@@ -1,20 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Flamey : MonoBehaviour
 {
     public static Flamey Instance {get; private set;}
 
-    //STATS
-    private int Health;
+    [Header("Stats")]
+    public int MaxHealth = 100;
+    public int Health;
     public int Dmg;
-    private float CritChance;
-    private float CritMultiplier;
+    [SerializeField][Range(0f,100f)]private float CritChance;
+    [SerializeField][Range(1f,5f)]private float CritMultiplier;
     [Range(5f, 20f)] public float BulletSpeed;
-    [Range(0f, 0.45f)] public float Accuracy;
-    
-    [SerializeField][Range(0.75f, 7f)] float atkSpeed = 1;
+    [Range(0f, 100f)] public float accuracy;
+    [SerializeField][Range(0.75f, 12f)] float atkSpeed = 1;
+    float accUpdate;
+    [HideInInspector] public float Accuracy;
     private float AtkSpeed;
     //===========
 
@@ -22,14 +27,19 @@ public class Flamey : MonoBehaviour
     private float timerAS;
     private float timerASCounter;
     //===========
-
+    [Header("Target")]
     [SerializeField] public Enemy current_homing;
+
+    [Header("Prefabs")]
     [SerializeField] private GameObject FlarePrefab;
     [SerializeField] public GameObject FlareSpotPrefab;
 
+    [Header("References")]
     private Animator anim;
+    [SerializeField]private Slider HealthSlider;
 
     private void Awake() {
+        Health = MaxHealth;
         Instance = this;
         anim = GetComponent<Animator>();
     }
@@ -40,6 +50,7 @@ public class Flamey : MonoBehaviour
         timerASCounter = AtkSpeedToSeconds(atkSpeed);;
         timerAS = timerASCounter;
         current_homing = getHoming();
+        UpdateHealthUI();
         
     }
 
@@ -58,6 +69,11 @@ public class Flamey : MonoBehaviour
                 AtkSpeed = atkSpeed;
                 updateTimerAS(atkSpeed);
             }
+            if(accUpdate != accuracy){
+                accUpdate = accuracy;
+                updateAccuracy(accuracy);
+            }
+            
             timerAS = timerASCounter;
             shoot();
         }
@@ -80,6 +96,47 @@ public class Flamey : MonoBehaviour
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
     }
+    private void updateAccuracy(float acc){
+        Accuracy = PercentageToAccuracy(acc);
+    }
+    private float PercentageToAccuracy(float perc){
+        return 0.8f - 0.008f * perc;
+    }
+
+    public Tuple<int,bool> getDmg(){
+        if(UnityEngine.Random.Range(0,100) < CritChance){
+            return new Tuple<int, bool>((int)(Dmg * CritMultiplier),true);
+        }else{
+            return new Tuple<int, bool>(Dmg, false);
+        }
+        
+    }
+
+    public void Hitted(int Dmg){
+        Health -= Dmg;
+        UpdateHealthUI();
+        DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, Color.red);
+    }
+    private void UpdateHealthUI(){
+        HealthSlider.maxValue = MaxHealth;
+        HealthSlider.value = Health;
+    }
+
+    public void addAccuracy(float amount){accuracy = Math.Min(accuracy + amount, 100f);}
+    public void multAccuracy(float amount){accuracy = Math.Min(accuracy * amount, 100f);}
+    public void addAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed + amount, 12f);}
+    public void multAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed * amount, 12f); Debug.Log("ATK INC");}
+
+    public void addBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed + amount, 20f);}
+    public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f); Debug.Log("BULLET INC");}
+
+    public void addHealth(int max_increase, float healperc){
+        MaxHealth += max_increase;
+        Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
+        UpdateHealthUI();
+        DamageUI.Instance.spawnTextDmg(transform.position, "+"+MaxHealth * healperc, Color.green);
+    }
+    
 
     
 }

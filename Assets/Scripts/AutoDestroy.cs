@@ -18,4 +18,8 @@ public class AutoDestroy : MonoBehaviour
         Timer = n;
         isOn = true;
     }
+
+    public void SelfDestroy(){
+        Destroy(gameObject);
+    }
 }

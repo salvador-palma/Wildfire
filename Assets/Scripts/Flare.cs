@@ -11,7 +11,7 @@ public class Flare : MonoBehaviour
     private float speedAscend;
     private float speedDescend;
     private float YLimit = 10f;
-    private Enemy target;
+    private Vector2 target;
     private GameObject FlareSpot;
     private float destY;
     [SerializeField] Color SpotColor;
@@ -19,7 +19,7 @@ public class Flare : MonoBehaviour
         SpotColor.a = 0;
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-        target = Flamey.Instance.current_homing;
+        target = Flamey.Instance.current_homing.transform.position;
     }
 
     private void Update() {
@@ -42,9 +42,9 @@ public class Flare : MonoBehaviour
         
     }
     private void goDown(){
-        Vector2 vt = target.transform.position;
+
         float Accuracy = Flamey.Instance.Accuracy;
-        Vector2 v = new Vector2(RandomGaussian(Accuracy, vt.x), RandomGaussian(Accuracy, vt.y) - 0.4f);
+        Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y - 0.4f));
         setPosition(v);
         SummonFlareSpot(v);
         goingDown = true;
@@ -60,8 +60,8 @@ public class Flare : MonoBehaviour
     }
     private void FlareSpotHit(){
         FlareSpot.GetComponent<CircleCollider2D>().enabled = true;
-        FlareSpot.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
-        FlareSpot.GetComponent<AutoDestroy>().StartCD(1f);
+        FlareSpot.GetComponent<SpriteRenderer>().enabled = false;
+        FlareSpot.GetComponent<AutoDestroy>().StartCD(0.5f);
     }
     private void FlareSpotUpdate(){
         SpotColor.a = 0.6f - Vector2.Distance(transform.position, FlareSpot.transform.position)/6;
@@ -69,12 +69,5 @@ public class Flare : MonoBehaviour
     }
 
     
-    private float RandomGaussian(float variance, float mean){
-        float u1 = 1.0f- UnityEngine.Random.value; 
-        float u2 = 1.0f- UnityEngine.Random.value;
-        double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); 
-        double randNormal = mean + variance * randStdNormal; 
-        
-        return (float)randNormal;
-    }
+    
 }
