@@ -13,10 +13,13 @@ public class Flamey : MonoBehaviour
     public int MaxHealth = 100;
     public int Health;
     public int Dmg;
+
+    private List<OnHitEffects> onHitEffects;
     [SerializeField][Range(0f,100f)]private float CritChance;
     [SerializeField][Range(1f,5f)]private float CritMultiplier;
     [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
+    [Range(1f,5f)] public float BulletSize;
     [SerializeField][Range(0.75f, 12f)] float atkSpeed = 1;
     float accUpdate;
     [HideInInspector] public float Accuracy;
@@ -125,10 +128,19 @@ public class Flamey : MonoBehaviour
     public void addAccuracy(float amount){accuracy = Math.Min(accuracy + amount, 100f);}
     public void multAccuracy(float amount){accuracy = Math.Min(accuracy * amount, 100f);}
     public void addAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed + amount, 12f);}
-    public void multAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed * amount, 12f); Debug.Log("ATK INC");}
+    public void multAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed * amount, 12f);}
 
     public void addBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed + amount, 20f);}
-    public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f); Debug.Log("BULLET INC");}
+    public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f);}
+
+    public void addDmg(int amount){Dmg += amount;}
+    public void multDmg(int amount){Dmg *= amount;}
+
+    public void addCritChance(float amount){CritChance = Math.Min(CritChance + amount, 80f);}
+    public void multCritChance(float amount){CritChance = Math.Min(CritChance * amount, 80f);}
+
+    public void addCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier + amount, 5f);}
+    public void multCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier * amount, 5f);}
 
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
@@ -137,6 +149,13 @@ public class Flamey : MonoBehaviour
         DamageUI.Instance.spawnTextDmg(transform.position, "+"+MaxHealth * healperc, Color.green);
     }
     
+    public void addOnHitEffect(OnHitEffects onhit){
+        onHitEffects.Add(onhit);
+    }
+
+    public void ApplyOnHit(){
+        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect();}
+    }
 
     
 }

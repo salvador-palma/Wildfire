@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.28023762, b: 0.17354931, a: 1}
+  m_Color: {r: 0.845617, g: 0.6745283, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.28023762, b: 0.17354931, a: 1}
+  m_Color: {r: 0.8679245, g: 0.61019367, b: 0.1432894, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.23365372, b: 0.14293341, a: 1}
+  m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -631,6 +631,13 @@ MonoBehaviour:
   - {fileID: 133817218}
   CanvasDeck: {fileID: 1452869207}
   currentAugments: []
+  tierColors:
+  - {r: 0.8470589, g: 0.6745098, b: 1, a: 1}
+  - {r: 0.77647066, g: 0.45098042, b: 0.87843144, a: 1}
+  - {r: 0.86666673, g: 0.6117647, b: 0.14509805, a: 1}
+  - {r: 0.7372549, g: 0.4039216, b: 0.078431375, a: 1}
+  - {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  - {r: 0.48235297, g: 0.48235297, b: 0.48235297, a: 1}
 --- !u!1 &504933591
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.23365372, b: 0.14293341, a: 1}
+  m_Color: {r: 0.7764013, g: 0.45109472, b: 0.8773585, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1271,9 +1278,10 @@ MonoBehaviour:
   Health: 0
   Dmg: 5
   CritChance: 50
-  CritMultiplier: 1.25
+  CritMultiplier: 1
   BulletSpeed: 5
   accuracy: 0
+  BulletSize: 1
   atkSpeed: 0.75
   Accuracy: 0.8
   current_homing: {fileID: 0}
@@ -1314,7 +1322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
+  - {fileID: 7490778783104608431, guid: 31e8864fb8182ef43bec84cf3a44ddeb, type: 3}
   - {fileID: 3582897267612999944, guid: 58c6691817784a94dba3270c12045bee, type: 3}
+  - {fileID: 5990670790445592150, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
 --- !u!1 &820769346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.28023762, b: 0.17354931, a: 1}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1560,10 +1570,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Whenever you strike an enemy, gain a small chance to apply Burn effect
+  m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
-  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1593,7 +1603,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1906,10 +1916,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Whenever you strike an enemy, gain a small chance to apply Burn effect
+  m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
-  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1939,7 +1949,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2114,7 +2124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.23365372, b: 0.14293341, a: 1}
+  m_Color: {r: 0.735849, g: 0.40249977, b: 0.079832695, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

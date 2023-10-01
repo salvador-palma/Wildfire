@@ -10,15 +10,26 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] Enemies;
     float height;
     float width;
-    float TimerEnemySpawn = 1f;
     float t;
-
-
     bool isOn = true;
     bool isOnAugments = false;
 
-    float roundTimer = 10;
 
+    private int current_round = 0;
+
+    float TimerEnemySpawn = 1f;
+    float roundTimer = 10;
+    
+
+
+    List<List<float>> ProbabiltyList = new List<List<float>>(){
+        new List<float>(){1,0,0,0},
+        new List<float>(){0.85f,.15f,0,0},
+        new List<float>(){0.7f,0.3f,0f,0},
+        new List<float>(){0.55f,0.3f,.15f,0},
+    };
+
+    
     private void Awake() {
         Instance = this;
     }
@@ -39,14 +50,15 @@ public class EnemySpawner : MonoBehaviour
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 isOnAugments = true;
-                Deck.Instance.StartAugments();
+                Deck.Instance.StartAugments(current_round%5 == 0 && current_round != 0);
+                
             } 
             return;}
         if(t > 0){
             t-= Time.deltaTime;
         }else{
             t = TimerEnemySpawn;
-            SpawnEnemy(Enemies[0]);
+            SpawnEnemy(PickRandomEnemy(current_round));
             updateSpawnLimits();
         }
         if(roundTimer > 0){
@@ -71,8 +83,40 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void newRound(){
+        current_round++;
         isOn = true;
         isOnAugments = false;
-        roundTimer = 20f;
+        roundTimer = 10f;
     }
+
+
+   
+
+    private GameObject PickRandomEnemy(int round){
+        if(round >= ProbabiltyList.Count){round =  ProbabiltyList.Count-1;}
+        return Enemies[pickEnemyIndex(ProbabiltyList[round])];
+    }
+
+    private int pickEnemyIndex(List<float> prob){
+        float val = UnityEngine.Random.Range(0f,1f);
+        for(int i = 0 ; i< prob.Count; i++){
+            if(prob[i] > val){
+                //Debug.Log(i);
+                return i;
+            }else{
+                val -= prob[i];
+            }
+        }
+        return -1;
+    }
+
+
+    // private float getRoundTime(int phase, int round){
+    //     if(round>=)
+    //     10 * round + phase * 
+    // }
+
+
+
+
 }

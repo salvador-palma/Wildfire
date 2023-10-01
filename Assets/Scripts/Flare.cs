@@ -16,6 +16,8 @@ public class Flare : MonoBehaviour
     private float destY;
     [SerializeField] Color SpotColor;
     private void Start() {
+        float val = transform.localScale.x * Flamey.Instance.BulletSize;
+        transform.localScale = new Vector2(val,val);
         SpotColor.a = 0;
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
@@ -56,6 +58,8 @@ public class Flare : MonoBehaviour
     }
     private void SummonFlareSpot(Vector2 vec){
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
+        
+        FlareSpot.transform.localScale = new Vector2(FlareSpot.transform.localScale.x * Flamey.Instance.BulletSize,FlareSpot.transform.localScale.y * Flamey.Instance.BulletSize);
         FlareSpot.transform.position = vec;
     }
     private void FlareSpotHit(){

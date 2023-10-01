@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rabbit : Enemy
+public class Snail : Enemy
 {
     
     private bool check = false;
     
     private void Start() {
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.02f,0.1f);
-        AttackDelay = 2f;
+        Speed =  Distribuitons.RandomGaussian(0.02f,0.07f);
+        AttackDelay = 4f;
         AttackRange = 0.77f;
-        Damage = 5;
-        Health = 10;
+        Damage = 2;
+        Health = 11;
     }
     private void Update() {
         
@@ -27,3 +27,4 @@ public class Rabbit : Enemy
     
     
 }
+

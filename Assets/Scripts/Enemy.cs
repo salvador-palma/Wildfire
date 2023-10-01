@@ -53,4 +53,8 @@ public abstract class Enemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(AttackDelay);
         Attack();
     }
+
+    private void OnMouseDown() {
+        Flamey.Instance.current_homing = this;
+    }
 }
