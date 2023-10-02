@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
     private void Hitted(Tuple<int,bool> res){
         
         Health -= res.Item1;
+        Flamey.Instance.ApplyOnHit(res.Item1, Health);
         if(Health <= 0){Die();}
         PlayHitAnimation(res);
     }
@@ -53,8 +54,16 @@ public abstract class Enemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(AttackDelay);
         Attack();
     }
+    public void target(){
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+    public void untarget(){
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
 
     private void OnMouseDown() {
-        Flamey.Instance.current_homing = this;
+        
+        Flamey.Instance.target(this);
     }
 }

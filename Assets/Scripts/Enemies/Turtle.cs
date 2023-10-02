@@ -9,11 +9,11 @@ public class Turtle : Enemy
     
     private void Start() {
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.02f,0.04f);
+        Speed =  Distribuitons.RandomGaussian(0.01f,0.05f);
         AttackDelay = 6f;
         AttackRange = 1f;
-        Damage = 5;
-        Health = 100;
+        Damage = 50;
+        Health = 1000;
     }
     private void Update() {
         

@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     bool isOn = true;
     bool isOnAugments = false;
 
+    [SerializeField] GameObject testObject;
 
     private int current_round = 0;
 
@@ -21,12 +22,13 @@ public class EnemySpawner : MonoBehaviour
     float roundTimer = 10;
     
 
-
+    
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         new List<float>(){1,0,0,0},
         new List<float>(){0.85f,.15f,0,0},
         new List<float>(){0.7f,0.3f,0f,0},
         new List<float>(){0.55f,0.3f,.15f,0},
+        new List<float>(){0.2f,0.5f,.3f,0},
     };
 
     
@@ -34,15 +36,21 @@ public class EnemySpawner : MonoBehaviour
         Instance = this;
     }
     public void Start(){
-        t = TimerEnemySpawn;
+        roundTimer = getRoundTime(current_round);
+        TimerEnemySpawn = roundTimer/getSpawnAmount(current_round);
+       // t = TimerEnemySpawn;
         updateSpawnLimits();
+        GameUI.Instance.UpdateProgressBar(current_round);
+        Debug.Log(roundTimer);
+        Debug.Log(TimerEnemySpawn);
+        
         
     }
     private Vector2 getPoint(){
-        float angle = Mathf.Deg2Rad * UnityEngine.Random.Range(0,360);
-        float x = width * MathF.Cos(angle);
-        float y = height * MathF.Sin(angle);
-        return new Vector2(x,y);
+        double angle = Math.PI * UnityEngine.Random.Range(0,360)/180f;
+        double x = 0.52f * width * Math.Cos(angle);
+        double y = 0.52f * height * Math.Sin(angle);
+        return new Vector2((float)x,(float)y);
     }
 
     private void Update() {
@@ -50,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 isOnAugments = true;
-                Deck.Instance.StartAugments(current_round%5 == 0 && current_round != 0);
+                Deck.Instance.StartAugments((current_round+1)%5 == 0);
                 
             } 
             return;}
@@ -73,8 +81,9 @@ public class EnemySpawner : MonoBehaviour
         CheckFlip(g);
     }
     private void updateSpawnLimits(){
-        height = 1f * Camera.main.orthographicSize;
+        height = 2f * Camera.main.orthographicSize;
         width = height * Camera.main.aspect;
+        
     }
     private void CheckFlip(GameObject g){
         if(g.transform.position.x < 0){
@@ -86,7 +95,11 @@ public class EnemySpawner : MonoBehaviour
         current_round++;
         isOn = true;
         isOnAugments = false;
-        roundTimer = 10f;
+        roundTimer = getRoundTime(current_round);
+        TimerEnemySpawn = roundTimer/getSpawnAmount(current_round);
+        GameUI.Instance.UpdateProgressBar(current_round);
+        Debug.Log(roundTimer);
+        Debug.Log(TimerEnemySpawn);
     }
 
 
@@ -101,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
         float val = UnityEngine.Random.Range(0f,1f);
         for(int i = 0 ; i< prob.Count; i++){
             if(prob[i] > val){
-                //Debug.Log(i);
+                
                 return i;
             }else{
                 val -= prob[i];
@@ -111,10 +124,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    // private float getRoundTime(int phase, int round){
-    //     if(round>=)
-    //     10 * round + phase * 
-    // }
+    private float getRoundTime(int round){
+        return Math.Min(5 + 1.2f * round, 40);
+    }
+    private float getSpawnAmount(int round){
+        return 5 + 3f * round;
+    }
+    
 
 
 

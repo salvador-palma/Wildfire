@@ -10,17 +10,18 @@ public class Flamey : MonoBehaviour
     public static Flamey Instance {get; private set;}
 
     [Header("Stats")]
-    public int MaxHealth = 100;
+    public int MaxHealth = 1000;
     public int Health;
-    public int Dmg;
+    public int Dmg= 50;
 
-    private List<OnHitEffects> onHitEffects;
-    [SerializeField][Range(0f,100f)]private float CritChance;
-    [SerializeField][Range(1f,5f)]private float CritMultiplier;
+    public List<OnHitEffects> onHitEffects;
+    public List<OnShootEffects> onShootEffects;
+    [SerializeField][Range(0f,100f)]public float CritChance;
+    [SerializeField][Range(1f,5f)]public float CritMultiplier;
     [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
     [Range(1f,5f)] public float BulletSize;
-    [SerializeField][Range(0.75f, 12f)] float atkSpeed = 1;
+    [SerializeField][Range(0.75f, 12f)] public float atkSpeed = 1;
     float accUpdate;
     [HideInInspector] public float Accuracy;
     private float AtkSpeed;
@@ -43,25 +44,38 @@ public class Flamey : MonoBehaviour
 
     private void Awake() {
         Health = MaxHealth;
+       
         Instance = this;
         anim = GetComponent<Animator>();
+        onHitEffects = new List<OnHitEffects>();
+        onShootEffects = new List<OnShootEffects>();
+        
+        
     }
     // Start is called before the first frame update
     void Start()
     {
+        target(getHoming());
         AtkSpeed = atkSpeed;
         timerASCounter = AtkSpeedToSeconds(atkSpeed);;
         timerAS = timerASCounter;
-        current_homing = getHoming();
+        
         UpdateHealthUI();
+        
+        
+        
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            GameUI.Instance.TogglePausePanel();
+        }
         if(current_homing == null){
-            current_homing = getHoming();
+            target(getHoming());
             if(current_homing == null){return;}
         }
 
@@ -81,10 +95,23 @@ public class Flamey : MonoBehaviour
             shoot();
         }
 
+        
+
     }
 
-    private void shoot(){
+    public void shoot(){
         anim.Play("FlameShoot");
+        ApplyOnShoot();
+        Instantiate(FlarePrefab);
+    }
+    public void target(Enemy e){
+        if(e ==null){return;}
+        if(current_homing!=null){current_homing.untarget();}
+        e.target();
+        current_homing = e;
+    }
+
+    public void InstantiateShot(){
         Instantiate(FlarePrefab);
     }
     public static float AtkSpeedToSeconds(float asp){
@@ -148,13 +175,28 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, "+"+MaxHealth * healperc, Color.green);
     }
+    public void addHealth(float HealAmount){
+        Health = (int)Math.Min(Health + HealAmount, MaxHealth);
+         UpdateHealthUI();
+        DamageUI.Instance.spawnTextDmg(transform.position, "+"+ HealAmount, Color.green);
+    }
     
     public void addOnHitEffect(OnHitEffects onhit){
-        onHitEffects.Add(onhit);
+        if(onhit.addList()){
+            onHitEffects.Add(onhit);
+        } 
+    }
+    public void addOnShootEffect(OnShootEffects onhit){
+        if(onhit.addList()){
+            onShootEffects.Add(onhit);
+        }
     }
 
-    public void ApplyOnHit(){
-        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect();}
+    public void ApplyOnHit(float d, float h){
+        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect(d,h);}
+    }
+    public void ApplyOnShoot(){
+        foreach (OnShootEffects oh in onShootEffects){oh.ApplyEffect();}
     }
 
     
