@@ -11,7 +11,7 @@ public class Turtle : Enemy
         base.flame = Flamey.Instance;
         Speed =  Distribuitons.RandomGaussian(0.01f,0.05f);
         AttackDelay = 6f;
-        AttackRange = 1f;
+        AttackRange = 1.55f;
         Damage = 50;
         Health = 1000;
     }

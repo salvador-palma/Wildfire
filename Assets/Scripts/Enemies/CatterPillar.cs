@@ -11,7 +11,7 @@ public class CatterPillar : Enemy
         base.flame = Flamey.Instance;
         Speed =  Distribuitons.RandomGaussian(0.02f,0.2f);
         AttackDelay = 2f;
-        AttackRange = 0.77f;
+        AttackRange = 0.8f;
         Damage = 20;
         Health = 50;
     }

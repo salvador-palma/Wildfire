@@ -11,7 +11,7 @@ public class Snail : Enemy
         base.flame = Flamey.Instance;
         Speed =  Distribuitons.RandomGaussian(0.02f,0.1f);
         AttackDelay = 4f;
-        AttackRange = 0.77f;
+        AttackRange = 1.04f;
         Damage = 20;
         Health = 110;
     }

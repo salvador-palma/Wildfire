@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +42,9 @@ public class Flamey : MonoBehaviour
     [Header("References")]
     private Animator anim;
     [SerializeField]private Slider HealthSlider;
+    
 
+    private bool GameEnd;
     private void Awake() {
         Health = MaxHealth;
        
@@ -71,6 +74,7 @@ public class Flamey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameEnd){return;}
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
         }
@@ -95,7 +99,7 @@ public class Flamey : MonoBehaviour
             shoot();
         }
 
-        
+        if(Health <= 0){EndGame();}
 
     }
 
@@ -119,9 +123,13 @@ public class Flamey : MonoBehaviour
     }
 
     private Enemy getHoming(){
-        GameObject g =  GameObject.FindGameObjectWithTag("Enemy");
-        if(g == null){return null;}
-        return g.GetComponent<Enemy>();
+        // GameObject g =  GameObject.FindGameObjectWithTag("Enemy");
+        // if(g == null){return null;}
+        // return g.GetComponent<Enemy>();
+        List<Enemy> g =  new List<Enemy>();
+        g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>() ) );
+        g.Sort();
+        return g.Count!=0 ? g[0] : null;
     }
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
@@ -144,12 +152,24 @@ public class Flamey : MonoBehaviour
 
     public void Hitted(int Dmg){
         Health -= Dmg;
+        if(Health <= 0){EndGame();}
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
         HealthSlider.value = Health;
+    }
+    private void EndGame(){
+        GameEnd = true;
+        GameUI.Instance.SpeedUp(1f);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject e in enemies){
+            if(e != null){
+                e.GetComponent<Enemy>().EndEnemy();
+            }
+        }
+        GameUI.Instance.GameOverEffect();
     }
 
     public void addAccuracy(float amount){accuracy = Math.Min(accuracy + amount, 100f);}

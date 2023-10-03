@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
 
@@ -152,6 +153,14 @@ public class GameUI : MonoBehaviour
             SpeedUp(1f);
         }
         //Debug.Log(Time.timeScale);
+    }
+
+    public void GameOverEffect(){
+        Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        GetComponent<Animator>().Play("GameOver");
+    }
+    public void loadScene(string str){
+        SceneManager.LoadScene(str);
     }
     
    

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 {
     public Flamey flame;
     public int Damage;
@@ -70,5 +70,15 @@ public abstract class Enemy : MonoBehaviour
     private void SpawnExplosion(){
         GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
         g.transform.position = transform.position;
+    }
+
+
+    public int CompareTo(Enemy other)
+    {
+        return Vector2.Distance(transform.position, flame.transform.position) < Vector2.Distance(other.transform.position, flame.transform.position)? -1 : 1; 
+    }
+
+    public void EndEnemy(){
+        this.enabled = false;
     }
 }
