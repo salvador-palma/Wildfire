@@ -20,6 +20,7 @@ public class Snail : Enemy
         base.Move();
         if(Vector2.Distance(flame.transform.position, transform.position) < AttackRange && !check){
             check = true;
+            Speed = 0.00001f;
             InvokeRepeating("Attack",0f, AttackDelay);
         }
     }

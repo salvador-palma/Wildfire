@@ -25,10 +25,11 @@ public abstract class Enemy : MonoBehaviour
         Flamey.Instance.ApplyOnHit(res.Item1, Health);
         if(Health <= 0){Die();}
         PlayHitAnimation(res);
+        SpawnExplosion();
     }
     private void PlayHitAnimation(Tuple<int,bool> res){
         GetComponent<Animator>().Play("EnemyHit");
-        DamageUI.Instance.spawnTextDmg(transform.position, "-"+res.Item1, res.Item2 ? Color.yellow : Color.white);
+        DamageUI.Instance.spawnTextDmg(transform.position, res.Item1.ToString(), res.Item2 ? 1 : 0);
     }
 
     private void Die(){
@@ -65,5 +66,9 @@ public abstract class Enemy : MonoBehaviour
     private void OnMouseDown() {
         
         Flamey.Instance.target(this);
+    }
+    private void SpawnExplosion(){
+        GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
+        g.transform.position = transform.position;
     }
 }

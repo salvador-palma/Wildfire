@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using UnityEditorInternal;
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Flare : MonoBehaviour
@@ -13,15 +14,17 @@ public class Flare : MonoBehaviour
     private float YLimit = 10f;
     private Vector2 target;
     private GameObject FlareSpot;
+    
     private float destY;
     [SerializeField] Color SpotColor;
     private void Start() {
+        transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
         float val = transform.localScale.x * Flamey.Instance.BulletSize;
         transform.localScale = new Vector2(val,val);
         SpotColor.a = 0;
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-        target = Flamey.Instance.current_homing.transform.position;
+        //target = Flamey.Instance.current_homing.transform.position;
     }
 
     private void Update() {
@@ -44,9 +47,19 @@ public class Flare : MonoBehaviour
         
     }
     private void goDown(){
-
+        Enemy e = Flamey.Instance.current_homing;
+        if(e==null){Destroy(gameObject);return;}
+        else{target = e.transform.position;}
+        
+        
+        
+        
+        
+        
+        //try for 10 times
         float Accuracy = Flamey.Instance.Accuracy;
         Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y - 0.4f));
+        transform.localRotation = new Quaternion(0f,0f,0f,0f);
         setPosition(v);
         SummonFlareSpot(v);
         goingDown = true;

@@ -20,7 +20,7 @@ public class Flamey : MonoBehaviour
     [SerializeField][Range(1f,5f)]public float CritMultiplier;
     [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
-    [Range(1f,5f)] public float BulletSize;
+    [Range(0.5f,3f)] public float BulletSize;
     [SerializeField][Range(0.75f, 12f)] public float atkSpeed = 1;
     float accUpdate;
     [HideInInspector] public float Accuracy;
@@ -145,7 +145,7 @@ public class Flamey : MonoBehaviour
     public void Hitted(int Dmg){
         Health -= Dmg;
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, Color.red);
+        DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
@@ -168,17 +168,19 @@ public class Flamey : MonoBehaviour
 
     public void addCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier + amount, 5f);}
     public void multCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier * amount, 5f);}
+    public void addDmg(float amount){Dmg += (int)amount;}
+    public void multDmg(float amount){Dmg += (int)amount;}
 
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "+"+MaxHealth * healperc, Color.green);
+        DamageUI.Instance.spawnTextDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
         Health = (int)Math.Min(Health + HealAmount, MaxHealth);
          UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "+"+ HealAmount, Color.green);
+        DamageUI.Instance.spawnTextDmg(transform.position, ""+ HealAmount, 3);
     }
     
     public void addOnHitEffect(OnHitEffects onhit){

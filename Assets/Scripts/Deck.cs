@@ -54,26 +54,29 @@ public class Deck : MonoBehaviour
         augments.Add(new Augment("Lucky Shots", "Gain +15% critical strike damage", Tier.Silver, new UnityAction(()=> Flamey.Instance.addCritDmg(0.15f))));
         augments.Add(new Augment("Not enough refreshes", "Gain a random Silver augment", Tier.Silver, new UnityAction(()=> ActivateAugment(randomPicking(Tier.Silver)))));
         augments.Add(new Augment("The more the better", "When you fire a shot, gain a 5% chance to fire an extra shot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.05f)))));
+        augments.Add(new Augment("Hard Work", "Gain +10 Base Damage", Tier.Silver, new UnityAction(()=> Flamey.Instance.addDmg(10))));
     }
     void FillGold(){
         augments.Add(new Augment("Steady Aim", "Increase your accuracy by +30", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAccuracy(30))));
-        augments.Add(new Augment("Fire Dance", "Increase your attack speed by 125%", Tier.Gold, new UnityAction(()=> Flamey.Instance.multAttackSpeed(2.25f))));
-        augments.Add(new Augment("Fire-Express", "Gain x1.5 Bullet Speed", Tier.Gold, new UnityAction(()=> Flamey.Instance.multBulletSpeed(1.5f))));
+        augments.Add(new Augment("Fire Dance", "Increase your attack speed by +60", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAttackSpeed(0.6f))));
+        augments.Add(new Augment("Fire-Express", "Gain +2 Bullet Speed", Tier.Gold, new UnityAction(()=> Flamey.Instance.addBulletSpeed(2f))));
         augments.Add(new Augment("Sunfire Cape", "Heal 75% and gain +2500 Max HP", Tier.Gold, new UnityAction(()=> Flamey.Instance.addHealth(1500, 0.75f))));
         augments.Add(new Augment("Fate's Favor", "Gain +10% critical strike chance (capped at 80%)", Tier.Gold, new UnityAction(()=> Flamey.Instance.addCritChance(10))));
         augments.Add(new Augment("Critical Thinking", "Gain +30% critical strike damage", Tier.Gold, new UnityAction(()=> Flamey.Instance.addCritDmg(0.3f))));
-        augments.Add(new Augment("Blessed", "Gain 2 random Silver augments", Tier.Gold, new UnityAction(()=> {ActivateAugment(randomPicking(Tier.Silver));ActivateAugment(randomPicking(Tier.Silver));})));
+        augments.Add(new Augment("Feelin' Blessed", "Gain 2 random Silver augments", Tier.Gold, new UnityAction(()=> {ActivateAugment(randomPicking(Tier.Silver));ActivateAugment(randomPicking(Tier.Silver));})));
         augments.Add(new Augment("Double trouble", "When you fire a shot, gain a 15% chance to fire an extra shot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.15f)))));
+        augments.Add(new Augment("Heavy Hitter", "Gain +25 Base Damage", Tier.Gold, new UnityAction(()=> Flamey.Instance.addDmg(25))));
     }
     void FillPrismatic(){
         augments.Add(new Augment("Eagle Eye", "Double your current Accuracy (capped at 100)", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAccuracy(2))));
-        augments.Add(new Augment("Flamethrower", "Increase your attack speed by 200%", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAttackSpeed(3f))));
+        augments.Add(new Augment("Flamethrower", "Increase your attack speed by x0.5", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAttackSpeed(1.5f))));
         augments.Add(new Augment("HiperDrive", "Gain x2 Bullet Speed (capped at 20)", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multBulletSpeed(2f))));
         augments.Add(new Augment("Absolute Unit", "Heal to full HP and gain +5000 Max HP", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addHealth(500,1f))));
-        augments.Add(new Augment("Critical Inferno", "Gain +15% critical strike chance (capped at 80%) and x1.7 critical strike damage", Tier.Prismatic, new UnityAction(()=> {Flamey.Instance.addCritChance(15);Flamey.Instance.multCritDmg(1.7f);})));
+        augments.Add(new Augment("Critical Inferno", "Gain +15% critical strike chance (capped at 80%) and +170% critical strike damage", Tier.Prismatic, new UnityAction(()=> {Flamey.Instance.addCritChance(15);Flamey.Instance.multCritDmg(1.7f);})));
         augments.Add(new Augment("VampFire", "Heal 2% of the damage you deal per hit", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.02f)))));
         augments.Add(new Augment("Multicaster", "When you fire a shot, gain a 50% chance to fire an extra shot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.5f)))));
         augments.Add(new Augment("Roll the Dices", "Gain 4 random Silver augments", Tier.Prismatic, new UnityAction(()=> {ActivateAugment(randomPicking(Tier.Silver));ActivateAugment(randomPicking(Tier.Silver));ActivateAugment(randomPicking(Tier.Silver));ActivateAugment(randomPicking(Tier.Silver));})));
+        augments.Add(new Augment("Hephaestus", "Gain +50 Base Damage", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addDmg(50))));
     }
 
     Augment pickFromDeck(){
@@ -115,6 +118,7 @@ public class Deck : MonoBehaviour
         refreshedAugments.Clear();
         EnemySpawner.Instance.newRound();
         currentAugments = new Augment[]{null,null,null};
+        GameUI.Instance.UpdateMenuInfo();
     }
 
     public void StartAugments(bool isPrismaticRound){

@@ -14,7 +14,8 @@ public class GameUI : MonoBehaviour
     private float[] Progresses = new float[]{0f,.15f,.36f,.56f,.77f};
     [SerializeField] private Animator PrismaticLightAnimator;
 
-    
+    [Header("FastForward")]
+    [SerializeField]Button[] FastForwardButtons;
     [Header("Menu")]
     [SerializeField] Color ActiveTab;
     [SerializeField] Color InactiveTab;
@@ -42,8 +43,10 @@ public class GameUI : MonoBehaviour
     
     private void Awake() {
         Instance = this;
+        FastForwardButtons[0].interactable = false;
         
     }
+    
 
     public void UpdateProgressBar(int round){
         AugmentTemplate.SetActive(false);
@@ -64,7 +67,10 @@ public class GameUI : MonoBehaviour
     
     public void TogglePausePanel(){
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
-        
+    }
+    public void UpdateMenuInfo(){
+        defineStats();
+        defineEffectList();
     }
     
     public void changeTab(int index){
@@ -128,6 +134,24 @@ public class GameUI : MonoBehaviour
         EffectTexts[0].text = e.getText();
         EffectTexts[1].text = e.getType();
         EffectTexts[2].text = e.getDescription();
+    }
+
+    public void SpeedUp(float f){
+        Time.timeScale = f;
+    }
+
+    public void ToggleSpeedUp(){
+        if(Time.timeScale == 1f){
+            FastForwardButtons[0].interactable = true;
+            FastForwardButtons[1].interactable = false;
+            SpeedUp(3f);
+
+        }else{
+            FastForwardButtons[0].interactable = false;
+            FastForwardButtons[1].interactable = true;
+            SpeedUp(1f);
+        }
+        //Debug.Log(Time.timeScale);
     }
     
    

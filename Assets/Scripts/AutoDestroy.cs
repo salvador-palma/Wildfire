@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
 {
-    private float Timer;
-    private bool isOn;
+    [SerializeField]private float Timer;
+    [SerializeField]private bool isOn;
     private void Update() {
         if(isOn){
             Timer-=Time.deltaTime;

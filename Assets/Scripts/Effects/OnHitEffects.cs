@@ -52,6 +52,6 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "Heal x" + perc + " of the damage you deal each shot. This applies to critical damage aswell.";
+        return "Heal " + perc + "% of the damage you deal each shot. This applies to critical damage aswell.";
     }
 }
