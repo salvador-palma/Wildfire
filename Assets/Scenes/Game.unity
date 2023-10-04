@@ -3284,7 +3284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &803225696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3352,8 +3352,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 312507740}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: loadScene
-        m_Mode: 5
+        m_MethodName: StartOver
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   FlarePrefab: {fileID: 5670772395214100646, guid: 2e25ba8c496e99548b70471384659ce1, type: 3}
   FlareSpotPrefab: {fileID: 9207615669171026501, guid: 59c00f86f086e2249bcfcde8b18bd183, type: 3}
   HealthSlider: {fileID: 1350612377}
+  GameEnd: 0
 --- !u!95 &811388238
 Animator:
   serializedVersion: 5
@@ -3552,6 +3553,7 @@ MonoBehaviour:
   - {fileID: 8862798018454020762, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
   testObject: {fileID: 0}
   ExplosionPrefab: {fileID: 6982197892161001652, guid: e68e2d8982bd03447b90319865eb4f0f, type: 3}
+  GameEnd: 0
 --- !u!1 &811842351
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,7 +4543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &891494644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4609,8 +4611,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 312507740}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: loadScene
-        m_Mode: 5
+        m_MethodName: GameToMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

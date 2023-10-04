@@ -115,7 +115,7 @@ public class Deck : MonoBehaviour
     }
 
     public void StartAugments(bool isPrismaticRound){
-        
+        if(Flamey.Instance.GameEnd){return;}
         filteredAugments = FilterAugments(isPrismaticRound);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
         if(isPrismaticRound){GameUI.Instance.FillAll();}

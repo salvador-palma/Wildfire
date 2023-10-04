@@ -162,6 +162,18 @@ public class GameUI : MonoBehaviour
     public void loadScene(string str){
         SceneManager.LoadScene(str);
     }
+    public void StartOver(){
+        GetComponent<Animator>().Play("StartOver");
+    }
+    public void GameToMenu(){
+        GetComponent<Animator>().Play("GameToMenu");
+    }
+    public void DeleteAllEnemies(){
+        GameObject[] en = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject e in en){
+            Destroy(e);
+        }
+    }
     
    
     

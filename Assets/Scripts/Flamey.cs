@@ -44,7 +44,7 @@ public class Flamey : MonoBehaviour
     [SerializeField]private Slider HealthSlider;
     
 
-    private bool GameEnd;
+    public bool GameEnd;
     private void Awake() {
         Health = MaxHealth;
        
@@ -162,6 +162,7 @@ public class Flamey : MonoBehaviour
     }
     private void EndGame(){
         GameEnd = true;
+        EnemySpawner.Instance.GameEnd = true;
         GameUI.Instance.SpeedUp(1f);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject e in enemies){

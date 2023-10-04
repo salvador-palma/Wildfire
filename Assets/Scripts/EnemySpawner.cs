@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     float roundTimer = 10;
     [SerializeField] public GameObject ExplosionPrefab;
     
-
+    public bool GameEnd;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         new List<float>(){1,0,0,0},
@@ -37,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
         Instance = this;
     }
     public void Start(){
+
         roundTimer = getRoundTime(current_round);
         TimerEnemySpawn = roundTimer/getSpawnAmount(current_round);
        // t = TimerEnemySpawn;
@@ -55,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update() {
-
+        if(GameEnd){return;}
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 isOnAugments = true;
