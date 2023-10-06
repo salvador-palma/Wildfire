@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,9 +23,11 @@ public class VampOnHit : OnHitEffects
 {
     public static VampOnHit Instance;
     public float perc;
-    public VampOnHit(float perc){
+    public float prob;
+    public VampOnHit(float perc, float prob){
         
         this.perc = perc;
+        this.prob = prob;
         if(Instance == null){
             Instance = this;
         }else{
@@ -33,10 +36,13 @@ public class VampOnHit : OnHitEffects
     }
     public void ApplyEffect(float dmg, float health = 0)
     {
-        Flamey.Instance.addHealth(dmg * perc);
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            Flamey.Instance.addHealth(dmg * perc);
+        }
     }
     public void Stack(VampOnHit vampOnHit){
         perc += vampOnHit.perc;
+        prob += perc;
     }
     public bool addList(){
         return Instance == this;
@@ -44,7 +50,7 @@ public class VampOnHit : OnHitEffects
 
     public string getText()
     {
-        return "VampFire";
+        return "The Blood Mage";
     }
 
     public string getType()
@@ -54,7 +60,7 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "Heal " + perc*100 + "% of the damage you deal each shot. This applies to critical damage aswell.";
+        return "You have a " + prob*100 + "% chance per shot of healing " + perc*100 + "% of the damage you dealt. This applies for critical damage aswell.";
     }
 
     public string getIcon()
