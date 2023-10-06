@@ -41,6 +41,10 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject EffectTemplate;
     [SerializeField] TextMeshProUGUI[] EffectTexts;
 
+
+    [SerializeField] Animator BlackScreen;
+    [SerializeField] Animator BlackScreenOver;
+    [SerializeField] private TextMeshProUGUI RoundsLastedText;
     
     private void Awake() {
         Instance = this;
@@ -75,8 +79,8 @@ public class GameUI : MonoBehaviour
     }
     
     public void changeTab(int index){
-        if(index==1){defineStats();}
-        if(index==2){defineEffectList();}
+        // if(index==1){defineStats();}
+        // if(index==2){defineEffectList();}
         if(index != current_Tab){
             MenuTabs[current_Tab].SetActive(false);
             ButtonTabs[current_Tab].color = InactiveTab;
@@ -96,6 +100,7 @@ public class GameUI : MonoBehaviour
         go.transform.GetChild(0).GetComponent<Image>().color = t.Item1;
         go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
         go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.Description;
+        go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
 
@@ -127,6 +132,7 @@ public class GameUI : MonoBehaviour
         {
             GameObject go = Instantiate(EffectTemplate,EffectContainer.transform);
             go.GetComponent<Button>().onClick.AddListener(()=>DisplayEffectInfo(e));
+            go.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getIcon());
             go.SetActive(true);
         }
     }
@@ -156,7 +162,8 @@ public class GameUI : MonoBehaviour
     }
 
     public void GameOverEffect(){
-        Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        RoundsLastedText.text = "YOU'VE SURVIVED " + EnemySpawner.Instance.current_round + " ROUNDS";
+        Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
     }
     public void loadScene(string str){
@@ -173,6 +180,16 @@ public class GameUI : MonoBehaviour
         foreach(GameObject e in en){
             Destroy(e);
         }
+    }
+
+    public void BlackScreenOn(){
+        BlackScreen.Play("BlackScreen");
+    }
+    public void BlackScreenOverOn(){
+        BlackScreenOver.Play("BlackScreen");
+    }
+    public void BlackScreenOff(){
+        BlackScreen.Play("BlackScreenOff");
     }
     
    

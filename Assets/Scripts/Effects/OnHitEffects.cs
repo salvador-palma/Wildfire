@@ -8,9 +8,11 @@ public interface Effect{
     public string getText();
     public string getType();
     public string getDescription();
+    public string getIcon();
 }
 public interface OnHitEffects: Effect
 {
+    
 
     public bool addList();
     public void ApplyEffect(float dmg = 0, float health = 0);
@@ -52,6 +54,11 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "Heal " + perc + "% of the damage you deal each shot. This applies to critical damage aswell.";
+        return "Heal " + perc*100 + "% of the damage you deal each shot. This applies to critical damage aswell.";
+    }
+
+    public string getIcon()
+    {
+        return "vampfire";
     }
 }

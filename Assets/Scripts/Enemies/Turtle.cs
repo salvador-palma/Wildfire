@@ -14,6 +14,7 @@ public class Turtle : Enemy
         AttackRange = 1.55f;
         Damage = 50;
         Health = 1000;
+        StartAnimations(2);
     }
     private void Update() {
         

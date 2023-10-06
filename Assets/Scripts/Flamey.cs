@@ -68,7 +68,6 @@ public class Flamey : MonoBehaviour
         
         
         
-        
     }
 
     // Update is called once per frame

@@ -14,6 +14,8 @@ public class Snail : Enemy
         AttackRange = 1.04f;
         Damage = 20;
         Health = 110;
+
+        StartAnimations(0);
     }
     private void Update() {
         

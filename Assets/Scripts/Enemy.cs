@@ -12,20 +12,24 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public float Speed;
     public int Health;
    
-    
+    public Transform HitCenter;
 
     
     public void Move(){
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime);
     }
 
-    private void Hitted(Tuple<int,bool> res){
+    public void StartAnimations(int ID){
+        GetComponent<Animator>().SetInteger("EnemyID", ID);
+    }
+
+    private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
         
         Health -= res.Item1;
         Flamey.Instance.ApplyOnHit(res.Item1, Health);
         if(Health <= 0){Die();}
         PlayHitAnimation(res);
-        SpawnExplosion();
+        SpawnExplosion(explosionPos);
     }
     private void PlayHitAnimation(Tuple<int,bool> res){
         GetComponent<Animator>().Play("EnemyHit");
@@ -40,7 +44,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         if(other.tag == "FlareHit"){
             
-            Hitted(Flamey.Instance.getDmg());
+            Hitted(Flamey.Instance.getDmg(), other.transform.position);
         }
     }
 
@@ -67,9 +71,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         Flamey.Instance.target(this);
     }
-    private void SpawnExplosion(){
+    private void SpawnExplosion(Vector2 explosionPos){
         GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
-        g.transform.position = transform.position;
+        g.transform.position = explosionPos;
     }
 
 

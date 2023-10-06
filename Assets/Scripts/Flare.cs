@@ -49,7 +49,7 @@ public class Flare : MonoBehaviour
     private void goDown(){
         Enemy e = Flamey.Instance.current_homing;
         if(e==null){Destroy(gameObject);return;}
-        else{target = e.transform.position;}
+        else{target = e.HitCenter.position;}
         
         
         
@@ -58,7 +58,7 @@ public class Flare : MonoBehaviour
         
         //try for 10 times
         float Accuracy = Flamey.Instance.Accuracy;
-        Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y - 0.4f));
+        Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y ));
         transform.localRotation = new Quaternion(0f,0f,0f,0f);
         setPosition(v);
         SummonFlareSpot(v);

@@ -54,6 +54,10 @@ public class SecondShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Whenever you fire a shot, there's a " + perc + "% chance that you fire a second shot.";
+        return "Whenever you fire a shot, there's a " + perc*100 + "% chance that you fire a second shot.";
+    }
+    public string getIcon()
+    {
+        return "multishot";
     }
 }

@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] GameObject testObject;
 
-    private int current_round = 0;
+    public int current_round = 0;
 
     float TimerEnemySpawn = 1f;
     float roundTimer = 10;

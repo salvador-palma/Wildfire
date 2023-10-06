@@ -14,6 +14,7 @@ public class CatterPillar : Enemy
         AttackRange = 0.8f;
         Damage = 20;
         Health = 50;
+        StartAnimations(1);
     }
     private void Update() {
         
