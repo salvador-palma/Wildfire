@@ -10,15 +10,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] Enemies;
     float height;
     float width;
-    float t;
+    float TimerEnemySpawn;
     bool isOn = true;
     bool isOnAugments = false;
 
-    [SerializeField] GameObject testObject;
+    
 
     public int current_round = 0;
 
-    float TimerEnemySpawn = 1f;
+    float FixedEnemyAmount = 5f;
+    
+    float FixedRoundDuration = 5f;
     float roundTimer = 10;
     [SerializeField] public GameObject ExplosionPrefab;
     
@@ -39,12 +41,12 @@ public class EnemySpawner : MonoBehaviour
     public void Start(){
 
         roundTimer = getRoundTime(current_round);
-        TimerEnemySpawn = roundTimer/getSpawnAmount(current_round);
-       // t = TimerEnemySpawn;
+        
+        
+        TimerEnemySpawn =(float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
         updateSpawnLimits();
         GameUI.Instance.UpdateProgressBar(current_round);
-        Debug.Log(roundTimer);
-        Debug.Log(TimerEnemySpawn);
+        
         
         
     }
@@ -64,10 +66,12 @@ public class EnemySpawner : MonoBehaviour
                 
             } 
             return;}
-        if(t > 0){
-            t-= Time.deltaTime;
+        if(TimerEnemySpawn > 0){
+            TimerEnemySpawn-= Time.deltaTime;
         }else{
-            t = TimerEnemySpawn;
+            
+            TimerEnemySpawn = (float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
+            
             SpawnEnemy(PickRandomEnemy(current_round));
             updateSpawnLimits();
         }
@@ -98,10 +102,16 @@ public class EnemySpawner : MonoBehaviour
         isOn = true;
         isOnAugments = false;
         roundTimer = getRoundTime(current_round);
-        TimerEnemySpawn = roundTimer/getSpawnAmount(current_round);
+        FixedRoundDuration = roundTimer;
+        FixedEnemyAmount = getSpawnAmount(current_round);
+        float temp = FixedEnemyAmount/FixedRoundDuration;
+        TimerEnemySpawn = (float)Distribuitons.RandomExponential(temp) ;
         GameUI.Instance.UpdateProgressBar(current_round);
-        Debug.Log(roundTimer);
-        Debug.Log(TimerEnemySpawn);
+        foreach (NotEspecificEffect item in Flamey.Instance.notEspecificEffects)
+        {
+            item.ApplyEffect();
+        }
+        
     }
 
 
@@ -116,7 +126,6 @@ public class EnemySpawner : MonoBehaviour
         float val = UnityEngine.Random.Range(0f,1f);
         for(int i = 0 ; i< prob.Count; i++){
             if(prob[i] > val){
-                
                 return i;
             }else{
                 val -= prob[i];
@@ -127,7 +136,7 @@ public class EnemySpawner : MonoBehaviour
 
 
     private float getRoundTime(int round){
-        return Math.Min(5 + 1.2f * round, 40);
+        return Math.Min(5 + 1.2f * (float)Distribuitons.RandomUniform(round - 1, round + 1), 40);
     }
     private float getSpawnAmount(int round){
         return 5 + 3f * round;

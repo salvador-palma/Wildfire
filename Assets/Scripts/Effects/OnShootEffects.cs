@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,7 +28,7 @@ public class SecondShot : OnShootEffects{
 
     public void ApplyEffect()
     {
-        if(Random.Range(0f,1f) < perc){
+        if(UnityEngine.Random.Range(0f,1f) < perc){
             
             ShootWithDelay();
         }
@@ -111,7 +112,66 @@ public class BurstShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "For each " + interval + " shots, you will shoot a burst of " + amount + " extra shots";
+        return "Each " + interval + " shots, you will shoot a burst of " + amount + " extra shots";
+    }
+    public string getIcon()
+    {
+        return "multishot";
+    }
+}
+
+public class KrakenSlayer : OnShootEffects{
+
+
+    public static KrakenSlayer Instance;
+    public int interval;
+    public int extraDmg;
+    int curr;
+    public KrakenSlayer(int interval, int extraDmg){
+        this.interval = interval;
+        this.extraDmg = extraDmg;
+        if(Instance == null){
+            Instance = this;
+        }else{
+            Instance.Stack(this);
+        }
+    }
+
+    public void ApplyEffect()
+    {
+        curr--;
+        if(curr <= 0){
+            curr = interval;
+            ShootWithDelay();
+        }
+    }
+    private void ShootWithDelay(){
+        //await Task.Delay(100);
+        Flamey.Instance.InstantiateShot(extraDmg, 2);
+        
+    }
+
+    public void Stack(KrakenSlayer krakenSlayer){
+        interval = Mathf.Max(5, interval - krakenSlayer.interval);
+        extraDmg += krakenSlayer.extraDmg;
+    }
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Blue Flame";
+    }
+
+    public string getType()
+    {
+        return "On-Shoot Effect";
+    }
+
+    public string getDescription()
+    {
+        return "Each " + interval + " shots, you will shoot an extra powerfull shot that deals +" + extraDmg + " extra damage";
     }
     public string getIcon()
     {

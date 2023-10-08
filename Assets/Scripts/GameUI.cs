@@ -119,8 +119,7 @@ public class GameUI : MonoBehaviour
 
     public void defineEffectList(){
         List<Effect> el = new List<Effect>();
-        el.AddRange(Flamey.Instance.onHitEffects);
-        el.AddRange(Flamey.Instance.onShootEffects);
+        el.AddRange(Flamey.Instance.allEffects);
         UpdateEffects(el);
     }
     public void UpdateEffects(List<Effect> el){

@@ -33,5 +33,16 @@ public class MenuUI : MonoBehaviour
             Debug.Log("Done!");
         }
 
+        if(Input.GetKeyDown(KeyCode.K)){
+            float f = 0;
+            for (int i = 0; i < 1000; i++)
+            {
+                float g = (float)Distribuitons.RandomExponential(8f/6.2f);
+                f += g;
+                Debug.Log(g);
+            }
+            Debug.Log("Results: " + f/1000);
+        }
+
     }
 }

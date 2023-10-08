@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public interface OnHitEffects: Effect
     
 
     public bool addList();
-    public void ApplyEffect(float dmg = 0, float health = 0);
+    public void ApplyEffect(float dmg = 0, float health = 0, Enemy en = null);
     
 }
 public class VampOnHit : OnHitEffects
@@ -34,7 +35,7 @@ public class VampOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0)
+    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
             Flamey.Instance.addHealth(dmg * perc);
@@ -42,7 +43,7 @@ public class VampOnHit : OnHitEffects
     }
     public void Stack(VampOnHit vampOnHit){
         perc += vampOnHit.perc;
-        prob += perc;
+        prob += vampOnHit.prob;
     }
     public bool addList(){
         return Instance == this;
@@ -61,6 +62,188 @@ public class VampOnHit : OnHitEffects
     public string getDescription()
     {
         return "You have a " + prob*100 + "% chance per shot of healing " + perc*100 + "% of the damage you dealt. This applies for critical damage aswell.";
+    }
+
+    public string getIcon()
+    {
+        return "vampfire";
+    }
+}
+
+public class IceOnHit : OnHitEffects
+
+{
+    private Color IceColor;
+    public static IceOnHit Instance;
+    public int duration;
+    public float prob;
+    public IceOnHit(int duration, float prob){
+       
+        this.duration = duration;
+        this.prob = prob;
+        if(Instance == null){
+            Instance = this;
+        }else{
+            Instance.Stack(this);
+        }
+    }
+    public async void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    {
+        if(en==null){return;}
+        if(en.inEffect){return;}
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            
+            en.inEffect = true;
+            en.GetComponent<Animator>().Play("EnemyEffectice");
+            float f = en.Speed;
+            float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
+            
+            en.Speed -= en.Speed * percentage;
+            DamageUI.Instance.spawnTextDmg(en.transform.position, "SLOWED", 4);
+            await Task.Delay(duration);
+            if(en == null){return;}
+            en.GetComponent<Animator>().Play("EnemyEffectClear");
+            
+            
+            en.Speed = f;
+            en.inEffect = false;
+        }
+    }
+    public void Stack(IceOnHit iceOnHit){
+        duration += iceOnHit.duration;
+        prob += iceOnHit.prob;
+    }
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Ice Soul";
+    }
+
+    public string getType()
+    {
+        return "On-Hit Effect";
+    }
+
+    public string getDescription()
+    {
+        
+        float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
+        
+        return "You have a " + prob*100 + "% chance per shot of slowing the enemy for " + percentage * 100 + "% of it's speed for a duration of "+ duration/1000 + " seconds. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
+    }
+
+    public string getIcon()
+    {
+        return "vampfire";
+    }
+}
+
+public class ShredOnHit : OnHitEffects
+{
+    
+    public static ShredOnHit Instance;
+    public float percReduced;
+    public float prob;
+    public ShredOnHit(float prob, float percReduced){
+       
+        this.percReduced = percReduced;
+        this.prob = prob;
+        if(Instance == null){
+            Instance = this;
+        }else{
+            Instance.Stack(this);
+        }
+    }
+    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    {
+        if(en==null){return;}
+        
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            en.Armor -=  (int)(en.Armor *  percReduced);
+            Debug.Log("Shred");
+        }
+    }
+    public void Stack(ShredOnHit shredOnHit){
+        percReduced += shredOnHit.percReduced;
+        prob += shredOnHit.prob;
+    }
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Shredding Flames";
+    }
+
+    public string getType()
+    {
+        return "On-Hit Effect";
+    }
+
+    public string getDescription()
+    {
+
+        return "You have a " + prob*100 + "% chance per shot of reducing the target's armor for " + percReduced * 100 + "%" ;
+    }
+
+    public string getIcon()
+    {
+        return "vampfire";
+    }
+}
+
+public class ExecuteOnHit : OnHitEffects
+{
+    
+    public static ExecuteOnHit Instance;
+    public float percToKill;
+    public ExecuteOnHit(float percToKill){
+       
+        this.percToKill = percToKill;
+        
+        if(Instance == null){
+            Instance = this;
+        }else{
+            Instance.Stack(this);
+        }
+    }
+    public async void  ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    {
+        if(en==null){return;}
+        if(en.Health < en.MaxHealth * percToKill){
+            float f = en.Health;
+            Vector2 v = en.transform.position;
+            en.Health = 0;
+            await Task.Delay(50);
+            DamageUI.Instance.spawnTextDmg(v, "EXECUTED",5);
+        }
+        
+    }
+    public void Stack(ExecuteOnHit executeOnHit){
+        percToKill = Mathf.Min(0.5f, percToKill + executeOnHit.percToKill);
+        
+    }
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Assassin's Path";
+    }
+
+    public string getType()
+    {
+        return "On-Hit Effect";
+    }
+
+    public string getDescription()
+    {
+        return "You penetrate through " + Flamey.Instance.ArmorPen * 100 + "% of enemy armor. When you hit an enemy below " + percToKill*100 + "% of it's Max Health, you execute them." ;
     }
 
     public string getIcon()

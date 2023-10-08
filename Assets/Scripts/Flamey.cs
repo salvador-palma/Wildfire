@@ -15,8 +15,12 @@ public class Flamey : MonoBehaviour
     public int Health;
     public int Dmg= 50;
 
+    public int Armor = 0;
+    public float ArmorPen = 0;
     public List<OnHitEffects> onHitEffects;
     public List<OnShootEffects> onShootEffects;
+    public List<NotEspecificEffect> notEspecificEffects;
+    public List<Effect> allEffects;
     [SerializeField][Range(0f,100f)]public float CritChance;
     [SerializeField][Range(1f,5f)]public float CritMultiplier;
     [Range(5f, 20f)] public float BulletSpeed;
@@ -36,7 +40,7 @@ public class Flamey : MonoBehaviour
     [SerializeField] public Enemy current_homing;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject FlarePrefab;
+    [SerializeField] private GameObject[] FlarePrefabs;
     [SerializeField] public GameObject FlareSpotPrefab;
 
     [Header("References")]
@@ -52,7 +56,8 @@ public class Flamey : MonoBehaviour
         anim = GetComponent<Animator>();
         onHitEffects = new List<OnHitEffects>();
         onShootEffects = new List<OnShootEffects>();
-        
+        notEspecificEffects = new List<NotEspecificEffect>();
+        allEffects = new List<Effect>();
         
     }
     // Start is called before the first frame update
@@ -66,7 +71,7 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         
         
-        
+
         
     }
 
@@ -105,7 +110,11 @@ public class Flamey : MonoBehaviour
     public void shoot(){
         anim.Play("FlameShoot");
         ApplyOnShoot();
-        Instantiate(FlarePrefab);
+        Tuple<int,bool> tp = getDmg();
+        GameObject go = Instantiate(FlarePrefabs[tp.Item2 ? 1 : 0]);
+        go.GetComponent<Flare>().Damage = tp.Item1;
+        go.GetComponent<Flare>().isCrit = tp.Item2;
+        Debug.Log(tp);
     }
     public void target(Enemy e){
         if(e ==null){return;}
@@ -114,17 +123,21 @@ public class Flamey : MonoBehaviour
         current_homing = e;
     }
 
-    public void InstantiateShot(){
-        Instantiate(FlarePrefab);
+    public void InstantiateShot(int extraDmg = 0, int flameindex = 0){
+        Tuple<int,bool> tp = getDmg();
+        if(flameindex == 0 && tp.Item2){flameindex = 1;}
+        GameObject go = Instantiate(FlarePrefabs[flameindex]);
+        go.GetComponent<Flare>().Damage = tp.Item1 + extraDmg;
+        go.GetComponent<Flare>().isCrit = tp.Item2;
+        Debug.Log(tp);
+
     }
     public static float AtkSpeedToSeconds(float asp){
         return 1/asp;
     }
 
     private Enemy getHoming(){
-        // GameObject g =  GameObject.FindGameObjectWithTag("Enemy");
-        // if(g == null){return null;}
-        // return g.GetComponent<Enemy>();
+        
         List<Enemy> g =  new List<Enemy>();
         g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>() ) );
         g.Sort();
@@ -149,8 +162,8 @@ public class Flamey : MonoBehaviour
         
     }
 
-    public void Hitted(int Dmg){
-        Health -= Dmg;
+    public void Hitted(int Dmg, float armPen){
+        Health -=(int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
@@ -191,6 +204,9 @@ public class Flamey : MonoBehaviour
     public void addDmg(float amount){Dmg += (int)amount;}
     public void multDmg(float amount){Dmg += (int)amount;}
 
+    public void addArmor(int amount){Armor += (int)amount;}
+    public void addArmorPen(float amount){ArmorPen = Mathf.Min(1.0f, ArmorPen + amount);}
+
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
@@ -206,20 +222,32 @@ public class Flamey : MonoBehaviour
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){
             onHitEffects.Add(onhit);
+            allEffects.Add(onhit);
         } 
     }
     public void addOnShootEffect(OnShootEffects onhit){
         if(onhit.addList()){
             onShootEffects.Add(onhit);
+            allEffects.Add(onhit);
+        }
+    }
+    public void addNotEspecificEffect(NotEspecificEffect onhit){
+        if(onhit.addList()){
+            notEspecificEffects.Add(onhit);
+            allEffects.Add(onhit);
         }
     }
 
-    public void ApplyOnHit(float d, float h){
-        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect(d,h);}
+    public void ApplyOnHit(float d, float h, Enemy e){
+        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect(d,h,e);}
     }
     public void ApplyOnShoot(){
         foreach (OnShootEffects oh in onShootEffects){oh.ApplyEffect();}
     }
 
+
+    public GameObject SpawnObject(GameObject go){
+        return Instantiate(go);
+    }
     
 }

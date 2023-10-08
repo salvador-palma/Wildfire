@@ -24,6 +24,22 @@ public class Distribuitons
         return randNormal;
     }
 
+    public static float RandomExponential(float lambda){
+        float f = UnityEngine.Random.value;
+        
+        return -Mathf.Log(1f - f) / lambda;
+    }
+
+    public static double RandomUniform(double min, double max)
+    {
+        return UnityEngine.Random.value * (max - min) + min;
+    }
+
+
+
+
+
+
     public static Dictionary<double, int> ValueFrequency(double[] values, double[] bins){
         Dictionary<double, int> binCounts = new Dictionary<double, int>();
         foreach (double bin in bins){binCounts[bin] = 0;}

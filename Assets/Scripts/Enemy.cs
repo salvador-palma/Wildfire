@@ -11,8 +11,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public float AttackRange;
     public float Speed;
     public int Health;
+    public int MaxHealth;
+    public int Armor;
+    public float ArmorPen;
    
     public Transform HitCenter;
+
+    public bool inEffect;
 
     
     public void Move(){
@@ -24,11 +29,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
+        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * res.Item1);
         
-        Health -= res.Item1;
-        Flamey.Instance.ApplyOnHit(res.Item1, Health);
+        
+        Health -= effectiveDmg;
+        Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
         if(Health <= 0){Die();}
-        PlayHitAnimation(res);
+        PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, res.Item2));
         SpawnExplosion(explosionPos);
     }
     private void PlayHitAnimation(Tuple<int,bool> res){
@@ -36,20 +43,22 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         DamageUI.Instance.spawnTextDmg(transform.position, res.Item1.ToString(), res.Item2 ? 1 : 0);
     }
 
-    private void Die(){
+    public void Die(){
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         
         if(other.tag == "FlareHit"){
-            
-            Hitted(Flamey.Instance.getDmg(), other.transform.position);
+           
+            Hitted(other.GetComponent<FlareSpot>().DmgCrit, other.transform.position);
+        }else if(other.tag == "OrbitalHit"){
+            Hitted(new Tuple<int, bool>(FlameCircle.Instance.damage, false), other.transform.position);
         }
     }
 
     public void Attack(){
-        flame.Hitted(Damage);
+        flame.Hitted(Damage, ArmorPen);
         PlayAttackAnimation();
     }
     private void PlayAttackAnimation(){
@@ -59,6 +68,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         yield return new WaitForSecondsRealtime(AttackDelay);
         Attack();
     }
+    
     public void target(){
         transform.GetChild(0).gameObject.SetActive(true);
     }

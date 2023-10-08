@@ -15,6 +15,8 @@ public class Flare : MonoBehaviour
     private Vector2 target;
     private GameObject FlareSpot;
     
+    public int Damage;
+    public bool isCrit;
     private float destY;
     [SerializeField] Color SpotColor;
     private void Start() {
@@ -72,6 +74,9 @@ public class Flare : MonoBehaviour
     private void SummonFlareSpot(Vector2 vec){
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
         
+        FlareSpot.GetComponent<FlareSpot>().DmgCrit = new Tuple<int, bool>(Damage, isCrit);
+       // Debug.Log(Damage + " " + isCrit);
+       // Debug.Log(FlareSpot.GetComponent<FlareSpot>().DmgCrit);
         FlareSpot.transform.localScale = new Vector2(FlareSpot.transform.localScale.x * Flamey.Instance.BulletSize,FlareSpot.transform.localScale.y * Flamey.Instance.BulletSize);
         FlareSpot.transform.position = vec;
     }

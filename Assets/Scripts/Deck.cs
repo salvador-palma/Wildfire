@@ -58,6 +58,10 @@ public class Deck : MonoBehaviour
         augments.Add(new Augment("Heavy Hitter", "Gain +25 Base Damage", "weight", Tier.Gold, new UnityAction(()=> Flamey.Instance.addDmg(25))));
         augments.Add(new Augment("Hephaestus", "Gain +50 Base Damage", "weight", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addDmg(50))));
 
+        //ARMOR
+        augments.Add(new Augment("Mesh Armor", "Increase your armor by +10", "acc", Tier.Silver, new UnityAction(()=> Flamey.Instance.addArmor(10))));
+        augments.Add(new Augment("Long Lasting Fire", "Increase your armor by +20", "acc", Tier.Gold, new UnityAction(()=> Flamey.Instance.addArmor(20))));
+        augments.Add(new Augment("The Armor of God", "Increase your armor by +35", "acc", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addArmor(35))));
 
 
 
@@ -65,6 +69,7 @@ public class Deck : MonoBehaviour
 
         //CRITIC 
         augments.Add(new Augment("Critical Inferno", "Unlock the ability to critical strike", "critchance", Tier.Prismatic, new UnityAction(()=> {
+            Flamey.Instance.addNotEspecificEffect(new CritUnlock());
             Flamey.Instance.addCritDmg(1.1f);
             Flamey.Instance.addCritChance(0.1f);
             removeFromDeck("Critical Inferno");
@@ -100,7 +105,7 @@ public class Deck : MonoBehaviour
         //BURST SHOT
         augments.Add(new Augment("Burst Shot", "Unlock the ability to burst shot", "multishot", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Burst Shot");
-            Flamey.Instance.addOnShootEffect(new BurstShot(100, 3));
+            Flamey.Instance.addOnShootEffect(new BurstShot(50, 3));
             augments.Add(new Augment("Happy Trigger", "You will need 5 shots less to proc Burst Shot", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(5,0)))));
             augments.Add(new Augment("Bullet Symphony", "You will need 10 shots less to proc Burst Shot", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(10,0)))));
             augments.Add(new Augment("Make It Rain", "You will need 20 shots less to proc Burst Shot", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(20,0)))));
@@ -109,7 +114,70 @@ public class Deck : MonoBehaviour
             augments.Add(new Augment("Burst to Victory", "Your Burst Shot will shoot four extra flames", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,4)))));
         
         })));
-    
+
+        //ICE SOUL
+        augments.Add(new Augment("Frost Fire", "Unlock the ability to Slow Enemies using ice(?)", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Frost Fire");
+            Flamey.Instance.addOnHitEffect(new IceOnHit(500, 0.1f));
+            augments.Add(new Augment("IcyHot", "Gain +5% chance to proc your Frost Fire effect", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.05f)))));
+            augments.Add(new Augment("Glacial Energy", "Gain +15% chance to proc your Frost Fire effect", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.15f)))));
+            augments.Add(new Augment("A Dance of Fire and Ice", "Gain +30% chance to proc your Frost Fire effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.3f)))));
+            augments.Add(new Augment("Slowly but Surely", "Your Frost Fire effect lasts for 0.2 seconds more", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(200, 0)))));
+            augments.Add(new Augment("Frost Bite", "Your Frost Fire effect lasts for 0.5 seconds more", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(500, 0)))));
+            augments.Add(new Augment("Absolute Zero", "Your Frost Fire effect lasts for 1 second more", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0)))));
+        })));
+
+
+        //SHRED ON HIT
+        augments.Add(new Augment("Shredding Flames", "Unlock the ability to shred enemy armor", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Shredding Flames");
+            Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.05f));
+            augments.Add(new Augment("Weaken", "Gain +10% chance to proc your Shredding Flames effect", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0f)))));
+            augments.Add(new Augment("Armor", "Gain +20% chance to proc your Shredding Flames effect", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.2f, 0f)))));
+            augments.Add(new Augment("Disintegration Field", "Gain +35% chance to proc your Frost Fire effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.35f, 0f)))));
+            augments.Add(new Augment("Cheese Shredder", "Your Shredding Flames effect reduces +5% more enemy armor per proc", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.05f)))));
+            augments.Add(new Augment("Black Cleaver", "Your Shredding Flames effect reduces +15% more enemy armor per proc", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.15f)))));
+            augments.Add(new Augment("Molecular Decomposition", "Your Shredding Flames effect reduces +30% more enemy armor per proc", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.30f)))));
+        })));
+
+        //ASSASSIN'S PATHS
+        augments.Add(new Augment("Assassin's Path", "Unlock the ability to pierce armor and execute enemies", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Assassin's Path");
+            Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
+            Flamey.Instance.addArmorPen(0.05f);
+            augments.Add(new Augment("Execution Enforcer", "You can execute enemies for +2% of their Max Health (capped at 50%)", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f)))));
+            augments.Add(new Augment("Soul Collector", "You can execute enemies for +4% of their Max Health (capped at 50%)", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.04f)))));
+            augments.Add(new Augment("La Guillotine", "You can execute enemies for +10% of their Max Health (capped at 50%)", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f)))));
+            augments.Add(new Augment("Shell Breaker", "Gain +5% Armor Penetration", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addArmorPen(0.05f))));
+            augments.Add(new Augment("Quantum Piercing", "Gain +13% Armor Penetration", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addArmorPen(0.13f))));
+            augments.Add(new Augment("Lance of Aether", "Gain +25% Armor Penetration", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addArmorPen(0.25f))));
+        })));
+
+
+        //KRAKEN SLAYER
+        augments.Add(new Augment("Blue Flame", "Each 20 shots send a blue flame that causes +50 extra damage", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Blue Flame");
+            Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 50));
+
+            augments.Add(new Augment("The Bluer The Better", "You will need 1 shot less to proc Blue Flame (capped at 5 shots interval)", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(1, 0)))));
+            augments.Add(new Augment("Propane Combustion", "You will need 2 shots less to proc Blue Flame (capped at 5 shots interval)", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(2, 0)))));
+            augments.Add(new Augment("The never ending Blue", "You will need 5 shots less to proc Blue Flame (capped at 5 shots interval)", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(5, 0)))));
+            augments.Add(new Augment("Propane Leakage", "Your Blue Flame deals +25 extra damage", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 25)))));
+            augments.Add(new Augment("Powerfull Blue", "Your Blue Flame deals +50 extra damage", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50)))));
+            augments.Add(new Augment("Blue Inferno", "Your Blue Flame deals +100 extra damage", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100)))));
+        })));
+
+
+        //ORBITAL FLAMES
+        augments.Add(new Augment("Orbital Flames", "A tiny Flame will orbit around you, damaging the foes it collides with", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Orbital Flames");
+            Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 25));
+
+            augments.Add(new Augment("Tame the Flames", "Gain +1 tiny Flame in your Orbital Field", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 0)))));
+            augments.Add(new Augment("Tiny Flames Win", "Your Orbital Flames deal +10 damage", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 10)))));
+            augments.Add(new Augment("Relliable Damage", "Your Orbital Flames deal +25 damage", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 25)))));
+            augments.Add(new Augment("Saturn", "Your Orbital Flames deal +50 damage", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 50)))));
+        })));
     }   
 
 
