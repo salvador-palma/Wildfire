@@ -9,12 +9,12 @@ public class Turtle : Enemy
     
     private void Start() {
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.01f,0.05f);
-        AttackDelay = 6f;
-        AttackRange = 1.55f;
-        Damage = 50;
-        Health = 1000;
-        Armor = 50;
+        Speed =  Distribuitons.RandomGaussian(0.01f,Speed);
+        // AttackDelay = 6f;
+        // AttackRange = 1.55f;
+        // Damage = 50;
+        // Health = 1000;
+        // Armor = 50;
         MaxHealth = Health;
         StartAnimations(2);
     }

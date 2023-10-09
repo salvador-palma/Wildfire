@@ -9,13 +9,13 @@ public class CatterPillar : Enemy
     
     private void Start() {
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.02f,0.2f);
-        AttackDelay = 2f;
-        AttackRange = 0.8f;
-        Damage = 20;
-        Health = 50;
-        ArmorPen = 0.2f;
-        Armor = 0;
+        Speed =  Distribuitons.RandomGaussian(0.02f,Speed);
+        // AttackDelay = 2f;
+        // AttackRange = 0.8f;
+        // Damage = 20;
+        // Health = 50;
+        // ArmorPen = 0.2f;
+        // Armor = 0;
         MaxHealth = Health;
         StartAnimations(1);
     }

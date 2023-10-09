@@ -9,12 +9,12 @@ public class Snail : Enemy
     
     private void Start() {
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.02f,0.1f);
-        AttackDelay = 4f;
-        AttackRange = 1.04f;
-        Damage = 20;
-        Health = 110;
-        Armor = 20;
+        Speed =  Distribuitons.RandomGaussian(0.02f,Speed);
+        // AttackDelay = 4f;
+        // AttackRange = 1.04f;
+        // Damage = 20;
+        // Health = 110;
+        // Armor = 20;
         MaxHealth = Health;
         StartAnimations(0);
     }

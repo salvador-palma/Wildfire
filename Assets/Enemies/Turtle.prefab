@@ -219,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012150764, y: -2.073498}
+  m_Offset: {x: -0.012150764, y: -1.7535796}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -230,7 +230,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.8383293, y: 2.8945174}
+  m_Size: {x: 7.8383293, y: 4.67692}
   m_EdgeRadius: 0
 --- !u!50 &8862798018454020760
 Rigidbody2D:
@@ -287,11 +287,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
-  Damage: 0
-  AttackDelay: 0
-  AttackRange: 0
-  Speed: 0
-  Health: 0
+  Damage: 50
+  AttackDelay: 5
+  AttackRange: 1.55
+  Speed: 0.05
+  Health: 1000
+  MaxHealth: 0
+  Armor: 50
+  ArmorPen: 0
   HitCenter: {fileID: 6236854942049564200}
   inEffect: 0
 --- !u!1001 &8297971508363720087

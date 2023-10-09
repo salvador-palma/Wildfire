@@ -70,7 +70,7 @@ public class Deck : MonoBehaviour
         //CRITIC 
         augments.Add(new Augment("Critical Inferno", "Unlock the ability to critical strike", "critchance", Tier.Prismatic, new UnityAction(()=> {
             Flamey.Instance.addNotEspecificEffect(new CritUnlock());
-            Flamey.Instance.addCritDmg(1.1f);
+            Flamey.Instance.addCritDmg(0.2f);
             Flamey.Instance.addCritChance(0.1f);
             removeFromDeck("Critical Inferno");
             augments.Add(new Augment("Lucky Shots", "Gain +15% critical strike damage", "critdmg", Tier.Silver, new UnityAction(()=> Flamey.Instance.addCritDmg(0.15f))));
@@ -124,7 +124,7 @@ public class Deck : MonoBehaviour
             augments.Add(new Augment("A Dance of Fire and Ice", "Gain +30% chance to proc your Frost Fire effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.3f)))));
             augments.Add(new Augment("Slowly but Surely", "Your Frost Fire effect lasts for 0.2 seconds more", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(200, 0)))));
             augments.Add(new Augment("Frost Bite", "Your Frost Fire effect lasts for 0.5 seconds more", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(500, 0)))));
-            augments.Add(new Augment("Absolute Zero", "Your Frost Fire effect lasts for 1 second more", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0)))));
+            augments.Add(new Augment("Absolute Zero", "Your Frost Fire effect lasts for 1.5 second more", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(1500, 0)))));
         })));
 
 
@@ -134,7 +134,7 @@ public class Deck : MonoBehaviour
             Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.05f));
             augments.Add(new Augment("Weaken", "Gain +10% chance to proc your Shredding Flames effect", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0f)))));
             augments.Add(new Augment("Armor", "Gain +20% chance to proc your Shredding Flames effect", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.2f, 0f)))));
-            augments.Add(new Augment("Disintegration Field", "Gain +35% chance to proc your Frost Fire effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.35f, 0f)))));
+            augments.Add(new Augment("Disintegration Field", "Gain +35% chance to proc your Shredding Flames effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.35f, 0f)))));
             augments.Add(new Augment("Cheese Shredder", "Your Shredding Flames effect reduces +5% more enemy armor per proc", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.05f)))));
             augments.Add(new Augment("Black Cleaver", "Your Shredding Flames effect reduces +15% more enemy armor per proc", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.15f)))));
             augments.Add(new Augment("Molecular Decomposition", "Your Shredding Flames effect reduces +30% more enemy armor per proc", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.30f)))));
@@ -155,7 +155,7 @@ public class Deck : MonoBehaviour
 
 
         //KRAKEN SLAYER
-        augments.Add(new Augment("Blue Flame", "Each 20 shots send a blue flame that causes +50 extra damage", "multishot", Tier.Prismatic, new UnityAction(()=> {
+        augments.Add(new Augment("Blue Flame", "Unlock the ability to shoot blue flames that inflict extra damage", "multishot", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Blue Flame");
             Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 50));
 
@@ -178,6 +178,48 @@ public class Deck : MonoBehaviour
             augments.Add(new Augment("Relliable Damage", "Your Orbital Flames deal +25 damage", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 25)))));
             augments.Add(new Augment("Saturn", "Your Orbital Flames deal +50 damage", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 50)))));
         })));
+
+        //LAVA POOL
+        augments.Add(new Augment("Lava Pool", "Unlock the ability to create Lava Pools that ignores enemy armor", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Lava Pool");
+            Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 10, 0.1f, 2f));
+
+            augments.Add(new Augment("Hot Tub", "Your Lava Pool will inflict +10 damage per second", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0)))));
+            augments.Add(new Augment("Magical Scorch", "Your Lava Pool will inflict +25 damage per second", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,25,0,0)))));
+            augments.Add(new Augment("Conflagration", "Your Lava Pool will inflict +50 damage per second", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,50,0,0)))));
+
+
+            augments.Add(new Augment("Hot Steps", "Gain +5% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.05f,0)))));
+            augments.Add(new Augment("Lava here, Lava there", "Gain +10% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.10f,0)))));
+            augments.Add(new Augment("The Apocalypse", "Gain +20% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.20f,0)))));
+        
+            augments.Add(new Augment("Heat Area", "Your Lava Pool grows by +0.25 (capped at 2.5)", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0)))));
+            augments.Add(new Augment("Lava Lakes", "Your Lava Pool grows by +0.5 (capped at 2.5)", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0)))));
+            augments.Add(new Augment("Inside the vulcano", "Your Lava Pool grows by +1 (capped at 2.5)", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0)))));
+        
+            augments.Add(new Augment("Sear the ground", "Your Lava Pool lasts for +0.75 seconds", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.75f)))));
+            augments.Add(new Augment("Eternally Hot", "Your Lava Pool lasts for +1.5 seconds", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.5f)))));
+            augments.Add(new Augment("Unsettling Magma", "Your Lava Pool lasts for +3 seconds", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,3f)))));
+        })));
+
+
+        //STATIK SHOT
+        augments.Add(new Augment("Static Energy", "Unlock the ability to send static energy to enemies nearby of your target", "multishot", Tier.Prismatic, new UnityAction(()=> {
+            removeFromDeck("Static Energy");
+            Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,15,3));
+
+            augments.Add(new Augment("Watts Up", "Gain +5% probability to proc your Static Energy effect", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.05f,0,0)))));
+            augments.Add(new Augment("Electrifying Possibilities", "Gain +15% probability to proc your Static Energy effect", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.15f,0,0)))));
+            augments.Add(new Augment("The Sparkster", "Gain +30% probability to proc your Static Energy effect", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.30f,0,0)))));
+            augments.Add(new Augment("Shock Dart", "Your Statik Energy deals +10 extra damage", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,10,0)))));
+            augments.Add(new Augment("Shocking Advancement", "Your Statik Energy deals +25 extra damage", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,25,0)))));
+            augments.Add(new Augment("Zeus", "Your Statik Energy deals +50 extra damage", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,50,0)))));
+            augments.Add(new Augment("Conductive materials", "Your Statik Energy will be able to cross through 1 more enemy", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1)))));
+            augments.Add(new Augment("Feel the Flow", "Your Statik Energy will be able to cross through 2 more enemies", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))));
+            augments.Add(new Augment("Amping Up!", "Your Statik Energy will be able to cross through 5 more enemies", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,5)))));
+        })));
+
+
     }   
 
 

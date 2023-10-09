@@ -20,6 +20,7 @@ public class Flamey : MonoBehaviour
     public List<OnHitEffects> onHitEffects;
     public List<OnShootEffects> onShootEffects;
     public List<NotEspecificEffect> notEspecificEffects;
+    public List<OnLandEffect> onLandEffects;
     public List<Effect> allEffects;
     [SerializeField][Range(0f,100f)]public float CritChance;
     [SerializeField][Range(1f,5f)]public float CritMultiplier;
@@ -58,6 +59,7 @@ public class Flamey : MonoBehaviour
         onShootEffects = new List<OnShootEffects>();
         notEspecificEffects = new List<NotEspecificEffect>();
         allEffects = new List<Effect>();
+        onLandEffects = new List<OnLandEffect>();
         
     }
     // Start is called before the first frame update
@@ -237,12 +239,24 @@ public class Flamey : MonoBehaviour
             allEffects.Add(onhit);
         }
     }
+    public void addOnLandEffect(OnLandEffect onhit){
+        if(onhit.addList()){
+            onLandEffects.Add(onhit);
+            allEffects.Add(onhit);
+        }
+    }
 
-    public void ApplyOnHit(float d, float h, Enemy e){
-        foreach (OnHitEffects oh in onHitEffects){oh.ApplyEffect(d,h,e);}
+    public void ApplyOnHit(float d, float h, Enemy e, string except = null){
+        foreach (OnHitEffects oh in onHitEffects){
+            if(oh.getText() == except){continue;}
+            oh.ApplyEffect(d,h,e);
+            }
     }
     public void ApplyOnShoot(){
         foreach (OnShootEffects oh in onShootEffects){oh.ApplyEffect();}
+    }
+    public void ApplyOnLand(Vector2 pos){
+        foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
 
 

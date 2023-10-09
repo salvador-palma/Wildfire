@@ -251,3 +251,69 @@ public class ExecuteOnHit : OnHitEffects
         return "vampfire";
     }
 }
+
+public class StatikOnHit : OnHitEffects
+{
+    
+    public static StatikOnHit Instance;
+    public GameObject prefab;
+    public float prob;
+    public int dmg;
+    public int ttl;
+    public StatikOnHit(float prob, int dmg, int ttl){
+        
+        this.prob = prob;
+        this.dmg = dmg;
+        this.ttl = ttl;
+        prefab = Resources.Load<GameObject>("Prefab/StatikShiv");
+        if(Instance == null){
+            Instance = this;
+        }else{
+            Instance.Stack(this);
+        }
+    }
+    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    {
+        if(en==null){return;}
+        
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            GameObject g = Flamey.Instance.SpawnObject(prefab);
+            g.transform.position = en.HitCenter.position;
+            StatikShiv s = g.GetComponent<StatikShiv>();
+            s.TTL = ttl;
+            s.currentTarget = en;
+            s.locationOfEnemy = en.HitCenter.position;
+            s.Started = true;
+        }
+        
+    }
+    public void Stack(StatikOnHit statikOnHit){
+        prob += statikOnHit.prob;
+        dmg += statikOnHit.dmg;
+        ttl += statikOnHit.ttl;
+        
+    }
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Statik Energy";
+    }
+
+    public string getType()
+    {
+        return "On-Hit Effect";
+    }
+
+    public string getDescription()
+    {
+        return "When you hit an enemy, you have a chance of " + prob * 100 + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each.";
+    }
+
+    public string getIcon()
+    {
+        return "vampfire";
+    }
+}

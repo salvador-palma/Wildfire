@@ -27,7 +27,15 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void StartAnimations(int ID){
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
-
+    
+    public void HittedWithArmor(int dmg, bool onHit, string except = null){
+        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
+        Health -= effectiveDmg;
+        if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
+        if(Health <= 0){Die();}
+        PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, false));
+       
+    }
     private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * res.Item1);
         

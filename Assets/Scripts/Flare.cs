@@ -36,6 +36,7 @@ public class Flare : MonoBehaviour
             if(transform.position.y < destY){
                 
                 FlareSpotHit();
+                Flamey.Instance.ApplyOnLand(transform.position);
                 Destroy(gameObject);
                 
             }
@@ -84,6 +85,7 @@ public class Flare : MonoBehaviour
         FlareSpot.GetComponent<CircleCollider2D>().enabled = true;
         FlareSpot.GetComponent<SpriteRenderer>().enabled = false;
         FlareSpot.GetComponent<AutoDestroy>().StartCD(0.5f);
+
     }
     private void FlareSpotUpdate(){
         SpotColor.a = 0.6f - Vector2.Distance(transform.position, FlareSpot.transform.position)/6;

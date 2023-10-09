@@ -27,11 +27,46 @@ public class EnemySpawner : MonoBehaviour
     public bool GameEnd;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
+
         new List<float>(){1,0,0,0},
         new List<float>(){0.85f,.15f,0,0},
         new List<float>(){0.7f,0.3f,0f,0},
+        new List<float>(){0.6f,0.4f,0f,0},
+        new List<float>(){0.6f,0.4f,0f,0},
+
         new List<float>(){0.55f,0.3f,.15f,0},
         new List<float>(){0.2f,0.5f,.3f,0},
+        new List<float>(){0.1f,0.6f,.3f,0},
+        new List<float>(){0.05f,0.6f,.35f,0},
+        new List<float>(){0,1f,0,0},
+        new List<float>(){1f,0,0,0},
+        new List<float>(){0,0.5f,.5f,0},
+        new List<float>(){0,0.5f,.5f,0},
+        new List<float>(){0,0.5f,.5f,0},
+        new List<float>(){0,0.5f,.5f,0},
+        new List<float>(){0,0.5f,.45f,0.05f},
+        new List<float>(){0,0.5f,.45f,0.05f},
+        new List<float>(){0,0.5f,.45f,0.05f},
+        new List<float>(){0,0.4f,.5f,0.10f},
+        new List<float>(){0,0.39f,.50f,0.10f,0.01f},
+        new List<float>(){0,0.35f,.50f,0.10f,0.05f},
+        new List<float>(){0,0f,.75f,0.20f,0.05f},
+        new List<float>(){0,0f,.65f,0.20f,0.15f},
+        new List<float>(){0,0f,0f,1f,0f},
+        new List<float>(){0,0f,0f,0.75f,0.25f},
+        new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
+        new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
+        new List<float>(){0,0f,0f,0.7f,0.2f, 0.10f},
+        new List<float>(){0,0f,0f,0.6f,0.3f, 0.10f},
+        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0f,0f,0.20f,0.40f, 0.40f},
+
     };
 
     
