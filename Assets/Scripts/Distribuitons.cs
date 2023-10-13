@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Distribuitons 
@@ -35,8 +36,53 @@ public class Distribuitons
         return UnityEngine.Random.value * (max - min) + min;
     }
 
+     public static int RandomBinomial(int n, double p) {
+        double[] probs = BinomialAux(n, p);
+        double x = UnityEngine.Random.value;
+        
+        for(int i = 0; i != probs.Length; i++) {
+            if(x < probs[i]) {
+                return i;
+            } else {
+                x -= probs[i];
+            }
+        }
+        return n;
+    }
 
+    public static double[] BinomialAux(int n, double p) {
+        double[] probs = new double[n + 1];
+        for(int i = 0; i != probs.Length; i++) {
+            probs[i] = C(n,i) * Math.Pow(p,i) * Math.Pow(1-p, n-i);
+        }
+        return probs;
+    }
+    public static int C(int n, int x){
+        return factorial(n)/(factorial(x) * factorial(n-x));
+    }
 
+    public static int factorial(int n) {
+        if(n <= 1)
+            return 1;
+        return n * factorial(n-1);
+    }
+
+    public static bool[] sillyGoose(int len, int n) {
+        bool[] boolArray = new bool[len];
+        for (int i = 0; i < n; i++)
+        {
+            boolArray[i] = true;
+        }
+        for (int i = len - 1; i > 0; i--)
+        {
+            int j = UnityEngine.Random.Range(0, i + 1);
+            bool temp = boolArray[i];
+            boolArray[i] = boolArray[j];
+            boolArray[j] = temp;
+        } 
+        return boolArray;
+    } 
+ 
 
 
 

@@ -30,10 +30,20 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     
     public void HittedWithArmor(int dmg, bool onHit, string except = null){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
-        Health -= effectiveDmg;
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
+        Health -= effectiveDmg;
+        
         if(Health <= 0){Die();}
         PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, false));
+       
+    }
+    public void HittedArmorless(int dmg, string except = null){
+        
+        //if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
+        Health -= dmg;
+        
+        if(Health <= 0){Die();}
+        PlayHitAnimation(new Tuple<int, bool>(dmg, false));
        
     }
     private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
@@ -45,13 +55,15 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(Health <= 0){Die();}
         PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, res.Item2));
         SpawnExplosion(explosionPos);
+        //CameraShake.Shake(0.25f,0.1f);
     }
-    private void PlayHitAnimation(Tuple<int,bool> res){
+    public void PlayHitAnimation(Tuple<int,bool> res){
         GetComponent<Animator>().Play("EnemyHit");
         DamageUI.Instance.spawnTextDmg(transform.position, res.Item1.ToString(), res.Item2 ? 1 : 0);
     }
 
     public void Die(){
+        CameraShake.Shake(0.4f,0.15f);
         Destroy(gameObject);
     }
 

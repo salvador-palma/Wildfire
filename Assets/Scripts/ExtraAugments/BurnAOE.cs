@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,7 +30,7 @@ public class BurnAOE : MonoBehaviour
                 foreach (Enemy item in colliding)
                 {
                     if(item == null){continue;}
-                    item.HittedWithArmor(Damage, false);
+                    item.HittedArmorless(Damage);
                     
                 }
             }catch(InvalidOperatorException e){

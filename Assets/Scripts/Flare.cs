@@ -26,7 +26,7 @@ public class Flare : MonoBehaviour
         SpotColor.a = 0;
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-        //target = Flamey.Instance.current_homing.transform.position;
+
     }
 
     private void Update() {
@@ -50,14 +50,11 @@ public class Flare : MonoBehaviour
         
     }
     private void goDown(){
-        Enemy e = Flamey.Instance.current_homing;
-        if(e==null){Destroy(gameObject);return;}
-        else{target = e.HitCenter.position;}
-        
-        
-        
-        
-        
+        if(target == Vector2.zero){
+            Enemy e = Flamey.Instance.current_homing;
+            if(e==null){Destroy(gameObject);return;}
+            else{target = e.HitCenter.position;}
+        }
         
         //try for 10 times
         float Accuracy = Flamey.Instance.Accuracy;
@@ -69,7 +66,7 @@ public class Flare : MonoBehaviour
         
     }
     private void setPosition(Vector2 dest){
-        transform.position = new Vector2(dest.x, transform.position.y);
+        transform.position = new Vector2(dest.x, transform.position.y + dest.y);
         destY = dest.y;
     }
     private void SummonFlareSpot(Vector2 vec){
@@ -90,6 +87,10 @@ public class Flare : MonoBehaviour
     private void FlareSpotUpdate(){
         SpotColor.a = 0.6f - Vector2.Distance(transform.position, FlareSpot.transform.position)/6;
         FlareSpot.GetComponent<SpriteRenderer>().color = SpotColor;
+    }
+
+    public void setTarget(Vector2 v){
+        target = v;
     }
 
     

@@ -39,31 +39,72 @@ public class EnemySpawner : MonoBehaviour
         new List<float>(){0.1f,0.6f,.3f,0},
         new List<float>(){0.05f,0.6f,.35f,0},
         new List<float>(){0,1f,0,0},
+
+        new List<float>(){0.55f,0.3f,.15f,0},
+        new List<float>(){0.2f,0.5f,.3f,0},
+        new List<float>(){0.1f,0.6f,.3f,0},
+        new List<float>(){0.05f,0.6f,.35f,0},
+        new List<float>(){0,1f,0,0},
+        
         new List<float>(){1f,0,0,0},
         new List<float>(){0,0.5f,.5f,0},
         new List<float>(){0,0.5f,.5f,0},
         new List<float>(){0,0.5f,.5f,0},
         new List<float>(){0,0.5f,.5f,0},
+
         new List<float>(){0,0.5f,.45f,0.05f},
         new List<float>(){0,0.5f,.45f,0.05f},
         new List<float>(){0,0.5f,.45f,0.05f},
         new List<float>(){0,0.4f,.5f,0.10f},
         new List<float>(){0,0.39f,.50f,0.10f,0.01f},
+
         new List<float>(){0,0.35f,.50f,0.10f,0.05f},
         new List<float>(){0,0f,.75f,0.20f,0.05f},
         new List<float>(){0,0f,.65f,0.20f,0.15f},
-        new List<float>(){0,0f,0f,1f,0f},
-        new List<float>(){0,0f,0f,0.75f,0.25f},
+        new List<float>(){0.5f,.2f,0f,0.3f,0f},
+        new List<float>(){0.5f,.2f,0f,0.3f,0f},
+        
+        
+        new List<float>(){0,0f,0.55f,0.40f,0.15f},
+        new List<float>(){0,0f,0.55f,0.40f,0.15f},
+        new List<float>(){0,0f,0.55f,0.40f,0.15f},
+        new List<float>(){0,0f,0.55f,0.40f,0.15f},
+        new List<float>(){0,0f,0.5f,0.40f,0.20f},
+        
+
+        new List<float>(){0,0f,0.4f,0.50f,0.20f},
+        new List<float>(){0,0f,0.4f,0.50f,0.20f},
+        new List<float>(){0,0f,0.45f,0.50f,0.25f},
+        new List<float>(){0,0f,0.4f,0.55f,0.25f},
+        new List<float>(){0,0f,0.4f,0.55f,0.25f},
+
+        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+
         new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
         new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
         new List<float>(){0,0f,0f,0.7f,0.2f, 0.10f},
         new List<float>(){0,0f,0f,0.6f,0.3f, 0.10f},
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+
         new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
         new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
         new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
         new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        
         new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
         new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
+        
         new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
         new List<float>(){0,0f,0f,0.20f,0.40f, 0.40f},
 
@@ -72,21 +113,23 @@ public class EnemySpawner : MonoBehaviour
     
     private void Awake() {
         Instance = this;
+       
     }
     public void Start(){
-
+        current_round = 75;
+        resetInstances();
         roundTimer = getRoundTime(current_round);
         
         
         TimerEnemySpawn =(float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
         updateSpawnLimits();
         GameUI.Instance.UpdateProgressBar(current_round);
-        
+        GameUI.Instance.UpdateMenuInfo(current_round);
         
         
     }
     private Vector2 getPoint(){
-        double angle = Math.PI * UnityEngine.Random.Range(0,360)/180f;
+        double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
         double x = 0.52f * width * Math.Cos(angle);
         double y = 0.52f * height * Math.Sin(angle);
         return new Vector2((float)x,(float)y);
@@ -134,6 +177,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void newRound(){
         current_round++;
+        
         isOn = true;
         isOnAugments = false;
         roundTimer = getRoundTime(current_round);
@@ -146,6 +190,8 @@ public class EnemySpawner : MonoBehaviour
         {
             item.ApplyEffect();
         }
+        
+        GameUI.Instance.UpdateMenuInfo(current_round);
         
     }
 
@@ -171,14 +217,27 @@ public class EnemySpawner : MonoBehaviour
 
 
     private float getRoundTime(int round){
-        return Math.Min(5 + 1.2f * (float)Distribuitons.RandomUniform(round - 1, round + 1), 40);
+        //return Math.Min(5 + 1.2f * (float)Distribuitons.RandomUniform(round - 1, round + 1), 40);
+        return Math.Min(5 + 1.2f * round, 40);
     }
     private float getSpawnAmount(int round){
         return 5 + 3f * round;
     }
     
 
+    private void resetInstances(){
+        // FlameCircle.Instance = null;
+        // VampOnHit.Instance = null;
+        // IceOnHit.Instance = null;
+        // ShredOnHit.Instance = null;
+        // ExecuteOnHit.Instance = null;
+        // StatikOnHit.Instance = null;
+        // BurnOnLand.Instance = null;
+        // SecondShot.Instance = null;
+        // BurstShot.Instance = null;
+        // KrakenSlayer.Instance = null;
 
+    }
 
 
 }

@@ -23,6 +23,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject[] MenuTabs;
     [SerializeField] Image[] ButtonTabs;
+    [SerializeField] TextMeshProUGUI roundCounter;
     int current_Tab = 0;
 
     [Header("Augments")]
@@ -73,9 +74,10 @@ public class GameUI : MonoBehaviour
     public void TogglePausePanel(){
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
     }
-    public void UpdateMenuInfo(){
+    public void UpdateMenuInfo(int current_round){
         defineStats();
         defineEffectList();
+        setRoundCounter(current_round);
     }
     
     public void changeTab(int index){
@@ -191,6 +193,9 @@ public class GameUI : MonoBehaviour
         BlackScreen.Play("BlackScreenOff");
     }
     
+    public void setRoundCounter(int n){
+        roundCounter.text = "ROUND " + n;
+    }
    
     
 

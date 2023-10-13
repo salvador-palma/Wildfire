@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,6 +74,8 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         
         
+        
+        
 
         
     }
@@ -84,6 +87,7 @@ public class Flamey : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
         }
+        
         if(current_homing == null){
             target(getHoming());
             if(current_homing == null){return;}
@@ -116,7 +120,7 @@ public class Flamey : MonoBehaviour
         GameObject go = Instantiate(FlarePrefabs[tp.Item2 ? 1 : 0]);
         go.GetComponent<Flare>().Damage = tp.Item1;
         go.GetComponent<Flare>().isCrit = tp.Item2;
-        Debug.Log(tp);
+       
     }
     public void target(Enemy e){
         if(e ==null){return;}
@@ -125,13 +129,13 @@ public class Flamey : MonoBehaviour
         current_homing = e;
     }
 
-    public void InstantiateShot(int extraDmg = 0, int flameindex = 0){
+    public Flare InstantiateShot(int extraDmg = 0, int flameindex = 0){
         Tuple<int,bool> tp = getDmg();
         if(flameindex == 0 && tp.Item2){flameindex = 1;}
         GameObject go = Instantiate(FlarePrefabs[flameindex]);
         go.GetComponent<Flare>().Damage = tp.Item1 + extraDmg;
         go.GetComponent<Flare>().isCrit = tp.Item2;
-        Debug.Log(tp);
+        return go.GetComponent<Flare>();
 
     }
     public static float AtkSpeedToSeconds(float asp){
@@ -144,6 +148,10 @@ public class Flamey : MonoBehaviour
         g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>() ) );
         g.Sort();
         return g.Count!=0 ? g[0] : null;
+    }
+    public UnityEngine.Vector2 getRandomHomingPosition(){
+        GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
+        return go[UnityEngine.Random.Range(0, go.Length)].GetComponent<Enemy>().HitCenter.position;
     }
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
@@ -165,10 +173,12 @@ public class Flamey : MonoBehaviour
     }
 
     public void Hitted(int Dmg, float armPen){
+        
         Health -=(int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
+        CameraShake.Shake(0.5f,0.35f);
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
@@ -255,7 +265,7 @@ public class Flamey : MonoBehaviour
     public void ApplyOnShoot(){
         foreach (OnShootEffects oh in onShootEffects){oh.ApplyEffect();}
     }
-    public void ApplyOnLand(Vector2 pos){
+    public void ApplyOnLand(UnityEngine.Vector2 pos){
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
 

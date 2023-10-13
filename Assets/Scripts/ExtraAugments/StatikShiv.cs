@@ -29,11 +29,7 @@ public class StatikShiv : MonoBehaviour
     }
     private void Update() {
         if(!Started){return;}
-        LineTime-=Time.deltaTime;
-        if(LineTime <= 0){
-            Debug.Log("Statik Destroyed");
-            //Destroy(gameObject);
-        }
+        
 
         NextDelay-=Time.deltaTime;
         if(NextDelay <= 0 && !NextCheck){
@@ -45,10 +41,10 @@ public class StatikShiv : MonoBehaviour
     }
 
     private Enemy Next(){
-        if(currentTarget == null){Destroy(gameObject);}
-        Vector2 overlapPosition = locationOfEnemy;
         
+        Vector2 overlapPosition = locationOfEnemy;
         colcol = Physics2D.OverlapCircleAll(overlapPosition, myCollider.radius);
+
         List<Enemy> collected = new List<Enemy>();
         
         foreach (Collider2D item in colcol)
@@ -59,7 +55,9 @@ public class StatikShiv : MonoBehaviour
                 collected.Add(e);
             }
         }
+        
         if(collected.Count == 0){return null;}
+        
         return collected[UnityEngine.Random.Range(0, collected.Count - 1)];
     }
     private void SpawnNext(){
@@ -67,20 +65,25 @@ public class StatikShiv : MonoBehaviour
             if(TTL <= 0){Destroy(gameObject);return;}
             if(alreadyPassed == null){alreadyPassed = new List<Enemy>();}
             alreadyPassed.Add(currentTarget);
+
             Enemy target = Next();
             if(target == null){Destroy(gameObject);return;}
             ActivateLine(target.HitCenter.position);
-            DealDamage(target);
             GameObject go = Instantiate(StatikPrefab);
+            
             go.transform.position = target.HitCenter.position;
             SetupNext(go.GetComponent<StatikShiv>(), target);
+            DealDamage(target);
+            
+            
         }catch(Exception e){
             string str = e.StackTrace;
         }
+        Destroy(gameObject);
         
     }
     private void ActivateLine(Vector3 pos){
-        lineRenderer.SetPositions(new Vector3[]{currentTarget.HitCenter.position, pos});
+        lineRenderer.SetPositions(new Vector3[]{locationOfEnemy, pos});
         lineRenderer.enabled = true;
 
     }
@@ -98,6 +101,6 @@ public class StatikShiv : MonoBehaviour
         statikShiv.locationOfEnemy = t.HitCenter.position;
         statikShiv.Started = true;
         
-        Destroy(gameObject);
+       
     }
 }

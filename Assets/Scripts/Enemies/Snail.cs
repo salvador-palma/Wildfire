@@ -6,7 +6,7 @@ public class Snail : Enemy
 {
     
     private bool check = false;
-    
+    [SerializeField]  private bool withShell;
     private void Start() {
         base.flame = Flamey.Instance;
         Speed =  Distribuitons.RandomGaussian(0.02f,Speed);
@@ -16,7 +16,7 @@ public class Snail : Enemy
         // Health = 110;
         // Armor = 20;
         MaxHealth = Health;
-        StartAnimations(0);
+        StartAnimations(withShell? 0 : 2);
     }
     private void Update() {
         

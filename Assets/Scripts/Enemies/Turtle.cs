@@ -16,7 +16,7 @@ public class Turtle : Enemy
         // Health = 1000;
         // Armor = 50;
         MaxHealth = Health;
-        StartAnimations(2);
+        StartAnimations(3);
     }
     private void Update() {
         

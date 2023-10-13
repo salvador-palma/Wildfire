@@ -86,7 +86,8 @@ public class BurstShot : OnShootEffects{
         if(leftToShoot <= 0){
             leftToShoot = interval;
             for(int i =0; i< amount; i++){
-                Flamey.Instance.InstantiateShot();
+                Flare f = Flamey.Instance.InstantiateShot();
+                f.setTarget(Flamey.Instance.getRandomHomingPosition());
             }
         }
     }
