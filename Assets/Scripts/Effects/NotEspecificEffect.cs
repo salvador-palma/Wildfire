@@ -56,7 +56,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getIcon()
     {
-        return "vampfire";
+        return "orbital";
     }
 
     public string getText()
@@ -98,7 +98,7 @@ public class CritUnlock : NotEspecificEffect
 
     public string getIcon()
     {
-        return "vampfire";
+        return "critchance";
     }
 
     public string getText()

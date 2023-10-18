@@ -66,6 +66,6 @@ public class BurnOnLand : OnLandEffect
 
     public string getIcon()
     {
-        return "vampfire";
+        return "lava";
     }
 }

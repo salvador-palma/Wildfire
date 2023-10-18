@@ -137,7 +137,7 @@ public class IceOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "vampfire";
+        return "ice";
     }
 }
 
@@ -192,7 +192,7 @@ public class ShredOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "vampfire";
+        return "shred";
     }
 }
 
@@ -248,7 +248,7 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "vampfire";
+        return "assassin";
     }
 }
 
@@ -314,6 +314,6 @@ public class StatikOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "vampfire";
+        return "statik";
     }
 }

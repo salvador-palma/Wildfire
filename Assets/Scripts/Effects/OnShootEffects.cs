@@ -117,7 +117,7 @@ public class BurstShot : OnShootEffects{
     }
     public string getIcon()
     {
-        return "multishot";
+        return "burst";
     }
 }
 
@@ -176,6 +176,6 @@ public class KrakenSlayer : OnShootEffects{
     }
     public string getIcon()
     {
-        return "multishot";
+        return "blueflame";
     }
 }
