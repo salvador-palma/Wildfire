@@ -28,80 +28,94 @@ public class EnemySpawner : MonoBehaviour
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         //0
-        new List<float>(){1,0,0,0},
-        new List<float>(){0.85f,.15f,0,0},
-        new List<float>(){0.7f,0.3f,0f,0},
-        new List<float>(){0.6f,0.4f,0f,0},
-        new List<float>(){0.6f,0.4f,0f,0},
+        //Slug + TinySlime
+        new List<float>(){1,0},
+        new List<float>(){0.85f,.15f},
+        new List<float>(){0.7f,0.3f},
+        new List<float>(){0.6f,0.4f},
+        new List<float>(){0.6f,0.4f},
+
         //5
-        new List<float>(){0.55f,0.3f,.15f,0},
-        new List<float>(){0.2f,0.5f,.3f,0},
-        new List<float>(){0.1f,0.6f,.3f,0},
-        new List<float>(){0.05f,0.6f,.35f,0},
-        new List<float>(){0,1f,0,0},
+        //CatterPie + Slime
+        new List<float>(){0.4f,0.25f,.15f,0.1f},
+        new List<float>(){0.05f,0.5f,.3f,0.15f},
+        new List<float>(){0.05f,0.4f,.5f,0.05f},
+        new List<float>(){0.05f,0.5f,.35f,0.1f},
+        new List<float>(){0,0.8f,0,0.2f},
+
         //10
-        new List<float>(){0.55f,0.3f,.15f,0},
-        new List<float>(){0.2f,0.5f,.3f,0},
-        new List<float>(){0.1f,0.6f,.3f,0},
-        new List<float>(){0.05f,0.6f,.35f,0},
-        new List<float>(){0,1f,0,0},
-       //15 
-        new List<float>(){1f,0,0,0},
-        new List<float>(){0,0.5f,.5f,0},
-        new List<float>(){0,0.5f,.5f,0},
-        new List<float>(){0,0.5f,.5f,0},
-        new List<float>(){0,0.5f,.5f,0},
+        //SlimeOrangeTiny
+        new List<float>(){0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0,.2f,.5f,.3f},
+
+        //15 
+        //Turtle
+        new List<float>(){0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0,0,.2f,.5f,.3f},
+
         //20
-        new List<float>(){0,0.5f,.45f,0.05f},
-        new List<float>(){0,0.5f,.45f,0.05f},
-        new List<float>(){0,0.5f,.45f,0.05f},
-        new List<float>(){0,0.4f,.5f,0.10f},
-        new List<float>(){0,0.39f,.50f,0.10f,0.01f},
+        //Slime Orange
+        new List<float>(){0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0.2f,0,0.2f,.3f,0f,.3f},
+
         //25
-        new List<float>(){0,0.35f,.50f,0.10f,0.05f},
-        new List<float>(){0,0f,.75f,0.20f,0.05f},
-        new List<float>(){0,0f,.65f,0.20f,0.15f},
-        new List<float>(){0.5f,.2f,0f,0.3f,0f},
-        new List<float>(){0.5f,.2f,0f,0.3f,0f},
+        //Snail
+        new List<float>(){0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0,0,0,0,.2f,.5f,.3f},
         
         //30
-        new List<float>(){0,0f,0.55f,0.40f,0.15f},
-        new List<float>(){0,0f,0.55f,0.40f,0.15f},
-        new List<float>(){0,0f,0.55f,0.40f,0.15f},
-        new List<float>(){0,0f,0.55f,0.40f,0.15f},
-        new List<float>(){0,0f,0.5f,0.40f,0.20f},
+        //SlimeRedTiny + CatterillarRed
+        new List<float>(){0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,0,0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,0,0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0,0,0,0,0,.2f,.5f,.3f},
 
         //35
-        new List<float>(){0,0f,0.2f,0.55f,0.25f},
-        new List<float>(){0,0f,0.2f,0.55f,0.25f},
-        new List<float>(){0,0f,0.2f,0.55f,0.25f},
-        new List<float>(){0,0f,0.2f,0.55f,0.25f},
-        new List<float>(){0,0f,0.2f,0.55f,0.25f},
+        //SlimeRed
+        new List<float>(){0,0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0.1f,0,0.1f,.15f,0f,.15f,0f,0.25f,0f, 0.25f},
 
         //40
-        new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
-        new List<float>(){0,0f,0f,0.7f,0.25f, 0.05f},
-        new List<float>(){0,0f,0f,0.7f,0.2f, 0.10f},
-        new List<float>(){0,0f,0f,0.6f,0.3f, 0.10f},
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        //Red Turtle
+        new List<float>(){0,0,0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
+        new List<float>(){0,0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
+        new List<float>(){0,0,0,0,0,0,0,0,.2f,.5f,.3f},
         //45
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
         //50
-        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
 
         //55
-        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0f,0f,0.20f,0.40f, 0.40f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.20f,0.40f, 0.40f},
 
     };
 
@@ -164,9 +178,9 @@ public class EnemySpawner : MonoBehaviour
         width = height * Camera.main.aspect;
         
     }
-    private void CheckFlip(GameObject g){
+    public void CheckFlip(GameObject g){
         if(g.transform.position.x < 0){
-            g.GetComponent<SpriteRenderer>().flipX = true;
+            g.GetComponent<SpriteRenderer>().flipX = !g.GetComponent<SpriteRenderer>().flipX;
         }
     }
 
@@ -207,7 +221,7 @@ public class EnemySpawner : MonoBehaviour
                 val -= prob[i];
             }
         }
-        return -1;
+        return prob.Count - 1;
     }
 
 

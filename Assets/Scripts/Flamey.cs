@@ -115,6 +115,7 @@ public class Flamey : MonoBehaviour
 
     public void shoot(){
         anim.Play("FlameShoot");
+        AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
         ApplyOnShoot();
         Tuple<int,bool> tp = getDmg();
         GameObject go = Instantiate(FlarePrefabs[tp.Item2 ? 1 : 0]);

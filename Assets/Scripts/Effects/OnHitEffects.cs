@@ -38,7 +38,7 @@ public class VampOnHit : OnHitEffects
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            Flamey.Instance.addHealth(dmg * perc);
+            Flamey.Instance.addHealth(Math.Abs(dmg * perc));
         }
     }
     public void Stack(VampOnHit vampOnHit){

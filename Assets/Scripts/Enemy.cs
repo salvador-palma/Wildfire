@@ -52,17 +52,21 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         Health -= effectiveDmg;
         Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
-        if(Health <= 0){Die();}
+        if(Health <= 0){this.Die();}
         PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, res.Item2));
+        PlayHitSoundFx();
         SpawnExplosion(explosionPos);
         //CameraShake.Shake(0.25f,0.1f);
+    }
+    private void PlayHitSoundFx(){
+        AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
     }
     public void PlayHitAnimation(Tuple<int,bool> res){
         GetComponent<Animator>().Play("EnemyHit");
         DamageUI.Instance.spawnTextDmg(transform.position, res.Item1.ToString(), res.Item2 ? 1 : 0);
     }
 
-    public void Die(){
+    public virtual void Die(){
         CameraShake.Shake(0.4f,0.15f);
         Destroy(gameObject);
     }
