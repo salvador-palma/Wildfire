@@ -17,7 +17,7 @@ public class Deck : MonoBehaviour
     [SerializeField] private Button[] RefreshButtons;
     private List<Augment> refreshedAugments;
 
-    [SerializeField] private Color[] tierColors;
+    [SerializeField] private Sprite[] tierSprites;
     private List<Augment> filteredAugments;
     private Tier currentTier;
 
@@ -255,7 +255,7 @@ public class Deck : MonoBehaviour
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
         SlotsParent.GetComponent<Animator>().Play("OutroSlots");
-        Debug.Log("HERE");
+       // Debug.Log("HERE");
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
         EnemySpawner.Instance.newRound();
@@ -281,34 +281,34 @@ public class Deck : MonoBehaviour
     private List<Augment> FilterAugments(bool isPrismaticRound){
         if(isPrismaticRound){
             currentTier = Tier.Prismatic;
-            ChangeColors(tierColors[0],tierColors[1]);
+            ChangeColors(tierSprites[4],tierSprites[5]);
             return augments.FindAll( a => a.tier == Tier.Prismatic);
         }
         if(PhaseTiers[currPhase]){
             currentTier = Tier.Gold;
-            ChangeColors(tierColors[2],tierColors[3]);
+            ChangeColors(tierSprites[2],tierSprites[3]);
             return augments.FindAll( a => a.tier == Tier.Gold);
         }else{
             currentTier = Tier.Silver;
-            ChangeColors(tierColors[4],tierColors[5]);
+            ChangeColors(tierSprites[0],tierSprites[1]);
             return augments.FindAll( a => a.tier == Tier.Silver);
         }
     }
-    private void ChangeColors(Color basic, Color shade){
+    private void ChangeColors(Sprite sprite, Sprite back){
         for (int i = 0; i < Slots.Length; i++)
         {
-            Slots[i].GetComponent<Image>().color = shade;
-            Slots[i].transform.Find("Shadow").GetComponent<Image>().color = basic;
+            Slots[i].GetComponent<Image>().sprite = back;
+            Slots[i].transform.Find("Shadow").GetComponent<Image>().sprite = sprite;
         }
     }
-    public Tuple<Color,Color> getTierColors(Tier t){
+    public Sprite getTierSprite(Tier t){
          switch(t){
             case Tier.Silver:
-                return new Tuple<Color, Color>(tierColors[4],tierColors[5]);
+                return tierSprites[1];
             case Tier.Gold:
-                return new Tuple<Color, Color>(tierColors[2],tierColors[3]);
+                return tierSprites[3];
             case Tier.Prismatic:
-                return new Tuple<Color, Color>(tierColors[0],tierColors[1]);
+                return tierSprites[5];
                 
         }
         return null;

@@ -97,9 +97,8 @@ public class GameUI : MonoBehaviour
     public void AddAugment(Augment a){
         if(!ownsAugment){ownsAugment = true; NoAugmentsText.SetActive(false);}
         GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
-        Tuple<Color,Color> t = Deck.Instance.getTierColors(a.tier);
-        go.GetComponent<Image>().color = t.Item1;
-        go.transform.GetChild(0).GetComponent<Image>().color = t.Item1;
+        
+        go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
         go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
         go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.Description;
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
