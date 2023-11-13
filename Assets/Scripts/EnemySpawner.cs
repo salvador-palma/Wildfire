@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
 
         //5
         //CatterPie + Slime
-        new List<float>(){0.4f,0.25f,.15f,0.1f},
+        new List<float>(){0.4f,0.3f,.2f,0.1f},
         new List<float>(){0.05f,0.5f,.3f,0.15f},
         new List<float>(){0.05f,0.4f,.5f,0.05f},
         new List<float>(){0.05f,0.5f,.35f,0.1f},
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
 
         //10
         //SlimeOrangeTiny
-        new List<float>(){0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,.3f,.15f,.45f,.1f},
         new List<float>(){0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,.05f,.2f,.5f, 0.25f},
@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
 
         //15 
         //Turtle
-        new List<float>(){0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,.05f,.2f,.5f, 0.25f},
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
 
         //20
         //Slime Orange
-        new List<float>(){0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,0,.05f,.2f,.5f, 0.25f},
@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
 
         //25
         //Snail
-        new List<float>(){0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,0,0,.05f,.2f,.5f, 0.25f},
@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         
         //30
         //SlimeRedTiny + CatterillarRed
-        new List<float>(){0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,0,0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,0,0,0,.05f,.2f,.5f, 0.25f},
@@ -85,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
 
         //35
         //SlimeRed
-        new List<float>(){0,0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
@@ -93,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
 
         //40
         //Red Turtle
-        new List<float>(){0,0,0,0,0,0,0,.3f,.15f,.4f,.05f},
+        new List<float>(){0,0,0,0,0,0,0,.3f,.15f,.45f,.1f},
         new List<float>(){0,0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
         new List<float>(){0,0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
