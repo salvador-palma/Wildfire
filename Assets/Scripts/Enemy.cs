@@ -34,7 +34,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Health -= effectiveDmg;
         
         if(Health <= 0){Die();}
-        PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, false));
+        PlayHitAnimation(effectiveDmg, false, except=="Statik Energy" ? 6 : -1);
        
     }
     public void HittedArmorless(int dmg, string except = null){
@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Health -= dmg;
         
         if(Health <= 0){Die();}
-        PlayHitAnimation(new Tuple<int, bool>(dmg, false));
+        PlayHitAnimation(dmg, false);
        
     }
     private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
@@ -53,20 +53,21 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Health -= effectiveDmg;
         Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
         if(Health <= 0){this.Die();}
-        PlayHitAnimation(new Tuple<int, bool>(effectiveDmg, res.Item2));
-        PlayHitSoundFx();
+        PlayHitAnimation(effectiveDmg, res.Item2);
+        
         SpawnExplosion(explosionPos);
         //CameraShake.Shake(0.25f,0.1f);
     }
     private void PlayHitSoundFx(){
         AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
     }
-    public void PlayHitAnimation(Tuple<int,bool> res){
+    public void PlayHitAnimation(int dmg, bool isCrit, int extraInfo = -1){
         GetComponent<Animator>().Play("EnemyHit");
-        DamageUI.Instance.spawnTextDmg(transform.position, res.Item1.ToString(), res.Item2 ? 1 : 0);
+        DamageUI.Instance.spawnTextDmg(transform.position, dmg.ToString(), extraInfo != -1 ? extraInfo : isCrit ? 1 : 0);
     }
 
     public virtual void Die(){
+        PlayHitSoundFx();
         CameraShake.Shake(0.4f,0.15f);
         Destroy(gameObject);
     }

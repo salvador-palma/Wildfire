@@ -73,7 +73,7 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
         
-        //addNotEspecificEffect(new FlameCircle(4, 25));
+       
         
         
 

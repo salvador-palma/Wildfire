@@ -14,6 +14,7 @@ public class StatikShiv : MonoBehaviour
     public float NextDelayFixed;
     public float NextDelay = 100;
     public int TTL;
+    public int MAXTTL;
     [SerializeField] List<Enemy> alreadyPassed;
     [SerializeField] Collider2D[] colcol;
     CircleCollider2D myCollider;
@@ -93,6 +94,7 @@ public class StatikShiv : MonoBehaviour
     }
 
     private void SetupNext(StatikShiv statikShiv, Enemy t){
+        if(TTL == MAXTTL){AudioManager.Instance.PlayFX(2, 2, 0.95f, 1.05f);}
         statikShiv.alreadyPassed = alreadyPassed;
         statikShiv.TTL = TTL - 1;
         statikShiv.currentTarget = t;

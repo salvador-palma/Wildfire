@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -277,13 +278,17 @@ public class StatikOnHit : OnHitEffects
         if(en==null){return;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
+
             GameObject g = Flamey.Instance.SpawnObject(prefab);
             g.transform.position = en.HitCenter.position;
             StatikShiv s = g.GetComponent<StatikShiv>();
             s.TTL = ttl;
+            s.MAXTTL = ttl;
             s.currentTarget = en;
             s.locationOfEnemy = en.HitCenter.position;
             s.Started = true;
+
+            
         }
         
     }
