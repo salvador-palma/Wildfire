@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     float width;
     float TimerEnemySpawn;
     bool isOn = true;
-    bool isOnAugments = false;
+    [HideInInspector] public bool isOnAugments = false;
 
     
 
@@ -116,6 +116,11 @@ public class EnemySpawner : MonoBehaviour
         new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
         new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
         new List<float>(){0,0,0,0,0,0,0,0f,0f,0.20f,0.40f, 0.40f},
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.20f,0.40f, 0.40f},
+
+        //60
+        new List<float>(){0,0,0,0,0,0,0,0f,0f,0f,0f, 0f, 1f},
+
 
     };
 
@@ -125,7 +130,7 @@ public class EnemySpawner : MonoBehaviour
        
     }
     public void Start(){
-        //current_round = 75;
+        current_round = 1000;
         resetInstances();
         roundTimer = getRoundTime(current_round);
         
@@ -148,8 +153,12 @@ public class EnemySpawner : MonoBehaviour
         if(GameEnd){return;}
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
-                isOnAugments = true;
-                Deck.Instance.StartAugments((current_round+1)%5 == 0);
+                if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
+                else{
+                    isOnAugments = true;
+                    Deck.Instance.StartAugments((current_round+1)%5 == 0);
+                }
+                
                 
             } 
             return;}
@@ -186,6 +195,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void newRound(){
         current_round++;
+        
         
         isOn = true;
         isOnAugments = false;

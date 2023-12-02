@@ -52,6 +52,7 @@ public class Flamey : MonoBehaviour
 
     public bool GameEnd;
     private void Awake() {
+        
         Health = MaxHealth;
        
         Instance = this;
@@ -73,8 +74,8 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
         
-       
-        
+        addNotEspecificEffect(new FlameCircle(4,50000));
+        addOnHitEffect(new IceOnHit(10000,1f));
         
 
         

@@ -46,6 +46,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] Animator BlackScreen;
     [SerializeField] Animator BlackScreenOver;
     [SerializeField] private TextMeshProUGUI RoundsLastedText;
+
+    [SerializeField] private Animator LimitRoundAnimator;
     
     private void Awake() {
         Instance = this;
@@ -72,12 +74,18 @@ public class GameUI : MonoBehaviour
 
     
     public void TogglePausePanel(){
+        Flamey f = Flamey.Instance;
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
+        StatsTexts[6].text = f.Health+"/"+f.MaxHealth;
+        healthSlider.maxValue = f.MaxHealth;
+        healthSlider.value = f.Health;
+        EraseEffectInfo();
     }
     public void UpdateMenuInfo(int current_round){
         defineStats();
         defineEffectList();
         setRoundCounter(current_round);
+        
     }
     
     public void changeTab(int index){
@@ -142,6 +150,12 @@ public class GameUI : MonoBehaviour
         EffectTexts[1].text = e.getType();
         EffectTexts[2].text = e.getDescription();
     }
+    public void EraseEffectInfo(){
+        
+        EffectTexts[0].text = "";
+        EffectTexts[1].text = "";
+        EffectTexts[2].text = "";
+    }
 
     public void SpeedUp(float f){
         Time.timeScale = f;
@@ -191,7 +205,14 @@ public class GameUI : MonoBehaviour
     public void BlackScreenOff(){
         BlackScreen.Play("BlackScreenOff");
     }
-    
+    public void ShowLimitRoundPanel(){
+        LimitRoundAnimator.Play("LimitRoundOn");
+    }
+    public void ShowLimitRoundPanelOff(){
+        LimitRoundAnimator.Play("LimitRoundOff");
+        EnemySpawner.Instance.isOnAugments = true;
+        Deck.Instance.StartAugments((59+1)%5 == 0);
+    }
     public void setRoundCounter(int n){
         roundCounter.text = "ROUND " + n;
     }
