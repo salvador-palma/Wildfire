@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         Health -= effectiveDmg;
-        
+        flame.TotalDamage+=effectiveDmg;
         if(Health <= 0){Die();}
         PlayHitAnimation(effectiveDmg, false, except=="Statik Energy" ? 6 : -1);
        
@@ -41,7 +41,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         //if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         Health -= dmg;
-        
+        flame.TotalDamage+=dmg;
         if(Health <= 0){Die();}
         PlayHitAnimation(dmg, false);
        
@@ -49,7 +49,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * res.Item1);
         
-        
+        flame.TotalDamage+=effectiveDmg;
         Health -= effectiveDmg;
         Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
         if(Health <= 0){this.Die();}
@@ -67,6 +67,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual void Die(){
+        flame.TotalKills++;
         PlayHitSoundFx();
         CameraShake.Shake(0.4f,0.15f);
         Destroy(gameObject);

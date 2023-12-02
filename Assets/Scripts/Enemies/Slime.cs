@@ -13,7 +13,7 @@ public class Slime : Enemy
     private float maxSpeed;
     private void Start() {
         base.flame = Flamey.Instance;
-        maxSpeed =  Distribuitons.RandomGaussian(0.02f,Speed);
+        maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         Speed = 0.00001f;
         
         MaxHealth = Health;

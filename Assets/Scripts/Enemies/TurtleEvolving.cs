@@ -10,7 +10,7 @@ public class TurtleEvolving : Enemy
     private void Start() {
         int x = EnemySpawner.Instance.current_round;
         base.flame = Flamey.Instance;
-        Speed =  Distribuitons.RandomGaussian(0.01f,0.0012f * x);
+        Speed =  Distribuitons.RandomTruncatedGaussian(0.01f,0.0012f * x,0.03f);
         AttackDelay = 5f;
         AttackRange = 1.55f;
         Damage = (int) 1.6f*x;

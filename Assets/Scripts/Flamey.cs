@@ -51,6 +51,16 @@ public class Flamey : MonoBehaviour
     
 
     public bool GameEnd;
+
+
+    //FINAL STATS COUNTERS
+    [HideInInspector] public int TotalKills;
+    [HideInInspector] public int TotalShots;
+    [HideInInspector] public float TotalDamage;
+    [HideInInspector] public float TotalDamageTaken;
+    [HideInInspector] public float TotalHealed;
+
+
     private void Awake() {
         
         Health = MaxHealth;
@@ -74,8 +84,8 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
         
-        addNotEspecificEffect(new FlameCircle(4,50000));
-        addOnHitEffect(new IceOnHit(10000,1f));
+        addOnHitEffect(new VampOnHit(1f,1f));
+        
         
 
         
@@ -115,6 +125,7 @@ public class Flamey : MonoBehaviour
     }
 
     public void shoot(){
+        TotalShots++;
         anim.Play("FlameShoot");
         AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
         ApplyOnShoot();
@@ -132,6 +143,7 @@ public class Flamey : MonoBehaviour
     }
 
     public Flare InstantiateShot(int extraDmg = 0, int flameindex = 0){
+        TotalShots++;
         Tuple<int,bool> tp = getDmg();
         if(flameindex == 0 && tp.Item2){flameindex = 1;}
         GameObject go = Instantiate(FlarePrefabs[flameindex]);
@@ -175,8 +187,9 @@ public class Flamey : MonoBehaviour
     }
 
     public void Hitted(int Dmg, float armPen){
-        
-        Health -=(int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
+        int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
+        TotalDamageTaken+=dmgeff;
+        Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
@@ -224,12 +237,14 @@ public class Flamey : MonoBehaviour
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
+        TotalHealed+=MaxHealth * healperc;
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
+        TotalHealed+=HealAmount;
         Health = (int)Math.Min(Health + HealAmount, MaxHealth);
-         UpdateHealthUI();
+        UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, ""+ HealAmount, 3);
     }
     
@@ -274,6 +289,19 @@ public class Flamey : MonoBehaviour
 
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);
+    }
+
+
+    public List<SimpleStat> getBaseStats(){
+        return new List<SimpleStat>
+        {
+            new SimpleStat("Enemies killed", TotalKills),
+            new SimpleStat("Fireballs shot", TotalShots),
+            new SimpleStat("Damage given", (int)TotalDamage),
+            new SimpleStat("Damage taken", (int)TotalDamageTaken),
+            new SimpleStat("Healed health", (int)TotalHealed)
+
+        };
     }
     
 }

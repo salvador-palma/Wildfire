@@ -130,7 +130,7 @@ public class EnemySpawner : MonoBehaviour
        
     }
     public void Start(){
-        current_round = 1000;
+        // current_round = 100;
         resetInstances();
         roundTimer = getRoundTime(current_round);
         
@@ -245,16 +245,16 @@ public class EnemySpawner : MonoBehaviour
     
 
     private void resetInstances(){
-        // FlameCircle.Instance = null;
-        // VampOnHit.Instance = null;
-        // IceOnHit.Instance = null;
-        // ShredOnHit.Instance = null;
-        // ExecuteOnHit.Instance = null;
-        // StatikOnHit.Instance = null;
-        // BurnOnLand.Instance = null;
-        // SecondShot.Instance = null;
-        // BurstShot.Instance = null;
-        // KrakenSlayer.Instance = null;
+        FlameCircle.Instance = null;
+        VampOnHit.Instance = null;
+        IceOnHit.Instance = null;
+        ShredOnHit.Instance = null;
+        ExecuteOnHit.Instance = null;
+        StatikOnHit.Instance = null;
+        BurnOnLand.Instance = null;
+        SecondShot.Instance = null;
+        BurstShot.Instance = null;
+        KrakenSlayer.Instance = null;
 
     }
 

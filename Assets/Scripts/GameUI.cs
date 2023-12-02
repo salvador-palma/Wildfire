@@ -49,9 +49,20 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] private Animator LimitRoundAnimator;
     
+
+
+    [Header("Final Stats")]
+    
+    [SerializeField] GameObject FinalStatsPanel;
+    [SerializeField] Button FinalStatsButton;
+    List<SimpleStat> FinalStats;
+    [SerializeField] GameObject[] StatTemplates;
+    
+
     private void Awake() {
         Instance = this;
         FastForwardButtons[0].interactable = false;
+        FinalStatsButton.onClick.AddListener(()=>{FinalStatsPanel.SetActive(!FinalStatsPanel.activeInHierarchy);});
         
     }
     
@@ -179,6 +190,7 @@ public class GameUI : MonoBehaviour
         RoundsLastedText.text = "YOU'VE SURVIVED " + EnemySpawner.Instance.current_round + " ROUNDS";
         Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
+        setUpFinalStats();
     }
     public void loadScene(string str){
         SceneManager.LoadScene(str);
@@ -216,9 +228,33 @@ public class GameUI : MonoBehaviour
     public void setRoundCounter(int n){
         roundCounter.text = "ROUND " + n;
     }
-   
     
-
-
+    private void setUpFinalStats(){
+        FinalStats = new List<SimpleStat>();
+        FinalStats.AddRange(Flamey.Instance.getBaseStats());
+        displayFinalStatsPage(0);
+        
+    }
+    private void displayFinalStatsPage(int page){
+        for (int i = 0; i < 5; i++)
+        {
+            int currentIndex = i + page *5;
+            if(currentIndex >= FinalStats.Count){StatTemplates[i].SetActive(false);}
+            else{
+                setFinalStatTemplate(FinalStats[currentIndex], StatTemplates[i]);
+                StatTemplates[i].SetActive(true);
+            }
+        }
+    }
+    private void setFinalStatTemplate(SimpleStat simpleStat, GameObject template){
+        template.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = simpleStat.Title;
+        template.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = simpleStat.value + "";
+    }
     
+}
+
+public class SimpleStat{
+    public string Title;
+    public int value;
+    public SimpleStat(string t, int v){Title = t; value = v;}
 }

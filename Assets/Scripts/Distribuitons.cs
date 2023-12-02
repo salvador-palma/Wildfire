@@ -7,38 +7,44 @@ using UnityEngine;
 
 public class Distribuitons 
 {
+    public static System.Random random = new System.Random();
     public static float RandomGaussian(float variance, float mean){
-        float u1 = 1.0f- UnityEngine.Random.value; 
-        float u2 = 1.0f- UnityEngine.Random.value;
+        float u1 = 1.0f- (float)RandomUniform(0f,1f);
+        float u2 = 1.0f- (float)RandomUniform(0f,1f);
         double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); 
         double randNormal = mean + variance * randStdNormal; 
         
         return (float)randNormal;
     }
 
-    public static double RandomGaussianDouble(float variance, float mean){
-        float u1 = 1.0f- UnityEngine.Random.value; 
-        float u2 = 1.0f- UnityEngine.Random.value;
-        double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2); 
-        double randNormal = mean + variance * randStdNormal; 
-        
-        return randNormal;
+    public static float RandomTruncatedGaussian(float variance, float mean, float limits){
+        float randNormal = RandomGaussian(variance,mean);
+        if(randNormal < mean-limits || randNormal > mean+limits){
+            randNormal = mean;
+        }
+        return (float)randNormal;
     }
 
+    
+
     public static float RandomExponential(float lambda){
-        float f = UnityEngine.Random.value;
+        float f = (float)RandomUniform(0f,1f);
         
         return -Mathf.Log(1f - f) / lambda;
     }
 
     public static double RandomUniform(double min, double max)
     {
-        return UnityEngine.Random.value * (max - min) + min;
+        return random.NextDouble() * (max - min) + min;
+    }
+    public static int RandomUniform(int min, int max)
+    {
+        return (int)RandomUniform((double)min,(double)max);
     }
 
      public static int RandomBinomial(int n, double p) {
         double[] probs = BinomialAux(n, p);
-        double x = UnityEngine.Random.value;
+        double x = (float)RandomUniform(0f,1f);
         
         for(int i = 0; i != probs.Length; i++) {
             if(x < probs[i]) {
@@ -75,7 +81,7 @@ public class Distribuitons
         }
         for (int i = len - 1; i > 0; i--)
         {
-            int j = UnityEngine.Random.Range(0, i + 1);
+            int j = RandomUniform(0, i + 1);
             bool temp = boolArray[i];
             boolArray[i] = boolArray[j];
             boolArray[j] = temp;
