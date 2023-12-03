@@ -45,6 +45,16 @@ public class VampOnHit : OnHitEffects
     public void Stack(VampOnHit vampOnHit){
         perc += vampOnHit.perc;
         prob += vampOnHit.prob;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= 1f){
+            prob = 1;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Steal to Heal");
+            deck.removeFromDeck("Eternal Hunger");
+            deck.removeFromDeck("Soul Harvester");
+        }      
     }
     public bool addList(){
         return Instance == this;
@@ -113,6 +123,16 @@ public class IceOnHit : OnHitEffects
     public void Stack(IceOnHit iceOnHit){
         duration += iceOnHit.duration;
         prob += iceOnHit.prob;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= 1f){
+            prob = 1;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("IcyHot");
+            deck.removeFromDeck("Glacial Energy");
+            deck.removeFromDeck("A Dance of Fire and Ice");
+        }      
     }
     public bool addList(){
         return Instance == this;
@@ -164,12 +184,29 @@ public class ShredOnHit : OnHitEffects
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
             en.Armor -=  (int)(en.Armor *  percReduced);
-            Debug.Log("Shred");
+           
         }
     }
     public void Stack(ShredOnHit shredOnHit){
         percReduced += shredOnHit.percReduced;
         prob += shredOnHit.prob;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= 1f){
+            prob = 1;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Weaken");
+            deck.removeFromDeck("Armor Corruptor");
+            deck.removeFromDeck("Disintegration Field");
+        }  
+        if(percReduced >= 1f){
+            percReduced = 1;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Cheese Shredder");
+            deck.removeFromDeck("Black Cleaver");
+            deck.removeFromDeck("Molecular Decomposition");
+        }      
     }
     public bool addList(){
         return Instance == this;
@@ -226,7 +263,16 @@ public class ExecuteOnHit : OnHitEffects
     }
     public void Stack(ExecuteOnHit executeOnHit){
         percToKill = Mathf.Min(0.5f, percToKill + executeOnHit.percToKill);
-        
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(percToKill >= 0.5f){
+            percToKill = 0.5f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Execution Enforcer");
+            deck.removeFromDeck("Soul Collector");
+            deck.removeFromDeck("La Guillotine");
+        }      
     }
     public bool addList(){
         return Instance == this;
@@ -296,7 +342,16 @@ public class StatikOnHit : OnHitEffects
         prob += statikOnHit.prob;
         dmg += statikOnHit.dmg;
         ttl += statikOnHit.ttl;
-        
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= 1){
+            prob = 1f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Watts Up");
+            deck.removeFromDeck("Electrifying Possibilities");
+            deck.removeFromDeck("The Sparkster");
+        }      
     }
     public bool addList(){
         return Instance == this;

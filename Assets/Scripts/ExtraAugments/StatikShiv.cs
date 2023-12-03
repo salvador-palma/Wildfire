@@ -90,7 +90,7 @@ public class StatikShiv : MonoBehaviour
     }
 
     private void DealDamage(Enemy e){   
-        e.HittedWithArmor(StatikOnHit.Instance.dmg, true, "Statik Energy");
+        e.HittedWithArmor(StatikOnHit.Instance.dmg, true, 6, "Statik Energy");
     }
 
     private void SetupNext(StatikShiv statikShiv, Enemy t){

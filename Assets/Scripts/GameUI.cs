@@ -127,12 +127,11 @@ public class GameUI : MonoBehaviour
     public void defineStats(){
         Flamey f = Flamey.Instance;
         StatsTexts[0].text = "Base Damage: " + f.Dmg;
-        StatsTexts[1].text = "Attack Speed: " + f.atkSpeed;
-        StatsTexts[2].text = "Critical Strike Chance: " + f.CritChance;
-        StatsTexts[3].text = "Critical Damage Multiplier: x" + f.CritMultiplier;
-        StatsTexts[4].text = "Bullet Speed: " + f.BulletSpeed;
-        StatsTexts[5].text = "Accuracy: " + f.accuracy;
-        StatsTexts[6].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[1].text = "Attack Speed: " + f.atkSpeed + " flames/s";
+        StatsTexts[2].text = "Bullet Speed: x"+f.BulletSpeed;
+        StatsTexts[3].text = "Accuracy: " + f.accuracy + "%";
+        StatsTexts[4].text = "Armor: " + f.Armor;
+        StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
     }
@@ -249,6 +248,10 @@ public class GameUI : MonoBehaviour
     private void setFinalStatTemplate(SimpleStat simpleStat, GameObject template){
         template.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = simpleStat.Title;
         template.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = simpleStat.value + "";
+    }
+
+    public void StartGameEvent(){
+        EnemySpawner.Instance.StartGame();
     }
     
 }

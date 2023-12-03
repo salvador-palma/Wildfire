@@ -5,5 +5,6 @@ using UnityEngine;
 
 public class FlareSpot : MonoBehaviour
 {
-    public Tuple<int, bool> DmgCrit;
+    public int Dmg;
+    public int DmgTextID;
 }

@@ -43,6 +43,23 @@ public class BurnOnLand : OnLandEffect
         prob += burnOnLand.prob;
         damage += burnOnLand.damage;
         lasting += burnOnLand.lasting;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= 0.5f){
+            prob = .5f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Hot Steps");
+            deck.removeFromDeck("Lava here, Lava there");
+            deck.removeFromDeck("The Apocalypse");
+        }
+        if(size >= 2.5f){
+            size = 2.5f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Heat Area");
+            deck.removeFromDeck("Lava Lakes");
+            deck.removeFromDeck("Inside the volcano");
+        }
         
     }
     public bool addList(){

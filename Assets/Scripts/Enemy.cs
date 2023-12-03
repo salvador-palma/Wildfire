@@ -28,32 +28,32 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
     
-    public void HittedWithArmor(int dmg, bool onHit, string except = null){
+    public void HittedWithArmor(int dmg, bool onHit, int TextID, string except = null){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         Health -= effectiveDmg;
         flame.TotalDamage+=effectiveDmg;
         if(Health <= 0){Die();}
-        PlayHitAnimation(effectiveDmg, false, except=="Statik Energy" ? 6 : -1);
+        PlayHitAnimation(effectiveDmg, TextID);
        
     }
-    public void HittedArmorless(int dmg, string except = null){
+    public void HittedArmorless(int dmg, int textID){
         
         //if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         Health -= dmg;
         flame.TotalDamage+=dmg;
         if(Health <= 0){Die();}
-        PlayHitAnimation(dmg, false);
+        PlayHitAnimation(dmg, textID);
        
     }
-    private void Hitted(Tuple<int,bool> res, Vector2 explosionPos){
-        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * res.Item1);
+    private void Hitted(int Dmg, int TextID, Vector2 explosionPos){
+        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * Dmg);
         
         flame.TotalDamage+=effectiveDmg;
         Health -= effectiveDmg;
         Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
         if(Health <= 0){this.Die();}
-        PlayHitAnimation(effectiveDmg, res.Item2);
+        PlayHitAnimation(effectiveDmg, TextID);
         
         SpawnExplosion(explosionPos);
         //CameraShake.Shake(0.25f,0.1f);
@@ -61,9 +61,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     private void PlayHitSoundFx(){
         AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
     }
-    public void PlayHitAnimation(int dmg, bool isCrit, int extraInfo = -1){
+    public void PlayHitAnimation(int dmg, int textID){
         GetComponent<Animator>().Play("EnemyHit");
-        DamageUI.Instance.spawnTextDmg(transform.position, dmg.ToString(), extraInfo != -1 ? extraInfo : isCrit ? 1 : 0);
+        DamageUI.Instance.spawnTextDmg(transform.position, dmg.ToString(), textID);
     }
 
     public virtual void Die(){
@@ -76,10 +76,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     private void OnTriggerEnter2D(Collider2D other) {
         
         if(other.tag == "FlareHit"){
-           
-            Hitted(other.GetComponent<FlareSpot>().DmgCrit, other.transform.position);
+           FlareSpot spot = other.GetComponent<FlareSpot>();
+           Hitted(spot.Dmg, spot.DmgTextID, other.transform.position);
         }else if(other.tag == "OrbitalHit"){
-            Hitted(new Tuple<int, bool>(FlameCircle.Instance.damage, false), other.transform.position);
+            Hitted(FlameCircle.Instance.damage, 0, other.transform.position);
         }
     }
 

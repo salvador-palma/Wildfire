@@ -19,16 +19,30 @@ public class Flare : MonoBehaviour
     public bool isCrit;
     private float destY;
     [SerializeField] Color SpotColor;
+
+    public int FlameType;
+    public int DmgTextID;
     private void Start() {
+        SetupTarget();
+        SetupStats();
+        //float val = transform.localScale.x * Flamey.Instance.BulletSize;
+        //transform.localScale = new Vector2(val,val);
+        
+        
+
+    }
+    private void SetupTarget(){
         transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
-        float val = transform.localScale.x * Flamey.Instance.BulletSize;
-        transform.localScale = new Vector2(val,val);
         SpotColor.a = 0;
+    }
+    private void SetupStats(){
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
 
-    }
+        Damage = (int)GetDmgByType(FlameType);
 
+
+    }
     private void Update() {
         if(goingDown){
             transform.position = new Vector2(transform.position.x, transform.position.y - speedDescend * Time.deltaTime);
@@ -49,6 +63,7 @@ public class Flare : MonoBehaviour
         }
         
     }
+   
     private void goDown(){
         if(target == Vector2.zero){
             Enemy e = Flamey.Instance.current_homing;
@@ -72,7 +87,8 @@ public class Flare : MonoBehaviour
     private void SummonFlareSpot(Vector2 vec){
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
         
-        FlareSpot.GetComponent<FlareSpot>().DmgCrit = new Tuple<int, bool>(Damage, isCrit);
+        FlareSpot.GetComponent<FlareSpot>().Dmg = Damage;
+        FlareSpot.GetComponent<FlareSpot>().DmgTextID = DmgTextID;
        // Debug.Log(Damage + " " + isCrit);
        // Debug.Log(FlareSpot.GetComponent<FlareSpot>().DmgCrit);
         FlareSpot.transform.localScale = new Vector2(FlareSpot.transform.localScale.x * Flamey.Instance.BulletSize,FlareSpot.transform.localScale.y * Flamey.Instance.BulletSize);
@@ -94,5 +110,15 @@ public class Flare : MonoBehaviour
     }
 
     
+    public static float GetDmgByType(int type){
+        Flamey f = Flamey.Instance;
+        switch(type){
+            case 0: return f.Dmg;
+            case 1: return f.Dmg * CritUnlock.Instance.mult;
+            case 2: return f.Dmg + KrakenSlayer.Instance.extraDmg;
+            case 3: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
+            default: return f.Dmg;
+        }
+    }
     
 }

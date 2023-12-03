@@ -23,8 +23,7 @@ public class Flamey : MonoBehaviour
     public List<NotEspecificEffect> notEspecificEffects;
     public List<OnLandEffect> onLandEffects;
     public List<Effect> allEffects;
-    [SerializeField][Range(0f,100f)]public float CritChance;
-    [SerializeField][Range(1f,5f)]public float CritMultiplier;
+
     [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
     [Range(0.5f,3f)] public float BulletSize;
@@ -83,11 +82,8 @@ public class Flamey : MonoBehaviour
         timerAS = timerASCounter;
         
         UpdateHealthUI();
-        
-        addOnHitEffect(new VampOnHit(1f,1f));
-        
-        
 
+        
         
     }
 
@@ -127,12 +123,12 @@ public class Flamey : MonoBehaviour
     public void shoot(){
         TotalShots++;
         anim.Play("FlameShoot");
+
         AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
-        ApplyOnShoot();
-        Tuple<int,bool> tp = getDmg();
-        GameObject go = Instantiate(FlarePrefabs[tp.Item2 ? 1 : 0]);
-        go.GetComponent<Flare>().Damage = tp.Item1;
-        go.GetComponent<Flare>().isCrit = tp.Item2;
+        int FlameType = ApplyOnShoot();
+
+        Instantiate(FlarePrefabs[FlameType]);
+        
        
     }
     public void target(Enemy e){
@@ -142,15 +138,11 @@ public class Flamey : MonoBehaviour
         current_homing = e;
     }
 
-    public Flare InstantiateShot(int extraDmg = 0, int flameindex = 0){
+    public Flare InstantiateShot(List<string> except = null){
         TotalShots++;
-        Tuple<int,bool> tp = getDmg();
-        if(flameindex == 0 && tp.Item2){flameindex = 1;}
-        GameObject go = Instantiate(FlarePrefabs[flameindex]);
-        go.GetComponent<Flare>().Damage = tp.Item1 + extraDmg;
-        go.GetComponent<Flare>().isCrit = tp.Item2;
+        int FlameType = ApplyOnShoot(except);
+        GameObject go = Instantiate(FlarePrefabs[FlameType]);
         return go.GetComponent<Flare>();
-
     }
     public static float AtkSpeedToSeconds(float asp){
         return 1/asp;
@@ -177,22 +169,18 @@ public class Flamey : MonoBehaviour
         return 0.8f - 0.008f * perc;
     }
 
-    public Tuple<int,bool> getDmg(){
-        if(UnityEngine.Random.Range(0,100) < CritChance){
-            return new Tuple<int, bool>((int)(Dmg * CritMultiplier),true);
-        }else{
-            return new Tuple<int, bool>(Dmg, false);
-        }
-        
-    }
+    
 
     public void Hitted(int Dmg, float armPen){
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
+
+        
+
         TotalDamageTaken+=dmgeff;
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "-"+Dmg, 2);
+        DamageUI.Instance.spawnTextDmg(transform.position, "-"+dmgeff, 2);
         CameraShake.Shake(0.5f,0.35f);
     }
     private void UpdateHealthUI(){
@@ -212,27 +200,72 @@ public class Flamey : MonoBehaviour
         GameUI.Instance.GameOverEffect();
     }
 
-    public void addAccuracy(float amount){accuracy = Math.Min(accuracy + amount, 100f);}
-    public void multAccuracy(float amount){accuracy = Math.Min(accuracy * amount, 100f);}
-    public void addAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed + amount, 12f);}
-    public void multAttackSpeed(float amount){atkSpeed = Math.Min(atkSpeed * amount, 12f);}
+    public void addAccuracy(float amount){
+        accuracy = Math.Min(accuracy + amount, 100f);
+        if(accuracy == 100f){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Target Practice");
+            deck.removeFromDeck("Steady Aim");
+            deck.removeFromDeck("Eagle Eye");
+        }
+    }
+    public void multAccuracy(float amount){
+        accuracy = Math.Min(accuracy * amount, 100f);
+        if(accuracy == 100f){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Target Practice");
+            deck.removeFromDeck("Steady Aim");
+            deck.removeFromDeck("Eagle Eye");
+        }
+    }
+    public void addAttackSpeed(float amount){
+        atkSpeed = Math.Min(atkSpeed + amount, 12f);
+        if(atkSpeed == 12f){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Swifty Flames");
+            deck.removeFromDeck("Fire Dance");
+            deck.removeFromDeck("Flamethrower");
+        }
+    }
+    public void multAttackSpeed(float amount){
+        atkSpeed = Math.Min(atkSpeed * amount, 12f);
+        if(atkSpeed == 12f){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Swifty Flames");
+            deck.removeFromDeck("Fire Dance");
+            deck.removeFromDeck("Flamethrower");
+        }
+    }
 
-    public void addBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed + amount, 20f);}
+    public void addBulletSpeed(float amount){
+        BulletSpeed = Math.Min(BulletSpeed + amount, 20f);
+        if(BulletSpeed == 20f){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Quick Shot");
+            deck.removeFromDeck("Fire-Express");
+            deck.removeFromDeck("HiperDrive");
+        }
+    }
     public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f);}
 
     public void addDmg(int amount){Dmg += amount;}
     public void multDmg(int amount){Dmg *= amount;}
-
-    public void addCritChance(float amount){CritChance = Math.Min(CritChance + amount, 80f);}
-    public void multCritChance(float amount){CritChance = Math.Min(CritChance * amount, 80f);}
-
-    public void addCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier + amount, 5f);}
-    public void multCritDmg(float amount){CritMultiplier = Math.Min(CritMultiplier * amount, 5f);}
+  
     public void addDmg(float amount){Dmg += (int)amount;}
     public void multDmg(float amount){Dmg += (int)amount;}
 
     public void addArmor(int amount){Armor += (int)amount;}
-    public void addArmorPen(float amount){ArmorPen = Mathf.Min(1.0f, ArmorPen + amount);}
+    public void addArmorPen(float amount){
+        ArmorPen = Mathf.Min(1.0f, ArmorPen + amount);
+        
+        if(ArmorPen >= 1){
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Shell Breaker");
+            deck.removeFromDeck("Quantum Piercing");
+            deck.removeFromDeck("Lance of Aether");
+        }      
+    
+    }
 
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
@@ -279,8 +312,15 @@ public class Flamey : MonoBehaviour
             oh.ApplyEffect(d,h,e);
             }
     }
-    public void ApplyOnShoot(){
-        foreach (OnShootEffects oh in onShootEffects){oh.ApplyEffect();}
+    public int ApplyOnShoot(List<string> except = null){
+        int res = 0;
+        foreach (OnShootEffects oh in onShootEffects){
+            if(except==null ||  !except.Contains(oh.getText())){
+                res += oh.ApplyEffect();
+            }
+            
+        }
+        return res;
     }
     public void ApplyOnLand(UnityEngine.Vector2 pos){
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}

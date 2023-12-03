@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     float roundTimer = 10;
     [SerializeField] public GameObject ExplosionPrefab;
     
-    public bool GameEnd;
+    public bool GameEnd = true;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         //0
@@ -40,13 +40,13 @@ public class EnemySpawner : MonoBehaviour
         new List<float>(){0.4f,0.3f,.2f,0.1f},
         new List<float>(){0.05f,0.5f,.3f,0.15f},
         new List<float>(){0.05f,0.4f,.5f,0.05f},
-        new List<float>(){0.05f,0.5f,.35f,0.1f},
+        new List<float>(){0.05f,0.5f,.35f,0.1f}, 
         new List<float>(){0,0.8f,0,0.2f},
 
         //10
         //SlimeOrangeTiny
-        new List<float>(){0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,.15f,.25f,0.5f, 0.1f},
+        new List<float>(){0,.3f,.15f,.45f,.1f}, 
+        new List<float>(){0,.15f,.25f,0.5f, 0.1f}, 
         new List<float>(){0,.10f,.25f,0.5f,.15f},
         new List<float>(){0,.05f,.2f,.5f, 0.25f},
         new List<float>(){0,0,.2f,.5f,.3f},
@@ -130,7 +130,9 @@ public class EnemySpawner : MonoBehaviour
        
     }
     public void Start(){
-        // current_round = 100;
+        //current_round = 100;
+        GameEnd =true;
+        Flamey.Instance.GameEnd = true;
         resetInstances();
         roundTimer = getRoundTime(current_round);
         
@@ -142,6 +144,10 @@ public class EnemySpawner : MonoBehaviour
         
         
     }
+    public void StartGame(){ 
+        Flamey.Instance.GameEnd = false;       
+        GameEnd = false;
+    }
     private Vector2 getPoint(){
         double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
         double x = 0.52f * width * Math.Cos(angle);
@@ -151,6 +157,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() {
         if(GameEnd){return;}
+        
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
@@ -196,7 +203,7 @@ public class EnemySpawner : MonoBehaviour
     public void newRound(){
         current_round++;
         
-        
+       
         isOn = true;
         isOnAugments = false;
         roundTimer = getRoundTime(current_round);
@@ -246,15 +253,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void resetInstances(){
         FlameCircle.Instance = null;
+
         VampOnHit.Instance = null;
         IceOnHit.Instance = null;
         ShredOnHit.Instance = null;
         ExecuteOnHit.Instance = null;
         StatikOnHit.Instance = null;
+
         BurnOnLand.Instance = null;
+
         SecondShot.Instance = null;
         BurstShot.Instance = null;
         KrakenSlayer.Instance = null;
+        CritUnlock.Instance = null;
 
     }
 

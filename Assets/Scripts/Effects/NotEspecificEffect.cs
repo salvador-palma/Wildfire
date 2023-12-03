@@ -73,41 +73,18 @@ public class FlameCircle : NotEspecificEffect
         amount = Mathf.Min(flameCircle.amount + amount, 4);
         damage += flameCircle.damage;
         UpdateAmount();
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(amount == 4){
+        
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Tame the Flames");
+        }  
+          
     }
 
     
 }
 
-public class CritUnlock : NotEspecificEffect
-{
-    public CritUnlock(){}
-    public bool addList()
-    {
-        return true;
-    }
 
-    public void ApplyEffect()
-    {
-        return;
-    }
-
-    public string getDescription()
-    {
-        return "Your shots have a " + Flamey.Instance.CritChance+ "% critical chance and x" + Flamey.Instance.CritMultiplier + " critical damage multiplier.";
-    }
-
-    public string getIcon()
-    {
-        return "critchance";
-    }
-
-    public string getText()
-    {
-        return "Critical Inferno";
-    }
-
-    public string getType()
-    {
-        return "Especial Effect";
-    }
-}

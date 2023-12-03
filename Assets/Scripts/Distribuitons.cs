@@ -19,8 +19,8 @@ public class Distribuitons
 
     public static float RandomTruncatedGaussian(float variance, float mean, float limits){
         float randNormal = RandomGaussian(variance,mean);
-        if(randNormal < mean-limits || randNormal > mean+limits){
-            randNormal = mean;
+        while(randNormal < mean-limits || randNormal > mean+limits){
+            randNormal = RandomGaussian(variance,mean);
         }
         return (float)randNormal;
     }
@@ -42,7 +42,7 @@ public class Distribuitons
         return (int)RandomUniform((double)min,(double)max);
     }
 
-     public static int RandomBinomial(int n, double p) {
+    public static int RandomBinomial(int n, double p) {
         double[] probs = BinomialAux(n, p);
         double x = (float)RandomUniform(0f,1f);
         
@@ -55,7 +55,6 @@ public class Distribuitons
         }
         return n;
     }
-
     public static double[] BinomialAux(int n, double p) {
         double[] probs = new double[n + 1];
         for(int i = 0; i != probs.Length; i++) {
