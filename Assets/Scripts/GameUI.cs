@@ -87,7 +87,7 @@ public class GameUI : MonoBehaviour
     public void TogglePausePanel(){
         Flamey f = Flamey.Instance;
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
-        StatsTexts[6].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
         EraseEffectInfo();

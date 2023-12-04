@@ -83,7 +83,7 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
 
-        
+    
         
     }
 
@@ -93,6 +93,9 @@ public class Flamey : MonoBehaviour
         if(GameEnd){return;}
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
+        }
+        if(Input.GetKeyDown(KeyCode.K)){
+            Health = -1000;
         }
         
         if(current_homing == null){

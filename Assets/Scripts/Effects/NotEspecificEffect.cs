@@ -36,6 +36,9 @@ public class FlameCircle : NotEspecificEffect
         
         //Flamey.Instance.addNotEspecificEffect(new FlameCircle(1,20)); //REMOVE AFTER
     }
+    public void SetSpin(bool b){
+        SpinnerInstance.canSpin = b;
+    }
     public void UpdateAmount(){
         if(amount != prevamount){
             prevamount = amount;

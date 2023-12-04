@@ -4791,7 +4791,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4920,7 +4920,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77066fc5d0054b4caf1e5db6736dfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
+  isCrit: 0
   SpotColor: {r: 0.99215686, g: 0.60784316, b: 0.3137255, a: 0}
+  FlameType: 0
+  DmgTextID: 0
 --- !u!1 &8975080467911726130
 GameObject:
   m_ObjectHideFlags: 0
@@ -9711,7 +9715,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

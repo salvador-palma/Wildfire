@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933638579302567124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18, y: -1.6, z: -0.116}
+  m_LocalPosition: {x: -0.21000049, y: 1.4100002, z: -0.116}
   m_LocalScale: {x: 0.966102, y: 0.966102, z: 0.966102}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3011184000945308468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23462, y: -2.1909, z: 0}
+  m_LocalPosition: {x: 0.39, y: 1.08, z: 0}
   m_LocalScale: {x: 0.45790014, y: 0.45790014, z: 0.45790014}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -246,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291404277037128494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17, y: -2.2, z: 0}
+  m_LocalPosition: {x: -0.22, y: 0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -343,7 +343,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &3824812908442208364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -357,10 +357,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.24009204, y: -2.0110068}
+  m_Offset: {x: -0.24009204, y: 0.48252022}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.022}
     oldSize: {x: 6.4, y: 6.4}
     newSize: {x: 18.47, y: 19.2}
     adaptiveTilingThreshold: 0.5
@@ -368,7 +368,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.118781, y: 2.2575238}
+  m_Size: {x: 3.118781, y: 1.222564}
   m_EdgeRadius: 0
 --- !u!114 &4627532564867205976
 MonoBehaviour:
@@ -393,7 +393,7 @@ MonoBehaviour:
   ArmorPen: 0
   HitCenter: {fileID: 2067935665991311732}
   inEffect: 0
-  tiny: 0
+  tiny: 1
   DeathSpawnSwarm: 0
   TinySlime: {fileID: 0}
   spawnTinyPos: []

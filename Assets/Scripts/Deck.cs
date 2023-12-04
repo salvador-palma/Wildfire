@@ -254,6 +254,7 @@ public class Deck : MonoBehaviour
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
         SlotsParent.GetComponent<Animator>().Play("OutroSlots");
+        if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
        // Debug.Log("HERE");
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
@@ -264,6 +265,9 @@ public class Deck : MonoBehaviour
 
     public void StartAugments(bool isPrismaticRound){
         if(Flamey.Instance.GameEnd){return;}
+
+        if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(false);}
+
         filteredAugments = FilterAugments(isPrismaticRound);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
         if(isPrismaticRound){GameUI.Instance.FillAll();}

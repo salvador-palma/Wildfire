@@ -8,15 +8,19 @@ public class Spinner : MonoBehaviour
     public float multiplier = 1.2f;
 
     public GameObject[] Spinners;
-   
+    
+    public bool canSpin = true;
     private void Start() {
         
         speed = Flamey.Instance.BulletSpeed;
+        canSpin = true;
         
     }
     private void Update() {
+        if(canSpin){
+            transform.Rotate(0,0,speed*multiplier*Time.deltaTime);
+        }
         
-        transform.Rotate(0,0,speed*multiplier*Time.deltaTime);
     }
 
     public GameObject SpawnCircle(int amount){

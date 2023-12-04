@@ -17,7 +17,7 @@ public class Slime : Enemy
         Speed = 0.00001f;
         
         MaxHealth = Health;
-        StartAnimations(3);
+        StartAnimations(tiny ? 3 : 6);
     }
     private void Update() {
         
