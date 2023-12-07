@@ -275,6 +275,6 @@ public class CritUnlock : OnShootEffects{
 
     public string getType()
     {
-        return "Especial Effect";
+        return "On-Shoot Effect";
     }
 }

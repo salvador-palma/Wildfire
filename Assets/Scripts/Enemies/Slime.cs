@@ -22,7 +22,7 @@ public class Slime : Enemy
     private void Update() {
         
         base.Move();
-        if(Vector2.Distance(flame.transform.position, transform.position) < AttackRange && !check){
+        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !check){
             check = true;
             Speed = 0.0001f;
             GetComponent<Animator>().SetTrigger("InRange");

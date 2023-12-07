@@ -369,7 +369,7 @@ public class StatikOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "When you hit an enemy, you have a chance of " + prob * 100 + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each.";
+        return "When you hit an enemy, you have a chance of " + prob * 100 + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each and applies On-Hit effects";
     }
 
     public string getIcon()

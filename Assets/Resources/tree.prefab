@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546000852225760726}
   - component: {fileID: 546000852225760725}
-  - component: {fileID: 4148728487652111711}
+  - component: {fileID: 4323207835042819525}
   m_Layer: 0
   m_Name: tree
   m_TagString: Untagged
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546000852225760727}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.67, y: -3.91, z: -59.852493}
-  m_LocalScale: {x: 0.49, y: 0.46, z: 1}
+  m_LocalScale: {x: 0.32720912, y: 0.3071759, z: 0.66777366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &546000852225760725
 SpriteRenderer:
@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!114 &4148728487652111711
+  m_SpriteSortPoint: 1
+--- !u!114 &4323207835042819525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

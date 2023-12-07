@@ -115,7 +115,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public int CompareTo(Enemy other)
     {
-        return Vector2.Distance(transform.position, flame.transform.position) < Vector2.Distance(other.transform.position, flame.transform.position)? -1 : 1; 
+        return Vector2.Distance(HitCenter.position, flame.transform.position) < Vector2.Distance(other.HitCenter.position, flame.transform.position)? -1 : 1; 
     }
 
     public void EndEnemy(){

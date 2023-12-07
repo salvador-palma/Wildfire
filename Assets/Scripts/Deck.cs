@@ -23,8 +23,11 @@ public class Deck : MonoBehaviour
 
     private bool[] PhaseTiers = new bool[4];
     private int currPhase = 0;
-    private void Start() {
+    private void Awake(){
         Instance = this;
+    }
+    private void Start() {
+        
         currentAugments = new Augment[3];
         FillDeck();
         refreshedAugments = new List<Augment>();
@@ -53,9 +56,9 @@ public class Deck : MonoBehaviour
         augments.Add(new Augment("Absolute Unit", "Heal 75% and gain +500 Max HP", "health", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addHealth(500,1f))));
        
         //RANDOM AUGMENTS
-        augments.Add(new Augment("Feelin' Blessed", "Gain 4 random Silver augments", "dice", Tier.Gold, new UnityAction(()=> {for (int i = 0; i < 4; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
+        augments.Add(new Augment("Feelin' Blessed", "Gain 3 random Silver augments", "dice", Tier.Gold, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
         augments.Add(new Augment("Not enough refreshes", "Gain 2 random Silver augments", "dice", Tier.Silver, new UnityAction(()=> {for (int i = 0; i < 2; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
-        augments.Add(new Augment("Roll the Dices", "Gain 4 random Gold augments", "dice", Tier.Prismatic, new UnityAction(()=> {for (int i = 0; i < 4; i++){ActivateAugment(randomPicking(Tier.Gold)); }})));
+        augments.Add(new Augment("Roll the Dices", "Gain 3 random Gold augments", "dice", Tier.Prismatic, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Gold)); }})));
 
         //DAMAGE
         augments.Add(new Augment("Hard Work", "Gain +10 Base Damage", "weight", Tier.Silver, new UnityAction(()=> Flamey.Instance.addDmg(10))));
@@ -106,7 +109,7 @@ public class Deck : MonoBehaviour
         })));
 
         //BURST SHOT
-        augments.Add(new Augment("Burst Shot", "Unlock the ability to burst shot", "burst", Tier.Prismatic, new UnityAction(()=> {
+        augments.Add(new Augment("Burst Shot", "Unlock the ability to send burst shots", "burst", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Burst Shot");
             Flamey.Instance.addOnShootEffect(new BurstShot(50, 3));
             augments.Add(new Augment("Happy Trigger", "You will need 5 shots less to proc Burst Shot", "burst", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(5,0)))));
@@ -119,7 +122,7 @@ public class Deck : MonoBehaviour
         })));
 
         //ICE SOUL
-        augments.Add(new Augment("Frost Fire", "Unlock the ability to Slow Enemies using ice(?)", "ice", Tier.Prismatic, new UnityAction(()=> {
+        augments.Add(new Augment("Frost Fire", "Unlock the ability to Slow enemies using ice(?)", "ice", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Frost Fire");
             Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0.1f));
             augments.Add(new Augment("IcyHot", "Gain +5% chance to proc your Frost Fire effect", "ice", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.05f)))));
@@ -172,7 +175,7 @@ public class Deck : MonoBehaviour
 
 
         //ORBITAL FLAMES
-        augments.Add(new Augment("Orbital Flames", "A tiny Flame will orbit around you, damaging the foes it collides with", "orbital", Tier.Prismatic, new UnityAction(()=> {
+        augments.Add(new Augment("Orbital Flames", "A tiny Flame will orbit around you damaging the foes it collides with", "orbital", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Orbital Flames");
             Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 25));
 
@@ -183,7 +186,7 @@ public class Deck : MonoBehaviour
         })));
 
         //LAVA POOL
-        augments.Add(new Augment("Lava Pool", "Unlock the ability to create Lava Pools that ignores enemy armor", "lava", Tier.Prismatic, new UnityAction(()=> {
+        augments.Add(new Augment("Lava Pool", "Unlock the ability to create Lava Pools that ignore enemy armor", "lava", Tier.Prismatic, new UnityAction(()=> {
             removeFromDeck("Lava Pool");
             Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 25, 0.1f, 2f));
 
@@ -221,7 +224,7 @@ public class Deck : MonoBehaviour
             augments.Add(new Augment("Feel the Flow", "Your Statik Energy will be able to cross through 2 more enemies", "statik", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))));
             augments.Add(new Augment("Amping Up!", "Your Statik Energy will be able to cross through 5 more enemies", "statik", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,5)))));
         })));
-
+    //30 silver 30 gold 41 prismatic
 
     }   
 
@@ -240,7 +243,7 @@ public class Deck : MonoBehaviour
             ChangeSingular(pickFromDeck(), Slots[i], i);
         }
     }
-    void ChangeSingular(Augment augment, GameObject slot, int i){
+    public void ChangeSingular(Augment augment, GameObject slot, int i){
         slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment.Title;
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment.icon;
         slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment.Description;
@@ -317,7 +320,7 @@ public class Deck : MonoBehaviour
         return null;
     }
 
-    private Augment randomPicking(Tier tier){
+    public Augment randomPicking(Tier tier){
         List<Augment> tempAugments = augments.FindAll( a => a.tier == tier);
         
         return tempAugments[UnityEngine.Random.Range(0, tempAugments.Count)];
@@ -325,7 +328,7 @@ public class Deck : MonoBehaviour
 
     private void ActivateAugment(Augment a){
         a.action();
-        if(!a.Description.Contains("random Silver")){GameUI.Instance.AddAugment(a);}
+        if(!a.Description.Contains("random")){GameUI.Instance.AddAugment(a);}
         
     }
 

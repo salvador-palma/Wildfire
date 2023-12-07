@@ -54,7 +54,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + " Flames orbit around you in a circle. Upon collision with an enemy, it deals " + damage + " damage to them. This effect scales with Bullet Speed.";
+        return amount + " Flames orbit around you in a circle. Upon collision with an enemy, it deals " + damage + " damage to them. This effect scales with Bullet Speed and applies On-Hit effects";
     }
 
     public string getIcon()
