@@ -6922,13 +6922,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 1000
   Health: 0
-  Dmg: 50
-  Armor: 0
+  Dmg: 10000
+  Armor: 1000
   ArmorPen: 0
-  BulletSpeed: 5
+  BulletSpeed: 20
   accuracy: 0
   BulletSize: 1
-  atkSpeed: 0.75
+  atkSpeed: 12
   Accuracy: 0.8
   current_homing: {fileID: 0}
   FlarePrefabs:
@@ -8663,7 +8663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3787222, g: 0.6509434, b: 0.34082413, a: 1}
+  m_Color: {r: 0.3787222, g: 0.6509434, b: 0.34082413, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10672,7 +10672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6886792, g: 0.21764861, b: 0.21764861, a: 1}
+  m_Color: {r: 0.6886792, g: 0.21764861, b: 0.21764861, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11349,7 +11349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380179854
 RectTransform:
   m_ObjectHideFlags: 0

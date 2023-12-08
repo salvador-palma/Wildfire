@@ -14,7 +14,6 @@ public class CatterPillar : Enemy
         StartAnimations(1);
     }
     private void Update() {
-        
         base.Move();
         if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !check){
             check = true;
