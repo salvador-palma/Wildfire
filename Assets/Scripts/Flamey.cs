@@ -82,9 +82,8 @@ public class Flamey : MonoBehaviour
         timerAS = timerASCounter;
         
         UpdateHealthUI();
-        //addOnHitEffect(new StatikOnHit(1f, 10000, 13));
-        addOnHitEffect(new VampOnHit(1f,1f));
-        addOnShootEffect(new CritUnlock(1f,50f));
+        
+        Flare.EnemyMask = LayerMask.GetMask("Enemy");
         
     }
 

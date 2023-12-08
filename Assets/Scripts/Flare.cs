@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class Flare : MonoBehaviour
 {
-    private bool goingDown;
+    public static LayerMask EnemyMask;
+    private int goingDownPhase;
+    
     private float speedAscend;
     private float speedDescend;
     private float YLimit = 10f;
@@ -16,7 +18,6 @@ public class Flare : MonoBehaviour
     private GameObject FlareSpot;
     
     public int Damage;
-    public bool isCrit;
     private float destY;
     [SerializeField] Color SpotColor;
 
@@ -24,12 +25,7 @@ public class Flare : MonoBehaviour
     public int DmgTextID;
     private void Start() {
         SetupTarget();
-        SetupStats();
-        //float val = transform.localScale.x * Flamey.Instance.BulletSize;
-        //transform.localScale = new Vector2(val,val);
-        
-        
-
+        SetupStats();     
     }
     private void SetupTarget(){
         transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
@@ -38,26 +34,25 @@ public class Flare : MonoBehaviour
     private void SetupStats(){
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-
         Damage = (int)GetDmgByType(FlameType);
-
-
     }
     private void Update() {
-        if(goingDown){
+        
+        if(goingDownPhase == 1){
+
             transform.position = new Vector2(transform.position.x, transform.position.y - speedDescend * Time.deltaTime);
             FlareSpotUpdate();
+
             if(transform.position.y < destY){
-                
-                FlareSpotHit();
-                Flamey.Instance.ApplyOnLand(transform.position);
+                goingDownPhase++;
+                HitGround(transform.position);                
                 Destroy(gameObject);
-                
             }
             
         }else{
             transform.position = new Vector2(transform.position.x, transform.position.y + speedAscend * Time.deltaTime);
             if(transform.position.y > YLimit){
+                goingDownPhase++;
                 goDown();
             }
         }
@@ -71,13 +66,13 @@ public class Flare : MonoBehaviour
             else{target = e.HitCenter.position;}
         }
         
-        //try for 10 times
+
         float Accuracy = Flamey.Instance.Accuracy;
         Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y ));
         transform.localRotation = new Quaternion(0f,0f,0f,0f);
         setPosition(v);
         SummonFlareSpot(v);
-        goingDown = true;
+        
         
     }
     private void setPosition(Vector2 dest){
@@ -86,19 +81,22 @@ public class Flare : MonoBehaviour
     }
     private void SummonFlareSpot(Vector2 vec){
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
-        
-        FlareSpot.GetComponent<FlareSpot>().Dmg = Damage;
-        FlareSpot.GetComponent<FlareSpot>().DmgTextID = DmgTextID;
-       // Debug.Log(Damage + " " + isCrit);
-       // Debug.Log(FlareSpot.GetComponent<FlareSpot>().DmgCrit);
-        FlareSpot.transform.localScale = new Vector2(FlareSpot.transform.localScale.x * Flamey.Instance.BulletSize,FlareSpot.transform.localScale.y * Flamey.Instance.BulletSize);
         FlareSpot.transform.position = vec;
     }
-    private void FlareSpotHit(){
-        FlareSpot.GetComponent<CircleCollider2D>().enabled = true;
-        FlareSpot.GetComponent<SpriteRenderer>().enabled = false;
-        FlareSpot.GetComponent<AutoDestroy>().StartCD(0.5f);
 
+    private void HitGround(Vector2 position){
+        Flamey.Instance.ApplyOnLand(position);
+        Destroy(FlareSpot.gameObject);
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, EnemyMask);
+        if(colliders.Length > 0){
+            GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
+            g.transform.position = transform.position;
+        }
+        
+        foreach(Collider2D col in colliders){
+            col.GetComponent<Enemy>().Hitted(Damage, DmgTextID);
+        }
     }
     private void FlareSpotUpdate(){
         SpotColor.a = 0.6f - Vector2.Distance(transform.position, FlareSpot.transform.position)/6;
@@ -108,8 +106,6 @@ public class Flare : MonoBehaviour
     public void setTarget(Vector2 v){
         target = v;
     }
-
-    
     public static float GetDmgByType(int type){
         Flamey f = Flamey.Instance;
         switch(type){

@@ -22,4 +22,8 @@ public class AutoDestroy : MonoBehaviour
     public void SelfDestroy(){
         Destroy(gameObject);
     }
+    public void SelfDestroyTextDMG(){
+        DamageUI.currentDamageTexts--;
+        Destroy(gameObject);
+    }
 }

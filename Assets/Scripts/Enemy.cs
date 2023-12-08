@@ -14,12 +14,21 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public int MaxHealth;
     public int Armor;
     public float ArmorPen;
+    public bool Attacking;
    
     public Transform HitCenter;
 
     public bool inEffect;
 
     
+    public virtual void UpdateEnemy()  {
+        Move();
+        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+           Attacking = true;
+           GetComponent<Animator>().SetTrigger("InRange");
+           InvokeRepeating("Attack",0f, AttackDelay);
+        }
+    }
     public void Move(){
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime);
     }
@@ -27,36 +36,27 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void StartAnimations(int ID){
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
-    
+   
     public void HittedWithArmor(int dmg, bool onHit, int TextID, string except = null){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
-        Health -= effectiveDmg;
-        flame.TotalDamage+=effectiveDmg;
-        if(Health <= 0){Die();}
-        PlayHitAnimation(effectiveDmg, TextID);
-       
+        HittedArmorless(effectiveDmg,TextID);       
     }
+    
     public void HittedArmorless(int dmg, int textID){
+        try{
+            Health -= dmg;
+            flame.TotalDamage+=dmg;
+            PlayHitAnimation(dmg, textID);
+        }catch{
+            Debug.Log("Error Ocurred");
+        }
         
-        //if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
-        Health -= dmg;
-        flame.TotalDamage+=dmg;
-        if(Health <= 0){Die();}
-        PlayHitAnimation(dmg, textID);
-       
     }
-    private void Hitted(int Dmg, int TextID, Vector2 explosionPos){
+    public void Hitted(int Dmg, int TextID){
         int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * Dmg);
-        
-        flame.TotalDamage+=effectiveDmg;
-        Health -= effectiveDmg;
         Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
-        if(Health <= 0){this.Die();}
-        PlayHitAnimation(effectiveDmg, TextID);
-        
-        SpawnExplosion(explosionPos);
-        //CameraShake.Shake(0.25f,0.1f);
+        HittedArmorless(effectiveDmg,TextID);   
     }
     private void PlayHitSoundFx(){
         AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
@@ -75,11 +75,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.tag == "FlareHit"){
-           FlareSpot spot = other.GetComponent<FlareSpot>();
-           Hitted(spot.Dmg, spot.DmgTextID, other.transform.position);
-        }else if(other.tag == "OrbitalHit"){
-            Hitted(FlameCircle.Instance.damage, 0, other.transform.position);
+        if(other.tag == "OrbitalHit"){
+            Hitted(FlameCircle.Instance.damage, 0);
+            SpawnExplosion(other.transform.position);
         }
     }
 
@@ -90,10 +88,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     private void PlayAttackAnimation(){
         GetComponent<Animator>().Play("EnemyAttack");
     }
-    public IEnumerator AttackRoutine(){
-        yield return new WaitForSecondsRealtime(AttackDelay);
-        Attack();
-    }
+    
     
     public void target(){
         transform.GetChild(0).gameObject.SetActive(true);

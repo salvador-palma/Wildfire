@@ -252,13 +252,12 @@ public class Deck : MonoBehaviour
     }
 
     public void PickedAugment(int i){
-        currPhase++;
+        SlotsParent.GetComponent<Animator>().Play("OutroSlots");
 
+        currPhase++;
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
-        SlotsParent.GetComponent<Animator>().Play("OutroSlots");
         if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
-       // Debug.Log("HERE");
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
         EnemySpawner.Instance.newRound();

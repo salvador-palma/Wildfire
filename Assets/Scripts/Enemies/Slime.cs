@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
-    
-    private bool check = false;
     [SerializeField]  private bool tiny;
     [SerializeField] private int DeathSpawnSwarm;
     [SerializeField] private GameObject TinySlime;
     [SerializeField] private Vector2[] spawnTinyPos;
     private float maxSpeed;
     private void Start() {
-        base.flame = Flamey.Instance;
+        flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         Speed = 0.00001f;
         
         MaxHealth = Health;
         StartAnimations(tiny ? 3 : 6);
     }
-    private void Update() {
-        
-        base.Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !check){
-            check = true;
-            Speed = 0.0001f;
-            GetComponent<Animator>().SetTrigger("InRange");
-            InvokeRepeating("Attack",0f, AttackDelay);
-        }
-    }
+
     public void SlideOn(){
         Speed = maxSpeed;
     }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -124,10 +126,10 @@ public class EnemySpawner : MonoBehaviour
 
     };
 
-    
+    List<Enemy> PresentEnemies;
     private void Awake() {
         Instance = this;
-       
+        PresentEnemies = new List<Enemy>();
     }
     public void Start(){
         current_round = 500;
@@ -157,7 +159,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() {
         if(GameEnd){return;}
-        
+        UpdateEnemies();
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
@@ -184,8 +186,21 @@ public class EnemySpawner : MonoBehaviour
             isOn = false;
         }
     }
+    public void UpdateEnemies(){
+        PresentEnemies.ForEach(e => {if(!e.Attacking){e.UpdateEnemy();}});
+        List<Enemy> deadEnemies = PresentEnemies.Where(e => e.Health < 0).ToList();
+        foreach(Enemy enemy in deadEnemies){
+            PresentEnemies.Remove(enemy);
+            enemy.Die();
+        }
+
+
+       
+    }
     public void SpawnEnemy(GameObject enemy){
         GameObject g = Instantiate(enemy);
+
+        PresentEnemies.Add(g.GetComponent<Enemy>());
         g.transform.position = getPoint();
         CheckFlip(g);
     }

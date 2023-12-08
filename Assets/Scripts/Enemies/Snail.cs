@@ -5,7 +5,6 @@ using UnityEngine;
 public class Snail : Enemy
 {
     
-    private bool check = false;
     [SerializeField]  private bool withShell;
     private float maxSpeed;
     private void Start() {
@@ -16,16 +15,8 @@ public class Snail : Enemy
         MaxHealth = Health;
         StartAnimations(withShell? 0 : 2);
     }
-    private void Update() {
-        
-        base.Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !check){
-            check = true;
-            Speed = 0.00001f;
-            GetComponent<Animator>().SetTrigger("InRange");
-            InvokeRepeating("Attack",0f, AttackDelay);
-        }
-    }
+   
+
     public void SlideOn(){
         Speed = maxSpeed;
     }
