@@ -46,7 +46,6 @@ public class BurnAOE : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider){
         if(collider.tag == "Enemy"){
-            //Debug.Log("HIT");
             colliding.Add(collider.GetComponent<Enemy>());
         }
     }

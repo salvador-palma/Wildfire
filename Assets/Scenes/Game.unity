@@ -6914,7 +6914,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &811388236
 Transform:
   m_ObjectHideFlags: 0
@@ -6924,7 +6924,7 @@ Transform:
   m_GameObject: {fileID: 811388234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.34204102, z: 0}
+  m_LocalPosition: {x: 0, y: -0.516, z: 0}
   m_LocalScale: {x: 0.2660024, y: 0.26600245, z: 0.2660024}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6942,15 +6942,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef70998057d2fb4a8a130f3589afe0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100000
+  MaxHealth: 1000
   Health: 0
-  Dmg: 25000
-  Armor: 10000
+  Dmg: 50
+  Armor: 0
   ArmorPen: 0
-  BulletSpeed: 20
-  accuracy: 100
+  BulletSpeed: 5
+  accuracy: 0
   BulletSize: 1
-  atkSpeed: 12
+  atkSpeed: 0.75
   Accuracy: 0.8
   current_homing: {fileID: 0}
   FlarePrefabs:
@@ -11371,7 +11371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1380179854
 RectTransform:
   m_ObjectHideFlags: 0

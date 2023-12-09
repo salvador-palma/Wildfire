@@ -132,7 +132,7 @@ public class EnemySpawner : MonoBehaviour
         PresentEnemies = new List<Enemy>();
     }
     public void Start(){
-        current_round = 500;
+        //current_round = 500;
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
         resetInstances();
@@ -193,10 +193,8 @@ public class EnemySpawner : MonoBehaviour
             PresentEnemies.Remove(enemy);
             enemy.Die();
         }
-
-
-       
     }
+    public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public void SpawnEnemy(GameObject enemy){
         GameObject g = Instantiate(enemy);
 

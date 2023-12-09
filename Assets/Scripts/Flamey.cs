@@ -55,9 +55,9 @@ public class Flamey : MonoBehaviour
     //FINAL STATS COUNTERS
     [HideInInspector] public int TotalKills;
     [HideInInspector] public int TotalShots;
-    [HideInInspector] public float TotalDamage;
-    [HideInInspector] public float TotalDamageTaken;
-    [HideInInspector] public float TotalHealed;
+    [HideInInspector] public ulong TotalDamage;
+    [HideInInspector] public ulong TotalDamageTaken;
+    [HideInInspector] public ulong TotalHealed;
 
 
     private void Awake() {
@@ -179,7 +179,7 @@ public class Flamey : MonoBehaviour
 
         
 
-        TotalDamageTaken+=dmgeff;
+        TotalDamageTaken+=(ulong)dmgeff;
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
@@ -273,12 +273,12 @@ public class Flamey : MonoBehaviour
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
-        TotalHealed+=MaxHealth * healperc;
+        TotalHealed+=(ulong)(MaxHealth * healperc);
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
-        TotalHealed+=HealAmount;
+        TotalHealed+=(ulong)HealAmount;
         Health = (int)Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
         DamageUI.Instance.spawnTextDmg(transform.position, ""+ HealAmount, 3);

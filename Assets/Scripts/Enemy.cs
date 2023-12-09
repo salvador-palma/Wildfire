@@ -38,7 +38,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
    
     public void HittedWithArmor(int dmg, bool onHit, int TextID, string except = null){
-        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
+        float B = dmg/(1+Armor/100);
+        int effectiveDmg = (int)(B + (Damage-B)*flame.ArmorPen);
+        //int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
+        
+        
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         HittedArmorless(effectiveDmg,TextID);       
     }
@@ -46,7 +50,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void HittedArmorless(int dmg, int textID){
         try{
             Health -= dmg;
-            flame.TotalDamage+=dmg;
+            flame.TotalDamage+=(ulong)dmg;
             PlayHitAnimation(dmg, textID);
         }catch{
             Debug.Log("Error Ocurred");
