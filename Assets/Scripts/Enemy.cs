@@ -77,13 +77,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        
-        if(other.tag == "OrbitalHit"){
-            Hitted(FlameCircle.Instance.damage, 0);
-            SpawnExplosion(other.transform.position);
-        }
-    }
+    
 
     public void Attack(){
         flame.Hitted(Damage, ArmorPen);
@@ -106,7 +100,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         Flamey.Instance.target(this);
     }
-    private void SpawnExplosion(Vector2 explosionPos){
+    public static void SpawnExplosion(Vector2 explosionPos){
         GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
         g.transform.position = explosionPos;
     }

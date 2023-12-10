@@ -174,7 +174,6 @@ public class EnemySpawner : MonoBehaviour
         if(TimerEnemySpawn > 0){
             TimerEnemySpawn-= Time.deltaTime;
         }else{
-            
             TimerEnemySpawn = (float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
             
             SpawnEnemy(PickRandomEnemy(current_round));
@@ -266,20 +265,20 @@ public class EnemySpawner : MonoBehaviour
     
 
     private void resetInstances(){
-        // FlameCircle.Instance = null;
+        FlameCircle.Instance = null;
 
-        // VampOnHit.Instance = null;
-        // IceOnHit.Instance = null;
-        // ShredOnHit.Instance = null;
-        // ExecuteOnHit.Instance = null;
-        // StatikOnHit.Instance = null;
+        VampOnHit.Instance = null;
+        IceOnHit.Instance = null;
+        ShredOnHit.Instance = null;
+        ExecuteOnHit.Instance = null;
+        StatikOnHit.Instance = null;
 
-        // BurnOnLand.Instance = null;
+        BurnOnLand.Instance = null;
 
-        // SecondShot.Instance = null;
-        // BurstShot.Instance = null;
-        // KrakenSlayer.Instance = null;
-        // CritUnlock.Instance = null;
+        SecondShot.Instance = null;
+        BurstShot.Instance = null;
+        KrakenSlayer.Instance = null;
+        CritUnlock.Instance = null;
 
     }
 

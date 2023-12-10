@@ -29,4 +29,12 @@ public class Spinner : MonoBehaviour
     public void kill(){
         Destroy(gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D other) {
+        
+        if(other.tag == "Enemy"){
+            Enemy e = other.GetComponent<Enemy>();
+            e.Hitted(FlameCircle.Instance.damage, 0);
+            Enemy.SpawnExplosion(other.transform.position);
+        }
+    }
 }

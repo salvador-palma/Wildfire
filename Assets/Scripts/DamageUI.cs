@@ -6,7 +6,7 @@ using UnityEngine;
 public class DamageUI : MonoBehaviour
 {
     public static DamageUI Instance {get; private set;}
-    const int MAX_DAMAGE_TEXT_REQUEST = 50;
+    const int MAX_DAMAGE_TEXT_REQUEST = 100;
     public static int currentDamageTexts;
     [SerializeField] private GameObject[] textDmg;
     [SerializeField] private Canvas targetCanvas;

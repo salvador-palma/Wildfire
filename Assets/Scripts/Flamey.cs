@@ -84,7 +84,6 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         
         Flare.EnemyMask = LayerMask.GetMask("Enemy");
-        
     }
 
     // Update is called once per frame
