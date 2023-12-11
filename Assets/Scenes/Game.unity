@@ -7015,7 +7015,7 @@ MonoBehaviour:
   BulletSpeed: 5
   accuracy: 0
   BulletSize: 1
-  atkSpeed: 0.75
+  atkSpeed: 12
   Accuracy: 0.8
   current_homing: {fileID: 0}
   FlarePrefabs:
@@ -12392,6 +12392,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522459083}
   m_CullTransparentMesh: 1
+--- !u!1 &1559845926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1559845928}
+  - component: {fileID: 1559845927}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1559845927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559845926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7cc5545b563e546820bc8d253b0237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledFlares: []
+  DefaultFlarePrefab: {fileID: 5670772395214100646, guid: 2e25ba8c496e99548b70471384659ce1, type: 3}
+  FlareTypes:
+  - DmgTextID: 0
+    FlareColor: {r: 0, g: 0, b: 0, a: 0}
+    SpotColor: {r: 0, g: 0, b: 0, a: 0}
+    ParticleColors: []
+  - DmgTextID: 1
+    FlareColor: {r: 0.9960785, g: 0.5176471, b: 0, a: 1}
+    SpotColor: {r: 0.9960785, g: 0.56078434, b: 0, a: 0}
+    ParticleColors:
+    - {r: 0.69803923, g: 0.27058825, b: 0, a: 1}
+    - {r: 0.69803923, g: 0.20392159, b: 0, a: 1}
+  - DmgTextID: 7
+    FlareColor: {r: 0, g: 0.9960785, b: 0.94117653, a: 1}
+    SpotColor: {r: 0.14901961, g: 0.9960785, b: 0.9960785, a: 0}
+    ParticleColors:
+    - {r: 0, g: 0.47450984, b: 0.9960785, a: 1}
+    - {r: 0, g: 0.41960788, b: 0.9960785, a: 1}
+  - DmgTextID: 8
+    FlareColor: {r: 0, g: 0.6509804, b: 0.9960785, a: 1}
+    SpotColor: {r: 0.08235294, g: 0.68235296, b: 0.9450981, a: 0}
+    ParticleColors:
+    - {r: 0, g: 0.24313727, b: 0.50980395, a: 1}
+    - {r: 0, g: 0.30980393, b: 0.7372549, a: 1}
+--- !u!4 &1559845928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559845926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8579714, y: -0.5074143, z: 0.11147751}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1562088144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22594,3 +22663,4 @@ SceneRoots:
   - {fileID: 52353449}
   - {fileID: 365815746}
   - {fileID: 1617019076}
+  - {fileID: 1559845928}

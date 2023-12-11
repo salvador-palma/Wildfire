@@ -3,38 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-
 using UnityEngine;
 
 public class Flare : MonoBehaviour
 {
-    public static LayerMask EnemyMask;
-    private int goingDownPhase;
     
-    private float speedAscend;
-    private float speedDescend;
-    private float YLimit = 10f;
-    private Vector2 target;
-    private GameObject FlareSpot;
+
+
+    public int goingDownPhase;
+    
+    public float speedAscend;
+    public float speedDescend;
+    private static float YLimit = 10f;
+    public Vector2 target;
+    public GameObject FlareSpot;
     
     public int Damage;
-    private float destY;
-    [SerializeField] Color SpotColor;
+    public float destY;
+    [SerializeField] public Color SpotColor;
 
     public int FlameType;
     public int DmgTextID;
-    private void Start() {
+    public void VirtualStart(){
+        Reset();
         SetupTarget();
-        SetupStats();     
+        SetupStats();  
     }
+    
     private void SetupTarget(){
-        transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
+        transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), 0);
         SpotColor.a = 0;
     }
     private void SetupStats(){
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-        Damage = (int)GetDmgByType(FlameType);
+        Damage = (int)FlareManager.GetDmgByType(FlameType);
     }
     private void Update() {
         
@@ -45,11 +48,12 @@ public class Flare : MonoBehaviour
 
             if(transform.position.y < destY){
                 goingDownPhase++;
-                HitGround(transform.position);                
-                Destroy(gameObject);
+                HitGround(transform.position);   
+                         
+                FlareManager.DestroyFlare(gameObject);
             }
             
-        }else{
+        }else if(goingDownPhase==0){
             transform.position = new Vector2(transform.position.x, transform.position.y + speedAscend * Time.deltaTime);
             if(transform.position.y > YLimit){
                 goingDownPhase++;
@@ -62,7 +66,7 @@ public class Flare : MonoBehaviour
     private void goDown(){
         if(target == Vector2.zero){
             Enemy e = Flamey.Instance.current_homing;
-            if(e==null){Destroy(gameObject);return;}
+            if(e==null){FlareManager.DestroyFlare(gameObject);return;}
             else{target = e.HitCenter.position;}
         }
         
@@ -88,7 +92,7 @@ public class Flare : MonoBehaviour
         Flamey.Instance.ApplyOnLand(position);
         Destroy(FlareSpot.gameObject);
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, EnemyMask);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, FlareManager.EnemyMask);
         if(colliders.Length > 0){
             GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
             g.transform.position = transform.position;
@@ -106,15 +110,15 @@ public class Flare : MonoBehaviour
     public void setTarget(Vector2 v){
         target = v;
     }
-    public static float GetDmgByType(int type){
-        Flamey f = Flamey.Instance;
-        switch(type){
-            case 0: return f.Dmg;
-            case 1: return f.Dmg * CritUnlock.Instance.mult;
-            case 2: return f.Dmg + KrakenSlayer.Instance.extraDmg;
-            case 3: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
-            default: return f.Dmg;
-        }
+
+    public void Reset(){
+        goingDownPhase=0;
+        target=Vector2.zero;
+        FlareSpot = null;
+        destY = 0;
+
+
     }
+    
     
 }

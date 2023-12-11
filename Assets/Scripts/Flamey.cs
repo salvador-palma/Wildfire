@@ -59,7 +59,7 @@ public class Flamey : MonoBehaviour
     [HideInInspector] public ulong TotalDamageTaken;
     [HideInInspector] public ulong TotalHealed;
 
-
+  
     private void Awake() {
         
         Health = MaxHealth;
@@ -83,7 +83,11 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
         
-        Flare.EnemyMask = LayerMask.GetMask("Enemy");
+        FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
+
+        addOnShootEffect(new CritUnlock(1f, 1.3f));
+        addOnShootEffect(new SecondShot(1f));
+        addOnShootEffect(new BurstShot(10,20));
     }
 
     // Update is called once per frame
@@ -100,9 +104,11 @@ public class Flamey : MonoBehaviour
         if(current_homing == null){
             target(getHoming());
             if(current_homing == null){return;}
+            
         }
-
-        if(timerAS > 0){
+        
+        if(timerAS > 0 ){
+            
             timerAS -= Time.deltaTime;
         }else{
             if(atkSpeed != AtkSpeed){
@@ -129,7 +135,8 @@ public class Flamey : MonoBehaviour
         AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
         int FlameType = ApplyOnShoot();
 
-        Instantiate(FlarePrefabs[FlameType]);
+        FlareManager.InstantiateFlare(FlameType);
+       // Instantiate(FlarePrefabs[FlameType]);
         
        
     }
@@ -143,7 +150,7 @@ public class Flamey : MonoBehaviour
     public Flare InstantiateShot(List<string> except = null){
         TotalShots++;
         int FlameType = ApplyOnShoot(except);
-        GameObject go = Instantiate(FlarePrefabs[FlameType]);
+        GameObject go = FlareManager.InstantiateFlare(FlameType);
         return go.GetComponent<Flare>();
     }
     public static float AtkSpeedToSeconds(float asp){
@@ -159,7 +166,13 @@ public class Flamey : MonoBehaviour
     }
     public UnityEngine.Vector2 getRandomHomingPosition(){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
-        return go[UnityEngine.Random.Range(0, go.Length)].GetComponent<Enemy>().HitCenter.position;
+        try{
+            GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+            return g.GetComponent<Enemy>().HitCenter.position;
+        }catch{
+            Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
+        }
+        return UnityEngine.Vector2.zero;
     }
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
