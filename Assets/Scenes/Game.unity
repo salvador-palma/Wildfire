@@ -2731,18 +2731,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d68a195d22a0b14494ea218a66517a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDmg:
-  - {fileID: 3633900077226613852, guid: 5e7410176e12e1546b75257c0db84b33, type: 3}
-  - {fileID: 1185878174542248444, guid: cdee850b9195d2d45a9a7c2d8585a73e, type: 3}
-  - {fileID: 531432483663556873, guid: f5b3a6f2e042a734d9d092eaf271734b, type: 3}
-  - {fileID: 4889850923052572346, guid: 5592a00bb1823c0488b3df0016f2ef8a, type: 3}
-  - {fileID: 3027109998800185359, guid: c92a886452ab62c43b02253aac5ff0e2, type: 3}
-  - {fileID: 7164260314519534854, guid: 072b95a06c587294e89cff7b8e0cc0e5, type: 3}
-  - {fileID: 6819506290342146469, guid: 4283b53aea767ca4e9f1627528c56e02, type: 3}
-  - {fileID: 4857594928699485146, guid: 682ff755fa2e1c541a19ca640f781779, type: 3}
-  - {fileID: 4254173745996239976, guid: a3cb3bebd712900428c0bd04403343ce, type: 3}
-  - {fileID: 7490714664952505414, guid: f60a8dc118436f146be3666f6e35e794, type: 3}
-  targetCanvas: {fileID: 312507736}
+  textDamageTypes:
+  - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
+    color: {r: 0.8000001, g: 0, b: 0, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
+    color: {r: 1, g: 0.40784317, b: 0.40000004, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 19a7434caca7efd40ac5e59e53c37010, type: 2}
+    color: {r: 0.03529412, g: 0.87843144, b: 0, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 3edad9b836e0e1e46a74ffa1adeac422, type: 2}
+    color: {r: 0, g: 0.6666667, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 17cbeda4000105144a009cad9f1ae163, type: 2}
+    color: {r: 1, g: 0.9058824, b: 0.3529412, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 3edad9b836e0e1e46a74ffa1adeac422, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 3edad9b836e0e1e46a74ffa1adeac422, type: 2}
+    color: {r: 0.14509805, g: 0.5803922, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
+    color: {r: 0.8117648, g: 0.56078434, b: 0.19607845, a: 1}
+  TextDmgTemplate: {fileID: 3633900077226613852, guid: 5e7410176e12e1546b75257c0db84b33, type: 3}
+  targetCanvas: {fileID: 2079703109}
 --- !u!114 &312507739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7009,13 +7020,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 1000
   Health: 0
-  Dmg: 50
-  Armor: 0
+  Dmg: 100
+  Armor: 100
   ArmorPen: 0
-  BulletSpeed: 5
-  accuracy: 0
+  BulletSpeed: 13.87
+  accuracy: 100
   BulletSize: 1
-  atkSpeed: 12
+  atkSpeed: 4.5
   Accuracy: 0.8
   current_homing: {fileID: 0}
   FlarePrefabs:
@@ -21954,6 +21965,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076151007}
   m_CullTransparentMesh: 1
+--- !u!1 &2079703102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079703110}
+  - component: {fileID: 2079703109}
+  - component: {fileID: 2079703108}
+  - component: {fileID: 2079703107}
+  m_Layer: 5
+  m_Name: DamageUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2079703107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079703102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &2079703108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079703102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &2079703109
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079703102}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 6
+  m_TargetDisplay: 0
+--- !u!224 &2079703110
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079703102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &2080975616
 GameObject:
   m_ObjectHideFlags: 0
@@ -22657,6 +22769,7 @@ SceneRoots:
   - {fileID: 287116302}
   - {fileID: 1452869212}
   - {fileID: 312507737}
+  - {fileID: 2079703110}
   - {fileID: 1373078465}
   - {fileID: 687836387}
   - {fileID: 35752738}

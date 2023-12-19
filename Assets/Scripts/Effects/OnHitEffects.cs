@@ -110,7 +110,7 @@ public class IceOnHit : OnHitEffects
             float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
             
             en.Speed -= en.Speed * percentage;
-            DamageUI.Instance.spawnTextDmg(en.transform.position, "SLOWED", 4);
+            DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
             await Task.Delay(duration);
             if(en == null){return;}
             en.GetComponent<Animator>().Play("EnemyEffectClear");
@@ -257,7 +257,7 @@ public class ExecuteOnHit : OnHitEffects
             Vector2 v = en.transform.position;
             en.Health = 0;
             await Task.Delay(50);
-            DamageUI.Instance.spawnTextDmg(v, "EXECUTED",5);
+            DamageUI.InstantiateTxtDmg(v, "EXECUTED",5);
         }
         
     }

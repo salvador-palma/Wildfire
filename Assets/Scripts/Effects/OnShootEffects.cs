@@ -19,6 +19,7 @@ public class SecondShot : OnShootEffects{
     public float perc;
     public SecondShot(float p){
         perc = p;
+        Debug.Log(p);
         if(Instance == null){
             Instance = this;
         }else{

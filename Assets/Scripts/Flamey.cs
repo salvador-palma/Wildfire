@@ -85,9 +85,6 @@ public class Flamey : MonoBehaviour
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
 
-        addOnShootEffect(new CritUnlock(1f, 1.3f));
-        addOnShootEffect(new SecondShot(1f));
-        addOnShootEffect(new BurstShot(10,20));
     }
 
     // Update is called once per frame
@@ -195,7 +192,7 @@ public class Flamey : MonoBehaviour
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "-"+dmgeff, 2);
+        DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, 2);
         CameraShake.Shake(0.5f,0.35f);
     }
     private void UpdateHealthUI(){
@@ -287,13 +284,13 @@ public class Flamey : MonoBehaviour
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
         TotalHealed+=(ulong)(MaxHealth * healperc);
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position,""+ MaxHealth * healperc, 3);
+        DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
         TotalHealed+=(ulong)HealAmount;
         Health = (int)Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, ""+ HealAmount, 3);
+        DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
     }
     
     public void addOnHitEffect(OnHitEffects onhit){

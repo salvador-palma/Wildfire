@@ -23,7 +23,6 @@ public class AutoDestroy : MonoBehaviour
         Destroy(gameObject);
     }
     public void SelfDestroyTextDMG(){
-        DamageUI.currentDamageTexts--;
-        Destroy(gameObject);
+        DamageUI.DestroyTxtDmg(gameObject);
     }
 }

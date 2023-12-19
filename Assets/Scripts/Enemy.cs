@@ -67,7 +67,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
     public void PlayHitAnimation(int dmg, int textID){
         GetComponent<Animator>().Play("EnemyHit");
-        DamageUI.Instance.spawnTextDmg(transform.position, dmg.ToString(), textID);
+        DamageUI.InstantiateTxtDmg(transform.position, dmg.ToString(), textID);
     }
 
     public virtual void Die(){

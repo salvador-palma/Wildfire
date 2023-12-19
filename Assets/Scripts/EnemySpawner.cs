@@ -132,7 +132,7 @@ public class EnemySpawner : MonoBehaviour
         PresentEnemies = new List<Enemy>();
     }
     public void Start(){
-        //current_round = 500;
+        current_round = 0;
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
         resetInstances();
