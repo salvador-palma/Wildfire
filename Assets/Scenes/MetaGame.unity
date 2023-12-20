@@ -2711,6 +2711,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
+      propertyPath: isBaseStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
       propertyPath: AugmentClass
       value: Damage
       objectReference: {fileID: 0}
@@ -3658,13 +3662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acf3fcb247da4c4b84ab2237769253c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SavedCode: 32101
   AllSkills:
-  - {fileID: 93031583}
-  - {fileID: 1039663519}
-  - {fileID: 1289154291}
-  - {fileID: 149539795078830792}
-  - {fileID: 1392698847}
+    list: []
   UpgradeColors:
   - {r: 0.28627452, g: 0.11764706, b: 0.38039216, a: 1}
   - {r: 0.5647059, g: 0.3529412, b: 0.24705884, a: 1}
@@ -3969,6 +3968,10 @@ PrefabInstance:
     - target: {fileID: 7314881474442260708, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
+      propertyPath: isBaseStat
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
       propertyPath: AugmentClass
@@ -4462,6 +4465,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
+      propertyPath: isBaseStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
       propertyPath: AugmentClass
       value: Atk Speed
       objectReference: {fileID: 0}
@@ -4722,17 +4729,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1370434672959814038, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
   m_PrefabInstance: {fileID: 1392698844}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1392698847 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7904330541548711869, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
-  m_PrefabInstance: {fileID: 1392698844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392698846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91818a2eeaeb6c429da76ad9ecf15c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1393937292 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1983641075123666865, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}

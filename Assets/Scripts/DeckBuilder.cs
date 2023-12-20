@@ -14,27 +14,24 @@ public class DeckBuilder : MonoBehaviour
         if(Instance == this){DefineAugmentClasses();DefineAugmentClassesPrice();}
         
     }
-    void Start(){
-        
-        
-    }
-    public void UpgradeClass(string classUpgrade){
-        Debug.Log("Upgrading: " + classUpgrade);
-        foreach (Augment item in AllAugments)
-        {
+    
+    // public void UpgradeClass(string classUpgrade){
+    //     Debug.Log("Upgrading: " + classUpgrade);
+    //     foreach (Augment item in AllAugments)
+    //     {
             
-            if(item.getAugmentClass().Equals(classUpgrade)){item.Upgrade();}
-        }
+    //         if(item.getAugmentClass().Equals(classUpgrade)){item.Upgrade();}
+    //     }
         
-    }
-    public void UnlockClass(string classUnlocked, string[] childClasses){
-        Debug.Log("Unlocking: " + classUnlocked);
-        UpgradeClass(classUnlocked);
-        for (int i = 0; i < childClasses.Length; i++)
-        {
-            UpgradeClass(childClasses[i]);
-        }
-    }
+    // }
+    // public void UnlockClass(string classUnlocked, string[] childClasses){
+    //     Debug.Log("Unlocking: " + classUnlocked);
+    //     UpgradeClass(classUnlocked);
+    //     for (int i = 0; i < childClasses.Length; i++)
+    //     {
+    //         UpgradeClass(childClasses[i]);
+    //     }
+    // }
     public void DefineAugmentClassesPrice(){
         AugmentPrices = new Dictionary<string, int[]>();
         AugmentPrices["Damage"] = new int[4]{100,300,900,2700};

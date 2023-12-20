@@ -18,23 +18,15 @@ public class SkillTreeButton : MonoBehaviour
    
     [SerializeField] List<SkillTreeButton> previousNode;
     [SerializeField] List<SkillTreeLine> nextPaths;
-
-    [SerializeField] int Max_Upgrades;
-    public int upgradeAmount;
-    private bool isBaseStat;
-
-    //MEANINGS
-    //-1 => NOT DISCOVERED
-    //0 => BUYABLE
-    //1 => BOUGHT
-
+    public bool isBaseStat;
     void Start()
     {
-        isBaseStat = Max_Upgrades==5;
-        int storedValue = PlayerPrefs.GetInt(AugmentClass, -5);
-        if(isBaseStat){setUpgradeAmount(1);GetComponent<Animator>().Play(UNLOCKED);}
-        if(storedValue != -5){LoadUpgrade(storedValue);}
+        
+
+        if(getLevel()>=0){GetComponent<Animator>().Play(UNLOCKED);NextPaths(false);}
+        
         GetComponent<Button>().onClick.AddListener(Clicked);
+        UpdateImage();
         
     }
     public void ping(){
@@ -43,26 +35,21 @@ public class SkillTreeButton : MonoBehaviour
         {
             result = result && item.wasBought();
         }
-        if(result){Unlock(Max_Upgrades == 3 ? 1 : 0);}
+        if(result){Unlock();SkillTreeManager.Instance.Upgrade(AugmentClass);UpdateImage();}
     }
-    private void Unlock(int atPhase){
-        setUpgradeAmount(atPhase);
+    private void Unlock(){
         GetComponent<Animator>().Play(UNLOCKING);
     }
     private void Clicked(){
         //CHECK FOR PRICE
-        if(upgradeAmount==Max_Upgrades || upgradeAmount < 0){return;}
+        
 
         Upgrade();
+        UpdateImage();
     }
     private void Upgrade(){
-        if(UnlockableField){
-            DeckBuilder.Instance.UnlockClass(AugmentClass, UnlockableClasses);
-        }else{
-            DeckBuilder.Instance.UpgradeClass(AugmentClass);
-        }
-        setUpgradeAmount(upgradeAmount+1);
-        if(upgradeAmount==2 && isBaseStat || upgradeAmount == 1 && !isBaseStat){NextPaths(true);}
+        SkillTreeManager.Instance.Upgrade(AugmentClass);
+        if(getLevel()==1){NextPaths(true);}
     }
     
     public void NextPaths(bool withPing){
@@ -72,29 +59,19 @@ public class SkillTreeButton : MonoBehaviour
         }
     }
 
-    private void setUpgradeAmount(int n){
-        upgradeAmount = n;
-        transform.Find("FillImage").GetComponent<Image>().color = SkillTreeManager.Instance.getColor(n, Max_Upgrades);
-        PlayerPrefs.SetInt(AugmentClass, upgradeAmount);
+    private void UpdateImage(){
+        transform.Find("FillImage").GetComponent<Image>().color = SkillTreeManager.Instance.getColor(AugmentClass);
     }
 
     public bool wasBought(){
-        return upgradeAmount>=2 && isBaseStat || upgradeAmount >= 1 && !isBaseStat; 
+        return getLevel()>=1; 
     }
 
-    public void LoadUpgrade(int at){
-        for (int i = isBaseStat? 1:0; i < at; i++)
-        {
-            if(UnlockableField){
-                DeckBuilder.Instance.UnlockClass(AugmentClass, UnlockableClasses);
-            }else{
-                DeckBuilder.Instance.UpgradeClass(AugmentClass);
-            }
-        }
-        setUpgradeAmount(at);
-        GetComponent<Animator>().Play(UNLOCKED);
-        if(upgradeAmount>=2 && isBaseStat || upgradeAmount >= 1 && !isBaseStat){NextPaths(false);}
+    private int getLevel(){
+        return SkillTreeManager.Instance.getLevel(AugmentClass);
     }
+    
+
 
      
 }

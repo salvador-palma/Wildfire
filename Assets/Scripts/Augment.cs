@@ -18,7 +18,7 @@ public class Augment
     [HideInInspector] public Tier tier;
     [HideInInspector] public Sprite icon;
     [HideInInspector] public UnityAction[] actions;
-    [SerializeField] int level;    
+    
     string AugmentClass;
     bool baseStat;
     bool baseCard;
@@ -29,26 +29,25 @@ public class Augment
         actions = a;
         tier = ti;
         icon = Resources.Load<Sprite>(i);
-        level = baseStat ? 0 : -1;
+        
         AugmentClass = augmentClass;
         this.baseStat = baseStat;
         this.baseCard = baseCard;
     }
     public void Activate(){
-        actions[level]();
+        actions[getLevel()]();
     }
-
-    public void Upgrade(){
-        if(level == actions.Length - 1){return;}
-        level++;
+    public int getLevel(){
+       return SkillTreeManager.Instance.getLevel(AugmentClass);
     }
+    
     public string getDescription(){
-        return Description[level];
+        return Description[getLevel()];
     }
    
 
     public bool playable(){
-        return baseStat || (baseCard && level >= 0);
+        return baseStat || (baseCard && getLevel() >= 0);
     }
     public string getAugmentClass(){return AugmentClass;}
 }
