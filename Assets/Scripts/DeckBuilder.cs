@@ -15,23 +15,7 @@ public class DeckBuilder : MonoBehaviour
         
     }
     
-    // public void UpgradeClass(string classUpgrade){
-    //     Debug.Log("Upgrading: " + classUpgrade);
-    //     foreach (Augment item in AllAugments)
-    //     {
-            
-    //         if(item.getAugmentClass().Equals(classUpgrade)){item.Upgrade();}
-    //     }
-        
-    // }
-    // public void UnlockClass(string classUnlocked, string[] childClasses){
-    //     Debug.Log("Unlocking: " + classUnlocked);
-    //     UpgradeClass(classUnlocked);
-    //     for (int i = 0; i < childClasses.Length; i++)
-    //     {
-    //         UpgradeClass(childClasses[i]);
-    //     }
-    // }
+  
     public void DefineAugmentClassesPrice(){
         AugmentPrices = new Dictionary<string, int[]>();
         AugmentPrices["Damage"] = new int[4]{100,300,900,2700};
@@ -47,6 +31,18 @@ public class DeckBuilder : MonoBehaviour
         AugmentPrices["CriticUnlock"] = new int[1]{800};
         AugmentPrices["CriticChance"] = new int[2]{500, 1000};
         AugmentPrices["CriticDmg"] = new int[2]{500, 1000};
+
+        AugmentPrices["VampUnlock"] = new int[1]{800};
+        AugmentPrices["VampProb"] = new int[2]{500, 1000};
+        AugmentPrices["VampPerc"] = new int[2]{500, 1000};
+
+        AugmentPrices["BurstUnlock"] = new int[1]{800};
+        AugmentPrices["BurstAmount"] = new int[2]{500, 1000};
+        AugmentPrices["BurstInterval"] = new int[2]{500, 1000};
+
+        AugmentPrices["IceUnlock"] = new int[1]{800};
+        AugmentPrices["IceDuration"] = new int[2]{500, 1000};
+        AugmentPrices["IceProb"] = new int[2]{500, 1000};
         
     }
     public void DefineAugmentClasses(){
@@ -293,9 +289,131 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0.6f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.3f, 1.2f)))}),
+            new Augment("VampUnlock" ,"The Blood Mage", new string[1]{"Unlock the ability to life-steal"}, "vampfire", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("The Blood Mage");
+                Flamey.Instance.addOnHitEffect(new VampOnHit(0.05f,0.05f));
+                Deck.Instance.AddAugmentClass(new List<string>{"VampProb","VampPerc"});            
+            })}, baseCard: true),  
+            new Augment("VampProb","Steal to Heal", new string[3]{"Gain +2% chance to proc your Blood Mage effect", 
+                                                            "Gain +5% chance to proc your Blood Mage effect", 
+                                                            "Gain +8% chance to proc your Blood Mage effect"}, "vampfire", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.02f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.08f)))}), 
+            new Augment("VampProb","Eternal Hunger", new string[3]{"Gain +4% chance to proc your Blood Mage effect", 
+                                                            "Gain +10% chance to proc your Blood Mage effect", 
+                                                            "Gain +16% chance to proc your Blood Mage effect"}, "vampfire", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.04f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.16f)))}),
+            new Augment("VampProb","Soul Harvester", new string[3]{"Gain +10% chance to proc your Blood Mage effect", 
+                                                            "Gain +20% chance to proc your Blood Mage effect", 
+                                                            "Gain +30% chance to proc your Blood Mage effect"}, "vampfire", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.2f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.3f)))}),  
+            new Augment("VampPerc","Sustenance", new string[3]{"Gain +2% Heal on your Blood Mage effect", 
+                                                            "Gain +3% Heal on your Blood Mage effect", 
+                                                            "Gain +5% Heal on your Blood Mage effect"}, "vampfire", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.02f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.03f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.05f,0f)))}),  
+            new Augment("VampPerc","Vampire Survivor", new string[3]{"Gain +4% Heal on your Blood Mage effect", 
+                                                            "Gain +7% Heal on your Blood Mage effect", 
+                                                            "Gain +12% Heal on your Blood Mage effect"}, "vampfire", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.04f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.07f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.12f,0f)))}),
+            new Augment("VampPerc","Blood Pact", new string[3]{"Gain +8% Heal on your Blood Mage effect", 
+                                                            "Gain +15% Heal on your Blood Mage effect", 
+                                                            "Gain +25% Heal on your Blood Mage effect"}, "vampfire", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.08f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.15f,0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.25f,0f)))}),    
             
+            new Augment("BurstUnlock" ,"Burst Shot", new string[1]{"Unlock the ability to send burst shots"}, "burst", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Burst Shot");
+                Flamey.Instance.addOnShootEffect(new BurstShot(50, 5));
+                Deck.Instance.AddAugmentClass(new List<string>{"BurstInterval","BurstAmount"});            
+            })}, baseCard: true),  
+            new Augment("BurstInterval","Happy Trigger", new string[3]{"You will need 2 shots less to proc Burst Shot", 
+                                                                        "You will need 4 shots less to proc Burst Shot", 
+                                                                        "You will need 7 shots less to proc Burst Shot"}, "burst", Tier.Silver, new UnityAction[3]{
+                                                                                                                    new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(2,0))),
+                                                                                                                    new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(4,0))),
+                                                                                                                    new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(7,0)))}), 
+            new Augment("BurstInterval","Bullet Symphony", new string[3]{"You will need 5 shots less to proc Burst Shot", 
+                                                            "You will need 8 shots less to proc Burst Shot", 
+                                                            "You will need 14 shots less to proc Burst Shot"}, "burst", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(5,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(8,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(14,0)))}), 
+            new Augment("BurstInterval","Make It Rain", new string[3]{"You will need 10 shots less to proc Burst Shot", 
+                                                            "You will need 15 shots less to proc Burst Shot", 
+                                                            "You will need 25 shots less to proc Burst Shot"}, "burst", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(10,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(15,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(25,0)))}), 
+            new Augment("BurstAmount","Burst Barricade", new string[3]{"Your Burst Shot will shoot an extra flame", 
+                                                            "Your Burst Shot will +2 flames", 
+                                                            "Your Burst Shot will +3 flames"}, "burst", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,1))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,2))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,3)))}), 
+            new Augment("BurstAmount","Burst Unleashed", new string[3]{"Your Burst Shot will +2 flames", 
+                                                            "Your Burst Shot will +3 flames", 
+                                                            "Your Burst Shot will +5 flames"}, "burst", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,2))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,3))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,6)))}), 
+            new Augment("BurstAmount","Burst to Victory", new string[3]{"Your Burst Shot will +3 flames", 
+                                                            "Your Burst Shot will +5 flames", 
+                                                            "Your Burst Shot will +10 flames"}, "burst", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,3))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,5))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,10)))}), 
             
-
+            new Augment("IceUnlock" ,"Frost Fire", new string[1]{"Unlock the ability to Slow enemies using ice(?)"}, "ice", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Frost Fire");
+                Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0.1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"IceDuration","IceProb"});            
+            })}, baseCard: true),  
+            new Augment("IceProb","IcyHot", new string[3]{"Gain +3% chance to proc your Frost Fire effect", 
+                                                            "Gain +5% chance to proc your Frost Fire effect", 
+                                                            "Gain +8% chance to proc your Frost Fire effect"}, "ice", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.03f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.08f)))}), 
+            new Augment("IceProb","Glacial Energy", new string[3]{"Gain +7% chance to proc your Frost Fire effect", 
+                                                            "Gain +15% chance to proc your Frost Fire effect", 
+                                                            "Gain +20% chance to proc your Frost Fire effect"}, "ice", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.07f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.20f)))}), 
+            new Augment("IceProb","A Dance of Fire and Ice", new string[3]{"Gain +15% chance to proc your Frost Fire effect", 
+                                                            "Gain +25% chance to proc your Frost Fire effect", 
+                                                            "Gain +40% chance to proc your Frost Fire effect"}, "ice", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.25f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.40f)))}), 
+            new Augment("IceDuration","Slowly but Surely", new string[3]{"Your Frost Fire effect lasts for 0.2 seconds more", 
+                                                            "Your Frost Fire effect lasts for 0.4 seconds more", 
+                                                            "Your Frost Fire effect lasts for 0.6 seconds more"}, "ice", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(200, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(400, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(600, 0)))}),
+            new Augment("IceDuration","Frost Bite", new string[3]{"Your Frost Fire effect lasts for 0.5 seconds more", 
+                                                            "Your Frost Fire effect lasts for 1 seconds more", 
+                                                            "Your Frost Fire effect lasts for 1.5 seconds more"}, "ice", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(500, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1500, 0)))}), 
+            new Augment("IceDuration","Absolute Zero", new string[3]{"Your Frost Fire effect lasts for 1 seconds more", 
+                                                            "Your Frost Fire effect lasts for 2 seconds more", 
+                                                            "Your Frost Fire effect lasts for 3 seconds more"}, "ice", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(2000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(3000, 0)))}),   
         };
 
     }

@@ -48,7 +48,8 @@ public class SkillTreeManager : MonoBehaviour
     
 
     public int getLevel(string skill){
-        return GetSkills(skill).value;
+        Skills result = GetSkills(skill);
+        return result==null ? 0 : result.value;
     }
     public int getMaxLevel(string skill){
         return GetSkills(skill).max_value;
@@ -65,6 +66,7 @@ public class SkillTreeManager : MonoBehaviour
         {
             if(item.type == skill){return item;}
         }
+        Debug.LogWarning("Skill not found: " + skill);
         return null;
     }
     public void WritingData(){

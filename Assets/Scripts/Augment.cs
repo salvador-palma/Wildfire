@@ -35,19 +35,29 @@ public class Augment
         this.baseCard = baseCard;
     }
     public void Activate(){
-        actions[getLevel()]();
+        if(Description.Length == 1){actions[0]();}else{
+            actions[getLevel()]();
+        }
+       
     }
     public int getLevel(){
        return SkillTreeManager.Instance.getLevel(AugmentClass);
     }
     
     public string getDescription(){
-        return Description[getLevel()];
+        try{
+            if(Description.Length == 1){return Description[0];}
+            return Description[getLevel()];
+        }catch{
+            Debug.LogError("Error: " + AugmentClass + " at level " + getLevel() + " does not exist");
+            return "error";
+        }
+        
     }
    
 
     public bool playable(){
-        return baseStat || (baseCard && getLevel() >= 0);
+        return baseStat || (baseCard && getLevel() > 0);
     }
     public string getAugmentClass(){return AugmentClass;}
 }

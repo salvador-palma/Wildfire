@@ -236,6 +236,7 @@ public class CritUnlock : OnShootEffects{
     public int ApplyEffect()
     {
         if(Distribuitons.RandomUniform(0f,1f) <= perc){
+            Debug.Log("here");
             return 1;
         }
         return 0;

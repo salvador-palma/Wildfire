@@ -37,103 +37,14 @@ public class Deck : MonoBehaviour
     void FillDeck(){
         augments = DeckBuilder.Instance.getAllCards();
         
-        // //ACCURACY
-        // augments.Add(new Augment("Target Practice", "Increase your accuracy by +15% (capped at 100%)", "acc", Tier.Silver, new UnityAction(()=> Flamey.Instance.addAccuracy(15))));
-        // augments.Add(new Augment("Steady Aim", "Increase your accuracy by +30", "acc", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAccuracy(30))));
-        // augments.Add(new Augment("Eagle Eye", "Double your current Accuracy (capped at 100)", "acc", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAccuracy(2))));
-        
-        // //ATTACK SPEED
-        // augments.Add(new Augment("Swifty Flames", "Increase your attack speed by +30", "atkspeed", Tier.Silver, new UnityAction(()=> Flamey.Instance.addAttackSpeed(.3f))));
-        // augments.Add(new Augment("Fire Dance", "Increase your attack speed by +60", "atkspeed", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAttackSpeed(0.6f))));
-        // augments.Add(new Augment("Flamethrower", "Increase your attack speed by x0.5", "atkspeed", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAttackSpeed(1.5f))));
-
-        // //BULLET SPEED
-        // augments.Add(new Augment("Quick Shot", "Gain +0.75 Bullet Speed", "speed", Tier.Silver, new UnityAction(()=> Flamey.Instance.addBulletSpeed(0.75f))));
-        // augments.Add(new Augment("Fire-Express", "Gain +1.75 Bullet Speed", "speed", Tier.Gold, new UnityAction(()=> Flamey.Instance.addBulletSpeed(1.75f))));
-        // augments.Add(new Augment("HiperDrive", "Gain +4 Bullet Speed (capped at 20)", "speed", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addBulletSpeed(4f))));
-
-        // //MAX HEALTH 
-        // augments.Add(new Augment("Warm Soup", "Heal 30% of your Max Health", "health", Tier.Silver, new UnityAction(()=> Flamey.Instance.addHealth(0,0.3f))));
-        // augments.Add(new Augment("Sunfire Cape", "Heal 50% and gain +250 Max HP", "health", Tier.Gold, new UnityAction(()=> Flamey.Instance.addHealth(250, 0.75f))));
-        // augments.Add(new Augment("Absolute Unit", "Heal 75% and gain +500 Max HP", "health", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addHealth(500,1f))));
        
-        // //RANDOM AUGMENTS
-        // augments.Add(new Augment("Feelin' Blessed", "Gain 3 random Silver augments", "dice", Tier.Gold, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
-        // augments.Add(new Augment("Not enough refreshes", "Gain 2 random Silver augments", "dice", Tier.Silver, new UnityAction(()=> {for (int i = 0; i < 2; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
-        // augments.Add(new Augment("Roll the Dices", "Gain 3 random Gold augments", "dice", Tier.Prismatic, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Gold)); }})));
-
-        // //DAMAGE
-        // augments.Add(new Augment("Hard Work", "Gain +10 Base Damage", "weight", Tier.Silver, new UnityAction(()=> Flamey.Instance.addDmg(10))));
-        // augments.Add(new Augment("Heavy Hitter", "Gain +25 Base Damage", "weight", Tier.Gold, new UnityAction(()=> Flamey.Instance.addDmg(25))));
-        // augments.Add(new Augment("Hephaestus", "Gain +50 Base Damage", "weight", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addDmg(50))));
-
-        // //ARMOR
-        // augments.Add(new Augment("Mesh Armor", "Increase your armor by +10", "armor", Tier.Silver, new UnityAction(()=> Flamey.Instance.addArmor(10))));
-        // augments.Add(new Augment("Long Lasting Fire", "Increase your armor by +20", "armor", Tier.Gold, new UnityAction(()=> Flamey.Instance.addArmor(20))));
-        // augments.Add(new Augment("The Armor of God", "Increase your armor by +45", "armor", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addArmor(45))));
-
-
-
-        // //SKILL TREES
-
-        // //CRITIC 
-        // augments.Add(new Augment("Critical Inferno", "Unlock the ability to critical strike", "critchance", Tier.Prismatic, new UnityAction(()=> {
-        //     Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 1.6f));
-            
-        //     removeFromDeck("Critical Inferno");
-        //     augments.Add(new Augment("Lucky Shots", "Gain +15% critical strike damage", "critdmg", Tier.Silver, new UnityAction(()=> new CritUnlock(0f, 0.15f))));
-        //     augments.Add(new Augment("Critical Thinking", "Gain +30% critical strike damage", "critdmg", Tier.Gold, new UnityAction(()=> new CritUnlock(0f, 0.3f))));
-        //     augments.Add(new Augment("Critical Miracle", "Gain +5% critical strike chance (capped at 80%)", "critchance", Tier.Silver, new UnityAction(()=> new CritUnlock(0.05f, 0))));
-        //     augments.Add(new Augment("Fate's Favor", "Gain +10% critical strike chance (capped at 80%)", "critchance", Tier.Gold, new UnityAction(()=> new CritUnlock(0.1f, 0f))));
-        //     augments.Add(new Augment("Overheat", "Gain +15% critical strike chance (capped at 80%) and +60% critical strike damage", "critchance", Tier.Prismatic, new UnityAction(()=> new CritUnlock(0.15f, .6f))));
-        // })));
-
-        // //VAMPIRE ONHIT 
-        // augments.Add(new Augment("The Blood Mage", "Unlock the ability to life-steal", "vampfire", Tier.Prismatic, new UnityAction(()=> {
-        //     removeFromDeck("The Blood Mage");
-        //     Flamey.Instance.addOnHitEffect(new VampOnHit(0.1f,0.1f));
-        //     augments.Add(new Augment("Steal to Heal", "Gain +5% chance to proc your Blood Mage effect", "vampfire", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.05f)))));
-        //     augments.Add(new Augment("Eternal Hunger", "Gain +10% chance to proc your Blood Mage effect", "vampfire", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.10f)))));
-        //     augments.Add(new Augment("Soul Harvester", "Gain +20% chance to proc your Blood Mage effect", "vampfire", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.2f)))));
-        //     augments.Add(new Augment("Sustenance", "Gain +3% Heal on your Blood Mage effect", "vampfire", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.03f,0f)))));
-        //     augments.Add(new Augment("Vampire Survivor", "Gain +7% Heal on your Blood Mage effect", "vampfire", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.07f,0f)))));
-        //     augments.Add(new Augment("Blood Pact", "Gain +15% Heal on your Blood Mage effect", "vampfire", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.15f,0f)))));
-        // })));
-
-        // //MULTICASTER
-        // augments.Add(new Augment("Multicaster", "Unlock the ability to multicast", "multishot", Tier.Prismatic, new UnityAction(()=> {
-        //     removeFromDeck("Multicaster");
-        //     Flamey.Instance.addOnShootEffect(new SecondShot(0.1f));
-        //     augments.Add(new Augment("The more the better", "When you fire a shot, gain a 5% chance to fire an extra shot", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.05f)))));
-        //     augments.Add(new Augment("Double trouble", "When you fire a shot, gain a 15% chance to fire an extra shot", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.15f)))));
-        //     augments.Add(new Augment("Casting Cascade", "When you fire a shot, gain a 35% chance to fire an extra shot", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.35f)))));
         
-        // })));
 
-        // //BURST SHOT
-        // augments.Add(new Augment("Burst Shot", "Unlock the ability to send burst shots", "burst", Tier.Prismatic, new UnityAction(()=> {
-        //     removeFromDeck("Burst Shot");
-        //     Flamey.Instance.addOnShootEffect(new BurstShot(50, 3));
-        //     augments.Add(new Augment("Happy Trigger", "You will need 5 shots less to proc Burst Shot", "burst", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(5,0)))));
-        //     augments.Add(new Augment("Bullet Symphony", "You will need 10 shots less to proc Burst Shot", "burst", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(10,0)))));
-        //     augments.Add(new Augment("Make It Rain", "You will need 20 shots less to proc Burst Shot", "burst", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(20,0)))));
-        //     augments.Add(new Augment("Burst Barricade", "Your Burst Shot will shoot an extra flame", "burst", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,1)))));
-        //     augments.Add(new Augment("Burst Unleashed", "Your Burst Shot will shoot two extra flames", "burst", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,2)))));
-        //     augments.Add(new Augment("Burst to Victory", "Your Burst Shot will shoot five extra flames", "burst", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,5)))));
         
-        // })));
 
-        // //ICE SOUL
-        // augments.Add(new Augment("Frost Fire", "Unlock the ability to Slow enemies using ice(?)", "ice", Tier.Prismatic, new UnityAction(()=> {
-        //     removeFromDeck("Frost Fire");
-        //     Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0.1f));
-        //     augments.Add(new Augment("IcyHot", "Gain +5% chance to proc your Frost Fire effect", "ice", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.05f)))));
-        //     augments.Add(new Augment("Glacial Energy", "Gain +15% chance to proc your Frost Fire effect", "ice", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.15f)))));
-        //     augments.Add(new Augment("A Dance of Fire and Ice", "Gain +30% chance to proc your Frost Fire effect", "ice", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.3f)))));
-        //     augments.Add(new Augment("Slowly but Surely", "Your Frost Fire effect lasts for 0.4 seconds more", "ice", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(400, 0)))));
-        //     augments.Add(new Augment("Frost Bite", "Your Frost Fire effect lasts for 1 second more", "ice", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0)))));
-        //     augments.Add(new Augment("Absolute Zero", "Your Frost Fire effect lasts for 2.5 seconds more", "ice", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(2500, 0)))));
-        // })));
+        
+
+        
 
 
         // //SHRED ON HIT
@@ -235,9 +146,9 @@ public class Deck : MonoBehaviour
     Augment pickFromDeck(){
         Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
         //MAKES UNIQUES REMOVE AFTER
-        // while(currentAugments.Contains(aug)){
-        //     aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
-        // }
+        while(currentAugments.Contains(aug)){
+            aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
+        }
         return aug;
     }
     void ChangeSlots(){
@@ -330,16 +241,16 @@ public class Deck : MonoBehaviour
 
     public void ActivateAugment(Augment a){
         a.Activate();
-        if(!a.Description.Contains("random")){GameUI.Instance.AddAugment(a);}
+        if(!a.getDescription().Contains("random")){GameUI.Instance.AddAugment(a);}
         
     }
 
     public void RefreshAugment(int index){
         RefreshButtons[index].interactable = false;
         Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
-        // while(currentAugments.Contains(aug) || refreshedAugments.Contains(aug)){
-        //     aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
-        // }
+        while(currentAugments.Contains(aug) || refreshedAugments.Contains(aug)){
+            aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
+        }
         refreshedAugments.Add(currentAugments[index]);
         ChangeSingular(aug,Slots[index], index);
     }

@@ -22,8 +22,9 @@ public class SkillTreeButton : MonoBehaviour
     void Start()
     {
         
-
-        if(getLevel()>=0){GetComponent<Animator>().Play(UNLOCKED);NextPaths(false);}
+        int lvl = getLevel();
+        if(lvl>=0){GetComponent<Animator>().Play(UNLOCKED);}
+        if(lvl>=1){NextPaths(false);}
         
         GetComponent<Button>().onClick.AddListener(Clicked);
         UpdateImage();

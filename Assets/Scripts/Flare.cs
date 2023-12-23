@@ -22,7 +22,7 @@ public class Flare : MonoBehaviour
     public float destY;
     [SerializeField] public Color SpotColor;
 
-    public int FlameType;
+    
     public int DmgTextID;
     public void VirtualStart(){
         Reset();
@@ -37,7 +37,7 @@ public class Flare : MonoBehaviour
     private void SetupStats(){
         speedAscend = Flamey.Instance.BulletSpeed;
         speedDescend = 1.5f * speedAscend;
-        Damage = (int)FlareManager.GetDmgByType(FlameType);
+       
     }
     private void Update() {
         

@@ -27,11 +27,13 @@ public class FlareManager : MonoBehaviour
     public FlareType getFlareType(int i){return FlareTypes[i];}
 
     public static void transformFlare(int i, GameObject flare){
-        if(i==0){return;}
+        
         FlareType flareData = INSTANCE.FlareTypes[i];
         flare.GetComponent<SpriteRenderer>().color = flareData.FlareColor;
-        flare.GetComponent<Flare>().DmgTextID = flareData.DmgTextID;
-        flare.GetComponent<Flare>().SpotColor = flareData.FlareColor;
+        Flare f = flare.GetComponent<Flare>();
+        f.DmgTextID = flareData.DmgTextID;
+        f.SpotColor = flareData.FlareColor;
+        f.Damage = (int)GetDmgByType(i);
         ParticleSystem.MainModule main = flare.GetComponentInChildren<ParticleSystem>().main;
         main.startColor = new ParticleSystem.MinMaxGradient(flareData.ParticleColors[0], flareData.ParticleColors[1]);
     }
