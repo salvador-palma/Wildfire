@@ -21,4 +21,12 @@ public class SkillTreeLine : MonoBehaviour
         TempPingNext = pingNext;
         GetComponent<Animator>().Play("SkillTreeLineUnlock");
     }
+    public void PlayInit(){
+        if(LineNext){
+            foreach(GameObject line in nextObjects){
+                line.GetComponent<SkillTreeLine>().PlayInit();
+            }
+        }
+        GetComponent<Animator>().Play("Init");
+    }
 }

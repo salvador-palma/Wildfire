@@ -15,7 +15,11 @@ public class DeckBuilder : MonoBehaviour
         
     }
     
-  
+    public int getPrice(string skill, int level){
+        int[] prices = AugmentPrices[skill];
+        if(level>=prices.Length || level < 0){return -1;}
+        return prices[level];
+    }
     public void DefineAugmentClassesPrice(){
         AugmentPrices = new Dictionary<string, int[]>();
         AugmentPrices["Damage"] = new int[4]{100,300,900,2700};
@@ -40,9 +44,32 @@ public class DeckBuilder : MonoBehaviour
         AugmentPrices["BurstAmount"] = new int[2]{500, 1000};
         AugmentPrices["BurstInterval"] = new int[2]{500, 1000};
 
-        AugmentPrices["IceUnlock"] = new int[1]{800};
-        AugmentPrices["IceDuration"] = new int[2]{500, 1000};
-        AugmentPrices["IceProb"] = new int[2]{500, 1000};
+        AugmentPrices["ShredUnlock"] = new int[1]{800};
+        AugmentPrices["ShredProb"] = new int[2]{500, 1000};
+        AugmentPrices["ShredPerc"] = new int[2]{500, 1000};
+
+        AugmentPrices["AssassinUnlock"] = new int[1]{800};
+        AugmentPrices["ArmorPen"] = new int[2]{500, 1000};
+        AugmentPrices["Execute"] = new int[2]{500, 1000};
+
+        AugmentPrices["BlueUnlock"] = new int[1]{800};
+        AugmentPrices["BlueInterval"] = new int[2]{500, 1000};
+        AugmentPrices["BlueDmg"] = new int[2]{500, 1000};
+
+        AugmentPrices["OrbitalUnlock"] = new int[1]{800};
+        AugmentPrices["OrbitalAmount"] = new int[2]{500, 1000};
+        AugmentPrices["OrbitalDmg"] = new int[2]{500, 1000};
+
+        AugmentPrices["LavaPoolUnlock"] = new int[1]{800};
+        AugmentPrices["LavaProb"] = new int[2]{500, 1000};
+        AugmentPrices["LavaDuration"] = new int[2]{500, 1000};
+        AugmentPrices["LavaSize"] = new int[2]{500, 1000};
+        AugmentPrices["LavaDmg"] = new int[2]{500, 1000};
+
+        AugmentPrices["StaticUnlock"] = new int[1]{800};
+        AugmentPrices["StatikDmg"] = new int[2]{500, 1000};
+        AugmentPrices["StatikTTL"] = new int[2]{500, 1000};
+        AugmentPrices["StatikProb"] = new int[2]{500, 1000};
         
     }
     public void DefineAugmentClasses(){
@@ -414,6 +441,299 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(2000, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(3000, 0)))}),   
+            
+            new Augment("ShredUnlock" ,"Shredding Flames", new string[1]{"Unlock the ability to shred enemy armor"}, "shred", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Shredding Flames");
+                Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"ShredProb","ShredPerc"});            
+            })}, baseCard: true),   
+            new Augment("ShredProb","Weaken", new string[3]{"Gain +5% chance to proc your Shredding Flames effect", 
+                                                            "Gain +10% chance to proc your Shredding Flames effect", 
+                                                            "Gain +15% chance to proc your Shredding Flames effect"}, "shred", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.05f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.15f, 0f)))}),
+            new Augment("ShredProb","Armor Corruptor", new string[3]{"Gain +10% chance to proc your Shredding Flames effect", 
+                                                            "Gain +20% chance to proc your Shredding Flames effect", 
+                                                            "Gain +30% chance to proc your Shredding Flames effect"}, "shred", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.2f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.3f, 0f)))}),
+            new Augment("ShredProb","Disintegration Field", new string[3]{"Gain +20% chance to proc your Shredding Flames effect", 
+                                                            "Gain +40% chance to proc your Shredding Flames effect", 
+                                                            "Gain +60% chance to proc your Shredding Flames effect"}, "shred", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.2f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.4f, 0f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.6f, 0f)))}),  
+            new Augment("ShredPerc","Cheese Shredder", new string[3]{"Your Shredding Flames effect reduces +3% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +5% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +10% more enemy armor per proc"}, "shred", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.03f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.1f)))}),  
+            new Augment("ShredPerc","Black Cleaver", new string[3]{"Your Shredding Flames effect reduces +7% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +15% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +20% more enemy armor per proc"}, "shred", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.2f)))}),   
+            new Augment("ShredPerc","Molecular Decomposition", new string[3]{"Your Shredding Flames effect reduces +15% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +30% more enemy armor per proc", 
+                                                            "Your Shredding Flames effect reduces +50% more enemy armor per proc"}, "shred", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.3f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.5f)))}),                         
+            new Augment("AssassinUnlock" ,"Assassin's Path", new string[1]{"Unlock the ability to pierce armor and execute enemies"}, "assassin", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Shredding Flames");
+                Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
+                Flamey.Instance.addArmorPen(0.05f);
+                Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen","Execute"});            
+            })}, baseCard: true),  
+            new Augment("Execute","Execution Enforcer", new string[3]{"You can execute enemies for +1% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +2% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +5% of their Max Health (capped at 50%)"}, "assassin", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.01f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f)))}),
+            new Augment("Execute","Soul Collector", new string[3]{"You can execute enemies for +2% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +5% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +10% of their Max Health (capped at 50%)"}, "assassin", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f)))}),
+            new Augment("Execute","La Guillotine", new string[3]{"You can execute enemies for +5% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +10% of their Max Health (capped at 50%)", 
+                                                            "You can execute enemies for +25% of their Max Health (capped at 50%)"}, "assassin", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.25f)))}),
+            new Augment("ArmorPen","Shell Breaker", new string[3]{"Gain +3% Armor Penetration", 
+                                                            "Gain +5% Armor Penetration", 
+                                                            "Gain +7% Armor Penetration"}, "assassin", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.03f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.05f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.07f))}),
+            new Augment("ArmorPen","Quantum Piercing", new string[3]{"Gain +5% Armor Penetration", 
+                                                            "Gain +10% Armor Penetration", 
+                                                            "Gain +15% Armor Penetration"}, "assassin", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.05f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.1f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.15f))}),
+            new Augment("ArmorPen","Lance of Aether", new string[3]{"Gain +10% Armor Penetration", 
+                                                            "Gain +20% Armor Penetration", 
+                                                            "Gain +30% Armor Penetration"}, "assassin", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.1f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.2f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addArmorPen(0.3f))}),
+            new Augment("BlueUnlock" ,"Blue Flame", new string[1]{"Unlock the ability to shoot blue flames that inflict extra damage"}, "blueflame", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Blue Flame");
+                Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 100));
+                Deck.Instance.AddAugmentClass(new List<string>{"BlueInterval","BlueDmg"});            
+            })}, baseCard: true),  
+            new Augment("BlueInterval","The Bluer The Better", new string[3]{"You will need 1 shot less to proc Blue Flame", 
+                                                            "You will need 2 shots less to proc Blue Flame", 
+                                                            "You will need 3 shots less to proc Blue Flame"}, "blueflame", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(1, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(2, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(3, 0)))}),
+            new Augment("BlueInterval","Propane Combustion", new string[3]{"You will need 2 shot less to proc Blue Flame", 
+                                                            "You will need 4 shots less to proc Blue Flame", 
+                                                            "You will need 6 shots less to proc Blue Flame"}, "blueflame", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(2, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(4, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(6, 0)))}),
+            new Augment("BlueInterval","Never ending Blue", new string[3]{"You will need 4 shot less to proc Blue Flame", 
+                                                            "You will need 8 shots less to proc Blue Flame", 
+                                                            "You will need 12 shots less to proc Blue Flame"}, "blueflame", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(4, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(8, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(12, 0)))}),
+            new Augment("BlueDmg","Propane Leakage", new string[3]{"Your Blue Flame deals +15 extra damage", 
+                                                            "Your Blue Flame deals +25 extra damage", 
+                                                            "Your Blue Flame deals +40 extra damage"}, "blueflame", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 15))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 30))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50)))}),
+            new Augment("BlueDmg","Powerfull Blue", new string[3]{"Your Blue Flame deals +30 extra damage", 
+                                                            "Your Blue Flame deals +50 extra damage", 
+                                                            "Your Blue Flame deals +80 extra damage"}, "blueflame", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 30))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100)))}),
+            new Augment("BlueDmg","Blue Inferno", new string[3]{"Your Blue Flame deals +50 extra damage", 
+                                                            "Your Blue Flame deals +100 extra damage", 
+                                                            "Your Blue Flame deals +200 extra damage"}, "blueflame", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 200)))}),
+            
+            new Augment("OrbitalUnlock" ,"Orbital Flames", new string[1]{"A tiny Flame will orbit around you damaging the foes it collides with"}, "orbital", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Orbital Flames");
+                Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 25));
+                Deck.Instance.AddAugmentClass(new List<string>{"OrbitalDmg","OrbitalAmount"});            
+            })}, baseCard: true), 
+            new Augment("OrbitalAmount","Tame the Flames", new string[3]{"Gain +1 tiny Flame in your Orbital Field (max. 4)", 
+                                                            "Gain +2 tiny Flame in your Orbital Field (max. 4)", 
+                                                            "Gain +3 tiny Flame in your Orbital Field (max. 4)"}, "orbital", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(2, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(3, 0)))}),
+            new Augment("OrbitalDmg","Tiny Flames Win", new string[3]{"Your Orbital Flames deal +10 damage", 
+                                                            "Your Orbital Flames deal +15 damage", 
+                                                            "Your Orbital Flames deal +20 damage"}, "orbital", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 10))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 15))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 20)))}),
+            new Augment("OrbitalDmg","Reliable Damage", new string[3]{"Your Orbital Flames deal +20 damage", 
+                                                            "Your Orbital Flames deal +30 damage", 
+                                                            "Your Orbital Flames deal +40 damage"}, "orbital", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 20))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 30))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 40)))}),
+            new Augment("OrbitalDmg","Saturn", new string[3]{"Your Orbital Flames deal +40 damage", 
+                                                            "Your Orbital Flames deal +60 damage", 
+                                                            "Your Orbital Flames deal +80 damage"}, "orbital", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 40))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0,60))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 80)))}),
+
+            new Augment("LavaPoolUnlock" ,"Lava Pool", new string[1]{"Unlock the ability to create Lava Pools that ignore enemy armor"}, "lava", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Lava Pool");
+                Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 25, 0.05f, 1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"LavaDmg","LavaSize","LavaProb","LavaDuration"});            
+            })}, baseCard: true), 
+            new Augment("LavaDmg","Hot Tub", new string[3]{"Your Lava Pool will inflict +5 damage per second", 
+                                                            "Your Lava Pool will inflict +10 damage per second", 
+                                                            "Your Lava Pool will inflict +15 damage per second"}, "lava", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,5,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,15,0,0)))}),
+            new Augment("LavaDmg","Magical Scorch", new string[3]{"Your Lava Pool will inflict +10 damage per second", 
+                                                            "Your Lava Pool will inflict +20 damage per second", 
+                                                            "Your Lava Pool will inflict +30 damage per second"}, "lava", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,20,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,30,0,0)))}),
+            new Augment("LavaDmg","Conflagration", new string[3]{"Your Lava Pool will inflict +20 damage per second", 
+                                                            "Your Lava Pool will inflict +40 damage per second", 
+                                                            "Your Lava Pool will inflict +60 damage per second"}, "lava", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,20,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,40,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,60,0,0)))}),
+            new Augment("LavaProb","Hot Steps", new string[3]{"Gain +3% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +5% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "lava", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.03f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.05f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0)))}),
+            new Augment("LavaProb","Lava here, Lava there", new string[3]{"Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +10% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "lava", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.1f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0)))}),
+            new Augment("LavaProb","The Apocalypse", new string[3]{"Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +20% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+                                                            "Gain +30% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "lava", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.2f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.3f,0)))}),
+            new Augment("LavaSize","Heat Area", new string[3]{"Your Lava Pool grows by +0.20 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +0.25 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +0.30 (capped at 2.5)"}, "lava", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.2f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.3f,0,0,0)))}),
+            new Augment("LavaSize","Lava Lakes", new string[3]{"Your Lava Pool grows by +0.4 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +0.5 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +0.6 (capped at 2.5)"}, "lava", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.4f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.6f,0,0,0)))}),
+            new Augment("LavaSize","Inside the volcano", new string[3]{"Your Lava Pool grows by +0.8 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +1 (capped at 2.5)", 
+                                                            "Your Lava Pool grows by +1.2 (capped at 2.5)"}, "lava", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.8f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1.2f,0,0,0)))}),
+            new Augment("LavaDuration","Sear the ground", new string[3]{"Your Lava Pool lasts for +0.3 seconds", 
+                                                            "Your Lava Pool lasts for +0.5 seconds", 
+                                                            "Your Lava Pool lasts for +0.8 seconds"}, "lava", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.3f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.5f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.8f)))}),
+            new Augment("LavaDuration","Eternally Hot", new string[3]{"Your Lava Pool lasts for +0.8 seconds", 
+                                                            "Your Lava Pool lasts for +1.2 seconds", 
+                                                            "Your Lava Pool lasts for +1.7 seconds"}, "lava", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.8f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.2f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.7f)))}),
+            new Augment("LavaDuration","Unsettling Magma", new string[3]{"Your Lava Pool lasts for +1.8 seconds", 
+                                                            "Your Lava Pool lasts for +2.4 seconds", 
+                                                            "Your Lava Pool lasts for +3.5 seconds"}, "lava", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.8f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,2.4f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,3.5f)))}),
+            new Augment("StaticUnlock" ,"Static Energy", new string[1]{"Unlock the ability to send static energy to enemies nearby of your target"}, "statik", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Static Energy");
+                Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,25,3));
+                Deck.Instance.AddAugmentClass(new List<string>{"StatikProb","StatikDmg","StatikTTL"});            
+            })}, baseCard: true), 
+            new Augment("StatikProb","Watts Up", new string[3]{"Gain +3% probability to proc your Static Energy effect", 
+                                                            "Gain +5% probability to proc your Static Energy effect", 
+                                                            "Gain +7% probability to proc your Static Energy effect"}, "statik", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.03f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.05f,0,0))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.07f,0,0)))}),
+            new Augment("StatikProb","Electrifying Possibilities", new string[3]{"Gain +7% probability to proc your Static Energy effect", 
+                                                            "Gain +10% probability to proc your Static Energy effect", 
+                                                            "Gain +15% probability to proc your Static Energy effect"}, "statik", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.7f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.15f,0,0)))}),
+            new Augment("StatikProb","The Sparkster", new string[3]{"Gain +20% probability to proc your Static Energy effect", 
+                                                            "Gain +25% probability to proc your Static Energy effect", 
+                                                            "Gain +35% probability to proc your Static Energy effect"}, "statik", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.2f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.25f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.35f,0,0)))}),
+            new Augment("StatikDmg","Shock Dart", new string[3]{"Your Statik Energy deals +5 extra damage", 
+                                                            "Your Statik Energy deals +10 extra damage", 
+                                                            "Your Statik Energy deals +15 extra damage"}, "statik", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,5,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,10,0))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,15,0)))}),
+            new Augment("StatikDmg","Shocking Advancement", new string[3]{"Your Statik Energy deals +10 extra damage", 
+                                                            "Your Statik Energy deals +20 extra damage", 
+                                                            "Your Statik Energy deals +40 extra damage"}, "statik", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,10,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,20,0))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,30,0)))}),
+            new Augment("StatikDmg","Zeus", new string[3]{"Your Statik Energy deals +20 extra damage", 
+                                                            "Your Statik Energy deals +50 extra damage", 
+                                                            "Your Statik Energy deals +100 extra damage"}, "statik", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,20,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,50,0))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,100,0)))}),
+            new Augment("StatikTTL","Conductive materials", new string[3]{"Your Statik Energy will be able to cross through 1 more enemy", 
+                                                            "Your Statik Energy will be able to cross through 1 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 2 more enemies"}, "statik", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))}),
+            new Augment("StatikTTL","Feel the Flow", new string[3]{"Your Statik Energy will be able to cross through 2 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 3 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 4 more enemies"}, "statik", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,3))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,4)))}),
+            new Augment("StatikTTL","Amping Up!", new string[3]{"Your Statik Energy will be able to cross through 4 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 6 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 8 more enemies"}, "statik", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,4))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,6))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,8)))}),
+
         };
 
     }
@@ -437,6 +757,8 @@ public class DeckBuilder : MonoBehaviour
         }
         return result;
     }
+
+    
 
 
 

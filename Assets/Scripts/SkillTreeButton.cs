@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SkillTreeButton : MonoBehaviour
@@ -18,17 +20,21 @@ public class SkillTreeButton : MonoBehaviour
    
     [SerializeField] List<SkillTreeButton> previousNode;
     [SerializeField] List<SkillTreeLine> nextPaths;
-    public bool isBaseStat;
-    void Start()
-    {
-        
+    private bool wasUnlocked;
+    void Start(){virtualStart(); SkillTreeManager.Instance.treeReset += virtualStart;}
+
+    private void virtualStart(object sender, EventArgs e){virtualStart();ResetLines();}
+    private void ResetLines(){nextPaths.ForEach(l => l.PlayInit());}
+    public void virtualStart(){
+        wasUnlocked = false;
+        GetComponent<Button>().onClick.RemoveAllListeners();
         int lvl = getLevel();
-        if(lvl>=0){GetComponent<Animator>().Play(UNLOCKED);}
+        if(lvl==-1){GetComponent<Animator>().Play(LOCKED);}
+        else if(lvl>=0){GetComponent<Animator>().Play(UNLOCKED);}
         if(lvl>=1){NextPaths(false);}
         
         GetComponent<Button>().onClick.AddListener(Clicked);
         UpdateImage();
-        
     }
     public void ping(){
         bool result =true;
@@ -36,19 +42,29 @@ public class SkillTreeButton : MonoBehaviour
         {
             result = result && item.wasBought();
         }
-        if(result){Unlock();SkillTreeManager.Instance.Upgrade(AugmentClass);UpdateImage();}
+        if(result && !wasUnlocked){Unlock();SkillTreeManager.Instance.Upgrade(AugmentClass);UpdateImage();}
     }
     private void Unlock(){
+        wasUnlocked = true;
         GetComponent<Animator>().Play(UNLOCKING);
     }
     private void Clicked(){
-        //CHECK FOR PRICE
-        
-
         Upgrade();
         UpdateImage();
     }
+    public void Hovered()
+    {
+        int lvl = getLevel();
+        if(lvl ==-1){return;}
+        SkillTreeManager.Instance.displayedSkill = AugmentClass;
+    }
+    public void DeHovered()
+    {
+        
+        SkillTreeManager.Instance.displayedSkill = null;
+    }
     private void Upgrade(){
+
         SkillTreeManager.Instance.Upgrade(AugmentClass);
         if(getLevel()==1){NextPaths(true);}
     }
@@ -71,6 +87,8 @@ public class SkillTreeButton : MonoBehaviour
     private int getLevel(){
         return SkillTreeManager.Instance.getLevel(AugmentClass);
     }
+
+
     
 
 

@@ -50,7 +50,15 @@ public class Augment
             return Description[getLevel()];
         }catch{
             Debug.LogError("Error: " + AugmentClass + " at level " + getLevel() + " does not exist");
-            return "error";
+            return "";
+        }
+        
+    }
+    public string getNextDescription(){
+        try{
+            return Description[getLevel()+1];
+        }catch{
+            return "Max Level";
         }
         
     }
