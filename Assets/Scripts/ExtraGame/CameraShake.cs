@@ -16,7 +16,6 @@ public class CameraShake : MonoBehaviour
     public void ShakeInstance(float duration, float strenght){
         _camera.DOComplete();
         _camera.DOShakePosition(duration, strenght);
-        _camera.DOShakeRotation(duration,strenght);
     }
 
 }   

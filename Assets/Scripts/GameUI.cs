@@ -119,7 +119,7 @@ public class GameUI : MonoBehaviour
         
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
         go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.Description;
+        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }

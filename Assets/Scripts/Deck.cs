@@ -35,195 +35,9 @@ public class Deck : MonoBehaviour
     }
 
     void FillDeck(){
-        //ACCURACY
-        augments.Add(new Augment("Target Practice", "Increase your accuracy by +15% (capped at 100%)", "acc", Tier.Silver, new UnityAction(()=> Flamey.Instance.addAccuracy(15))));
-        augments.Add(new Augment("Steady Aim", "Increase your accuracy by +30", "acc", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAccuracy(30))));
-        augments.Add(new Augment("Eagle Eye", "Double your current Accuracy (capped at 100)", "acc", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAccuracy(2))));
+        augments = DeckBuilder.Instance.getAllCards();
         
-        //ATTACK SPEED
-        augments.Add(new Augment("Swifty Flames", "Increase your attack speed by +30", "atkspeed", Tier.Silver, new UnityAction(()=> Flamey.Instance.addAttackSpeed(.3f))));
-        augments.Add(new Augment("Fire Dance", "Increase your attack speed by +60", "atkspeed", Tier.Gold, new UnityAction(()=> Flamey.Instance.addAttackSpeed(0.6f))));
-        augments.Add(new Augment("Flamethrower", "Increase your attack speed by x0.5", "atkspeed", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.multAttackSpeed(1.5f))));
-
-        //BULLET SPEED
-        augments.Add(new Augment("Quick Shot", "Gain +0.75 Bullet Speed", "speed", Tier.Silver, new UnityAction(()=> Flamey.Instance.addBulletSpeed(0.75f))));
-        augments.Add(new Augment("Fire-Express", "Gain +1.75 Bullet Speed", "speed", Tier.Gold, new UnityAction(()=> Flamey.Instance.addBulletSpeed(1.75f))));
-        augments.Add(new Augment("HiperDrive", "Gain +4 Bullet Speed (capped at 20)", "speed", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addBulletSpeed(4f))));
-
-        //MAX HEALTH 
-        augments.Add(new Augment("Warm Soup", "Heal 30% of your Max Health", "health", Tier.Silver, new UnityAction(()=> Flamey.Instance.addHealth(0,0.3f))));
-        augments.Add(new Augment("Sunfire Cape", "Heal 50% and gain +250 Max HP", "health", Tier.Gold, new UnityAction(()=> Flamey.Instance.addHealth(250, 0.75f))));
-        augments.Add(new Augment("Absolute Unit", "Heal 75% and gain +500 Max HP", "health", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addHealth(500,1f))));
-       
-        //RANDOM AUGMENTS
-        augments.Add(new Augment("Feelin' Blessed", "Gain 3 random Silver augments", "dice", Tier.Gold, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
-        augments.Add(new Augment("Not enough refreshes", "Gain 2 random Silver augments", "dice", Tier.Silver, new UnityAction(()=> {for (int i = 0; i < 2; i++){ActivateAugment(randomPicking(Tier.Silver)); }})));
-        augments.Add(new Augment("Roll the Dices", "Gain 3 random Gold augments", "dice", Tier.Prismatic, new UnityAction(()=> {for (int i = 0; i < 3; i++){ActivateAugment(randomPicking(Tier.Gold)); }})));
-
-        //DAMAGE
-        augments.Add(new Augment("Hard Work", "Gain +10 Base Damage", "weight", Tier.Silver, new UnityAction(()=> Flamey.Instance.addDmg(10))));
-        augments.Add(new Augment("Heavy Hitter", "Gain +25 Base Damage", "weight", Tier.Gold, new UnityAction(()=> Flamey.Instance.addDmg(25))));
-        augments.Add(new Augment("Hephaestus", "Gain +50 Base Damage", "weight", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addDmg(50))));
-
-        //ARMOR
-        augments.Add(new Augment("Mesh Armor", "Increase your armor by +10", "armor", Tier.Silver, new UnityAction(()=> Flamey.Instance.addArmor(10))));
-        augments.Add(new Augment("Long Lasting Fire", "Increase your armor by +20", "armor", Tier.Gold, new UnityAction(()=> Flamey.Instance.addArmor(20))));
-        augments.Add(new Augment("The Armor of God", "Increase your armor by +45", "armor", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addArmor(45))));
-
-
-
-        //SKILL TREES
-
-        //CRITIC 
-        augments.Add(new Augment("Critical Inferno", "Unlock the ability to critical strike", "critchance", Tier.Prismatic, new UnityAction(()=> {
-            Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 1.6f));
-            
-            removeFromDeck("Critical Inferno");
-            augments.Add(new Augment("Lucky Shots", "Gain +15% critical strike damage", "critdmg", Tier.Silver, new UnityAction(()=> new CritUnlock(0f, 0.15f))));
-            augments.Add(new Augment("Critical Thinking", "Gain +30% critical strike damage", "critdmg", Tier.Gold, new UnityAction(()=> new CritUnlock(0f, 0.3f))));
-            augments.Add(new Augment("Critical Miracle", "Gain +5% critical strike chance (capped at 80%)", "critchance", Tier.Silver, new UnityAction(()=> new CritUnlock(0.05f, 0))));
-            augments.Add(new Augment("Fate's Favor", "Gain +10% critical strike chance (capped at 80%)", "critchance", Tier.Gold, new UnityAction(()=> new CritUnlock(0.1f, 0f))));
-            augments.Add(new Augment("Overheat", "Gain +15% critical strike chance (capped at 80%) and +60% critical strike damage", "critchance", Tier.Prismatic, new UnityAction(()=> new CritUnlock(0.15f, .6f))));
-        })));
-
-        //VAMPIRE ONHIT 
-        augments.Add(new Augment("The Blood Mage", "Unlock the ability to life-steal", "vampfire", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("The Blood Mage");
-            Flamey.Instance.addOnHitEffect(new VampOnHit(0.1f,0.1f));
-            augments.Add(new Augment("Steal to Heal", "Gain +5% chance to proc your Blood Mage effect", "vampfire", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.05f)))));
-            augments.Add(new Augment("Eternal Hunger", "Gain +10% chance to proc your Blood Mage effect", "vampfire", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.10f)))));
-            augments.Add(new Augment("Soul Harvester", "Gain +20% chance to proc your Blood Mage effect", "vampfire", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.2f)))));
-            augments.Add(new Augment("Sustenance", "Gain +3% Heal on your Blood Mage effect", "vampfire", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.03f,0f)))));
-            augments.Add(new Augment("Vampire Survivor", "Gain +7% Heal on your Blood Mage effect", "vampfire", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.07f,0f)))));
-            augments.Add(new Augment("Blood Pact", "Gain +15% Heal on your Blood Mage effect", "vampfire", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new VampOnHit(0.15f,0f)))));
-        })));
-
-        //MULTICASTER
-        augments.Add(new Augment("Multicaster", "Unlock the ability to multicast", "multishot", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Multicaster");
-            Flamey.Instance.addOnShootEffect(new SecondShot(0.1f));
-            augments.Add(new Augment("The more the better", "When you fire a shot, gain a 5% chance to fire an extra shot", "multishot", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.05f)))));
-            augments.Add(new Augment("Double trouble", "When you fire a shot, gain a 15% chance to fire an extra shot", "multishot", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.15f)))));
-            augments.Add(new Augment("Casting Cascade", "When you fire a shot, gain a 35% chance to fire an extra shot", "multishot", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new SecondShot(0.35f)))));
-        
-        })));
-
-        //BURST SHOT
-        augments.Add(new Augment("Burst Shot", "Unlock the ability to send burst shots", "burst", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Burst Shot");
-            Flamey.Instance.addOnShootEffect(new BurstShot(50, 3));
-            augments.Add(new Augment("Happy Trigger", "You will need 5 shots less to proc Burst Shot", "burst", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(5,0)))));
-            augments.Add(new Augment("Bullet Symphony", "You will need 10 shots less to proc Burst Shot", "burst", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(10,0)))));
-            augments.Add(new Augment("Make It Rain", "You will need 20 shots less to proc Burst Shot", "burst", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(20,0)))));
-            augments.Add(new Augment("Burst Barricade", "Your Burst Shot will shoot an extra flame", "burst", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,1)))));
-            augments.Add(new Augment("Burst Unleashed", "Your Burst Shot will shoot two extra flames", "burst", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,2)))));
-            augments.Add(new Augment("Burst to Victory", "Your Burst Shot will shoot five extra flames", "burst", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new BurstShot(0,5)))));
-        
-        })));
-
-        //ICE SOUL
-        augments.Add(new Augment("Frost Fire", "Unlock the ability to Slow enemies using ice(?)", "ice", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Frost Fire");
-            Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0.1f));
-            augments.Add(new Augment("IcyHot", "Gain +5% chance to proc your Frost Fire effect", "ice", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.05f)))));
-            augments.Add(new Augment("Glacial Energy", "Gain +15% chance to proc your Frost Fire effect", "ice", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.15f)))));
-            augments.Add(new Augment("A Dance of Fire and Ice", "Gain +30% chance to proc your Frost Fire effect", "ice", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(0, 0.3f)))));
-            augments.Add(new Augment("Slowly but Surely", "Your Frost Fire effect lasts for 0.4 seconds more", "ice", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(400, 0)))));
-            augments.Add(new Augment("Frost Bite", "Your Frost Fire effect lasts for 1 second more", "ice", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0)))));
-            augments.Add(new Augment("Absolute Zero", "Your Frost Fire effect lasts for 2.5 seconds more", "ice", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new IceOnHit(2500, 0)))));
-        })));
-
-
-        //SHRED ON HIT
-        augments.Add(new Augment("Shredding Flames", "Unlock the ability to shred enemy armor", "shred", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Shredding Flames");
-            Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.1f));
-            augments.Add(new Augment("Weaken", "Gain +10% chance to proc your Shredding Flames effect", "shred", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0f)))));
-            augments.Add(new Augment("Armor Corruptor", "Gain +20% chance to proc your Shredding Flames effect", "shred", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.2f, 0f)))));
-            augments.Add(new Augment("Disintegration Field", "Gain +40% chance to proc your Shredding Flames effect", "shred", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0.4f, 0f)))));
-            augments.Add(new Augment("Cheese Shredder", "Your Shredding Flames effect reduces +5% more enemy armor per proc", "shred", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.05f)))));
-            augments.Add(new Augment("Black Cleaver", "Your Shredding Flames effect reduces +15% more enemy armor per proc", "shred", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.15f)))));
-            augments.Add(new Augment("Molecular Decomposition", "Your Shredding Flames effect reduces +35% more enemy armor per proc", "shred", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ShredOnHit(0f, 0.35f)))));
-        })));
-
-        //ASSASSIN'S PATHS
-        augments.Add(new Augment("Assassin's Path", "Unlock the ability to pierce armor and execute enemies", "assassin", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Assassin's Path");
-            Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
-            Flamey.Instance.addArmorPen(0.05f);
-            augments.Add(new Augment("Execution Enforcer", "You can execute enemies for +2% of their Max Health (capped at 50%)", "assassin", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f)))));
-            augments.Add(new Augment("Soul Collector", "You can execute enemies for +4% of their Max Health (capped at 50%)", "assassin", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.04f)))));
-            augments.Add(new Augment("La Guillotine", "You can execute enemies for +10% of their Max Health (capped at 50%)", "assassin", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f)))));
-            augments.Add(new Augment("Shell Breaker", "Gain +5% Armor Penetration", "assassin", Tier.Silver, new UnityAction(()=> Flamey.Instance.addArmorPen(0.05f))));
-            augments.Add(new Augment("Quantum Piercing", "Gain +12% Armor Penetration", "assassin", Tier.Gold, new UnityAction(()=> Flamey.Instance.addArmorPen(0.12f))));
-            augments.Add(new Augment("Lance of Aether", "Gain +25% Armor Penetration", "assassin", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addArmorPen(0.25f))));
-        })));
-
-
-        //KRAKEN SLAYER
-        augments.Add(new Augment("Blue Flame", "Unlock the ability to shoot blue flames that inflict extra damage", "blueflame", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Blue Flame");
-            Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 50));
-
-            augments.Add(new Augment("The Bluer The Better", "You will need 1 shot less to proc Blue Flame", "blueflame", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(1, 0)))));
-            augments.Add(new Augment("Propane Combustion", "You will need 3 shots less to proc Blue Flame", "blueflame", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(3, 0)))));
-            augments.Add(new Augment("Never ending Blue", "You will need 7 shots less to proc Blue Flame", "blueflame", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(7, 0)))));
-            augments.Add(new Augment("Propane Leakage", "Your Blue Flame deals +25 extra damage", "blueflame", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 25)))));
-            augments.Add(new Augment("Powerfull Blue", "Your Blue Flame deals +50 extra damage", "blueflame", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50)))));
-            augments.Add(new Augment("Blue Inferno", "Your Blue Flame deals +100 extra damage", "blueflame", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100)))));
-        })));
-
-
-        //ORBITAL FLAMES
-        augments.Add(new Augment("Orbital Flames", "A tiny Flame will orbit around you damaging the foes it collides with", "orbital", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Orbital Flames");
-            Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 25));
-
-            augments.Add(new Augment("Tame the Flames", "Gain +1 tiny Flame in your Orbital Field", "orbital", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 0)))));
-            augments.Add(new Augment("Tiny Flames Win", "Your Orbital Flames deal +10 damage", "orbital", Tier.Silver, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 10)))));
-            augments.Add(new Augment("Relliable Damage", "Your Orbital Flames deal +25 damage", "orbital", Tier.Gold, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 25)))));
-            augments.Add(new Augment("Saturn", "Your Orbital Flames deal +50 damage", "orbital", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 50)))));
-        })));
-
-        //LAVA POOL
-        augments.Add(new Augment("Lava Pool", "Unlock the ability to create Lava Pools that ignore enemy armor", "lava", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Lava Pool");
-            Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 25, 0.1f, 2f));
-
-            augments.Add(new Augment("Hot Tub", "Your Lava Pool will inflict +10 damage per second", "lava", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0)))));
-            augments.Add(new Augment("Magical Scorch", "Your Lava Pool will inflict +25 damage per second", "lava", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,25,0,0)))));
-            augments.Add(new Augment("Conflagration", "Your Lava Pool will inflict +50 damage per second", "lava", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,50,0,0)))));
-
-
-            augments.Add(new Augment("Hot Steps", "Gain +5% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "lava", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.05f,0)))));
-            augments.Add(new Augment("Lava here, Lava there", "Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "lava", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0)))));
-            augments.Add(new Augment("The Apocalypse", "Gain +25% probability of spawning a Lava Pool when your shot lands (capped at 50%)", "lava", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.25f,0)))));
-        
-            augments.Add(new Augment("Heat Area", "Your Lava Pool grows by +0.25 (capped at 2.5)", "lava", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0)))));
-            augments.Add(new Augment("Lava Lakes", "Your Lava Pool grows by +0.5 (capped at 2.5)", "lava", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0)))));
-            augments.Add(new Augment("Inside the volcano", "Your Lava Pool grows by +1 (capped at 2.5)", "lava", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0)))));
-        
-            augments.Add(new Augment("Sear the ground", "Your Lava Pool lasts for +0.75 seconds", "lava", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.75f)))));
-            augments.Add(new Augment("Eternally Hot", "Your Lava Pool lasts for +1.5 seconds", "lava", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.5f)))));
-            augments.Add(new Augment("Unsettling Magma", "Your Lava Pool lasts for +3 seconds", "lava", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,3f)))));
-        })));
-
-
-        //STATIK SHOT
-        augments.Add(new Augment("Static Energy", "Unlock the ability to send static energy to enemies nearby of your target", "statik", Tier.Prismatic, new UnityAction(()=> {
-            removeFromDeck("Static Energy");
-            Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,25,3));
-
-            augments.Add(new Augment("Watts Up", "Gain +5% probability to proc your Static Energy effect", "statik", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.05f,0,0)))));
-            augments.Add(new Augment("Electrifying Possibilities", "Gain +15% probability to proc your Static Energy effect", "statik", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.15f,0,0)))));
-            augments.Add(new Augment("The Sparkster", "Gain +30% probability to proc your Static Energy effect", "statik", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0.30f,0,0)))));
-            augments.Add(new Augment("Shock Dart", "Your Statik Energy deals +10 extra damage", "statik", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,10,0)))));
-            augments.Add(new Augment("Shocking Advancement", "Your Statik Energy deals +25 extra damage", "statik", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,25,0)))));
-            augments.Add(new Augment("Zeus", "Your Statik Energy deals +50 extra damage", "statik", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,50,0)))));
-            augments.Add(new Augment("Conductive materials", "Your Statik Energy will be able to cross through 1 more enemy", "statik", Tier.Silver, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1)))));
-            augments.Add(new Augment("Feel the Flow", "Your Statik Energy will be able to cross through 2 more enemies", "statik", Tier.Gold, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))));
-            augments.Add(new Augment("Amping Up!", "Your Statik Energy will be able to cross through 5 more enemies", "statik", Tier.Prismatic, new UnityAction(()=> Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,5)))));
-        })));
+         
     //30 silver 30 gold 41 prismatic
 
     }   
@@ -231,7 +45,8 @@ public class Deck : MonoBehaviour
 
 
     Augment pickFromDeck(){
-        Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];; 
+        Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
+        //MAKES UNIQUES REMOVE AFTER
         while(currentAugments.Contains(aug)){
             aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
         }
@@ -246,19 +61,18 @@ public class Deck : MonoBehaviour
     public void ChangeSingular(Augment augment, GameObject slot, int i){
         slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment.Title;
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment.icon;
-        slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment.Description;
+        slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment.getDescription();
         currentAugments[i] = augment;
         
     }
 
     public void PickedAugment(int i){
-        currPhase++;
+        SlotsParent.GetComponent<Animator>().Play("OutroSlots");
 
+        currPhase++;
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
-        SlotsParent.GetComponent<Animator>().Play("OutroSlots");
         if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
-       // Debug.Log("HERE");
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
         EnemySpawner.Instance.newRound();
@@ -326,9 +140,9 @@ public class Deck : MonoBehaviour
         return tempAugments[UnityEngine.Random.Range(0, tempAugments.Count)];
     }
 
-    private void ActivateAugment(Augment a){
-        a.action();
-        if(!a.Description.Contains("random")){GameUI.Instance.AddAugment(a);}
+    public void ActivateAugment(Augment a){
+        a.Activate();
+        if(!a.getDescription().Contains("random")){GameUI.Instance.AddAugment(a);}
         
     }
 
@@ -349,6 +163,9 @@ public class Deck : MonoBehaviour
     public void resetPhaseAugmentTier(){
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
         currPhase = 0;
+    }
+    public void AddAugmentClass(List<string> str){
+        augments.AddRange(DeckBuilder.Instance.GetAugmentsFromClasses(str));
     }
 
 

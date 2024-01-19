@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7435112540527258871}
   - component: {fileID: 9142557287874662127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3641121184754211320}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.12851116, y: 0.82099986, z: -0.099}
   m_LocalScale: {x: 0.5464872, y: 0.5464872, z: 0.5464872}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4670528521194801826}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9142557287874662127
 SpriteRenderer:
@@ -95,10 +95,9 @@ GameObject:
   - component: {fileID: 4670528521194801826}
   - component: {fileID: 4670528521194801824}
   - component: {fileID: 4670528521194801831}
-  - component: {fileID: 4670528521194801830}
   - component: {fileID: 4670528521194801829}
   - component: {fileID: 1198520685922799849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TurtleEvolving
   m_TagString: Enemy
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -112,8 +111,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4670528521194801828}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2064714, y: -0.3128761, z: 0.024716005}
+  m_LocalPosition: {x: 4.2064714, y: -0.3128761, z: 0}
   m_LocalScale: {x: 1.0573593, y: 1.0573593, z: 1.0573593}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -121,7 +121,6 @@ Transform:
   - {fileID: 7827878065619967510}
   - {fileID: 7435112540527258871}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4670528521194801824
 SpriteRenderer:
@@ -185,6 +184,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -201,27 +219,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7749574, y: 0.67896223}
   m_EdgeRadius: 0
---- !u!50 &4670528521194801830
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4670528521194801828}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!95 &4670528521194801829
 Animator:
   serializedVersion: 5
@@ -264,6 +261,7 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 0
   ArmorPen: 0
+  Attacking: 0
   HitCenter: {fileID: 7827878065619967510}
   inEffect: 0
 --- !u!1 &5065300614589380299
@@ -276,7 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1585438743180391266}
   - component: {fileID: 428140941878475516}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,6 +288,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5065300614589380299}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.068, y: 1.365, z: 0}
   m_LocalScale: {x: 0.11274096, y: 0.11274096, z: 0.11274096}
@@ -297,7 +296,6 @@ Transform:
   m_Children:
   - {fileID: 1421781133235500695}
   m_Father: {fileID: 4670528521194801826}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &428140941878475516
 Animator:
@@ -330,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1421781133235500695}
   - component: {fileID: 3952423331652195837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,13 +342,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6041653762156729460}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.000000044703484}
   m_LocalPosition: {x: -1.0999999, y: 4.45, z: 0}
   m_LocalScale: {x: 1.8750001, y: 1.8750001, z: 1.8750001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1585438743180391266}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!212 &3952423331652195837
 SpriteRenderer:
@@ -413,7 +411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7827878065619967510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,11 +425,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7289585890704656932}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.14451116, y: 0.24599987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4670528521194801826}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

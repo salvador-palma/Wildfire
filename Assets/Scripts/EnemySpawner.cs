@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -124,13 +126,13 @@ public class EnemySpawner : MonoBehaviour
 
     };
 
-    
+    List<Enemy> PresentEnemies;
     private void Awake() {
         Instance = this;
-       
+        PresentEnemies = new List<Enemy>();
     }
     public void Start(){
-        current_round = 500;
+        current_round = 0;
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
         resetInstances();
@@ -157,7 +159,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() {
         if(GameEnd){return;}
-        
+        UpdateEnemies();
         if(!isOn){
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
@@ -172,7 +174,6 @@ public class EnemySpawner : MonoBehaviour
         if(TimerEnemySpawn > 0){
             TimerEnemySpawn-= Time.deltaTime;
         }else{
-            
             TimerEnemySpawn = (float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
             
             SpawnEnemy(PickRandomEnemy(current_round));
@@ -184,8 +185,19 @@ public class EnemySpawner : MonoBehaviour
             isOn = false;
         }
     }
+    public void UpdateEnemies(){
+        PresentEnemies.ForEach(e => {if(!e.Attacking){e.UpdateEnemy();}});
+        List<Enemy> deadEnemies = PresentEnemies.Where(e => e.Health < 0).ToList();
+        foreach(Enemy enemy in deadEnemies){
+            PresentEnemies.Remove(enemy);
+            enemy.Die();
+        }
+    }
+    public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public void SpawnEnemy(GameObject enemy){
         GameObject g = Instantiate(enemy);
+
+        PresentEnemies.Add(g.GetComponent<Enemy>());
         g.transform.position = getPoint();
         CheckFlip(g);
     }
@@ -253,20 +265,22 @@ public class EnemySpawner : MonoBehaviour
     
 
     private void resetInstances(){
-        // FlameCircle.Instance = null;
+        FlameCircle.Instance = null;
 
-        // VampOnHit.Instance = null;
-        // IceOnHit.Instance = null;
-        // ShredOnHit.Instance = null;
-        // ExecuteOnHit.Instance = null;
-        // StatikOnHit.Instance = null;
+        VampOnHit.Instance = null;
+        IceOnHit.Instance = null;
+        ShredOnHit.Instance = null;
+        ExecuteOnHit.Instance = null;
+        StatikOnHit.Instance = null;
 
-        // BurnOnLand.Instance = null;
+        BurnOnLand.Instance = null;
 
-        // SecondShot.Instance = null;
-        // BurstShot.Instance = null;
-        // KrakenSlayer.Instance = null;
-        // CritUnlock.Instance = null;
+        SecondShot.Instance = null;
+        BurstShot.Instance = null;
+        KrakenSlayer.Instance = null;
+        CritUnlock.Instance = null;
+
+       
 
     }
 

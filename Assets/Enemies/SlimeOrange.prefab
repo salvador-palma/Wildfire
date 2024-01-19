@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5803723484568441261}
   - component: {fileID: 4862590219445360691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54601695510467588}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.06, y: 1.73, z: 0}
   m_LocalScale: {x: 0.26278344, y: 0.26278344, z: 0.26278344}
@@ -31,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 6138764225804850264}
   m_Father: {fileID: 2815585019930246226}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4862590219445360691
 Animator:
@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5766863595882658625}
   - component: {fileID: 8498969920387815681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,13 +78,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201359812653923424}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.27, y: 1.43, z: -0.116}
   m_LocalScale: {x: 0.966102, y: 0.966102, z: 0.966102}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2815585019930246226}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8498969920387815681
 SpriteRenderer:
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6138764225804850264}
   - component: {fileID: 8094024017544722226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,13 +162,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536343163497805499}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.000000044703484}
   m_LocalPosition: {x: -1.0999999, y: 4.45, z: 0}
   m_LocalScale: {x: 1.8750001, y: 1.8750001, z: 1.8750001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5803723484568441261}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!212 &8094024017544722226
 SpriteRenderer:
@@ -234,9 +234,8 @@ GameObject:
   - component: {fileID: 2815585019930246221}
   - component: {fileID: 2815585019930246223}
   - component: {fileID: 2815585019930246211}
-  - component: {fileID: 2815585019930246220}
   - component: {fileID: 897841424077968589}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlimeOrange
   m_TagString: Enemy
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -250,6 +249,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2815585019930246224}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.18, y: 0.58, z: 0.024716005}
   m_LocalScale: {x: 0.6140754, y: 0.6140754, z: 0.6140754}
@@ -259,7 +259,6 @@ Transform:
   - {fileID: 5195803040948269624}
   - {fileID: 5766863595882658625}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2815585019930246221
 SpriteRenderer:
@@ -323,6 +322,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -360,6 +378,7 @@ MonoBehaviour:
   MaxHealth: 500
   Armor: 20
   ArmorPen: 0
+  Attacking: 0
   HitCenter: {fileID: 5195803040948269624}
   inEffect: 0
   tiny: 0
@@ -369,27 +388,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: -0.865, y: -0.806}
   - {x: 0.832, y: -0.782}
---- !u!50 &2815585019930246220
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2815585019930246224}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!95 &897841424077968589
 Animator:
   serializedVersion: 5
@@ -420,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5195803040948269624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,11 +432,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5164283093400880445}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2799998, y: 0.8299999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2815585019930246226}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

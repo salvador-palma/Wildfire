@@ -55,11 +55,11 @@ public class Flamey : MonoBehaviour
     //FINAL STATS COUNTERS
     [HideInInspector] public int TotalKills;
     [HideInInspector] public int TotalShots;
-    [HideInInspector] public float TotalDamage;
-    [HideInInspector] public float TotalDamageTaken;
-    [HideInInspector] public float TotalHealed;
+    [HideInInspector] public ulong TotalDamage;
+    [HideInInspector] public ulong TotalDamageTaken;
+    [HideInInspector] public ulong TotalHealed;
 
-
+  
     private void Awake() {
         
         Health = MaxHealth;
@@ -82,10 +82,9 @@ public class Flamey : MonoBehaviour
         timerAS = timerASCounter;
         
         UpdateHealthUI();
-        //addOnHitEffect(new StatikOnHit(1f, 10000, 13));
-        addOnHitEffect(new VampOnHit(1f,1f));
-        addOnShootEffect(new CritUnlock(1f,50f));
         
+        FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
+
     }
 
     // Update is called once per frame
@@ -102,9 +101,11 @@ public class Flamey : MonoBehaviour
         if(current_homing == null){
             target(getHoming());
             if(current_homing == null){return;}
+            
         }
-
-        if(timerAS > 0){
+        
+        if(timerAS > 0 ){
+            
             timerAS -= Time.deltaTime;
         }else{
             if(atkSpeed != AtkSpeed){
@@ -131,7 +132,8 @@ public class Flamey : MonoBehaviour
         AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
         int FlameType = ApplyOnShoot();
 
-        Instantiate(FlarePrefabs[FlameType]);
+        FlareManager.InstantiateFlare(FlameType);
+       // Instantiate(FlarePrefabs[FlameType]);
         
        
     }
@@ -145,7 +147,7 @@ public class Flamey : MonoBehaviour
     public Flare InstantiateShot(List<string> except = null){
         TotalShots++;
         int FlameType = ApplyOnShoot(except);
-        GameObject go = Instantiate(FlarePrefabs[FlameType]);
+        GameObject go = FlareManager.InstantiateFlare(FlameType);
         return go.GetComponent<Flare>();
     }
     public static float AtkSpeedToSeconds(float asp){
@@ -161,7 +163,13 @@ public class Flamey : MonoBehaviour
     }
     public UnityEngine.Vector2 getRandomHomingPosition(){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
-        return go[UnityEngine.Random.Range(0, go.Length)].GetComponent<Enemy>().HitCenter.position;
+        try{
+            GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+            return g.GetComponent<Enemy>().HitCenter.position;
+        }catch{
+            Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
+        }
+        return UnityEngine.Vector2.zero;
     }
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
@@ -180,11 +188,11 @@ public class Flamey : MonoBehaviour
 
         
 
-        TotalDamageTaken+=dmgeff;
+        TotalDamageTaken+=(ulong)dmgeff;
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, "-"+dmgeff, 2);
+        DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, 2);
         CameraShake.Shake(0.5f,0.35f);
     }
     private void UpdateHealthUI(){
@@ -274,15 +282,15 @@ public class Flamey : MonoBehaviour
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
-        TotalHealed+=MaxHealth * healperc;
+        TotalHealed+=(ulong)(MaxHealth * healperc);
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position,""+ MaxHealth * healperc, 3);
+        DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
-        TotalHealed+=HealAmount;
+        TotalHealed+=(ulong)HealAmount;
         Health = (int)Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
-        DamageUI.Instance.spawnTextDmg(transform.position, ""+ HealAmount, 3);
+        DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
     }
     
     public void addOnHitEffect(OnHitEffects onhit){
