@@ -12,7 +12,9 @@ public class SkillTreeButton : MonoBehaviour
     const string LOCKED = "SkillTreeButtonLocked";
     const string UNLOCKING = "SkillTreeButtonUnlock";
 
+    public static SkillTreeButton SelectedButton;
 
+    public string DisplayTitle;
     [SerializeField] bool UnlockableField;
     [SerializeField] string[] UnlockableClasses;
 
@@ -49,20 +51,22 @@ public class SkillTreeButton : MonoBehaviour
         GetComponent<Animator>().Play(UNLOCKING);
     }
     private void Clicked(){
-        Upgrade();
-        UpdateImage();
-    }
-    public void Hovered()
-    {
+        // Upgrade();
+        // UpdateImage();
+        SelectedButton = this;
+        
         int lvl = getLevel();
         if(lvl ==-1){return;}
-        SkillTreeManager.Instance.displayedSkill = AugmentClass;
+        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
+        MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
+    
     }
-    public void DeHovered()
-    {
-        
-        SkillTreeManager.Instance.displayedSkill = null;
+    public void ClickedUpgrade(){
+        Upgrade();
+        UpdateImage();
+        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
     }
+   
     private void Upgrade(){
 
         SkillTreeManager.Instance.Upgrade(AugmentClass);

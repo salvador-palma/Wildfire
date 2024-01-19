@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum Tier{
-    Silver,
-    Gold,
-    Prismatic
+    Silver = 0,
+    Gold = 1,
+    Prismatic = 2
 }
 
 [Serializable]

@@ -3,10 +3,11 @@ using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 [System.Serializable]
 public class Skills{
@@ -30,9 +31,13 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] Color[] UpgradeColors;
  
     [SerializeField] TextMeshProUGUI[] UpgradeInfoTexts;
+    [SerializeField] TextMeshProUGUI[] UpgradeExtraTexts; //0-Title 1-Cost 2-Upgrade/Unlock
+    [SerializeField] Color DisabledColor;
+    [SerializeField] GameObject[] BeforeAndAfter;
+    [SerializeField] RectTransform UpgradeInfoContentPanel;
     [SerializeField] TextMeshProUGUI emberAmountTxt;
-    private string _displayedSkill;
-    public string displayedSkill {get{return _displayedSkill;}set{_displayedSkill=value;changeUpgradeInfoTexts(value);}}
+    [SerializeField] TextMeshProUGUI emberLossTxt;
+   
 
     public event EventHandler treeReset;
     private void Awake() {
@@ -40,7 +45,7 @@ public class SkillTreeManager : MonoBehaviour
         ReadData();
     }
     private void Start(){
-        changeUpgradeInfoTexts(displayedSkill);
+        //changeUpgradeInfoTexts(displayedSkill);
         changeEmberAmountUI();
     }
 
@@ -84,7 +89,7 @@ public class SkillTreeManager : MonoBehaviour
             
             WritingData();
         }   
-        displayedSkill = skill;
+        
     }
     public Skills GetSkills(string skill){
         foreach (Skills item in PlayerData.skills)
@@ -109,22 +114,75 @@ public class SkillTreeManager : MonoBehaviour
     }
 
 
+   
 
     //UI PARTITION
-    public void changeUpgradeInfoTexts(string skill){
+    public void DisplaySkill(string skill, SkillTreeButton extra){
         if(skill==null){
-            foreach(TextMeshProUGUI txt in UpgradeInfoTexts){txt.text = "";}return;
+            return;
         }
-        List<Augment> augments = DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill});
-        int i=0;
-        foreach(Augment a in augments){
-            UpgradeInfoTexts[i].text = a.getDescription();
-            UpgradeInfoTexts[i+3].text = a.getNextDescription();
-            i++;
+        GetComponentInParent<Animator>().SetTrigger("Info");
+        Skills s = GetSkills(skill);
+        if(s.max_value == 1){
+            UpgradeExtraTexts[2].text = s.value == s.max_value ? "Unlocked" : "Unlock";
+            
+            Array.ForEach(BeforeAndAfter, x => x.SetActive(false));
+            UpgradeInfoContentPanel.sizeDelta = new Vector2(168,44);
+        }else{
+            List<Augment> augments = DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill});
+
+            augments.Sort((a,b)=> a.tier - b.tier );
+            int b = 0;
+            for(int i =0; i!= 3; i++){
+                if(b >= augments.Count || ( b < augments.Count && (int)augments[b].tier != i)){
+                    UpgradeInfoTexts[i].text = "";
+                    UpgradeInfoTexts[i+3].text = "";
+                    UpgradeInfoTexts[i].transform.parent.GetComponent<Image>().color = DisabledColor;
+                    UpgradeInfoTexts[i+3].transform.parent.GetComponent<Image>().color = DisabledColor;
+                    continue;
+                }
+                
+                UpgradeInfoTexts[i].text = augments[b].getDescription();
+                UpgradeInfoTexts[i+3].text = augments[b].getNextDescription();
+                UpgradeInfoTexts[i].transform.parent.GetComponent<Image>().color = Color.white;
+                UpgradeInfoTexts[i+3].transform.parent.GetComponent<Image>().color = Color.white;
+                b++;
+            }
+
+            UpgradeExtraTexts[2].text = "Upgrade";
+            
+            UpgradeInfoContentPanel.sizeDelta = new Vector2(168,395);
+            Array.ForEach(BeforeAndAfter, x => x.SetActive(true));
         }
+        UpgradeExtraTexts[0].text = extra.DisplayTitle;
+        UpgradeExtraTexts[1].text = s.value == s.max_value ? "" :  "Cost:" + DeckBuilder.Instance.getPrice(skill, getLevel(skill));
+        
+        
+
     }
+    // public void changeUpgradeInfoTexts(string skill){
+        
+    //     Skills s = GetSkills(skill);
+    //     if(s.max_value == 1){
+
+    //     }else{
+    //         List<Augment> augments = DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill});
+    //         int i=0;
+    //         foreach(Augment a in augments){
+    //             UpgradeInfoTexts[i].text = a.getDescription();
+    //             UpgradeInfoTexts[i+3].text = a.getNextDescription();
+    //             i++;
+    //         }
+    //     }
+        
+    // }
     public void changeEmberAmountUI(){
+        //9000 - 10000
+        int difference = PlayerData.embers - int.Parse(emberAmountTxt.text);
         emberAmountTxt.text = PlayerData.embers.ToString();
+        
+        emberLossTxt.text = difference > 0 ? "+"+difference : ""+difference;
+        GetComponentInParent<Animator>().Play("SkillTreeLoss");
     }
 
     public void resetSkillTree(){
@@ -138,6 +196,14 @@ public class SkillTreeManager : MonoBehaviour
         WritingData();
         treeReset?.Invoke(this, new EventArgs());
         
+    }
+    public void toggleSkillTree(GameObject SkillTreePanel){
+        // bool new_state = !SkillTreePanel.activeInHierarchy;
+        // SkillTreePanel.SetActive(new_state);
+        // if(new_state){treeReset?.Invoke(this, new EventArgs());}
+        GetComponentInParent<Animator>().SetTrigger("Rest");
+        SkillTreePanel.transform.position = new Vector2(SkillTreePanel.transform.position.x > 2000 ? 0 : 2000, 0);
+
     }
     
 }
