@@ -160,24 +160,15 @@ public class SkillTreeManager : MonoBehaviour
         
 
     }
-    // public void changeUpgradeInfoTexts(string skill){
-        
-    //     Skills s = GetSkills(skill);
-    //     if(s.max_value == 1){
-
-    //     }else{
-    //         List<Augment> augments = DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill});
-    //         int i=0;
-    //         foreach(Augment a in augments){
-    //             UpgradeInfoTexts[i].text = a.getDescription();
-    //             UpgradeInfoTexts[i+3].text = a.getNextDescription();
-    //             i++;
-    //         }
-    //     }
-        
-    // }
+    public static void AddEmbers(int n){
+        if(Instance == null){Debug.LogWarning("No SkillTreeManager Instance Found");}
+        else{
+            Instance.PlayerData.embers += n;
+            Instance.WritingData();
+        }
+    }
     public void changeEmberAmountUI(){
-        //9000 - 10000
+  
         int difference = PlayerData.embers - int.Parse(emberAmountTxt.text);
         emberAmountTxt.text = PlayerData.embers.ToString();
         
@@ -198,9 +189,6 @@ public class SkillTreeManager : MonoBehaviour
         
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
-        // bool new_state = !SkillTreePanel.activeInHierarchy;
-        // SkillTreePanel.SetActive(new_state);
-        // if(new_state){treeReset?.Invoke(this, new EventArgs());}
         GetComponentInParent<Animator>().SetTrigger("Rest");
         SkillTreePanel.transform.position = new Vector2(SkillTreePanel.transform.position.x > 2000 ? 0 : 2000, 0);
 

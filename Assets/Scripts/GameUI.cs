@@ -35,6 +35,7 @@ public class GameUI : MonoBehaviour
     [Header("Stats")]
     [SerializeField] TextMeshProUGUI[] StatsTexts;
     [SerializeField] Slider healthSlider;
+    [SerializeField] TextMeshProUGUI EmberAmountTxt;
     
     [Header("Effects")]
     
@@ -150,7 +151,7 @@ public class GameUI : MonoBehaviour
         {
             GameObject go = Instantiate(EffectTemplate,EffectContainer.transform);
             go.GetComponent<Button>().onClick.AddListener(()=>DisplayEffectInfo(e));
-            go.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getIcon());
+            go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/"+e.getIcon());
             go.SetActive(true);
         }
     }
@@ -252,6 +253,10 @@ public class GameUI : MonoBehaviour
 
     public void StartGameEvent(){
         EnemySpawner.Instance.StartGame();
+    }
+
+    public void SetEmberAmount(int n){
+        EmberAmountTxt.text = n.ToString();
     }
     
 }

@@ -8,7 +8,7 @@ public class Slime : Enemy
     [SerializeField] private int DeathSpawnSwarm;
     [SerializeField] private GameObject TinySlime;
     [SerializeField] private Vector2[] spawnTinyPos;
-    private float maxSpeed;
+    [SerializeField] private float maxSpeed;
     private void Start() {
         flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
@@ -35,6 +35,13 @@ public class Slime : Enemy
         
          
         base.Die();
+    }
+
+    override public void setSpeed(float s){
+        maxSpeed = s;
+    }
+    override public float getSpeed(){
+        return maxSpeed;
     }
     
 }

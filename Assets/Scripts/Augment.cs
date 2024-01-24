@@ -22,17 +22,19 @@ public class Augment
     string AugmentClass;
     bool baseStat;
     bool baseCard;
-    public Augment(string augmentClass,string t, string[] d, string i, Tier ti, UnityAction[] a, bool baseStat = false, bool baseCard = false){
+    bool baseCardUpgrade;
+    public Augment(string augmentClass,string t, string[] d, string i, Tier ti, UnityAction[] a, bool baseStat = false, bool baseCard = false, bool baseCardUpgrade = false){
         Title = t;
 
         Description = d;
         actions = a;
         tier = ti;
-        icon = Resources.Load<Sprite>(i);
+        icon = Resources.Load<Sprite>("Icons/" + i);
         
         AugmentClass = augmentClass;
         this.baseStat = baseStat;
         this.baseCard = baseCard;
+        this.baseCardUpgrade = baseCardUpgrade;
     }
     public void Activate(){
         if(Description.Length == 1){actions[0]();}else{
@@ -65,7 +67,7 @@ public class Augment
    
 
     public bool playable(){
-        return baseStat || (baseCard && getLevel() > 0);
+        return baseStat || (baseCard && getLevel() > 0) || (baseCardUpgrade && getLevel() >= 0);
     }
     public string getAugmentClass(){return AugmentClass;}
 }

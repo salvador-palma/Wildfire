@@ -6,7 +6,7 @@ public class Snail : Enemy
 {
     
     [SerializeField]  private bool withShell;
-    private float maxSpeed;
+    [SerializeField] private float maxSpeed;
     private void Start() {
         base.flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
@@ -22,6 +22,12 @@ public class Snail : Enemy
     }
     public void SlideOff(){
         Speed = 0.00001f;
+    }
+    override public void setSpeed(float s){
+        maxSpeed = s;
+    }
+    override public float getSpeed(){
+        return maxSpeed;
     }
 
     

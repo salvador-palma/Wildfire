@@ -86,9 +86,9 @@ public class IceOnHit : OnHitEffects
 {
     private Color IceColor;
     public static IceOnHit Instance;
-    public int duration;
+    public float duration;
     public float prob;
-    public IceOnHit(int duration, float prob){
+    public IceOnHit(float duration, float prob){
        
         this.duration = duration;
         this.prob = prob;
@@ -98,26 +98,19 @@ public class IceOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public async void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(en==null){return;}
         if(en.inEffect){return;}
         if(UnityEngine.Random.Range(0f,1f) < prob){
             
-            en.inEffect = true;
-            en.GetComponent<Animator>().Play("EnemyEffectice");
-            float f = en.Speed;
-            float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
-            
-            en.Speed -= en.Speed * percentage;
+
+            en.setTemporarySpeed(duration, Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f), 
+                                e =>{ e.GetComponent<Animator>().Play("EnemyEffectice"); e.inEffect = true;},
+                                e =>{ e.GetComponent<Animator>().Play("EnemyEffectClear"); e.inEffect = false;});
             DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
-            await Task.Delay(duration);
-            if(en == null){return;}
-            en.GetComponent<Animator>().Play("EnemyEffectClear");
-            
-            
-            en.Speed = f;
-            en.inEffect = false;
+
+ 
         }
     }
     public void Stack(IceOnHit iceOnHit){

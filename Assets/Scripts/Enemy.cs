@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
@@ -14,6 +13,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public int MaxHealth;
     public int Armor;
     public float ArmorPen;
+    public Vector2Int EmberDropRange;
     public bool Attacking;
    
     public Transform HitCenter;
@@ -40,17 +40,17 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void HittedWithArmor(int dmg, bool onHit, int TextID, string except = null){
         float B = dmg/(1+Armor/100);
         int effectiveDmg = (int)(B + (Damage-B)*flame.ArmorPen);
-        //int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * dmg);
-        
+ 
         
         if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
         HittedArmorless(effectiveDmg,TextID);       
     }
     
-    public void HittedArmorless(int dmg, int textID){
+    public void HittedArmorless(int dmg, int textID, bool onHit = false){
         try{
             Health -= dmg;
             flame.TotalDamage+=(ulong)dmg;
+            if(onHit){Flamey.Instance.ApplyOnHit(dmg, Health, this);}
             PlayHitAnimation(dmg, textID);
         }catch{
             Debug.Log("Error Ocurred");
@@ -71,16 +71,27 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual void Die(){
+        Flamey.Instance.ApplyOnKill(this);
+        Flamey.Instance.addEmbers(calculateEmbers());
         flame.TotalKills++;
         PlayHitSoundFx();
         CameraShake.Shake(0.4f,0.15f);
         Destroy(gameObject);
     }
 
+
+    private int calculateEmbers(){
+        if(MoneyMultipliers.Instance == null){
+            return EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], 0.1f);
+        }
+        return (int)((EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], MoneyMultipliers.Instance.p)) * MoneyMultipliers.Instance.mult);
+        
+    }
+
     
 
     public void Attack(){
-        flame.Hitted(Damage, ArmorPen);
+        flame.Hitted(Damage, ArmorPen, this);
         PlayAttackAnimation();
     }
     private void PlayAttackAnimation(){
@@ -113,5 +124,61 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public void EndEnemy(){
         this.enabled = false;
+    }
+
+
+
+
+
+    public void setTemporarySpeed(float seconds, float percReduced, Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null, string augmentClass = null){
+        //if(inEffect){return;}
+        
+        if(augmentClass == "IcePool"){
+            if(timeSpeed <= 0){
+                timeSpeed = Math.Max(timeSpeed, seconds);
+                StartCoroutine(setSpeedTimer(percReduced,beforeAction,afterAction));
+            }else{
+                timeSpeed = Math.Max(timeSpeed, seconds);
+            }
+        }else{
+            if(inEffect){return;}
+            SetSpeedCouroutineEffect(seconds,percReduced,beforeAction,afterAction);
+        }
+        
+    }
+
+    private float timeSpeed = 0;
+    private IEnumerator setSpeedTimer(float percReduced,Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null){
+
+        if(beforeAction != null){beforeAction(this);}
+        //float current_Speed = getSpeed();
+        setSpeed(getSpeed() * percReduced);
+
+        while(timeSpeed > 0){
+            timeSpeed -= Time.deltaTime;
+            yield return null;
+        }
+
+        if(afterAction != null){afterAction(this);}
+        setSpeed(getSpeed() / percReduced);
+    }
+
+    public virtual void setSpeed(float speed){
+        Speed = speed;
+    }
+    public virtual float getSpeed(){
+        return Speed;
+    }
+     private IEnumerator SetSpeedCouroutineEffect(float seconds, float percReduced,Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null){
+        inEffect = true;
+        if(beforeAction != null){beforeAction(this);}
+
+        //float current_Speed = getSpeed();
+        setSpeed(getSpeed() * percReduced);
+        yield return new WaitForSeconds(seconds);
+        if(afterAction != null){afterAction(this);}
+        setSpeed(getSpeed() / percReduced);
+
+        inEffect = false;
     }
 }

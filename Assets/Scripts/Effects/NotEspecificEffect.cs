@@ -90,4 +90,67 @@ public class FlameCircle : NotEspecificEffect
     
 }
 
+public class MoneyMultipliers : NotEspecificEffect
+{
+    public static MoneyMultipliers Instance;
 
+    public float mult;
+    public float p;
+    public MoneyMultipliers(float p, float mult, bool init = false){
+        this.mult = mult;
+        this.p = p;
+        if(init){
+            Instance = this;
+            return;
+        }
+
+        if(Instance == null){
+            Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0.1f, 1f, true));
+
+        }    
+        Instance.Stack(this);
+        
+    }
+    public void Stack(MoneyMultipliers moneyMultipliers){
+        p+=moneyMultipliers.p;
+        mult+=moneyMultipliers.mult;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(p >= 1){
+            p = 1;
+            Deck deck = Deck.Instance;
+            // deck.removeFromDeck("Tame the Flames");
+        }  
+          
+    }
+    public bool addList()
+    {
+        return Instance == this;
+    }
+
+    public void ApplyEffect()
+    {
+        return;
+    }
+
+    public string getDescription()
+    {
+        return "Whenever you kill an enemy, there's a " + p*100 + "% of getting more embers. This value is then multiplied by " + mult*100 + "%. You can check the Bestiary for more info on enemy specific drop rates.";
+    }
+
+    public string getIcon()
+    {
+        return "MoneyUnlock";
+    }
+
+    public string getText()
+    {
+        return "Ember Generation";
+    }
+
+    public string getType()
+    {
+        return "Especial Effect";
+    }
+}

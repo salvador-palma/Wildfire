@@ -18,10 +18,13 @@ public class Flamey : MonoBehaviour
 
     public int Armor = 0;
     public float ArmorPen = 0;
+    public int Embers = 0;
     public List<OnHitEffects> onHitEffects;
     public List<OnShootEffects> onShootEffects;
     public List<NotEspecificEffect> notEspecificEffects;
     public List<OnLandEffect> onLandEffects;
+    public List<OnHittedEffects> onHittedEffects;
+    public List<OnKillEffects> onKillEffects;
     public List<Effect> allEffects;
 
     [Range(5f, 20f)] public float BulletSpeed;
@@ -71,6 +74,8 @@ public class Flamey : MonoBehaviour
         notEspecificEffects = new List<NotEspecificEffect>();
         allEffects = new List<Effect>();
         onLandEffects = new List<OnLandEffect>();
+        onHittedEffects = new List<OnHittedEffects>();
+        onKillEffects = new List<OnKillEffects>();
         
     }
     // Start is called before the first frame update
@@ -85,6 +90,9 @@ public class Flamey : MonoBehaviour
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
 
+        // Deck.Instance.removeFromDeck("Essence Eater");
+        // Flamey.Instance.addOnKillEffect(new Explosion(1f,100));
+        // Deck.Instance.AddAugmentClass(new List<string>{"ExplodeProb","ExplodeDmg"});      
     }
 
     // Update is called once per frame
@@ -183,12 +191,14 @@ public class Flamey : MonoBehaviour
 
     
 
-    public void Hitted(int Dmg, float armPen){
+    public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true){
+
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
 
-        
-
         TotalDamageTaken+=(ulong)dmgeff;
+
+        if(onhitted){ApplyOnHitted(attacker);}
+
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
@@ -209,6 +219,7 @@ public class Flamey : MonoBehaviour
                 e.GetComponent<Enemy>().EndEnemy();
             }
         }
+        SkillTreeManager.AddEmbers(Embers);
         GameUI.Instance.GameOverEffect();
     }
 
@@ -317,6 +328,18 @@ public class Flamey : MonoBehaviour
             allEffects.Add(onhit);
         }
     }
+    public void addOnHittedEffect(OnHittedEffects onhit){
+        if(onhit.addList()){
+            onHittedEffects.Add(onhit);
+            allEffects.Add(onhit);
+        }
+    }
+    public void addOnKillEffect(OnKillEffects onhit){
+        if(onhit.addList()){
+            onKillEffects.Add(onhit);
+            allEffects.Add(onhit);
+        }
+    }
 
     public void ApplyOnHit(float d, float h, Enemy e, string except = null){
         foreach (OnHitEffects oh in onHitEffects){
@@ -337,7 +360,13 @@ public class Flamey : MonoBehaviour
     public void ApplyOnLand(UnityEngine.Vector2 pos){
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
+    public void ApplyOnHitted(Enemy e){
+        foreach (OnHittedEffects oh in onHittedEffects){oh.ApplyEffect(e);}
+    }
 
+    public void ApplyOnKill(Enemy e){
+        foreach (OnKillEffects oh in onKillEffects){oh.ApplyEffect(e);}
+    }
 
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);
@@ -354,6 +383,11 @@ public class Flamey : MonoBehaviour
             new SimpleStat("Healed health", (int)TotalHealed)
 
         };
+    }
+
+    public void addEmbers(int n){
+        Embers += n;
+        GameUI.Instance.SetEmberAmount(Embers);
     }
     
 }
