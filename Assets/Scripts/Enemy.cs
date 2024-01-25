@@ -70,8 +70,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         DamageUI.InstantiateTxtDmg(transform.position, dmg.ToString(), textID);
     }
 
-    public virtual void Die(){
-        Flamey.Instance.ApplyOnKill(this);
+    public virtual void Die(bool onKill = true){
+        if(onKill){Flamey.Instance.ApplyOnKill(this);}
         Flamey.Instance.addEmbers(calculateEmbers());
         flame.TotalKills++;
         PlayHitSoundFx();
@@ -181,4 +181,31 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
         inEffect = false;
     }
+
+
+
+
+
+
+    public static Enemy getClosestEnemy(Vector2 pos){
+        GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
+        if(go.Length == 0){return null;}
+        try{
+            GameObject minimum = go[0];
+            float minDist = float.PositiveInfinity;
+            foreach(GameObject enemy in go){
+                float calc = Vector2.Distance(enemy.GetComponent<Enemy>().HitCenter.position, pos);
+                if(minDist > calc){
+                    minDist = calc;
+                    minimum = enemy;
+                }
+            }
+            return minimum.GetComponent<Enemy>();
+        }catch{
+            Debug.Log("Covered Error! Flamey.getRandomHomingEnemy()");
+
+        }
+        return null;
+    }
+
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Unity.Mathematics;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ public class Flamey : MonoBehaviour
     public List<OnLandEffect> onLandEffects;
     public List<OnHittedEffects> onHittedEffects;
     public List<OnKillEffects> onKillEffects;
+    public List<TimeBasedEffect> timedEffects;
     public List<Effect> allEffects;
 
     [Range(5f, 20f)] public float BulletSpeed;
@@ -63,6 +65,7 @@ public class Flamey : MonoBehaviour
     [HideInInspector] public ulong TotalHealed;
 
   
+    private float secondTimer = 1f;
     private void Awake() {
         
         Health = MaxHealth;
@@ -76,6 +79,7 @@ public class Flamey : MonoBehaviour
         onLandEffects = new List<OnLandEffect>();
         onHittedEffects = new List<OnHittedEffects>();
         onKillEffects = new List<OnKillEffects>();
+        timedEffects = new List<TimeBasedEffect>();
         
     }
     // Start is called before the first frame update
@@ -90,9 +94,9 @@ public class Flamey : MonoBehaviour
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
 
-        // Deck.Instance.removeFromDeck("Essence Eater");
-        // Flamey.Instance.addOnKillEffect(new Explosion(1f,100));
-        // Deck.Instance.AddAugmentClass(new List<string>{"ExplodeProb","ExplodeDmg"});      
+         Deck.Instance.removeFromDeck("Necromancer");
+                Flamey.Instance.addOnKillEffect(new Necromancer(1f, 0.5f));
+                Deck.Instance.AddAugmentClass(new List<string>{"NecroProb","NecroStats"}); 
     }
 
     // Update is called once per frame
@@ -131,6 +135,11 @@ public class Flamey : MonoBehaviour
 
         if(Health <= 0){EndGame();}
 
+        secondTimer-=Time.deltaTime;
+        if(secondTimer <= 0){
+            secondTimer = 1f;
+            ApplyTimed();
+        }
     }
 
     public void shoot(){
@@ -179,6 +188,7 @@ public class Flamey : MonoBehaviour
         }
         return UnityEngine.Vector2.zero;
     }
+   
     private void updateTimerAS(float asp){
         timerASCounter = AtkSpeedToSeconds(asp);
     }
@@ -340,6 +350,12 @@ public class Flamey : MonoBehaviour
             allEffects.Add(onhit);
         }
     }
+    public void addTimeBasedEffect(TimeBasedEffect onhit){
+        if(onhit.addList()){
+            timedEffects.Add(onhit);
+            allEffects.Add(onhit);
+        }
+    }
 
     public void ApplyOnHit(float d, float h, Enemy e, string except = null){
         foreach (OnHitEffects oh in onHitEffects){
@@ -367,10 +383,13 @@ public class Flamey : MonoBehaviour
     public void ApplyOnKill(Enemy e){
         foreach (OnKillEffects oh in onKillEffects){oh.ApplyEffect(e);}
     }
-
+    public void ApplyTimed(){
+        foreach (TimeBasedEffect oh in timedEffects){oh.ApplyEffect();}
+    }
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);
     }
+   
 
 
     public List<SimpleStat> getBaseStats(){

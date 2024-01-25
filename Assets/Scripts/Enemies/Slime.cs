@@ -25,7 +25,7 @@ public class Slime : Enemy
         Speed = 0.0001f;
     }
 
-    override public void Die(){
+    override public void Die(bool onkill = true){
         for(int i = 0; i != DeathSpawnSwarm; i++){
             GameObject go = Instantiate(TinySlime);
             go.transform.position =  (Vector2)transform.position + spawnTinyPos[i];
@@ -34,7 +34,7 @@ public class Slime : Enemy
         }
         
          
-        base.Die();
+        base.Die(tiny);
     }
 
     override public void setSpeed(float s){

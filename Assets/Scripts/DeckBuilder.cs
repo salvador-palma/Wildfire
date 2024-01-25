@@ -938,8 +938,8 @@ public class DeckBuilder : MonoBehaviour
             new Augment("ExplodeProb","Bomb Rush", new string[3]{"Gain +5% chance to generate an explosion whenever you kill an enemy", 
                                                             "Gain +7% chance to generate an explosion whenever you kill an enemy", 
                                                             "Gain +10% chance to generate an explosion whenever you kill an enemy"}, "ExplodeProb", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.5f,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.7f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.05f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.07f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.1f,0)))}), 
             new Augment("ExplodeProb","Grenade Launcher", new string[3]{"Gain +10% chance to generate an explosion whenever you kill an enemy", 
                                                             "Gain +15% chance to generate an explosion whenever you kill an enemy", 
@@ -972,6 +972,137 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,200))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,300)))}),
             
+            
+            new Augment("NecroUnlock" ,"Necromancer", new string[1]{"Unlock the ability to summon ghouls whenever enemies die"}, "NecroUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Necromancer");
+                Flamey.Instance.addOnKillEffect(new Necromancer(0.1f, 0.1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"NecroProb","NecroStats"});            
+            })}, baseCard: true),  
+            new Augment("NecroProb","Wraith Walkers", new string[3]{"Gain +5% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +7% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +10% chance to summon a ghoul whenever you kill an enemy"}, "NecroProb", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0.05f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.07f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.1f,0)))}), 
+            new Augment("NecroProb","Soul Shepard", new string[3]{"Gain +10% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +15% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +20% chance to summon a ghoul whenever you kill an enemy"}, "NecroProb", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.1f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.15f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.2f,0)))}),
+            new Augment("NecroProb","Crypt of the Necromancer", new string[3]{"Gain +20% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +30% chance to summon a ghoul whenever you kill an enemy", 
+                                                            "Gain +40% chance to summon a ghoul whenever you kill an enemy"}, "NecroProb", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.2f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.3f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(.4f,0)))}),  
+            new Augment("NecroStats","Phantom Infusion", new string[3]{"Ghouls' damage will increase by 5% of your damage", 
+                                                            "Ghouls' damage will increase by 7% of your damage", 
+                                                            "Ghouls' damage will increase by 15% of your damage"}, "NecroStats", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.07f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.15f)))}),  
+            new Augment("NecroStats","Death's Embrace", new string[3]{"Ghouls' damage will increase by 12% of your damage", 
+                                                            "Ghouls' damage will increase by 15% of your damage", 
+                                                            "Ghouls' damage will increase by 25% of your damage"}, "NecroStats", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.12f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.25f)))}),
+            new Augment("NecroStats","Hero's Spirit", new string[3]{"Ghouls' damage will increase by 25% of your damage", 
+                                                            "Ghouls' damage will increase by 30% of your damage", 
+                                                            "Ghouls' damage will increase by 50% of your damage"}, "NecroStats", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.25f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.3f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.5f)))}),
+            new Augment("BulletsUnlock" ,"Pirate", new string[1]{"Unlock the ability to shoot bullets around dead enemies and loot their bodies"}, "BulletsUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Pirate");
+                Flamey.Instance.addOnKillEffect(new Bullets(0.1f, 10, 1));
+                Deck.Instance.AddAugmentClass(new List<string>{"BulletsProb","BulletsDmg","BulletsAmount"});            
+            })}, baseCard: true),  
+            new Augment("BulletsProb","Pirate Wannabe", new string[3]{"Gain +5% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +7% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +10% chance to release bullets whenever you kill an enemy"}, "BulletsProb", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0.05f, 0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.07f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.1f,0,0)))}), 
+            new Augment("BulletsProb","Yes, Captain!", new string[3]{"Gain +10% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +15% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +20% chance to release bullets whenever you kill an enemy"}, "BulletsProb", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.1f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.15f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.2f,0,0)))}),
+            new Augment("BulletsProb","Shoot it, Loot it", new string[3]{"Gain +20% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +30% chance to release bullets whenever you kill an enemy", 
+                                                            "Gain +40% chance to release bullets whenever you kill an enemy"}, "BulletsProb", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.2f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.3f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.4f,0,0)))}),  
+            new Augment("BulletsDmg","Round Shot", new string[3]{"Bullets will deal +10 damage", 
+                                                            "Bullets will deal +15 damage", 
+                                                            "Bullets will deal +20 damage"}, "BulletsDmg", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,10,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,15,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,20,0)))}),  
+            new Augment("BulletsDmg","Arggh!", new string[3]{"Bullets will deal +20 damage", 
+                                                            "Bullets will deal +30 damage", 
+                                                            "Bullets will deal +40 damage"}, "BulletsDmg", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,20,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,30,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,40,0)))}),
+            new Augment("BulletsDmg","Fire of Thieves", new string[3]{"Bullets will deal +40 damage", 
+                                                            "Bullets will deal +60 damage", 
+                                                            "Bullets will deal +100 damage"}, "BulletsDmg", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,40,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,60,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,100,0)))}),
+            new Augment("BulletsAmount","Cannonball Pile", new string[3]{"Your Bullet Shooter effect will shoot +1 bullet", 
+                                                            "Your Bullet Shooter effect will shoot +2 bullets", 
+                                                            "Your Bullet Shooter effect will shoot +3 bullets"}, "BulletsAmount", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,1))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,2))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,3)))}),
+            new Augment("Regen" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Regeneration");
+                Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 10f));
+                Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            
+            })}, baseCard: true),  
+            new Augment("RegenPerSecond","Self-Healing Fire", new string[3]{"Each second you will regen +0.2 Health", 
+                                                            "Each second you will regen +0.5 Health", 
+                                                            "Each second you will regen +1 Health"}, "RegenPerSecond", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.5f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0)))}), 
+            new Augment("RegenPerSecond","Perseverance", new string[3]{"Each second you will regen +0.5 Health", 
+                                                            "Each second you will regen +1 Health", 
+                                                            "Each second you will regen +2.5 Health"}, "RegenPerSecond", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.5f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(2.5f, 0)))}),
+            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will regen +1 Health", 
+                                                            "Each second you will regen +2 Health", 
+                                                            "Each second you will regen +5 Health"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(2f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(5f, 0)))}),  
+            new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you will regen +5 Health", 
+                                                            "At the end of each round you will regen +10 Health", 
+                                                            "At the end of each round you will regen +15 Health"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 5))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 15)))}),  
+            new Augment("RegenPerRound","Leftovers", new string[3]{"At the end of each round you will regen +10 Health", 
+                                                            "At the end of each round you will regen +20 Health", 
+                                                            "At the end of each round you will regen +30 Health"}, "RegenPerRound", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 20))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 30)))}),
+            new Augment("RegenPerRound","Free Healthcare", new string[3]{"At the end of each round you will regen +25 Health", 
+                                                            "At the end of each round you will regen +50 Health", 
+                                                            "At the end of each round you will regen +100 Health"}, "RegenPerRound", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 25))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 100)))}),
+        
         
         
         };
