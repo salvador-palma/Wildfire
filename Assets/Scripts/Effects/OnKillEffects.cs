@@ -109,8 +109,8 @@ public class Explosion : OnKillEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 1f){
-            prob = 1;
+        if(prob >= .5f){
+            prob = .5f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Bomb Rush");
             deck.removeFromDeck("Grenade Launcher");
@@ -177,8 +177,8 @@ public class Necromancer : OnKillEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 0.5f){
-            prob = 0.5f;
+        if(prob >= .5f){
+            prob = .5f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Wraith Walkers");
             deck.removeFromDeck("Soul Shepard");

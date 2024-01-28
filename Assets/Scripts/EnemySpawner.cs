@@ -231,6 +231,8 @@ public class EnemySpawner : MonoBehaviour
         }
         
         GameUI.Instance.UpdateMenuInfo(current_round);
+
+        Flamey.Instance.ApplyTimedRound();
         
     }
 

@@ -65,7 +65,8 @@ public class Flamey : MonoBehaviour
     [HideInInspector] public ulong TotalHealed;
 
   
-    private float secondTimer = 1f;
+    private float secondTimer = 0.25f;
+    private float tick = 0.25f;
     private void Awake() {
         
         Health = MaxHealth;
@@ -94,9 +95,9 @@ public class Flamey : MonoBehaviour
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
 
-         Deck.Instance.removeFromDeck("Necromancer");
-                Flamey.Instance.addOnKillEffect(new Necromancer(1f, 0.5f));
-                Deck.Instance.AddAugmentClass(new List<string>{"NecroProb","NecroStats"}); 
+        Deck.Instance.removeFromDeck("Ice Pool");
+                Flamey.Instance.addOnLandEffect(new IceOnLand(2.5f, 0.5f, 0.5f, 3f));
+                Deck.Instance.AddAugmentClass(new List<string>{"IcePoolDuration","IcePoolProb","IcePoolSlow","IcePoolSize"});                 
     }
 
     // Update is called once per frame
@@ -137,7 +138,7 @@ public class Flamey : MonoBehaviour
 
         secondTimer-=Time.deltaTime;
         if(secondTimer <= 0){
-            secondTimer = 1f;
+            secondTimer = tick;
             ApplyTimed();
         }
     }
@@ -187,6 +188,16 @@ public class Flamey : MonoBehaviour
             Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
         }
         return UnityEngine.Vector2.zero;
+    }
+    public Enemy getRandomHomingEnemy(){
+        GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
+        try{
+            GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+            return g.GetComponent<Enemy>();
+        }catch{
+            Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
+        }
+        return null;
     }
    
     private void updateTimerAS(float asp){
@@ -385,6 +396,9 @@ public class Flamey : MonoBehaviour
     }
     public void ApplyTimed(){
         foreach (TimeBasedEffect oh in timedEffects){oh.ApplyEffect();}
+    }
+    public void ApplyTimedRound(){
+        foreach (TimeBasedEffect oh in timedEffects){oh.ApplyRound();}
     }
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);

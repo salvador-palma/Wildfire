@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public interface NotEspecificEffect : Effect{
@@ -153,4 +154,196 @@ public class MoneyMultipliers : NotEspecificEffect
     {
         return "Especial Effect";
     }
+}
+
+
+
+public class CandleTurrets : NotEspecificEffect
+{
+    public int dmg;
+    public float atkSpeed;
+    public int amount;
+
+    public static CandleTurrets Instance;
+    public static GameObject CandleCircle;
+    
+    public CandleTurrets(int dmg, float atkSpeed, int amount){
+       
+        this.amount = amount;
+        this.dmg = dmg;
+        this.atkSpeed = atkSpeed;
+        if(Instance == null){
+            Instance = this;     
+            StartCandleCircle();
+            UpdateAmount();
+        }else{
+            Instance.Stack(this);
+        }
+    }
+
+    public void ApplyEffect()
+    {
+        UpdateAmount();
+    }
+
+    public void StartCandleCircle(){
+        CandleCircle = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/CandleCircle"));
+        
+    }
+    public void UpdateAmount(){
+        
+        for(int i = 0; i < amount; i++){
+           
+            CandleCircle.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+    public bool addList()
+    {
+        return Instance == this;
+    }
+
+    public string getDescription()
+    {
+        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + atkSpeed + " attack speed";
+    }
+
+    public string getIcon()
+    {
+        return "CandleUnlock";
+    }
+
+    public string getText()
+    {
+        return "Candle Turrets";
+    }
+
+    public string getType()
+    {
+        return "Especial Effect";
+    }
+
+    public void Stack(CandleTurrets candleTurrets){
+        
+        dmg += candleTurrets.dmg;
+        atkSpeed += candleTurrets.atkSpeed;
+        amount += candleTurrets.amount;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(amount > 6){
+            amount = 6;
+            CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
+            GameObject.Find("logs").SetActive(false);
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Philosopher's Stone");
+        } 
+        if(atkSpeed >= 6f){
+            atkSpeed = 6f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Alembic Artistry");
+            deck.removeFromDeck("Ancient Wizard");
+            deck.removeFromDeck("Begin the Ritual");
+
+        } 
+          
+    }
+
+    
+}
+
+public class Summoner : NotEspecificEffect
+{
+    public int dmg;
+    public float atkSpeed;
+    public float speed;
+    public int amount;
+
+    public List<Bee> bees;
+    public static Summoner Instance;
+    public static GameObject Bee;
+    
+    public Summoner(int dmg, float atkSpeed, float speed, int amount){
+       
+        this.amount = amount;
+        this.dmg = dmg;
+        this.atkSpeed = atkSpeed;
+        this.speed = speed;
+        if(Instance == null){
+            Instance = this;     
+            bees = new List<Bee>();
+            Bee = Resources.Load<GameObject>("Prefab/Bee");
+            ApplyEffect();
+        }else{
+            Instance.Stack(this);
+        }
+    }
+
+    public void ApplyEffect()
+    {
+        for(int i = bees.Count; i < amount; i++){
+            bees.Add(Flamey.Instance.SpawnObject(Bee).GetComponent<Bee>());
+        }
+
+        foreach(Bee b in bees){
+            b.UpdateStats();
+        }
+    }
+
+    public bool addList()
+    {
+        return Instance == this;
+    }
+
+    public string getDescription()
+    {
+        return amount + "Bees will fight by your side, targeting the closest enemy and applying On-Hit effects. Each Bee deals " + dmg + " damage, has " + atkSpeed + " attack speed and " + speed + " speed";
+    }
+
+    public string getIcon()
+    {
+        return "SummonUnlock";
+    }
+
+    public string getText()
+    {
+        return "Bee Summoner";
+    }
+
+    public string getType()
+    {
+        return "Especial Effect";
+    }
+
+    public void Stack(Summoner summoner){
+        
+        dmg += summoner.dmg;
+        atkSpeed += summoner.atkSpeed;
+        amount += summoner.amount;
+        speed += summoner.speed;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(amount > 12){
+            amount = 12;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Bee Hive");
+        } 
+        if(atkSpeed >= 6f){
+            atkSpeed = 6f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Rapid Shooters");
+            deck.removeFromDeck("Bee-autiful Pets");
+            deck.removeFromDeck("Bee Swarm");
+        } 
+        if(speed >= 6f){
+            speed = 6f;
+            Deck deck = Deck.Instance;
+            deck.removeFromDeck("Speeding Up");
+            deck.removeFromDeck("Agility");
+            deck.removeFromDeck("Bee Acrobacy League");
+        } 
+          
+    }
+
+    
 }
