@@ -84,7 +84,7 @@ public class BurnOnLand : OnLandEffect
 
     public string getIcon()
     {
-        return "lava";
+        return "LavaPoolUnlock";
     }
 }
 

@@ -60,7 +60,7 @@ public class SecondShot : OnShootEffects{
 
     public string getText()
     {
-        return "MultiCaster";
+        return "MulticasterUnlock";
     }
 
     public string getType()
@@ -147,7 +147,7 @@ public class BurstShot : OnShootEffects{
     }
     public string getIcon()
     {
-        return "burst";
+        return "BurstUnlock";
     }
 }
 
@@ -213,7 +213,7 @@ public class KrakenSlayer : OnShootEffects{
     }
     public string getIcon()
     {
-        return "blueflame";
+        return "BlueFlameUnlock";
     }
 }
 
@@ -267,12 +267,12 @@ public class CritUnlock : OnShootEffects{
 
     public string getIcon()
     {
-        return "critchance";
+        return "CritUnlock";
     }
 
     public string getText()
     {
-        return "Critical Inferno";
+        return "Critical Strike";
     }
 
     public string getType()

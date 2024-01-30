@@ -60,7 +60,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getIcon()
     {
-        return "orbital";
+        return "OrbitalUnlock";
     }
 
     public string getText()

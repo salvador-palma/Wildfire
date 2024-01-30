@@ -77,7 +77,7 @@ public class VampOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "vampfire";
+        return "VampUnlock";
     }
 }
 
@@ -151,7 +151,7 @@ public class IceOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "ice";
+        return "IceUnlock";
     }
 }
 
@@ -223,7 +223,7 @@ public class ShredOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "shred";
+        return "ShredUnlock";
     }
 }
 
@@ -288,7 +288,7 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "assassin";
+        return "Assassins";
     }
 }
 
@@ -367,6 +367,6 @@ public class StatikOnHit : OnHitEffects
 
     public string getIcon()
     {
-        return "statik";
+        return "StatikUnlock";
     }
 }

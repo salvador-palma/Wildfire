@@ -24,6 +24,7 @@ public class SkillTreeLine : MonoBehaviour
     public void PlayInit(){
         if(LineNext){
             foreach(GameObject line in nextObjects){
+                if(line == null){continue;}
                 line.GetComponent<SkillTreeLine>().PlayInit();
             }
         }

@@ -95,9 +95,7 @@ public class Flamey : MonoBehaviour
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
 
-        Deck.Instance.removeFromDeck("Ice Pool");
-                Flamey.Instance.addOnLandEffect(new IceOnLand(2.5f, 0.5f, 0.5f, 3f));
-                Deck.Instance.AddAugmentClass(new List<string>{"IcePoolDuration","IcePoolProb","IcePoolSlow","IcePoolSize"});                 
+                      
     }
 
     // Update is called once per frame
@@ -240,7 +238,7 @@ public class Flamey : MonoBehaviour
                 e.GetComponent<Enemy>().EndEnemy();
             }
         }
-        SkillTreeManager.AddEmbers(Embers);
+        
         GameUI.Instance.GameOverEffect();
     }
 

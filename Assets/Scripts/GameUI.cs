@@ -193,6 +193,7 @@ public class GameUI : MonoBehaviour
         setUpFinalStats();
     }
     public void loadScene(string str){
+        SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         SceneManager.LoadScene(str);
     }
     public void StartOver(){

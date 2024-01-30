@@ -8,74 +8,114 @@ public class DeckBuilder : MonoBehaviour
     public static DeckBuilder Instance;
     public List<Augment> AllAugments;
     public Dictionary<string, int[]> AugmentPrices;
-    
+    int[] basePrice;
+    int[] upgradePrice;
+    int[] unlockPrice;
     void Awake(){
         if(Instance==null){Instance = this;}
         if(Instance == this){DefineAugmentClasses();DefineAugmentClassesPrice();}
-        
+        basePrice = new int[4]{300,900,2700,8100};
+        upgradePrice = new int[2]{2500,7500};
+        unlockPrice = new int[1]{1000};
     }
     
     public int getPrice(string skill, int level){
-        int[] prices = AugmentPrices[skill];
+        // int[] prices = AugmentPrices[skill];
+        int[] prices = new int[0];
+        switch(SkillTreeManager.Instance.GetSkills(skill).max_value){
+            case 1: prices = unlockPrice;
+                break;
+            case 2: prices = upgradePrice;
+                break;
+            case 4: prices = basePrice;
+                break;  
+        }
         if(level>=prices.Length || level < 0){return -1;}
         return prices[level];
     }
     public void DefineAugmentClassesPrice(){
+        int[] basePrice = new int[4]{300,900,2700,8100};
+        int[] upgradePrice = new int[2]{2500,7500};
+        int[] unlockPrice = new int[1]{1000};
+
         AugmentPrices = new Dictionary<string, int[]>();
-        AugmentPrices["Damage"] = new int[4]{100,300,900,2700};
-        AugmentPrices["Accuracy"] = new int[4]{100,300,900,2700};
-        AugmentPrices["Atk Speed"] = new int[4]{100,300,900,2700};
-        AugmentPrices["Bullet Speed"] = new int[4]{100,300,900,2700};
-        AugmentPrices["Armor"] = new int[4]{100,300,900,2700};
-        AugmentPrices["Health"] = new int[4]{100,300,900,2700};
 
-        AugmentPrices["MulticasterUnlock"] = new int[1]{800};
-        AugmentPrices["Multicaster"] = new int[2]{500, 1000};
+        // AugmentPrices["Dmg"] = basePrice;
+        // AugmentPrices["Acc"] = basePrice;
+        // AugmentPrices["AtkSpeed"] = basePrice;
+        // AugmentPrices["BltSpeed"] = basePrice;
+        // AugmentPrices["Armor"] = basePrice;
+        // AugmentPrices["Health"] = basePrice;
 
-        AugmentPrices["CriticUnlock"] = new int[1]{800};
-        AugmentPrices["CriticChance"] = new int[2]{500, 1000};
-        AugmentPrices["CriticDmg"] = new int[2]{500, 1000};
+        // AugmentPrices["MulticasterUnlock"] = unlockPrice;
+        // AugmentPrices["MulticasterProb"] = upgradePrice;
 
-        AugmentPrices["VampUnlock"] = new int[1]{800};
-        AugmentPrices["VampProb"] = new int[2]{500, 1000};
-        AugmentPrices["VampPerc"] = new int[2]{500, 1000};
+        // AugmentPrices["CritUnlock"] = unlockPrice;
+        // AugmentPrices["CritChance"] = upgradePrice;
+        // AugmentPrices["CritMult"] = upgradePrice;
 
-        AugmentPrices["BurstUnlock"] = new int[1]{800};
-        AugmentPrices["BurstAmount"] = new int[2]{500, 1000};
-        AugmentPrices["BurstInterval"] = new int[2]{500, 1000};
+        // AugmentPrices["VampUnlock"] = unlockPrice;
+        // AugmentPrices["VampProb"] = upgradePrice;
+        // AugmentPrices["VampPerc"] = upgradePrice;
 
-        AugmentPrices["ShredUnlock"] = new int[1]{800};
-        AugmentPrices["ShredProb"] = new int[2]{500, 1000};
-        AugmentPrices["ShredPerc"] = new int[2]{500, 1000};
+        // AugmentPrices["BurstUnlock"] = unlockPrice;
+        // AugmentPrices["BurstAmount"] = upgradePrice;
+        // AugmentPrices["BurstInterval"] = upgradePrice;
 
-        AugmentPrices["AssassinUnlock"] = new int[1]{800};
-        AugmentPrices["ArmorPen"] = new int[2]{500, 1000};
-        AugmentPrices["Execute"] = new int[2]{500, 1000};
+        // AugmentPrices["ShredUnlock"] = unlockPrice;
+        // AugmentPrices["ShredProb"] = upgradePrice;
+        // AugmentPrices["ShredPerc"] = upgradePrice;
 
-        AugmentPrices["BlueUnlock"] = new int[1]{800};
-        AugmentPrices["BlueInterval"] = new int[2]{500, 1000};
-        AugmentPrices["BlueDmg"] = new int[2]{500, 1000};
+        // AugmentPrices["Assassins"] = unlockPrice;
+        // AugmentPrices["ArmorPen"] = upgradePrice;
+        // AugmentPrices["Execute"] = upgradePrice;
 
-        AugmentPrices["OrbitalUnlock"] = new int[1]{800};
-        AugmentPrices["OrbitalAmount"] = new int[2]{500, 1000};
-        AugmentPrices["OrbitalDmg"] = new int[2]{500, 1000};
+        // AugmentPrices["BlueUnlock"] = unlockPrice;
+        // AugmentPrices["BlueInterval"] = upgradePrice;
+        // AugmentPrices["BlueDmg"] = upgradePrice;
 
-        AugmentPrices["LavaPoolUnlock"] = new int[1]{800};
-        AugmentPrices["LavaProb"] = new int[2]{500, 1000};
-        AugmentPrices["LavaDuration"] = new int[2]{500, 1000};
-        AugmentPrices["LavaSize"] = new int[2]{500, 1000};
-        AugmentPrices["LavaDmg"] = new int[2]{500, 1000};
+        // AugmentPrices["OrbitalUnlock"] = unlockPrice;
+        // AugmentPrices["OrbitalAmount"] = upgradePrice;
+        // AugmentPrices["OrbitalDmg"] = upgradePrice;
 
-        AugmentPrices["StatikUnlock"] = new int[1]{800};
-        AugmentPrices["StatikDmg"] = new int[2]{500, 1000};
-        AugmentPrices["StatikTTL"] = new int[2]{500, 1000};
-        AugmentPrices["StatikProb"] = new int[2]{500, 1000};
+        // AugmentPrices["LavaPoolUnlock"] = unlockPrice;
+        // AugmentPrices["LavaProb"] = upgradePrice;
+        // AugmentPrices["LavaDuration"] = upgradePrice;
+        // AugmentPrices["LavaSize"] = upgradePrice;
+        // AugmentPrices["LavaDmg"] = upgradePrice;
+
+        // AugmentPrices["StatikUnlock"] = unlockPrice;
+        // AugmentPrices["StatikDmg"] = upgradePrice;
+        // AugmentPrices["StatikTTL"] = upgradePrice;
+        // AugmentPrices["StatikProb"] = upgradePrice;
+
+        // AugmentPrices["GambleUnlock"] = unlockPrice;
+        // AugmentPrices["GambleImprove"] = upgradePrice;
+
+        // AugmentPrices["IceUnlock"] = unlockPrice;
+        // AugmentPrices["IceProb"] = upgradePrice;
+        // AugmentPrices["IceDuration"] = upgradePrice;
+
+        // AugmentPrices["RegenUnlock"] = unlockPrice;
+        // AugmentPrices["RegenRound"] = upgradePrice;
+        // AugmentPrices["RegenAmount"] = upgradePrice;
+
+        // AugmentPrices["IcePoolUnlock"] = unlockPrice;
+        // AugmentPrices["IcePoolDuration"] = upgradePrice;
+        // AugmentPrices["IcePoolProb"] = upgradePrice;
+        // AugmentPrices["IcePoolSlow"] = upgradePrice;
+        // AugmentPrices["IcePoolSize"] = upgradePrice;
+
+        // AugmentPrices["ThornsUnlock"] = unlockPrice;
+        // AugmentPrices["ThornsPerc"] = upgradePrice;
+        // AugmentPrices["ThornsProb"] = upgradePrice;
+ 
         
     }
     public void DefineAugmentClasses(){
         AllAugments = new List<Augment>
         {
-            new Augment("Damage","Hard Work", new string[5]{"Gain +5 Base Damage", 
+            new Augment("Dmg","Hard Work", new string[5]{"Gain +5 Base Damage", 
                                                     "Gain +10 Base Damage", 
                                                     "Gain +15 Base Damage", 
                                                     "Gain +20 Base Damage", 
@@ -84,7 +124,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(15)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(20)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(30)),},baseStat: true),
-            new Augment("Damage","Heavy Hitter", new string[5]{"Gain +15 Base Damage", 
+            new Augment("Dmg","Heavy Hitter", new string[5]{"Gain +15 Base Damage", 
                                                     "Gain +20 Base Damage", 
                                                     "Gain +25 Base Damage", 
                                                     "Gain +35 Base Damage", 
@@ -93,7 +133,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(25)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(35)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(50)),},baseStat: true),
-            new Augment("Damage","Hephaestus", new string[5]{"Gain +40 Base Damage", 
+            new Augment("Dmg","Hephaestus", new string[5]{"Gain +40 Base Damage", 
                                                     "Gain +50 Base Damage", 
                                                     "Gain +65 Base Damage", 
                                                     "Gain +80 Base Damage", 
@@ -102,7 +142,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(65)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(80)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(100)),},baseStat: true),
-            new Augment("Accuracy","Target Practice", new string[5]{"Increase your accuracy by +5%", 
+            new Augment("Acc","Target Practice", new string[5]{"Increase your accuracy by +5%", 
                                                     "Increase your accuracy by +10%", 
                                                     "Increase your accuracy by +15%", 
                                                     "Increase your accuracy by +20%", 
@@ -111,7 +151,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(15)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(20)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(25)),},baseStat: true),
-            new Augment("Accuracy","Steady Aim", new string[5]{"Increase your accuracy by +10%", 
+            new Augment("Acc","Steady Aim", new string[5]{"Increase your accuracy by +10%", 
                                                     "Increase your accuracy by +15%", 
                                                     "Increase your accuracy by +25%", 
                                                     "Increase your accuracy by +35%", 
@@ -120,7 +160,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(25)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(35)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(50)),},baseStat: true),
-            new Augment("Accuracy","Eagle Eye", new string[5]{"Increase your accuracy by +20%", 
+            new Augment("Acc","Eagle Eye", new string[5]{"Increase your accuracy by +20%", 
                                                     "Increase your accuracy by +30%", 
                                                     "Increase your accuracy by +50%", 
                                                     "Increase your accuracy by +75%", 
@@ -129,27 +169,27 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(50)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(75)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAccuracy(100)),},baseStat: true),
-            new Augment("Atk Speed","Swifty Flames", new string[5]{
-                                                    "Increase your attack speed by +15", 
-                                                    "Increase your attack speed by +25", 
-                                                    "Increase your attack speed by +40", 
-                                                    "Increase your attack speed by +60", 
-                                                    "Increase your attack speed by +80"}, "AtkSpeed", Tier.Silver, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addAttackSpeed(.15f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.25f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.4f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.6f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(1f)),},baseStat: true),
-            new Augment("Atk Speed","Fire Dance", new string[5]{
+            new Augment("AtkSpeed","Swifty Flames", new string[5]{
+                                                    "Increase your attack speed by +10", 
+                                                    "Increase your attack speed by +20", 
                                                     "Increase your attack speed by +30", 
                                                     "Increase your attack speed by +50", 
-                                                    "Increase your attack speed by +70", 
-                                                    "Increase your attack speed by +100", 
-                                                    "Increase your attack speed by +160"}, "AtkSpeed", Tier.Gold, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addAttackSpeed(.3f)),
+                                                    "Increase your attack speed by +70"}, "AtkSpeed", Tier.Silver, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addAttackSpeed(.1f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.2f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.3f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAttackSpeed(.5f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.7f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.7f)),},baseStat: true),
+            new Augment("AtkSpeed","Fire Dance", new string[5]{
+                                                    "Increase your attack speed by +20", 
+                                                    "Increase your attack speed by +40", 
+                                                    "Increase your attack speed by +60", 
+                                                    "Increase your attack speed by +100", 
+                                                    "Increase your attack speed by +150"}, "AtkSpeed", Tier.Gold, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addAttackSpeed(.2f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.4f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(.6f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAttackSpeed(1f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(1.6f)),},baseStat: true),
-            new Augment("Atk Speed","Flamethrower", new string[5]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(1.5f)),},baseStat: true),
+            new Augment("AtkSpeed","Flamethrower", new string[5]{
                                                     "Gain 25% attack speed", 
                                                     "Gain 50% attack speed", 
                                                     "Gain 100% attack speed", 
@@ -159,7 +199,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.multAttackSpeed(2f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.multAttackSpeed(2.5f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.multAttackSpeed(3.5f)),},baseStat: true),
-            new Augment("Bullet Speed","Quick Shot", new string[5]{
+            new Augment("BltSpeed","Quick Shot", new string[5]{
                                                     "Gain +0.25 Bullet Speed", 
                                                     "Gain +0.5 Bullet Speed", 
                                                     "Gain +0.8 Bullet Speed", 
@@ -169,7 +209,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(.8f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(1.2f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(1.8f)),},baseStat: true),
-            new Augment("Bullet Speed","Fire-Express", new string[5]{
+            new Augment("BltSpeed","Fire-Express", new string[5]{
                                                     "Gain +0.5 Bullet Speed", 
                                                     "Gain +1 Bullet Speed", 
                                                     "Gain +1.75 Bullet Speed", 
@@ -179,7 +219,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(1.75f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(2.2f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addBulletSpeed(3f)),},baseStat: true),
-            new Augment("Bullet Speed","HiperDrive", new string[5]{
+            new Augment("BltSpeed","HiperDrive", new string[5]{
                                                     "Gain +1 Bullet Speed", 
                                                     "Gain +2 Bullet Speed", 
                                                     "Gain +4 Bullet Speed", 
@@ -248,12 +288,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmor(50)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmor(70)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmor(100)),},baseStat: true), 
-            new Augment("Random","Not enough refreshes", new string[1]{
-                                                    "Gain 2 random Silver augments"}, "GambleImprove", Tier.Silver, new UnityAction[1]{new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}})},baseStat: true), 
-            new Augment("Random","Feelin' Blessed", new string[1]{
-                                                    "Gain 3 random Silver augments"}, "GambleImprove", Tier.Gold, new UnityAction[1]{new UnityAction(() => {for (int i = 0; i < 3; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}})},baseStat: true),      
-            new Augment("Random","Roll the Dices", new string[1]{
-                                                    "Gain 3 random Gold augments"}, "GambleImprove", Tier.Prismatic, new UnityAction[1]{new UnityAction(() => {for (int i = 0; i < 3; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold));}})},baseStat: true),  
+            
         
 
 
@@ -262,55 +297,55 @@ public class DeckBuilder : MonoBehaviour
                 Flamey.Instance.addOnShootEffect(new SecondShot(0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"Multicaster"});            
             })}, baseCard: true),   
-            new Augment("Multicaster","The more the better", new string[3]{"When you fire a shot, gain a 3% chance to fire an extra shot", 
+            new Augment("MulticasterProb","The more the better", new string[3]{"When you fire a shot, gain a 3% chance to fire an extra shot", 
                                                                             "When you fire a shot, gain a 7% chance to fire an extra shot", 
                                                                             "When you fire a shot, gain a 12% chance to fire an extra shot"}, "MulticasterProb", Tier.Silver, new UnityAction[3]{
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.03f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.07f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.12f)))}), 
-            new Augment("Multicaster","Double trouble", new string[3]{"When you fire a shot, gain a 10% chance to fire an extra shot", 
+            new Augment("MulticasterProb","Double trouble", new string[3]{"When you fire a shot, gain a 10% chance to fire an extra shot", 
                                                                         "When you fire a shot, gain a 15% chance to fire an extra shot", 
                                                                         "When you fire a shot, gain a 20% chance to fire an extra shot"}, "MulticasterProb", Tier.Gold, new UnityAction[3]{
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.1f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.15f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.20f)))}), 
-            new Augment("Multicaster","Casting Cascade", new string[3]{"When you fire a shot, gain a 20% chance to fire an extra shot", 
+            new Augment("MulticasterProb","Casting Cascade", new string[3]{"When you fire a shot, gain a 20% chance to fire an extra shot", 
                                                                         "When you fire a shot, gain a 30% chance to fire an extra shot", 
                                                                         "When you fire a shot, gain a 40% chance to fire an extra shot"}, "MulticasterProb", Tier.Prismatic, new UnityAction[3]{
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.2f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.3f))),
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.4f)))}), 
 
-            new Augment("CriticUnlock" ,"Critical Inferno", new string[1]{"Unlock the ability to critical strike"}, "CritUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+            new Augment("CritUnlock" ,"Critical Inferno", new string[1]{"Unlock the ability to critical strike"}, "CritUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Critical Inferno");
                 Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 1.5f));
-                Deck.Instance.AddAugmentClass(new List<string>{"CriticDmg","CriticChance"});            
+                Deck.Instance.AddAugmentClass(new List<string>{"CritMult","CritChance"});            
             })}, baseCard: true),  
-            new Augment("CriticDmg","Lucky Shots", new string[3]{"Gain +5% critical strike damage", 
+            new Augment("CritMult","Lucky Shots", new string[3]{"Gain +5% critical strike damage", 
                                                             "Gain +15% critical strike damage", 
                                                             "Gain +30% critical strike damage"}, "CritMult", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.1f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.2f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.3f)))}), 
-            new Augment("CriticDmg","Critical Thinking", new string[3]{"Gain +15% critical strike damage", 
+            new Augment("CritMult","Critical Thinking", new string[3]{"Gain +15% critical strike damage", 
                                                             "Gain +35% critical strike damage", 
                                                             "Gain +70% critical strike damage"}, "CritMult", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.15f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.35f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.7f)))}),
-            new Augment("CriticChance","Critical Miracle", new string[3]{"Gain +3% critical strike chance (capped at 80%)", 
+            new Augment("CritChance","Critical Miracle", new string[3]{"Gain +3% critical strike chance (capped at 80%)", 
                                                             "Gain +7% critical strike chance (capped at 80%)", 
                                                             "Gain +15% critical strike chance (capped at 80%)"}, "CritChance", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.03f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.07f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0f)))}),
-            new Augment("CriticChance","Fate's Favor", new string[3]{"Gain +7% critical strike chance (capped at 80%)", 
+            new Augment("CritChance","Fate's Favor", new string[3]{"Gain +7% critical strike chance (capped at 80%)", 
                                                             "Gain +15% critical strike chance (capped at 80%)", 
                                                             "Gain +30% critical strike chance (capped at 80%)"}, "CritChance", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.07f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.3f, 0f)))}),
-            new Augment("CriticChance","Overheat", new string[3]{"Gain +10% critical strike chance (capped at 80%) and +30% critical strike damage", 
+            new Augment("CritChance","Overheat", new string[3]{"Gain +10% critical strike chance (capped at 80%) and +30% critical strike damage", 
                                                             "Gain +15% critical strike chance (capped at 80%) and +60% critical strike damage", 
                                                             "Gain +30% critical strike chance (capped at 80%) and +120% critical strike damage"}, "CritChance", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 0.3f))),
@@ -483,8 +518,8 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.15f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.5f)))}),                         
-            new Augment("AssassinUnlock" ,"Assassin's Path", new string[1]{"Unlock the ability to pierce armor and execute enemies"}, "Assassins", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Shredding Flames");
+            new Augment("Assassins" ,"Assassin's Path", new string[1]{"Unlock the ability to pierce armor and execute enemies"}, "Assassins", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeFromDeck("Assassin's Path");
                 Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
                 Flamey.Instance.addArmorPen(0.05f);
                 Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen","Execute"});            
@@ -525,42 +560,42 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmorPen(0.1f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmorPen(0.2f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmorPen(0.3f))}),
-            new Augment("BlueUnlock" ,"Blue Flame", new string[1]{"Unlock the ability to shoot blue flames that inflict extra damage"}, "BlueFlameUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+            new Augment("BlueFlameUnlock" ,"Blue Flame", new string[1]{"Unlock the ability to shoot blue flames that inflict extra damage"}, "BlueFlameUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Blue Flame");
                 Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 100));
-                Deck.Instance.AddAugmentClass(new List<string>{"BlueInterval","BlueDmg"});            
+                Deck.Instance.AddAugmentClass(new List<string>{"BlueFlameInterval","BlueFlameDmg"});            
             })}, baseCard: true),  
-            new Augment("BlueInterval","The Bluer The Better", new string[3]{"You will need 1 shot less to proc Blue Flame", 
+            new Augment("BlueFlameInterval","The Bluer The Better", new string[3]{"You will need 1 shot less to proc Blue Flame", 
                                                             "You will need 2 shots less to proc Blue Flame", 
                                                             "You will need 3 shots less to proc Blue Flame"}, "BlueFlameInterval", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(1, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(2, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(3, 0)))}),
-            new Augment("BlueInterval","Propane Combustion", new string[3]{"You will need 2 shot less to proc Blue Flame", 
+            new Augment("BlueFlameInterval","Propane Combustion", new string[3]{"You will need 2 shot less to proc Blue Flame", 
                                                             "You will need 4 shots less to proc Blue Flame", 
                                                             "You will need 6 shots less to proc Blue Flame"}, "BlueFlameInterval", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(2, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(4, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(6, 0)))}),
-            new Augment("BlueInterval","Never ending Blue", new string[3]{"You will need 4 shot less to proc Blue Flame", 
+            new Augment("BlueFlameInterval","Never ending Blue", new string[3]{"You will need 4 shot less to proc Blue Flame", 
                                                             "You will need 8 shots less to proc Blue Flame", 
                                                             "You will need 12 shots less to proc Blue Flame"}, "BlueFlameInterval", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(4, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(8, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(12, 0)))}),
-            new Augment("BlueDmg","Propane Leakage", new string[3]{"Your Blue Flame deals +15 extra damage", 
+            new Augment("BlueFlameDmg","Propane Leakage", new string[3]{"Your Blue Flame deals +15 extra damage", 
                                                             "Your Blue Flame deals +25 extra damage", 
                                                             "Your Blue Flame deals +40 extra damage"}, "BlueFlameDmg", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 15))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 30))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50)))}),
-            new Augment("BlueDmg","Powerfull Blue", new string[3]{"Your Blue Flame deals +30 extra damage", 
+            new Augment("BlueFlameDmg","Powerfull Blue", new string[3]{"Your Blue Flame deals +30 extra damage", 
                                                             "Your Blue Flame deals +50 extra damage", 
                                                             "Your Blue Flame deals +80 extra damage"}, "BlueFlameDmg", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 30))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100)))}),
-            new Augment("BlueDmg","Blue Inferno", new string[3]{"Your Blue Flame deals +50 extra damage", 
+            new Augment("BlueFlameDmg","Blue Inferno", new string[3]{"Your Blue Flame deals +50 extra damage", 
                                                             "Your Blue Flame deals +100 extra damage", 
                                                             "Your Blue Flame deals +200 extra damage"}, "BlueFlameDmg", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))),
@@ -600,75 +635,75 @@ public class DeckBuilder : MonoBehaviour
             new Augment("LavaPoolUnlock" ,"Lava Pool", new string[1]{"Unlock the ability to create Lava Pools that ignore enemy armor"}, "LavaPoolUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Lava Pool");
                 Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 25, 0.05f, 1f));
-                Deck.Instance.AddAugmentClass(new List<string>{"LavaDmg","LavaSize","LavaProb","LavaDuration"});            
+                Deck.Instance.AddAugmentClass(new List<string>{"LavaPoolDmg","LavaPoolSize","LavaPoolProb","LavaPoolDuration"});            
             })}, baseCard: true), 
-            new Augment("LavaDmg","Hot Tub", new string[3]{"Your Lava Pool will inflict +5 damage per second", 
+            new Augment("LavaPoolDmg","Hot Tub", new string[3]{"Your Lava Pool will inflict +5 damage per second", 
                                                             "Your Lava Pool will inflict +10 damage per second", 
-                                                            "Your Lava Pool will inflict +15 damage per second"}, "LavaPoolProb", Tier.Silver, new UnityAction[3]{
+                                                            "Your Lava Pool will inflict +15 damage per second"}, "LavaPoolDmg", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,5,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,15,0,0)))}),
-            new Augment("LavaDmg","Magical Scorch", new string[3]{"Your Lava Pool will inflict +10 damage per second", 
+            new Augment("LavaPoolDmg","Magical Scorch", new string[3]{"Your Lava Pool will inflict +10 damage per second", 
                                                             "Your Lava Pool will inflict +20 damage per second", 
-                                                            "Your Lava Pool will inflict +30 damage per second"}, "LavaPoolProb", Tier.Gold, new UnityAction[3]{
+                                                            "Your Lava Pool will inflict +30 damage per second"}, "LavaPoolDmg", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,10,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,20,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,30,0,0)))}),
-            new Augment("LavaDmg","Conflagration", new string[3]{"Your Lava Pool will inflict +20 damage per second", 
+            new Augment("LavaPoolDmg","Conflagration", new string[3]{"Your Lava Pool will inflict +20 damage per second", 
                                                             "Your Lava Pool will inflict +40 damage per second", 
-                                                            "Your Lava Pool will inflict +60 damage per second"}, "LavaPoolProb", Tier.Prismatic, new UnityAction[3]{
+                                                            "Your Lava Pool will inflict +60 damage per second"}, "LavaPoolDmg", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,20,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,40,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,60,0,0)))}),
-            new Augment("LavaProb","Hot Steps", new string[3]{"Gain +3% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+            new Augment("LavaPoolProb","Hot Steps", new string[3]{"Gain +3% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
                                                             "Gain +5% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolDmg", Tier.Silver, new UnityAction[3]{
+                                                            "Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.03f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.05f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0)))}),
-            new Augment("LavaProb","Lava here, Lava there", new string[3]{"Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+            new Augment("LavaPoolProb","Lava here, Lava there", new string[3]{"Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
                                                             "Gain +10% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolDmg", Tier.Gold, new UnityAction[3]{
+                                                            "Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.1f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0)))}),
-            new Augment("LavaProb","The Apocalypse", new string[3]{"Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
+            new Augment("LavaPoolProb","The Apocalypse", new string[3]{"Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
                                                             "Gain +20% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +30% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolDmg", Tier.Prismatic, new UnityAction[3]{
+                                                            "Gain +30% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.2f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.3f,0)))}),
-            new Augment("LavaSize","Heat Area", new string[3]{"Your Lava Pool grows by +0.20 (capped at 2.5)", 
+            new Augment("LavaPoolSize","Heat Area", new string[3]{"Your Lava Pool grows by +0.20 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +0.25 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +0.30 (capped at 2.5)"}, "LavaPoolSize", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.2f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.3f,0,0,0)))}),
-            new Augment("LavaSize","Lava Lakes", new string[3]{"Your Lava Pool grows by +0.4 (capped at 2.5)", 
+            new Augment("LavaPoolSize","Lava Lakes", new string[3]{"Your Lava Pool grows by +0.4 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +0.5 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +0.6 (capped at 2.5)"}, "LavaPoolSize", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.4f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.6f,0,0,0)))}),
-            new Augment("LavaSize","Inside the volcano", new string[3]{"Your Lava Pool grows by +0.8 (capped at 2.5)", 
+            new Augment("LavaPoolSize","Inside the volcano", new string[3]{"Your Lava Pool grows by +0.8 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +1 (capped at 2.5)", 
                                                             "Your Lava Pool grows by +1.2 (capped at 2.5)"}, "LavaPoolSize", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.8f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1.2f,0,0,0)))}),
-            new Augment("LavaDuration","Sear the ground", new string[3]{"Your Lava Pool lasts for +0.3 seconds", 
+            new Augment("LavaPoolDuration","Sear the ground", new string[3]{"Your Lava Pool lasts for +0.3 seconds", 
                                                             "Your Lava Pool lasts for +0.5 seconds", 
                                                             "Your Lava Pool lasts for +0.8 seconds"}, "LavaPoolDuration", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.5f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.8f)))}),
-            new Augment("LavaDuration","Eternally Hot", new string[3]{"Your Lava Pool lasts for +0.8 seconds", 
+            new Augment("LavaPoolDuration","Eternally Hot", new string[3]{"Your Lava Pool lasts for +0.8 seconds", 
                                                             "Your Lava Pool lasts for +1.2 seconds", 
                                                             "Your Lava Pool lasts for +1.7 seconds"}, "LavaPoolDuration", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.8f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.2f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.7f)))}),
-            new Augment("LavaDuration","Unsettling Magma", new string[3]{"Your Lava Pool lasts for +1.8 seconds", 
+            new Augment("LavaPoolDuration","Unsettling Magma", new string[3]{"Your Lava Pool lasts for +1.8 seconds", 
                                                             "Your Lava Pool lasts for +2.4 seconds", 
                                                             "Your Lava Pool lasts for +3.5 seconds"}, "LavaPoolDuration", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.8f))),
@@ -889,6 +924,26 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(.15f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0.2f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(.3f, 0)))}, baseCardUpgrade:true),
+            new Augment("GambleImprove","Not enough refreshes", new string[3]{"Gain a random silver augment", 
+                                                            "Gain 2 random silver augments", 
+                                                            "Gain 1 random gold augment"}, "GambleImprove", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver))),
+                                                                                                                        new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}}),
+                                                                                                                        new UnityAction(() => Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold)))}, baseCardUpgrade:true),
+            new Augment("GambleImprove","Feelin' Blessed", new string[3]{"Gain a random gold augment", 
+                                                            "Gain 2 random silver augments", 
+                                                            "Gain 2 random gold augments"}, "GambleImprove", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold))),
+                                                                                                                        new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}}),
+                                                                                                                        new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold));}})}, baseCardUpgrade:true),
+            new Augment("GambleImprove","Roll the Dice", new string[3]{"Gain a random prismatic augment", 
+                                                            "Gain 2 random gold augments", 
+                                                            "Gain 2 random prismatic augments"}, "GambleImprove", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Prismatic))),
+                                                                                                                        new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold));}}),
+                                                                                                                        new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Prismatic));}})}, baseCardUpgrade:true),
+
+            
             new Augment("VampDeathUnlock" ,"Essence Eater", new string[1]{"Unlock the ability to drain the essence of dead enemies"}, "VampDeathUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Essence Eater");
                 Flamey.Instance.addOnKillEffect(new VampOnDeath(0.1f,0.15f));
@@ -931,7 +986,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.2f,0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.3f,0f)))}),    
             new Augment("ExplodeUnlock" ,"Explosion", new string[1]{"Unlock the ability to generate explosions whenever enemies die"}, "ExplodeUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Essence Eater");
+                Deck.Instance.removeFromDeck("Explosion");
                 Flamey.Instance.addOnKillEffect(new Explosion(0.1f,50));
                 Deck.Instance.AddAugmentClass(new List<string>{"ExplodeProb","ExplodeDmg"});            
             })}, baseCard: true),  
@@ -1061,7 +1116,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,1))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,2))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,3)))}),
-            new Augment("Regen" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+            new Augment("RegenUnlock" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Regeneration");
                 Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 10f));
                 Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            

@@ -19,6 +19,9 @@ public class MetaMenuUI : MonoBehaviour
     public void StartGame(){
         SceneManager.LoadScene("Game");
     }
+    public void PlayOutro(){
+        GetComponent<Animator>().Play("Outro");
+    }
     // private void Update() {
     //     float scrollDelta = Input.mouseScrollDelta.y;
     //     if(scrollDelta!=0){

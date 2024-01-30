@@ -48,6 +48,7 @@ public class SkillTreeManager : MonoBehaviour
         //changeUpgradeInfoTexts(displayedSkill);
         changeEmberAmountUI();
     }
+    
 
     public Color getColor(string augmentClass){
         int maxlvl = getMaxLevel(augmentClass);
@@ -113,6 +114,17 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
 
+    public static void AddEmbersToJSON(int n){
+        Debug.Log("Adding " + n + " embers to JSON");
+        if(File.Exists(Application.dataPath +"/skills.json")){
+            string jsonR = File.ReadAllText(Application.dataPath +"/skills.json");
+            SerializableList<Skills> p  = JsonUtility.FromJson<SerializableList<Skills>>(jsonR);
+            p.embers += n;
+            string jsonW = JsonUtility.ToJson(p);
+            File.WriteAllText(Application.dataPath + "/skills.json", jsonW);
+        }
+    }
+
 
    
 
@@ -160,20 +172,14 @@ public class SkillTreeManager : MonoBehaviour
         
 
     }
-    public static void AddEmbers(int n){
-        if(Instance == null){Debug.LogWarning("No SkillTreeManager Instance Found");}
-        else{
-            Instance.PlayerData.embers += n;
-            Instance.WritingData();
-        }
-    }
+    
     public void changeEmberAmountUI(){
   
-        int difference = PlayerData.embers - int.Parse(emberAmountTxt.text);
+        //int difference = PlayerData.embers - int.Parse(emberAmountTxt.text);
         emberAmountTxt.text = PlayerData.embers.ToString();
         
-        emberLossTxt.text = difference > 0 ? "+"+difference : ""+difference;
-        GetComponentInParent<Animator>().Play("SkillTreeLoss");
+        // emberLossTxt.text = difference > 0 ? "+"+difference : ""+difference;
+        // GetComponentInParent<Animator>().Play("SkillTreeLoss");
     }
 
     public void resetSkillTree(){
