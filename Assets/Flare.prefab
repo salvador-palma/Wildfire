@@ -4942,9 +4942,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77066fc5d0054b4caf1e5db6736dfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goingDownPhase: 0
+  speedAscend: 0
+  speedDescend: 0
+  target: {x: 0, y: 0}
+  FlareSpot: {fileID: 0}
   Damage: 0
+  destY: 0
   SpotColor: {r: 0.99215686, g: 0.60784316, b: 0.3137255, a: 0}
-  FlameType: 0
   DmgTextID: 0
 --- !u!1 &8975080467911726130
 GameObject:

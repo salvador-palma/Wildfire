@@ -231,6 +231,7 @@ public class Flamey : MonoBehaviour
     private void EndGame(){
         GameEnd = true;
         EnemySpawner.Instance.GameEnd = true;
+        GameState.Delete();
         GameUI.Instance.SpeedUp(1f);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject e in enemies){

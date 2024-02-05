@@ -38,7 +38,7 @@ public class ThornsOnHitted : OnHittedEffects
 
         if(Random.Range(0f,1f) < prob){
             if(Flamey.Instance.Armor == 0){return;}
-            en.HittedArmorless((int)(Flamey.Instance.Armor * perc), 10);
+            en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: true, onHit: true);
         }
 
     }
@@ -58,7 +58,7 @@ public class ThornsOnHitted : OnHittedEffects
     }
     public string getDescription()
     {
-        return "Everytime you get hit by an enemy you have a " + prob*100f + "% chance of returning " + perc*100f+ "% of your Armor as damage back. This effect ignores enemy armor completely";
+        return "Everytime you get hit by an enemy you have a " + Mathf.Round(prob*100f) + "% chance of returning " + Mathf.Round(perc*100f)+ "% of your Armor as damage back. This effect ignores enemy armor completely";
     }
 
     public string getIcon()

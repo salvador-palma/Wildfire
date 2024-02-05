@@ -54,7 +54,7 @@ public class HealthRegen : TimeBasedEffect
     
     public string getDescription()
     {
-        return "You regen " + perSec + " health per second and " + perRound + " at the end of each round";
+        return "You regen " + Mathf.Round(perSec * 100.0f) * 0.01f + " health per second and " + Mathf.Round(perRound * 100.0f) * 0.01f + " at the end of each round";
     }
 
     public string getIcon()
@@ -129,7 +129,7 @@ public class LightningEffect : TimeBasedEffect
     
     public string getDescription()
     {
-        return "Each " + (float)interval/4 + " seconds, a thunder will spawn at a convenient location dealing " + dmg + " to enemies struck by it. When it lands, the thunder applies On-Land Effects";
+        return "Each " + Mathf.Round((float)interval/4 * 100.0f) * 0.01f + " seconds, a thunder will spawn at a convenient location dealing " + dmg + " to enemies struck by it. When it lands, the thunder applies On-Land Effects";
     }
 
     public string getIcon()
@@ -213,7 +213,7 @@ public class Immolate : TimeBasedEffect
     
     public string getDescription()
     {
-        return "Each " + (float)interval/4 + " seconds, you will release energy that travels " + radius*100 + " units and deals " + dmg + " damage";
+        return "Each " + Mathf.Round((float)interval/4 * 100.0f) * 0.01f + " seconds, you will release energy that travels " + Mathf.Round(radius*100) + " units and deals " + dmg + " damage";
     }
 
     public string getIcon()

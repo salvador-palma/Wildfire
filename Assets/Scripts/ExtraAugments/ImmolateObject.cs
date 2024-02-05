@@ -39,7 +39,7 @@ public class ImmolateObject : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Enemy"){
             Enemy e = other.GetComponent<Enemy>();
-            e.HittedWithArmor(dmg, false, 9);
+            e.Hitted(dmg, 9, ignoreArmor:false, onHit:false);
         }
     }
 }

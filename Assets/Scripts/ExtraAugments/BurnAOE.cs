@@ -30,7 +30,7 @@ public class BurnAOE : MonoBehaviour
                 foreach (Enemy item in colliding)
                 {
                     if(item == null){continue;}
-                    item.HittedArmorless(Damage,9);
+                    item.Hitted(Damage,9, ignoreArmor:true, onHit: false);
                     
                 }
             }catch(InvalidOperatorException e){

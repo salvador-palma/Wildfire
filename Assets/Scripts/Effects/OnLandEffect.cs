@@ -79,7 +79,7 @@ public class BurnOnLand : OnLandEffect
 
     public string getDescription()
     {
-        return "Whenever a shot lands, there's a " + prob * 100 + "% chance of spawning a Lava Pool with x" + size + " size that lasts for " + lasting + " seconds . The Lava Pool deals " + damage + " damage per second to enemies stepping on it.";
+        return "Whenever a shot lands, there's a " + Mathf.Round(prob * 100) + "% chance of spawning a Lava Pool with x" + size + " size that lasts for " + lasting + " seconds . The Lava Pool deals " + damage + " damage per second to enemies stepping on it.";
     }
 
     public string getIcon()
@@ -165,7 +165,7 @@ public class IceOnLand : OnLandEffect
 
     public string getDescription()
     {
-        return "Whenever a shot lands, there's a " + prob * 100 + "% chance of spawning an Ice Pool with x" + size + " size that lasts for " + lasting + " seconds . The Ice Pool slows down enemies stepping on it for " + slow*100 + "%";
+        return "Whenever a shot lands, there's a " + Mathf.Round(prob * 100) + "% chance of spawning an Ice Pool with x" + size + " size that lasts for " + lasting + " seconds . The Ice Pool slows down enemies stepping on it for " + Mathf.Round(slow*100) + "%";
     }
 
     public string getIcon()

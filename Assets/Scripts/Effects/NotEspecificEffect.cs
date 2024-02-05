@@ -137,7 +137,7 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Whenever you kill an enemy, there's a " + p*100 + "% of getting more embers. This value is then multiplied by " + mult*100 + "%. You can check the Bestiary for more info on enemy specific drop rates.";
+        return "Whenever you kill an enemy, there's a " + Mathf.Round(p*100) + "% of getting more embers. This value is then multiplied by " + Mathf.Round(mult*100) + "%. You can check the Bestiary for more info on enemy specific drop rates.";
     }
 
     public string getIcon()
@@ -204,7 +204,7 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + atkSpeed + " attack speed";
+        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + Mathf.Round(atkSpeed) + " attack speed";
     }
 
     public string getIcon()
@@ -229,16 +229,19 @@ public class CandleTurrets : NotEspecificEffect
         amount += candleTurrets.amount;
         RemoveUselessAugments();
     }
+    bool checkedForAmount = false;
     private void RemoveUselessAugments(){
-        if(amount > 6){
+       
+        if(amount >= 6 && !checkedForAmount){
+            checkedForAmount = true;
             amount = 6;
             CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
             GameObject.Find("logs").SetActive(false);
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Philosopher's Stone");
         } 
-        if(atkSpeed >= 6f){
-            atkSpeed = 6f;
+        if(atkSpeed >= 3f){
+            atkSpeed = 3f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Alembic Artistry");
             deck.removeFromDeck("Ancient Wizard");
@@ -296,7 +299,7 @@ public class Summoner : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + "Bees will fight by your side, targeting the closest enemy and applying On-Hit effects. Each Bee deals " + dmg + " damage, has " + atkSpeed + " attack speed and " + speed + " speed";
+        return amount + "Bees will fight by your side, targeting the closest enemy and applying On-Hit effects. Each Bee deals " + dmg + " damage, has " + Mathf.Round(atkSpeed) + " attack speed and " + Mathf.Round(speed) + " speed";
     }
 
     public string getIcon()
@@ -323,20 +326,20 @@ public class Summoner : NotEspecificEffect
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(amount > 12){
-            amount = 12;
+        if(amount > 10){
+            amount = 10;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Bee Hive");
         } 
-        if(atkSpeed >= 6f){
-            atkSpeed = 6f;
+        if(atkSpeed >= 3f){
+            atkSpeed = 3f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Rapid Shooters");
             deck.removeFromDeck("Bee-autiful Pets");
             deck.removeFromDeck("Bee Swarm");
         } 
-        if(speed >= 6f){
-            speed = 6f;
+        if(speed >= 4f){
+            speed = 4f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Speeding Up");
             deck.removeFromDeck("Agility");

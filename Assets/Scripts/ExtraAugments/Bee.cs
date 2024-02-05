@@ -42,7 +42,7 @@ public class Bee : MonoBehaviour
     }
     private void Attack(){
         atkTimer = 1/atkSpeed;
-        target.HittedWithArmor((int)dmg, true, 10);
+        target.Hitted(dmg, 12, ignoreArmor:false, onHit:true);
     }
     private void checkFlip(){
         if(target!=null && sp != null){

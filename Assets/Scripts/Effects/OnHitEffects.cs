@@ -72,7 +72,7 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You have a " + prob*100 + "% chance per shot of healing " + perc*100 + "% of the damage you dealt. This applies for critical damage aswell.";
+        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of healing " + Mathf.Round(perc*100) + "% of the damage you dealt. This applies for critical damage aswell.";
     }
 
     public string getIcon()
@@ -146,7 +146,7 @@ public class IceOnHit : OnHitEffects
         
         float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
         
-        return "You have a " + prob*100 + "% chance per shot of slowing the enemy for " + percentage * 100 + "% of it's speed for a duration of "+ duration/1000 + " seconds. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
+        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of slowing the enemy for " + Mathf.Round(percentage * 100) + "% of it's speed for a duration of "+ Mathf.Round(duration/1000) + " seconds. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
     }
 
     public string getIcon()
@@ -218,7 +218,7 @@ public class ShredOnHit : OnHitEffects
     public string getDescription()
     {
 
-        return "You have a " + prob*100 + "% chance per shot of reducing the target's armor for " + percReduced * 100 + "%" ;
+        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of reducing the target's armor for " + Mathf.Round(percReduced * 100) + "%" ;
     }
 
     public string getIcon()
@@ -283,7 +283,7 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You penetrate through " + Flamey.Instance.ArmorPen * 100 + "% of enemy armor. When you hit an enemy below " + percToKill*100 + "% of it's Max Health, you execute them." ;
+        return "You penetrate through " + Mathf.Round(Flamey.Instance.ArmorPen * 100) + "% of enemy armor. When you hit an enemy below " + Mathf.Round(percToKill*100) + "% of it's Max Health, you execute them." ;
     }
 
     public string getIcon()
@@ -362,7 +362,7 @@ public class StatikOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "When you hit an enemy, you have a chance of " + prob * 100 + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each and applies On-Hit effects";
+        return "When you hit an enemy, you have a chance of " + Mathf.Round(prob * 100) + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each and applies On-Hit effects";
     }
 
     public string getIcon()

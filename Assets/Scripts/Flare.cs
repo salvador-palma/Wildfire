@@ -24,6 +24,7 @@ public class Flare : MonoBehaviour
 
     
     public int DmgTextID;
+
     public void VirtualStart(){
         Reset();
         SetupTarget();
@@ -90,12 +91,15 @@ public class Flare : MonoBehaviour
     }
     virtual protected void SummonFlareSpot(Vector2 vec){
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
+        
         FlareSpot.transform.position = vec;
+        FlareSpot.GetComponent<SpriteRenderer>().enabled=true;
     }
 
     virtual protected void HitGround(Vector2 position){
         Flamey.Instance.ApplyOnLand(position);
-        Destroy(FlareSpot.gameObject);
+
+        Destroy(FlareSpot);
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, FlareManager.EnemyMask);
         if(colliders.Length > 0){
@@ -104,11 +108,12 @@ public class Flare : MonoBehaviour
         }
         
         foreach(Collider2D col in colliders){
-            col.GetComponent<Enemy>().Hitted(Damage, DmgTextID);
+            col.GetComponent<Enemy>().Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
         }
     }
     private void FlareSpotUpdate(){
         SpotColor.a = 0.6f - Vector2.Distance(transform.position, FlareSpot.transform.position)/6;
+        
         FlareSpot.GetComponent<SpriteRenderer>().color = SpotColor;
     }
 
@@ -124,4 +129,8 @@ public class Flare : MonoBehaviour
     }
     
     
+
+
+
+
 }

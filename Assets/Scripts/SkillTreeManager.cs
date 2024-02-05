@@ -133,7 +133,7 @@ public class SkillTreeManager : MonoBehaviour
         if(skill==null){
             return;
         }
-        GetComponentInParent<Animator>().SetTrigger("Info");
+        GetComponentInParent<Animator>().SetBool("InfoDisplay",true);
         Skills s = GetSkills(skill);
         if(s.max_value == 1){
             UpgradeExtraTexts[2].text = s.value == s.max_value ? "Unlocked" : "Unlock";
@@ -183,10 +183,22 @@ public class SkillTreeManager : MonoBehaviour
     }
 
     public void resetSkillTree(){
+        List<string> exceptions = new List<string>(){"SummonUnlock", "NecroUnlock", "MoneyUnlock"};
+        
+
         foreach (Skills item in PlayerData.skills)
         {
-            item.value = item.max_value == 4 || item.max_value == 0 ? 0 : -1;
+            if(exceptions.Contains(item.type) && item.value > -1){
+                item.value = 0;
+            }
+            else{
+                item.value = item.max_value == 4 ? 0 : -1;
+            }
+            
+
         }
+
+        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
         PlayerData.embers += PlayerData.skillTreeEmbers;
         PlayerData.skillTreeEmbers = 0;
         changeEmberAmountUI();
@@ -195,8 +207,8 @@ public class SkillTreeManager : MonoBehaviour
         
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
-        GetComponentInParent<Animator>().SetTrigger("Rest");
-        SkillTreePanel.transform.position = new Vector2(SkillTreePanel.transform.position.x > 2000 ? 0 : 2000, 0);
+        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+        SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
 
     }
     

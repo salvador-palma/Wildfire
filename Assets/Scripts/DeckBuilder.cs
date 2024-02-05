@@ -16,14 +16,15 @@ public class DeckBuilder : MonoBehaviour
         if(Instance == this){DefineAugmentClasses();DefineAugmentClassesPrice();}
         basePrice = new int[4]{300,900,2700,8100};
         upgradePrice = new int[2]{2500,7500};
-        unlockPrice = new int[1]{1000};
+        unlockPrice = new int[1]{500};
     }
     
     public int getPrice(string skill, int level){
         // int[] prices = AugmentPrices[skill];
+        List<string> firstUnlocks = new List<string>(){"OrbitalUnlock","Assassins", "CritUnlock", "RegenUnlock", "ShredUnlock", "BurstUnlock"};
         int[] prices = new int[0];
         switch(SkillTreeManager.Instance.GetSkills(skill).max_value){
-            case 1: prices = unlockPrice;
+            case 1: prices =  unlockPrice;
                 break;
             case 2: prices = upgradePrice;
                 break;
@@ -31,12 +32,10 @@ public class DeckBuilder : MonoBehaviour
                 break;  
         }
         if(level>=prices.Length || level < 0){return -1;}
-        return prices[level];
+        return firstUnlocks.Contains(skill) ? 300 : prices[level];
     }
     public void DefineAugmentClassesPrice(){
-        int[] basePrice = new int[4]{300,900,2700,8100};
-        int[] upgradePrice = new int[2]{2500,7500};
-        int[] unlockPrice = new int[1]{1000};
+        
 
         AugmentPrices = new Dictionary<string, int[]>();
 
@@ -133,15 +132,15 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(25)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(35)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(50)),},baseStat: true),
-            new Augment("Dmg","Hephaestus", new string[5]{"Gain +40 Base Damage", 
+            new Augment("Dmg","Hephaestus", new string[5]{"Gain +30 Base Damage", 
+                                                    "Gain +40 Base Damage", 
                                                     "Gain +50 Base Damage", 
                                                     "Gain +65 Base Damage", 
-                                                    "Gain +80 Base Damage", 
-                                                    "Gain +100 Base Damage"}, "Dmg", Tier.Prismatic, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addDmg(40)),
+                                                    "Gain +80 Base Damage"}, "Dmg", Tier.Prismatic, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addDmg(30)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addDmg(40)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(50)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addDmg(65)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addDmg(80)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addDmg(100)),},baseStat: true),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addDmg(80)),},baseStat: true),
             new Augment("Acc","Target Practice", new string[5]{"Increase your accuracy by +5%", 
                                                     "Increase your accuracy by +10%", 
                                                     "Increase your accuracy by +15%", 
@@ -190,15 +189,15 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addAttackSpeed(1f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addAttackSpeed(1.5f)),},baseStat: true),
             new Augment("AtkSpeed","Flamethrower", new string[5]{
-                                                    "Gain 25% attack speed", 
-                                                    "Gain 50% attack speed", 
-                                                    "Gain 100% attack speed", 
-                                                    "Gain 150% attack speed", 
-                                                    "Gain 250% attack speed"}, "AtkSpeed", Tier.Prismatic, new UnityAction[5]{new UnityAction(() => Flamey.Instance.multAttackSpeed(1.25f)),
+                                                    "Increase your attack speed by +50", 
+                                                    "Increase your attack speed by +80", 
+                                                    "Multiply your attack speed by x1.5", 
+                                                    "Multiply your attack speed by x2", 
+                                                    "Multiply your attack speed by x2.5"}, "AtkSpeed", Tier.Prismatic, new UnityAction[5]{new UnityAction(() => Flamey.Instance.addAttackSpeed(0.5f)),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addAttackSpeed(0.8f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.multAttackSpeed(1.5f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.multAttackSpeed(2f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.multAttackSpeed(2.5f)),
-                                                                                                                        new UnityAction(() => Flamey.Instance.multAttackSpeed(3.5f)),},baseStat: true),
+                                                                                                                        new UnityAction(() => Flamey.Instance.multAttackSpeed(2.5f)),},baseStat: true),
             new Augment("BltSpeed","Quick Shot", new string[5]{
                                                     "Gain +0.25 Bullet Speed", 
                                                     "Gain +0.5 Bullet Speed", 
@@ -1010,22 +1009,22 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(.4f,0)))}),  
             new Augment("ExplodeDmg","Cherry Bomb", new string[3]{"Generated explosions will deal +10 damage", 
                                                             "Generated explosions will deal +20 damage", 
-                                                            "Generated explosions will deal +50 damage"}, "ExplodeDmg", Tier.Silver, new UnityAction[3]{
+                                                            "Generated explosions will deal +30 damage"}, "ExplodeDmg", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,10))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,20))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,30)))}),  
-            new Augment("ExplodeDmg","Dynamite Blast", new string[3]{"Generated explosions will deal +30 damage", 
-                                                            "Generated explosions will deal +60 damage", 
-                                                            "Generated explosions will deal +100 damage"}, "ExplodeDmg", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,30))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,60))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,100)))}),
-            new Augment("ExplodeDmg","Nuke Blast", new string[3]{"Generated explosions will deal +100 damage", 
-                                                            "Generated explosions will deal +200 damage", 
-                                                            "Generated explosions will deal +300 damage"}, "ExplodeDmg", Tier.Prismatic, new UnityAction[3]{
+            new Augment("ExplodeDmg","Dynamite Blast", new string[3]{"Generated explosions will deal +25 damage", 
+                                                            "Generated explosions will deal +50 damage", 
+                                                            "Generated explosions will deal +75 damage"}, "ExplodeDmg", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,25))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,50))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,75)))}),
+            new Augment("ExplodeDmg","Nuke Blast", new string[3]{"Generated explosions will deal +50 damage", 
+                                                            "Generated explosions will deal +100 damage", 
+                                                            "Generated explosions will deal +150 damage"}, "ExplodeDmg", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,50))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,100))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,200))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,300)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new Explosion(0,150)))}),
             
             
             new Augment("NecroUnlock" ,"Necromancer", new string[1]{"Unlock the ability to summon ghouls whenever enemies die"}, "NecroUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
@@ -1198,68 +1197,68 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,50))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,100))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,200)))}),
-            new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to control Thunder"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+            new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to release Heat Waves"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Immolate");
                 Flamey.Instance.addTimeBasedEffect(new Immolate(100, 25, 0.3f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
             })}, baseCard: true),  
-            new Augment("ImmolateInterval","Heat Discharge", new string[3]{"Immolate cooldown decreases by -0.25 seconds", 
-                                                            "Immolate cooldown decreases by -0.5 seconds", 
-                                                            "Immolate cooldown decreases by -1 seconds"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(1, 0,0))),
+            new Augment("ImmolateInterval","Heat Discharge", new string[3]{"Immolate cooldown decreases by -0.5 seconds", 
+                                                            "Immolate cooldown decreases by -1 seconds", 
+                                                            "Immolate cooldown decreases by -2 seconds"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(2, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(4, 0,0)))}), 
-            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by -0.5 seconds", 
-                                                            "Immolate cooldown decreases by -1.25 seconds", 
-                                                            "Immolate cooldown decreases by -2 seconds"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(2, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(5, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0)))}),
-            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by -2 seconds", 
-                                                            "Immolate cooldown decreases by -3 seconds", 
-                                                            "Immolate cooldown decreases by -4 seconds"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(4, 0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0)))}), 
+            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by -1 seconds", 
+                                                            "Immolate cooldown decreases by -2 seconds", 
+                                                            "Immolate cooldown decreases by -4 seconds"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(4, 0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(12, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(16, 0,0)))}),  
-            new Augment("ImmolateDmg","Volt Tackle", new string[3]{"Immolate will deal +5 damage", 
-                                                            "Immolate will deal +7 damage", 
-                                                            "Immolate will deal +10 damage"}, "ImmolateDmg", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,10,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,20,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,30,0)))}),  
-            new Augment("ImmolateDmg","Universal Damage", new string[3]{"Immolate will deal +10 damage", 
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(16, 0,0)))}),
+            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by -2 seconds", 
+                                                            "Immolate cooldown decreases by -4 seconds", 
+                                                            "Immolate cooldown decreases by -8 seconds"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(16, 0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(32, 0,0)))}),  
+            new Augment("ImmolateDmg","Summer Heat", new string[3]{"Immolate will deal +10 damage", 
                                                             "Immolate will deal +15 damage", 
-                                                            "Immolate will deal +25 damage"}, "ImmolateDmg", Tier.Gold, new UnityAction[3]{
+                                                            "Immolate will deal +25 damage"}, "ImmolateDmg", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,10,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,15,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,25,0)))}),  
+            new Augment("ImmolateDmg","Universal Damage", new string[3]{"Immolate will deal +20 damage", 
+                                                            "Immolate will deal +30 damage", 
+                                                            "Immolate will deal +50 damage"}, "ImmolateDmg", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,20,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,40,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,60,0)))}),
-            new Augment("ImmolateDmg","Nuclear Shockwave", new string[3]{"Immolate will deal +20 damage", 
-                                                            "Immolate will deal +40 damage", 
-                                                            "Immolate will deal +50 damage"}, "ImmolateDmg", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,30,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0)))}),
+            new Augment("ImmolateDmg","Nuclear Shockwave", new string[3]{"Immolate will deal +50 damage", 
+                                                            "Immolate will deal +75 damage", 
+                                                            "Immolate will deal +150 damage"}, "ImmolateDmg", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,100,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,200,0)))}),
-            new Augment("ImmolateRadius","Waving Flames", new string[3]{"Immolating waves will travel for +5 radius", 
-                                                            "Immolating waves will travel for +10 radius", 
-                                                            "Immolating waves will travel for +20 radius"}, "ImmolateRadius", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,75,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,150,0)))}),
+            new Augment("ImmolateRadius","Waving Flames", new string[3]{"Immolating waves will travel for +10 radius", 
+                                                            "Immolating waves will travel for +15 radius", 
+                                                            "Immolating waves will travel for +25 radius"}, "ImmolateRadius", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.1f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.2f)))}),  
-            new Augment("ImmolateRadius","Spread the Fire", new string[3]{"Immolating waves will travel for +10 radius", 
-                                                            "Immolating waves will travel for +25 radius", 
-                                                            "Immolating waves will travel for +40 radius"}, "ImmolateRadius", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f)))}),  
+            new Augment("ImmolateRadius","Spread the Fire", new string[3]{"Immolating waves will travel for +25 radius", 
+                                                            "Immolating waves will travel for +35 radius", 
+                                                            "Immolating waves will travel for +50 radius"}, "ImmolateRadius", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.4f)))}),
-            new Augment("ImmolateRadius","Across the Globe", new string[3]{"Immolating waves will travel for +20 radius", 
-                                                            "Immolating waves will travel for +50 radius", 
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.35f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f)))}),
+            new Augment("ImmolateRadius","Across the Globe", new string[3]{"Immolating waves will travel for +50 radius", 
+                                                            "Immolating waves will travel for +75 radius", 
                                                             "Immolating waves will travel for +100 radius"}, "ImmolateRadius", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.2f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.75f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,1f)))}),
             new Augment("CandleUnlock" ,"Arcanist", new string[1]{"Unlock the ability to start a ritual"}, "CandleUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Arcanist");
-                Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.25f, 1));
+                Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.2f, 1));
                 Deck.Instance.AddAugmentClass(new List<string>{"CandleDmg","CandleAmount","CandleAtkSpeed"});            
             })}, baseCard: true),  
             new Augment("CandleAtkSpeed","Alembic Artistry", new string[3]{"Candles will increase their attack speed by +10", 
@@ -1311,23 +1310,23 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount"});            
             })}, baseCard: true),  
             new Augment("SummonAtkSpeed","Rapid Shooters", new string[3]{"Bees will increase their attack speed by +10", 
-                                                            "Bees will increase their attack speed by +25", 
-                                                            "Bees will increase their attack speed by +40"}, "SummonAtkSpeed", Tier.Silver, new UnityAction[3]{
+                                                            "Bees will increase their attack speed by +20", 
+                                                            "Bees will increase their attack speed by +35"}, "SummonAtkSpeed", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.1f, 0, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.25f, 0, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.4f, 0, 0))),}), 
-            new Augment("SummonAtkSpeed","Bee-autiful Pets", new string[3]{"Bees will increase their attack speed by +20", 
-                                                            "Bees will increase their attack speed by +50", 
-                                                            "Bees will increase their attack speed by +80"}, "SummonAtkSpeed", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.2f, 0, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.5f, 0, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.8f, 0, 0))),}), 
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.35f, 0, 0))),}), 
+            new Augment("SummonAtkSpeed","Bee-autiful Pets", new string[3]{"Bees will increase their attack speed by +20", 
+                                                            "Bees will increase their attack speed by +40", 
+                                                            "Bees will increase their attack speed by +75"}, "SummonAtkSpeed", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.2f, 0, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.4f, 0, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.75f, 0, 0))),}), 
             new Augment("SummonAtkSpeed","Bee Swarm", new string[3]{"Bees will increase their attack speed by +50", 
                                                             "Bees will increase their attack speed by +100", 
-                                                            "Bees will increase their attack speed by +175"}, "SummonAtkSpeed", Tier.Prismatic, new UnityAction[3]{
+                                                            "Bees will increase their attack speed by +150"}, "SummonAtkSpeed", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.5f, 0, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 1f, 0, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 1.75f, 0, 0))),}), 
+                                                                                                                        new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 1.5f, 0, 0))),}), 
             new Augment("SummonDmg","Baby Bee", new string[3]{"Bees will deal +5 damage", 
                                                             "Bees will deal +10 damage", 
                                                             "Bees will deal +15 damage"}, "SummonDmg", Tier.Silver, new UnityAction[3]{
@@ -1393,6 +1392,17 @@ public class DeckBuilder : MonoBehaviour
             }
         }
         return result;
+    }
+
+    public Augment getAugmentByName(string title){
+        foreach (Augment item in AllAugments)
+        {
+            if(item.Title == title){
+                return item;
+            }
+        }
+        return null;
+
     }
 
     

@@ -16,8 +16,11 @@ public class FlareManager : MonoBehaviour
 
     const int POOLED_FLARES_AMOUNT = 250;
     [SerializeField] List<GameObject> pooledFlares = new List<GameObject>();
+
+    [SerializeField] List<GameObject> pooledFlareSpots = new List<GameObject>();
     
     [SerializeField] GameObject DefaultFlarePrefab;
+    [SerializeField] GameObject DefaultFlareSpotPrefab;
     [SerializeField] FlareType[] FlareTypes;
     void Awake(){
         INSTANCE = this;
@@ -51,6 +54,7 @@ public class FlareManager : MonoBehaviour
     public void StartPool(){
         for(int i = 0; i< POOLED_FLARES_AMOUNT; i++){
             pooledFlares.Add(Instantiate(DefaultFlarePrefab));
+            pooledFlareSpots.Add(Instantiate(DefaultFlareSpotPrefab));
         }
     }
     public static GameObject InstantiateFlare(int type){
@@ -71,7 +75,12 @@ public class FlareManager : MonoBehaviour
         }
         return null;
     }
+
+    
+
     public static void DestroyFlare(GameObject flare){
         flare.SetActive(false);
     }
+
+   
 }

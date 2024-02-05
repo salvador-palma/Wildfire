@@ -95,10 +95,10 @@ public class Explosion : OnKillEffects
     {
         if(en==null){return;}
         if(Random.Range(0f,1f) < prob){
-            Collider2D[] targets = Physics2D.OverlapCircleAll(en.transform.position, 2.5f, FlareManager.EnemyMask);
+            Collider2D[] targets = Physics2D.OverlapCircleAll(en.transform.position, 1.8f, FlareManager.EnemyMask);
             Flamey.Instance.SpawnObject(Prefab).transform.position = en.transform.position;
             foreach(Collider2D col in targets){
-                col.GetComponent<Enemy>().Hitted(dmg, 1);
+                col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
             }
             
         }
@@ -260,8 +260,8 @@ public class Bullets : OnKillEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 1f){
-            prob = 1f;
+        if(prob >= .5f){
+            prob = .5f;
             Deck deck = Deck.Instance;
             deck.removeFromDeck("Pirate Wannabe");
             deck.removeFromDeck("Yes, Captain!");
@@ -275,7 +275,7 @@ public class Bullets : OnKillEffects
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a " + prob*100 + "% chance of releasing " + amount + " bullets that deal " + dmg + " and apply On-Hit Effects. \n if this effect procs, you will also gain +25 embers";
+        return "Everytime you kill an enemy, there's a " + Mathf.Round(prob*100) + "% chance of releasing " + amount + " bullets that deal " + dmg + " and apply On-Hit Effects. \n if this effect procs, you will also gain +25 embers";
     }
 
     public string getIcon()

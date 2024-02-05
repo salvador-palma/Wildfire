@@ -37,31 +37,23 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
    
-    public void HittedWithArmor(int dmg, bool onHit, int TextID, string except = null){
-        float B = dmg/(1+Armor/100);
-        int effectiveDmg = (int)(B + (Damage-B)*flame.ArmorPen);
- 
-        
-        if(onHit){Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this, except);}
-        HittedArmorless(effectiveDmg,TextID);       
-    }
-    
-    public void HittedArmorless(int dmg, int textID, bool onHit = false){
-        try{
-            Health -= dmg;
-            flame.TotalDamage+=(ulong)dmg;
-            if(onHit){Flamey.Instance.ApplyOnHit(dmg, Health, this);}
-            PlayHitAnimation(dmg, textID);
-        }catch{
-            Debug.Log("Error Ocurred");
+
+    public void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+
+        if(ignoreArmor){
+            float B = Dmg/(1+Armor/100);
+            Dmg = (int)(B + (Dmg-B)*Flamey.Instance.ArmorPen);
         }
-        
+
+        if(onHit){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
+
+
+        Health -= Dmg;
+        flame.TotalDamage+=(ulong)Dmg;
+        PlayHitAnimation(Dmg, TextID); 
     }
-    public void Hitted(int Dmg, int TextID){
-        int effectiveDmg = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-Flamey.Instance.ArmorPen))) * Dmg);
-        Flamey.Instance.ApplyOnHit(effectiveDmg, Health, this);
-        HittedArmorless(effectiveDmg,TextID);   
-    }
+
+    
     private void PlayHitSoundFx(){
         AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
     }

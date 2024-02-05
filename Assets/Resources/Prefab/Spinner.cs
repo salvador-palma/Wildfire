@@ -33,7 +33,7 @@ public class Spinner : MonoBehaviour
         
         if(other.tag == "Enemy"){
             Enemy e = other.GetComponent<Enemy>();
-            e.Hitted(FlameCircle.Instance.damage, 0);
+            e.Hitted(FlameCircle.Instance.damage, 0, ignoreArmor:false, onHit: true);
             Enemy.SpawnExplosion(other.transform.position);
         }
     }

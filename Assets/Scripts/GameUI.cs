@@ -71,7 +71,8 @@ public class GameUI : MonoBehaviour
     public void UpdateProgressBar(int round){
         AugmentTemplate.SetActive(false);
         EffectTemplate.SetActive(false);
-        ProgressBar.fillAmount = Progresses[round%5];
+        
+        ProgressBar.fillAmount = Progresses[round < 0 ? 0 : round%5];
         
     }
     public void FillAll(){
@@ -101,17 +102,13 @@ public class GameUI : MonoBehaviour
     }
     
     public void changeTab(int index){
-        // if(index==1){defineStats();}
-        // if(index==2){defineEffectList();}
         if(index != current_Tab){
             MenuTabs[current_Tab].SetActive(false);
             ButtonTabs[current_Tab].color = InactiveTab;
             ButtonTabs[index].color = ActiveTab;
             MenuTabs[index].SetActive(true);
             current_Tab = index;
-            
         }
-
     }
 
     public void AddAugment(Augment a){
@@ -124,12 +121,24 @@ public class GameUI : MonoBehaviour
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
+    public void AddAugment(SerializedAugment serA){
+        if(!ownsAugment){ownsAugment = true; NoAugmentsText.SetActive(false);}
+        GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
+
+        Augment a = DeckBuilder.Instance.getAugmentByName(serA.title);
+
+        go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
+        go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
+        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription(serA.level);
+        go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
+        go.SetActive(true);
+    }
 
     public void defineStats(){
         Flamey f = Flamey.Instance;
         StatsTexts[0].text = "Base Damage: " + f.Dmg;
-        StatsTexts[1].text = "Attack Speed: " + f.atkSpeed + " flames/s";
-        StatsTexts[2].text = "Bullet Speed: x"+f.BulletSpeed;
+        StatsTexts[1].text = "Attack Speed: " + f.atkSpeed.ToString("F2") + " flames/s";
+        StatsTexts[2].text = "Bullet Speed: x"+ f.BulletSpeed;
         StatsTexts[3].text = "Accuracy: " + f.accuracy + "%";
         StatsTexts[4].text = "Armor: " + f.Armor;
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
@@ -253,6 +262,7 @@ public class GameUI : MonoBehaviour
     }
 
     public void StartGameEvent(){
+        
         EnemySpawner.Instance.StartGame();
     }
 

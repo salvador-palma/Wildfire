@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
         if(other.tag == "Enemy"){
             PingHit();
             Enemy e = other.GetComponent<Enemy>();
-            e.HittedWithArmor(dmg, true, 10);
+            e.Hitted(dmg, 10, ignoreArmor:false, onHit: true);
             Enemy.SpawnExplosion(other.transform.position);
             
         }

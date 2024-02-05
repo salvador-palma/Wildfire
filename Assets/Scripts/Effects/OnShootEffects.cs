@@ -70,7 +70,7 @@ public class SecondShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Whenever you fire a shot, there's a " + perc*100 + "% chance that you fire a second shot.";
+        return "Whenever you fire a shot, there's a " + Mathf.Round(perc*100) + "% chance that you fire a second shot.";
     }
     public string getIcon()
     {
@@ -236,7 +236,7 @@ public class CritUnlock : OnShootEffects{
     public int ApplyEffect()
     {
         if(Distribuitons.RandomUniform(0f,1f) <= perc){
-            Debug.Log("here");
+           
             return 1;
         }
         return 0;
@@ -262,7 +262,7 @@ public class CritUnlock : OnShootEffects{
 
     public string getDescription()
     {
-        return "Your shots have a " + CritUnlock.Instance.perc * 100+ "% critical chance and x" + CritUnlock.Instance.mult + " critical damage multiplier.";
+        return "Your shots have a " + Mathf.Round(perc * 100)+ "% critical chance and x" + Mathf.Round(mult) + " critical damage multiplier.";
     }
 
     public string getIcon()

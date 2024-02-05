@@ -40,8 +40,8 @@ public class Augment
         if(Description.Length == 1){actions[0]();}else{
             actions[getLevel()]();
         }
-       
     }
+    
     public int getLevel(){
        return SkillTreeManager.Instance.getLevel(AugmentClass);
     }
@@ -56,6 +56,7 @@ public class Augment
         }
         
     }
+    
     public string getNextDescription(){
         try{
             return Description[getLevel()+1];
@@ -70,6 +71,30 @@ public class Augment
         return baseStat || (baseCard && getLevel() > 0) || (baseCardUpgrade && getLevel() >= 0);
     }
     public string getAugmentClass(){return AugmentClass;}
+
+    public bool isUnlockableMidGame(){
+        return baseCard;
+    }
+
+    public SerializedAugment Serialize(){
+        return new SerializedAugment(Title, getLevel());
+    }
+    public string getDescription(int lvl){
+        try{
+            return Description[lvl];
+        }catch{
+            return Description[0];
+        }
+        
+    }
+    public void Activate(int lvl){
+        if(actions.Length == 1){
+            actions[0]();
+        }else{
+            actions[lvl]();
+        }
+        
+    }
 }
 
 

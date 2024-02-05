@@ -53,7 +53,7 @@ public class Ghoul : MonoBehaviour
     }
     private void Attack(){
         remainingAttacks--;
-        target.HittedWithArmor((int)dmg, false, 10);
+        target.Hitted((int)dmg, 13, ignoreArmor:false, onHit:false);
         AtkIntervalTimer = AtkInterval;
         
     }

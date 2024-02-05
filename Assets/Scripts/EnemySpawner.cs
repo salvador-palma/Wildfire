@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -130,15 +131,13 @@ public class EnemySpawner : MonoBehaviour
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
+        resetInstances();
     }
     public void Start(){
-        current_round = 0;
+        
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
-        resetInstances();
         roundTimer = getRoundTime(current_round);
-        
-        
         TimerEnemySpawn =(float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
         updateSpawnLimits();
         GameUI.Instance.UpdateProgressBar(current_round);
@@ -146,9 +145,24 @@ public class EnemySpawner : MonoBehaviour
         
         
     }
+
+    
     public void StartGame(){ 
-        Flamey.Instance.GameEnd = false;       
-        GameEnd = false;
+        Flamey.Instance.GameEnd = false;    
+        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
+            if(Deck.Instance.hasAtLeastOneUnlockable()){
+                current_round = -1;
+                isOnAugments = true;
+                Deck.Instance.StartAugments(true, true);
+            }else{
+                GameEnd = false;
+            }
+        }else{
+            newRound();
+        }
+
+        PlayerPrefs.DeleteKey("PlayerLoad");   
+          
     }
     private Vector2 getPoint(){
         double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
@@ -170,7 +184,8 @@ public class EnemySpawner : MonoBehaviour
                 
                 
             } 
-            return;}
+            return;
+        }
         if(TimerEnemySpawn > 0){
             TimerEnemySpawn-= Time.deltaTime;
         }else{
@@ -180,7 +195,7 @@ public class EnemySpawner : MonoBehaviour
             updateSpawnLimits();
         }
         if(roundTimer > 0){
-            roundTimer-=Time.deltaTime ;
+            roundTimer-=Time.deltaTime;
         }else{
             isOn = false;
         }
@@ -208,15 +223,15 @@ public class EnemySpawner : MonoBehaviour
     }
     public void CheckFlip(GameObject g){
         if(g.transform.position.x < 0){
-            g.GetComponent<SpriteRenderer>().flipX = !g.GetComponent<SpriteRenderer>().flipX;
+            bool flipped = !g.GetComponent<SpriteRenderer>().flipX;
+            g.GetComponent<SpriteRenderer>().flipX = flipped;
+            g.transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
         }
     }
 
     public void newRound(){
         
         current_round++;
-        
-       
         isOn = true;
         isOnAugments = false;
         roundTimer = getRoundTime(current_round);
@@ -225,6 +240,7 @@ public class EnemySpawner : MonoBehaviour
         float temp = FixedEnemyAmount/FixedRoundDuration;
         TimerEnemySpawn = (float)Distribuitons.RandomExponential(temp) ;
         GameUI.Instance.UpdateProgressBar(current_round);
+        GameEnd = false;
         foreach (NotEspecificEffect item in Flamey.Instance.notEspecificEffects)
         {
             item.ApplyEffect();
@@ -258,7 +274,7 @@ public class EnemySpawner : MonoBehaviour
 
 
     private float getRoundTime(int round){
-        //return Math.Min(5 + 1.2f * (float)Distribuitons.RandomUniform(round - 1, round + 1), 40);
+        
         return Math.Min(5 + 1.2f * round, 40);
     }
     private float getSpawnAmount(int round){
@@ -268,6 +284,16 @@ public class EnemySpawner : MonoBehaviour
 
     private void resetInstances(){
         FlameCircle.Instance = null;
+        MoneyMultipliers.Instance = null;
+        CandleTurrets.Instance = null;
+        Summoner.Instance = null;
+
+        ThornsOnHitted.Instance = null;
+
+        VampOnDeath.Instance = null;
+        Explosion.Instance = null;
+        Necromancer.Instance= null;
+        Bullets.Instance = null;
 
         VampOnHit.Instance = null;
         IceOnHit.Instance = null;
@@ -276,11 +302,16 @@ public class EnemySpawner : MonoBehaviour
         StatikOnHit.Instance = null;
 
         BurnOnLand.Instance = null;
+        IceOnLand.Instance = null;
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
         KrakenSlayer.Instance = null;
         CritUnlock.Instance = null;
+
+        HealthRegen.Instance = null;
+        LightningEffect.Instance = null;
+        Immolate.Instance = null;
 
        
 
