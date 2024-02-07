@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
@@ -40,8 +41,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
 
-        if(ignoreArmor){
-            float B = Dmg/(1+Armor/100);
+        if(!ignoreArmor){
+            float B = Dmg/(1+(Armor/100f));
             Dmg = (int)(B + (Dmg-B)*Flamey.Instance.ArmorPen);
         }
 
@@ -49,7 +50,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
         Health -= Dmg;
-        flame.TotalDamage+=(ulong)Dmg;
+        Flamey.Instance.TotalDamage+=(ulong)Dmg;
         PlayHitAnimation(Dmg, TextID); 
     }
 

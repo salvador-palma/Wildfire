@@ -294,7 +294,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("MulticasterUnlock" ,"Multicaster", new string[1]{"Unlock the ability to multicast"}, "MulticasterUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeFromDeck("Multicaster");
                 Flamey.Instance.addOnShootEffect(new SecondShot(0.1f));
-                Deck.Instance.AddAugmentClass(new List<string>{"Multicaster"});            
+                Deck.Instance.AddAugmentClass(new List<string>{"MulticasterProb"});            
             })}, baseCard: true),   
             new Augment("MulticasterProb","The more the better", new string[3]{"When you fire a shot, gain a 3% chance to fire an extra shot", 
                                                                             "When you fire a shot, gain a 7% chance to fire an extra shot", 

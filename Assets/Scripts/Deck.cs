@@ -260,19 +260,19 @@ public class GameState{
     public static GameState LoadGameState(){
         GameState result = null;
         if(File.Exists(Application.dataPath +"/gameState.json")){
-            string json = File.ReadAllText(Application.dataPath +"/gameState.json");
+            string json = File.ReadAllText(Application.persistentDataPath +"/gameState.json");
             result = JsonUtility.FromJson<GameState>(json);
         }
         return result;
     }
     public static void SaveGameState(GameState gameState){
         string json = JsonUtility.ToJson(gameState);
-        File.WriteAllText(Application.dataPath + "/gameState.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/gameState.json", json);
     }
 
     public static void Delete(){
-        if(File.Exists(Application.dataPath +"/gameState.json")){
-            File.Delete(Application.dataPath +"/gameState.json");
+        if(File.Exists(Application.persistentDataPath +"/gameState.json")){
+            File.Delete(Application.persistentDataPath +"/gameState.json");
             
         }
     }

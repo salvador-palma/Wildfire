@@ -121,7 +121,9 @@ public class MoneyMultipliers : NotEspecificEffect
         if(p >= 1){
             p = 1;
             Deck deck = Deck.Instance;
-            // deck.removeFromDeck("Tame the Flames");
+            deck.removeFromDeck("Savings Account");
+            deck.removeFromDeck("Tax Payment");
+            deck.removeFromDeck("Robbery");
         }  
           
     }

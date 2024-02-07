@@ -74,7 +74,7 @@ public class SecondShot : OnShootEffects{
     }
     public string getIcon()
     {
-        return "multishot";
+        return "MulticasterUnlock";
     }
 }
 
@@ -262,7 +262,7 @@ public class CritUnlock : OnShootEffects{
 
     public string getDescription()
     {
-        return "Your shots have a " + Mathf.Round(perc * 100)+ "% critical chance and x" + Mathf.Round(mult) + " critical damage multiplier.";
+        return "Your shots have a " + Mathf.Round(perc*100f*100f) * 0.01f + "% critical chance and x" + Mathf.Round(mult) + " critical damage multiplier.";
     }
 
     public string getIcon()

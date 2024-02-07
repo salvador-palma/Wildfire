@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,9 +16,10 @@ public class FlareManager : MonoBehaviour
     public static LayerMask EnemyMask;
 
     const int POOLED_FLARES_AMOUNT = 250;
+    const int POOL_ADDITION_AMOUNT = 50;
     [SerializeField] List<GameObject> pooledFlares = new List<GameObject>();
 
-    [SerializeField] List<GameObject> pooledFlareSpots = new List<GameObject>();
+    
     
     [SerializeField] GameObject DefaultFlarePrefab;
     [SerializeField] GameObject DefaultFlareSpotPrefab;
@@ -54,12 +56,16 @@ public class FlareManager : MonoBehaviour
     public void StartPool(){
         for(int i = 0; i< POOLED_FLARES_AMOUNT; i++){
             pooledFlares.Add(Instantiate(DefaultFlarePrefab));
-            pooledFlareSpots.Add(Instantiate(DefaultFlareSpotPrefab));
+        }
+    }
+    public void IncreasePool(){
+        for(int i = 0; i< POOL_ADDITION_AMOUNT; i++){
+            pooledFlares.Add(Instantiate(DefaultFlarePrefab));
         }
     }
     public static GameObject InstantiateFlare(int type){
         GameObject pooledFlare = getPooledObject();
-        if(pooledFlare==null){Debug.LogError("Pool Not Big Enough!");}
+        if(pooledFlare==null){INSTANCE.IncreasePool(); return InstantiateFlare(type);}
         transformFlare(type,pooledFlare);
         pooledFlare.transform.localRotation = new Quaternion(0f,0f,180f,0f);
         pooledFlare.GetComponent<Flare>().VirtualStart();
@@ -75,8 +81,6 @@ public class FlareManager : MonoBehaviour
         }
         return null;
     }
-
-    
 
     public static void DestroyFlare(GameObject flare){
         flare.SetActive(false);

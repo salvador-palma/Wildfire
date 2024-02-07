@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Unity.Mathematics;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,10 +28,10 @@ public class Flamey : MonoBehaviour
     public List<TimeBasedEffect> timedEffects;
     public List<Effect> allEffects;
 
-    [Range(5f, 20f)] public float BulletSpeed;
+    [Range(5f, 200f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
     [Range(0.5f,3f)] public float BulletSize;
-    [SerializeField][Range(0.75f, 12f)] public float atkSpeed = 1;
+    [SerializeField][Range(0.75f, 120f)] public float atkSpeed = 1;
     float accUpdate;
     [HideInInspector] public float Accuracy;
     private float AtkSpeed;

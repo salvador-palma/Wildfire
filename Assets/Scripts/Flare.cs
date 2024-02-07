@@ -40,18 +40,20 @@ public class Flare : MonoBehaviour
         speedDescend = 1.5f * speedAscend;
        
     }
+    [SerializeField] GameObject VisualDebug;
     private void Update() {
         
         if(goingDownPhase == 1){
 
             transform.position = new Vector2(transform.position.x, transform.position.y - speedDescend * Time.deltaTime);
+            
             FlareSpotUpdate();
 
             if(transform.position.y < destY){
+                Instantiate(VisualDebug).transform.position = FlareSpot.transform.position;
                 goingDownPhase++;
-                HitGround(transform.position);   
+                HitGround(FlareSpot.transform.position);   
                 DestroyGameObject(); 
-                
             }
             
         }else if(goingDownPhase==0){
@@ -60,6 +62,9 @@ public class Flare : MonoBehaviour
                 goingDownPhase++;
                 goDown();
             }
+        }else{
+            DestroyGameObject();
+
         }
         
     }
@@ -96,15 +101,15 @@ public class Flare : MonoBehaviour
         FlareSpot.GetComponent<SpriteRenderer>().enabled=true;
     }
 
-    virtual protected void HitGround(Vector2 position){
-        Flamey.Instance.ApplyOnLand(position);
+    virtual protected void HitGround(Vector2 vec){
+        Flamey.Instance.ApplyOnLand(vec);
 
         Destroy(FlareSpot);
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f, FlareManager.EnemyMask);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, FlareManager.EnemyMask);
         if(colliders.Length > 0){
             GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
-            g.transform.position = transform.position;
+            g.transform.position = vec;
         }
         
         foreach(Collider2D col in colliders){
