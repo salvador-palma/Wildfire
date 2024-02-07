@@ -28,10 +28,9 @@ public class Flamey : MonoBehaviour
     public List<TimeBasedEffect> timedEffects;
     public List<Effect> allEffects;
 
-    [Range(5f, 200f)] public float BulletSpeed;
+    [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
-    [Range(0.5f,3f)] public float BulletSize;
-    [SerializeField][Range(0.75f, 120f)] public float atkSpeed = 1;
+    [SerializeField][Range(0.75f, 12f)] public float atkSpeed = 1;
     float accUpdate;
     [HideInInspector] public float Accuracy;
     private float AtkSpeed;
@@ -141,6 +140,7 @@ public class Flamey : MonoBehaviour
     }
 
     public void shoot(){
+        if(EnemySpawner.Instance.isOnAugments){return;}
         TotalShots++;
         anim.Play("FlameShoot");
 
@@ -230,6 +230,7 @@ public class Flamey : MonoBehaviour
     private void EndGame(){
         GameEnd = true;
         EnemySpawner.Instance.GameEnd = true;
+        GameUI.Instance.PausePanel.SetActive(false);
         GameState.Delete();
         GameUI.Instance.SpeedUp(1f);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

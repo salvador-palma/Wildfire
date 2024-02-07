@@ -50,7 +50,7 @@ public class Flare : MonoBehaviour
             FlareSpotUpdate();
 
             if(transform.position.y < destY){
-                Instantiate(VisualDebug).transform.position = FlareSpot.transform.position;
+                
                 goingDownPhase++;
                 HitGround(FlareSpot.transform.position);   
                 DestroyGameObject(); 
@@ -63,25 +63,27 @@ public class Flare : MonoBehaviour
                 goDown();
             }
         }else{
-            DestroyGameObject();
+           DestroyGameObject();
 
         }
         
     }
     virtual public void DestroyGameObject(){
         FlareManager.DestroyFlare(gameObject);
+        if(FlareSpot!=null){Destroy(FlareSpot);}
     }
    
     virtual public void GetTarget(){
         if(target == Vector2.zero){
             Enemy e = Flamey.Instance.current_homing;
-            if(e==null){FlareManager.DestroyFlare(gameObject);return;}
+            if(e==null){DestroyGameObject();return;}
             else{target = e.HitCenter.position;}
         }
     }
     private void goDown(){
 
         GetTarget();
+        if(target==null){return;}
         float Accuracy = Flamey.Instance.Accuracy;
         Vector2 v = new Vector2(Distribuitons.RandomGaussian(Accuracy, target.x), Distribuitons.RandomGaussian(Accuracy, target.y ));
         transform.localRotation = new Quaternion(0f,0f,0f,0f);
@@ -105,6 +107,7 @@ public class Flare : MonoBehaviour
         Flamey.Instance.ApplyOnLand(vec);
 
         Destroy(FlareSpot);
+        
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, FlareManager.EnemyMask);
         if(colliders.Length > 0){
@@ -129,7 +132,11 @@ public class Flare : MonoBehaviour
     public void Reset(){
         goingDownPhase=0;
         target=Vector2.zero;
-        FlareSpot = null;
+        if(FlareSpot!=null){
+            Destroy(FlareSpot.gameObject);
+            FlareSpot = null;
+        }
+        
         destY = 0;
     }
     

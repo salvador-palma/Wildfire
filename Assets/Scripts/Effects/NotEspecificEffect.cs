@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -25,6 +26,8 @@ public class FlameCircle : NotEspecificEffect
             Instance = this;
             GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount));
             SpinnerInstance = g.GetComponent<Spinner>();
+            Deck.RoundOver += SetSpinFalse;
+            Deck.RoundStart += SetSpinTrue;
             
         }else{
             Instance.Stack(this);
@@ -36,6 +39,12 @@ public class FlameCircle : NotEspecificEffect
         SpinnerInstance.speed = Flamey.Instance.BulletSpeed;
         
         //Flamey.Instance.addNotEspecificEffect(new FlameCircle(1,20)); //REMOVE AFTER
+    }
+    public void SetSpinFalse(object sender ,EventArgs e){
+        SetSpin(false);
+    }
+    public void SetSpinTrue(object sender ,EventArgs e){
+        SetSpin(true);
     }
     public void SetSpin(bool b){
         SpinnerInstance.canSpin = b;
@@ -206,7 +215,7 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + Mathf.Round(atkSpeed) + " attack speed";
+        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + Mathf.Round(atkSpeed * 100f) * 0.01f + " attack speed";
     }
 
     public string getIcon()

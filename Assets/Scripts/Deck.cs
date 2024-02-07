@@ -27,14 +27,18 @@ public class Deck : MonoBehaviour
     private int currPhase = 0;
 
 
-
+    public static event EventHandler RoundOver;
+    public static event EventHandler RoundStart;
     GameState gameState;
 
     private void Awake(){
         Instance = this;
-        
+        RoundOver += ClearRemainderObjects;
         
     }
+
+    
+
     private void Start() {
 
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 1){
@@ -47,6 +51,8 @@ public class Deck : MonoBehaviour
         FillDeck();
         refreshedAugments = new List<Augment>();
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
+
+
     }
 
     void FillDeck(){
@@ -95,7 +101,8 @@ public class Deck : MonoBehaviour
         currPhase++;
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
-        if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
+        RoundStart?.Invoke(this, new EventArgs());
+        //if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
 
@@ -111,7 +118,9 @@ public class Deck : MonoBehaviour
     public void StartAugments(bool isPrismaticRound, bool OnlyUnlockables = false){
         if(Flamey.Instance.GameEnd){return;}
 
-        if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(false);}
+
+        RoundOver?.Invoke(this, new EventArgs());
+        //if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(false);}
 
         filteredAugments = FilterAugments(isPrismaticRound, OnlyUnlockables);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
@@ -238,6 +247,18 @@ public class Deck : MonoBehaviour
        
         
     }
+    private void ClearRemainderObjects(object sender, EventArgs e)
+    {
+        int i = 0;
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Flare")){
+            if(!g.activeInHierarchy && g.GetComponent<Flare>().FlareSpot != null){
+                Destroy(g.GetComponent<Flare>().FlareSpot);
+                Debug.Log("Destroyed " + i);
+                i++;
+            }
+             
+        }
+    }
 
 
 }
@@ -259,7 +280,7 @@ public class GameState{
 
     public static GameState LoadGameState(){
         GameState result = null;
-        if(File.Exists(Application.dataPath +"/gameState.json")){
+        if(File.Exists(Application.persistentDataPath +"/gameState.json")){
             string json = File.ReadAllText(Application.persistentDataPath +"/gameState.json");
             result = JsonUtility.FromJson<GameState>(json);
         }

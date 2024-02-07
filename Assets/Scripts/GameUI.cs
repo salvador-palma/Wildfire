@@ -20,7 +20,7 @@ public class GameUI : MonoBehaviour
     [Header("Menu")]
     [SerializeField] Color ActiveTab;
     [SerializeField] Color InactiveTab;
-    [SerializeField] GameObject PausePanel;
+    [SerializeField] public GameObject PausePanel;
     [SerializeField] GameObject[] MenuTabs;
     [SerializeField] Image[] ButtonTabs;
     [SerializeField] TextMeshProUGUI roundCounter;
@@ -205,10 +205,16 @@ public class GameUI : MonoBehaviour
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         SceneManager.LoadScene(str);
     }
+
+    private bool clickedAButton = false;
     public void StartOver(){
+        if(clickedAButton){return;}
+        clickedAButton = true;
         GetComponent<Animator>().Play("StartOver");
     }
     public void GameToMenu(){
+        if(clickedAButton){return;}
+        clickedAButton = true;
         GetComponent<Animator>().Play("GameToMenu");
     }
     public void DeleteAllEnemies(){

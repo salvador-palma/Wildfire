@@ -60,7 +60,7 @@ public class SecondShot : OnShootEffects{
 
     public string getText()
     {
-        return "MulticasterUnlock";
+        return "Multicaster";
     }
 
     public string getType()
