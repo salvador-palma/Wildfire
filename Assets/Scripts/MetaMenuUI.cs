@@ -72,6 +72,7 @@ public class MetaMenuUI : MonoBehaviour
 
 
     public void ClickedPlay(){
+        Debug.Log(Application.persistentDataPath);
         if(File.Exists(Application.persistentDataPath +"/gameState.json")){
             StartChat();
             ChatSingular("Do you wish to continue your previous unfinished run?",
