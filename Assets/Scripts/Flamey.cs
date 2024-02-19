@@ -109,11 +109,17 @@ public class Flamey : MonoBehaviour
         
         if(current_homing == null){
             target(getHoming());
-            if(current_homing == null){return;}
+            if(current_homing == null ){return;}
             
         }
         
-        if(timerAS > 0 ){
+        if(stunTimeLeft > 0f){
+            stunTimeLeft -= Time.deltaTime;
+            if(stunTimeLeft <= 0f){
+                GetComponent<Animator>().Play("Happy");
+            }
+        }
+        else if(timerAS > 0 ){
             
             timerAS -= Time.deltaTime;
         }else{
@@ -155,8 +161,11 @@ public class Flamey : MonoBehaviour
     public void target(Enemy e){
         if(e ==null){return;}
         if(current_homing!=null){current_homing.untarget();}
-        e.target();
-        current_homing = e;
+        if(e.canTarget()){
+            e.target();
+            current_homing = e;
+        }
+        
     }
 
     public Flare InstantiateShot(List<string> except = null){
@@ -323,6 +332,14 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
     }
+
+
+    private float stunTimeLeft;
+
+    public void Stun(float t){
+        GetComponent<Animator>().Play("Stunned");
+        stunTimeLeft = t;
+    }
     
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){
@@ -367,11 +384,12 @@ public class Flamey : MonoBehaviour
         }
     }
 
+
     public void ApplyOnHit(float d, float h, Enemy e, string except = null){
         foreach (OnHitEffects oh in onHitEffects){
             if(oh.getText() == except){continue;}
             oh.ApplyEffect(d,h,e);
-            }
+        }
     }
     public int ApplyOnShoot(List<string> except = null){
         int res = 0;

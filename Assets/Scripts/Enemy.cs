@@ -30,16 +30,17 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            InvokeRepeating("Attack",0f, AttackDelay);
         }
     }
-    public void Move(){
+    public virtual void Move(){
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime);
     }
 
     public void StartAnimations(int ID){
+
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
    
 
-    public void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
 
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
@@ -83,11 +84,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     
 
-    public void Attack(){
+    public virtual void Attack(){
         flame.Hitted(Damage, ArmorPen, this);
         PlayAttackAnimation();
     }
-    private void PlayAttackAnimation(){
+    protected virtual void PlayAttackAnimation(){
         GetComponent<Animator>().Play("EnemyAttack");
     }
     
@@ -99,8 +100,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
+    public virtual bool canTarget(){return true;}
 
-    private void OnMouseDown() {
+
+    protected virtual void OnMouseDown() {
         
         Flamey.Instance.target(this);
     }
@@ -119,6 +122,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         this.enabled = false;
     }
 
+    public virtual void CheckFlip(){
+        if(transform.position.x < 0){
+            bool flipped = !GetComponent<SpriteRenderer>().flipX;
+            GetComponent<SpriteRenderer>().flipX = flipped;
+            transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
+        }
+    }
 
 
 

@@ -127,7 +127,7 @@ public class EnemySpawner : MonoBehaviour
 
     };
 
-    List<Enemy> PresentEnemies;
+    public List<Enemy> PresentEnemies;
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
@@ -214,20 +214,15 @@ public class EnemySpawner : MonoBehaviour
 
         PresentEnemies.Add(g.GetComponent<Enemy>());
         g.transform.position = getPoint();
-        CheckFlip(g);
+        g.GetComponent<Enemy>().CheckFlip();
+        
     }
     private void updateSpawnLimits(){
         height = 2f * Camera.main.orthographicSize;
         width = height * Camera.main.aspect;
         
     }
-    public void CheckFlip(GameObject g){
-        if(g.transform.position.x < 0){
-            bool flipped = !g.GetComponent<SpriteRenderer>().flipX;
-            g.GetComponent<SpriteRenderer>().flipX = flipped;
-            g.transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
-        }
-    }
+    
 
     public void newRound(){
         

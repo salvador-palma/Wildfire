@@ -30,7 +30,7 @@ public class Slime : Enemy
             GameObject go = Instantiate(TinySlime);
             go.transform.position =  (Vector2)transform.position + spawnTinyPos[i];
             EnemySpawner.Instance.addEnemy(go.GetComponent<Enemy>());
-            EnemySpawner.Instance.CheckFlip(go);
+            go.GetComponent<Enemy>().CheckFlip();
         }
         
          
