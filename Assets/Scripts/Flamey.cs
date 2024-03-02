@@ -159,8 +159,10 @@ public class Flamey : MonoBehaviour
        
     }
     public void target(Enemy e){
+        
         if(e ==null){return;}
         if(current_homing!=null){current_homing.untarget();}
+        
         if(e.canTarget()){
             e.target();
             current_homing = e;
@@ -181,9 +183,8 @@ public class Flamey : MonoBehaviour
     private Enemy getHoming(){
         
         List<Enemy> g =  new List<Enemy>();
-        g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>() ) );
-        g.Sort();
-        return g.Count!=0 ? g[0] : null;
+        g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>()).Where(x => x.canTarget()));
+        return g.Count!=0 ? g.Min() : null;
     }
     public UnityEngine.Vector2 getRandomHomingPosition(){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
@@ -438,6 +439,12 @@ public class Flamey : MonoBehaviour
     public void addEmbers(int n){
         Embers += n;
         GameUI.Instance.SetEmberAmount(Embers);
+    }
+    public int removeEmbers(int n){
+        int removed = Math.Min(Embers, n);
+        Embers = Math.Max(0, Embers - n);
+        GameUI.Instance.SetEmberAmount(Embers);
+        return removed;
     }
     
 }

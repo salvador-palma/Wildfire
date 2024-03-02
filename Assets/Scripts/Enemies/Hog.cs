@@ -45,7 +45,7 @@ public class Hog : Enemy
             AttackedAlready = true;
             flame.Hitted(Damage, ArmorPen, this);
         }
-        PlayAttackAnimation();
+       
     }
 
 

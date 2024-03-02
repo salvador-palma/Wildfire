@@ -201,8 +201,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
     public void UpdateEnemies(){
-        PresentEnemies.ForEach(e => {if(!e.Attacking){e.UpdateEnemy();}});
-        List<Enemy> deadEnemies = PresentEnemies.Where(e => e.Health < 0).ToList();
+        PresentEnemies.ForEach(e => {if(e!=null && !e.Attacking){e.UpdateEnemy();}});
+        List<Enemy> deadEnemies = PresentEnemies.Where(e => e==null || e.Health < 0).ToList();
         foreach(Enemy enemy in deadEnemies){
             PresentEnemies.Remove(enemy);
             enemy.Die();

@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
            Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
-           InvokeRepeating("Attack",0f, AttackDelay);
+           InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
         }
     }
     public virtual void Move(){
@@ -65,6 +65,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual void Die(bool onKill = true){
+        if(this==null){return;}
         if(onKill){Flamey.Instance.ApplyOnKill(this);}
         Flamey.Instance.addEmbers(calculateEmbers());
         flame.TotalKills++;
@@ -74,21 +75,20 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
 
-    private int calculateEmbers(){
+    protected virtual int calculateEmbers(){
         if(MoneyMultipliers.Instance == null){
             return EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], 0.1f);
         }
         return (int)((EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], MoneyMultipliers.Instance.p)) * MoneyMultipliers.Instance.mult);
-        
     }
 
     
 
     public virtual void Attack(){
         flame.Hitted(Damage, ArmorPen, this);
-        PlayAttackAnimation();
     }
     protected virtual void PlayAttackAnimation(){
+        Debug.Log("ShootAnim");
         GetComponent<Animator>().Play("EnemyAttack");
     }
     
