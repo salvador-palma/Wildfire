@@ -88,7 +88,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         flame.Hitted(Damage, ArmorPen, this);
     }
     protected virtual void PlayAttackAnimation(){
-        Debug.Log("ShootAnim");
+       
         GetComponent<Animator>().Play("EnemyAttack");
     }
     

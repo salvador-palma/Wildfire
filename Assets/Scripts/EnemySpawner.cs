@@ -181,8 +181,7 @@ public class EnemySpawner : MonoBehaviour
                     isOnAugments = true;
                     Deck.Instance.StartAugments((current_round+1)%5 == 0);
                 }
-                
-                
+                Flamey.Instance.poisonsLeft = 0;
             } 
             return;
         }

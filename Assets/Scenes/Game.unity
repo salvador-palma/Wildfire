@@ -2787,11 +2787,13 @@ MonoBehaviour:
   - fontAsset: {fileID: 11400000, guid: 17110652ca55eb649b9a069ded9ac151, type: 2}
     color: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
   - fontAsset: {fileID: 11400000, guid: 1e3d6a292ebbb294996a9be9b73a76c9, type: 2}
-    color: {r: 1, g: 0.5137255, b: 0.9490196, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
   - fontAsset: {fileID: 11400000, guid: 592eb17d909ebef4b9987799e85052fb, type: 2}
     color: {r: 0.99215686, g: 1, b: 0.19215687, a: 1}
   - fontAsset: {fileID: 11400000, guid: 3edad9b836e0e1e46a74ffa1adeac422, type: 2}
     color: {r: 0.078431375, g: 0.7411765, b: 1, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 1e3d6a292ebbb294996a9be9b73a76c9, type: 2}
+    color: {r: 0.92156863, g: 0.42745098, b: 1, a: 1}
   TextDmgTemplate: {fileID: 3633900077226613852, guid: 5e7410176e12e1546b75257c0db84b33, type: 3}
   targetCanvas: {fileID: 2079703109}
 --- !u!114 &312507739
@@ -7192,6 +7194,7 @@ MonoBehaviour:
   FlareSpotPrefab: {fileID: 9207615669171026501, guid: 59c00f86f086e2249bcfcde8b18bd183, type: 3}
   HealthSlider: {fileID: 1350612377}
   GameEnd: 1
+  poisonsLeft: 0
   TotalKills: 0
   TotalShots: 0
   TotalDamage: 0
@@ -7232,7 +7235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 5868289912624929837, guid: 937c2c6f8385930429db3ef659897091, type: 3}
+  - {fileID: 2726785249501007897, guid: 871a9fa517ed26042ba82063be8ae195, type: 3}
   - {fileID: 7444185946290512100, guid: ef02aaaba7f3ca046b852d109c2d5d7f, type: 3}
   - {fileID: 3905129715520958868, guid: 58c6691817784a94dba3270c12045bee, type: 3}
   - {fileID: 4496818285050228991, guid: 6c640e28031c1c14db48c2e9174e8f65, type: 3}

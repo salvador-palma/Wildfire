@@ -54,6 +54,9 @@ public class Flamey : MonoBehaviour
 
     public bool GameEnd;
 
+    [Header("Status Effects")]
+    private float stunTimeLeft;
+    public int poisonsLeft;
 
     //FINAL STATS COUNTERS
     [HideInInspector] public int TotalKills;
@@ -65,6 +68,7 @@ public class Flamey : MonoBehaviour
   
     private float secondTimer = 0.25f;
     private float tick = 0.25f;
+    private int tickNumber;
     private void Awake() {
         
         Health = MaxHealth;
@@ -79,6 +83,8 @@ public class Flamey : MonoBehaviour
         onHittedEffects = new List<OnHittedEffects>();
         onKillEffects = new List<OnKillEffects>();
         timedEffects = new List<TimeBasedEffect>();
+
+        
         
     }
     // Start is called before the first frame update
@@ -109,7 +115,7 @@ public class Flamey : MonoBehaviour
         
         if(current_homing == null){
             target(getHoming());
-            if(current_homing == null ){return;}
+            if(current_homing == null){return;}
             
         }
         
@@ -131,7 +137,6 @@ public class Flamey : MonoBehaviour
                 accUpdate = accuracy;
                 updateAccuracy(accuracy);
             }
-            
             timerAS = timerASCounter;
             shoot();
         }
@@ -141,12 +146,16 @@ public class Flamey : MonoBehaviour
         secondTimer-=Time.deltaTime;
         if(secondTimer <= 0){
             secondTimer = tick;
+            tickNumber++;
+            if(poisonsLeft > 0  && tickNumber >= 4){tickNumber=0; ApplyPoison();}
             ApplyTimed();
         }
+
+        
     }
 
     public void shoot(){
-        if(EnemySpawner.Instance.isOnAugments){return;}
+        if(EnemySpawner.Instance.isOnAugments || current_homing == null){return;}
         TotalShots++;
         anim.Play("FlameShoot");
 
@@ -216,10 +225,7 @@ public class Flamey : MonoBehaviour
     private float PercentageToAccuracy(float perc){
         return 0.8f - 0.008f * perc;
     }
-
-    
-
-    public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true){
+    public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake=true, int idHitTxt= 2){
 
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
 
@@ -230,8 +236,8 @@ public class Flamey : MonoBehaviour
         Health -= dmgeff;
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
-        DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, 2);
-        CameraShake.Shake(0.5f,0.35f);
+        DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, idHitTxt);
+        if(isShake){CameraShake.Shake(0.5f,0.35f);} 
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
@@ -335,13 +341,19 @@ public class Flamey : MonoBehaviour
     }
 
 
-    private float stunTimeLeft;
+    
 
     public void Stun(float t){
         GetComponent<Animator>().Play("Stunned");
         stunTimeLeft = t;
     }
-    
+    public void Poison(int amount){
+        poisonsLeft += amount;
+    }
+    public void ApplyPoison(){
+        poisonsLeft--;
+        Hitted(Math.Max(1,MaxHealth/48), 1, null, onhitted:false, isShake:false, idHitTxt:14);
+    }
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){
             onHitEffects.Add(onhit);
