@@ -44,7 +44,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
-            Dmg = (int)(B + (Dmg-B)*Flamey.Instance.ArmorPen);
+            Dmg = (int)(B + (Dmg-B)*(onHit ? Flamey.Instance.ArmorPen : 0));
         }
 
         if(onHit){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Moose : Enemy
 {
-    public CapsuleCollider2D HealCollider;
     public int HealPerGrowl;
     
     public int TimesHealed;
+    public float HealRadius= 2.7f;
     void Start()
     {
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
@@ -44,9 +44,9 @@ public class Moose : Enemy
     }
     public override void Attack()
     {
-         Collider2D[] AnimalAround = Physics2D.OverlapCapsuleAll(HealCollider.bounds.center,HealCollider.size,CapsuleDirection2D.Vertical,HealCollider.transform.eulerAngles.z, FlareManager.EnemyMask);
+        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HealRadius, FlareManager.EnemyMask);
 
-         foreach(Collider2D col in AnimalAround){
+        foreach(Collider2D col in AnimalAround){
             Enemy e = col.GetComponent<Enemy>();          
             if(e==null || e==this){continue;}
             int healing = Math.Min(HealPerGrowl, e.MaxHealth - e.Health);
@@ -55,7 +55,7 @@ public class Moose : Enemy
                 DamageUI.InstantiateTxtDmg(e.transform.position, ""+healing, 3);
             }
 
-         }
+        }
     }
     protected override void PlayAttackAnimation(){
         GetComponent<Animator>().Play("Howl");

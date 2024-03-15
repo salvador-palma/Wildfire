@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9030358477521101351}
   - component: {fileID: 499141664019057515}
   - component: {fileID: 536133494324245569}
-  - component: {fileID: 9013638000024851355}
   m_Layer: 6
   m_Name: Moose
   m_TagString: Enemy
@@ -119,9 +118,9 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 2243752992482967641}
   inEffect: 0
-  HealCollider: {fileID: 9013638000024851355}
   HealPerGrowl: 500
   TimesHealed: 0
+  HealRadius: 2.7
 --- !u!95 &499141664019057515
 Animator:
   serializedVersion: 7
@@ -190,43 +189,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.598838, y: 0.7589235}
   m_EdgeRadius: 0
---- !u!70 &9013638000024851355
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2726785249501007897}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -1.16}
-  m_Size: {x: 5.44, y: 2.95}
-  m_Direction: 1
 --- !u!1 &2860736670429999039
 GameObject:
   m_ObjectHideFlags: 0
