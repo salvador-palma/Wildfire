@@ -10,7 +10,8 @@ public class Spider : Enemy
     public float initialRadiusX = 9.39f;
     public float initialRadiusY = 5.07f;
 
-    public float shrinkRate = 0.1f;
+    public Vector2 shrinkLimits;
+    private float shrinkRate;
 
     private float radiusX;
     private float radiusY;
@@ -29,25 +30,28 @@ public class Spider : Enemy
         }
         base.flame = Flamey.Instance;
         
-        Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
+        
         MaxHealth = Health;
 
         direction = Random.Range(0f, 1f) < 0.5f ? 1 : -1;
         Vector3 relativePosition = transform.position - centerPoint.position;
         angle = Mathf.Atan2(relativePosition.y, relativePosition.x);
 
+        shrinkRate = Random.Range(shrinkLimits[0], shrinkLimits[1]);
     }
 
     // Update is called once per frame
     
     
+    float prevX;
     public override void Move(){
 
-        if(rest){return;}
+
 
         float x = centerPoint.position.x + Mathf.Cos(angle) * radiusX;
         float y = centerPoint.position.y + Mathf.Sin(angle) * radiusY;
 
+        prevX = transform.position.x;
 
         transform.position = new Vector3(x, y, transform.position.z);
 
@@ -56,7 +60,15 @@ public class Spider : Enemy
         radiusX -= shrinkRate * Time.deltaTime;
         radiusY -= shrinkRate * Time.deltaTime;
         
+        CheckFlip();
+    }
 
+    public override void CheckFlip(){
+        
+            GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
+
+            transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
+        
     }
 
     

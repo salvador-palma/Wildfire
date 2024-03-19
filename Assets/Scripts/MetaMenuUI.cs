@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class MetaMenuUI : MonoBehaviour
 {
     //Deug
+    [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject SkillTree;
     static public MetaMenuUI Instance;
@@ -40,6 +41,10 @@ public class MetaMenuUI : MonoBehaviour
     public void SkillTreeMenuToggle(){
         
         SkillTreeManager.Instance.toggleSkillTree(SkillTreePanel);
+    }
+
+    public void BestiaryMenuToggle(){
+        BestiaryPanel.SetActive(!BestiaryPanel.activeInHierarchy);
     }
  
     public void UpgradeButton(){

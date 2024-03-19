@@ -21,7 +21,6 @@ public class Armadillo : Enemy
     }
     override public void UpdateEnemy(){
         base.UpdateEnemy();
-
     }
 
     public override void Move(){
