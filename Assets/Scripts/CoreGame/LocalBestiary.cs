@@ -37,104 +37,12 @@ public class AnimalAbility{
     [TextAreaAttribute]public string description;
 }
 
-public class Bestiary{
-    private static Bestiary INSTANCE;
-    public List<AnimalRunTimeData> animals;
-    public BestiarySaveData saved_milestones;
-
-    private int[] milestones = new int[5]{100, 2500, 10000, 25000, 100000};
-    private Bestiary(){
-        INSTANCE=this;
-    }
-    public static Bestiary getBestiary(){
-        if(INSTANCE==null){return new Bestiary();}
-        else{return INSTANCE;}
-    }
-
-    public static void DisplayProfile(int ID, Image icon, TextMeshProUGUI Title){
-        AnimalRunTimeData animal = getBestiary().animals[ID];
-        icon.sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
-        Title.text = animal.name;
-        RectTransform TRR = icon.GetComponent<RectTransform>();
-        TRR.anchoredPosition = animal.IconPos;
-        TRR.sizeDelta = animal.IconSize;
-    }
-    public static void DisplayStats(int ID, TextMeshProUGUI[] labels){
-        AnimalRunTimeData animal = getBestiary().animals[ID];
-        Enemy enemy = animal.enemy;
-
-        labels[0].text = enemy.Health.ToString();
-        labels[1].text = enemy.Damage.ToString();
-        labels[2].text = enemy.Armor.ToString();
-        labels[3].text = (enemy.Speed*100f).ToString();
-        labels[4].text = (enemy.AttackRange * 10f).ToString();
-        labels[5].text =  enemy.AttackDelay + "s";
-        labels[6].text = enemy.EmberDropRange[0] + "-" + enemy.EmberDropRange[1];
-        labels[7].text = animal.Wave + "h00";
-    }
-    public static void DisplayMilestones(int ID, TextMeshProUGUI counter, Slider slider){
-        int[] milestone_progress = getMilestoneProgress(ID);
-        counter.text = milestone_progress==null ? "MAX" : milestone_progress[0]+"/"+milestone_progress[1];
-        slider.maxValue = milestone_progress == null ? 1 : milestone_progress[1];
-        slider.value = milestone_progress == null ? 1 : milestone_progress[0];
-
-        
-    }
-    public static void DisplayDescription(int ID, GameObject[] abilitiesContainer){
-        AnimalRunTimeData animal = getBestiary().animals[ID];
-        AnimalAbility[] abilities = animal.abilities;
-        for (int i = 0; i < abilitiesContainer.Length; i++)
-        {
-            if(i <= abilities.Length - 1){
-                abilitiesContainer[i].GetComponentsInChildren<Image>()[1].sprite = abilities[i].icon;
-                abilitiesContainer[i].GetComponentInChildren<TextMeshProUGUI>().text = abilities[i].description;
-                abilitiesContainer[i].SetActive(true);
-            }else{
-                abilitiesContainer[i].SetActive(false);
-            }
-            
-        }
-    }
-
-    private static int[] getMilestoneProgress(int ID){
-        AnimalSaveData animalSaveData = getBestiary().saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
-        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return null;}
-        int deaths = animalSaveData.DeathAmount;
-        int i=0;
-        int[] milestones = getBestiary().milestones;
-        while(i < 5 && deaths >= milestones[i]){
-            i++;
-        }
-        return i>=5 ? null : new int[2]{deaths, milestones[i]};
-    }
-    public static int getMilestoneProgressInt(int ID){
-        AnimalSaveData animalSaveData = getBestiary().saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
-        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
-        int deaths = animalSaveData.DeathAmount;
-        int i=0;
-        int[] milestones = getBestiary().milestones;
-        while(i < 5 && deaths >= milestones[i]){
-            i++;
-        }
-        return i;
-    }
-
-}
-
 public class LocalBestiary : MonoBehaviour
 {
-    /*
-    0-Health
-    1-Damage
-    2-Armor
-    3-Speed
-    4-Embers
-    5-Wave
-    6-Description
-    7-Deaths
-    8-Title
-    */
+    
+    public static LocalBestiary INSTANCE;
     string[] BestiaryTabs = new string[3]{"STATS","ABILITIES", "MILESTONES"};
+    private int[] milestones = new int[5]{100, 2500, 10000, 25000, 100000};
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
     private int lastID;
@@ -169,20 +77,18 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] Transform InfoPanel;
     
     public void Start(){
+
         RetrieveReferences();
         ReadBestiaryData();
-        Bestiary.getBestiary().animals = animals;
-        Bestiary.getBestiary().saved_milestones = saved_milestones;
         InitSlots();
 
         RightButton.onClick.AddListener(()=>ChangeTab(1));
         LeftButton.onClick.AddListener(()=>ChangeTab(-1));
     }
     
-
     private void RetrieveReferences(){
 
-
+        //STATS
         statLabels[0] = BestiaryPanels[0].transform.Find("InputHealth").GetComponentInChildren<TextMeshProUGUI>();
         statLabels[1] = BestiaryPanels[0].transform.Find("InputDamage").GetComponentInChildren<TextMeshProUGUI>();
         statLabels[2] = BestiaryPanels[0].transform.Find("InputArmor").GetComponentInChildren<TextMeshProUGUI>();
@@ -192,16 +98,18 @@ public class LocalBestiary : MonoBehaviour
         statLabels[6] = BestiaryPanels[0].transform.Find("InputEmbers").GetComponentInChildren<TextMeshProUGUI>();
         statLabels[7] = BestiaryPanels[0].transform.Find("InputWave").GetComponentInChildren<TextMeshProUGUI>();
 
+        //PROFILE
         title = InfoPanel.Find("Title").GetComponent<TextMeshProUGUI>();
+        AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(0).GetComponent<Image>();
 
+        //MILESTONES
         milestoneProgress = BestiaryPanels[2].transform.Find("MilestoneProgress").GetComponent<TextMeshProUGUI>();
         milestoneStars = BestiaryPanels[2].transform.Find("Stars").GetComponent<Image>();
-
-        AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(0).GetComponent<Image>();
         DeathAmountSlider = BestiaryPanels[2].transform.Find("Slider").GetComponent<Slider>();
 
     }
 
+    /* ===== BESTIARY SLOTS ===== */
     private void InitSlots(){
         int i = 0;
         foreach(AnimalRunTimeData animal in animals){
@@ -210,45 +118,47 @@ public class LocalBestiary : MonoBehaviour
         }
     }
     private void InitIndividualSlot(AnimalRunTimeData animal, int index){
+
         GameObject newSlot = Instantiate(SlotTemplate,Container.transform);
         Transform newSlotImage = newSlot.transform.Find("Animal");
-
         RectTransform RT = newSlotImage.GetComponent<RectTransform>();
-        RT.anchoredPosition = animal.IconPos;
-        RT.sizeDelta = animal.IconSize;
-
-        int milestone_lvl = Bestiary.getMilestoneProgressInt(index);
-        
-        if(milestone_lvl >= 6){milestone_lvl=5;}
-        
-        newSlotImage.GetComponent<Image>().sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
-        if(milestone_lvl==-1){
-            newSlotImage.GetComponent<Image>().color = Color.black;
-            newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[0];
-        }else{
-            newSlot.GetComponent<Button>().onClick.AddListener(()=>DisplayProfile(index));
-            newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[milestone_lvl];
-        }
+        ResizeImage();
+        checkMilestoneProgress();
         newSlot.SetActive(true);
+
+        void ResizeImage(){
+            RT.anchoredPosition = animal.IconPos;
+            RT.sizeDelta = animal.IconSize;
+        }
+        void checkMilestoneProgress(){
+            int milestone_lvl = getMilestoneProgressInt(index);
+            
+            if(milestone_lvl >= 6){milestone_lvl=5;}
+            
+            newSlotImage.GetComponent<Image>().sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
+            if(milestone_lvl==-1){
+                newSlotImage.GetComponent<Image>().color = Color.black;
+                newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[0];
+            }else{
+                newSlot.GetComponent<Button>().onClick.AddListener(()=>DisplayProfile(index));
+                newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[milestone_lvl];
+            }
+        }
+        
     }
-    private void DisplayProfile(int ID){
-        lastID = ID;
-        Bestiary.DisplayProfile(ID, AnimalImage, title);
-        UpdateCurrentTab(ID);
-    }
+    
+    /* ===== TAB NAVIGATION ===== */
     private void UpdateCurrentTab(int ID){
         switch(BestiaryDisplayTab){
             case "STATS":
-                Bestiary.DisplayStats(ID, statLabels);
+                DisplayStats(ID, statLabels);
                 break;
             case "ABILITIES":
-                Bestiary.DisplayDescription(ID, AbilitiesPanel);
+                DisplayDescription(ID, AbilitiesPanel);
                 break;
             case "MILESTONES":
-                Bestiary.DisplayMilestones(ID, milestoneProgress, DeathAmountSlider);
-                int lvl = Bestiary.getMilestoneProgressInt(ID);
-                milestoneStars.sprite = Stars[lvl];
-                DeathAmountSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = StarsColor[lvl];
+                DisplayMilestones(ID, milestoneProgress, DeathAmountSlider);
+                
                 break;
         }
     }
@@ -266,6 +176,8 @@ public class LocalBestiary : MonoBehaviour
 
     }
 
+
+    /* ===== I/O FUNCTIONS ===== */
     private void ReadBestiaryData(){
         if(File.Exists(Application.persistentDataPath +"/bestiary.json")){
             string json = File.ReadAllText(Application.persistentDataPath +"/bestiary.json");
@@ -275,7 +187,6 @@ public class LocalBestiary : MonoBehaviour
             ReadBestiaryData();
         }
     }
-
     private void CreateBeastiaryFile(){
         BestiarySaveData createdSaveData = new BestiarySaveData();
         for (int i = 0; i < animals.Count(); i++)
@@ -284,11 +195,85 @@ public class LocalBestiary : MonoBehaviour
         }
         File.WriteAllText(Application.persistentDataPath +"/bestiary.json", JsonUtility.ToJson(createdSaveData));
     }
-
     public void WritingData(){
         string json = JsonUtility.ToJson(milestoneProgress);
         File.WriteAllText(Application.persistentDataPath + "/bestiary.json", json);
     }
 
+    /* ===== UI FUNCTIONS ===== */
+    private void DisplayProfile(int ID){
+        lastID = ID;
+        UpdateCurrentTab(ID);
 
+        AnimalRunTimeData animal = animals[ID];
+
+        AnimalImage.sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
+        title.text = animal.name;
+        RectTransform TRR = AnimalImage.GetComponent<RectTransform>();
+        TRR.anchoredPosition = animal.IconPos;
+        TRR.sizeDelta = animal.IconSize;
+    }
+    private void DisplayStats(int ID, TextMeshProUGUI[] labels){
+
+        AnimalRunTimeData animal = animals[ID];
+        Enemy enemy = animal.enemy;
+
+        labels[0].text = enemy.Health.ToString();
+        labels[1].text = enemy.Damage.ToString();
+        labels[2].text = enemy.Armor.ToString();
+        labels[3].text = (enemy.Speed*100f).ToString();
+        labels[4].text = (enemy.AttackRange * 10f).ToString();
+        labels[5].text =  enemy.AttackDelay + "s";
+        labels[6].text = enemy.EmberDropRange[0] + "-" + enemy.EmberDropRange[1];
+        labels[7].text = animal.Wave + "h00";
+    }
+    private void DisplayMilestones(int ID, TextMeshProUGUI counter, Slider slider){
+
+        int[] milestone_progress = getMilestoneProgress(ID);
+        counter.text = milestone_progress==null ? "MAX" : milestone_progress[0]+"/"+milestone_progress[1];
+        slider.maxValue = milestone_progress == null ? 1 : milestone_progress[1];
+        slider.value = milestone_progress == null ? 1 : milestone_progress[0];
+        int lvl = getMilestoneProgressInt(ID);
+        milestoneStars.sprite = Stars[lvl];
+        DeathAmountSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = StarsColor[lvl];
+
+    }
+    private void DisplayDescription(int ID, GameObject[] abilitiesContainer){
+        AnimalRunTimeData animal = animals[ID];
+        AnimalAbility[] abilities = animal.abilities;
+
+        for (int i = 0; i < abilitiesContainer.Length; i++)
+        {
+            if(i <= abilities.Length - 1){
+                abilitiesContainer[i].GetComponentsInChildren<Image>()[1].sprite = abilities[i].icon;
+                abilitiesContainer[i].GetComponentInChildren<TextMeshProUGUI>().text = abilities[i].description;
+                abilitiesContainer[i].SetActive(true);
+            }else{
+                abilitiesContainer[i].SetActive(false);
+            }
+            
+        }
+    }
+
+    /* ===== MILESTONES ===== */
+    private int[] getMilestoneProgress(int ID, bool returnID=false){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return null;}
+        int deaths = animalSaveData.DeathAmount;
+        int i=0;
+        while(i < 5 && deaths >= milestones[i]){
+            i++;
+        }
+        return i>=5 ? null : new int[2]{deaths, milestones[i]};
+    }
+    private int getMilestoneProgressInt(int ID){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
+        int deaths = animalSaveData.DeathAmount;
+        int i=0;
+        while(i < 5 && deaths >= milestones[i]){
+            i++;
+        }
+        return i;
+    }
 }
