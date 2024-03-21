@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,10 +8,9 @@ public class EnemySpawner : MonoBehaviour
 {
     
     public static EnemySpawner Instance {get; private set;}
-    [SerializeField] GameObject[] Enemies;
     float height;
     float width;
-    float TimerEnemySpawn;
+    
     bool isOn = true;
     [HideInInspector] public bool isOnAugments = false;
 
@@ -21,112 +18,30 @@ public class EnemySpawner : MonoBehaviour
 
     public int current_round = 0;
 
-    float FixedEnemyAmount = 5f;
-    
-    float FixedRoundDuration = 5f;
-    float roundTimer = 10;
+    float EnemyAmount;
+    float RoundDuration;
+    float TimerEnemySpawn;
+    float TimerEnemySpawnCounter;
+
     [SerializeField] public GameObject ExplosionPrefab;
     
     public bool GameEnd = true;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
-        //0
-        //Slug + TinySlime
-        new List<float>(){1,0},
-        new List<float>(){0.85f,.15f},
-        new List<float>(){0.7f,0.3f},
-        new List<float>(){0.6f,0.4f},
-        new List<float>(){0.6f,0.4f},
+        new List<float>(){1,0,0},
+        new List<float>(){0.85f,.15f,0},
+        new List<float>(){0.6f,0.4f,0},
+        new List<float>(){0.5f,0.5f},
+        new List<float>(){0.5f,0.5f},
 
-        //5
-        //CatterPie + Slime
-        new List<float>(){0.4f,0.3f,.2f,0.1f},
-        new List<float>(){0.05f,0.5f,.3f,0.15f},
-        new List<float>(){0.05f,0.4f,.5f,0.05f},
-        new List<float>(){0.05f,0.5f,.35f,0.1f}, 
-        new List<float>(){0,0.8f,0,0.2f},
-
-        //10
-        //SlimeOrangeTiny
-        new List<float>(){0,.3f,.15f,.45f,.1f}, 
-        new List<float>(){0,.15f,.25f,0.5f, 0.1f}, 
-        new List<float>(){0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0,.2f,.5f,.3f},
-
-        //15 
-        //Turtle
-        new List<float>(){0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0,0,.2f,.5f,.3f},
-
-        //20
-        //Slime Orange
-        new List<float>(){0,0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0.2f,0,0.2f,.3f,0f,.3f},
-
-        //25
-        //Snail
-        new List<float>(){0,0,0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0,0,0,0,.2f,.5f,.3f},
-        
-        //30
-        //SlimeRedTiny + CatterillarRed
-        new List<float>(){0,0,0,0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,0,0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,0,0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0,0,0,0,0,.2f,.5f,.3f},
-
-        //35
-        //SlimeRed
-        new List<float>(){0,0,0,0,0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0.1f,0,0.1f,.15f,0f,.15f,0f,0.25f,0f, 0.25f},
-
-        //40
-        //Red Turtle
-        new List<float>(){0,0,0,0,0,0,0,.3f,.15f,.45f,.1f},
-        new List<float>(){0,0,0,0,0,0,0,.15f,.25f,0.5f, 0.1f},
-        new List<float>(){0,0,0,0,0,0,0,.10f,.25f,0.5f,.15f},
-        new List<float>(){0,0,0,0,0,0,0,.05f,.2f,.5f, 0.25f},
-        new List<float>(){0,0,0,0,0,0,0,0,.2f,.5f,.3f},
-        //45
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.55f,0.35f, 0.10f},
-        //50
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.5f,0.35f, 0.15f},
-
-        //55
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.33f,0.34f, 0.33f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.20f,0.40f, 0.40f},
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0.20f,0.40f, 0.40f},
-
-        //60
-        new List<float>(){0,0,0,0,0,0,0,0f,0f,0f,0f, 0f, 1f},
-
-
+        new List<float>(){0,.15f,.85f},
+        new List<float>(){0.15f,.15f, 0.7f},
+        new List<float>(){0.1f,0.3f,0.6f},
+        new List<float>(){0.25f,0.25f, 0.5f},
+        new List<float>(){0.3f, 0.3f, 0.4f},
     };
 
+    public Enemy[] PhaseEnemies;
     public List<Enemy> PresentEnemies;
     private void Awake() {
         Instance = this;
@@ -137,16 +52,11 @@ public class EnemySpawner : MonoBehaviour
         
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
-        roundTimer = getRoundTime(current_round);
-        TimerEnemySpawn =(float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
-        updateSpawnLimits();
-        GameUI.Instance.UpdateProgressBar(current_round);
-        GameUI.Instance.UpdateMenuInfo(current_round);
-        
+
+        SetSpawnLimits();
+        StartRound();
         
     }
-
-    
     public void StartGame(){ 
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
@@ -160,9 +70,7 @@ public class EnemySpawner : MonoBehaviour
         }else{
             newRound();
         }
-
-        PlayerPrefs.DeleteKey("PlayerLoad");   
-          
+        PlayerPrefs.DeleteKey("PlayerLoad");    
     }
     private Vector2 getPoint(){
         double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
@@ -185,18 +93,15 @@ public class EnemySpawner : MonoBehaviour
             } 
             return;
         }
-        if(TimerEnemySpawn > 0){
-            TimerEnemySpawn-= Time.deltaTime;
+        if(TimerEnemySpawnCounter > 0){
+            TimerEnemySpawnCounter-= Time.deltaTime;
         }else{
-            TimerEnemySpawn = (float)Distribuitons.RandomExponential(FixedEnemyAmount/FixedRoundDuration);
-            
+            TimerEnemySpawnCounter = TimerEnemySpawn;
             SpawnEnemy(PickRandomEnemy(current_round));
-            updateSpawnLimits();
-        }
-        if(roundTimer > 0){
-            roundTimer-=Time.deltaTime;
-        }else{
-            isOn = false;
+            EnemyAmount--;
+            if(EnemyAmount <= 0){
+                isOn = false;
+            }
         }
     }
     public void UpdateEnemies(){
@@ -210,50 +115,44 @@ public class EnemySpawner : MonoBehaviour
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public void SpawnEnemy(GameObject enemy){
         GameObject g = Instantiate(enemy);
-
         PresentEnemies.Add(g.GetComponent<Enemy>());
         g.transform.position = getPoint();
         g.GetComponent<Enemy>().CheckFlip();
-        
     }
-    private void updateSpawnLimits(){
+    private void SetSpawnLimits(){
         height = 2f * Camera.main.orthographicSize;
         width = height * Camera.main.aspect;
-        
     }
     
 
     public void newRound(){
         
         current_round++;
+
         isOn = true;
         isOnAugments = false;
-        roundTimer = getRoundTime(current_round);
-        FixedRoundDuration = roundTimer;
-        FixedEnemyAmount = getSpawnAmount(current_round);
-        float temp = FixedEnemyAmount/FixedRoundDuration;
-        TimerEnemySpawn = (float)Distribuitons.RandomExponential(temp) ;
-        GameUI.Instance.UpdateProgressBar(current_round);
-        GameEnd = false;
-        foreach (NotEspecificEffect item in Flamey.Instance.notEspecificEffects)
-        {
-            item.ApplyEffect();
-        }
-        
-        GameUI.Instance.UpdateMenuInfo(current_round);
+        GameEnd = false; 
 
+        Flamey.Instance.notEspecificEffects.ForEach(effect => effect.ApplyEffect());
         Flamey.Instance.ApplyTimedRound();
+
+        StartRound();
         
     }
+    private void StartRound(){
 
-
-   
-
-    private GameObject PickRandomEnemy(int round){
-        if(round >= ProbabiltyList.Count){round =  ProbabiltyList.Count-1;}
-        return Enemies[pickEnemyIndex(ProbabiltyList[round])];
+        EnemyAmount = getSpawnAmount(current_round);
+        RoundDuration = getRoundTime(current_round);
+        TimerEnemySpawn = EnemyAmount/RoundDuration;
+        if(current_round%10==0){PhaseEnemies = pickEnemiesForPhase(current_round);}
+        GameUI.Instance.UpdateProgressBar(current_round); 
+        GameUI.Instance.UpdateMenuInfo(current_round); 
+        Debug.Log("Expected Enemies: " + EnemyAmount);
     }
 
+
+    /* ===== ENEMY PICK ===== */
+    private GameObject PickRandomEnemy(int round){return PhaseEnemies[pickEnemyIndex(ProbabiltyList[round % 10])].gameObject;}
     private int pickEnemyIndex(List<float> prob){
         float val = UnityEngine.Random.Range(0f,1f);
         for(int i = 0 ; i< prob.Count; i++){
@@ -266,16 +165,10 @@ public class EnemySpawner : MonoBehaviour
         return prob.Count - 1;
     }
 
-
-    private float getRoundTime(int round){
-        
-        return Math.Min(5 + 1.2f * round, 40);
-    }
-    private float getSpawnAmount(int round){
-        return 5 + 3f * round;
-    }
+    /* ===== ROUND SETTINGS ===== */
+    private float getRoundTime(int round){return Math.Min(5 + 1.2f * round, 40);}
+    private float getSpawnAmount(int round){return 5*(round%10)+30*(round/10)+5;}
     
-
     private void resetInstances(){
         FlameCircle.Instance = null;
         MoneyMultipliers.Instance = null;
@@ -307,9 +200,12 @@ public class EnemySpawner : MonoBehaviour
         LightningEffect.Instance = null;
         Immolate.Instance = null;
 
-       
+        LocalBestiary.INSTANCE.getEnemyList().ForEach(e => e.ResetStatic());     
 
     }
 
-
+    private Enemy[] pickEnemiesForPhase(int round){
+        return LocalBestiary.INSTANCE.getRandomEnemyCombination((round/10)+1, 3);
+    }
+    
 }

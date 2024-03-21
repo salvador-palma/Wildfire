@@ -194,7 +194,7 @@ MonoBehaviour:
   Damage: 15
   AttackDelay: 3
   AttackRange: 1
-  Speed: 0.15
+  Speed: 0.2
   Health: 100
   MaxHealth: 0
   Armor: 25
@@ -206,10 +206,10 @@ MonoBehaviour:
   centerPoint: {fileID: 0}
   initialRadiusX: 9.39
   initialRadiusY: 5.07
-  shrinkLimits: {x: 0.1, y: 0.15}
+  shrinkLimits: {x: 0.15, y: 0.2}
   direction: 1
   jumping: 0
-  jumpTimer: 0.75
+  jumpTimer: 0.4
 --- !u!61 &7441892780136714138
 BoxCollider2D:
   m_ObjectHideFlags: 0

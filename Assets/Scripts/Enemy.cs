@@ -71,6 +71,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         flame.TotalKills++;
         PlayHitSoundFx();
         CameraShake.Shake(0.4f,0.15f);
+        incDeathAmount();
         Destroy(gameObject);
     }
 
@@ -82,6 +83,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         return (int)((EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], MoneyMultipliers.Instance.p)) * MoneyMultipliers.Instance.mult);
     }
 
+    public abstract int getDeathAmount();
+    public abstract void incDeathAmount();
+    public abstract void ResetStatic();
     
 
     public virtual void Attack(){

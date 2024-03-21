@@ -19,6 +19,7 @@ public class AnimalSaveData {
 public class BestiarySaveData{
     public List<AnimalSaveData> animals;
     public BestiarySaveData(){animals = new List<AnimalSaveData>();}
+    public void AddMilestone(int ID, int N){animals[ID].DeathAmount+=N;}
 }
 
 [System.Serializable]
@@ -75,9 +76,10 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] GameObject Container;
 
     [SerializeField] Transform InfoPanel;
-    
-    public void Start(){
 
+    public void Start(){
+        INSTANCE = this;
+        gameObject.SetActive(false);
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
@@ -196,7 +198,7 @@ public class LocalBestiary : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath +"/bestiary.json", JsonUtility.ToJson(createdSaveData));
     }
     public void WritingData(){
-        string json = JsonUtility.ToJson(milestoneProgress);
+        string json = JsonUtility.ToJson(saved_milestones);
         File.WriteAllText(Application.persistentDataPath + "/bestiary.json", json);
     }
 
@@ -276,4 +278,32 @@ public class LocalBestiary : MonoBehaviour
         }
         return i;
     }
+
+    /* ===== API ===== */
+    public Enemy[] getRandomEnemyCombination(int phase, int amount){
+        Enemy[] result = new Enemy[amount];
+        for (int i = 0; i < result.Length; i++)
+        {
+            Enemy picked;
+            do{
+                List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
+                picked = phaseAnimals[UnityEngine.Random.Range(0, phaseAnimals.Count())].enemy;
+            }while(result.Contains(picked));
+            result[i] = picked;
+            Debug.Log("Picked: " + result[i].name);
+        }
+        return result;
+    }
+    public List<Enemy> getEnemyList(){
+        return animals.Select(a => a.enemy).ToList();
+    }
+    public void UpdateBestiaryValues(){
+        for (int i = 0; i < animals.Count; i++)
+        {
+            saved_milestones.AddMilestone(i, animals[i].enemy.getDeathAmount());
+            Debug.Log("Adding " + animals[i].enemy.getDeathAmount() + " to " + animals[i].name);
+        }
+        WritingData();
+    }
+
 }

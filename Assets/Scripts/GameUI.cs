@@ -203,6 +203,7 @@ public class GameUI : MonoBehaviour
     }
     public void loadScene(string str){
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
+        LocalBestiary.INSTANCE.UpdateBestiaryValues();
         SceneManager.LoadScene(str);
     }
 
@@ -242,7 +243,7 @@ public class GameUI : MonoBehaviour
         Deck.Instance.StartAugments((59+1)%5 == 0);
     }
     public void setRoundCounter(int n){
-        roundCounter.text = "ROUND " + n;
+        roundCounter.text = "" + n/10 +":"+(n%10)*6;
     }
     
     private void setUpFinalStats(){
@@ -268,7 +269,6 @@ public class GameUI : MonoBehaviour
     }
 
     public void StartGameEvent(){
-        
         EnemySpawner.Instance.StartGame();
     }
 

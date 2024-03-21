@@ -7,20 +7,18 @@ public class DeckBuilder : MonoBehaviour
 {
     public static DeckBuilder Instance;
     public List<Augment> AllAugments;
-    public Dictionary<string, int[]> AugmentPrices;
     int[] basePrice;
     int[] upgradePrice;
     int[] unlockPrice;
     void Awake(){
         if(Instance==null){Instance = this;}
-        if(Instance == this){DefineAugmentClasses();DefineAugmentClassesPrice();}
+        if(Instance==this){DefineAugmentClasses();}
         basePrice = new int[4]{300,900,2700,8100};
         upgradePrice = new int[2]{2500,7500};
         unlockPrice = new int[1]{500};
     }
     
     public int getPrice(string skill, int level){
-        // int[] prices = AugmentPrices[skill];
         List<string> firstUnlocks = new List<string>(){"OrbitalUnlock","Assassins", "CritUnlock", "RegenUnlock", "ShredUnlock", "BurstUnlock"};
         int[] prices = new int[0];
         switch(SkillTreeManager.Instance.GetSkills(skill).max_value){
@@ -33,83 +31,6 @@ public class DeckBuilder : MonoBehaviour
         }
         if(level>=prices.Length || level < 0){return -1;}
         return firstUnlocks.Contains(skill) ? 300 : prices[level];
-    }
-    public void DefineAugmentClassesPrice(){
-        
-
-        AugmentPrices = new Dictionary<string, int[]>();
-
-        // AugmentPrices["Dmg"] = basePrice;
-        // AugmentPrices["Acc"] = basePrice;
-        // AugmentPrices["AtkSpeed"] = basePrice;
-        // AugmentPrices["BltSpeed"] = basePrice;
-        // AugmentPrices["Armor"] = basePrice;
-        // AugmentPrices["Health"] = basePrice;
-
-        // AugmentPrices["MulticasterUnlock"] = unlockPrice;
-        // AugmentPrices["MulticasterProb"] = upgradePrice;
-
-        // AugmentPrices["CritUnlock"] = unlockPrice;
-        // AugmentPrices["CritChance"] = upgradePrice;
-        // AugmentPrices["CritMult"] = upgradePrice;
-
-        // AugmentPrices["VampUnlock"] = unlockPrice;
-        // AugmentPrices["VampProb"] = upgradePrice;
-        // AugmentPrices["VampPerc"] = upgradePrice;
-
-        // AugmentPrices["BurstUnlock"] = unlockPrice;
-        // AugmentPrices["BurstAmount"] = upgradePrice;
-        // AugmentPrices["BurstInterval"] = upgradePrice;
-
-        // AugmentPrices["ShredUnlock"] = unlockPrice;
-        // AugmentPrices["ShredProb"] = upgradePrice;
-        // AugmentPrices["ShredPerc"] = upgradePrice;
-
-        // AugmentPrices["Assassins"] = unlockPrice;
-        // AugmentPrices["ArmorPen"] = upgradePrice;
-        // AugmentPrices["Execute"] = upgradePrice;
-
-        // AugmentPrices["BlueUnlock"] = unlockPrice;
-        // AugmentPrices["BlueInterval"] = upgradePrice;
-        // AugmentPrices["BlueDmg"] = upgradePrice;
-
-        // AugmentPrices["OrbitalUnlock"] = unlockPrice;
-        // AugmentPrices["OrbitalAmount"] = upgradePrice;
-        // AugmentPrices["OrbitalDmg"] = upgradePrice;
-
-        // AugmentPrices["LavaPoolUnlock"] = unlockPrice;
-        // AugmentPrices["LavaProb"] = upgradePrice;
-        // AugmentPrices["LavaDuration"] = upgradePrice;
-        // AugmentPrices["LavaSize"] = upgradePrice;
-        // AugmentPrices["LavaDmg"] = upgradePrice;
-
-        // AugmentPrices["StatikUnlock"] = unlockPrice;
-        // AugmentPrices["StatikDmg"] = upgradePrice;
-        // AugmentPrices["StatikTTL"] = upgradePrice;
-        // AugmentPrices["StatikProb"] = upgradePrice;
-
-        // AugmentPrices["GambleUnlock"] = unlockPrice;
-        // AugmentPrices["GambleImprove"] = upgradePrice;
-
-        // AugmentPrices["IceUnlock"] = unlockPrice;
-        // AugmentPrices["IceProb"] = upgradePrice;
-        // AugmentPrices["IceDuration"] = upgradePrice;
-
-        // AugmentPrices["RegenUnlock"] = unlockPrice;
-        // AugmentPrices["RegenRound"] = upgradePrice;
-        // AugmentPrices["RegenAmount"] = upgradePrice;
-
-        // AugmentPrices["IcePoolUnlock"] = unlockPrice;
-        // AugmentPrices["IcePoolDuration"] = upgradePrice;
-        // AugmentPrices["IcePoolProb"] = upgradePrice;
-        // AugmentPrices["IcePoolSlow"] = upgradePrice;
-        // AugmentPrices["IcePoolSize"] = upgradePrice;
-
-        // AugmentPrices["ThornsUnlock"] = unlockPrice;
-        // AugmentPrices["ThornsPerc"] = upgradePrice;
-        // AugmentPrices["ThornsProb"] = upgradePrice;
- 
-        
     }
     public void DefineAugmentClasses(){
         AllAugments = new List<Augment>

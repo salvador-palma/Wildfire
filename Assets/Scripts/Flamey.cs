@@ -352,7 +352,7 @@ public class Flamey : MonoBehaviour
     }
     public void ApplyPoison(){
         poisonsLeft--;
-        Hitted(Math.Max(1,MaxHealth/48), 1, null, onhitted:false, isShake:false, idHitTxt:14);
+        Hitted(Math.Max(1,Health/50), 1, null, onhitted:false, isShake:false, idHitTxt:14);
     }
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){

@@ -5,6 +5,8 @@ using System;
 
 public class Squirrel : Enemy
 {
+    
+
     public GameObject BombPrefab;
     
     public bool placedBomb;
@@ -56,4 +58,11 @@ public class Squirrel : Enemy
         }
         base.Die();
     }
+
+
+    public static int DEATH_AMOUNT = 0;
+    public override int getDeathAmount(){return DEATH_AMOUNT;}
+    public override void incDeathAmount(){DEATH_AMOUNT++;}
+    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

@@ -61,7 +61,9 @@ public class Beatle : Enemy
         if(Vector2.Distance(flame.transform.position, Ball.transform.position) < ballHitRange){
             Attacking = true;
             Destroy(Ball);
+            Damage = (int)(Ball.transform.localScale.x/0.6f * Damage);
             base.Attack();
+
             Die();
         }
     }
@@ -81,4 +83,16 @@ public class Beatle : Enemy
             BallFinit.transform.localPosition = new Vector2(-BallFinit.transform.localPosition.x,BallFinit.transform.localPosition.y);
         }
     }
+
+    public override void Die(bool onKill = true)
+    {
+        if(Ball!=null){Destroy(Ball);}
+        base.Die(onKill);
+    }
+
+
+    public static int DEATH_AMOUNT = 0;
+    public override int getDeathAmount(){return DEATH_AMOUNT;}
+    public override void incDeathAmount(){DEATH_AMOUNT++;}
+    public override void ResetStatic(){DEATH_AMOUNT = 0;}
 }

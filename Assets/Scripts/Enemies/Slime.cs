@@ -43,6 +43,11 @@ public class Slime : Enemy
     override public float getSpeed(){
         return maxSpeed;
     }
+
+    public static int DEATH_AMOUNT = 0;
+    public override int getDeathAmount(){return DEATH_AMOUNT;}
+    public override void incDeathAmount(){DEATH_AMOUNT++;}
+    public override void ResetStatic(){DEATH_AMOUNT = 0;}
     
 }
 
