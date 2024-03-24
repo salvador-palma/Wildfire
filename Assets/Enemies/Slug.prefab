@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6862924177304672689}
   - component: {fileID: 6862924177304672691}
   - component: {fileID: 8383785513374019889}
-  - component: {fileID: 8624454741422236722}
+  - component: {fileID: 908001879365601688}
   m_Layer: 6
   m_Name: Slug
   m_TagString: Enemy
@@ -191,7 +191,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8624454741422236722
+--- !u!114 &908001879365601688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6862924177304672684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fa7103b2502934cae44dff50f26a3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d5a953c73de9cb4680f9caa4acbd9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 20
   ArmorPen: 0
-  EmberDropRange: {x: 1, y: 5}
+  EmberDropRange: {x: 2, y: 5}
   Attacking: 0
   HitCenter: {fileID: 3474463150486099908}
   inEffect: 0

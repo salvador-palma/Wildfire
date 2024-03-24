@@ -643,7 +643,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("StatikProb","Electrifying Possibilities", new string[3]{"Gain +7% probability to proc your Static Energy effect", 
                                                             "Gain +10% probability to proc your Static Energy effect", 
                                                             "Gain +15% probability to proc your Static Energy effect"}, "StatikProb", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.7f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.07f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0.15f,0,0)))}),
             new Augment("StatikProb","The Sparkster", new string[3]{"Gain +20% probability to proc your Static Energy effect", 

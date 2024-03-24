@@ -136,12 +136,13 @@ public class GameUI : MonoBehaviour
 
     public void defineStats(){
         Flamey f = Flamey.Instance;
-        StatsTexts[0].text = "Base Damage: " + f.Dmg;
-        StatsTexts[1].text = "Attack Speed: " + f.atkSpeed.ToString("F2") + " flames/s";
-        StatsTexts[2].text = "Bullet Speed: x"+ f.BulletSpeed;
-        StatsTexts[3].text = "Accuracy: " + f.accuracy + "%";
-        StatsTexts[4].text = "Armor: " + f.Armor;
+        StatsTexts[0].text = "" + f.Dmg;
+        StatsTexts[1].text = f.atkSpeed.ToString("F2") + "/s";
+        StatsTexts[2].text = "x"+ f.BulletSpeed;
+        StatsTexts[3].text = f.accuracy + "%";
+        StatsTexts[4].text = f.Armor.ToString();
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[6].text = f.Embers.ToString();
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
     }
@@ -243,9 +244,11 @@ public class GameUI : MonoBehaviour
         Deck.Instance.StartAugments((59+1)%5 == 0);
     }
     public void setRoundCounter(int n){
-        roundCounter.text = "" + n/10 +":"+(n%10)*6;
+        roundCounter.text = "" + n/10 +"h"+ ((n%10)*6).ToString("00") ;
     }
     
+
+    /* ===== FINAL STATS ===== */
     private void setUpFinalStats(){
         FinalStats = new List<SimpleStat>();
         FinalStats.AddRange(Flamey.Instance.getBaseStats());

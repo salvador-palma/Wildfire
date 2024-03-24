@@ -180,13 +180,9 @@ public class SkillTreeManager : MonoBehaviour
 
     }
     
-    public void changeEmberAmountUI(){
-  
-        //int difference = PlayerData.embers - int.Parse(emberAmountTxt.text);
+    public void changeEmberAmountUI(int amount = 0){
+        PlayerData.embers += amount;
         emberAmountTxt.text = PlayerData.embers.ToString();
-        
-        // emberLossTxt.text = difference > 0 ? "+"+difference : ""+difference;
-        // GetComponentInParent<Animator>().Play("SkillTreeLoss");
     }
 
     public void resetSkillTree(){

@@ -10177,6 +10177,81 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1370434672959814038, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
   m_PrefabInstance: {fileID: 538788360}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &551673277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551673278}
+  - component: {fileID: 551673280}
+  - component: {fileID: 551673279}
+  m_Layer: 0
+  m_Name: Notification
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &551673278
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551673277}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 45.68703}
+  m_LocalScale: {x: 1.0001144, y: 1.0001144, z: 1.0001144}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457361214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 43.7, y: 43.9}
+  m_SizeDelta: {x: 28.05, y: 28.05}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &551673279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551673277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 4665978710371154710, guid: 41dc9c6d8bd83e246ae09dfd39ee55d8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &551673280
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551673277}
+  m_CullTransparentMesh: 1
 --- !u!1001 &554098463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24913,6 +24988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206136738}
   - component: {fileID: 1206136741}
+  - component: {fileID: 1206136743}
   - component: {fileID: 1206136740}
   - component: {fileID: 1206136739}
   - component: {fileID: 1206136742}
@@ -24934,7 +25010,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8558227, y: 0.8558227, z: 0.8558227}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1869826425}
   m_Father: {fileID: 1297511971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -24959,9 +25036,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 275411189}
-          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
-          m_MethodName: SkillTreeMenuToggle
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: ClickedCharacter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -25031,6 +25108,58 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1206136743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206136737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c4d73fa58aae5438646f0e398a0196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runTimeDialogues:
+  - dialogues:
+    - message: Hey! This is just a Test
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: And this is the second message
+      avatar: {fileID: 21300000, guid: 002fb66ba1854e14b872c24dc7b86ebf, type: 3}
+    - message: Byeeeee!!
+      avatar: {fileID: 21300000, guid: 355c823827d02a04bb50a15b3c2185ec, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275411189}
+          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+          m_MethodName: SkillTreeMenuToggle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  Name: Rowl
+  DefaultClickBehaviour:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 275411189}
+        m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+        m_MethodName: SkillTreeMenuToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1213614685 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3103684782140599294, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
@@ -29612,6 +29741,7 @@ GameObject:
   - component: {fileID: 1457361214}
   - component: {fileID: 1457361216}
   - component: {fileID: 1457361215}
+  - component: {fileID: 1457361219}
   - component: {fileID: 1457361217}
   - component: {fileID: 1457361218}
   m_Layer: 0
@@ -29632,7 +29762,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -39.1}
   m_LocalScale: {x: 0.8558227, y: 0.8558227, z: 0.8558227}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 551673278}
   m_Father: {fileID: 1297511971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -29717,9 +29848,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 275411189}
-          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
-          m_MethodName: BestiaryMenuToggle
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: ClickedCharacter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -29729,6 +29860,35 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1457361219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457361213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c4d73fa58aae5438646f0e398a0196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runTimeDialogues: []
+  Name: Betsy
+  DefaultClickBehaviour:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 275411189}
+        m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+        m_MethodName: BestiaryMenuToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1472278763
 GameObject:
   m_ObjectHideFlags: 0
@@ -33136,6 +33296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1688821893}
   - component: {fileID: 1688821894}
+  - component: {fileID: 1688821895}
   m_Layer: 5
   m_Name: Chat
   m_TagString: Untagged
@@ -33190,6 +33351,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1688821895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688821892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275411189}
+          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+          m_MethodName: ClickedChatPanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1689100316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36549,6 +36739,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc50de7c805d9a48af9c687aefd8bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1869826424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1869826425}
+  - component: {fileID: 1869826427}
+  - component: {fileID: 1869826426}
+  m_Layer: 0
+  m_Name: Notification
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1869826425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869826424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1206136738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 49.2, y: 55.3}
+  m_SizeDelta: {x: 28.05, y: 28.05}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1869826426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869826424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 4665978710371154710, guid: 41dc9c6d8bd83e246ae09dfd39ee55d8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1869826427
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869826424}
+  m_CullTransparentMesh: 1
 --- !u!114 &1900355283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2011877664141749019, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
@@ -42837,6 +43102,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: BestiaryPanels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: 'BestiaryPanels.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6804154460510507627}
     - target: {fileID: 5533112890008238485, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -42858,6 +43131,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+--- !u!1 &6804154460510507627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4297411825511938058, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6910396046864891248
 PrefabInstance:
   m_ObjectHideFlags: 0

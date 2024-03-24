@@ -277,19 +277,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
-  Damage: 15
+  Damage: 25
   AttackDelay: 8
   AttackRange: 1.5
-  Speed: 0.15
-  Health: 500
+  Speed: 0.125
+  Health: 350
   MaxHealth: 0
-  Armor: 250
+  Armor: 150
   ArmorPen: 0
-  EmberDropRange: {x: 0, y: 0}
+  EmberDropRange: {x: 5, y: 9}
   Attacking: 0
   HitCenter: {fileID: 4154431325428908917}
   inEffect: 0
-  isPoisonous: 1
+  isPoisonous: 0
   poisonTicks: 6
 --- !u!95 &6887370181742787493
 Animator:

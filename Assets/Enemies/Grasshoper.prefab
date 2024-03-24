@@ -194,12 +194,12 @@ MonoBehaviour:
   Damage: 15
   AttackDelay: 3
   AttackRange: 1
-  Speed: 0.2
+  Speed: 0.3
   Health: 100
   MaxHealth: 0
-  Armor: 25
+  Armor: 100
   ArmorPen: 0
-  EmberDropRange: {x: 0, y: 0}
+  EmberDropRange: {x: 3, y: 6}
   Attacking: 0
   HitCenter: {fileID: 3390616376177793989}
   inEffect: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   shrinkLimits: {x: 0.15, y: 0.2}
   direction: 1
   jumping: 0
-  jumpTimer: 0.4
+  jumpTimer: 1
 --- !u!61 &7441892780136714138
 BoxCollider2D:
   m_ObjectHideFlags: 0

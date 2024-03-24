@@ -17,6 +17,7 @@ public class Deck : MonoBehaviour
     [SerializeField] GameObject SlotsParent;
     private Augment[] currentAugments;
     [SerializeField] private Button[] RefreshButtons;
+    [SerializeField] private Sprite[] Stars;
     private List<Augment> refreshedAugments;
 
     [SerializeField] private Sprite[] tierSprites;
@@ -89,6 +90,7 @@ public class Deck : MonoBehaviour
         slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.Title;
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment == null ? null : augment.icon;
         slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.getDescription();
+        slot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[augment.isUnlockableMidGame() ? 5:augment.getLevel()];
         currentAugments[i] = augment;
         
     }

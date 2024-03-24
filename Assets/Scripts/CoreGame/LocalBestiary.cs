@@ -3,16 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [System.Serializable]
 public class AnimalSaveData {
     public int AnimalID;
     public int DeathAmount;
+    public int RetrievedRewards;
     public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;}
 }
 [System.Serializable]
@@ -42,10 +46,13 @@ public class LocalBestiary : MonoBehaviour
 {
     
     public static LocalBestiary INSTANCE;
+    public static int AvailableClaims;
     string[] BestiaryTabs = new string[3]{"STATS","ABILITIES", "MILESTONES"};
-    private int[] milestones = new int[5]{100, 2500, 10000, 25000, 100000};
+    private int[] milestones = new int[5]{100, 500, 2500, 10000, 50000};
+    private int[] milestone_rewards = new int[5]{300,1500,5000,25000,100000};
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
+    public event EventHandler ClaimRewardEvent;
     private int lastID;
     [SerializeField] List<AnimalRunTimeData> animals;
 
@@ -70,6 +77,7 @@ public class LocalBestiary : MonoBehaviour
     TextMeshProUGUI milestoneProgress;
     Image milestoneStars;
     Slider DeathAmountSlider;
+    Button claimRewardButton;
 
     //GRID RELATED
     [SerializeField] GameObject SlotTemplate;
@@ -77,7 +85,7 @@ public class LocalBestiary : MonoBehaviour
 
     [SerializeField] Transform InfoPanel;
 
-    public void Start(){
+    public void Awake(){
         INSTANCE = this;
         gameObject.SetActive(false);
         RetrieveReferences();
@@ -86,6 +94,12 @@ public class LocalBestiary : MonoBehaviour
 
         RightButton.onClick.AddListener(()=>ChangeTab(1));
         LeftButton.onClick.AddListener(()=>ChangeTab(-1));
+
+        claimRewardButton.onClick.AddListener(()=>ClaimRewards(lastID));
+
+        if(SceneManager.GetActiveScene().name == "Game"){
+            BestiaryTabs = new string[2]{"STATS","ABILITIES"};
+        }
     }
     
     private void RetrieveReferences(){
@@ -105,9 +119,12 @@ public class LocalBestiary : MonoBehaviour
         AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(0).GetComponent<Image>();
 
         //MILESTONES
+        
         milestoneProgress = BestiaryPanels[2].transform.Find("MilestoneProgress").GetComponent<TextMeshProUGUI>();
         milestoneStars = BestiaryPanels[2].transform.Find("Stars").GetComponent<Image>();
         DeathAmountSlider = BestiaryPanels[2].transform.Find("Slider").GetComponent<Slider>();
+        claimRewardButton = BestiaryPanels[2].transform.Find("ClaimRewards").GetComponent<Button>();
+        
 
     }
 
@@ -134,16 +151,21 @@ public class LocalBestiary : MonoBehaviour
         }
         void checkMilestoneProgress(){
             int milestone_lvl = getMilestoneProgressInt(index);
-            
-            if(milestone_lvl >= 6){milestone_lvl=5;}
-            
+                       
             newSlotImage.GetComponent<Image>().sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
             if(milestone_lvl==-1){
                 newSlotImage.GetComponent<Image>().color = Color.black;
                 newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[0];
             }else{
                 newSlot.GetComponent<Button>().onClick.AddListener(()=>DisplayProfile(index));
-                newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[milestone_lvl];
+                newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[milestone_lvl >= 6 ? 5 : milestone_lvl];
+                
+            }
+
+            if(SceneManager.GetActiveScene().name != "Game"){
+                bool NotificationCondition = saved_milestones.animals[index].RetrievedRewards < milestone_lvl;
+                newSlot.transform.Find("Notification").gameObject.SetActive(NotificationCondition); 
+                if(NotificationCondition){AvailableClaims++;}
             }
         }
         
@@ -239,6 +261,12 @@ public class LocalBestiary : MonoBehaviour
         milestoneStars.sprite = Stars[lvl];
         DeathAmountSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = StarsColor[lvl];
 
+       
+        claimRewardButton.gameObject.SetActive(saved_milestones.animals[ID].RetrievedRewards < lvl);
+        
+        
+        
+
     }
     private void DisplayDescription(int ID, GameObject[] abilitiesContainer){
         AnimalRunTimeData animal = animals[ID];
@@ -279,20 +307,41 @@ public class LocalBestiary : MonoBehaviour
         return i;
     }
 
+    private void ClaimRewards(int AnimalToClaimID){
+        int claimed_rewards = saved_milestones.animals[AnimalToClaimID].RetrievedRewards;
+        int rewards_capable_to_claim = getMilestoneProgressInt(AnimalToClaimID);
+        int total_rewards_in_embers = 0;
+        for (int i = claimed_rewards; i < rewards_capable_to_claim; i++)
+        {
+           total_rewards_in_embers += milestone_rewards[i];
+          
+        }
+        AvailableClaims--;
+        saved_milestones.animals[AnimalToClaimID].RetrievedRewards = rewards_capable_to_claim;
+        SkillTreeManager.Instance.changeEmberAmountUI(total_rewards_in_embers);
+        SkillTreeManager.Instance.WritingData();
+        UpdateCurrentTab(AnimalToClaimID);
+        WritingData();
+
+        Container.transform.GetChild(AnimalToClaimID+1).Find("Notification").gameObject.SetActive(false);
+        ClaimRewardEvent?.Invoke(this, new EventArgs());
+    }
     /* ===== API ===== */
     public Enemy[] getRandomEnemyCombination(int phase, int amount){
-        Enemy[] result = new Enemy[amount];
+        AnimalRunTimeData[] result = new AnimalRunTimeData[amount];
+        List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
+
         for (int i = 0; i < result.Length; i++)
         {
-            Enemy picked;
+            AnimalRunTimeData picked;
             do{
-                List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
-                picked = phaseAnimals[UnityEngine.Random.Range(0, phaseAnimals.Count())].enemy;
+                
+                picked = phaseAnimals[UnityEngine.Random.Range(0, phaseAnimals.Count())];
             }while(result.Contains(picked));
             result[i] = picked;
-            Debug.Log("Picked: " + result[i].name);
         }
-        return result;
+        Array.Sort(result, (a,b) => animals.IndexOf(a) - animals.IndexOf(b));
+        return result.Select(e=>e.enemy).ToArray();
     }
     public List<Enemy> getEnemyList(){
         return animals.Select(a => a.enemy).ToList();
@@ -301,9 +350,19 @@ public class LocalBestiary : MonoBehaviour
         for (int i = 0; i < animals.Count; i++)
         {
             saved_milestones.AddMilestone(i, animals[i].enemy.getDeathAmount());
-            Debug.Log("Adding " + animals[i].enemy.getDeathAmount() + " to " + animals[i].name);
+            
         }
         WritingData();
     }
 
+    public float[] getMeasurements(Enemy e){
+        
+        AnimalRunTimeData data = animals.FirstOrDefault(a => a.enemy == e);
+        if(data==null){return null;}
+        float[] results = new float[4]{data.IconPos[0], data.IconPos[1], data.IconSize[0], data.IconSize[1]};
+        return results;
+    }
+    public int getAvailableRewards(){
+        return AvailableClaims;
+    }
 }

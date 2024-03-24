@@ -5,7 +5,7 @@ using UnityEngine;
 public class Snail : Enemy
 {
     
-    [SerializeField]  private bool withShell;
+    [SerializeField]  protected bool withShell;
     [SerializeField] private float maxSpeed;
     private void Start() {
         base.flame = Flamey.Instance;

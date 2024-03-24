@@ -37,7 +37,7 @@ public class SecondShot : OnShootEffects{
     }
     private async void ShootWithDelay(){
         await Task.Delay(100);
-        Flamey.Instance.InstantiateShot(new List<string>(){"MultiCaster"});
+        Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
     }
 
     public void Stack(SecondShot secondShot){
@@ -99,7 +99,7 @@ public class BurstShot : OnShootEffects{
         if(leftToShoot <= 0){
             leftToShoot = interval;
             for(int i =0; i< amount; i++){
-                Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Burst Shot", "MultiCaster"});
+                Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Burst Shot", "Multicaster"});
                 f.setTarget(Flamey.Instance.getRandomHomingPosition());
             }
         }

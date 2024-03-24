@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -92,26 +93,35 @@ public class MetaMenuUI : MonoBehaviour
         }
     }
 
-    private void StartChat(){
+    public void StartChat(){
         ChatPanel.gameObject.SetActive(true);
         ChatPanel.GetComponent<Animator>().Play("Intro");
     }
     public void EndChat(){
         ChatPanel.GetComponent<Animator>().Play("Outro");
+        Message.text = "";
         Array.ForEach(Options, e => e.gameObject.SetActive(false));
     }
     private void ChatSingular(string msg,Sprite avatar, string[] optionTxt = null, UnityAction[] optionAction = null){
         Message.text = "";
         Profile.sprite = avatar;
-        for(int i =0; i < optionTxt.Length; i++){
-            Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
-            Options[i].onClick.RemoveAllListeners();
-            Options[i].onClick.AddListener(optionAction[i]);
+
+        if(optionTxt!=null){
+            for(int i =0; i < optionTxt.Length; i++){
+                Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
+                Options[i].onClick.RemoveAllListeners();
+                Options[i].onClick.AddListener(optionAction[i]);
+            }
         }
-        StartCoroutine(ShowTextTimed(msg));
+        
+        StartCoroutine(ShowTextTimed(msg, optionTxt!=null));
     }
-    public IEnumerator ShowTextTimed(string msg){
+    public IEnumerator ShowTextTimed(string msg, bool withOptions){
         foreach(char c in msg){
+            if(triggerNext>0){
+                Message.text = msg;
+                break;
+            }
             Message.text += c;
             if(char.IsWhiteSpace(c)){
                 yield return new WaitForSeconds(0.05f);
@@ -121,8 +131,29 @@ public class MetaMenuUI : MonoBehaviour
             
 
         }
-        Array.ForEach(Options, e => e.gameObject.SetActive(true));
+        
+        Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
+        triggerNext=1;
         yield break;
+    }
+
+
+    int triggerNext;
+    public void ClickedChatPanel(){
+        triggerNext++;
+    }
+    public IEnumerator StartDialogue(Dialogue[] dialogue, UnityEvent after = null){
+        StartChat();
+        foreach (Dialogue d in dialogue)
+        {   
+            ChatSingular(d.message, d.avatar);
+            yield return new WaitUntil(() => triggerNext >= 2);
+            triggerNext = 0;
+        }
+        EndChat();
+        if(after != null){
+            after.Invoke();
+        }
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -41,8 +42,17 @@ public class EnemySpawner : MonoBehaviour
         new List<float>(){0.3f, 0.3f, 0.4f},
     };
 
-    public Enemy[] PhaseEnemies;
+    public Enemy[] PickedEnemies;
     public List<Enemy> PresentEnemies;
+
+
+    //ENEMY PREVIEWER
+    [Header("Binoculars")]
+    public int HindSightDeepness = 3;
+    public string latestSpecies;
+    public GameObject[] BinocularSlots;
+
+
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
@@ -52,9 +62,12 @@ public class EnemySpawner : MonoBehaviour
         
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
-
+        PickedEnemies = pickEnemies(current_round);
         SetSpawnLimits();
         StartRound();
+
+        
+        InitBinoculars();
         
     }
     public void StartGame(){ 
@@ -115,7 +128,9 @@ public class EnemySpawner : MonoBehaviour
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public void SpawnEnemy(GameObject enemy){
         GameObject g = Instantiate(enemy);
-        PresentEnemies.Add(g.GetComponent<Enemy>());
+        Enemy e = g.GetComponent<Enemy>();
+        addEnemy(e);
+        CheckForBinoculars(e);
         g.transform.position = getPoint();
         g.GetComponent<Enemy>().CheckFlip();
     }
@@ -143,16 +158,50 @@ public class EnemySpawner : MonoBehaviour
 
         EnemyAmount = getSpawnAmount(current_round);
         RoundDuration = getRoundTime(current_round);
-        TimerEnemySpawn = EnemyAmount/RoundDuration;
-        if(current_round%10==0){PhaseEnemies = pickEnemiesForPhase(current_round);}
+        TimerEnemySpawn = RoundDuration/EnemyAmount;
         GameUI.Instance.UpdateProgressBar(current_round); 
         GameUI.Instance.UpdateMenuInfo(current_round); 
-        Debug.Log("Expected Enemies: " + EnemyAmount);
     }
+    
+    /* ===== BINOCULARS ===== */
+    private void CheckForBinoculars(Enemy e){
+        if(latestSpecies==null){latestSpecies=e.name; Debug.Log("RETURN");return;}
 
+        int start_from = Array.FindIndex(PickedEnemies, item => e.name == item.name+"(Clone)");
 
+        if( e.name != latestSpecies && start_from > Array.FindIndex(PickedEnemies, item => latestSpecies == item.name+"(Clone)")){
+            latestSpecies = e.name;
+            IncrementBinocularHindSight();
+        }
+        void IncrementBinocularHindSight(){
+            Debug.Log("Increment Binocular");
+            int j = 0;
+            for (int i = start_from; i < start_from+HindSightDeepness; i++)
+            {
+                GameObject child = BinocularSlots[j];
+                child.GetComponent<Image>().sprite = PickedEnemies[i+1].GetComponent<SpriteRenderer>().sprite;
+                float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
+                ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
+                j++;
+            }
+        }
+        void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize){
+            RT.anchoredPosition = IconPos;
+            RT.sizeDelta = IconSize;
+        }
+    }
+    private void InitBinoculars(){
+        for (int i = 0; i < HindSightDeepness; i++)
+        {
+            GameObject child = BinocularSlots[i];
+            child.GetComponent<Image>().sprite = PickedEnemies[i+1].gameObject.GetComponent<SpriteRenderer>().sprite;
+            float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
+            child.GetComponent<RectTransform>().anchoredPosition = new Vector2(dimensions[0], dimensions[1]);
+            child.GetComponent<RectTransform>().sizeDelta = new Vector2(dimensions[2], dimensions[3]);
+        }
+    }
     /* ===== ENEMY PICK ===== */
-    private GameObject PickRandomEnemy(int round){return PhaseEnemies[pickEnemyIndex(ProbabiltyList[round % 10])].gameObject;}
+    private GameObject PickRandomEnemy(int round){return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;}
     private int pickEnemyIndex(List<float> prob){
         float val = UnityEngine.Random.Range(0f,1f);
         for(int i = 0 ; i< prob.Count; i++){
@@ -167,7 +216,7 @@ public class EnemySpawner : MonoBehaviour
 
     /* ===== ROUND SETTINGS ===== */
     private float getRoundTime(int round){return Math.Min(5 + 1.2f * round, 40);}
-    private float getSpawnAmount(int round){return 5*(round%10)+30*(round/10)+5;}
+    private float getSpawnAmount(int round){return 5*(round%10)+35*(round/10)+5;}
     
     private void resetInstances(){
         FlameCircle.Instance = null;
@@ -199,13 +248,19 @@ public class EnemySpawner : MonoBehaviour
         HealthRegen.Instance = null;
         LightningEffect.Instance = null;
         Immolate.Instance = null;
-
-        LocalBestiary.INSTANCE.getEnemyList().ForEach(e => e.ResetStatic());     
+        try{
+        LocalBestiary.INSTANCE.getEnemyList().ForEach(e => e.ResetStatic());  
+        }catch{}   
 
     }
 
-    private Enemy[] pickEnemiesForPhase(int round){
-        return LocalBestiary.INSTANCE.getRandomEnemyCombination((round/10)+1, 3);
+    private Enemy[] pickEnemies(int round){
+        List<Enemy> result = new List<Enemy>();
+        for (int i = 0; i < 6; i++)
+        {
+            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3));
+        }
+        return result.ToArray();
     }
     
 }
