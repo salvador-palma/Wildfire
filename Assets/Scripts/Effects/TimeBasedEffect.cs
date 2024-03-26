@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public interface TimeBasedEffect : Effect
@@ -35,7 +36,10 @@ public class HealthRegen : TimeBasedEffect
     {
         if(tickAmount <= 0){
             tickAmount = 4;
-            Flamey.Instance.addHealth(perSec);
+            if(Flamey.Instance.Health < Flamey.Instance.MaxHealth){
+                Flamey.Instance.addHealth(perSec);
+            }
+            
         }else{
             tickAmount--;
         }
@@ -54,7 +58,11 @@ public class HealthRegen : TimeBasedEffect
     
     public string getDescription()
     {
-        return "You regen " + Mathf.Round(perSec * 100.0f) * 0.01f + " health per second and " + Mathf.Round(perRound * 100.0f) * 0.01f + " at the end of each round";
+        return "You can regenerate health per second and at the end of each round";
+    }
+    public string getCaps()
+    {
+        return string.Format("Regen/s: {0}/s <br>Regen/round: {1}/round", Mathf.Round(perSec * 100.0f) * 0.01f, Mathf.Round(perRound * 100.0f) * 0.01f);
     }
 
     public string getIcon()
@@ -121,15 +129,17 @@ public class LightningEffect : TimeBasedEffect
         if(interval <= 1){
             interval = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Charge it up!");
-            deck.removeFromDeck("Eletric Discharge");
-            deck.removeFromDeck("Thunderstorm");
+            deck.removeClassFromDeck("ThunderInterval");
         } 
     }
     
     public string getDescription()
     {
-        return "Each " + Mathf.Round((float)interval/4 * 100.0f) * 0.01f + " seconds, a thunder will spawn at a convenient location dealing " + dmg + " to enemies struck by it. When it lands, the thunder applies On-Land Effects";
+        return "Each few amount of seconds, a thunder will spawn at a convenient location dealing damage to enemies struck by it. This ability applies On-Land Effects";
+    }
+    public string getCaps()
+    {
+        return string.Format("Interval: {0}s (Min 0.25s)<br>Damage: +{1}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, dmg);
     }
 
     public string getIcon()
@@ -198,22 +208,22 @@ public class Immolate : TimeBasedEffect
         if(interval <= 16){
             interval = 16;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Heat Discharge");
-            deck.removeFromDeck("Accumulated Heat");
-            deck.removeFromDeck("Releasing Everything");
+            deck.removeClassFromDeck("ImmolateInterval");
         } 
         if(radius >= 2f){
             radius = 2f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Waving Flames");
-            deck.removeFromDeck("Spread the Fire");
-            deck.removeFromDeck("Across the Globe");
+            deck.removeClassFromDeck("ImmolateRadius");
         }
     }
     
     public string getDescription()
     {
-        return "Each " + Mathf.Round((float)interval/4 * 100.0f) * 0.01f + " seconds, you will release energy that travels " + Mathf.Round(radius*100) + " units and deals " + dmg + " damage";
+        return "Each few amount of seconds, you will release a wave of energy that travels through the campsite dealing damage to enemies caught by it";
+    }
+    public string getCaps()
+    {
+        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{1}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
     }
 
     public string getIcon()

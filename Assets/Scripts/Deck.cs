@@ -59,9 +59,6 @@ public class Deck : MonoBehaviour
     void FillDeck(){
         augments = DeckBuilder.Instance.getAllCards();
     }   
-
-
-
     Augment pickFromDeck(){
         Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
         //MAKES UNIQUES REMOVE AFTER
@@ -104,7 +101,7 @@ public class Deck : MonoBehaviour
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
         RoundStart?.Invoke(this, new EventArgs());
-        //if(FlameCircle.Instance != null){FlameCircle.Instance.SetSpin(true);}
+
         ActivateAugment(currentAugments[i]);
         refreshedAugments.Clear();
 
@@ -204,8 +201,11 @@ public class Deck : MonoBehaviour
         ChangeSingular(aug,Slots[index], index);
     }
 
-    public void removeFromDeck(string title){
-        augments.RemoveAll(a => a.Title == title);
+    public void removeClassFromDeck(string augmentClass){
+        augments.RemoveAll(a => a.AugmentClass == augmentClass);
+    }
+    public void removeCardFromDeck(string name){
+        augments.RemoveAll(a => a.Title == name);
     }
 
     public void resetPhaseAugmentTier(){

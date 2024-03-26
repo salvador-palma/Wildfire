@@ -48,7 +48,7 @@ public class LocalBestiary : MonoBehaviour
     public static LocalBestiary INSTANCE;
     public static int AvailableClaims;
     string[] BestiaryTabs = new string[3]{"STATS","ABILITIES", "MILESTONES"};
-    private int[] milestones = new int[5]{100, 500, 2500, 10000, 50000};
+    public int[] milestones = new int[5]{100, 500, 2500, 10000, 50000};
     private int[] milestone_rewards = new int[5]{300,1500,5000,25000,100000};
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
@@ -64,6 +64,7 @@ public class LocalBestiary : MonoBehaviour
     //GENERAL
     TextMeshProUGUI title;
     Image AnimalImage;
+
 
     //TABS
     [SerializeField] Button RightButton;
@@ -146,13 +147,15 @@ public class LocalBestiary : MonoBehaviour
         newSlot.SetActive(true);
 
         void ResizeImage(){
-            RT.anchoredPosition = animal.IconPos;
-            RT.sizeDelta = animal.IconSize;
+            if(getMilestoneProgressInt(index) != -1){
+                newSlotImage.GetComponent<Image>().sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
+                newSlotImage.GetComponent<Image>().color = Color.white;
+                RT.anchoredPosition = animal.IconPos;
+                RT.sizeDelta = animal.IconSize;
+            } 
         }
         void checkMilestoneProgress(){
             int milestone_lvl = getMilestoneProgressInt(index);
-                       
-            newSlotImage.GetComponent<Image>().sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
             if(milestone_lvl==-1){
                 newSlotImage.GetComponent<Image>().color = Color.black;
                 newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[0];
@@ -365,4 +368,15 @@ public class LocalBestiary : MonoBehaviour
     public int getAvailableRewards(){
         return AvailableClaims;
     }
+
+    public int get_Amount_Of_Enemies_With_Milestones_Above(int N){
+        return saved_milestones.animals.Where(e => e.DeathAmount >= N).Count();
+    }
+    public bool hasBeenUnlocked(Enemy e){
+        int ID = animals.FindIndex(i => i.enemy == e);
+        if(ID == -1){return false;}
+        
+        return saved_milestones.animals[ID].DeathAmount >= 0;
+    }
+
 }

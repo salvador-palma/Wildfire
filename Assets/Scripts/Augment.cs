@@ -19,7 +19,7 @@ public class Augment
     [HideInInspector] public Sprite icon;
     [HideInInspector] public UnityAction[] actions;
     
-    string AugmentClass;
+    public string AugmentClass;
     bool baseStat;
     bool baseCard;
     bool baseCardUpgrade;

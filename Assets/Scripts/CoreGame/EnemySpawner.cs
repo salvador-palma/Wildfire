@@ -48,8 +48,9 @@ public class EnemySpawner : MonoBehaviour
 
     //ENEMY PREVIEWER
     [Header("Binoculars")]
-    public int HindSightDeepness = 3;
+    public int HindSightDeepness;
     public string latestSpecies;
+    public GameObject BinocularPanel;
     public GameObject[] BinocularSlots;
 
 
@@ -63,6 +64,10 @@ public class EnemySpawner : MonoBehaviour
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
         PickedEnemies = pickEnemies(current_round);
+        HindSightDeepness = Math.Max(0,GameVariables.GetVariable("BinocularLevel"));
+        if(HindSightDeepness == 0){
+            BinocularPanel.SetActive(false);
+        }
         SetSpawnLimits();
         StartRound();
 
@@ -184,21 +189,30 @@ public class EnemySpawner : MonoBehaviour
                 ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
                 j++;
             }
+            
         }
         void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize){
             RT.anchoredPosition = IconPos;
             RT.sizeDelta = IconSize;
         }
     }
+    
     private void InitBinoculars(){
+
         for (int i = 0; i < HindSightDeepness; i++)
         {
             GameObject child = BinocularSlots[i];
             child.GetComponent<Image>().sprite = PickedEnemies[i+1].gameObject.GetComponent<SpriteRenderer>().sprite;
+            if(!LocalBestiary.INSTANCE.hasBeenUnlocked(PickedEnemies[i+1])){
+                child.GetComponent<Image>().color = Color.black;
+            }
             float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
             child.GetComponent<RectTransform>().anchoredPosition = new Vector2(dimensions[0], dimensions[1]);
             child.GetComponent<RectTransform>().sizeDelta = new Vector2(dimensions[2], dimensions[3]);
+
         }
+        
+
     }
     /* ===== ENEMY PICK ===== */
     private GameObject PickRandomEnemy(int round){return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;}

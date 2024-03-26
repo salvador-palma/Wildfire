@@ -213,7 +213,7 @@ public class DeckBuilder : MonoBehaviour
 
 
             new Augment("MulticasterUnlock" ,"Multicaster", new string[1]{"Unlock the ability to multicast"}, "MulticasterUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Multicaster");
+                Deck.Instance.removeClassFromDeck("MulticasterUnlock");
                 Flamey.Instance.addOnShootEffect(new SecondShot(0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"MulticasterProb"});            
             })}, baseCard: true),   
@@ -237,7 +237,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                                                 new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.4f)))}), 
 
             new Augment("CritUnlock" ,"Critical Inferno", new string[1]{"Unlock the ability to critical strike"}, "CritUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Critical Inferno");
+                Deck.Instance.removeClassFromDeck("CritUnlock");
                 Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 1.5f));
                 Deck.Instance.AddAugmentClass(new List<string>{"CritMult","CritChance"});            
             })}, baseCard: true),  
@@ -253,26 +253,26 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.15f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.35f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0f, 0.7f)))}),
-            new Augment("CritChance","Critical Miracle", new string[3]{"Gain +3% critical strike chance (capped at 80%)", 
-                                                            "Gain +7% critical strike chance (capped at 80%)", 
-                                                            "Gain +15% critical strike chance (capped at 80%)"}, "CritChance", Tier.Silver, new UnityAction[3]{
+            new Augment("CritChance","Critical Miracle", new string[3]{"Gain +3% critical strike chance", 
+                                                            "Gain +7% critical strike chance", 
+                                                            "Gain +15% critical strike chance"}, "CritChance", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.03f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.07f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0f)))}),
-            new Augment("CritChance","Fate's Favor", new string[3]{"Gain +7% critical strike chance (capped at 80%)", 
-                                                            "Gain +15% critical strike chance (capped at 80%)", 
-                                                            "Gain +30% critical strike chance (capped at 80%)"}, "CritChance", Tier.Gold, new UnityAction[3]{
+            new Augment("CritChance","Fate's Favor", new string[3]{"Gain +7% critical strike chance", 
+                                                            "Gain +15% critical strike chance", 
+                                                            "Gain +30% critical strike chance"}, "CritChance", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.07f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.3f, 0f)))}),
-            new Augment("CritChance","Overheat", new string[3]{"Gain +10% critical strike chance (capped at 80%) and +30% critical strike damage", 
-                                                            "Gain +15% critical strike chance (capped at 80%) and +60% critical strike damage", 
-                                                            "Gain +30% critical strike chance (capped at 80%) and +120% critical strike damage"}, "CritChance", Tier.Prismatic, new UnityAction[3]{
+            new Augment("CritChance","Overheat", new string[3]{"Gain +10% critical strike chance and +30% critical strike damage", 
+                                                            "Gain +15% critical strike chance and +60% critical strike damage", 
+                                                            "Gain +30% critical strike chance and +120% critical strike damage"}, "CritChance", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.1f, 0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.15f, 0.6f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new CritUnlock(0.3f, 1.2f)))}),
             new Augment("VampUnlock" ,"The Blood Mage", new string[1]{"Unlock the ability to life-steal"}, "VampUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("The Blood Mage");
+                Deck.Instance.removeClassFromDeck("VampUnlock");
                 Flamey.Instance.addOnHitEffect(new VampOnHit(0.05f,0.05f));
                 Deck.Instance.AddAugmentClass(new List<string>{"VampProb","VampPerc"});            
             })}, baseCard: true),  
@@ -314,7 +314,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.25f,0f)))}),    
             
             new Augment("BurstUnlock" ,"Burst Shot", new string[1]{"Unlock the ability to send burst shots"}, "BurstUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Burst Shot");
+                Deck.Instance.removeClassFromDeck("BurstUnlock");
                 Flamey.Instance.addOnShootEffect(new BurstShot(50, 5));
                 Deck.Instance.AddAugmentClass(new List<string>{"BurstInterval","BurstAmount"});            
             })}, baseCard: true),  
@@ -356,7 +356,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new BurstShot(0,10)))}), 
             
             new Augment("IceUnlock" ,"Frost Fire", new string[1]{"Unlock the ability to Slow enemies using ice(?)"}, "IceUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Frost Fire");
+                Deck.Instance.removeClassFromDeck("IceUnlock");
                 Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"IceDuration","IceProb"});            
             })}, baseCard: true),  
@@ -398,7 +398,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(3, 0)))}),   
             
             new Augment("ShredUnlock" ,"Shredding Flames", new string[1]{"Unlock the ability to shred enemy armor"}, "ShredUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Shredding Flames");
+                Deck.Instance.removeClassFromDeck("ShredUnlock");
                 Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ShredProb","ShredPerc"});            
             })}, baseCard: true),   
@@ -439,26 +439,26 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.5f)))}),                         
             new Augment("Assassins" ,"Assassin's Path", new string[1]{"Unlock the ability to pierce armor and execute enemies"}, "Assassins", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Assassin's Path");
+                Deck.Instance.removeClassFromDeck("Assassins");
                 Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
                 Flamey.Instance.addArmorPen(0.05f);
                 Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen","Execute"});            
             })}, baseCard: true),  
-            new Augment("Execute","Execution Enforcer", new string[3]{"You can execute enemies for +1% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +2% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +5% of their Max Health (capped at 50%)"}, "Execute", Tier.Silver, new UnityAction[3]{
+            new Augment("Execute","Execution Enforcer", new string[3]{"You can execute enemies for +1% of their Max Health", 
+                                                            "You can execute enemies for +2% of their Max Health", 
+                                                            "You can execute enemies for +5% of their Max Health"}, "Execute", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.01f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f)))}),
-            new Augment("Execute","Soul Collector", new string[3]{"You can execute enemies for +2% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +5% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +10% of their Max Health (capped at 50%)"}, "Execute", Tier.Gold, new UnityAction[3]{
+            new Augment("Execute","Soul Collector", new string[3]{"You can execute enemies for +2% of their Max Health", 
+                                                            "You can execute enemies for +5% of their Max Health", 
+                                                            "You can execute enemies for +10% of their Max Health"}, "Execute", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f)))}),
-            new Augment("Execute","La Guillotine", new string[3]{"You can execute enemies for +5% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +10% of their Max Health (capped at 50%)", 
-                                                            "You can execute enemies for +25% of their Max Health (capped at 50%)"}, "Execute", Tier.Prismatic, new UnityAction[3]{
+            new Augment("Execute","La Guillotine", new string[3]{"You can execute enemies for +5% of their Max Health", 
+                                                            "You can execute enemies for +10% of their Max Health", 
+                                                            "You can execute enemies for +25% of their Max Health"}, "Execute", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.1f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.25f)))}),
@@ -481,7 +481,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmorPen(0.2f)),
                                                                                                                         new UnityAction(() => Flamey.Instance.addArmorPen(0.3f))}),
             new Augment("BlueFlameUnlock" ,"Blue Flame", new string[1]{"Unlock the ability to shoot blue flames that inflict extra damage"}, "BlueFlameUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Blue Flame");
+                Deck.Instance.removeClassFromDeck("BlueFlameUnlock");
                 Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 100));
                 Deck.Instance.AddAugmentClass(new List<string>{"BlueFlameInterval","BlueFlameDmg"});            
             })}, baseCard: true),  
@@ -523,13 +523,13 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 200)))}),
             
             new Augment("OrbitalUnlock" ,"Orbital Flames", new string[1]{"A tiny Flame will orbit around you damaging the foes it collides with"}, "OrbitalUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Orbital Flames");
+                Deck.Instance.removeClassFromDeck("OrbitalUnlock");
                 Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 25));
                 Deck.Instance.AddAugmentClass(new List<string>{"OrbitalDmg","OrbitalAmount"});            
             })}, baseCard: true), 
-            new Augment("OrbitalAmount","Tame the Flames", new string[3]{"Gain +1 tiny Flame in your Orbital Field (max. 4)", 
-                                                            "Gain +2 tiny Flame in your Orbital Field (max. 4)", 
-                                                            "Gain +3 tiny Flame in your Orbital Field (max. 4)"}, "OrbitalAmount", Tier.Prismatic, new UnityAction[3]{
+            new Augment("OrbitalAmount","Tame the Flames", new string[3]{"Gain +1 tiny Flame in your Orbital Field", 
+                                                            "Gain +2 tiny Flame in your Orbital Field", 
+                                                            "Gain +3 tiny Flame in your Orbital Field"}, "OrbitalAmount", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(2, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(3, 0)))}),
@@ -553,7 +553,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 80)))}),
 
             new Augment("LavaPoolUnlock" ,"Lava Pool", new string[1]{"Unlock the ability to create Lava Pools that ignore enemy armor"}, "LavaPoolUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Lava Pool");
+                Deck.Instance.removeClassFromDeck("LavaPoolUnlock");
                 Flamey.Instance.addOnLandEffect(new BurnOnLand(1f, 25, 0.05f, 1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"LavaPoolDmg","LavaPoolSize","LavaPoolProb","LavaPoolDuration"});            
             })}, baseCard: true), 
@@ -575,39 +575,39 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,20,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,40,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,60,0,0)))}),
-            new Augment("LavaPoolProb","Hot Steps", new string[3]{"Gain +3% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +5% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Silver, new UnityAction[3]{
+            new Augment("LavaPoolProb","Hot Steps", new string[3]{"Gain +3% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +5% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +7% probability of spawning a Lava Pool when your shot lands"}, "LavaPoolProb", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.03f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.05f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0)))}),
-            new Augment("LavaPoolProb","Lava here, Lava there", new string[3]{"Gain +7% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +10% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Gold, new UnityAction[3]{
+            new Augment("LavaPoolProb","Lava here, Lava there", new string[3]{"Gain +7% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +10% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +15% probability of spawning a Lava Pool when your shot lands"}, "LavaPoolProb", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.07f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.1f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0)))}),
-            new Augment("LavaPoolProb","The Apocalypse", new string[3]{"Gain +15% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +20% probability of spawning a Lava Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +30% probability of spawning a Lava Pool when your shot lands (capped at 50%)"}, "LavaPoolProb", Tier.Prismatic, new UnityAction[3]{
+            new Augment("LavaPoolProb","The Apocalypse", new string[3]{"Gain +15% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +20% probability of spawning a Lava Pool when your shot lands", 
+                                                            "Gain +30% probability of spawning a Lava Pool when your shot lands"}, "LavaPoolProb", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.15f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.2f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.3f,0)))}),
-            new Augment("LavaPoolSize","Heat Area", new string[3]{"Your Lava Pool grows by +0.20 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +0.25 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +0.30 (capped at 2.5)"}, "LavaPoolSize", Tier.Silver, new UnityAction[3]{
+            new Augment("LavaPoolSize","Heat Area", new string[3]{"Your Lava Pool grows by +2 units", 
+                                                            "Your Lava Pool grows by +2.5 units", 
+                                                            "Your Lava Pool grows by +3 units"}, "LavaPoolSize", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.2f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.3f,0,0,0)))}),
-            new Augment("LavaPoolSize","Lava Lakes", new string[3]{"Your Lava Pool grows by +0.4 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +0.5 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +0.6 (capped at 2.5)"}, "LavaPoolSize", Tier.Gold, new UnityAction[3]{
+            new Augment("LavaPoolSize","Lava Lakes", new string[3]{"Your Lava Pool grows by +4 units", 
+                                                            "Your Lava Pool grows by +5 units", 
+                                                            "Your Lava Pool grows by +6 units"}, "LavaPoolSize", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.4f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.6f,0,0,0)))}),
-            new Augment("LavaPoolSize","Inside the volcano", new string[3]{"Your Lava Pool grows by +0.8 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +1 (capped at 2.5)", 
-                                                            "Your Lava Pool grows by +1.2 (capped at 2.5)"}, "LavaPoolSize", Tier.Prismatic, new UnityAction[3]{
+            new Augment("LavaPoolSize","Inside the volcano", new string[3]{"Your Lava Pool grows by +8 units", 
+                                                            "Your Lava Pool grows by +10 units", 
+                                                            "Your Lava Pool grows by +12 units"}, "LavaPoolSize", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.8f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1.2f,0,0,0)))}),
@@ -630,7 +630,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,2.4f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,3.5f)))}),
             new Augment("StatikUnlock" ,"Static Energy", new string[1]{"Unlock the ability to send static energy to enemies nearby of your target"}, "StatikUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Static Energy");
+                Deck.Instance.removeClassFromDeck("StatikUnlock");
                 Flamey.Instance.addOnHitEffect(new StatikOnHit(0.1f,25,3));
                 Deck.Instance.AddAugmentClass(new List<string>{"StatikProb","StatikDmg","StatikTTL"});            
             })}, baseCard: true), 
@@ -676,86 +676,86 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1))),
                                                                                                                            new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))}),
-            new Augment("StatikTTL","Feel the Flow", new string[3]{"Your Statik Energy will be able to cross through 2 more enemies", 
-                                                            "Your Statik Energy will be able to cross through 3 more enemies", 
+            new Augment("StatikTTL","Feel the Flow", new string[3]{"Your Statik Energy will be able to cross through 1 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 2 more enemies", 
                                                             "Your Statik Energy will be able to cross through 4 more enemies"}, "StatikTTL", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2))),
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,4)))}),
+            new Augment("StatikTTL","Amping Up!", new string[3]{"Your Statik Energy will be able to cross through 2 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 3 more enemies", 
+                                                            "Your Statik Energy will be able to cross through 6 more enemies"}, "StatikTTL", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,3))),
-                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,4)))}),
-            new Augment("StatikTTL","Amping Up!", new string[3]{"Your Statik Energy will be able to cross through 4 more enemies", 
-                                                            "Your Statik Energy will be able to cross through 6 more enemies", 
-                                                            "Your Statik Energy will be able to cross through 8 more enemies"}, "StatikTTL", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,4))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,6))),
-                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,8)))}),
-            new Augment("IcePoolUnlock" ,"Ice Pool", new string[1]{"Unlock the ability to create Ice Pools that slow down enemies"}, "IcePoolUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Ice Pool");
+                                                                                                                           new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,6)))}),
+            new Augment("IcePoolUnlock" ,"Ice Pool", new string[1]{"Unlock the ability to create Snow Pools that slow down enemies"}, "IcePoolUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("IcePoolUnlock");
                 Flamey.Instance.addOnLandEffect(new IceOnLand(1f, 0.1f, 0.05f, 1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"IcePoolDuration","IcePoolProb","IcePoolSlow","IcePoolSize"});            
             })}, baseCard: true), 
-            new Augment("IcePoolSlow","Cold Bath", new string[3]{"Your Ice Pool will slow down enemies for 2% more", 
-                                                            "Your Ice Pool will slow down enemies for 3% more", 
-                                                            "Your Ice Pool will slow down enemies for 4% more"}, "IcePoolSlow", Tier.Silver, new UnityAction[3]{
+            new Augment("IcePoolSlow","Cold Bath", new string[3]{"Your Snow Pool will slow down enemies for 2% more", 
+                                                            "Your Snow Pool will slow down enemies for 3% more", 
+                                                            "Your Snow Pool will slow down enemies for 4% more"}, "IcePoolSlow", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.02f,0,0))),  
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.03f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.04f,0,0)))}),
-            new Augment("IcePoolSlow","Glacial Grip", new string[3]{"Your Ice Pool will slow down enemies for 4% more", 
-                                                            "Your Ice Pool will slow down enemies for 6% more", 
-                                                            "Your Ice Pool will slow down enemies for 8% more"}, "IcePoolSlow", Tier.Gold, new UnityAction[3]{
+            new Augment("IcePoolSlow","Glacial Grip", new string[3]{"Your Snow Pool will slow down enemies for 4% more", 
+                                                            "Your Snow Pool will slow down enemies for 6% more", 
+                                                            "Your Snow Pool will slow down enemies for 8% more"}, "IcePoolSlow", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.04f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.06f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.08f,0,0)))}),
-            new Augment("IcePoolSlow","Frozen Stasis", new string[3]{"Your Ice Pool will slow down enemies for 8% more", 
-                                                            "Your Ice Pool will slow down enemies for 12% more", 
-                                                            "Your Ice Pool will slow down enemies for 16% more"}, "IcePoolSlow", Tier.Prismatic, new UnityAction[3]{
+            new Augment("IcePoolSlow","Frozen Stasis", new string[3]{"Your Snow Pool will slow down enemies for 8% more", 
+                                                            "Your Snow Pool will slow down enemies for 12% more", 
+                                                            "Your Snow Pool will slow down enemies for 16% more"}, "IcePoolSlow", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.08f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.12f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.16f,0,0)))}),
-            new Augment("IcePoolProb","Cold Steps", new string[3]{"Gain +3% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +5% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +7% probability of spawning an Ice Pool when your shot lands (capped at 50%)"}, "IcePoolProb", Tier.Silver, new UnityAction[3]{
+            new Augment("IcePoolProb","Cold Steps", new string[3]{"Gain +3% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +5% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +7% probability of spawning an Snow Pool when your shot lands"}, "IcePoolProb", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.03f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.05f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.07f,0)))}),
-            new Augment("IcePoolProb","Ice here, Ice there", new string[3]{"Gain +7% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +10% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +15% probability of spawning an Ice Pool when your shot lands (capped at 50%)"}, "IcePoolProb", Tier.Gold, new UnityAction[3]{
+            new Augment("IcePoolProb","Ice here, Ice there", new string[3]{"Gain +7% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +10% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +15% probability of spawning an Snow Pool when your shot lands"}, "IcePoolProb", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.07f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.1f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.15f,0)))}),
-            new Augment("IcePoolProb","The North Pole", new string[3]{"Gain +15% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +20% probability of spawning an Ice Pool when your shot lands (capped at 50%)", 
-                                                            "Gain +30% probability of spawning an Ice Pool when your shot lands (capped at 50%)"}, "IcePoolProb", Tier.Prismatic, new UnityAction[3]{
+            new Augment("IcePoolProb","The North Pole", new string[3]{"Gain +15% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +20% probability of spawning an Snow Pool when your shot lands", 
+                                                            "Gain +30% probability of spawning an Snow Pool when your shot lands"}, "IcePoolProb", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.15f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.2f,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.3f,0)))}),
-            new Augment("IcePoolSize","Cold breeze", new string[3]{"Your Ice Pool grows by +0.20 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +0.25 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +0.30 (capped at 2.5)"}, "IcePoolSize", Tier.Silver, new UnityAction[3]{
+            new Augment("IcePoolSize","Cold breeze", new string[3]{"Your Snow Pool grows by +2 units", 
+                                                            "Your Snow Pool grows by +2.5 units", 
+                                                            "Your Snow Pool grows by +3 units"}, "IcePoolSize", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.2f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.25f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.3f,0,0,0)))}),
-            new Augment("IcePoolSize","Frozen Lakes", new string[3]{"Your Ice Pool grows by +0.4 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +0.5 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +0.6 (capped at 2.5)"}, "IcePoolSize", Tier.Gold, new UnityAction[3]{
+            new Augment("IcePoolSize","Frozen Lakes", new string[3]{"Your Snow Pool grows by +4 units", 
+                                                            "Your Snow Pool grows by +5 units", 
+                                                            "Your Snow Pool grows by +6 units"}, "IcePoolSize", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.4f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.5f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.6f,0,0,0)))}),
-            new Augment("IcePoolSize","Inside the iceberg", new string[3]{"Your Ice Pool grows by +0.8 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +1 (capped at 2.5)", 
-                                                            "Your Ice Pool grows by +1.2 (capped at 2.5)"}, "IcePoolSize", Tier.Prismatic, new UnityAction[3]{
+            new Augment("IcePoolSize","Inside the iceberg", new string[3]{"Your Snow Pool grows by +8 units", 
+                                                            "Your Snow Pool grows by +10 units", 
+                                                            "Your Snow Pool grows by +12 units"}, "IcePoolSize", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.8f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(1f,0,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(1.2f,0,0,0)))}),
-            new Augment("IcePoolDuration","Cooling down", new string[3]{"Your Ice Pool lasts for +0.3 seconds", 
-                                                            "Your Ice Pool lasts for +0.5 seconds", 
-                                                            "Your Ice Pool lasts for +0.8 seconds"}, "IcePoolDuration", Tier.Silver, new UnityAction[3]{
+            new Augment("IcePoolDuration","Cooling down", new string[3]{"Your Snow Pool lasts for +0.3 seconds", 
+                                                            "Your Snow Pool lasts for +0.5 seconds", 
+                                                            "Your Snow Pool lasts for +0.8 seconds"}, "IcePoolDuration", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,0.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,0.5f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,0.8f)))}),
-            new Augment("IcePoolDuration","Eternally Cold", new string[3]{"Your Ice Pool lasts for +0.8 seconds", 
-                                                            "Your Ice Pool lasts for +1.2 seconds", 
-                                                            "Your Ice Pool lasts for +1.7 seconds"}, "IcePoolDuration", Tier.Gold, new UnityAction[3]{
+            new Augment("IcePoolDuration","Eternally Cold", new string[3]{"Your Snow Pool lasts for +0.8 seconds", 
+                                                            "Your Snow Pool lasts for +1.2 seconds", 
+                                                            "Your Snow Pool lasts for +1.7 seconds"}, "IcePoolDuration", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,0.8f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,1.2f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,1.7f)))}),
@@ -766,7 +766,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,2.4f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,3.5f)))}),
             new Augment("ThornsUnlock" ,"Thorns", new string[1]{"Unlock the ability to deal damage back when hitted"}, "ThornsUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Thorns");
+                Deck.Instance.removeClassFromDeck("ThornsUnlock");
                 Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ThornsPerc","ThornsProb"});            
             })}, baseCard: true),  
@@ -865,7 +865,7 @@ public class DeckBuilder : MonoBehaviour
 
             
             new Augment("VampDeathUnlock" ,"Essence Eater", new string[1]{"Unlock the ability to drain the essence of dead enemies"}, "VampDeathUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Essence Eater");
+                Deck.Instance.removeClassFromDeck("VampDeathUnlock");
                 Flamey.Instance.addOnKillEffect(new VampOnDeath(0.1f,0.15f));
                 Deck.Instance.AddAugmentClass(new List<string>{"VampDeathProb","VampDeathPerc"});            
             })}, baseCard: true),  
@@ -906,7 +906,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.2f,0f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.3f,0f)))}),    
             new Augment("ExplodeUnlock" ,"Explosion", new string[1]{"Unlock the ability to generate explosions whenever enemies die"}, "ExplodeUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Explosion");
+                Deck.Instance.removeClassFromDeck("ExplodeUnlock");
                 Flamey.Instance.addOnKillEffect(new Explosion(0.1f,50));
                 Deck.Instance.AddAugmentClass(new List<string>{"ExplodeProb","ExplodeDmg"});            
             })}, baseCard: true),  
@@ -949,7 +949,7 @@ public class DeckBuilder : MonoBehaviour
             
             
             new Augment("NecroUnlock" ,"Necromancer", new string[1]{"Unlock the ability to summon ghouls whenever enemies die"}, "NecroUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Necromancer");
+                Deck.Instance.removeClassFromDeck("NecroUnlock");
                 Flamey.Instance.addOnKillEffect(new Necromancer(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"NecroProb","NecroStats"});            
             })}, baseCard: true),  
@@ -990,7 +990,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.3f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.5f)))}),
             new Augment("BulletsUnlock" ,"Pirate", new string[1]{"Unlock the ability to shoot bullets around dead enemies and loot their bodies"}, "BulletsUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Pirate");
+                Deck.Instance.removeClassFromDeck("BulletsUnlock");
                 Flamey.Instance.addOnKillEffect(new Bullets(0.1f, 10, 1));
                 Deck.Instance.AddAugmentClass(new List<string>{"BulletsProb","BulletsDmg","BulletsAmount"});            
             })}, baseCard: true),  
@@ -1037,7 +1037,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,2))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,3)))}),
             new Augment("RegenUnlock" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Regeneration");
+                Deck.Instance.removeClassFromDeck("RegenUnlock");
                 Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 10f));
                 Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            
             })}, baseCard: true),  
@@ -1078,7 +1078,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 100)))}),
             new Augment("ThunderUnlock" ,"Thunder", new string[1]{"Unlock the ability to control Thunder"}, "ThunderUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Thunder");
+                Deck.Instance.removeClassFromDeck("ThunderUnlock");
                 Flamey.Instance.addTimeBasedEffect(new LightningEffect(40, 25));
                 Deck.Instance.AddAugmentClass(new List<string>{"ThunderDmg","ThunderInterval"});            
             })}, baseCard: true),  
@@ -1119,7 +1119,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,100))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,200)))}),
             new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to release Heat Waves"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Immolate");
+                Deck.Instance.removeClassFromDeck("ImmolateUnlock");
                 Flamey.Instance.addTimeBasedEffect(new Immolate(100, 25, 0.3f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
             })}, baseCard: true),  
@@ -1178,7 +1178,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.75f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,1f)))}),
             new Augment("CandleUnlock" ,"Arcanist", new string[1]{"Unlock the ability to start a ritual"}, "CandleUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Arcanist");
+                Deck.Instance.removeClassFromDeck("CandleUnlock");
                 Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.2f, 1));
                 Deck.Instance.AddAugmentClass(new List<string>{"CandleDmg","CandleAmount","CandleAtkSpeed"});            
             })}, baseCard: true),  
@@ -1226,7 +1226,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new CandleTurrets(0, 0, 3))),}), 
 
             new Augment("SummonUnlock" ,"Beekeeper", new string[1]{"Unlock the ability to own a Bee Swarm"}, "SummonUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeFromDeck("Beekeeper");
+                Deck.Instance.removeClassFromDeck("SummonUnlock");
                 Flamey.Instance.addNotEspecificEffect(new Summoner(5, 0.25f, 0.5f, 1));
                 Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount"});            
             })}, baseCard: true),  

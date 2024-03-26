@@ -37,7 +37,7 @@ public class Armadillo : Enemy
 
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
 
-        base.Hitted(Dmg, TextID, ignoreArmor, false, except);
+        base.Hitted(Dmg, TextID, ignoreArmor, hitsUntilUnroll <= 0 ? onHit : false, except);
         if(onHit && hitsUntilUnroll > 0){
             hitsUntilUnroll--;
         }

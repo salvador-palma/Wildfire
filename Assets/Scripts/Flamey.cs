@@ -255,6 +255,10 @@ public class Flamey : MonoBehaviour
                 e.GetComponent<Enemy>().EndEnemy();
             }
         }
+        if(GameVariables.GetVariable("SkillTreeReady")<=0){
+            GameVariables.SetVariable("SkillTreeReady",1);
+        }
+        
         
         GameUI.Instance.GameOverEffect();
     }
@@ -263,36 +267,21 @@ public class Flamey : MonoBehaviour
         accuracy = Math.Min(accuracy + amount, 100f);
         if(accuracy == 100f){
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Target Practice");
-            deck.removeFromDeck("Steady Aim");
-            deck.removeFromDeck("Eagle Eye");
-        }
-    }
-    public void multAccuracy(float amount){
-        accuracy = Math.Min(accuracy * amount, 100f);
-        if(accuracy == 100f){
-            Deck deck = Deck.Instance;
-            deck.removeFromDeck("Target Practice");
-            deck.removeFromDeck("Steady Aim");
-            deck.removeFromDeck("Eagle Eye");
+            deck.removeClassFromDeck("Acc");
         }
     }
     public void addAttackSpeed(float amount){
         atkSpeed = Math.Min(atkSpeed + amount, 12f);
         if(atkSpeed == 12f){
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Swifty Flames");
-            deck.removeFromDeck("Fire Dance");
-            deck.removeFromDeck("Flamethrower");
+            deck.removeClassFromDeck("AtkSpeed");
         }
     }
     public void multAttackSpeed(float amount){
         atkSpeed = Math.Min(atkSpeed * amount, 12f);
         if(atkSpeed == 12f){
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Swifty Flames");
-            deck.removeFromDeck("Fire Dance");
-            deck.removeFromDeck("Flamethrower");
+            deck.removeClassFromDeck("AtkSpeed");
         }
     }
 
@@ -300,9 +289,7 @@ public class Flamey : MonoBehaviour
         BulletSpeed = Math.Min(BulletSpeed + amount, 20f);
         if(BulletSpeed == 20f){
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Quick Shot");
-            deck.removeFromDeck("Fire-Express");
-            deck.removeFromDeck("HiperDrive");
+            deck.removeClassFromDeck("BltSpeed");
         }
     }
     public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f);}
@@ -314,14 +301,12 @@ public class Flamey : MonoBehaviour
     public void multDmg(float amount){Dmg += (int)amount;}
 
     public void addArmor(int amount){Armor += (int)amount;}
-    public void addArmorPen(float amount){
-        ArmorPen = Mathf.Min(1.0f, ArmorPen + amount);
-        
-        if(ArmorPen >= 1){
+    public void addArmorPen(float amount){  
+        ArmorPen += amount;      
+        if(ArmorPen >= 0.5){
+            ArmorPen = 0.5f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Shell Breaker");
-            deck.removeFromDeck("Quantum Piercing");
-            deck.removeFromDeck("Lance of Aether");
+            deck.removeClassFromDeck("ArmorPen");
         }      
     
     }

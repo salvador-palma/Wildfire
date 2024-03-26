@@ -64,7 +64,11 @@ public class FlameCircle : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + " Flames orbit around you in a circle. Upon collision with an enemy, it deals " + damage + " damage to them. This effect scales with Bullet Speed and applies On-Hit effects";
+        return "Flames orbit around you in a circle. Colliding with an enemy deals damage and applies On-Hit Effects. Angular speed scales with Bullet Speed";
+    }
+    public string getCaps()
+    {
+        return string.Format("Orbits: {0} (Max. 4)<br>Damage: {1}", amount, damage);
     }
 
     public string getIcon()
@@ -92,7 +96,7 @@ public class FlameCircle : NotEspecificEffect
         if(amount == 4){
         
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Tame the Flames");
+            deck.removeClassFromDeck("OrbitalAmount");
         }  
           
     }
@@ -130,9 +134,7 @@ public class MoneyMultipliers : NotEspecificEffect
         if(p >= 1){
             p = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Savings Account");
-            deck.removeFromDeck("Tax Payment");
-            deck.removeFromDeck("Robbery");
+            deck.removeClassFromDeck("MoneyProb");
         }  
           
     }
@@ -148,7 +150,11 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Whenever you kill an enemy, there's a " + Mathf.Round(p*100) + "% of getting more embers. This value is then multiplied by " + Mathf.Round(mult*100) + "%. You can check the Bestiary for more info on enemy specific drop rates.";
+        return "Whenever you kill an enemy, there's a chance to loot more embers and multiply them. You can check the Bestiary for more info on enemy specific drop rates.";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%)<br>Multiplier: x{1}", Mathf.Round(p*100), Mathf.Round(mult*100)*0.01f);
     }
 
     public string getIcon()
@@ -166,8 +172,6 @@ public class MoneyMultipliers : NotEspecificEffect
         return "Especial Effect";
     }
 }
-
-
 
 public class CandleTurrets : NotEspecificEffect
 {
@@ -215,7 +219,11 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + " candles stand by your side shooting at random targets with " + dmg + " damage and " + Mathf.Round(atkSpeed * 100f) * 0.01f + " attack speed";
+        return "Lit candles stand around you shooting at random targets. Their hits will not apply On-Hit nor On-Land Effects";
+    }
+    public string getCaps()
+    {
+        return string.Format("Candle Amount: {0}% (Max. 6)<br>Damage: +{1} <br>Attack Speed: {2}/s (Max. 3/s)", amount, dmg, Mathf.Round(atkSpeed * 100f) * 0.01f);
     }
 
     public string getIcon()
@@ -249,15 +257,12 @@ public class CandleTurrets : NotEspecificEffect
             CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
             GameObject.Find("logs").SetActive(false);
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Philosopher's Stone");
+            deck.removeClassFromDeck("CandleAmount");
         } 
         if(atkSpeed >= 3f){
             atkSpeed = 3f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Alembic Artistry");
-            deck.removeFromDeck("Ancient Wizard");
-            deck.removeFromDeck("Begin the Ritual");
-
+            deck.removeClassFromDeck("CandleAtkSpeed");
         } 
           
     }
@@ -310,7 +315,11 @@ public class Summoner : NotEspecificEffect
 
     public string getDescription()
     {
-        return amount + "Bees will fight by your side, targeting the closest enemy and applying On-Hit effects. Each Bee deals " + dmg + " damage, has " + Mathf.Round(atkSpeed) + " attack speed and " + Mathf.Round(speed) + " speed";
+        return "Bees will fight by your side, targeting random enemies and applying On-Hit effects.";
+    }
+    public string getCaps()
+    {
+        return string.Format("Bee Amount: {0}% (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed), Mathf.Round(speed));
     }
 
     public string getIcon()
@@ -340,21 +349,17 @@ public class Summoner : NotEspecificEffect
         if(amount > 10){
             amount = 10;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Bee Hive");
+            deck.removeClassFromDeck("SummonAmount");
         } 
         if(atkSpeed >= 3f){
             atkSpeed = 3f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Rapid Shooters");
-            deck.removeFromDeck("Bee-autiful Pets");
-            deck.removeFromDeck("Bee Swarm");
+            deck.removeClassFromDeck("SummonAtkSpeed");
         } 
         if(speed >= 4f){
             speed = 4f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Speeding Up");
-            deck.removeFromDeck("Agility");
-            deck.removeFromDeck("Bee Acrobacy League");
+            deck.removeClassFromDeck("SummonSpeed");
         } 
           
     }

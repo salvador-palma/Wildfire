@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public interface OnKillEffects : Effect
 {
@@ -43,14 +45,16 @@ public class VampOnDeath : OnKillEffects
         if(prob >= 1f){
             prob = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Kill to Heal");
-            deck.removeFromDeck("Corpse Conduit");
-            deck.removeFromDeck("Reaper's Reward");
+            deck.removeClassFromDeck("VampDeathProb");
         } 
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a " + prob*100 + "% chance of healing for " + perc*100 + "% of its max health";
+        return "Everytime you kill an enemy, there's a chance of healing yourself for a percentage of its max health";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Healed: {1} (Max. 100%)", Mathf.Round(prob * 100), Mathf.Round(perc * 100));
     }
 
     public string getIcon()
@@ -94,7 +98,7 @@ public class Explosion : OnKillEffects
     public void ApplyEffect(Enemy en = null)
     {
         if(en==null){return;}
-        if(Random.Range(0f,1f) < prob){
+        if(UnityEngine.Random.Range(0f,1f) < prob){
             Collider2D[] targets = Physics2D.OverlapCircleAll(en.transform.position, 1.8f, FlareManager.EnemyMask);
             Flamey.Instance.SpawnObject(Prefab).transform.position = en.transform.position;
             foreach(Collider2D col in targets){
@@ -112,14 +116,16 @@ public class Explosion : OnKillEffects
         if(prob >= .5f){
             prob = .5f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Bomb Rush");
-            deck.removeFromDeck("Grenade Launcher");
-            deck.removeFromDeck("Bombardment");
+            deck.removeClassFromDeck("ExplodeProb");
         } 
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a " + prob*100 + "% chance of generating an explosion that deals " + dmg + " damage to surrounding enemies";
+        return "Everytime you kill an enemy, there's a chance of generating a massive explosion that damages surrounding enemies";
+    }
+    public string getCaps()
+    {
+         return string.Format("Chance: {0}% (Max. 50%) <br>Damage: +{1}", Mathf.Round(prob * 100), dmg);
     }
 
     public string getIcon()
@@ -143,7 +149,7 @@ public class Necromancer : OnKillEffects
 {
     
 
-    public static int AtkTimes = 5;
+    public static int AtkTimes = 3;
     public float prob;
     public float dmgPerc;
     public static Necromancer Instance;
@@ -167,7 +173,7 @@ public class Necromancer : OnKillEffects
     public void ApplyEffect(Enemy en = null)
     {
         if(en==null){return;}
-        if(Random.Range(0f,1f) < prob){
+        if(UnityEngine.Random.Range(0f,1f) < prob){
             Flamey.Instance.SpawnObject(Prefab).transform.position = en.transform.position;
         }
     }
@@ -180,14 +186,16 @@ public class Necromancer : OnKillEffects
         if(prob >= .5f){
             prob = .5f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Wraith Walkers");
-            deck.removeFromDeck("Soul Shepard");
-            deck.removeFromDeck("Crypt of the Necromancer");
+            deck.removeClassFromDeck("NecroProb");
         } 
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a " + prob*100 + "% chance of summoning a friendly ghoul. Ghouls can attack enemies for up to 5 times with " + dmgPerc*100 + "% of your damage.";
+        return "Everytime you kill an enemy, there's a chance of summoning a friendly ghoul. Ghouls can attack enemies for up to 3 times with a percentage of your base damage.";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100), Mathf.Round(dmgPerc * 100));
     }
 
     public string getIcon()
@@ -237,14 +245,14 @@ public class Bullets : OnKillEffects
     public void ApplyEffect(Enemy en = null)
     {
         if(en==null){return;}
-        if(Random.Range(0f,1f) < prob){
+        if(UnityEngine.Random.Range(0f,1f) < prob){
             
             SpawnBullets(en.transform.position);
             Flamey.Instance.addEmbers(25);
         }
     }
     private void SpawnBullets(Vector2 pos){
-        int randomRotation = Random.Range(0,360);
+        int randomRotation = UnityEngine.Random.Range(0,360);
         for(int i =0; i != amount; i++){
             GameObject go = Flamey.Instance.SpawnObject(Prefab);
             go.transform.position = pos;
@@ -263,19 +271,21 @@ public class Bullets : OnKillEffects
         if(prob >= .5f){
             prob = .5f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Pirate Wannabe");
-            deck.removeFromDeck("Yes, Captain!");
-            deck.removeFromDeck("Shoot it, Loot it");
+            deck.removeClassFromDeck("BulletsProb");
         } 
         if(amount >= 6){
             amount = 6;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Cannonball Pile");
+            deck.removeClassFromDeck("BulletsAmount");
         }
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a " + Mathf.Round(prob*100) + "% chance of releasing " + amount + " bullets that deal " + dmg + " and apply On-Hit Effects. \n if this effect procs, you will also gain +25 embers";
+        return "Everytime you kill an enemy, there's a chance of shooting Cannon Balls out of the enemy's corpse, that deal damage and apply On-Hit effects whenever they hit another creature. If this effect procs, you will also gain +10 embers. Cannon Balls' speed scales with Bullet Speed";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f), amount, dmg);
     }
 
     public string getIcon()

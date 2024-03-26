@@ -49,9 +49,7 @@ public class SecondShot : OnShootEffects{
         if(perc > 1){
             perc = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("The more the better");
-            deck.removeFromDeck("Double trouble");
-            deck.removeFromDeck("Casting Cascade");
+            deck.removeClassFromDeck("MulticasterProb");
         }
     }
     public bool addList(){
@@ -70,7 +68,11 @@ public class SecondShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Whenever you fire a shot, there's a " + Mathf.Round(perc*100) + "% chance that you fire a second shot.";
+        return "Whenever you fire a shot, there's a chance to fire an extra one. Extra shots will not count towards Multicaster or Burst Shot Effects";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%)<br>", Mathf.Round(perc*100));
     }
     public string getIcon()
     {
@@ -114,17 +116,15 @@ public class BurstShot : OnShootEffects{
     }
 
     private void RemoveUselessAugments(){
-        if(amount == 20){
+        if(amount >= 20){
+            amount = 20;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Burst Barricade");
-            deck.removeFromDeck("Burst Unleashed");
-            deck.removeFromDeck("Burst to Victory");
+            deck.removeClassFromDeck("BurstAmount");
         }
-        if(interval == 10){
+        if(interval >= 10){
+            interval = 10;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Happy Trigger");
-            deck.removeFromDeck("Bullet Symphony");
-            deck.removeFromDeck("Make It Rain");
+            deck.removeClassFromDeck("BurstInterval");
         }
     }
     public bool addList(){
@@ -143,7 +143,11 @@ public class BurstShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Each " + interval + " shots, you will shoot a burst of " + amount + " extra shots";
+        return "Shoot extra Burst Shots everytime you shoot a certain amount of flames. Extra shots will not count towards Multicaster or Burst Shot Effects";
+    }
+    public string getCaps()
+    {
+        return string.Format("Burst Shots: {0} Flames (Max. 20)<br>Burst Interval: {1} Flames (Min. 10)", amount, interval);
     }
     public string getIcon()
     {
@@ -187,9 +191,7 @@ public class KrakenSlayer : OnShootEffects{
     private void RemoveUselessAugments(){
         if(interval == 0){
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("The Bluer The Better");
-            deck.removeFromDeck("Propane Combustion");
-            deck.removeFromDeck("Never ending Blue");
+            deck.removeClassFromDeck("BlueFlameInterval");
             Flamey.Instance.gameObject.GetComponent<Animator>().SetTrigger("GoBlue");
         }
     }
@@ -207,9 +209,13 @@ public class KrakenSlayer : OnShootEffects{
         return "On-Shoot Effect";
     }
 
-    public string getDescription()
+    public string getDescription() 
     {
-        return "Each " + interval + " shots, you will shoot an extra powerfull shot that deals +" + extraDmg + " extra damage";
+        return "Shoot a powerfull Blue Flame that deals Extra Damage everytime you shoot a certain amount of flames.";
+    }
+    public string getCaps()
+    {
+        return string.Format("Extra Damage: +{0} Damage <br>Blue Flame Interval: {1} Flames (Min. 0)", extraDmg, interval);
     }
     public string getIcon()
     {
@@ -252,8 +258,12 @@ public class CritUnlock : OnShootEffects{
         if(perc >= 0.8f){
             perc = 0.8f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Critical Miracle");
-            deck.removeFromDeck("Fate's Favor");
+            deck.removeClassFromDeck("CritChance");
+        }
+        if(mult >= 5f){
+            mult = 5f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("CritMult");
         }
     }
     public bool addList(){
@@ -262,7 +272,11 @@ public class CritUnlock : OnShootEffects{
 
     public string getDescription()
     {
-        return "Your shots have a " + Mathf.Round(perc*100f*100f) * 0.01f + "% critical chance and x" + Mathf.Round(mult) + " critical damage multiplier.";
+        return "Your shots have a chance of critically striking, multiplying your damage by a certain amount.";
+    }
+    public string getCaps()
+    {
+        return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
     }
 
     public string getIcon()

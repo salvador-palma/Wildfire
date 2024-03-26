@@ -28,7 +28,10 @@ public class MetaMenuUI : MonoBehaviour
     [Header("Chat DataBase")]
     [SerializeField] Sprite[] AvatarBank;
 
-
+    [Header("Unlockable")]
+    [SerializeField] TextMeshProUGUI[] UnlockableTexts;
+    [SerializeField] Image UnlockableIcon;
+    [SerializeField] Sprite[] Unlockables;
     private void Awake() {
         Instance = this;
     }
@@ -123,11 +126,23 @@ public class MetaMenuUI : MonoBehaviour
                 break;
             }
             Message.text += c;
-            if(char.IsWhiteSpace(c)){
-                yield return new WaitForSeconds(0.05f);
-            }else{
-                yield return new WaitForSeconds(0.025f);
+            switch(c){
+                case '.':
+                case '!':
+                case '?':
+                    yield return new WaitForSeconds(0.2f);
+                    break;
+                case ',':
+                    yield return new WaitForSeconds(0.05f);
+                    break;
+                case ' ':
+                    yield return new WaitForSeconds(0.02f);
+                    break;
+                default:
+                    yield return new WaitForSeconds(0.01f);
+                    break;
             }
+         
             
 
         }
@@ -154,6 +169,20 @@ public class MetaMenuUI : MonoBehaviour
         if(after != null){
             after.Invoke();
         }
+    }
+
+
+
+    public void UnlockableScreen(string title, string name, string description, int iconID){
+        UnlockableTexts[0].text = title;
+        UnlockableTexts[1].text = name;
+        UnlockableTexts[2].text = description;
+        UnlockableIcon.sprite = Unlockables[iconID];
+        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");
+
+    }
+    public void UnlockOff(){
+        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
     }
 }
 

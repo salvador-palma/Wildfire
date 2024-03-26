@@ -50,7 +50,7 @@ public class SkillTreeButton : MonoBehaviour
         wasUnlocked = true;
         GetComponent<Animator>().Play(UNLOCKING);
     }
-    private void Clicked(){
+    public void Clicked(){
         // Upgrade();
         // UpdateImage();
         SelectedButton = this;

@@ -12,6 +12,7 @@ public interface Effect{
     public string getType();
     public string getDescription();
     public string getIcon();
+    public string getCaps();
 }
 public interface OnHitEffects: Effect
 {
@@ -51,9 +52,7 @@ public class VampOnHit : OnHitEffects
         if(prob >= 1f){
             prob = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Steal to Heal");
-            deck.removeFromDeck("Eternal Hunger");
-            deck.removeFromDeck("Soul Harvester");
+            deck.removeClassFromDeck("VampProb");
         }      
     }
     public bool addList(){
@@ -72,13 +71,18 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of healing " + Mathf.Round(perc*100) + "% of the damage you dealt. This applies for critical damage aswell.";
+        return "You have a chance of healing a percentage of the damage dealt.";
     }
-
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}%", Mathf.Round(prob*100), Mathf.Round(perc*100));
+    }
     public string getIcon()
     {
         return "VampUnlock";
     }
+
+    
 }
 
 public class IceOnHit : OnHitEffects
@@ -119,13 +123,15 @@ public class IceOnHit : OnHitEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
+        Deck deck = Deck.Instance;
         if(prob >= 1f){
             prob = 1;
-            Deck deck = Deck.Instance;
-            deck.removeFromDeck("IcyHot");
-            deck.removeFromDeck("Glacial Energy");
-            deck.removeFromDeck("A Dance of Fire and Ice");
-        }      
+            deck.removeClassFromDeck("IceProb");
+        }
+        if(duration >= 10000){
+            duration= 10000;
+            deck.removeClassFromDeck("IceDuration");
+        }    
     }
     public bool addList(){
         return Instance == this;
@@ -143,10 +149,12 @@ public class IceOnHit : OnHitEffects
 
     public string getDescription()
     {
-        
+        return "You have a chance of slowing the enemy for a percentage of its speed for a certain duration. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
+    }
+    public string getCaps()
+    {
         float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
-        
-        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of slowing the enemy for " + Mathf.Round(percentage * 100) + "% of it's speed for a duration of "+ Mathf.Round(duration/1000) + " seconds. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
+        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 99%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000));
     }
 
     public string getIcon()
@@ -189,16 +197,12 @@ public class ShredOnHit : OnHitEffects
         if(prob >= 1f){
             prob = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Weaken");
-            deck.removeFromDeck("Armor Corruptor");
-            deck.removeFromDeck("Disintegration Field");
+            deck.removeClassFromDeck("ShredProb");
         }  
         if(percReduced >= 1f){
             percReduced = 1;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Cheese Shredder");
-            deck.removeFromDeck("Black Cleaver");
-            deck.removeFromDeck("Molecular Decomposition");
+            deck.removeClassFromDeck("ShredPerc");
         }      
     }
     public bool addList(){
@@ -217,8 +221,11 @@ public class ShredOnHit : OnHitEffects
 
     public string getDescription()
     {
-
-        return "You have a " + Mathf.Round(prob*100) + "% chance per shot of reducing the target's armor for " + Mathf.Round(percReduced * 100) + "%" ;
+        return "You have a chance of reducing the target's armor by a certain percentage" ;
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Reduced: {1}% (Max. 100%)", Mathf.Round(prob*100), Mathf.Round(percReduced * 100));
     }
 
     public string getIcon()
@@ -262,10 +269,9 @@ public class ExecuteOnHit : OnHitEffects
         if(percToKill >= 0.5f){
             percToKill = 0.5f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Execution Enforcer");
-            deck.removeFromDeck("Soul Collector");
-            deck.removeFromDeck("La Guillotine");
-        }      
+            deck.removeClassFromDeck("Execute");
+        } 
+
     }
     public bool addList(){
         return Instance == this;
@@ -283,7 +289,11 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You penetrate through " + Mathf.Round(Flamey.Instance.ArmorPen * 100) + "% of enemy armor. When you hit an enemy below " + Mathf.Round(percToKill*100) + "% of it's Max Health, you execute them." ;
+        return "You penetrate through a percentage of enemy armor. Additionally, hitting enemies below a portion of their Max Health executes them." ;
+    }
+    public string getCaps()
+    {
+        return string.Format("Armor Penetration: {0}% (Max. 50%) <br>Execution: {1}% (Max. 100%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
     }
 
     public string getIcon()
@@ -341,9 +351,12 @@ public class StatikOnHit : OnHitEffects
         if(prob >= 1){
             prob = 1f;
             Deck deck = Deck.Instance;
-            deck.removeFromDeck("Watts Up");
-            deck.removeFromDeck("Electrifying Possibilities");
-            deck.removeFromDeck("The Sparkster");
+            deck.removeClassFromDeck("StatikProb");
+        }  
+        if(ttl >= 10){
+            ttl = 10;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("StatikTTL");
         }      
     }
     public bool addList(){
@@ -362,7 +375,12 @@ public class StatikOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "When you hit an enemy, you have a chance of " + Mathf.Round(prob * 100) + "% of unleashing a statik chain that passes through a max of " + ttl + " enemies near by, dealing " +dmg+" damage to each and applies On-Hit effects";
+        return "When you hit an enemy, you have a chance of unleashing a static energy chain that travels through enemies nearby, dealing damage to each while applying On-Hit effects";
+    }
+    public string getCaps()
+    {
+        return string.Format("Chance: {0}% (Max. 100%) <br>Travel Distance: {1} Enemies (Max. 15) <br>Damage: +{2}", Mathf.Round(prob * 100), ttl, dmg);
+
     }
 
     public string getIcon()

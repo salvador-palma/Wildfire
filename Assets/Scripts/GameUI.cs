@@ -39,9 +39,11 @@ public class GameUI : MonoBehaviour
     
     [Header("Effects")]
     
+    Effect latestInfoEffect;
     [SerializeField] GameObject EffectContainer;
     [SerializeField] GameObject EffectTemplate;
     [SerializeField] TextMeshProUGUI[] EffectTexts;
+    [SerializeField] Image EffectIcon;
 
 
     [SerializeField] Animator BlackScreen;
@@ -65,6 +67,7 @@ public class GameUI : MonoBehaviour
         FastForwardButtons[0].interactable = false;
         FinalStatsButton.onClick.AddListener(()=>{FinalStatsPanel.SetActive(!FinalStatsPanel.activeInHierarchy);});
         
+        if(GameVariables.GetVariable("BestiaryReady") <= 0){MenuTabs[2].SetActive(false);ButtonTabs[2].gameObject.SetActive(false);}
     }
     
 
@@ -92,7 +95,6 @@ public class GameUI : MonoBehaviour
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
-        EraseEffectInfo();
     }
     public void UpdateMenuInfo(int current_round){
         defineStats();
@@ -164,19 +166,20 @@ public class GameUI : MonoBehaviour
             go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/"+e.getIcon());
             go.SetActive(true);
         }
+        if(latestInfoEffect!=null){DisplayEffectInfo(latestInfoEffect);}
+        
     }
     public void DisplayEffectInfo(Effect e){
-        
+        if(latestInfoEffect==null){EffectIcon.enabled = true; EffectIcon.transform.parent.Find("Caps Label").gameObject.SetActive(true);}
+        latestInfoEffect = e;
         EffectTexts[0].text = e.getText();
         EffectTexts[1].text = e.getType();
         EffectTexts[2].text = e.getDescription();
+        EffectTexts[3].text = e.getCaps();
+        EffectIcon.sprite = Resources.Load<Sprite>("Icons/"+e.getIcon());
+
     }
-    public void EraseEffectInfo(){
-        
-        EffectTexts[0].text = "";
-        EffectTexts[1].text = "";
-        EffectTexts[2].text = "";
-    }
+
 
     public void SpeedUp(float f){
         Time.timeScale = f;

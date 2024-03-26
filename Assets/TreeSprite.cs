@@ -19,7 +19,6 @@ public class TreeSprite : MonoBehaviour
             if(n==-1){
                 n = Random.Range(0, treeSprites.Length);
             }
-
         }
         GetComponent<SpriteRenderer>().sprite = treeSprites[n];
         

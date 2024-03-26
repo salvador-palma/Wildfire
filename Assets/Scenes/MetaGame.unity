@@ -5402,6 +5402,16 @@ MonoBehaviour:
   - {fileID: 1176375316}
   AvatarBank:
   - {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+  UnlockableTexts:
+  - {fileID: 1925999018}
+  - {fileID: 1881166907}
+  - {fileID: 741522286}
+  UnlockableIcon: {fileID: 1792141499}
+  Unlockables:
+  - {fileID: 21300000, guid: fd7d2acfbcc19794aba2bc76ae877e88, type: 3}
+  - {fileID: -1969172876329986045, guid: 2deba3cb9bbd15745aecc63d846616ba, type: 3}
+  - {fileID: 21300000, guid: 1630a39cb1bb3d6458a2dc78225ad958, type: 3}
+  - {fileID: 21300000, guid: 698c219ef34df594ab901af015621aef, type: 3}
 --- !u!114 &275411190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5486,6 +5496,7 @@ RectTransform:
   - {fileID: 1317806081}
   - {fileID: 2017068195}
   - {fileID: 1688821893}
+  - {fileID: 787333908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7408,6 +7419,81 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1983641075123666865, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
   m_PrefabInstance: {fileID: 384161033}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &389929852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389929853}
+  - component: {fileID: 389929855}
+  - component: {fileID: 389929854}
+  m_Layer: 0
+  m_Name: GUIBlocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &389929853
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389929852}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000165, y: 1.0000165, z: 1.0000165}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787333908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 24.11}
+  m_SizeDelta: {x: 814.66, y: 534.34}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &389929854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389929852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &389929855
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389929852}
+  m_CullTransparentMesh: 1
 --- !u!1001 &390919404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12679,8 +12765,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 2801795071
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.6509804}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -15645,6 +15731,143 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &741522283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741522284}
+  - component: {fileID: 741522285}
+  - component: {fileID: 741522286}
+  m_Layer: 5
+  m_Name: Description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &741522284
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741522283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787333908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -49.8}
+  m_SizeDelta: {x: 313.23, y: 21.01}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &741522285
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741522283}
+  m_CullTransparentMesh: 1
+--- !u!114 &741522286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741522283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Allows you to see what enemy will come out next so you can be prepared.
+    To use them just open the Bestiary tab in-game
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3103784959
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.72156864}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 11.7
+  m_fontSizeBase: 11.7
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &742465707 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3103684782140599294, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
@@ -16132,6 +16355,153 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1983641075123666865, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
   m_PrefabInstance: {fileID: 525427226}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &787333907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 787333908}
+  - component: {fileID: 787333913}
+  - component: {fileID: 787333912}
+  - component: {fileID: 787333911}
+  - component: {fileID: 787333910}
+  - component: {fileID: 787333909}
+  m_Layer: 5
+  m_Name: UnlockableScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &787333908
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 389929853}
+  - {fileID: 1925999016}
+  - {fileID: 1881166905}
+  - {fileID: 741522284}
+  - {fileID: 1792141501}
+  m_Father: {fileID: 275411193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -8.75, y: -856}
+  m_SizeDelta: {x: 886.93, y: 190.53}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &787333909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275411189}
+          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+          m_MethodName: UnlockOff
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!95 &787333910
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c43aabde7207c744a14d7fd518cf94d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &787333911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &787333912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.09411765, g: 0, b: 0.1882353, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &787333913
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787333907}
+  m_CullTransparentMesh: 1
 --- !u!1001 &791959246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16556,7 +16926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &805029168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16598,7 +16968,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.6509804}
     m_HighlightedColor: {r: 1, g: 0.7210716, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -24366,7 +24736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1176375315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24384,7 +24754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 174.52527, y: -11.685644}
+  m_AnchoredPosition: {x: 261.7879, y: -11.685644}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176375316
@@ -24408,7 +24778,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.6509804}
     m_HighlightedColor: {r: 1, g: 0.7210716, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -25037,7 +25407,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1206136743}
-          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
           m_MethodName: ClickedCharacter
           m_Mode: 1
           m_Arguments:
@@ -25117,24 +25487,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 1206136737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c4d73fa58aae5438646f0e398a0196, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a21b56968779c34b8f09df3c5763831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   runTimeDialogues:
   - dialogues:
-    - message: Hey! This is just a Test
+    - message: Isn't camping just the best? The air out here feels so crisp and free!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: And this is the second message
-      avatar: {fileID: 21300000, guid: 002fb66ba1854e14b872c24dc7b86ebf, type: 3}
-    - message: Byeeeee!!
-      avatar: {fileID: 21300000, guid: 355c823827d02a04bb50a15b3c2185ec, type: 3}
+    - message: My absolute favorite part? Roasting marshmallows, hands down!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: It's all about finding the perfect balance between golden brown and
+        crispy perfection!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Why don't you give it a try?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+  - dialogues:
+    - message: Hey, dude! How's it haning? Any luck with marshamllows?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: You know, it's not just a bout the roasting technique. A solid campfire
+        sets the stage for perfection.
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: If you could lend me a paw I should be able to make it stronger. What
+        do you think?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 275411189}
-          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
-          m_MethodName: SkillTreeMenuToggle
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: UnlockSkillTree
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Whoa, hold up! You control Bees?!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: THAT'S INSANE BRO!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: That's what you thought I was gonna say right?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: The truth is Betsy also filled me in on some Bee wackery yesterday,
+        so I'm not totally caught off guard.
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: In fact, I think I can put that knowledge to good use and amp up our
+        campfire.
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: But, uh, I'm gonna need your expertise to really unlock the full potential.
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: ShowUnlockedUpgrade
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25160,6 +25577,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Unlockables:
+  - {fileID: 1341042525}
+  - {fileID: 1219473325}
+  - {fileID: 1559574314}
 --- !u!114 &1213614685 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3103684782140599294, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
@@ -29849,7 +30270,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1457361219}
-          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
           m_MethodName: ClickedCharacter
           m_Mode: 1
           m_Arguments:
@@ -29869,10 +30290,215 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457361213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89c4d73fa58aae5438646f0e398a0196, type: 3}
+  m_Script: {fileID: 11500000, guid: 82b669241ef09784d94cb3a017e7849c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runTimeDialogues: []
+  runTimeDialogues:
+  - dialogues:
+    - message: Well, would you believe it?
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: 'This campsite used to be a right haven for all sorts of critters,
+        but now it''s as quiet as a lamb in a field. '
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: I've a hankering to start me a little record book, ya see.
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: But, ye know, it's not as easy as pie! I'll need some info to get
+        me started.
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: Could ye tell me about three different animals 'round here?
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: That' set me off on the right hoof!
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+  - dialogues:
+    - message: Well, well, well! You've gone and spotted three critters already?
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Ain't that just dandy! Oh, what a splendid day indeed!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Now, hold your horses while I set up the record book...
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: ............................
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Ah, here it is! I'll name it "The Bestiary - by Betsy"!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: But listen here youngin'! I'll still need your assistance!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: If ye happen upon a grand total of 10 animal species, come holler
+        at me, and I'll have something special for ya as a little reward.
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: unlockBestiary
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Well, bless my soul!
+      avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+    - message: The Bestiary's chock-full with details on ten different critters already!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Just as I pledged, here's your reward...
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Take these Binoculars with you! They'll help you spot creatures from
+        a mile away!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Now, if by chance you happen upon a hundred critters of ten different
+        species, I'll upgrade those Binoculars for ya
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    - message: Until we meet again, youngster!
+      avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: SetBinocularLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a 100
+        critters each for 10 different species! '
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Just what's needed to spruce up those Binoculars! Here you go, take
+        them for a spin!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: If you are aiming to upgrade beyond that, I'll need records of 500
+        creatures spanning 15 different species. Think yu're up for the challenge?
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: SetBinocularLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: 'Well, I''ll be darned, you''ve really outdone yourself kid! '
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: The Bestiary already has records of 500 critters spread across 15
+        different species!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Hand over them Binoculars, and I'll give 'em a bit of a tweak...
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: There we are! Now they're as sharp as can be!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Well... to be honest... there's one last upgrade, but it'll take 2500
+        records for 25 different species!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Give me a holler once you've managed that!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: SetBinocularLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: I'll be hornswoggled! 2500 record of 25 different critters! That must
+        be a world record!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Just as I promised, I'll give you the ultimate optical device, so
+        hand over them Binoculars!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: There we go, as sharp as it gets! Now off you go, have yourself some
+        fun!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: SetBinocularLevel
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Hey, kid! Just curious, what's your favorite critter? Well, for me,
+        it's Bees.
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: I reckon they're something special, the way they all pitch in together.
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: 'Say, since you''re doin'' such a bang-up job fillin'' that Bestiary,
+        here''s an offer for ya:'
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: If you manage to fill it up completely, I'll teach you all there is
+        to know about Bees.
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Yep, including how to tame 'em! What do you say to that?
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 1
+  - dialogues:
+    - message: You've gone and done it! The Bestiary is filled to the brim!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    - message: Just as I promised, it's time for a lesson on Bees! Gather 'round,
+        and I'll tell you everything there is to know!
+      avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
+          m_MethodName: UnlockBees
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -29889,6 +30515,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Rowl: {fileID: 1206136743}
 --- !u!1 &1472278763
 GameObject:
   m_ObjectHideFlags: 0
@@ -35332,6 +35959,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc50de7c805d9a48af9c687aefd8bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1792141498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792141501}
+  - component: {fileID: 1792141500}
+  - component: {fileID: 1792141499}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1792141499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792141498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1969172876329986045, guid: 2deba3cb9bbd15745aecc63d846616ba, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1792141500
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792141498}
+  m_CullTransparentMesh: 1
+--- !u!224 &1792141501
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792141498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787333908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 26.75}
+  m_SizeDelta: {x: 53.5, y: 53.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1793645391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36814,6 +37516,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869826424}
   m_CullTransparentMesh: 1
+--- !u!1 &1881166904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881166905}
+  - component: {fileID: 1881166906}
+  - component: {fileID: 1881166907}
+  m_Layer: 5
+  m_Name: Name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1881166905
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787333908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -10.505}
+  m_SizeDelta: {x: 313.23, y: 21.01}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1881166906
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166904}
+  m_CullTransparentMesh: 1
+--- !u!114 &1881166907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: BINOCULARS
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 15.94
+  m_fontSizeBase: 15.94
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &1900355283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2011877664141749019, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
@@ -37366,6 +38204,142 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1983641075123666865, guid: 43309e8745c3c4a4f86cb3b8ced15d8d, type: 3}
   m_PrefabInstance: {fileID: 715578311}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1925999015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925999016}
+  - component: {fileID: 1925999017}
+  - component: {fileID: 1925999018}
+  m_Layer: 5
+  m_Name: Title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1925999016
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925999015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787333908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 75.354996}
+  m_SizeDelta: {x: 313.23, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1925999017
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925999015}
+  m_CullTransparentMesh: 1
+--- !u!114 &1925999018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925999015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: UNLOCKED
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 15.94
+  m_fontSizeBase: 15.94
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &1927193691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2011877664141749019, guid: 65a73022e00fa274f936bbfcb87ea60b, type: 3}
@@ -43002,6 +43976,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 275411193}
     m_Modifications:
+    - target: {fileID: 120018404740472462, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1040100809538220169, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -43082,25 +44060,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1540875374846060303, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e75a60ee58979f40bfa692221c1eb2e, type: 3}
+    - target: {fileID: 1540875374846060303, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_Color.a
+      value: 0.34901962
+      objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -1.9899998
       objectReference: {fileID: 0}
     - target: {fileID: 3460015415434498060, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3460015415434498060, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: BestiaryPanels.Array.size
@@ -43114,16 +44100,60 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 275411189}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566368321482610100, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80
+      objectReference: {fileID: 0}
     - target: {fileID: 8757481462603096372, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_Name
       value: Bestiary
       objectReference: {fileID: 0}
-    - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: m_SizeDelta.x
+    - target: {fileID: 8757481462603096372, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 374.91998
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 22.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209824019634027341, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209824019634027341, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209824019634027341, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209824019634027341, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
