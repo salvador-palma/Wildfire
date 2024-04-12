@@ -13,10 +13,13 @@ public class Rowl : NPC
     
     protected override void CharacterLoad()
     {
-        if(GameVariables.GetVariable("SkillTreeReady") == 1){
-            
-            QueueDialogue(1);
+        switch(GameVariables.GetVariable("SkillTreeReady")){
+            case 1:QueueDialogue(1);
+            break;
+            case 2:QueueDialogue(3);
+            break;
         }
+
     }
     public override void ClickedCharacter(){
 
@@ -36,5 +39,9 @@ public class Rowl : NPC
     public void ShowUnlockedUpgrade(int unlockableID){
         MetaMenuUI.Instance.SkillTreeMenuToggle();
         Unlockables[unlockableID].Clicked();
+    }
+
+    public void giveEmbers(int n){
+        SkillTreeManager.Instance.changeEmberAmountUI(n);
     }
 }

@@ -13,8 +13,8 @@ public class DeckBuilder : MonoBehaviour
     void Awake(){
         if(Instance==null){Instance = this;}
         if(Instance==this){DefineAugmentClasses();}
-        basePrice = new int[4]{300,900,2700,8100};
-        upgradePrice = new int[2]{2500,7500};
+        basePrice = new int[4]{300,900,2500,10000};
+        upgradePrice = new int[2]{1500,7500};
         unlockPrice = new int[1]{500};
     }
     

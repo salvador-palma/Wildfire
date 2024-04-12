@@ -13,22 +13,22 @@ public class Snail : Enemy
         Speed = maxSpeed;
         
         MaxHealth = Health;
-        StartAnimations(withShell? 0 : 2);
     }
-   
+    bool Moving;
+    public override void UpdateEnemy()
+    {
+        if(Moving){
+            base.UpdateEnemy();
+        }
+    }
 
     public void SlideOn(){
-        Speed = maxSpeed;
+        Moving = true;
     }
     public void SlideOff(){
-        Speed = 0.00001f;
+        Moving = false;
     }
-    override public void setSpeed(float s){
-        maxSpeed = s;
-    }
-    override public float getSpeed(){
-        return maxSpeed;
-    }
+   
 
     public static int DEATH_AMOUNT = 0;
     public override int getDeathAmount(){return DEATH_AMOUNT;}

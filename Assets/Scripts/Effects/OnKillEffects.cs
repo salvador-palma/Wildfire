@@ -248,7 +248,7 @@ public class Bullets : OnKillEffects
         if(UnityEngine.Random.Range(0f,1f) < prob){
             
             SpawnBullets(en.transform.position);
-            Flamey.Instance.addEmbers(25);
+            Flamey.Instance.addEmbers(10);
         }
     }
     private void SpawnBullets(Vector2 pos){

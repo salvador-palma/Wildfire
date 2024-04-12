@@ -275,7 +275,7 @@ public class GameState{
 
     public List<SerializedAugment> augments;
     public int CollectedEmbers;
-    public int Health;
+    public float Health;
     public int CurrentRound;
     public bool[] NextTiers;
 

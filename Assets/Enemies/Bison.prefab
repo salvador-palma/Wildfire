@@ -57,8 +57,8 @@ Transform:
   m_GameObject: {fileID: 864116750889206219}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.029, y: -0.059, z: 0}
-  m_LocalScale: {x: 0.9255031, y: 0.9255031, z: 0.9255031}
+  m_LocalPosition: {x: -0.02, y: 0.12, z: 0}
+  m_LocalScale: {x: 1.087281, y: 0.9171215, z: 1.087281}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6721021051283984197}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864116750889206219}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 087e497e75a9e174a8298ba3125625c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_Size: {x: 6.1, y: 5.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3088343331207743589
@@ -227,11 +227,11 @@ MonoBehaviour:
   AttackDelay: 6
   AttackRange: 1.75
   Speed: 0.6
-  Health: 1000
+  Health: 5000
   MaxHealth: 0
-  Armor: 100
+  Armor: 200
   ArmorPen: 0
-  EmberDropRange: {x: 0, y: 0}
+  EmberDropRange: {x: 12, y: 20}
   Attacking: 0
   HitCenter: {fileID: 1201471100915407414}
   inEffect: 0
@@ -291,7 +291,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

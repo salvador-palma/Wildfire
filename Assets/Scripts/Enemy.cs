@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -24,8 +26,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     
     public virtual void UpdateEnemy()  {
         Move();
+        
         if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
            Attacking = true;
+           removeSlowingEffects();
            GetComponent<Animator>().SetTrigger("InRange");
            InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
         }
@@ -106,6 +110,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual bool canTarget(){return true;}
 
+    
+
+    
 
     protected virtual void OnMouseDown() {
         
@@ -136,61 +143,52 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
 
+    public Dictionary<string, float[]> SlowEffectsDuration;
+    public virtual void SlowDown(float seconds, float percentage, string SlowEffect){
+        if(SlowEffectsDuration== null){SlowEffectsDuration = new Dictionary<string, float[]>();}
+        float[] prevInfo = SlowEffectsDuration.GetValueOrDefault(SlowEffect, null);
+        if(prevInfo == null || prevInfo[0] <= 0){
+            Speed *= percentage;
+            
+        }
+        SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
+        CheckEnemyIceSkin();
+    }  
+    public float[] getSlowInfo(string SlowEffect){
+        return SlowEffectsDuration == null ? null : SlowEffectsDuration.GetValueOrDefault(SlowEffect, null);
+    }
+    public void ApplySlowUpdate(){
+        if(SlowEffectsDuration== null){SlowEffectsDuration = new Dictionary<string, float[]>();}
 
-    public void setTemporarySpeed(float seconds, float percReduced, Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null, string augmentClass = null){
-        //if(inEffect){return;}
-        
-        if(augmentClass == "IcePool"){
-            if(timeSpeed <= 0){
-                timeSpeed = Math.Max(timeSpeed, seconds);
-                StartCoroutine(setSpeedTimer(percReduced,beforeAction,afterAction));
-            }else{
-                timeSpeed = Math.Max(timeSpeed, seconds);
+        foreach (string slow in SlowEffectsDuration.Keys)
+        {   
+            if(SlowEffectsDuration[slow][0] > 0){
+                SlowEffectsDuration[slow][0] -= Time.deltaTime;
+                if(SlowEffectsDuration[slow][0] <= 0){
+                    Speed /= SlowEffectsDuration[slow][1];
+                    CheckEnemyIceSkin();
+                }
             }
-        }else{
-            if(inEffect){return;}
-            SetSpeedCouroutineEffect(seconds,percReduced,beforeAction,afterAction);
+            
         }
+    } 
+    private void removeSlowingEffects(){
+        SlowEffectsDuration = new Dictionary<string, float[]>();
+        CheckEnemyIceSkin();
+    }
+    public void removeSlow(string effect){
+        SlowEffectsDuration[effect][0] = 0;
+        CheckEnemyIceSkin();
+    }
+    private void CheckEnemyIceSkin(){
         
-    }
-
-    private float timeSpeed = 0;
-    private IEnumerator setSpeedTimer(float percReduced,Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null){
-
-        if(beforeAction != null){beforeAction(this);}
-        //float current_Speed = getSpeed();
-        setSpeed(getSpeed() * percReduced);
-
-        while(timeSpeed > 0){
-            timeSpeed -= Time.deltaTime;
-            yield return null;
+        if(SlowEffectsDuration.Any(k => k.Value[0] > 0)){
+            
+            transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = true;
+        }else{
+            transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = false;
         }
-
-        if(afterAction != null){afterAction(this);}
-        setSpeed(getSpeed() / percReduced);
     }
-
-    public virtual void setSpeed(float speed){
-        Speed = speed;
-    }
-    public virtual float getSpeed(){
-        return Speed;
-    }
-     private IEnumerator SetSpeedCouroutineEffect(float seconds, float percReduced,Action<Enemy> beforeAction = null, Action<Enemy> afterAction = null){
-        inEffect = true;
-        if(beforeAction != null){beforeAction(this);}
-
-        //float current_Speed = getSpeed();
-        setSpeed(getSpeed() * percReduced);
-        yield return new WaitForSeconds(seconds);
-        if(afterAction != null){afterAction(this);}
-        setSpeed(getSpeed() / percReduced);
-
-        inEffect = false;
-    }
-
-
-
 
 
 

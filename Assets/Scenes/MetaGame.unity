@@ -16926,7 +16926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &805029168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24736,7 +24736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1176375315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25556,6 +25556,47 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Hey there, buddy!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Gotta shoot straight with you - The campfire's still not up to snuff!
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Need more embers, you say?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Alright, let me see what I can rustle up...
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Aha! Here you go, found 1500 embers chilling in my back pocket
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    - message: Use 'em wisely, alright?
+      avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 275411189}
+          m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
+          m_MethodName: SkillTreeMenuToggle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: giveEmbers
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1500
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -30320,7 +30361,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
     - message: Now, hold your horses while I set up the record book...
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: ............................
+    - message: ...
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
     - message: Ah, here it is! I'll name it "The Bestiary - by Betsy"!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
@@ -44070,32 +44111,713 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1.9899998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3460015415434498060, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3460015415434498060, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: BestiaryPanels.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].name
+      value: Mole
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].name
+      value: Bunny
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].name
+      value: Squirel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].name
+      value: Headgehog
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].name
+      value: Raccon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].name
+      value: Turtle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].Wave
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].name
+      value: Scorpion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].Wave
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].name
+      value: Armadillo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].name
+      value: Skunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].name
+      value: Beaver
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].name
+      value: Flying Squirrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].name
+      value: Hog
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].name
+      value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].name
+      value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].name
+      value: Stray Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].name
+      value: Alligator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].name
+      value: Bison
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].name
+      value: Moose
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].name
+      value: Musk Ox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].enemy
+      value: 
+      objectReference: {fileID: 6721927114820824289, guid: b48228c738c1e774bbc301b8b4b7ce2b, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].enemy
+      value: 
+      objectReference: {fileID: 1783731420939666997, guid: 10cc14674d0b6d24c908226a35e20643, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].enemy
+      value: 
+      objectReference: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: 'BestiaryPanels.Array.data[2]'
       value: 
       objectReference: {fileID: 6804154460510507627}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].enemy
+      value: 
+      objectReference: {fileID: 5813437837199226000, guid: 26ff5fc6f58c63e46a34b963fba143df, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].enemy
+      value: 
+      objectReference: {fileID: 4160200665350817852, guid: f2b3de56f11c62841a7595a6a00d68d6, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].enemy
+      value: 
+      objectReference: {fileID: 8018407032486470828, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].enemy
+      value: 
+      objectReference: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].enemy
+      value: 
+      objectReference: {fileID: 4317406584369839249, guid: b5aaec1beb537104aa96f34019d52471, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].enemy
+      value: 
+      objectReference: {fileID: 534645426103554320, guid: f8709f5ff08527b4da5ab3a0a256202f, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].enemy
+      value: 
+      objectReference: {fileID: 7296929045884615504, guid: d478b7ae2c141bc4db9fa3ae9efdf1b2, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].enemy
+      value: 
+      objectReference: {fileID: 4064433657471892735, guid: 8c5c7e79c0b647b4cbd788df5f29e67f, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].enemy
+      value: 
+      objectReference: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].enemy
+      value: 
+      objectReference: {fileID: 4792462256598324463, guid: 1f67f19206edff64e9426a95f5f167b6, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].enemy
+      value: 
+      objectReference: {fileID: 4544615441581723125, guid: ba9e790fe95de3743a10cc26240acd59, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].enemy
+      value: 
+      objectReference: {fileID: 4792462256598324463, guid: 43c751c59a70f224a9b1ee1a0a8944b1, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].enemy
+      value: 
+      objectReference: {fileID: 2074136074127113371, guid: 364f3c39a09d19c4a9150c660f40f191, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].enemy
+      value: 
+      objectReference: {fileID: 7665266975403006941, guid: 1cf140603a4582a48a1e64db7f93f7d8, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].enemy
+      value: 
+      objectReference: {fileID: 9030358477521101351, guid: 871a9fa517ed26042ba82063be8ae195, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].enemy
+      value: 
+      objectReference: {fileID: 6824811008063488913, guid: 3afb3ca05a191d54d98e21f2f0c92ebe, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].IconPos.x
+      value: -0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].IconPos.y
+      value: -9.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].IconPos.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].IconPos.y
+      value: -7.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].IconPos.x
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].IconPos.y
+      value: 2.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].IconPos.x
+      value: 0.00000047684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].IconPos.y
+      value: 5.245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].IconPos.x
+      value: -2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].IconPos.y
+      value: -9.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].IconPos.x
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].IconPos.y
+      value: 17.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].IconPos.x
+      value: -5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].IconPos.y
+      value: 15.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].IconPos.y
+      value: 4.7066e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].IconPos.x
+      value: 6.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].IconPos.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].IconPos.y
+      value: 4.7066e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].IconPos.x
+      value: -1.745
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].IconPos.y
+      value: -3.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].IconPos.x
+      value: -2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].IconPos.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].IconPos.y
+      value: 4.7066e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].IconPos.x
+      value: -1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].IconPos.y
+      value: 7.800001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].IconPos.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].IconPos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].IconPos.y
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].IconSize.x
+      value: 148.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].IconSize.y
+      value: 141.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].IconSize.x
+      value: 150.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].IconSize.y
+      value: 143.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].IconSize.x
+      value: 185.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].IconSize.y
+      value: 176.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].IconSize.x
+      value: 192.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].IconSize.y
+      value: 182.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].IconSize.x
+      value: 179.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].IconSize.y
+      value: 170.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].IconSize.x
+      value: 300.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].IconSize.y
+      value: 285.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].IconSize.x
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].IconSize.y
+      value: 182.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].IconSize.x
+      value: 193.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].IconSize.y
+      value: 184.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].IconSize.x
+      value: 149.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].IconSize.y
+      value: 141.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].IconSize.x
+      value: 200.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].IconSize.y
+      value: 190.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].IconSize.x
+      value: 192.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].IconSize.y
+      value: 182.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].IconSize.x
+      value: 79.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].IconSize.y
+      value: 75.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].IconSize.x
+      value: 161.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].IconSize.y
+      value: 153.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].IconSize.x
+      value: 174.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].IconSize.y
+      value: 165.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].IconSize.x
+      value: 150.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].IconSize.y
+      value: 150.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].IconSize.x
+      value: 177.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].IconSize.y
+      value: 168.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].IconSize.x
+      value: 169.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].IconSize.y
+      value: 165.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].IconSize.x
+      value: 134.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].IconSize.y
+      value: 134.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].IconSize.x
+      value: 148.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].IconSize.y
+      value: 148.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].description
+      value: '<size=100%><color=#FFFF00>- Stunning Bite -</color>
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[12].abilities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].abilities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].abilities.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a41f862fc4fdec41b8f6f025d69641c, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].abilities.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].abilities.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].abilities.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 54ffaeb9e1cfc0a4f992cb45ac6d55b2, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].abilities.Array.data[0].description
+      value: "<size=100%><color=#FFFF00>- Burrow -</color>\n<size=80%>Start the round
+        <color=#FF7000>burrowed</color> underground. \nWhile <color=#FF7000>burrowed</color>,
+        become <color=#53D1FF>untargetable</color> and <color=#53D1FF>immune</color>
+        to damage. These animals will come out on their own"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Hop -</color>
+
+        <size=80%>This animal
+        hops around instead of having a consistent movement speed'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
+
+        <size=80%>This
+        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
+        it get out of sight before it dies the <color=#934F28>acorn</color> will
+        detonate, dealing <color=#FF5858>+25 dmg.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Thorns -</color>
+
+        <size=80%>After
+        getting in range, this animal will cover itself, becoming <color=#FFFF00>Unhittable</color>
+        and dealing <color=#FF5858>+15 dmg</color> when it gets struck by <color=#FF99F3>On-Hit
+        Effects'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].abilities.Array.data[1].description
+      value: '<size=100%><color=#FFFF00>- Unhittable -</color>
+
+        <size=80%>This
+        animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
+        for Armor Penetration) '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Thief -</color>
+
+        <size=80%>This
+        animal has different goals in mind. Instead of trying to damage you, it will
+        <color=#FF7000>steal</color> <color=#FFCC7C>+100 embers.</color> You can
+        recover them by killing it before it gets out of sight.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[13].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Thief -</color>
+
+        <size=80%>This
+        animal has different goals in mind. Instead of trying to damage you, it will
+        <color=#FF7000>steal</color> <color=#FFCC7C>+100 embers.</color> You can
+        recover them by killing it before it gets out of sight.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Roll -</color>
+
+        <size=80%>This
+        animal begins the round by <color=#FF7000>rolling,</color> gaining <color=#AFEDFF>x2.5
+        speed</color>, <color=#919191>+1000 armor </color> and becoming <color=#FFFF00>Unhittable.</color>
+        It will unroll after denying 10 <color=#FF99F3>On-Hit Effects'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Stink Spray -</color>
+
+        <size=80%>Attacks
+        will <color=#53D1FF>stun</color> the campfire for 0.75s. <color=#53D1FF>Stun</color>
+        effects override eachother instead of stacking.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Dam Builder -</color>
+
+        <size=80%>Instead
+        of trying to damage you, it will <color=#FF7000>steal</color> your <color=#934F28>logs,</color>
+        taking away <color=#0CD405>-100 Max Health.</color> You can recover them
+        by killing it before it gets out of sight.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
+
+        <size=80%>This
+        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
+        it get out of sight before it dies the <color=#934F28>acorn</color> will
+        detonate, dealing <color=#FF5858>+25 dmg.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].abilities.Array.data[1].description
+      value: '<size=100%><color=#FFFF00>- Flying -</color>
+
+        <size=80%>Starts
+        the round by <color=#FF7000>flying</color> from trees, landing somewhere
+        in the middle of the campsite. While flying, it is <color=#53D1FF>untargetable</color>
+        and <color=#53D1FF>immune.</color>'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Charge -</color>
+
+        <size=80%>Begins
+        the round by <color=#FF7000>charging</color> a powerfull first attack that
+        deal <color=#FF5858>2x damage</color> '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Wolf Pack -</color>
+
+        <size=80%>For
+        each 4 wolves in the campsite, 1 will be considered the <color=#FFFF00>Alpha.</color>
+        If the <color=#FFFF00>Alpha</color> dies and there aren''t enough on the
+        field, the role will be transfered to other wolves.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.data[1].description
+      value: '<size=100%><color=#FFFF00>- Alpha -</color>
+
+        <size=80%>When
+        an <color=#FFFF00>Alpha</color> howls, it <color=#FF7000>taunts</color> the
+        campfire and <color=#FF7000>activates</color> nearby wolves. <color=#FF7000>Activated</color>
+        wolves gain <color=#AFEDFF>x2.5 movement speed,</color> <color=#FF5858>+0.5
+        Armor Penetrarion</color> and <color=#FF5858>+50 Dmg.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Honey Pot -</color>
+
+        <size=80%>Whenever
+        it gets below half <color=#0CD405>Max HP</color> it starts to consume <color=#934F28>Honey.</color>
+        Each scoop of <color=#934F28>Honey</color> heals for <color=#0CD405>+1000HP.</color>
+        It only stops consuming once its <color=#0CD405>Full Health</color> or it
+        dies.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Stray -</color>
+
+        <size=80%>Stray
+        wolves are used to living alone and are always <color=#FE7200>activated</color>.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Stunning Bite -</color>
+
+        <size=80%>Attacks
+        <color=#53D1FF>stun</color> the campfire for 0.75s. <color=#53D1FF>Stun</color>
+        effects override eachother instead of stacking.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Charge -</color>
+
+        <size=80%>Begins
+        the round by <color=#FF7000>charging</color> a powerfull first attack. Each
+        charge increases the first attack''s power by <color=#FF5858>+25 dmg</color> '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Caretaker -</color>
+
+        <size=80%>Heals
+        nearby animals 7 times for <color=#0CD405>+100HP</color> everytime it <color=#FE7200>howls</color>.
+        This doesn''t apply to itself or other animals of the same species'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].abilities.Array.data[0].description
+      value: '<size=100%><color=#FFFF00>- Protector -</color>
+
+        <size=80%>Protects
+        nearby animals 7 times with <color=#919191>+100 Armor</color> everytime it
+        <color=#FE7200>howls</color>. This doesn''t apply to itself or other animals
+        of the same species'
+      objectReference: {fileID: 0}
     - target: {fileID: 5533112890008238485, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -44130,15 +44852,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8757481462603096372, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 374.91998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 22.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9209824019634027341, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_SizeDelta.x

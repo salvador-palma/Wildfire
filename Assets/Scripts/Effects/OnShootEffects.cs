@@ -121,7 +121,7 @@ public class BurstShot : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstAmount");
         }
-        if(interval >= 10){
+        if(interval <= 10){
             interval = 10;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstInterval");

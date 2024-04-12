@@ -113,19 +113,10 @@ public class NPC : MonoBehaviour
             DefaultClickBehaviour.Invoke();
         }
     }
-    private bool hasPingNotification(){
-        switch (Name)
-        {
-            case "Betsy":
-                int claims = LocalBestiary.AvailableClaims;
-                return claims > 0;
-
-            default:
-                return false;
-                   
-        } 
+    protected virtual bool hasPingNotification(){
+        return false;
     }
-    private void UpdateNotification(object sender = null, EventArgs e= null){
+    protected void UpdateNotification(object sender = null, EventArgs e= null){
         transform.GetChild(0).gameObject.SetActive(hasPingNotification() || hasAvailableDialogue());
     }
 

@@ -21,6 +21,8 @@ public class Grasshoper : Enemy
     float timer;
     public float jumpTimer;
 
+    public float MaxSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class Grasshoper : Enemy
         base.flame = Flamey.Instance;
         
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
+        MaxSpeed = Speed;
         MaxHealth = Health;
         direction = Random.Range(0f, 1f) < 0.5f ? 1 : -1;
         Vector3 relativePosition = transform.position - centerPoint.position;
@@ -80,8 +83,8 @@ public class Grasshoper : Enemy
 
 
         angle += Speed * direction * Time.deltaTime;
-        radiusX -= shrinkRate * Time.deltaTime;
-        radiusY -= shrinkRate * Time.deltaTime;
+        radiusX -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
+        radiusY -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         
         CheckFlip();
     }

@@ -20,7 +20,7 @@ public class Wolf : Enemy
             GetComponent<Animator>().SetBool("isAlpha", true);
         }
         if(isAlpha){
-            StartCoroutine(StartAlphaDelay());  
+            TurnAlpha();
         }
     }
     private void Start() {
@@ -40,12 +40,7 @@ public class Wolf : Enemy
             base.UpdateEnemy();
         }
     }
-    public IEnumerator StartAlphaDelay(){
-        yield return new WaitForSeconds(3f);
-        howling = true;
-        GetComponent<Animator>().Play("Howl");
-        Speed = RunningSpeed;
-    }
+
 
     public void endHowl(){
         howling = false;
@@ -75,7 +70,10 @@ public class Wolf : Enemy
 
     public void TurnAlpha(){
         isAlpha = true;
-        StartCoroutine(StartAlphaDelay());  
+
+        howling = true;
+        GetComponent<Animator>().Play("Howl");
+        Speed = RunningSpeed;
         
     }
 

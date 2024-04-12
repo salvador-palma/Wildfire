@@ -37,12 +37,7 @@ public class Slime : Enemy
         base.Die(tiny);
     }
 
-    override public void setSpeed(float s){
-        maxSpeed = s;
-    }
-    override public float getSpeed(){
-        return maxSpeed;
-    }
+    
 
     public static int DEATH_AMOUNT = 0;
     public override int getDeathAmount(){return DEATH_AMOUNT;}

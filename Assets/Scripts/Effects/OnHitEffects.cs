@@ -106,15 +106,11 @@ public class IceOnHit : OnHitEffects
     {
         if(en==null){return;}
         if(en.inEffect){return;}
-        if(UnityEngine.Random.Range(0f,1f) < prob){
-            
-
-            en.setTemporarySpeed(duration, Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f), 
-                                e =>{ e.GetComponent<Animator>().Play("EnemyEffectice"); e.inEffect = true;},
-                                e =>{ e.GetComponent<Animator>().Play("EnemyEffectClear"); e.inEffect = false;});
+        if(UnityEngine.Random.Range(0f,1f) < prob){    
+            Debug.Log("Iced");
+            en.SlowDown(duration/1000f, 1 - Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f), "IceHit");
             DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
 
- 
         }
     }
     public void Stack(IceOnHit iceOnHit){
@@ -154,7 +150,7 @@ public class IceOnHit : OnHitEffects
     public string getCaps()
     {
         float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
-        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 99%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000));
+        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 99%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000f));
     }
 
     public string getIcon()

@@ -31,7 +31,7 @@ public class Lightning : MonoBehaviour
                     ex.transform.position = WorldPos;
                 }
                 foreach(Collider2D col in targets){
-                    col.GetComponent<Enemy>().Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
+                    col.GetComponent<Enemy>().Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: true, onHit: false);
                 }
                 Flamey.Instance.ApplyOnLand(WorldPos);
             }

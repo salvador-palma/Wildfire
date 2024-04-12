@@ -12,7 +12,7 @@ public class Turtle : Enemy
         Speed =  Distribuitons.RandomTruncatedGaussian(0.01f,Speed,0.03f);
      
         MaxHealth = Health;
-        StartAnimations(4);
+
     }
    
     

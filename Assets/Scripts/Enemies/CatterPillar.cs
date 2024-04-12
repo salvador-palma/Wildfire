@@ -9,7 +9,6 @@ public class CatterPillar : Enemy
         flame = Flamey.Instance;
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed, 0.075f);
         MaxHealth = Health;
-        StartAnimations(1);
     }
     
 

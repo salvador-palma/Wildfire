@@ -23,7 +23,7 @@ public class Skunk : Enemy
    
     public override void Attack(){
         Flamey.Instance.Stun(StunDuration);
-       
+        base.Attack();
     }
 
 

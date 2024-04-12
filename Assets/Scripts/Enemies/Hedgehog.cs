@@ -34,24 +34,34 @@ public class Hedgehog : Enemy
         Covered = true;
         Armor = ArmorCovered;
     }
-    public int TitForTat = 3;
-    int TitCounter = 3;
+    public int TitForTat = 10;
+    int TitCounter = 0;
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+
+
+
+
+        if(onHit && !Covered){
+            Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);
+        }
+        
 
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
             Dmg = (int)(B + (Dmg-B)*(onHit ? Flamey.Instance.ArmorPen : 0));
         }
 
-        if(onHit && !Covered){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
+        
 
         if(Covered && onHit){
-            if(TitCounter <= 0){
-                TitCounter = TitForTat;
+            if(TitCounter > 0){
+                TitCounter--;
             }else{
+                TitCounter = TitForTat;
                  Attack();
             }
         }
+
 
         Health -= Dmg;
         Flamey.Instance.TotalDamage+=(ulong)Dmg;

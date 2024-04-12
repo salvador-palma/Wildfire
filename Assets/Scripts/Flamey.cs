@@ -13,7 +13,7 @@ public class Flamey : MonoBehaviour
 
     [Header("Stats")]
     public int MaxHealth = 1000;
-    public int Health;
+    public float Health;
     public int Dmg= 50;
 
     public int Armor = 0;
@@ -98,8 +98,7 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
-
-                      
+           
     }
 
     // Update is called once per frame
@@ -255,8 +254,9 @@ public class Flamey : MonoBehaviour
                 e.GetComponent<Enemy>().EndEnemy();
             }
         }
-        if(GameVariables.GetVariable("SkillTreeReady")<=0){
-            GameVariables.SetVariable("SkillTreeReady",1);
+        int SkillTreeState = Math.Max(0,GameVariables.GetVariable("SkillTreeReady"));
+        if(SkillTreeState<=2){
+            GameVariables.SetVariable("SkillTreeReady",SkillTreeState+1 );
         }
         
         
@@ -320,7 +320,7 @@ public class Flamey : MonoBehaviour
     }
     public void addHealth(float HealAmount){
         TotalHealed+=(ulong)HealAmount;
-        Health = (int)Math.Min(Health + HealAmount, MaxHealth);
+        Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
     }
@@ -337,7 +337,7 @@ public class Flamey : MonoBehaviour
     }
     public void ApplyPoison(){
         poisonsLeft--;
-        Hitted(Math.Max(1,Health/50), 1, null, onhitted:false, isShake:false, idHitTxt:14);
+        Hitted((int)Math.Max(1,Health/50), 1, null, onhitted:false, isShake:false, idHitTxt:14);
     }
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){

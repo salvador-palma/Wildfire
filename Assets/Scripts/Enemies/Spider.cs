@@ -19,6 +19,7 @@ public class Spider : Enemy
 
     public int direction = 1;
     public bool rest;
+    public float MaxSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,7 @@ public class Spider : Enemy
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
-        
+        MaxSpeed = Speed;
         
         MaxHealth = Health;
 
@@ -57,8 +58,8 @@ public class Spider : Enemy
 
 
         angle += Speed * direction * Time.deltaTime;
-        radiusX -= shrinkRate * Time.deltaTime;
-        radiusY -= shrinkRate * Time.deltaTime;
+        radiusX -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
+        radiusY -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         
         CheckFlip();
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,12 +29,18 @@ public class IceAOE : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider){
         if(collider.tag == "Enemy"){
-            collider.GetComponent<Enemy>().setTemporarySpeed(lt, 1-Slow, augmentClass: "IcePool");
+
+            Enemy e = collider.GetComponent<Enemy>();
+            float[] info = e.getSlowInfo("IcePool");
+            
+            float lastingAmount = Math.Max(lt, info==null? -1 : info[0]);
+            e.SlowDown(lastingAmount, 1-Slow, "IcePool");
+  
         }
     }
     private void OnTriggerExit2D(Collider2D collider){
         if(collider.tag == "Enemy"){
-            //INTERRUPT COUROUTINE HERE
+            collider.GetComponent<Enemy>().removeSlow("IcePool");
         }
     }
 

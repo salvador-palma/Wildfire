@@ -25,7 +25,7 @@ public class Betsy : NPC
         */
         LocalBestiary B = LocalBestiary.INSTANCE;
 
-        if(GameVariables.GetVariable("BestiaryReady") <= 0 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= 5){
+        if(GameVariables.GetVariable("BestiaryReady") <= 0 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= 3){
             GameVariables.SetVariable("BestiaryReady", 1); 
             QueueDialogue(1);
         }
@@ -33,17 +33,19 @@ public class Betsy : NPC
             GameVariables.SetVariable("BeeQuest", 1); 
             QueueDialogue(6);
         }
-        else if(GameVariables.GetVariable("BeeQuest") == 1 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) == B.get_Amount_Of_Enemies_With_Milestones_Above(-1)){
+        if(GameVariables.GetVariable("BeeQuest") == 1 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) == B.get_Amount_Of_Enemies_With_Milestones_Above(-1)){
             GameVariables.SetVariable("BeeQuest", 2); 
             QueueDialogue(7);
         }
 
 
+        
         int binocularLvl = GameVariables.GetVariable("BinocularLevel");
         if(binocularLvl == -1){
             GameVariables.SetVariable("BinocularLevel",0);
             binocularLvl = 0;
         }
+        
         switch(binocularLvl){
             case 0:
             Debug.Log(B.get_Amount_Of_Enemies_With_Milestones_Above(0));
@@ -63,10 +65,14 @@ public class Betsy : NPC
                     QueueDialogue(5);}
                 break;
         }
+
+        
     }
 
     public void SetBinocularLevel(int n){
          GameVariables.SetVariable("BinocularLevel",n);
+         CharacterLoad();
+         UpdateNotification();
          switch(n){
             case 1:
                 MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "FLIMSY BINOCULARS", "Allows you to see what enemy will come out next so you can be prepared. To use them just open the Bestiary tab in-game", 1);
@@ -105,5 +111,10 @@ public class Betsy : NPC
         base.ClickedCharacter();
     }
 
-    
+    protected override bool hasPingNotification()
+    {
+        int claims = LocalBestiary.AvailableClaims;
+        return claims > 0 && GameVariables.GetVariable("BestiaryReady") > 0;
+    }
+
 }
