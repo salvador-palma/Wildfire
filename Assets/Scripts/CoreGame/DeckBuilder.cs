@@ -864,47 +864,86 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Prismatic));}})}, baseCardUpgrade:true),
 
             
-            new Augment("VampDeathUnlock" ,"Essence Eater", new string[1]{"Unlock the ability to drain the essence of dead enemies"}, "VampDeathUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
-                Deck.Instance.removeClassFromDeck("VampDeathUnlock");
-                Flamey.Instance.addOnKillEffect(new VampOnDeath(0.1f,0.15f));
-                Deck.Instance.AddAugmentClass(new List<string>{"VampDeathProb","VampDeathPerc"});            
+            new Augment("DrainPoolUnlock" ,"Drain Pool", new string[1]{"Unlock the ability to create Draining Pools"}, "DrainPoolUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("DrainPoolUnlock");
+                Flamey.Instance.addOnLandEffect(new DrainOnLand(1f, 0.01f, 0.05f, 1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"DrainPoolPerc","DrainPoolProb","DrainPoolSize","DrainPoolDuration"});            
             })}, baseCard: true),  
-            new Augment("VampDeathProb","Kill to Heal", new string[3]{"Gain +5% chance to proc your Essence Eater effect", 
-                                                            "Gain +7% chance to proc your Essence Eater effect", 
-                                                            "Gain +10% chance to proc your Essence Eater effect"}, "VampDeathProb", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.05f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.07f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.1f)))}), 
-            new Augment("VampDeathProb","Corpse Conduit", new string[3]{"Gain +10% chance to proc your Essence Eater effect", 
-                                                            "Gain +15% chance to proc your Essence Eater effect", 
-                                                            "Gain +20% chance to proc your Essence Eater effect"}, "VampDeathProb", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.1f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.15f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.2f)))}),
-            new Augment("VampDeathProb","Reaper's Reward", new string[3]{"Gain +20% chance to proc your Essence Eater effect", 
-                                                            "Gain +30% chance to proc your Essence Eater effect", 
-                                                            "Gain +40% chance to proc your Essence Eater effect"}, "VampDeathProb", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.2f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.3f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0f,0.4f)))}),  
-            new Augment("VampDeathPerc","Harvesting", new string[3]{"Gain +3% Heal on your Essence Eater effect", 
-                                                            "Gain +5% Heal on your Essence Eater effect", 
-                                                            "Gain +7% Heal on your Essence Eater effect"}, "VampDeathPerc", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.03f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.05f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.07f,0f)))}),  
-            new Augment("VampDeathPerc","Soul Hunger", new string[3]{"Gain +7% Heal on your Essence Eater effect", 
-                                                            "Gain +10% Heal on your Essence Eater effect", 
-                                                            "Gain +15% Heal on your Essence Eater effect"}, "VampDeathPerc", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.07f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.1f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.15f,0f)))}),
-            new Augment("VampDeathPerc","Life Drainer", new string[3]{"Gain +15% Heal on your Essence Eater effect", 
-                                                            "Gain +20% Heal on your Essence Eater effect", 
-                                                            "Gain +30% Heal on your Essence Eater effect"}, "VampDeathPerc", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.15f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.2f,0f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnKillEffect(new VampOnDeath(0.3f,0f)))}),    
+
+            new Augment("DrainPoolPerc","Harvesting", new string[3]{"Your Drain Pool will heal you for +1% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +1.5% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +2.5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.015f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.025f,0,0)))}),
+            new Augment("DrainPoolPerc","Carnivorous Plant", new string[3]{"Your Drain Pool will heal you for +2% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +3% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.02f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.03f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.05f,0,0)))}),
+            new Augment("DrainPoolPerc","Photosynthesis", new string[3]{"Your Drain Pool will heal you for +5% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +7.5% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +10% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.05f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.075f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.1f,0,0)))}),
+            new Augment("DrainPoolProb","Sowing the Field", new string[3]{"Gain +3% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +5% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +7% probability of spawning a Drain Pool when your shot lands"}, "DrainPoolProb", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.03f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.05f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.07f,0)))}),
+            new Augment("DrainPoolProb","Garden's Embrace", new string[3]{"Gain +7% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +10% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +15% probability of spawning a Drain Pool when your shot lands"}, "DrainPoolProb", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.07f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.1f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.15f,0)))}),
+            new Augment("DrainPoolProb","Lifebloom Aura", new string[3]{"Gain +15% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +20% probability of spawning a Drain Pool when your shot lands", 
+                                                            "Gain +30% probability of spawning a Drain Pool when your shot lands"}, "DrainPoolProb", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.15f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.2f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.3f,0)))}),
+            new Augment("DrainPoolSize","Sprouting", new string[3]{"Your Drain Pool grows by +2 units", 
+                                                            "Your Drain Pool grows by +2.5 units", 
+                                                            "Your Drain Pool grows by +3 units"}, "DrainPoolSize", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.2f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.25f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.3f,0,0,0)))}),
+            new Augment("DrainPoolSize","Flowering Surge", new string[3]{"Your Drain Pool grows by +4 units", 
+                                                            "Your Drain Pool grows by +5 units", 
+                                                            "Your Drain Pool grows by +6 units"}, "DrainPoolSize", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.4f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.5f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.6f,0,0,0)))}),
+            new Augment("DrainPoolSize","Botanical Boom", new string[3]{"Your Drain Pool grows by +8 units", 
+                                                            "Your Drain Pool grows by +10 units", 
+                                                            "Your Drain Pool grows by +12 units"}, "DrainPoolSize", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.8f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(1f,0,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(1.2f,0,0,0)))}),
+            new Augment("DrainPoolDuration","Lasting Petals", new string[3]{"Your Drain Pool lasts for +0.3 seconds", 
+                                                            "Your Drain Pool lasts for +0.5 seconds", 
+                                                            "Your Drain Pool lasts for +0.8 seconds"}, "DrainPoolDuration", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.3f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.5f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.8f)))}),
+            new Augment("DrainPoolDuration","Everlasting Blossom", new string[3]{"Your Drain Pool lasts for +0.8 seconds", 
+                                                            "Your Drain Pool lasts for +1.2 seconds", 
+                                                            "Your Drain Pool lasts for +1.7 seconds"}, "DrainPoolDuration", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.8f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,1.2f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,1.7f)))}),
+            new Augment("DrainPoolDuration","Garden of Eden", new string[3]{"Your Drain Pool lasts for +1.8 seconds", 
+                                                            "Your Drain Pool lasts for +2.4 seconds", 
+                                                            "Your Drain Pool lasts for +3.5 seconds"}, "DrainPoolDuration", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,1.8f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,2.4f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,3.5f)))}),
+            
+            
             new Augment("ExplodeUnlock" ,"Explosion", new string[1]{"Unlock the ability to generate explosions whenever enemies die"}, "ExplodeUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ExplodeUnlock");
                 Flamey.Instance.addOnKillEffect(new Explosion(0.1f,50));
@@ -1038,27 +1077,27 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,3)))}),
             new Augment("RegenUnlock" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("RegenUnlock");
-                Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 10f));
+                Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 10f));
                 Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            
             })}, baseCard: true),  
-            new Augment("RegenPerSecond","Self-Healing Fire", new string[3]{"Each second you will regen +0.2 Health", 
-                                                            "Each second you will regen +0.5 Health", 
-                                                            "Each second you will regen +1 Health"}, "RegenPerSecond", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.2f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.5f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0)))}), 
-            new Augment("RegenPerSecond","Perseverance", new string[3]{"Each second you will regen +0.5 Health", 
-                                                            "Each second you will regen +1 Health", 
-                                                            "Each second you will regen +2.5 Health"}, "RegenPerSecond", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0.5f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(2.5f, 0)))}),
-            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will regen +1 Health", 
-                                                            "Each second you will regen +2 Health", 
-                                                            "Each second you will regen +5 Health"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(2f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(5f, 0)))}),  
+            new Augment("RegenPerSecond","Self-Healing Fire", new string[3]{"Each second you will regen +4 Health", 
+                                                            "Each second you will regen +7 Health", 
+                                                            "Each second you will regen +10 Health"}, "RegenPerSecond", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(4f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(7f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 0)))}), 
+            new Augment("RegenPerSecond","Perseverance", new string[3]{"Each second you will regen +7 Health", 
+                                                            "Each second you will regen +15 Health", 
+                                                            "Each second you will regen +20 Health"}, "RegenPerSecond", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(7f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(15f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(20f, 0)))}),
+            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will regen +15 Health", 
+                                                            "Each second you will regen +25 Health", 
+                                                            "Each second you will regen +40 Health"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(15f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(25f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(40f, 0)))}),  
             new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you will regen +5 Health", 
                                                             "At the end of each round you will regen +10 Health", 
                                                             "At the end of each round you will regen +15 Health"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
@@ -1079,104 +1118,104 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 100)))}),
             new Augment("ThunderUnlock" ,"Thunder", new string[1]{"Unlock the ability to control Thunder"}, "ThunderUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ThunderUnlock");
-                Flamey.Instance.addTimeBasedEffect(new LightningEffect(40, 25));
+                Flamey.Instance.addTimeBasedEffect(new LightningEffect(40, 25, 0));
                 Deck.Instance.AddAugmentClass(new List<string>{"ThunderDmg","ThunderInterval"});            
             })}, baseCard: true),  
-            new Augment("ThunderInterval","Charge it up!", new string[3]{"Thunder cooldown decreases by -0.25 seconds", 
-                                                            "Thunder cooldown decreases by -0.5 seconds", 
-                                                            "Thunder cooldown decreases by -1 seconds"}, "ThunderInterval", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(1, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(2, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(4, 0)))}), 
-            new Augment("ThunderInterval","Eletric Discharge", new string[3]{"Thunder cooldown decreases by -0.5 seconds", 
-                                                            "Thunder cooldown decreases by -1.25 seconds", 
-                                                            "Thunder cooldown decreases by -2 seconds"}, "ThunderInterval", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(2, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(5, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(8, 0)))}),
-            new Augment("ThunderInterval","Thunderstorm", new string[3]{"Thunder cooldown decreases by -2 seconds", 
-                                                            "Thunder cooldown decreases by -3 seconds", 
-                                                            "Thunder cooldown decreases by -4 seconds"}, "ThunderInterval", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(8, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(12, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(16, 0)))}),  
+            new Augment("ThunderInterval","Charge it up!", new string[3]{"Thunder cooldown decreases by 7%", 
+                                                            "Thunder cooldown decreases by 15%", 
+                                                            "Thunder cooldown decreases by 25%"}, "ThunderInterval", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.07f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.25f)))}), 
+            new Augment("ThunderInterval","Eletric Discharge", new string[3]{"Thunder cooldown decreases by 15%", 
+                                                            "Thunder cooldown decreases by 25%", 
+                                                            "Thunder cooldown decreases by 35%"}, "ThunderInterval", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.25f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.35f)))}),
+            new Augment("ThunderInterval","Thunderstorm", new string[3]{"Thunder cooldown decreases by 25%", 
+                                                            "Thunder cooldown decreases by 35%", 
+                                                            "Thunder cooldown decreases by 50%"}, "ThunderInterval", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.25f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.35f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0, 0, 0.5f)))}),  
             new Augment("ThunderDmg","Volt Tackle", new string[3]{"Thunder will deal +10 damage on impact", 
                                                             "Thunder will deal +20 damage on impact", 
                                                             "Thunder will deal +30 damage on impact"}, "ThunderDmg", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,10))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,20))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,30)))}),  
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,10,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,20,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,30,0)))}),  
             new Augment("ThunderDmg","Zap Cannon", new string[3]{"Thunder will deal +20 damage on impact", 
                                                             "Thunder will deal +40 damage on impact", 
                                                             "Thunder will deal +60 damage on impact"}, "ThunderDmg", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,20))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,40))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,60)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,20,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,40,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,60,0)))}),
             new Augment("ThunderDmg","Lightning Synergy", new string[3]{"Thunder will deal +50 damage on impact", 
                                                             "Thunder will deal +100 damage on impact", 
                                                             "Thunder will deal +200 damage on impact"}, "ThunderDmg", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,50))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,100))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,200)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,50,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,100,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,200,0)))}),
             new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to release Heat Waves"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ImmolateUnlock");
-                Flamey.Instance.addTimeBasedEffect(new Immolate(100, 25, 0.3f));
+                Flamey.Instance.addTimeBasedEffect(new Immolate(100, 25, 0.3f, 0));
                 Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
             })}, baseCard: true),  
-            new Augment("ImmolateInterval","Heat Discharge", new string[3]{"Immolate cooldown decreases by -0.5 seconds", 
-                                                            "Immolate cooldown decreases by -1 seconds", 
-                                                            "Immolate cooldown decreases by -2 seconds"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(2, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(4, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0)))}), 
-            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by -1 seconds", 
-                                                            "Immolate cooldown decreases by -2 seconds", 
-                                                            "Immolate cooldown decreases by -4 seconds"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(4, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(16, 0,0)))}),
-            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by -2 seconds", 
-                                                            "Immolate cooldown decreases by -4 seconds", 
-                                                            "Immolate cooldown decreases by -8 seconds"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(8, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(16, 0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(32, 0,0)))}),  
+            new Augment("ImmolateInterval","Heat Discharge", new string[3]{"Immolate cooldown decreases by 5%", 
+                                                            "Immolate cooldown decreases by 7%", 
+                                                            "Immolate cooldown decreases by 10%"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0, 0, 0.05f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.07f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.1f)))}), 
+            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by 10%", 
+                                                            "Immolate cooldown decreases by 15%", 
+                                                            "Immolate cooldown decreases by 25%"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.15f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.25f)))}),
+            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by 20%", 
+                                                            "Immolate cooldown decreases by 30%", 
+                                                            "Immolate cooldown decreases by 50%"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.2f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.3f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.5f)))}),  
             new Augment("ImmolateDmg","Summer Heat", new string[3]{"Immolate will deal +10 damage", 
                                                             "Immolate will deal +15 damage", 
                                                             "Immolate will deal +25 damage"}, "ImmolateDmg", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,10,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,15,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,25,0)))}),  
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,10,0 ,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,15,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,25,0,0)))}),  
             new Augment("ImmolateDmg","Universal Damage", new string[3]{"Immolate will deal +20 damage", 
                                                             "Immolate will deal +30 damage", 
                                                             "Immolate will deal +50 damage"}, "ImmolateDmg", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,20,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,30,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,20,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,30,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0,0)))}),
             new Augment("ImmolateDmg","Nuclear Shockwave", new string[3]{"Immolate will deal +50 damage", 
                                                             "Immolate will deal +75 damage", 
                                                             "Immolate will deal +150 damage"}, "ImmolateDmg", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,75,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,150,0)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,75,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,150,0,0)))}),
             new Augment("ImmolateRadius","Waving Flames", new string[3]{"Immolating waves will travel for +10 radius", 
                                                             "Immolating waves will travel for +15 radius", 
                                                             "Immolating waves will travel for +25 radius"}, "ImmolateRadius", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.1f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.15f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f)))}),  
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.1f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.15f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f,0)))}),  
             new Augment("ImmolateRadius","Spread the Fire", new string[3]{"Immolating waves will travel for +25 radius", 
                                                             "Immolating waves will travel for +35 radius", 
                                                             "Immolating waves will travel for +50 radius"}, "ImmolateRadius", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.35f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.25f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.35f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f,0)))}),
             new Augment("ImmolateRadius","Across the Globe", new string[3]{"Immolating waves will travel for +50 radius", 
                                                             "Immolating waves will travel for +75 radius", 
                                                             "Immolating waves will travel for +100 radius"}, "ImmolateRadius", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.75f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,1f)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.5f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,0.75f,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,1f,0)))}),
             new Augment("CandleUnlock" ,"Arcanist", new string[1]{"Unlock the ability to start a ritual"}, "CandleUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("CandleUnlock");
                 Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.2f, 1));

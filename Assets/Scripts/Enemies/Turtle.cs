@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Turtle : Enemy
 {
@@ -10,6 +11,12 @@ public class Turtle : Enemy
         flame = Flamey.Instance;
         
         Speed =  Distribuitons.RandomTruncatedGaussian(0.01f,Speed,0.03f);
+        if(EnemySpawner.Instance.current_round >= 60){
+            int x = EnemySpawner.Instance.current_round;
+            Health += (int) Math.Pow(x-20, 2);
+            Armor = (int)(Armor * (x-45f)/15f); 
+            Speed *= (float) (Math.Pow(x-60, 2)/5000f) + 1f;
+        }
      
         MaxHealth = Health;
 

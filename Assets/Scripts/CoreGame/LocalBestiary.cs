@@ -131,6 +131,7 @@ public class LocalBestiary : MonoBehaviour
 
     /* ===== BESTIARY SLOTS ===== */
     private void InitSlots(){
+        AvailableClaims=0;
         int i = 0;
         foreach(AnimalRunTimeData animal in animals){
             InitIndividualSlot(animal, i);
@@ -346,6 +347,25 @@ public class LocalBestiary : MonoBehaviour
         Array.Sort(result, (a,b) => animals.IndexOf(a) - animals.IndexOf(b));
         return result.Select(e=>e.enemy).ToArray();
     }
+    public int getEnemyID(Enemy enemy){
+        return animals.TakeWhile(e => e.enemy != enemy).Count();
+    }
+    public int[] getEnemiesID(Enemy[] enemies){
+        int[] result = new int[enemies.Length];
+        for (int i = 0; i < enemies.Length; i++)
+        {   
+            result[i] = getEnemyID(enemies[i]);
+        }
+        return result;
+    }
+    public Enemy[] getEnemiesFromIDs(int[] ids){
+        Enemy[] result = new Enemy[ids.Length];
+        for (int i = 0; i < ids.Length; i++)
+        {
+            result[i] = animals[ids[i]].enemy;
+        }
+        return result;
+    }
     public List<Enemy> getEnemyList(){
         return animals.Select(a => a.enemy).ToList();
     }
@@ -378,5 +398,6 @@ public class LocalBestiary : MonoBehaviour
         
         return saved_milestones.animals[ID].DeathAmount >= 0;
     }
+
 
 }

@@ -108,9 +108,7 @@ public class Flamey : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
         }
-        if(Input.GetKeyDown(KeyCode.K)){
-            Health = -1000;
-        }
+        
         
         if(current_homing == null){
             target(getHoming());
@@ -242,7 +240,7 @@ public class Flamey : MonoBehaviour
         HealthSlider.maxValue = MaxHealth;
         HealthSlider.value = Health;
     }
-    private void EndGame(){
+    public void EndGame(){
         GameEnd = true;
         EnemySpawner.Instance.GameEnd = true;
         GameUI.Instance.PausePanel.SetActive(false);
@@ -262,6 +260,7 @@ public class Flamey : MonoBehaviour
         
         GameUI.Instance.GameOverEffect();
     }
+    
 
     public void addAccuracy(float amount){
         accuracy = Math.Min(accuracy + amount, 100f);
@@ -319,16 +318,15 @@ public class Flamey : MonoBehaviour
         DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
+        if(poisonsLeft>0){poisonsLeft--; return;}
         TotalHealed+=(ulong)HealAmount;
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
     }
 
-
-    
-
     public void Stun(float t){
+        if(stunTimeLeft > 0){return;}
         GetComponent<Animator>().Play("Stunned");
         stunTimeLeft = t;
     }
@@ -337,7 +335,7 @@ public class Flamey : MonoBehaviour
     }
     public void ApplyPoison(){
         poisonsLeft--;
-        Hitted((int)Math.Max(1,Health/50), 1, null, onhitted:false, isShake:false, idHitTxt:14);
+        Hitted((int)Math.Max(1,Health/25), 1, null, onhitted:false, isShake:false, idHitTxt:14);
     }
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){

@@ -57,13 +57,14 @@ public class EnemySpawner : MonoBehaviour
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
+        //current_round = 57;
         resetInstances();
     }
     public void Start(){
         
         GameEnd =true;
         Flamey.Instance.GameEnd = true;
-        PickedEnemies = pickEnemies(current_round);
+        
         HindSightDeepness = Math.Max(0,GameVariables.GetVariable("BinocularLevel"));
         if(HindSightDeepness == 0){
             BinocularPanel.SetActive(false);
@@ -72,12 +73,15 @@ public class EnemySpawner : MonoBehaviour
         StartRound();
 
         
-        InitBinoculars();
+        
         
     }
     public void StartGame(){ 
+        
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
+            Deck.Instance.LoadGame(false);
+            PickedEnemies = pickEnemies(current_round);
             if(Deck.Instance.hasAtLeastOneUnlockable()){
                 current_round = -1;
                 isOnAugments = true;
@@ -85,9 +89,13 @@ public class EnemySpawner : MonoBehaviour
             }else{
                 GameEnd = false;
             }
+            
         }else{
+            Deck.Instance.LoadGame(true);
             newRound();
         }
+
+        InitBinoculars();
         PlayerPrefs.DeleteKey("PlayerLoad");    
     }
     private Vector2 getPoint(){
@@ -183,13 +191,16 @@ public class EnemySpawner : MonoBehaviour
             int j = 0;
             for (int i = start_from; i < start_from+HindSightDeepness; i++)
             {
-                GameObject child = BinocularSlots[j];
-                child.GetComponent<Image>().sprite = PickedEnemies[i+1].GetComponent<SpriteRenderer>().sprite;
-                float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
-                ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
-                j++;
+                try{
+                    GameObject child = BinocularSlots[j];
+                    child.GetComponent<Image>().sprite = PickedEnemies[i+1].GetComponent<SpriteRenderer>().sprite;
+                    float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
+                    ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
+                    j++;
+                }catch(IndexOutOfRangeException e){
+                    Debug.Log("Increment Ignore");
+                }
             }
-            
         }
         void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize){
             RT.anchoredPosition = IconPos;
@@ -211,11 +222,14 @@ public class EnemySpawner : MonoBehaviour
             child.GetComponent<RectTransform>().sizeDelta = new Vector2(dimensions[2], dimensions[3]);
 
         }
-        
-
     }
     /* ===== ENEMY PICK ===== */
-    private GameObject PickRandomEnemy(int round){return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;}
+    private GameObject PickRandomEnemy(int round){
+        if (round >= 60)
+            return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
+        return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;
+        
+    }
     private int pickEnemyIndex(List<float> prob){
         float val = UnityEngine.Random.Range(0f,1f);
         for(int i = 0 ; i< prob.Count; i++){
@@ -230,7 +244,7 @@ public class EnemySpawner : MonoBehaviour
 
     /* ===== ROUND SETTINGS ===== */
     private float getRoundTime(int round){return Math.Min(5 + 1.2f * round, 40);}
-    private float getSpawnAmount(int round){return 5*(round%10)+35*(round/10)+5;}
+    private float getSpawnAmount(int round){return 5*(round%10)+25*(round/10)+5;}
     
     private void resetInstances(){
         FlameCircle.Instance = null;
@@ -274,6 +288,8 @@ public class EnemySpawner : MonoBehaviour
         {
             result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3));
         }
+        
+        Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
     }
     

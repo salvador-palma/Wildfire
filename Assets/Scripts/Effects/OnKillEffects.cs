@@ -183,8 +183,8 @@ public class Necromancer : OnKillEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= .5f){
-            prob = .5f;
+        if(prob >= 1f){
+            prob = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("NecroProb");
         } 

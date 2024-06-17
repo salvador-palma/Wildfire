@@ -90,14 +90,15 @@ public class LightningEffect : TimeBasedEffect
     int current_interval;
     public int dmg;
 
-    public LightningEffect(int interval, int dmg){
+
+    public LightningEffect(int interval, int dmg, float percRed){
         this.dmg = dmg;
         this.interval = interval;
         if(Instance == null){
             Instance = this;
             lightning = Resources.Load<GameObject>("Prefab/Lightning");
         }else{
-            Instance.Stack(this);
+            Instance.Stack(this, percRed);
         }
     }
     public bool addList()
@@ -109,9 +110,13 @@ public class LightningEffect : TimeBasedEffect
     {
         if(current_interval <=0 ){
             current_interval = interval;
-            Vector2 v = Flamey.Instance.getRandomHomingPosition();
-            GameObject go =  Flamey.Instance.SpawnObject(lightning);
-            go.transform.position = new Vector2(v.x, v.y + 10.91f);
+            for(int i = 0; i < 3; i++)
+            {
+                Vector2 v = Flamey.Instance.getRandomHomingPosition();
+                GameObject go =  Flamey.Instance.SpawnObject(lightning);
+                go.transform.position = new Vector2(v.x, v.y + 10.91f);
+            }
+            
 
         }else{
             current_interval--;
@@ -119,8 +124,16 @@ public class LightningEffect : TimeBasedEffect
     }
     public void ApplyRound(){}
 
-    public void Stack(LightningEffect lightningEffect){
-        interval -= lightningEffect.interval;
+    public void Stack(LightningEffect lightningEffect, float percRed){
+        if(percRed > 0){
+            if((int)Math.Ceiling(interval * (1-percRed)) == interval){
+                interval-=1;
+            }else{
+                interval = (int)Math.Ceiling(interval * (1-percRed));
+            }
+            
+        }
+        
         dmg += lightningEffect.dmg;
         RemoveUselessAugments();
     }
@@ -135,7 +148,7 @@ public class LightningEffect : TimeBasedEffect
     
     public string getDescription()
     {
-        return "Each few amount of seconds, a thunder will spawn at a convenient location dealing damage to enemies struck by it. This ability applies On-Land Effects";
+        return "Each few amount of seconds, 3 thunders will spawn at a convenient location dealing damage to enemies struck by it. This ability applies On-Land Effects";
     }
     public string getCaps()
     {
@@ -167,7 +180,7 @@ public class Immolate : TimeBasedEffect
     public int dmg;
     public float radius;
 
-    public Immolate(int interval, int dmg, float radius){
+    public Immolate(int interval, int dmg, float radius, float percRed){
         this.dmg = dmg;
         this.interval = interval;
         this.radius = radius;
@@ -175,7 +188,7 @@ public class Immolate : TimeBasedEffect
             Instance = this;
             ring = Resources.Load<GameObject>("Prefab/Ring");
         }else{
-            Instance.Stack(this);
+            Instance.Stack(this, percRed);
         }
     }
     public bool addList()
@@ -197,8 +210,16 @@ public class Immolate : TimeBasedEffect
     }
     public void ApplyRound(){}
 
-    public void Stack(Immolate immolate){
-        interval -= immolate.interval;
+    public void Stack(Immolate immolate, float percRed){
+        if(percRed > 0){
+            if((int)Math.Ceiling(interval * (1-percRed)) == interval){
+                interval-=1;
+            }else{
+                interval = (int)Math.Ceiling(interval * (1-percRed));
+            }
+            
+        }
+        
         dmg += immolate.dmg;
         radius += immolate.radius;
         RemoveUselessAugments();

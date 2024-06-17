@@ -319,7 +319,7 @@ public class Summoner : NotEspecificEffect
     }
     public string getCaps()
     {
-        return string.Format("Bee Amount: {0}% (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed), Mathf.Round(speed));
+        return string.Format("Bee Amount: {0} (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
     }
 
     public string getIcon()

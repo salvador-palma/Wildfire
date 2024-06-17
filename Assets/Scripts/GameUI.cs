@@ -52,7 +52,8 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] private Animator LimitRoundAnimator;
     
-
+    [Header("Pop Up End Night")]
+    [SerializeField] private GameObject ConfirmEndNightPanel;
 
     [Header("Final Stats")]
     
@@ -196,15 +197,16 @@ public class GameUI : MonoBehaviour
             FastForwardButtons[1].interactable = true;
             SpeedUp(1f);
         }
-        //Debug.Log(Time.timeScale);
     }
 
     public void GameOverEffect(){
-        RoundsLastedText.text = "YOU'VE SURVIVED " + EnemySpawner.Instance.current_round + " ROUNDS";
+        int n = EnemySpawner.Instance.current_round; 
+        RoundsLastedText.text = "YOU'VE SURVIVED UNTIL " + n/10 +"h"+ ((n%10)*6).ToString("00")  + " ";
         Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
         setUpFinalStats();
     }
+    
     public void loadScene(string str){
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         LocalBestiary.INSTANCE.UpdateBestiaryValues();
@@ -232,9 +234,7 @@ public class GameUI : MonoBehaviour
     public void BlackScreenOn(){
         BlackScreen.Play("BlackScreen");
     }
-    public void BlackScreenOverOn(){
-        BlackScreenOver.Play("BlackScreen");
-    }
+   
     public void BlackScreenOff(){
         BlackScreen.Play("BlackScreenOff");
     }
@@ -247,7 +247,14 @@ public class GameUI : MonoBehaviour
         Deck.Instance.StartAugments((59+1)%5 == 0);
     }
     public void setRoundCounter(int n){
-        roundCounter.text = "" + n/10 +"h"+ ((n%10)*6).ToString("00") ;
+        roundCounter.text = n/10 +"h"+ ((n%10)*6).ToString("00") ;
+    }
+
+    public void ForceEndGame(){
+        Flamey.Instance.EndGame();
+    }
+    public void PopUpConfirmEndNightPanel(){
+        ConfirmEndNightPanel.SetActive(!ConfirmEndNightPanel.activeInHierarchy);
     }
     
 

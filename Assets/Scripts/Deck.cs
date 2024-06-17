@@ -30,7 +30,7 @@ public class Deck : MonoBehaviour
 
     public static event EventHandler RoundOver;
     public static event EventHandler RoundStart;
-    GameState gameState;
+    public GameState gameState;
 
     private void Awake(){
         Instance = this;
@@ -42,14 +42,13 @@ public class Deck : MonoBehaviour
 
     private void Start() {
 
-        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 1){
-            LoadGame();
-        }else{
+        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
+            
             gameState = new GameState();
         }
 
         currentAugments = new Augment[3];
-        FillDeck();
+        
         refreshedAugments = new List<Augment>();
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
 
@@ -233,7 +232,11 @@ public class Deck : MonoBehaviour
         gameState.NextTiers = PhaseTiers;
         GameState.SaveGameState(gameState);
     }
-    private void LoadGame(){
+    public void LoadGame(bool withLoad){
+ 
+        FillDeck();
+
+        if(!withLoad){return;}
         gameState = GameState.LoadGameState();
         Flamey.Instance.addEmbers(gameState.CollectedEmbers);
         Flamey.Instance.Health = gameState.Health;
@@ -246,7 +249,7 @@ public class Deck : MonoBehaviour
         }
 
         EnemySpawner.Instance.current_round = gameState.CurrentRound;
-       
+        EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
         
     }
     private void ClearRemainderObjects(object sender, EventArgs e)
@@ -276,6 +279,7 @@ public class GameState{
     public List<SerializedAugment> augments;
     public int CollectedEmbers;
     public float Health;
+    public int[] EnemyIDs;
     public int CurrentRound;
     public bool[] NextTiers;
 

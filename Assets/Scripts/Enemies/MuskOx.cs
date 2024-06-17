@@ -11,12 +11,19 @@ public class MuskOx : Enemy
     public float HealRadius= 2.7f;
     void Start()
     {
+        
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
         
         Speed = Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
+        if(EnemySpawner.Instance.current_round >= 60){
+            int x = EnemySpawner.Instance.current_round;
+            Health += (int) Math.Pow(x-50, 2);
+            Armor = (int)(Armor * (x-45f)/15f); 
+            Speed *= (float) (Math.Pow(x-60, 2)/5000f) + 1f;
+        }
         MaxHealth = Health;
     }
     bool howling;
@@ -48,7 +55,7 @@ public class MuskOx : Enemy
 
         foreach(Collider2D col in AnimalAround){
             Enemy e = col.GetComponent<Enemy>();          
-            if(e==null || e==this){continue;}
+            if(e==null || e is MuskOx){continue;}
             e.Armor += ArmorPerGrowl;
             DamageUI.InstantiateTxtDmg(e.transform.position, ""+ArmorPerGrowl, 10);
             

@@ -30,6 +30,12 @@ public class Spider : Enemy
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
+        if(EnemySpawner.Instance.current_round >= 60){
+            int x = EnemySpawner.Instance.current_round;
+            Health += (int) Math.Pow(x, 2);
+            Armor = (int)(Armor * (x-45f)/15f); 
+            Speed *= (float) (Math.Pow(x-60, 2)/5000f) + 1f;
+        }
         MaxSpeed = Speed;
         
         MaxHealth = Health;
