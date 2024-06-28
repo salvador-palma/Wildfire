@@ -47,7 +47,7 @@ public class HealthRegen : TimeBasedEffect
     }
     public void ApplyRound()
     {
-        Flamey.Instance.addHealth(perRound);
+        Flamey.Instance.addHealth((int)perRound, 0);
     }
 
     public void Stack(HealthRegen healthRegen){
@@ -58,11 +58,11 @@ public class HealthRegen : TimeBasedEffect
     
     public string getDescription()
     {
-        return "You can regenerate health per second and at the end of each round";
+        return "You can regenerate <color=#0CD405>health</color> per second and gain <color=#0CD405>Max HP</color> at the end of each round";
     }
     public string getCaps()
     {
-        return string.Format("Regen/s: {0}/s <br>Regen/round: {1}/round", Mathf.Round(perSec * 100.0f) * 0.01f, Mathf.Round(perRound * 100.0f) * 0.01f);
+        return string.Format("Regen/s: {0}/s <br>Max HP/round: {1}/round", Mathf.Round(perSec * 100.0f) * 0.01f, Mathf.Round(perRound * 100.0f) * 0.01f);
     }
 
     public string getIcon()
@@ -126,10 +126,10 @@ public class LightningEffect : TimeBasedEffect
 
     public void Stack(LightningEffect lightningEffect, float percRed){
         if(percRed > 0){
-            if((int)Math.Ceiling(interval * (1-percRed)) == interval){
+            if((int)Math.Floor(interval * (1-percRed)) == interval){
                 interval-=1;
             }else{
-                interval = (int)Math.Ceiling(interval * (1-percRed));
+                interval = (int)Math.Floor(interval * (1-percRed));
             }
             
         }
@@ -148,7 +148,7 @@ public class LightningEffect : TimeBasedEffect
     
     public string getDescription()
     {
-        return "Each few amount of seconds, 3 thunders will spawn at a convenient location dealing damage to enemies struck by it. This ability applies On-Land Effects";
+        return "Each few amount of seconds, <color=#FFCC7C>3 thunders</color> will spawn at a convenient location dealing <color=#FF5858>damage</color> to enemies struck by it. This ability applies <color=#FF99F3>On-Land Effects";
     }
     public string getCaps()
     {
@@ -212,10 +212,10 @@ public class Immolate : TimeBasedEffect
 
     public void Stack(Immolate immolate, float percRed){
         if(percRed > 0){
-            if((int)Math.Ceiling(interval * (1-percRed)) == interval){
+            if((int)Math.Floor(interval * (1-percRed)) == interval){
                 interval-=1;
             }else{
-                interval = (int)Math.Ceiling(interval * (1-percRed));
+                interval = (int)Math.Floor(interval * (1-percRed));
             }
             
         }
@@ -226,8 +226,8 @@ public class Immolate : TimeBasedEffect
     }
 
     void RemoveUselessAugments(){
-        if(interval <= 16){
-            interval = 16;
+        if(interval <= 8){
+            interval = 8;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateInterval");
         } 
@@ -240,11 +240,11 @@ public class Immolate : TimeBasedEffect
     
     public string getDescription()
     {
-        return "Each few amount of seconds, you will release a wave of energy that travels through the campsite dealing damage to enemies caught by it";
+        return "Each few amount of seconds, you will release a <color=#FFCC7C>wave of energy</color> that travels through the campsite dealing <color=#FF5858>damage</color> to enemies caught by it and ignoring <color=#919191>Armor</color> completely";
     }
     public string getCaps()
     {
-        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{1}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
+        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
     }
 
     public string getIcon()

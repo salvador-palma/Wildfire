@@ -240,7 +240,11 @@ public class Flamey : MonoBehaviour
         HealthSlider.maxValue = MaxHealth;
         HealthSlider.value = Health;
     }
+
+    bool called;
     public void EndGame(){
+        if(called){return;}
+        called=true;
         GameEnd = true;
         EnemySpawner.Instance.GameEnd = true;
         GameUI.Instance.PausePanel.SetActive(false);
@@ -254,7 +258,7 @@ public class Flamey : MonoBehaviour
         }
         int SkillTreeState = Math.Max(0,GameVariables.GetVariable("SkillTreeReady"));
         if(SkillTreeState<=2){
-            GameVariables.SetVariable("SkillTreeReady",SkillTreeState+1 );
+            GameVariables.SetVariable("SkillTreeReady",SkillTreeState+1);
         }
         
         
@@ -302,8 +306,8 @@ public class Flamey : MonoBehaviour
     public void addArmor(int amount){Armor += (int)amount;}
     public void addArmorPen(float amount){  
         ArmorPen += amount;      
-        if(ArmorPen >= 0.5){
-            ArmorPen = 0.5f;
+        if(ArmorPen >= 0.8){
+            ArmorPen = 0.8f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ArmorPen");
         }      
@@ -318,7 +322,7 @@ public class Flamey : MonoBehaviour
         DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
-        if(poisonsLeft>0){poisonsLeft--; return;}
+        
         TotalHealed+=(ulong)HealAmount;
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();

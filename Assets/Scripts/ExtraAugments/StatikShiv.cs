@@ -15,6 +15,7 @@ public class StatikShiv : MonoBehaviour
     public float NextDelay = 100;
     public int TTL;
     public int MAXTTL;
+    public int Damage = -1;
     [SerializeField] List<Enemy> alreadyPassed;
     [SerializeField] Collider2D[] colcol;
     CircleCollider2D myCollider;
@@ -23,6 +24,7 @@ public class StatikShiv : MonoBehaviour
     bool NextCheck;
     public bool Started;
     private void Start() {
+        
         LineTimeFixed = LineTime;
         NextDelayFixed = NextDelay;
         myCollider = GetComponent<CircleCollider2D>();
@@ -31,14 +33,11 @@ public class StatikShiv : MonoBehaviour
     private void Update() {
         if(!Started){return;}
         
-
         NextDelay-=Time.deltaTime;
         if(NextDelay <= 0 && !NextCheck){
-            NextCheck = true;
-            
+            NextCheck = true;  
             SpawnNext();
         }
-        
     }
 
     private Enemy Next(){
@@ -90,19 +89,18 @@ public class StatikShiv : MonoBehaviour
     }
 
     private void DealDamage(Enemy e){   
-        e.Hitted(StatikOnHit.Instance.dmg, 6, ignoreArmor: false, onHit:true, "Statik Energy");
+        e.Hitted(Damage, 6, ignoreArmor: false, onHit:true, "Statik Energy");
     }
 
     private void SetupNext(StatikShiv statikShiv, Enemy t){
         if(TTL == MAXTTL){AudioManager.Instance.PlayFX(2, 2, 0.95f, 1.05f);}
         statikShiv.alreadyPassed = alreadyPassed;
         statikShiv.TTL = TTL - 1;
+        statikShiv.Damage = (int)(Damage * 0.9f);
         statikShiv.currentTarget = t;
         statikShiv.NextDelay = NextDelayFixed;
         statikShiv.LineTime = LineTimeFixed;
         statikShiv.locationOfEnemy = t.HitCenter.position;
         statikShiv.Started = true;
-        
-       
     }
 }

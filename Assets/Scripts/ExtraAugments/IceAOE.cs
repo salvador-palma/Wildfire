@@ -31,6 +31,7 @@ public class IceAOE : MonoBehaviour
         if(collider.tag == "Enemy"){
 
             Enemy e = collider.GetComponent<Enemy>();
+            if(!e.canTarget()){return;}
             float[] info = e.getSlowInfo("IcePool");
             
             float lastingAmount = Math.Max(lt, info==null? -1 : info[0]);

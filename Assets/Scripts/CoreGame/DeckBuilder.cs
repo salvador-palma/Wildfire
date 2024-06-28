@@ -434,10 +434,10 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.2f)))}),   
             new Augment("ShredPerc","Molecular Decomposition", new string[3]{"Your Shredding Flames effect reduces +15% more enemy armor per proc", 
                                                             "Your Shredding Flames effect reduces +30% more enemy armor per proc", 
-                                                            "Your Shredding Flames effect reduces +50% more enemy armor per proc"}, "ShredPerc", Tier.Prismatic, new UnityAction[3]{
+                                                            "Your Shredding Flames effect reduces +40% more enemy armor per proc"}, "ShredPerc", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.15f))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.3f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.5f)))}),                         
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.4f)))}),                         
             new Augment("Assassins" ,"Assassin's Path", new string[1]{"Unlock the ability to pierce armor and execute enemies"}, "Assassins", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Assassins");
                 Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.02f));
@@ -870,24 +870,24 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"DrainPoolPerc","DrainPoolProb","DrainPoolSize","DrainPoolDuration"});            
             })}, baseCard: true),  
 
-            new Augment("DrainPoolPerc","Harvesting", new string[3]{"Your Drain Pool will heal you for +1% Enemy Max HP per tick", 
-                                                            "Your Drain Pool will heal you for +1.5% Enemy Max HP per tick", 
-                                                            "Your Drain Pool will heal you for +2.5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Silver, new UnityAction[3]{
+            new Augment("DrainPoolPerc","Harvesting", new string[3]{"Your Drain Pool will heal you for +0.25% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +0.5% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +1% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.0025f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.005f,0,0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0)))}),
+            new Augment("DrainPoolPerc","Carnivorous Plant", new string[3]{"Your Drain Pool will heal you for +0.75% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +1% Enemy Max HP per tick", 
+                                                            "Your Drain Pool will heal you for +2.5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.0075f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.015f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.025f,0,0)))}),
-            new Augment("DrainPoolPerc","Carnivorous Plant", new string[3]{"Your Drain Pool will heal you for +2% Enemy Max HP per tick", 
+            new Augment("DrainPoolPerc","Photosynthesis", new string[3]{"Your Drain Pool will heal you for +2% Enemy Max HP per tick", 
                                                             "Your Drain Pool will heal you for +3% Enemy Max HP per tick", 
-                                                            "Your Drain Pool will heal you for +5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Gold, new UnityAction[3]{
+                                                            "Your Drain Pool will heal you for +5% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.02f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.03f,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.05f,0,0)))}),
-            new Augment("DrainPoolPerc","Photosynthesis", new string[3]{"Your Drain Pool will heal you for +5% Enemy Max HP per tick", 
-                                                            "Your Drain Pool will heal you for +7.5% Enemy Max HP per tick", 
-                                                            "Your Drain Pool will heal you for +10% Enemy Max HP per tick"}, "DrainPoolPerc", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.05f,0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.075f,0,0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.1f,0,0)))}),
             new Augment("DrainPoolProb","Sowing the Field", new string[3]{"Gain +3% probability of spawning a Drain Pool when your shot lands", 
                                                             "Gain +5% probability of spawning a Drain Pool when your shot lands", 
                                                             "Gain +7% probability of spawning a Drain Pool when your shot lands"}, "DrainPoolProb", Tier.Silver, new UnityAction[3]{
@@ -989,7 +989,7 @@ public class DeckBuilder : MonoBehaviour
             
             new Augment("NecroUnlock" ,"Necromancer", new string[1]{"Unlock the ability to summon ghouls whenever enemies die"}, "NecroUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("NecroUnlock");
-                Flamey.Instance.addOnKillEffect(new Necromancer(0.1f, 0.1f));
+                Flamey.Instance.addOnKillEffect(new Necromancer(0.1f, 0.25f));
                 Deck.Instance.AddAugmentClass(new List<string>{"NecroProb","NecroStats"});            
             })}, baseCard: true),  
             new Augment("NecroProb","Wraith Walkers", new string[3]{"Gain +5% chance to summon a ghoul whenever you kill an enemy", 
@@ -1030,7 +1030,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Necromancer(0,.5f)))}),
             new Augment("BulletsUnlock" ,"Pirate", new string[1]{"Unlock the ability to shoot bullets around dead enemies and loot their bodies"}, "BulletsUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("BulletsUnlock");
-                Flamey.Instance.addOnKillEffect(new Bullets(0.1f, 10, 1));
+                Flamey.Instance.addOnKillEffect(new Bullets(0.1f, 50, 2));
                 Deck.Instance.AddAugmentClass(new List<string>{"BulletsProb","BulletsDmg","BulletsAmount"});            
             })}, baseCard: true),  
             new Augment("BulletsProb","Pirate Wannabe", new string[3]{"Gain +5% chance to release bullets whenever you kill an enemy", 
@@ -1077,44 +1077,44 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,0,3)))}),
             new Augment("RegenUnlock" ,"Regeneration", new string[1]{"Unlock the ability to regenerate Health"}, "Regen", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("RegenUnlock");
-                Flamey.Instance.addTimeBasedEffect(new HealthRegen(1f, 10f));
+                Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 10f));
                 Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            
             })}, baseCard: true),  
-            new Augment("RegenPerSecond","Self-Healing Fire", new string[3]{"Each second you will regen +4 Health", 
-                                                            "Each second you will regen +7 Health", 
-                                                            "Each second you will regen +10 Health"}, "RegenPerSecond", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(4f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(7f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 0)))}), 
-            new Augment("RegenPerSecond","Perseverance", new string[3]{"Each second you will regen +7 Health", 
+            new Augment("RegenPerSecond","Self-Healing Fire", new string[3]{"Each second you will regen +10 Health", 
                                                             "Each second you will regen +15 Health", 
-                                                            "Each second you will regen +20 Health"}, "RegenPerSecond", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(7f, 0))),
+                                                            "Each second you will regen +25 Health"}, "RegenPerSecond", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(15f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(20f, 0)))}),
-            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will regen +15 Health", 
-                                                            "Each second you will regen +25 Health", 
-                                                            "Each second you will regen +40 Health"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(15f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(25f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(40f, 0)))}),  
-            new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you will regen +5 Health", 
-                                                            "At the end of each round you will regen +10 Health", 
-                                                            "At the end of each round you will regen +15 Health"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 5))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(25f, 0)))}), 
+            new Augment("RegenPerSecond","Perseverance", new string[3]{"Each second you will regen +20 Health", 
+                                                            "Each second you will regen +35 Health", 
+                                                            "Each second you will regen +50 Health"}, "RegenPerSecond", Tier.Gold, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(20f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(35f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(50f, 0)))}),
+            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will gain +50 Max HP", 
+                                                            "Each second you will gain +75 Max HP", 
+                                                            "Each second you will gain +100 Max HP"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(50f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(75f, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(100f, 0)))}),  
+            new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you gain regen +10 Max HP", 
+                                                            "At the end of each round you gain regen +15 Max HP", 
+                                                            "At the end of each round you gain regen +25 Max HP"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 15)))}),  
-            new Augment("RegenPerRound","Leftovers", new string[3]{"At the end of each round you will regen +10 Health", 
-                                                            "At the end of each round you will regen +20 Health", 
-                                                            "At the end of each round you will regen +30 Health"}, "RegenPerRound", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 15))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 25)))}),  
+            new Augment("RegenPerRound","Leftovers", new string[3]{"At the end of each round you gain regen +20 Max HP", 
+                                                            "At the end of each round you gain regen +30 Max HP", 
+                                                            "At the end of each round you gain regen +50 Max HP"}, "RegenPerRound", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 20))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 30)))}),
-            new Augment("RegenPerRound","Free Healthcare", new string[3]{"At the end of each round you will regen +25 Health", 
-                                                            "At the end of each round you will regen +50 Health", 
-                                                            "At the end of each round you will regen +100 Health"}, "RegenPerRound", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 25))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 30))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50)))}),
+            new Augment("RegenPerRound","Free Healthcare", new string[3]{"At the end of each round you gain regen +40 Max HP", 
+                                                            "At the end of each round you gain regen +60 Max HP", 
+                                                            "At the end of each round you gain regen +100 Max HP"}, "RegenPerRound", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 40))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 60))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 100)))}),
             new Augment("ThunderUnlock" ,"Thunder", new string[1]{"Unlock the ability to control Thunder"}, "ThunderUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ThunderUnlock");
@@ -1157,44 +1157,44 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,50,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,100,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new LightningEffect(0,200,0)))}),
-            new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to release Heat Waves"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
+            new Augment("ImmolateUnlock" ,"Immolate", new string[1]{"Unlock the ability to release Heat Waves that ignore Armor"}, "ImmolateUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ImmolateUnlock");
                 Flamey.Instance.addTimeBasedEffect(new Immolate(100, 25, 0.3f, 0));
                 Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
             })}, baseCard: true),  
             new Augment("ImmolateInterval","Heat Discharge", new string[3]{"Immolate cooldown decreases by 5%", 
-                                                            "Immolate cooldown decreases by 7%", 
-                                                            "Immolate cooldown decreases by 10%"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
+                                                            "Immolate cooldown decreases by 10%", 
+                                                            "Immolate cooldown decreases by 15%"}, "ImmolateInterval", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0, 0, 0.05f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.07f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.1f)))}), 
-            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by 10%", 
-                                                            "Immolate cooldown decreases by 15%", 
-                                                            "Immolate cooldown decreases by 25%"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.1f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.15f)))}), 
+            new Augment("ImmolateInterval","Accumulated Heat", new string[3]{"Immolate cooldown decreases by 15%", 
+                                                            "Immolate cooldown decreases by 25%", 
+                                                            "Immolate cooldown decreases by 35%"}, "ImmolateInterval", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.15f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.25f)))}),
-            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by 20%", 
-                                                            "Immolate cooldown decreases by 30%", 
-                                                            "Immolate cooldown decreases by 50%"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.2f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.3f))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.5f)))}),  
-            new Augment("ImmolateDmg","Summer Heat", new string[3]{"Immolate will deal +10 damage", 
-                                                            "Immolate will deal +15 damage", 
-                                                            "Immolate will deal +25 damage"}, "ImmolateDmg", Tier.Silver, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.25f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.35f)))}),
+            new Augment("ImmolateInterval","Releasing Everything", new string[3]{"Immolate cooldown decreases by 35%", 
+                                                            "Immolate cooldown decreases by 50%", 
+                                                            "Immolate cooldown decreases by 75%"}, "ImmolateInterval", Tier.Prismatic, new UnityAction[3]{
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.35f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.5f))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.75f)))}),  
+            new Augment("ImmolateDmg","Summer Heat", new string[3]{"Immolate will deal +15 damage", 
+                                                            "Immolate will deal +25 damage", 
+                                                            "Immolate will deal +35 damage"}, "ImmolateDmg", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,10,0 ,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,15,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,25,0,0)))}),  
-            new Augment("ImmolateDmg","Universal Damage", new string[3]{"Immolate will deal +20 damage", 
-                                                            "Immolate will deal +30 damage", 
-                                                            "Immolate will deal +50 damage"}, "ImmolateDmg", Tier.Gold, new UnityAction[3]{
+            new Augment("ImmolateDmg","Universal Damage", new string[3]{"Immolate will deal +30 damage", 
+                                                            "Immolate will deal +50 damage", 
+                                                            "Immolate will deal +75 damage"}, "ImmolateDmg", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,20,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,30,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0,0)))}),
-            new Augment("ImmolateDmg","Nuclear Shockwave", new string[3]{"Immolate will deal +50 damage", 
-                                                            "Immolate will deal +75 damage", 
-                                                            "Immolate will deal +150 damage"}, "ImmolateDmg", Tier.Prismatic, new UnityAction[3]{
+            new Augment("ImmolateDmg","Nuclear Shockwave", new string[3]{"Immolate will deal +75 damage", 
+                                                            "Immolate will deal +100 damage", 
+                                                            "Immolate will deal +200 damage"}, "ImmolateDmg", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,50,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,75,0,0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,150,0,0)))}),
@@ -1218,7 +1218,7 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0,0,1f,0)))}),
             new Augment("CandleUnlock" ,"Arcanist", new string[1]{"Unlock the ability to start a ritual"}, "CandleUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("CandleUnlock");
-                Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.2f, 1));
+                Flamey.Instance.addNotEspecificEffect(new CandleTurrets(5, 0.2f, 2));
                 Deck.Instance.AddAugmentClass(new List<string>{"CandleDmg","CandleAmount","CandleAtkSpeed"});            
             })}, baseCard: true),  
             new Augment("CandleAtkSpeed","Alembic Artistry", new string[3]{"Candles will increase their attack speed by +10", 

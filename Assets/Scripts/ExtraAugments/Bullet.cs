@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     float multiplier = 10f;
     int ttl = 1;
     int dmg;
-    float maxDistance = 3.6f;
+    float maxDistance = 10f;
     Vector2 SpawnPos;
     Rigidbody2D rb;
     void Start(){

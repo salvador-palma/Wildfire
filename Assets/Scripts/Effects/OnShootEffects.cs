@@ -19,7 +19,6 @@ public class SecondShot : OnShootEffects{
     public float perc;
     public SecondShot(float p){
         perc = p;
-        Debug.Log(p);
         if(Instance == null){
             Instance = this;
         }else{
@@ -46,8 +45,8 @@ public class SecondShot : OnShootEffects{
     }
 
     private void RemoveUselessAugments(){
-        if(perc > 1){
-            perc = 1;
+        if(perc > 1f){
+            perc = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
         }
@@ -68,7 +67,7 @@ public class SecondShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Whenever you fire a shot, there's a chance to fire an extra one. Extra shots will not count towards Multicaster or Burst Shot Effects";
+        return "Whenever you fire a shot, there's a chance to fire an <color=#FFCC7C>extra one</color>. Extra shots will <color=#FF5858>not</color> count towards <color=#FFFF00>Multicaster</color> or <color=#FFFF00>Burst Shot Effects</color>";
     }
     public string getCaps()
     {
@@ -143,7 +142,7 @@ public class BurstShot : OnShootEffects{
 
     public string getDescription()
     {
-        return "Shoot extra Burst Shots everytime you shoot a certain amount of flames. Extra shots will not count towards Multicaster or Burst Shot Effects";
+        return "Shoot extra <color=#FFCC7C>Burst Shots</color> everytime you shoot a certain amount of flames. <color=#FFCC7C>Extra shots</color> will <color=#FF5858>not</color> count towards <color=#FFFF00>Multicaster</color> or <color=#FFFF00>Burst Shot Effects</color>";
     }
     public string getCaps()
     {
@@ -211,7 +210,7 @@ public class KrakenSlayer : OnShootEffects{
 
     public string getDescription() 
     {
-        return "Shoot a powerfull Blue Flame that deals Extra Damage everytime you shoot a certain amount of flames.";
+        return "Shoot a powerful <color=#53D1FF>Blue Flame</color> that deals <color=#FF5858>Extra Damage</color> everytime you shoot a certain amount of flames.";
     }
     public string getCaps()
     {
@@ -272,7 +271,7 @@ public class CritUnlock : OnShootEffects{
 
     public string getDescription()
     {
-        return "Your shots have a chance of critically striking, multiplying your damage by a certain amount.";
+        return "Your shots have a chance of <color=#FF5858>critically striking</color>, multiplying your <color=#FF5858>damage</color> by a certain amount.";
     }
     public string getCaps()
     {

@@ -254,7 +254,7 @@ public class EnemySpawner : MonoBehaviour
 
         ThornsOnHitted.Instance = null;
 
-        VampOnDeath.Instance = null;
+        
         Explosion.Instance = null;
         Necromancer.Instance= null;
         Bullets.Instance = null;

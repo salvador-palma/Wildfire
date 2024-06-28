@@ -20,9 +20,10 @@ public class Beaver : Enemy
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
             int x = EnemySpawner.Instance.current_round;
-            Health += (int) Math.Pow(x-30, 2);
+            Health = (int)(Health * (float) (Math.Pow(x-30, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
-            Speed *= (float) (Math.Pow(x-60, 2)/5000f) + 1f;
+            Speed *= (float) (Math.Pow(x-30, 2)/4000f) + 1f;
+            Damage = (int)(Damage * (float) (Math.Pow(x-30, 2)/5000f) + 1f);
         }
         MaxHealth = Health;
     }
@@ -41,16 +42,14 @@ public class Beaver : Enemy
     }
     public override void Attack()
     {
-        if(Flamey.Instance.Health > StealObjective){
+        if(Flamey.Instance.MaxHealth > StealObjective){
             StealAmount = StealObjective;
             Flamey.Instance.MaxHealth -= StealAmount;
             Flamey.Instance.Health = Math.Min(Flamey.Instance.MaxHealth,Flamey.Instance.Health);
-        }else{
-            base.Attack();
         }
         Stealing = true;
 
-        StealAmount =   Flamey.Instance.removeEmbers(StealObjective);
+        
         TurnBack();
     }
     private void TurnBack(){
@@ -58,7 +57,7 @@ public class Beaver : Enemy
     }
 
     public override void Die(bool onKill = true){
-        if(!gotAway){ Flamey.Instance.addHealth(StealAmount, 0f);Flamey.Instance.addHealth(StealAmount);}
+        if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.75f), 0f);}
        
         base.Die();
     }

@@ -40,7 +40,7 @@ public class SquirrelFlying : Squirrel
         }
         
     }
-
+    public override bool canTarget(){return !flying;}
     private void Land(){
         flying = false;
         GetComponent<Animator>().SetTrigger("InGround");

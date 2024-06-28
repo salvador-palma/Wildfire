@@ -29,7 +29,7 @@ public class BurnAOE : MonoBehaviour
             try{
                 foreach (Enemy item in colliding)
                 {
-                    if(item == null){continue;}
+                    if(item == null || !item.canTarget()){continue;}
                     item.Hitted(Damage,9, ignoreArmor:true, onHit: false);
                     
                 }

@@ -33,7 +33,7 @@ public class DrainAOE : MonoBehaviour
             try{
                 foreach (Enemy item in colliding)
                 {
-                    if(item == null){continue;}
+                    if(item == null || !item.canTarget()){continue;}
                     Flamey.Instance.addHealth(item.MaxHealth * perc);
 
                 }

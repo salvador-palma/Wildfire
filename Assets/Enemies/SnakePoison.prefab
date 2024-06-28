@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7518749114406682927}
   - component: {fileID: 8886280262074445181}
-  - component: {fileID: 5490139014410445768}
+  - component: {fileID: 3041678152358119314}
   - component: {fileID: 1229017429093676878}
   - component: {fileID: 6358312252088375138}
   m_Layer: 6
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &5490139014410445768
+--- !u!114 &3041678152358119314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,24 +242,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8149722230384493485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f0a266f60de4e4e89f8cd33fdfec5d, type: 3}
+  m_Script: {fileID: 11500000, guid: ab3de287859eaa04882e8e68857d0e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
   Damage: 200
-  AttackDelay: 10
+  AttackDelay: 2
   AttackRange: 1.55
-  Speed: 0.65
-  Health: 500
+  Speed: 0.7
+  Health: 650
   MaxHealth: 500
-  Armor: 15
+  Armor: 50
   ArmorPen: 0.9
   EmberDropRange: {x: 13, y: 17}
   Attacking: 0
-  HitCenter: {fileID: 3538805168687155405}
+  HitCenter: {fileID: 0}
   inEffect: 0
   isPoisonous: 1
-  poisonTicks: 8
+  poisonTicks: 32
 --- !u!61 &1229017429093676878
 BoxCollider2D:
   m_ObjectHideFlags: 0

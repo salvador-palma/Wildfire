@@ -75,29 +75,29 @@ public class Betsy : NPC
          UpdateNotification();
          switch(n){
             case 1:
-                MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "FLIMSY BINOCULARS", "Allows you to see what enemy will come out next so you can be prepared. To use them just open the Bestiary tab in-game", 1);
+                MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "FLIMSY BINOCULARS", "Allows you to see what <color=#FFCC7C>enemy</color> will come out next so you can be prepared. To use them just open the <b><color=#FFCC7C>Bestiary</color></b> tab in-game", 1);
                 break;
             case 2:
-                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "LIGHTWEIGHT BINOCULARS", "Allows you to see the next 2 enemies", 1);
+                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "LIGHTWEIGHT BINOCULARS", "Allows you to see the next <color=#FFCC7C>2 enemies", 1);
                 break;
             case 3:
-                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "STURDY BINOCULARS", "Allows you to see the next 3 enemies", 1);
+                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "STURDY BINOCULARS", "Allows you to see the next <color=#FFCC7C>3 enemies", 1);
                 break;
             case 4:
-                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "HIGH-TECH BINOCULARS", "Allows you to see the next 4 enemies", 1);
+                MetaMenuUI.Instance.UnlockableScreen("UPGRADED", "HIGH-TECH BINOCULARS", "Allows you to see the next <color=#FFCC7C>4 enemies", 1);
                 break;
          }
           
     }
     public void unlockBestiary(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "BETSY'S BESTIARY", "You can now check the stats and abilities of animals you've defeated and gather milestones", 2);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "BETSY'S BESTIARY", "You can now check the stats and abilities of <color=#FFCC7C>animals</color> you've defeated and gather <color=#FFCC7C>milestones</color>", 2);
     }
     public void Default(){
         DefaultClickBehaviour.Invoke();
     }
     [SerializeField] NPC Rowl;
     public void UnlockBees(){
-        MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the Bee Summoner ability, go talk to Rowl", 0);
+        MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the <color=#FFCC7C>Bee Summoner</color> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\">Rowl", 0);
         Rowl.QueueDialogue(2);
         SkillTreeManager.Instance.Upgrade("SummonUnlock");
         SkillTreeManager.Instance.InvokeUIReset();

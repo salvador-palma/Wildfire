@@ -23,6 +23,16 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public bool inEffect;
 
+    private float slowfactor;
+    protected float SlowFactor{
+        get{
+            return slowfactor;
+        }
+        set{
+            slowfactor = Math.Clamp(value,0f,.99f);
+        }
+    }
+
     
     public virtual void UpdateEnemy()  {
         Move();
@@ -35,7 +45,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         }
     }
     public virtual void Move(){
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime);
     }
 
     public void StartAnimations(int ID){
@@ -109,7 +119,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual bool canTarget(){return true;}
-
+    
     
 
     
@@ -143,14 +153,15 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
 
-    public Dictionary<string, float[]> SlowEffectsDuration;
+    public Dictionary<string, float[]> SlowEffectsDuration = new Dictionary<string, float[]>{{"IceHit", new float[2]},{"IceLand", new float[2]}};
     public virtual void SlowDown(float seconds, float percentage, string SlowEffect){
-        if(SlowEffectsDuration== null){SlowEffectsDuration = new Dictionary<string, float[]>();}
-        float[] prevInfo = SlowEffectsDuration.GetValueOrDefault(SlowEffect, null);
+
+        float[] prevInfo = getSlowInfo(SlowEffect);
+
         if(prevInfo == null || prevInfo[0] <= 0){
-            Speed *= percentage;
-            
+            SlowFactor += percentage; 
         }
+
         SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
         CheckEnemyIceSkin();
     }  
@@ -158,35 +169,33 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         return SlowEffectsDuration == null ? null : SlowEffectsDuration.GetValueOrDefault(SlowEffect, null);
     }
     public void ApplySlowUpdate(){
-        if(SlowEffectsDuration== null){SlowEffectsDuration = new Dictionary<string, float[]>();}
-
         foreach (string slow in SlowEffectsDuration.Keys)
         {   
             if(SlowEffectsDuration[slow][0] > 0){
                 SlowEffectsDuration[slow][0] -= Time.deltaTime;
                 if(SlowEffectsDuration[slow][0] <= 0){
-                    Speed /= SlowEffectsDuration[slow][1];
+                    SlowFactor -= SlowEffectsDuration[slow][1];
                     CheckEnemyIceSkin();
                 }
             }
-            
         }
     } 
     private void removeSlowingEffects(){
-        SlowEffectsDuration = new Dictionary<string, float[]>();
+        SlowEffectsDuration = new Dictionary<string, float[]>{{"IceHit", new float[2]},{"IceLand", new float[2]}};
         CheckEnemyIceSkin();
     }
     public void removeSlow(string effect){
-        SlowEffectsDuration[effect][0] = 0;
-        CheckEnemyIceSkin();
+        if(SlowEffectsDuration.ContainsKey(effect)){
+            SlowEffectsDuration[effect][0] = 0;
+            CheckEnemyIceSkin();
+        }
     }
     private void CheckEnemyIceSkin(){
-        
         if(SlowEffectsDuration.Any(k => k.Value[0] > 0)){
-            
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = true;
         }else{
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = false;
+            SlowFactor = 0;
         }
     }
 

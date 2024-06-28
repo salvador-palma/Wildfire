@@ -228,6 +228,7 @@ public class Deck : MonoBehaviour
         gameState.augments.Add(augmentToAdd.Serialize());
         gameState.CollectedEmbers = Flamey.Instance.Embers;
         gameState.Health = Flamey.Instance.Health;
+        gameState.MaxHP = Flamey.Instance.MaxHealth;
         gameState.CurrentRound = EnemySpawner.Instance.current_round;
         gameState.NextTiers = PhaseTiers;
         GameState.SaveGameState(gameState);
@@ -239,7 +240,6 @@ public class Deck : MonoBehaviour
         if(!withLoad){return;}
         gameState = GameState.LoadGameState();
         Flamey.Instance.addEmbers(gameState.CollectedEmbers);
-        Flamey.Instance.Health = gameState.Health;
         
         PhaseTiers = gameState.NextTiers;
 
@@ -247,6 +247,8 @@ public class Deck : MonoBehaviour
             GameUI.Instance.AddAugment(a);
             DeckBuilder.Instance.getAugmentByName(a.title).Activate(a.level);
         }
+        Flamey.Instance.Health = gameState.Health;
+        Flamey.Instance.MaxHealth = gameState.MaxHP;
 
         EnemySpawner.Instance.current_round = gameState.CurrentRound;
         EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
@@ -279,6 +281,7 @@ public class GameState{
     public List<SerializedAugment> augments;
     public int CollectedEmbers;
     public float Health;
+    public int MaxHP;
     public int[] EnemyIDs;
     public int CurrentRound;
     public bool[] NextTiers;

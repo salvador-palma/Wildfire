@@ -10,68 +10,6 @@ public interface OnKillEffects : Effect
     public void ApplyEffect(Enemy en = null);
 }
 
-public class VampOnDeath : OnKillEffects
-{
-    public float prob;
-    public float perc;
-    public static VampOnDeath Instance;
-
-    public VampOnDeath(float prob, float perc){
-        this.prob = prob;
-        this.perc = perc;
-        if(Instance == null){
-            Instance = this;
-        }else{
-            Instance.Stack(this);
-        }
-    }
-    public bool addList()
-    {
-        return this == Instance;
-    }
-
-    public void ApplyEffect(Enemy en = null)
-    {
-        if(Random.Range(0f,1f) < prob){
-            Flamey.Instance.addHealth(en.MaxHealth * perc);
-        }
-    }
-    public void Stack(VampOnDeath vampOnDeath){
-        prob += vampOnDeath.prob;
-        perc += vampOnDeath.perc;
-        RemoveUselessAugments();
-    }
-    private void RemoveUselessAugments(){
-        if(prob >= 1f){
-            prob = 1;
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("VampDeathProb");
-        } 
-    }
-    public string getDescription()
-    {
-        return "Everytime you kill an enemy, there's a chance of healing yourself for a percentage of its max health";
-    }
-    public string getCaps()
-    {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Healed: {1} (Max. 100%)", Mathf.Round(prob * 100), Mathf.Round(perc * 100));
-    }
-
-    public string getIcon()
-    {
-        return "VampDeathUnlock";
-    }
-
-    public string getText()
-    {
-        return "Essence Eater";
-    }
-
-    public string getType()
-    {
-        return "On-Kill Effect";
-    }
-}
 
 public class Explosion : OnKillEffects
 {
@@ -121,7 +59,7 @@ public class Explosion : OnKillEffects
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a chance of generating a massive explosion that damages surrounding enemies";
+        return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
     }
     public string getCaps()
     {
@@ -183,15 +121,15 @@ public class Necromancer : OnKillEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 1f){
-            prob = 1f;
+        if(prob >= .5f){
+            prob = .5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("NecroProb");
         } 
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a chance of summoning a friendly ghoul. Ghouls can attack enemies for up to 3 times with a percentage of your base damage.";
+        return "Everytime you kill an enemy, there's a chance of summoning a <color=#FFCC7C>friendly ghoul</color>. Ghouls can attack enemies for up to <color=#FFCC7C>3 times</color> with a percentage of your <color=#FF5858>base damage.";
     }
     public string getCaps()
     {
@@ -281,7 +219,7 @@ public class Bullets : OnKillEffects
     }
     public string getDescription()
     {
-        return "Everytime you kill an enemy, there's a chance of shooting Cannon Balls out of the enemy's corpse, that deal damage and apply On-Hit effects whenever they hit another creature. If this effect procs, you will also gain +10 embers. Cannon Balls' speed scales with Bullet Speed";
+        return "Everytime you kill an enemy, there's a chance of shooting <color=#FFCC7C>Cannon Balls</color> out of the enemy's corpse, that deal damage and apply <color=#FF99F3>On-Hit effects</color> whenever they hit another creature. If this effect procs, you will also gain <color=#FFCC7C>+10 embers</color>. <color=#AFEDFF>Cannon Balls' speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
     public string getCaps()
     {

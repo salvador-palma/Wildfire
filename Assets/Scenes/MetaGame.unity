@@ -5855,6 +5855,7 @@ MonoBehaviour:
   Options:
   - {fileID: 805029169}
   - {fileID: 1176375316}
+  Name: {fileID: 591249276}
   AvatarBank:
   - {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
   UnlockableTexts:
@@ -12623,6 +12624,142 @@ RectTransform:
   m_AnchoredPosition: {x: 0.8927597, y: -98.35808}
   m_SizeDelta: {x: 198.06, y: 190.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &591249274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591249275}
+  - component: {fileID: 591249277}
+  - component: {fileID: 591249276}
+  m_Layer: 0
+  m_Name: Name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &591249275
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591249274}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000165, y: 1.0000165, z: 1.0000165}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1688821893}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -96.53, y: 15.07}
+  m_SizeDelta: {x: 565.14, y: 65.46}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &591249276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591249274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Rowl
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3539992575
+  m_fontColor: {r: 1, g: 0.78431374, b: 0, a: 0.8235294}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 18.7
+  m_fontSizeBase: 18.7
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &591249277
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591249274}
+  m_CullTransparentMesh: 1
 --- !u!1 &591477466
 GameObject:
   m_ObjectHideFlags: 0
@@ -14024,8 +14161,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -92.36, y: 1.06}
-  m_SizeDelta: {x: 558.68, y: 75.33}
+  m_AnchoredPosition: {x: -96.055, y: -0.99}
+  m_SizeDelta: {x: 566.08, y: 49.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625241251
 MonoBehaviour:
@@ -14047,7 +14184,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Do you wish to continue your previous unfinished run?
+  m_text: 'Ah, here it is! I''ll name it <b><color=#FFCC7C>"The Bestiary - by <sprite
+    name="Betsy"> Betsy"</color>!Ah, here it is! I''ll name it <b><color=#FFCC7C>"The
+    Bestiary - by <sprite name="Betsy"> Betsy"</color>!Ah, here it is! I''ll name
+    it '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
   m_sharedMaterial: {fileID: -6983974147429577738, guid: 8d86724d2b72c6d4e90969b0aef38250, type: 2}
@@ -14056,8 +14196,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2801795071
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.6509804}
+    rgba: 3539992575
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14074,8 +14214,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.7
-  m_fontSizeBase: 18.7
+  m_fontSize: 14.5
+  m_fontSizeBase: 14.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28449,6 +28589,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1206136740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28525,26 +28697,33 @@ MonoBehaviour:
   - dialogues:
     - message: Isn't camping just the best? The air out here feels so crisp and free!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: My absolute favorite part? Roasting marshmallows, hands down!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: It's all about finding the perfect balance between golden brown and
         crispy perfection!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: Why don't you give it a try?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
   - dialogues:
-    - message: Hey, dude! How's it haning? Any luck with marshamllows?
+    - message: Hey, dude! How's it hanging? Any luck with marshamllows?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: You know, it's not just a bout the roasting technique. A solid campfire
-        sets the stage for perfection.
+      Name: 
+    - message: You know, it's not just about the roasting technique. A solid<color=#FFCC7C>
+        campfire </color>sets the stage for perfection.
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: If you could lend me a paw I should be able to make it stronger. What
         do you think?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -28562,20 +28741,27 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: Whoa, hold up! You control Bees?!
+    - message: Whoa, hold up! You control <color=#FFCC7C>Bees?!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: THAT'S INSANE BRO!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: That's what you thought I was gonna say right?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: The truth is Betsy also filled me in on some Bee wackery yesterday,
-        so I'm not totally caught off guard.
+      Name: 
+    - message: The truth is <color=#FFCC7C><sprite name="Betsy">Betsy</color> also
+        filled me in on some<color=#FFCC7C> Bee </color> wackery yesterday, so I'm
+        not totally caught off guard.
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: In fact, I think I can put that knowledge to good use and amp up our
-        campfire.
+        <color=#FFCC7C>campfire.
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: But, uh, I'm gonna need your expertise to really unlock the full potential.
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -28595,16 +28781,25 @@ MonoBehaviour:
   - dialogues:
     - message: Hey there, buddy!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: Gotta shoot straight with you - The campfire's still not up to snuff!
+      Name: 
+    - message: Gotta shoot straight with you - The <color=#FFCC7C>campfire's</color>
+        still not up to snuff!
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: Need more embers, you say?
+      Name: 
+    - message: Need more <color=#FFCC7C><sprite name="Ember"> embers</color>, you
+        say?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: Alright, let me see what I can rustle up...
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
-    - message: Aha! Here you go, found 1500 embers chilling in my back pocket
+      Name: 
+    - message: Aha! Here you go, found <color=#FFCC7C>1500 <sprite name="Ember"></color>
+        embers chilling in my back pocket
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     - message: Use 'em wisely, alright?
       avatar: {fileID: 21300000, guid: e3dfb7a1a4f52ac49ba9a01808e78d55, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -28628,6 +28823,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 1500
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: SetVariable
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -33935,6 +34142,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1457361219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33951,38 +34190,56 @@ MonoBehaviour:
   - dialogues:
     - message: Well, would you believe it?
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
-    - message: 'This campsite used to be a right haven for all sorts of critters,
+      Name: 
+    - message: 'This campsite used to be a right haven for all sorts of <color=#FFCC7C>critters</color>,
         but now it''s as quiet as a lamb in a field. '
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
-    - message: I've a hankering to start me a little record book, ya see.
+      Name: 
+    - message: I've a hankering to start me a little <color=#FFCC7C>record book</color>,
+        ya see.
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+      Name: 
     - message: But, ye know, it's not as easy as pie! I'll need some info to get
         me started.
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
-    - message: Could ye tell me about three different animals 'round here?
+      Name: 
+    - message: Could ye tell me about <color=#FFCC7C>three</color> different <color=#FFCC7C>animals</color>
+        'round here?
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+      Name: 
     - message: That' set me off on the right hoof!
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
   - dialogues:
-    - message: Well, well, well! You've gone and spotted three critters already?
+    - message: Well, well, well! You've gone and spotted <color=#FFCC7C>three critters</color>
+        already?
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     - message: Ain't that just dandy! Oh, what a splendid day indeed!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: Now, hold your horses while I set up the record book...
+      Name: 
+    - message: Now, hold your horses while I set up the <color=#FFCC7C>record book</color>...
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     - message: ...
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: Ah, here it is! I'll name it "The Bestiary - by Betsy"!
+      Name: 
+    - message: Ah, here it is! I'll name it <b><color=#FFCC7C>"The Bestiary - by
+        <sprite name="Betsy"> Betsy"</color>!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     - message: But listen here youngin'! I'll still need your assistance!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: If ye happen upon a grand total of 10 animal species, come holler
-        at me, and I'll have something special for ya as a little reward.
+      Name: 
+    - message: If ye happen upon a grand total of <color=#FFCC7C>10 animal species</color>,
+        come holler at me, and I'll have something special for ya as a <color=#FFCC7C>little
+        reward.
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -34002,18 +34259,26 @@ MonoBehaviour:
   - dialogues:
     - message: Well, bless my soul!
       avatar: {fileID: 21300000, guid: 97d7cbe84f6f42e479b19828f3738d21, type: 3}
-    - message: The Bestiary's chock-full with details on ten different critters already!
+      Name: 
+    - message: <color=#FFCC7C>The Bestiary's</color> chock-full with details on <color=#FFCC7C>ten
+        different critters</color> already!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: Just as I pledged, here's your reward...
+      Name: 
+    - message: Just as I pledged, here's your <color=#FFCC7C>reward...
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: Take these Binoculars with you! They'll help you spot creatures from
-        a mile away!
+      Name: 
+    - message: Take these <b><color=#FFCC7C>Binoculars</color></b> with you! They'll
+        help you spot creatures from a mile away!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
-    - message: Now, if by chance you happen upon a hundred critters of ten different
-        species, I'll upgrade those Binoculars for ya
+      Name: 
+    - message: Now, if by chance you happen upon a <color=#FFCC7C>hundred critters</color>
+        of <color=#FFCC7C>ten different species</color>, I'll upgrade those <color=#FFCC7C>Binoculars</color>
+        for ya
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     - message: Until we meet again, youngster!
       avatar: {fileID: 21300000, guid: 0c71b5976b2c7554cb789983dc60d1b5, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -34031,15 +34296,19 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a 100
-        critters each for 10 different species! '
+    - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a <color=#FFCC7C>100
+        critters</color> each for <color=#FFCC7C>10 different species</color>! '
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: Just what's needed to spruce up those Binoculars! Here you go, take
-        them for a spin!
+      Name: 
+    - message: Just what's needed to spruce up those <color=#FFCC7C>Binoculars</color>!
+        Here you go, take them for a spin!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: If you are aiming to upgrade beyond that, I'll need records of 500
-        creatures spanning 15 different species. Think yu're up for the challenge?
+      Name: 
+    - message: If you are aiming to upgrade beyond that, I'll need records of <color=#FFCC7C>500
+        creatures</color> spanning <color=#FFCC7C>15 different species</color>. Think
+        you're up for the challenge?
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -34059,18 +34328,26 @@ MonoBehaviour:
   - dialogues:
     - message: 'Well, I''ll be darned, you''ve really outdone yourself kid! '
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: The Bestiary already has records of 500 critters spread across 15
-        different species!
+      Name: 
+    - message: <b><color=#FFCC7C>The Bestiary</color></b> already has records of
+        <color=#FFCC7C>500 critters</color> spread across <color=#FFCC7C>15 different
+        species</color>!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: Hand over them Binoculars, and I'll give 'em a bit of a tweak...
+      Name: 
+    - message: Hand over them <b><color=#FFCC7C>Binoculars</color></b>, and I'll
+        give 'em a bit of a tweak...
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: There we are! Now they're as sharp as can be!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: Well... to be honest... there's one last upgrade, but it'll take 2500
-        records for 25 different species!
+      Name: 
+    - message: Well... to be honest... there's one last upgrade, but it'll take <color=#FFCC7C>2500
+        records</color> for <color=#FFCC7C>25 different species</color>!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: Give me a holler once you've managed that!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -34088,15 +34365,18 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: I'll be hornswoggled! 2500 record of 25 different critters! That must
-        be a world record!
+    - message: I'll be hornswoggled! <color=#FFCC7C>2500 record</color> of <color=#FFCC7C>25
+        different critters</color>! That must be a world record!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: Just as I promised, I'll give you the ultimate optical device, so
-        hand over them Binoculars!
+        hand over them <b><color=#FFCC7C>Binoculars!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: There we go, as sharp as it gets! Now off you go, have yourself some
         fun!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -34115,28 +34395,37 @@ MonoBehaviour:
     dequeueAuto: 1
   - dialogues:
     - message: Hey, kid! Just curious, what's your favorite critter? Well, for me,
-        it's Bees.
+        it's <color=#FFCC7C>Bees.
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: I reckon they're something special, the way they all pitch in together.
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: 'Say, since you''re doin'' such a bang-up job fillin'' that Bestiary,
+      Name: 
+    - message: 'Say, since you''re doin'' such a bang-up job fillin'' that <b><color=#FFCC7C>Bestiary</color><b>,
         here''s an offer for ya:'
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     - message: If you manage to fill it up completely, I'll teach you all there is
-        to know about Bees.
+        to know about <color=#FFCC7C>Bees.
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: Yep, including how to tame 'em! What do you say to that?
+      Name: 
+    - message: Yep, including how to <color=#FFCC7C>tame</color> 'em! What do you
+        say to that?
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 1
   - dialogues:
-    - message: You've gone and done it! The Bestiary is filled to the brim!
+    - message: You've gone and done it! <b><color=#FFCC7C>The Bestiary</color></b>
+        is filled to the brim!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
-    - message: Just as I promised, it's time for a lesson on Bees! Gather 'round,
-        and I'll tell you everything there is to know!
+      Name: 
+    - message: Just as I promised, it's time for a lesson on <color=#FFCC7C>Bees</color>!
+        Gather 'round, and I'll tell you everything there is to know!
       avatar: {fileID: 21300000, guid: e120f827140731a47b712983c5449716, type: 3}
+      Name: 
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -38046,6 +38335,7 @@ RectTransform:
   - {fileID: 361373096}
   - {fileID: 287975500}
   - {fileID: 625241250}
+  - {fileID: 591249275}
   - {fileID: 334262351}
   - {fileID: 599045452}
   - {fileID: 1052466581}
@@ -49469,7 +49759,7 @@ PrefabInstance:
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[24].enemy
       value: 
-      objectReference: {fileID: 4792462256598324463, guid: 43c751c59a70f224a9b1ee1a0a8944b1, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[25].enemy
       value: 

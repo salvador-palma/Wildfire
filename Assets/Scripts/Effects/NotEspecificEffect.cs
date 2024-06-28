@@ -38,7 +38,7 @@ public class FlameCircle : NotEspecificEffect
     {
         SpinnerInstance.speed = Flamey.Instance.BulletSpeed;
         
-        //Flamey.Instance.addNotEspecificEffect(new FlameCircle(1,20)); //REMOVE AFTER
+        
     }
     public void SetSpinFalse(object sender ,EventArgs e){
         SetSpin(false);
@@ -64,7 +64,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Flames orbit around you in a circle. Colliding with an enemy deals damage and applies On-Hit Effects. Angular speed scales with Bullet Speed";
+        return "Flames orbit around you in a circle. Colliding with an enemy deals damage and applies <color=#FF99F3>On-Hit Effects</color>. <color=#AFEDFF>Angular speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
     public string getCaps()
     {
@@ -150,7 +150,7 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Whenever you kill an enemy, there's a chance to loot more embers and multiply them. You can check the Bestiary for more info on enemy specific drop rates.";
+        return "Whenever you kill an enemy, there's a chance to loot more <color=#FFCC7C>embers</color> and multiply them. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
     }
     public string getCaps()
     {
@@ -219,11 +219,11 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Lit candles stand around you shooting at random targets. Their hits will not apply On-Hit nor On-Land Effects";
+        return "Lit <color=#FFCC7C>candles</color> stand around you shooting at random targets. Their hits will <color=#FF5858>not</color> apply <color=#FF99F3>On-Hit</color> nor <color=#FF99F3>On-Land Effects";
     }
     public string getCaps()
     {
-        return string.Format("Candle Amount: {0}% (Max. 6)<br>Damage: +{1} <br>Attack Speed: {2}/s (Max. 3/s)", amount, dmg, Mathf.Round(atkSpeed * 100f) * 0.01f);
+        return string.Format("Candle Amount: {0} (Max. 6)<br>Damage: +{1} <br>Attack Speed: {2}/s (Max. 3/s)", amount, dmg, Mathf.Round(atkSpeed * 100f) * 0.01f);
     }
 
     public string getIcon()
@@ -315,7 +315,7 @@ public class Summoner : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Bees will fight by your side, targeting random enemies and applying On-Hit effects.";
+        return "<color=#FFCC7C>Bees</color> will fight by your side, targeting random enemies and applying <color=#FF99F3>On-Hit effects.";
     }
     public string getCaps()
     {

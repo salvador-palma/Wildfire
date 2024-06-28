@@ -11,6 +11,7 @@ using UnityEngine.Events;
 public class Dialogue{
     [TextArea]public string message;
     public Sprite avatar;
+    public string Name;
     
 }
 [System.Serializable]
@@ -99,7 +100,7 @@ public class NPC : MonoBehaviour
         if(own_dialogues.dequeueAuto){
            afterEvent.AddListener(()=>DequeueDialogue(ID));
         }
-        StartCoroutine(MetaMenuUI.Instance.StartDialogue(own_dialogues.dialogues, afterEvent));
+        StartCoroutine(MetaMenuUI.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
     }
     private void StartQueuedDialogue(){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
@@ -140,6 +141,11 @@ public class NPC : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/npcs.json", json);
     }
 
+    public void SetHovered(bool check) {
+        GetComponent<Animator>().SetBool("NPCHovering", check);
+    }
+    
+    
    
 }
 
@@ -175,8 +181,9 @@ public class GameVariables{
         string json = JsonUtility.ToJson(variableList);
         File.WriteAllText(Application.persistentDataPath + "/variables.json", json);
     }
-
+    
     public static void SetVariable(string name, int value){
+        Debug.Log("Setting Var: " + name + "; " + value);
         GameVariables gv = getInstance();
 
         if(gv.variableList.variables.Any(i => i.name == name)){

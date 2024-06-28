@@ -16,11 +16,8 @@ public interface Effect{
 }
 public interface OnHitEffects: Effect
 {
-    
-
     public bool addList();
     public void ApplyEffect(float dmg = 0, float health = 0, Enemy en = null);
-    
 }
 public class VampOnHit : OnHitEffects
 {
@@ -40,7 +37,10 @@ public class VampOnHit : OnHitEffects
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            Flamey.Instance.addHealth(Math.Abs(dmg * perc));
+            if(Flamey.Instance.Health != Flamey.Instance.MaxHealth){
+                Flamey.Instance.addHealth(Math.Abs(dmg * perc));
+            }
+            
         }
     }
     public void Stack(VampOnHit vampOnHit){
@@ -71,7 +71,7 @@ public class VampOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You have a chance of healing a percentage of the damage dealt.";
+        return "You have a chance of <color=#0CD405>healing</color> a percentage of the <color=#FF5858>damage</color> dealt.";
     }
     public string getCaps()
     {
@@ -104,11 +104,10 @@ public class IceOnHit : OnHitEffects
     }
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
-        if(en==null){return;}
-        if(en.inEffect){return;}
-        if(UnityEngine.Random.Range(0f,1f) < prob){    
-            Debug.Log("Iced");
-            en.SlowDown(duration/1000f, 1 - Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f), "IceHit");
+        if(en==null || en.getSlowInfo("IceHit")[0] > 0){return;}
+        if(UnityEngine.Random.Range(0f,1f) < prob){   
+
+            en.SlowDown(duration/1000f, 1 - Mathf.Min(0.8f,(Flamey.Instance.MaxHealth-1000) * 0.00033f), "IceHit");
             DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
 
         }
@@ -145,12 +144,12 @@ public class IceOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You have a chance of slowing the enemy for a percentage of its speed for a certain duration. This effect scales with Max Health (+1% slow per 20 Extra Max Health)" ;
+        return "You have a chance of slowing the enemy for a percentage of its <color=#AFEDFF>speed</color> for a certain duration. This effect scales with <color=#0CD405>Max Health</color> <color=#FFCC7C>(+1% slow per 33 Extra Max Health)" ;
     }
     public string getCaps()
     {
-        float percentage = Mathf.Min(0.99f,Flamey.Instance.MaxHealth * 0.00033f);
-        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 99%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000f));
+        float percentage = Mathf.Min(0.75f,Flamey.Instance.MaxHealth * 0.00033f);
+        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000f));
     }
 
     public string getIcon()
@@ -181,7 +180,6 @@ public class ShredOnHit : OnHitEffects
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
             en.Armor -=  (int)(en.Armor *  percReduced);
-           
         }
     }
     public void Stack(ShredOnHit shredOnHit){
@@ -195,8 +193,8 @@ public class ShredOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ShredProb");
         }  
-        if(percReduced >= 1f){
-            percReduced = 1;
+        if(percReduced >= 0.5f){
+            percReduced = 0.5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ShredPerc");
         }      
@@ -217,11 +215,11 @@ public class ShredOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You have a chance of reducing the target's armor by a certain percentage" ;
+        return "You have a chance of reducing the target's <color=#919191>armor</color> by a certain percentage" ;
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Reduced: {1}% (Max. 100%)", Mathf.Round(prob*100), Mathf.Round(percReduced * 100));
+        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Reduced: {1}% (Max. 50%)", Mathf.Round(prob*100), Mathf.Round(percReduced * 100));
     }
 
     public string getIcon()
@@ -285,11 +283,11 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "You penetrate through a percentage of enemy armor. Additionally, hitting enemies below a portion of their Max Health executes them." ;
+        return "You <color=#FF5858>penetrate</color> through a percentage of enemy <color=#919191>armor</color>. Additionally, hitting enemies below a portion of their <color=#0CD405>Max Health</color> <color=#FFCC7C>executes</color> them." ;
     }
     public string getCaps()
     {
-        return string.Format("Armor Penetration: {0}% (Max. 50%) <br>Execution: {1}% (Max. 100%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
+        return string.Format("Armor Penetration: {0}% (Max. 80%) <br>Execution: {1}% (Max. 50%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
     }
 
     public string getIcon()
@@ -329,6 +327,7 @@ public class StatikOnHit : OnHitEffects
             StatikShiv s = g.GetComponent<StatikShiv>();
             s.TTL = ttl;
             s.MAXTTL = ttl;
+            s.Damage = this.dmg;
             s.currentTarget = en;
             s.locationOfEnemy = en.HitCenter.position;
             s.Started = true;
@@ -344,7 +343,7 @@ public class StatikOnHit : OnHitEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 1){
+        if(prob >= 1f){
             prob = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("StatikProb");
@@ -371,11 +370,11 @@ public class StatikOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "When you hit an enemy, you have a chance of unleashing a static energy chain that travels through enemies nearby, dealing damage to each while applying On-Hit effects";
+        return "When you hit an enemy, you have a chance of unleashing a <color=#FFCC7C>static energy chain</color> that travels through enemies nearby, dealing damage to each while applying <color=#FF99F3>On-Hit effects</color. The more the chain travels the less damage it deals";
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Travel Distance: {1} Enemies (Max. 15) <br>Damage: +{2}", Mathf.Round(prob * 100), ttl, dmg);
+        return string.Format("Chance: {0}% (Max. 100%) <br>Travel Distance: {1} Enemies (Max. 10) <br>Damage: +{2}", Mathf.Round(prob * 100), ttl, dmg);
 
     }
 

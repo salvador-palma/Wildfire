@@ -21,9 +21,10 @@ public class Beatle : Enemy
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
             int x = EnemySpawner.Instance.current_round;
-            Health += (int) Math.Pow(x, 2);
+            Health = (int)(Health * (float) (Math.Pow(x, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
-            Speed *= (float) (Math.Pow(x-60, 2)/5000f) + 1f;
+            Speed *= (float) (Math.Pow(x, 2)/4000f) + 1f;
+            Damage = (int)(Damage * (float) (Math.Pow(x, 2)/5000f) + 1f);
         }
         MaxHealth = Health;
     }

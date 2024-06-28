@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class MetaMenuUI : MonoBehaviour
     [SerializeField] Image Profile;
     [SerializeField] TextMeshProUGUI Message;
     [SerializeField] Button[] Options;
+    [SerializeField] TextMeshProUGUI Name;
 
     [Header("Chat DataBase")]
     [SerializeField] Sprite[] AvatarBank;
@@ -85,7 +87,7 @@ public class MetaMenuUI : MonoBehaviour
         if(File.Exists(Application.persistentDataPath +"/gameState.json")){
             StartChat();
             ChatSingular("Do you wish to continue your previous unfinished run?",
-                            AvatarBank[0],
+                            AvatarBank[0], "Rowl",
                             new string[2]{"Yes", "No"},
                             new UnityAction[2]{
                                 new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 1); EndChat(); PlayOutro();}),
@@ -96,7 +98,9 @@ public class MetaMenuUI : MonoBehaviour
         }
     }
 
+    
     public void StartChat(){
+        
         ChatPanel.gameObject.SetActive(true);
         ChatPanel.GetComponent<Animator>().Play("Intro");
     }
@@ -105,7 +109,9 @@ public class MetaMenuUI : MonoBehaviour
         Message.text = "";
         Array.ForEach(Options, e => e.gameObject.SetActive(false));
     }
-    private void ChatSingular(string msg,Sprite avatar, string[] optionTxt = null, UnityAction[] optionAction = null){
+    private void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
+        
+        Name.text = name;
         Message.text = "";
         Profile.sprite = avatar;
 
@@ -120,31 +126,38 @@ public class MetaMenuUI : MonoBehaviour
         StartCoroutine(ShowTextTimed(msg, optionTxt!=null));
     }
     public IEnumerator ShowTextTimed(string msg, bool withOptions){
+        string formatting_buffer = "";
         foreach(char c in msg){
             if(triggerNext>0){
                 Message.text = msg;
                 break;
             }
-            Message.text += c;
-            switch(c){
-                case '.':
-                case '!':
-                case '?':
-                    yield return new WaitForSeconds(0.2f);
-                    break;
-                case ',':
-                    yield return new WaitForSeconds(0.05f);
-                    break;
-                case ' ':
-                    yield return new WaitForSeconds(0.02f);
-                    break;
-                default:
-                    yield return new WaitForSeconds(0.01f);
-                    break;
+            if(c=='<' || formatting_buffer != ""){
+                formatting_buffer += c;
+                if(c=='>'){
+                    Message.text += formatting_buffer;
+                    formatting_buffer = "";
+                }
+                
+            }else{  
+                Message.text += c;
+                switch(c){
+                    case '.':
+                    case '!':
+                    case '?':
+                        yield return new WaitForSeconds(0.4f);
+                        break;
+                    case ',':
+                        yield return new WaitForSeconds(0.05f);
+                        break;
+                    case ' ':
+                        yield return new WaitForSeconds(0.02f);
+                        break;
+                    default:
+                        yield return new WaitForSeconds(0.01f);
+                        break;
+                }
             }
-         
-            
-
         }
         
         Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
@@ -157,11 +170,16 @@ public class MetaMenuUI : MonoBehaviour
     public void ClickedChatPanel(){
         triggerNext++;
     }
-    public IEnumerator StartDialogue(Dialogue[] dialogue, UnityEvent after = null){
+    public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null){
         StartChat();
+        Name.text = defaultName;
+        Message.text = "";
+        
         foreach (Dialogue d in dialogue)
         {   
-            ChatSingular(d.message, d.avatar);
+            
+            ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
+
             yield return new WaitUntil(() => triggerNext >= 2);
             triggerNext = 0;
         }
@@ -176,7 +194,7 @@ public class MetaMenuUI : MonoBehaviour
     public void UnlockableScreen(string title, string name, string description, int iconID){
         UnlockableTexts[0].text = title;
         UnlockableTexts[1].text = name;
-        UnlockableTexts[2].text = description;
+        UnlockableTexts[2].SetText(description);
         UnlockableIcon.sprite = Unlockables[iconID];
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");
 

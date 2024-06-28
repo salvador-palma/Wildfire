@@ -81,7 +81,7 @@ public class BurnOnLand : OnLandEffect
 
     public string getDescription()
     {
-        return "Whenever a shot lands, there's a chance of spawning a Lava Pool. The Lava Pool deals damage per second to enemies stepping on it, ignoring Armor completely.";
+        return "Whenever a shot lands, there's a chance of spawning a <color=#FFCC7C>Lava Pool</color>. The <color=#FFCC7C>Lava Pool</color> deals damage per second to enemies <color=#FFCC7C>stepping</color> on it, ignoring <color=#919191>Armor</color> completely.";
     }
     public string getCaps()
     {
@@ -137,7 +137,7 @@ public class IceOnLand : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("IcePoolProb");
         }
-        if(slow >= 0.5F){
+        if(slow >= 0.5f){
             slow = .5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("IcePoolSlow");
@@ -165,7 +165,7 @@ public class IceOnLand : OnLandEffect
 
     public string getDescription()
     {
-        return "Whenever a shot lands, there's a chance of spawning an Ice Pool. Ice Pools slow down enemies stepping on it for " + Mathf.Round(slow*100) + "%. Ice Pools' slow does not stack with other Ice Pools.";
+        return "Whenever a shot lands, there's a chance of spawning an <color=#FFCC7C>Ice Pool</color>. <color=#FFCC7C>Ice Pools</color> <color=#AFEDFF>slow</color> down enemies <color=#FFCC7C>stepping</color> on it for " + Mathf.Round(slow*100) + "%. <color=#FFCC7C>Ice Pools'</color> <color=#AFEDFF>slow</color> does not stack with other <color=#FFCC7C>Ice Pools.";
     }
     public string getCaps()
     {
@@ -230,11 +230,7 @@ public class DrainOnLand : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolDuration");
         }
-        if(perc >= 1f){
-            perc = 1f;
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("DrainPoolDuration");
-        }
+        
         
     }
     public bool addList(){
@@ -253,11 +249,11 @@ public class DrainOnLand : OnLandEffect
 
     public string getDescription()
     {
-        return "Whenever a shot lands, there's a chance of sprouting a Flower. Everytime an enemy steps on a flower, you heal part of their Max HP";
+        return "Whenever a shot lands, there's a chance of sprouting a <color=#FFCC7C>Flower</color>. Everytime an enemy <color=#FFCC7C>steps</color> on a <color=#FFCC7C>flower</color>, you heal part of their <color=#0CD405>Max HP";
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}/s", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(perc*100f));
+        return string.Format("Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(perc*100f));
     }
 
     public string getIcon()

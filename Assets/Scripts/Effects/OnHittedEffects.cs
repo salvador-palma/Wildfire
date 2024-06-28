@@ -58,7 +58,7 @@ public class ThornsOnHitted : OnHittedEffects
     }
     public string getDescription()
     {
-        return "Everytime you get hit by an enemy you have a chance of returning a percentage of your Armor as damage back and applying On-Hit Effects";
+        return "Everytime you get hit by an enemy you have a chance of returning a percentage of your <color=#919191>Armor</color> as <color=#FF5858>damage</color> back and applying <color=#FF99F3>On-Hit Effects";
     }
     public string getCaps()
     {
