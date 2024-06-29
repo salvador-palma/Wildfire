@@ -34,9 +34,9 @@ public class SquirrelFlying : Squirrel
 
     public override void Move(){
         if(!flying){
-            transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime * (placedBomb? -1f : 1));
+            transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (placedBomb? -1f : 1));
         }else{
-            transform.position = Vector2.MoveTowards(transform.position, LandDest, Speed * flyingSpeedRatio * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, LandDest, Speed * (1-SlowFactor) * flyingSpeedRatio * Time.deltaTime);
         }
         
     }

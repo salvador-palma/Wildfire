@@ -40,7 +40,7 @@ public class Squirrel : Enemy
         }
     }
     public override void Move(){
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime * (placedBomb? -1f : 1));
+        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed* (1-SlowFactor)  * Time.deltaTime * (placedBomb? -1f : 1));
     }
     public override void Attack()
     {

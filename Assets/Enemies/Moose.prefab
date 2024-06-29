@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
+  Name: Moose
   Damage: 0
   AttackDelay: 5
   AttackRange: 3
@@ -118,9 +119,10 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 2243752992482967641}
   inEffect: 0
-  HealPerGrowl: 1000
+  slowfactor: 0
+  HealPerGrowl: 3000
   TimesHealed: 0
-  HealRadius: 2.7
+  HealRadius: 3
 --- !u!95 &499141664019057515
 Animator:
   serializedVersion: 7

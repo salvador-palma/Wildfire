@@ -28,7 +28,7 @@ public class Bunny : Enemy
         MaxHealth = Health;
     }
 
-    public override bool canTarget(){return !jumping;}
+   
     // Update is called once per frame
     override public void UpdateEnemy()
     {

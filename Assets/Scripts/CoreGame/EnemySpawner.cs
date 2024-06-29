@@ -146,6 +146,7 @@ public class EnemySpawner : MonoBehaviour
         CheckForBinoculars(e);
         g.transform.position = getPoint();
         g.GetComponent<Enemy>().CheckFlip();
+        
     }
     private void SetSpawnLimits(){
         height = 2f * Camera.main.orthographicSize;
@@ -178,14 +179,24 @@ public class EnemySpawner : MonoBehaviour
     
     /* ===== BINOCULARS ===== */
     private void CheckForBinoculars(Enemy e){
-        if(latestSpecies==null){latestSpecies=e.name; Debug.Log("RETURN");return;}
+        if(latestSpecies==null){latestSpecies=e.Name; return;}
 
-        int start_from = Array.FindIndex(PickedEnemies, item => e.name == item.name+"(Clone)");
-
-        if( e.name != latestSpecies && start_from > Array.FindIndex(PickedEnemies, item => latestSpecies == item.name+"(Clone)")){
-            latestSpecies = e.name;
-            IncrementBinocularHindSight();
+        int start_from = Array.FindIndex(PickedEnemies, en => e.Name == en.Name);
+        try{
+            int latest = Array.FindIndex(PickedEnemies, en => latestSpecies == en.Name);
+            if(e==null || PickedEnemies == null){return;}
+            if( e.Name != latestSpecies){
+                if(start_from > latest){
+                    
+                    latestSpecies = e.Name;
+                    IncrementBinocularHindSight();
+                }
+                
         }
+        } catch(Exception ex){
+            Debug.Log("Found: " + ex.Message);
+        }
+
         void IncrementBinocularHindSight(){
             Debug.Log("Increment Binocular");
             int j = 0;
@@ -225,6 +236,9 @@ public class EnemySpawner : MonoBehaviour
     }
     /* ===== ENEMY PICK ===== */
     private GameObject PickRandomEnemy(int round){
+        if(PickedEnemies==null){
+            Debug.Log("error found");
+        }
         if (round >= 60)
             return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
         return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;

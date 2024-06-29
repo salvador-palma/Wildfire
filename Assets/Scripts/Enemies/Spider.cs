@@ -64,7 +64,7 @@ public class Spider : Enemy
         transform.position = new Vector3(x, y, transform.position.z);
 
 
-        angle += Speed * direction * Time.deltaTime;
+        angle += Speed * (1-SlowFactor) * direction * Time.deltaTime;
         radiusX -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         radiusY -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         

@@ -68,7 +68,7 @@ public class Mole : Enemy
     }
     public override void Move()
     {
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
+        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
     }
 
     IEnumerator DigUp(){

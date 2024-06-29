@@ -107,7 +107,7 @@ public class IceOnHit : OnHitEffects
         if(en==null || en.getSlowInfo("IceHit")[0] > 0){return;}
         if(UnityEngine.Random.Range(0f,1f) < prob){   
 
-            en.SlowDown(duration/1000f, 1 - Mathf.Min(0.8f,(Flamey.Instance.MaxHealth-1000) * 0.00033f), "IceHit");
+            en.SlowDown(duration/1000f, Mathf.Min(0.75f,(Flamey.Instance.MaxHealth-1000) * 0.00033f), "IceHit");
             DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
 
         }
@@ -148,8 +148,9 @@ public class IceOnHit : OnHitEffects
     }
     public string getCaps()
     {
-        float percentage = Mathf.Min(0.75f,Flamey.Instance.MaxHealth * 0.00033f);
-        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/1000f));
+        float percentage = Mathf.Min(0.75f,(Flamey.Instance.MaxHealth-1000) * 0.00033f);
+        Debug.Log("Duration: " + duration);
+        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/10f)/100f);
     }
 
     public string getIcon()
@@ -370,7 +371,7 @@ public class StatikOnHit : OnHitEffects
 
     public string getDescription()
     {
-        return "When you hit an enemy, you have a chance of unleashing a <color=#FFCC7C>static energy chain</color> that travels through enemies nearby, dealing damage to each while applying <color=#FF99F3>On-Hit effects</color. The more the chain travels the less damage it deals";
+        return "When you hit an enemy, you have a chance of unleashing a <color=#FFCC7C>static energy chain</color> that travels through enemies nearby, dealing damage to each while applying <color=#FF99F3>On-Hit effects</color>. The more the chain travels the less damage it deals";
     }
     public string getCaps()
     {

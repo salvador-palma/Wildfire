@@ -190,6 +190,7 @@ public class Flamey : MonoBehaviour
         
         List<Enemy> g =  new List<Enemy>();
         g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>()).Where(x => x.canTarget()));
+        
         return g.Count!=0 ? g.Min() : null;
     }
     public UnityEngine.Vector2 getRandomHomingPosition(){

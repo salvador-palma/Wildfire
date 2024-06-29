@@ -381,21 +381,21 @@ public class DeckBuilder : MonoBehaviour
             new Augment("IceDuration","Slowly but Surely", new string[3]{"Your Frost Fire effect lasts for 0.2 seconds more", 
                                                             "Your Frost Fire effect lasts for 0.4 seconds more", 
                                                             "Your Frost Fire effect lasts for 0.6 seconds more"}, "IceDuration", Tier.Silver, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(0.2f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(.4f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(.6f, 0)))}),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(200, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(400, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(600, 0)))}),
             new Augment("IceDuration","Frost Bite", new string[3]{"Your Frost Fire effect lasts for 0.5 seconds more", 
                                                             "Your Frost Fire effect lasts for 1 seconds more", 
                                                             "Your Frost Fire effect lasts for 1.5 seconds more"}, "IceDuration", Tier.Gold, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(.5f, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1.5f, 0)))}), 
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(500, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1500, 0)))}), 
             new Augment("IceDuration","Absolute Zero", new string[3]{"Your Frost Fire effect lasts for 1 seconds more", 
                                                             "Your Frost Fire effect lasts for 2 seconds more", 
                                                             "Your Frost Fire effect lasts for 3 seconds more"}, "IceDuration", Tier.Prismatic, new UnityAction[3]{
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(2, 0))),
-                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(3, 0)))}),   
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(1000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(2000, 0))),
+                                                                                                                        new UnityAction(() => Flamey.Instance.addOnHitEffect(new IceOnHit(3000, 0)))}),   
             
             new Augment("ShredUnlock" ,"Shredding Flames", new string[1]{"Unlock the ability to shred enemy armor"}, "ShredUnlock", Tier.Prismatic, new UnityAction[1]{new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("ShredUnlock");
@@ -1092,27 +1092,27 @@ public class DeckBuilder : MonoBehaviour
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(20f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(35f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(50f, 0)))}),
-            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will gain +50 Max HP", 
-                                                            "Each second you will gain +75 Max HP", 
-                                                            "Each second you will gain +100 Max HP"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
+            new Augment("RegenPerSecond","Heart of Fire", new string[3]{"Each second you will gain +50 Health", 
+                                                            "Each second you will gain +75 Health", 
+                                                            "Each second you will gain +100 Health"}, "RegenPerSecond", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(50f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(75f, 0))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(100f, 0)))}),  
-            new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you gain regen +10 Max HP", 
-                                                            "At the end of each round you gain regen +15 Max HP", 
-                                                            "At the end of each round you gain regen +25 Max HP"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
+            new Augment("RegenPerRound","Emergency Bandage", new string[3]{"At the end of each round you gain +10 Max HP", 
+                                                            "At the end of each round you gain +15 Max HP", 
+                                                            "At the end of each round you gain +25 Max HP"}, "RegenPerRound", Tier.Silver, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 15))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 25)))}),  
-            new Augment("RegenPerRound","Leftovers", new string[3]{"At the end of each round you gain regen +20 Max HP", 
-                                                            "At the end of each round you gain regen +30 Max HP", 
-                                                            "At the end of each round you gain regen +50 Max HP"}, "RegenPerRound", Tier.Gold, new UnityAction[3]{
+            new Augment("RegenPerRound","Leftovers", new string[3]{"At the end of each round you gain +20 Max HP", 
+                                                            "At the end of each round you gain +30 Max HP", 
+                                                            "At the end of each round you gain +50 Max HP"}, "RegenPerRound", Tier.Gold, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 20))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 30))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50)))}),
-            new Augment("RegenPerRound","Free Healthcare", new string[3]{"At the end of each round you gain regen +40 Max HP", 
-                                                            "At the end of each round you gain regen +60 Max HP", 
-                                                            "At the end of each round you gain regen +100 Max HP"}, "RegenPerRound", Tier.Prismatic, new UnityAction[3]{
+            new Augment("RegenPerRound","Free Healthcare", new string[3]{"At the end of each round you gain +40 Max HP", 
+                                                            "At the end of each round you gain +60 Max HP", 
+                                                            "At the end of each round you gain +100 Max HP"}, "RegenPerRound", Tier.Prismatic, new UnityAction[3]{
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 40))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 60))),
                                                                                                                         new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 100)))}),

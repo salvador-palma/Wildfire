@@ -8,6 +8,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 {
     public Flamey flame;
+    public string Name;
     public int Damage;
     public float AttackDelay;
     public float AttackRange;
@@ -23,7 +24,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public bool inEffect;
 
-    private float slowfactor;
+    [SerializeField] private float slowfactor;
     protected float SlowFactor{
         get{
             return slowfactor;

@@ -67,7 +67,7 @@ public class Grasshoper : Enemy
             }
         }
     }
-    public override bool canTarget(){return !jumping;}
+    
     public void Landed(){
         jumping = false;
         timer = jumpTimer;
@@ -90,7 +90,7 @@ public class Grasshoper : Enemy
         transform.position = new Vector3(x, y, transform.position.z);
 
 
-        angle += Speed * direction * Time.deltaTime;
+        angle += Speed * (1-SlowFactor) * direction * Time.deltaTime;
         radiusX -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         radiusY -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
         

@@ -36,7 +36,7 @@ public class Frog : Enemy
         }
         MaxHealth = Health;
     }
-    public override bool canTarget(){return !jumping;}
+   
     // Update is called once per frame
     override public void UpdateEnemy()
     {
