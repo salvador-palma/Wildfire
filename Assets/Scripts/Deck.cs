@@ -1,17 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
-using Unity.Loading;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
-    public static Deck Instance {get; private set;}
+    public static Deck Instance {get; set;}
     [SerializeField] List<Augment> augments;
     [SerializeField] GameObject[] Slots;
     [SerializeField] GameObject SlotsParent;
@@ -32,16 +29,20 @@ public class Deck : MonoBehaviour
     public static event EventHandler RoundStart;
     public GameState gameState;
 
+    
     private void Awake(){
+        Debug.Log("Done here Deck");
+        
         Instance = this;
         RoundOver += ClearRemainderObjects;
+        // Console.Log("<color=#00ff00> Deck Initialized! </color>");
         
     }
 
     
 
     private void Start() {
-
+        Console.Log("<color=#00ff00> Deck Started! </color>");
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
             
             gameState = new GameState();
@@ -56,6 +57,9 @@ public class Deck : MonoBehaviour
     }
 
     void FillDeck(){
+        if(DeckBuilder.Instance == null){
+                Console.Log("<color=#0000ff> FillDeck: DeckBuilder was not initialized </color>");
+        }
         augments = DeckBuilder.Instance.getAllCards();
     }   
     Augment pickFromDeck(){
@@ -234,24 +238,43 @@ public class Deck : MonoBehaviour
         GameState.SaveGameState(gameState);
     }
     public void LoadGame(bool withLoad){
- 
-        FillDeck();
+        try{ 
+            FillDeck();
 
-        if(!withLoad){return;}
-        gameState = GameState.LoadGameState();
-        Flamey.Instance.addEmbers(gameState.CollectedEmbers);
-        
-        PhaseTiers = gameState.NextTiers;
+            if(!withLoad){return;}
+            Console.Log("<color=#0000ff> Passed Loading </color>");
+            gameState = GameState.LoadGameState();
+            if(Flamey.Instance == null){
+                Console.Log("<color=#0000ff> Flamey was not initialized </color>");
+            }
+            Flamey.Instance.addEmbers(gameState.CollectedEmbers);
+            
+            PhaseTiers = gameState.NextTiers;
+            if(GameUI.Instance == null){
+                Console.Log("<color=#0000ff> GameUI was not initialized </color>");
+            }
+            if(DeckBuilder.Instance == null){
+                Console.Log("<color=#0000ff> DeckBuilder was not initialized </color>");
+            }
+            if(LocalBestiary.INSTANCE == null){
+                Console.Log("<color=#0000ff> LocalBestiary was not initialized </color>");
+            }
+            if(EnemySpawner.Instance == null){
+                Console.Log("<color=#0000ff> EnemySpawner was not initialized </color>");
+            }
+            foreach(SerializedAugment a in gameState.augments){
+                GameUI.Instance.AddAugment(a);
+                DeckBuilder.Instance.getAugmentByName(a.title).Activate(a.level);
+            }
+            Flamey.Instance.Health = gameState.Health;
+            Flamey.Instance.MaxHealth = gameState.MaxHP;
 
-        foreach(SerializedAugment a in gameState.augments){
-            GameUI.Instance.AddAugment(a);
-            DeckBuilder.Instance.getAugmentByName(a.title).Activate(a.level);
+            EnemySpawner.Instance.current_round = gameState.CurrentRound;
+            EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
+
+        }catch(Exception e){
+            Console.Log("LoadGame: " + e.Message);
         }
-        Flamey.Instance.Health = gameState.Health;
-        Flamey.Instance.MaxHealth = gameState.MaxHP;
-
-        EnemySpawner.Instance.current_round = gameState.CurrentRound;
-        EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
         
     }
     private void ClearRemainderObjects(object sender, EventArgs e)
@@ -263,6 +286,10 @@ public class Deck : MonoBehaviour
                 Debug.Log("Destroyed " + i);
                 i++;
             }
+             
+        }
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Prop")){
+            Destroy(g);
              
         }
     }

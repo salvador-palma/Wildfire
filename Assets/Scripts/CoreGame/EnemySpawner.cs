@@ -77,21 +77,32 @@ public class EnemySpawner : MonoBehaviour
         
     }
     public void StartGame(){ 
-        
+        Console.Log("Starting Enemy Spawner...");
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
+
+            if(Deck.Instance == null){
+                Console.Log("<color=#0000ff> Deck was not initialized </color>");
+            }
             Deck.Instance.LoadGame(false);
+
             PickedEnemies = pickEnemies(current_round);
             if(Deck.Instance.hasAtLeastOneUnlockable()){
                 current_round = -1;
                 isOnAugments = true;
                 Deck.Instance.StartAugments(true, true);
+                Console.Log("Initial Augments Started");
             }else{
                 GameEnd = false;
+                Console.Log("No Abilities Unlocked");
             }
             
         }else{
+            if(Deck.Instance == null){
+                Console.Log("<color=#0000ff> Deck was not initialized!</color>");
+            }
             Deck.Instance.LoadGame(true);
+            Console.Log("Loading Game...");
             newRound();
         }
 
@@ -106,10 +117,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update() {
-        if(GameEnd){return;}
+        if(GameEnd){Console.Log("Enemy Spawner not Running!");return;}
+        
         UpdateEnemies();
         if(!isOn){
+            Console.Log("Waiting for round to finish...");
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
+                Console.Log("Round finished!");
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
                 else{
                     isOnAugments = true;
@@ -119,9 +133,11 @@ public class EnemySpawner : MonoBehaviour
             } 
             return;
         }
+
         if(TimerEnemySpawnCounter > 0){
             TimerEnemySpawnCounter-= Time.deltaTime;
         }else{
+            Console.Log("Spawning Enemy...");
             TimerEnemySpawnCounter = TimerEnemySpawn;
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;

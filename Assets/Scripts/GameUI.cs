@@ -282,7 +282,13 @@ public class GameUI : MonoBehaviour
     }
 
     public void StartGameEvent(){
-        EnemySpawner.Instance.StartGame();
+        Console.Log("Start Game Event.");
+        try{
+            EnemySpawner.Instance.StartGame();
+        }catch(Exception e){
+            Console.Log("<color=#ff0000>"+e.ToString()+"</color>");
+        }
+        
     }
 
     public void SetEmberAmount(int n){
