@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy[] PickedEnemies;
     public List<Enemy> PresentEnemies;
 
+    public bool Paused;
 
     //ENEMY PREVIEWER
     [Header("Binoculars")]
@@ -180,6 +181,10 @@ public class EnemySpawner : MonoBehaviour
 
         Flamey.Instance.notEspecificEffects.ForEach(effect => effect.ApplyEffect());
         Flamey.Instance.ApplyTimedRound();
+
+        if(Character.Instance.isCharacter("Multicaster")){
+            Flamey.Instance.addAttackSpeed(0.2f);
+        }
 
         StartRound();
         

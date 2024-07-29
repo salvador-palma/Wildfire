@@ -30,7 +30,7 @@ public class Flamey : MonoBehaviour
 
     [Range(5f, 20f)] public float BulletSpeed;
     [Range(0f, 100f)] public float accuracy;
-    [SerializeField][Range(0.75f, 12f)] public float atkSpeed = 1;
+    [SerializeField]public float atkSpeed = 0.75f;
     float accUpdate;
     [HideInInspector] public float Accuracy;
     private float AtkSpeed;
@@ -276,8 +276,11 @@ public class Flamey : MonoBehaviour
         }
     }
     public void addAttackSpeed(float amount){
-        atkSpeed = Math.Min(atkSpeed + amount, 12f);
-        if(atkSpeed == 12f){
+        atkSpeed += amount;
+        if(atkSpeed >= 12f){
+            if(!(Character.Instance.isCharacter("Multicaster") && amount == 0.2f)){
+                atkSpeed = 12f;
+            }
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("AtkSpeed");
         }

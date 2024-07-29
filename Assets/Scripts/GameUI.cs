@@ -26,6 +26,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundCounter;
     int current_Tab = 0;
 
+    
     [Header("Augments")]
     [SerializeField] GameObject AugmentContainer;
     [SerializeField] GameObject AugmentTemplate;
@@ -35,6 +36,7 @@ public class GameUI : MonoBehaviour
     [Header("Stats")]
     [SerializeField] TextMeshProUGUI[] StatsTexts;
     [SerializeField] Slider healthSlider;
+    [SerializeField] GameObject ProfileVessel;
     [SerializeField] TextMeshProUGUI EmberAmountTxt;
     
     [Header("Effects")]
@@ -62,6 +64,9 @@ public class GameUI : MonoBehaviour
     List<SimpleStat> FinalStats;
     [SerializeField] GameObject[] StatTemplates;
     
+    [Header("Character Pop Up")]
+    [SerializeField] TextMeshProUGUI CharacterNameDescriptionTxt;
+    [SerializeField] GameObject CharacterImage;
 
     private void Awake() {
         Instance = this;
@@ -294,7 +299,39 @@ public class GameUI : MonoBehaviour
     public void SetEmberAmount(int n){
         EmberAmountTxt.text = n.ToString();
     }
+
+    /* ===== CHARACTERS ===== */
     
+    public void playCharacterTransition(){
+        GetComponent<Animator>().SetTrigger("Character Transition");
+    }
+    public void CharacterTransitionLooksSetup(){
+        Character.Instance.SetupActiveLooks();
+    }
+    public void CharacterUnlockedPopUp(){
+        if(Character.Instance.isCharacterUnlocked()){
+            EnemySpawner.Instance.Paused = true;
+            EnemySpawner.Instance.newRound();
+        }else{
+            FillCharacterPopUpInfo();
+            GetComponent<Animator>().Play("CharacterUnlockedPopUp");
+        }
+ 
+    }
+    public void CharacterUnlockedPopDown(){
+        GetComponent<Animator>().Play("CharacterUnlockedPopDown");
+         EnemySpawner.Instance.Paused = false;
+        EnemySpawner.Instance.newRound();
+    }
+
+    private void FillCharacterPopUpInfo(){
+        CharacterNameDescriptionTxt.SetText(string.Format("{0}<br><color=#999999><size=10>{1}</size></color>",
+                                            Character.Instance.getName().ToUpper(), Character.Instance.getDescription()));
+        Character.Instance.TransformVesselToCharacter(CharacterImage);
+    }
+    public void UpdateProfileCharacter(){
+        Character.Instance.TransformVesselToCharacter(ProfileVessel);
+    }
 }
 
 public class SimpleStat{

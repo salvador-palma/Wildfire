@@ -106,15 +106,15 @@ public class Deck : MonoBehaviour
         RoundStart?.Invoke(this, new EventArgs());
 
         ActivateAugment(currentAugments[i]);
+        
         refreshedAugments.Clear();
-
-        
-        EnemySpawner.Instance.newRound();
-        
-        
-
         currentAugments = new Augment[]{null,null,null};
         
+        if(!EnemySpawner.Instance.Paused){
+            EnemySpawner.Instance.newRound();
+        }
+        
+
     }
 
     public void StartAugments(bool isPrismaticRound, bool OnlyUnlockables = false){

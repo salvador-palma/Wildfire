@@ -16,6 +16,7 @@ public class SecondShot : OnShootEffects{
 
 
     public static SecondShot Instance;
+    public bool maxed;
     public float perc;
     public SecondShot(float p){
         perc = p;
@@ -40,6 +41,7 @@ public class SecondShot : OnShootEffects{
     }
 
     public void Stack(SecondShot secondShot){
+        perc = 1;
         perc += secondShot.perc;
         RemoveUselessAugments();
     }
@@ -49,6 +51,12 @@ public class SecondShot : OnShootEffects{
             perc = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    private void CheckMaxed(){
+        if(perc >= 1f){
+            Character.Instance.SetupCharacter("Multicaster");
         }
     }
     public bool addList(){
@@ -77,6 +85,8 @@ public class SecondShot : OnShootEffects{
     {
         return "MulticasterUnlock";
     }
+
+   
 }
 
 public class BurstShot : OnShootEffects{
