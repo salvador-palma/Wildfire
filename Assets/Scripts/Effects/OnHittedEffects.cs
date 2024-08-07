@@ -45,16 +45,25 @@ public class ThornsOnHitted : OnHittedEffects
 
     }
     public void Stack(ThornsOnHitted thornsOnHitted){
+        
         prob += thornsOnHitted.prob;
         perc += thornsOnHitted.perc;
         RemoveUselessAugments();
     }
+    public bool maxed;
     private void RemoveUselessAugments(){
         if(prob >= 1){
             prob = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThornsProb");
         }      
+        if(!maxed){CheckMaxed();}
+    }
+
+    private void CheckMaxed(){
+        if(prob >= 1f){
+            Character.Instance.SetupCharacter("Thorns");
+        }
     }
     public string getDescription()
     {

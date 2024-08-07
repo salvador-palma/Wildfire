@@ -99,6 +99,13 @@ public class FlameCircle : NotEspecificEffect
             deck.removeClassFromDeck("OrbitalAmount");
         }  
           
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 4f){
+            Character.Instance.SetupCharacter("Orbital");
+        }
     }
 
     
@@ -129,6 +136,13 @@ public class MoneyMultipliers : NotEspecificEffect
         p+=moneyMultipliers.p;
         mult+=moneyMultipliers.mult;
         RemoveUselessAugments();
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(mult >= 3f){
+            Character.Instance.SetupCharacter("Money");
+        }
     }
     private void RemoveUselessAugments(){
         if(p >= 1){
@@ -265,6 +279,14 @@ public class CandleTurrets : NotEspecificEffect
             deck.removeClassFromDeck("CandleAtkSpeed");
         } 
           
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 6f && atkSpeed >= 3f){
+            Character.Instance.SetupCharacter("Arcanist");
+            maxed = true;
+        }
     }
 
     
@@ -362,6 +384,14 @@ public class Summoner : NotEspecificEffect
             deck.removeClassFromDeck("SummonSpeed");
         } 
           
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 10 && atkSpeed >= 3f && speed >= 4f){
+            Character.Instance.SetupCharacter("Bee Summoner");
+            maxed = true;
+        }
     }
 
     

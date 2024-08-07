@@ -56,7 +56,16 @@ public class Explosion : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ExplodeProb");
         } 
+        if(!maxed){CheckMaxed();}
     }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .5f){
+            Character.Instance.SetupCharacter("Explosion");
+            maxed = true;
+        }
+    }
+
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
@@ -126,6 +135,14 @@ public class Necromancer : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("NecroProb");
         } 
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .5f){
+            Character.Instance.SetupCharacter("Necro");
+            maxed = true;
+        }
     }
     public string getDescription()
     {
@@ -215,6 +232,14 @@ public class Bullets : OnKillEffects
             amount = 6;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BulletsAmount");
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .5f && amount >= 6){
+            Character.Instance.SetupCharacter("Pirate");
+            maxed = true;
         }
     }
     public string getDescription()

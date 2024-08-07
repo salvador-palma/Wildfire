@@ -54,6 +54,14 @@ public class VampOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("VampProb");
         }      
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= 1f){
+            Character.Instance.SetupCharacter("Vampire");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -127,6 +135,14 @@ public class IceOnHit : OnHitEffects
             duration= 10000;
             deck.removeClassFromDeck("IceDuration");
         }    
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= 1f && duration >= 10000){
+            Character.Instance.SetupCharacter("Ice");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -199,6 +215,14 @@ public class ShredOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ShredPerc");
         }      
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(percReduced >= 0.5f && prob >= 1f){
+            Character.Instance.SetupCharacter("Shred");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -267,6 +291,14 @@ public class ExecuteOnHit : OnHitEffects
             deck.removeClassFromDeck("Execute");
         } 
 
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(percToKill >= 0.5f && Flamey.Instance.ArmorPen >= .8f ){
+            Character.Instance.SetupCharacter("Assassin");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -354,6 +386,14 @@ public class StatikOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("StatikTTL");
         }      
+    if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= 1f && ttl >= 10){
+            Character.Instance.SetupCharacter("Statik");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;

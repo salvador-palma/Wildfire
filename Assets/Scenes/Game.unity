@@ -10193,42 +10193,227 @@ MonoBehaviour:
     AnimationBool: Thorns
     AbilityName: Thorns
     AbilityDescription: Immune to all Stuns
-    BodyBack: {fileID: 0}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 0}
-    BodyBackColor: {r: 0, g: 0, b: 0, a: 0}
-    BodyFrontColor: {r: 0, g: 0, b: 0, a: 0}
-  - Name: Empowered
-    AnimationBool: Crit
-    AbilityName: Critical Strike
-    AbilityDescription: Every source of Damage is able to Critically Strike
-    BodyBack: {fileID: 0}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 0}
-    BodyBackColor: {r: 0, g: 0, b: 0, a: 0}
-    BodyFrontColor: {r: 0, g: 0, b: 0, a: 0}
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 7f3add2241b179f428c2d6712cc1e900, type: 3}
+    Face: {fileID: 21300000, guid: 9a9e25e8b10a30d4ab7e084c8e7516ae, type: 3}
+    BodyBackColor: {r: 0.23529413, g: 0.6862745, b: 0.49411768, a: 1}
+    BodyFrontColor: {r: 0.45098042, g: 1, b: 0.7843138, a: 1}
   - Name: Saturn
     AnimationBool: Orbital
-    AbilityName: Orbital Flames
-    AbilityDescription: Gain +2 aditional smaller orbits
-    BodyBack: {fileID: 0}
+    AbilityName: Orbital
+    AbilityDescription: Gain +2 Orbits
+    BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 21300000, guid: be0e031c93bc602498ca2e8b759baadc, type: 3}
+    Face: {fileID: 21300000, guid: aa98c36d2babcce4094fb8b81b8b0453, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Sir Flareington
+    AnimationBool: Money
+    AbilityName: Money
+    AbilityDescription: Shiny spawn chance increases to 1%
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: ed3dc51ae158ea94cbc82000d40a38eb, type: 3}
+    Face: {fileID: 21300000, guid: 0a3d5b38e35bc284783cd61e5990ab31, type: 3}
+    BodyBackColor: {r: 0.77647066, g: 0.75294125, b: 0.7960785, a: 1}
+    BodyFrontColor: {r: 0.9058824, g: 0.8705883, b: 0.9568628, a: 1}
+  - Name: Fire Bee
+    AnimationBool: Bee
+    AbilityName: Bee Summoner
+    AbilityDescription: Manage your Hive!
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: aaba9973b4cab8f45bb1fac810bcf374, type: 3}
+    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
+    BodyBackColor: {r: 0.26666668, g: 0.10980393, b: 0.0627451, a: 1}
+    BodyFrontColor: {r: 0.9490197, g: 0.6666667, b: 0.08627451, a: 1}
+  - Name: Van Pyre
+    AnimationBool: Vampire
+    AbilityName: Vampire
+    AbilityDescription: Gain +1 Max HP for each 1000 HP Overhealed
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 26f597fa10cc8a7408c6320da27d60cf, type: 3}
+    Face: {fileID: 21300000, guid: 6e39dc0060db5e142ba961155e060a0e, type: 3}
+    BodyBackColor: {r: 0.9921569, g: 0.8588236, b: 0.70980394, a: 1}
+    BodyFrontColor: {r: 0.93725497, g: 0.7803922, b: 0.62352943, a: 1}
+  - Name: Ice Cube
+    AnimationBool: Ice
+    AbilityName: Ice
+    AbilityDescription: <b>Active:</b> Become unhittable for 5 seconds (Cooldown
+      1 round)
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
-    Face: {fileID: 0}
-    BodyBackColor: {r: 0, g: 0, b: 0, a: 0}
-    BodyFrontColor: {r: 0, g: 0, b: 0, a: 0}
+    Face: {fileID: 21300000, guid: 14afa6e652243ac4b918120a9cb3a98d, type: 3}
+    BodyBackColor: {r: 0.64705884, g: 0.82745105, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Echo
+    AnimationBool: Shred
+    AbilityName: Shred
+    AbilityDescription: Gain +1 Armor for each 100 Shredded Armor
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: b5793142d42d6a14194b0b216ef6cbf3, type: 3}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 0.5803922, g: 0.43529415, b: 0.86274517, a: 1}
+    BodyFrontColor: {r: 0.86274517, g: 0.5529412, b: 0.7411765, a: 1}
+  - Name: Ash Pyre
+    AnimationBool: Assassin
+    AbilityName: Assassin
+    AbilityDescription: Gain +1 Armor for each 100 Shredded Armor
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: b336ad4404a8c98458df00144fb3cbe0, type: 3}
+    Face: {fileID: 21300000, guid: f1aa7f189907849459a89e40af7c719e, type: 3}
+    BodyBackColor: {r: 0.19215688, g: 0.21568629, b: 0.30980393, a: 1}
+    BodyFrontColor: {r: 0.11764707, g: 0.14117648, b: 0.24705884, a: 1}
+  - Name: Tesla Coil
+    AnimationBool: Statik
+    AbilityName: Statik
+    AbilityDescription: Every time statik procs, gain 1 HP Shield up to 10% MAX HP
+    BodyBack: {fileID: 21300000, guid: 1ecc71e4b6e116642bc01dfa7ef05880, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 5020ccbd4b437ed44be03b312eb14763, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Bomber
+    AnimationBool: Explosion
+    AbilityName: Explosion
+    AbilityDescription: After every explosion another one will detonate near the
+      Campfire
+    BodyBack: {fileID: 21300000, guid: 7102881627f786c49ae93c002898a613, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: d9f1d435da110ec46946ffd7a87e15df, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: King Ghoul
+    AnimationBool: Necro
+    AbilityName: Necro
+    AbilityDescription: Ghouls will hit double the times
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 906f946758a536b4897cf7083d6e534e, type: 3}
+    BodyBackColor: {r: 0.37647063, g: 0.58431375, b: 0.7960785, a: 1}
+    BodyFrontColor: {r: 0.24705884, g: 0.5137255, b: 0.7843138, a: 1}
+  - Name: Captain Ember Teach
+    AnimationBool: Pirate
+    AbilityName: Pirate
+    AbilityDescription: Cannonballs can pass through 3 enemies
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 6f48d94b85168264a81177fb14686f82, type: 3}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 0.9960785, g: 0.9960785, b: 0, a: 1}
+    BodyFrontColor: {r: 0.41568628, g: 0.22352941, b: 0.15294118, a: 1}
+  - Name: Mt. Vesuvius
+    AnimationBool: Lava
+    AbilityName: Lava
+    AbilityDescription: A permanent Lava Pool will sit near the Campfire
+    BodyBack: {fileID: 21300000, guid: d8b444b3850195047830fb643c86c232, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 10a69fde5f389ad4c8ffb40c9f14cc44, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
   - Name: Mt. Everest
     AnimationBool: Snow
-    AbilityName: Snow Pool
-    AbilityDescription: ----
-    BodyBack: {fileID: 0}
+    AbilityName: Snow
+    AbilityDescription: <b>Active:</b> Cover the whole arena in Snow (1 Round Cooldown)
+    BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
-    Face: {fileID: 0}
-    BodyBackColor: {r: 0, g: 0, b: 0, a: 0}
-    BodyFrontColor: {r: 0, g: 0, b: 0, a: 0}
+    Face: {fileID: 21300000, guid: fefab17c3a6ea064e81f9423bf0f9f00, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Flora
+    AnimationBool: Flower
+    AbilityName: Flower
+    AbilityDescription: Overhealing will turn into Extra Damage instead
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 5d0bf28d09d77464f8ead33b3218644b, type: 3}
+    Face: {fileID: 21300000, guid: a0b150097291d1f41853d1f099fed361, type: 3}
+    BodyBackColor: {r: 0.3019608, g: 0.7803922, b: 0.2901961, a: 1}
+    BodyFrontColor: {r: 0.77647066, g: 0.909804, b: 0.3647059, a: 1}
+  - Name: Blaze Brigade
+    AnimationBool: Burst
+    AbilityName: Burst
+    AbilityDescription: '<b>Active: </b> Shoot 250 Bullets in Burst (3 Round Cooldown)'
+    BodyBack: {fileID: 21300000, guid: b90f329d505d5d34a92c6a822994eee3, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 3aa3fe38f76a8b140add2a7bfa8ed2a7, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Blue Flame
+    AnimationBool: Blue
+    AbilityName: Blue
+    AbilityDescription: '<b>Active: </b> Turn Purple for 5s (1 Round Cooldown)'
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
+    BodyBackColor: {r: 0.5019608, g: 0.6, b: 0.9960785, a: 1}
+    BodyFrontColor: {r: 0.9960785, g: 0.9960785, b: 0.627451, a: 1}
+  - Name: Powered Up
+    AnimationBool: Crit
+    AbilityName: Crit
+    AbilityDescription: Crit Strikes will apply to all Damage sources
+    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Ankh-Ra
+    AnimationBool: Arcanist
+    AbilityName: Arcanist
+    AbilityDescription: Gain +1 Candle Damage for each 100 Kills
+    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Monk
+    AnimationBool: Immolate
+    AbilityName: Immolate
+    AbilityDescription: 'Immolated waves return after reaching the maximum radius
+
+'
+    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Zeus
+    AnimationBool: Thunder
+    AbilityName: Thunder
+    AbilityDescription: Cast double the Thunders
+    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+  - Name: Pheonix
+    AnimationBool: Regen
+    AbilityName: Regen
+    AbilityDescription: When you die, reborn at full HP and kill every enemy on screen
+      (5 Round Cooldown)
+    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &818081748
 PrefabInstance:
   m_ObjectHideFlags: 0

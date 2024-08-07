@@ -335,6 +335,11 @@ public class Flamey : MonoBehaviour
     }
 
     public void Stun(float t){
+
+        if(Character.Instance.isCharacter("Thorns")){
+            return;
+        }
+
         if(stunTimeLeft > 0){return;}
         GetComponent<Animator>().Play("Stunned");
         stunTimeLeft = t;

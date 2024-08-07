@@ -41,7 +41,6 @@ public class SecondShot : OnShootEffects{
     }
 
     public void Stack(SecondShot secondShot){
-        perc = 1;
         perc += secondShot.perc;
         RemoveUselessAugments();
     }
@@ -135,6 +134,14 @@ public class BurstShot : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstInterval");
         }
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 20 && interval <= 10){
+            Character.Instance.SetupCharacter("Burst");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -202,6 +209,14 @@ public class KrakenSlayer : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BlueFlameInterval");
             Flamey.Instance.gameObject.GetComponent<Animator>().SetTrigger("GoBlue");
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(interval <= 0){
+            Character.Instance.SetupCharacter("Blue");
+            maxed = true;
         }
     }
     public bool addList(){
@@ -273,6 +288,14 @@ public class CritUnlock : OnShootEffects{
             mult = 5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritMult");
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(perc >= .8f && mult >= 5f){
+            Character.Instance.SetupCharacter("Crit");
+            maxed = true;
         }
     }
     public bool addList(){
