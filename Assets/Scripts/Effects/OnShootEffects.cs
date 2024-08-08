@@ -41,6 +41,7 @@ public class SecondShot : OnShootEffects{
     }
 
     public void Stack(SecondShot secondShot){
+        perc = 1;
         perc += secondShot.perc;
         RemoveUselessAugments();
     }
