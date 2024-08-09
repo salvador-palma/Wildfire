@@ -21,14 +21,7 @@ public class DeckBuilder : MonoBehaviour
     public int getPrice(string skill, int level){
         List<string> firstUnlocks = new List<string>(){"OrbitalUnlock","Assassins", "CritUnlock", "RegenUnlock", "ShredUnlock", "BurstUnlock"};
         int[] prices = new int[0];
-        switch(SkillTreeManager.Instance.GetSkills(skill).max_value){
-            case 1: prices =  unlockPrice;
-                break;
-            case 2: prices = upgradePrice;
-                break;
-            case 4: prices = basePrice;
-                break;  
-        }
+        
         if(level>=prices.Length || level < 0){return -1;}
         return firstUnlocks.Contains(skill) ? 300 : prices[level];
     }

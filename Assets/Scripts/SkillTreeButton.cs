@@ -8,88 +8,85 @@ using UnityEngine.UI;
 
 public class SkillTreeButton : MonoBehaviour
 {
-    const string UNLOCKED = "SkillTreeButtonUnlocked";
-    const string LOCKED = "SkillTreeButtonLocked";
-    const string UNLOCKING = "SkillTreeButtonUnlock";
+    const string UNLOCKED = "LineOn";
+    const string LOCKED = "LineOff";
+    const string UNLOCKING = "LineSkill";
 
     public static SkillTreeButton SelectedButton;
 
-    public string DisplayTitle;
-    [SerializeField] bool UnlockableField;
-    [SerializeField] string[] UnlockableClasses;
+    public string AbilityName;
 
-    [SerializeField] string AugmentClass;
+    
    
     [SerializeField] List<SkillTreeButton> previousNode;
-    [SerializeField] List<SkillTreeLine> nextPaths;
-    private bool wasUnlocked;
+    [SerializeField] List<SkillTreeButton> followingNode;
+    [SerializeField] List<Animator> nextPaths;
+    
     void Start(){virtualStart(); SkillTreeManager.Instance.treeReset += virtualStart;}
 
-    private void virtualStart(object sender, EventArgs e){virtualStart();ResetLines();}
-    private void ResetLines(){nextPaths.ForEach(l => l.PlayInit());}
+    private void virtualStart(object sender, EventArgs e){virtualStart();/*ResetLines();*/}
+    // private void ResetLines(){nextPaths.ForEach(l => l.PlayInit());}
     public void virtualStart(){
-        wasUnlocked = false;
+        
         GetComponent<Button>().onClick.RemoveAllListeners();
         int lvl = getLevel();
-        if(lvl==-1){GetComponent<Animator>().Play(LOCKED);}
-        else if(lvl>=0){GetComponent<Animator>().Play(UNLOCKED);}
-        if(lvl>=1){NextPaths(false);}
+  
+        if(lvl>= 0){
+            foreach (Animator path in nextPaths)
+            {
+                path.Play(UNLOCKED);
+            }
+        }
+
+        if( lvl == -3 ){
+            gameObject.SetActive(false);
+        }
         
         GetComponent<Button>().onClick.AddListener(Clicked);
-        UpdateImage();
+       
     }
     public void ping(){
         bool result =true;
         foreach (SkillTreeButton item in previousNode)
         {
-            result = result && item.wasBought();
+            result = result && item.getLevel() >= 0;
         }
-        if(result && !wasUnlocked){Unlock();SkillTreeManager.Instance.Upgrade(AugmentClass);UpdateImage();}
+        /* && !wasUnlocked */ 
+        if(result ){Unlock();SkillTreeManager.Instance.Upgrade(AbilityName);}
     }
     private void Unlock(){
-        wasUnlocked = true;
-        GetComponent<Animator>().Play(UNLOCKING);
+       // wasUnlocked = true;
+        // GetComponent<Animator>().Play(UNLOCKING);
     }
     public void Clicked(){
-        // Upgrade();
-        // UpdateImage();
+        Debug.Log("Clicked Skill...");
         SelectedButton = this;
         
         int lvl = getLevel();
-        if(lvl ==-1){return;}
-        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
-        MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
+        if(lvl <=-2){return;}
+
+        SkillTreeManager.Instance.DisplaySkill(AbilityName);
+        //MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
     
     }
     public void ClickedUpgrade(){
         Upgrade();
-        UpdateImage();
-        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
+        SkillTreeManager.Instance.DisplaySkill(AbilityName);
     }
    
     private void Upgrade(){
-
-        SkillTreeManager.Instance.Upgrade(AugmentClass);
-        if(getLevel()==1){NextPaths(true);}
+        SkillTreeManager.Instance.Upgrade(AbilityName);
+        if(getLevel()==0){NextPaths(true);}
     }
     
     public void NextPaths(bool withPing){
-        foreach (SkillTreeLine item in nextPaths)
+        foreach (Animator item in nextPaths)
         {
-            item.PlayUnlock(withPing);
+            item.Play("");
         }
     }
-
-    private void UpdateImage(){
-        transform.Find("FillImage").GetComponent<Image>().color = SkillTreeManager.Instance.getColor(AugmentClass);
-    }
-
-    public bool wasBought(){
-        return getLevel()>=1; 
-    }
-
-    private int getLevel(){
-        return SkillTreeManager.Instance.getLevel(AugmentClass);
+    public int getLevel(){
+        return SkillTreeManager.Instance.getLevel(AbilityName);
     }
 
 
