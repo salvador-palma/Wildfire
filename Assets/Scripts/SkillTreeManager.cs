@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [System.Serializable]
@@ -20,6 +22,7 @@ public class SerializableList<T> {
 [Serializable]
 public class Ability{
     public string Name;
+    public string Type;
     [TextArea] public string AbilityDescription1;
     [TextArea] public string AbilityDescription2;
     [TextArea] public string AbilityDescription3;
@@ -41,6 +44,13 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] passivesText;
     [SerializeField] Animator anim;
     public event EventHandler treeReset;
+
+    [Header("Color Pallete")]
+    [SerializeField] ColorBlock UnlockedColor;
+    [SerializeField] ColorBlock SilverColor;
+    [SerializeField] ColorBlock GoldColor;
+    [SerializeField] ColorBlock PrismaticColor;
+
     private void Awake() {
         Instance = this;
         anim = GetComponent<Animator>();
@@ -60,16 +70,26 @@ public class SkillTreeManager : MonoBehaviour
         return result==null ? -1 : result.level;
     }
 
-    public void Upgrade(string skill_name){
+    public bool Upgrade(string skill_name){
         Skills skill = GetSkill(skill_name);
-        int price = DeckBuilder.Instance.getPrice(skill_name, skill.level);
+        int price = DeckBuilder.Instance.getPrice(skill_name, skill.level + 1);
+        if(price == -1){return false;}
+
+        if(price == -2){
+            changeEmberAmountUI();
+            skill.level++;
+            WritingData();
+            return true;
+        }
         if(price < PlayerData.embers){
             PlayerData.skillTreeEmbers+=price;
             PlayerData.embers-=price;
             changeEmberAmountUI();
             skill.level++;
             WritingData();
+            return true;
         }
+        return false;
     }
     public Skills GetSkill(string skill){
         
@@ -119,20 +139,22 @@ public class SkillTreeManager : MonoBehaviour
    
 
     //UI PARTITION
-    public void DisplaySkill(string skill){
+    public void DisplaySkill(string skill, int level){
         Debug.Log("Displaying Skill...");
         anim.SetTrigger("DisplayInfo");
         
         
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
         if(ability != null){
-            passivesText[0].text = ability.AbilityDescription1;
-            passivesText[1].text = ability.AbilityDescription2;
-            passivesText[2].text = ability.AbilityDescription3;
+            passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br>" + ability.AbilityDescription1;
+            passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br>" + ability.AbilityDescription2;
+            passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br>" + ability.AbilityDescription3;
 
             titleText.text = ability.Name;
             typeText.text = "Not-Done Effect";
-            purchaseButtonText.text = "Upgrade (1500)";
+
+            int price = DeckBuilder.Instance.getPrice(skill, level + 1);
+            purchaseButtonText.text = string.Format("Upgrade ({0})",  price == - 1 ? "Maxed Out" : price);
 
             
             
@@ -143,9 +165,21 @@ public class SkillTreeManager : MonoBehaviour
 
     }
     
+    public ColorBlock GetColors(int level){
+        switch(level){
+            case 0:
+                return SilverColor;
+            case 1:
+                return GoldColor;
+            case 2:
+                return PrismaticColor;
+            default:
+                return UnlockedColor;
+        }
+    }
     public void changeEmberAmountUI(int amount = 0){
         PlayerData.embers += amount;
-        //emberAmountTxt.text = PlayerData.embers.ToString();
+        emberText.text = PlayerData.embers.ToString();
     }
 
     public void resetSkillTree(){

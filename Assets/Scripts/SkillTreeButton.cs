@@ -17,28 +17,28 @@ public class SkillTreeButton : MonoBehaviour
     public string AbilityName;
 
     
-   
+    public int level;
+
     [SerializeField] List<SkillTreeButton> previousNode;
     [SerializeField] List<SkillTreeButton> followingNode;
     [SerializeField] List<Animator> nextPaths;
     
     void Start(){virtualStart(); SkillTreeManager.Instance.treeReset += virtualStart;}
 
-    private void virtualStart(object sender, EventArgs e){virtualStart();/*ResetLines();*/}
-    // private void ResetLines(){nextPaths.ForEach(l => l.PlayInit());}
+    private void virtualStart(object sender, EventArgs e){virtualStart();}
     public void virtualStart(){
         
         GetComponent<Button>().onClick.RemoveAllListeners();
-        int lvl = getLevel();
-  
-        if(lvl>= 0){
+        ReloadColor();
+        ReloadFunctionality();
+        if(level>= 0){
             foreach (Animator path in nextPaths)
             {
                 path.Play(UNLOCKED);
             }
         }
 
-        if( lvl == -3 ){
+        if( level == -3 ){
             gameObject.SetActive(false);
         }
         
@@ -47,16 +47,22 @@ public class SkillTreeButton : MonoBehaviour
     }
     public void ping(){
         bool result =true;
-        foreach (SkillTreeButton item in previousNode)
+        foreach (SkillTreeButton skills in previousNode)
         {
-            result = result && item.getLevel() >= 0;
+            result = result && skills.getLevel() >= 0;
         }
-        /* && !wasUnlocked */ 
-        if(result ){Unlock();SkillTreeManager.Instance.Upgrade(AbilityName);}
-    }
-    private void Unlock(){
-       // wasUnlocked = true;
-        // GetComponent<Animator>().Play(UNLOCKING);
+        if(result){
+            if(Step()){
+                
+                if(level == -1){
+                    followingNode.ForEach(skill =>{
+                        if(skill.level == -3){
+                            skill.gameObject.SetActive(true); skill.Step();
+                        }
+                    });
+                }
+            }
+        }
     }
     public void Clicked(){
         Debug.Log("Clicked Skill...");
@@ -65,25 +71,48 @@ public class SkillTreeButton : MonoBehaviour
         int lvl = getLevel();
         if(lvl <=-2){return;}
 
-        SkillTreeManager.Instance.DisplaySkill(AbilityName);
-        //MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
+        SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
+        MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
     
     }
     public void ClickedUpgrade(){
-        Upgrade();
-        SkillTreeManager.Instance.DisplaySkill(AbilityName);
+        if(SkillTreeManager.Instance.Upgrade(AbilityName)){
+            ReloadColor();
+            if(level==0){StartCoroutine("NextPathCouroutine");}
+        }
+        SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
+    }
+    public bool Step(){
+        if( SkillTreeManager.Instance.Upgrade(AbilityName)){
+            ReloadColor();
+            ReloadFunctionality();
+            return true;
+        }
+        return false;
     }
    
-    private void Upgrade(){
-        SkillTreeManager.Instance.Upgrade(AbilityName);
-        if(getLevel()==0){NextPaths(true);}
+    private void ReloadColor(){
+        level = getLevel();
+        GetComponent<Button>().colors = SkillTreeManager.Instance.GetColors(level);
+      
+    }
+    private void ReloadFunctionality(){
+        Button self = GetComponent<Button>();
+
+        if(level >= -1){
+            self.interactable = true;
+            self.transform.Find("Icon").GetComponent<Image>().enabled= true;
+        }else{
+            self.interactable = false;
+            self.transform.Find("Icon").GetComponent<Image>().enabled= false;
+        }
+
     }
     
-    public void NextPaths(bool withPing){
-        foreach (Animator item in nextPaths)
-        {
-            item.Play("");
-        }
+    public IEnumerator NextPathCouroutine(){
+        foreach(Animator item in nextPaths){item.Play(UNLOCKING);}
+        yield return new WaitForSeconds(1);
+        followingNode.ForEach(skill => skill.ping());
     }
     public int getLevel(){
         return SkillTreeManager.Instance.getLevel(AbilityName);

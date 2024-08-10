@@ -7,23 +7,44 @@ public class DeckBuilder : MonoBehaviour
 {
     public static DeckBuilder Instance;
     public List<Augment> AllAugments;
-    int[] basePrice;
-    int[] upgradePrice;
-    int[] unlockPrice;
+
+    int[] firstLayerPrices;
+    int[] secondLayerPrices;
+    int[] thirdLayerPrices;
+    int[] fourthLayerPrices;
+
     void Awake(){
         if(Instance==null){Instance = this;}
         if(Instance==this){DefineAugmentClasses();}
-        basePrice = new int[4]{300,900,2500,10000};
-        upgradePrice = new int[2]{1500,7500};
-        unlockPrice = new int[1]{500};
+
+        firstLayerPrices = new int[]{500, 1500, 4500};
+        secondLayerPrices = new int[]{1000, 3000, 9000};
+        thirdLayerPrices = new int[]{2000, 6000, 18000};
+        fourthLayerPrices = new int[]{4000, 12000, 36000};
     }
     
     public int getPrice(string skill, int level){
-        List<string> firstUnlocks = new List<string>(){"OrbitalUnlock","Assassins", "CritUnlock", "RegenUnlock", "ShredUnlock", "BurstUnlock"};
-        int[] prices = new int[0];
-        
-        if(level>=prices.Length || level < 0){return -1;}
-        return firstUnlocks.Contains(skill) ? 300 : prices[level];
+        if(level < 0 ){return -2;}
+        if(level > 2){return -1;}
+
+        List<string> firstLayer = new List<string>(){"Assassin","Orbits", "Critical Strike", "Regeneration", "Multicaster"};
+        List<string> secondLayer = new List<string>(){"Vampire","Pirate", "Thorns", "Resonance", "Burst Shot", "Freeze", "Magical Shot"};
+        List<string> thirdLayer = new List<string>(){"Flower Field","Explosion", "Immolate", "Lava Pool", "Snow Pool", "Static Energy", "Thunder"};
+        List<string> fourthLayer = new List<string>(){"Necromancer","Ritual", "Bee Summoner", "Ember Generation", "Gambling"};
+
+
+        if(firstLayer.Contains(skill)){
+            return firstLayerPrices[level];
+        }else if(secondLayer.Contains(skill)){
+            return secondLayerPrices[level];
+        }else if(thirdLayer.Contains(skill)){
+            return thirdLayerPrices[level];
+        }else if(fourthLayer.Contains(skill)){
+            return fourthLayerPrices[level];
+        }else{
+            Debug.LogWarning("Couldn't find price for " + skill + " at level " + level);
+            return -1;
+        }
     }
     public void DefineAugmentClasses(){
         AllAugments = new List<Augment>
