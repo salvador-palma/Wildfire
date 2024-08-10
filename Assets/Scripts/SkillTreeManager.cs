@@ -61,10 +61,6 @@ public class SkillTreeManager : MonoBehaviour
         changeEmberAmountUI();
     }
     
-
-    
-    
-
     public int getLevel(string skill){
         Skills result = GetSkill(skill);
         return result==null ? -1 : result.level;
@@ -146,9 +142,35 @@ public class SkillTreeManager : MonoBehaviour
         
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
         if(ability != null){
-            passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br>" + ability.AbilityDescription1;
-            passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br>" + ability.AbilityDescription2;
-            passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br>" + ability.AbilityDescription3;
+
+            passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
+            passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
+            passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
+            passivesText[0].color = Color.white;
+            passivesText[1].color = Color.white;
+            passivesText[2].color = Color.white;
+
+            switch (level+1)
+            {
+                
+                case 0:
+                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
+                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
+                case 1:
+                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
+                case 2:
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
+            }
+           
+            
 
             titleText.text = ability.Name;
             typeText.text = "Not-Done Effect";
@@ -183,7 +205,19 @@ public class SkillTreeManager : MonoBehaviour
     }
 
     public void resetSkillTree(){
-        
+        List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster"};
+        List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate", "Necromancer", "Gambling"};
+        foreach(Skills skill in PlayerData.skills){
+            if(exceptionsLayer1.Contains(skill.type)){
+                skill.level = Math.Min(skill.level, -1);
+            }else if(exceptionsLayer2.Contains(skill.type)){
+                skill.level = Math.Min(skill.level, -2);
+            }else{
+                skill.level = -3;
+            }
+        }
+        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+
         PlayerData.embers += PlayerData.skillTreeEmbers;
         PlayerData.skillTreeEmbers = 0;
         changeEmberAmountUI();

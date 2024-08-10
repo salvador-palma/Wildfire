@@ -60,7 +60,6 @@ public class MetaMenuUI : MonoBehaviour
     }
     private IEnumerator currentCouroutine;
     public void moveSkillTree(Vector2 pos){
-        //SkillTree.transform.localPosition = pos;
         if(currentCouroutine!=null){StopCoroutine (currentCouroutine);}
         currentCouroutine = SmoothLerp (0.5f, pos);
         StartCoroutine (currentCouroutine);

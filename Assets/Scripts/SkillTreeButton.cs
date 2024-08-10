@@ -31,12 +31,8 @@ public class SkillTreeButton : MonoBehaviour
         GetComponent<Button>().onClick.RemoveAllListeners();
         ReloadColor();
         ReloadFunctionality();
-        if(level>= 0){
-            foreach (Animator path in nextPaths)
-            {
-                path.Play(UNLOCKED);
-            }
-        }
+
+        nextPaths.ForEach(path => path.Play(level >= 0 ? UNLOCKED : LOCKED));
 
         if( level == -3 ){
             gameObject.SetActive(false);
@@ -72,7 +68,10 @@ public class SkillTreeButton : MonoBehaviour
         if(lvl <=-2){return;}
 
         SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
-        MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
+        Vector2 LookUpPos = transform.localPosition;
+        LookUpPos.x += 100f;
+        LookUpPos.y += -20f;
+        MetaMenuUI.Instance.moveSkillTree(LookUpPos * -1f);
     
     }
     public void ClickedUpgrade(){
@@ -106,6 +105,7 @@ public class SkillTreeButton : MonoBehaviour
             self.interactable = false;
             self.transform.Find("Icon").GetComponent<Image>().enabled= false;
         }
+        
 
     }
     
