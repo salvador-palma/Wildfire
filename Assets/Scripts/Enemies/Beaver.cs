@@ -57,7 +57,7 @@ public class Beaver : Enemy
     }
 
     public override void Die(bool onKill = true){
-        if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.75f), 0f);}
+        if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.9f), 0f);}
        
         base.Die();
     }

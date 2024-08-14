@@ -1,13 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public interface OnKillEffects : Effect
 {
     public bool addList();
-    public void ApplyEffect(Enemy en = null);
+    public void ApplyEffect(Vector2 en);
 }
 
 
@@ -33,12 +37,12 @@ public class Explosion : OnKillEffects
         return this == Instance;
     }
 
-    public void ApplyEffect(Enemy en = null)
+    public void ApplyEffect(Vector2 pos)
     {
-        if(en==null){return;}
+        
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            Collider2D[] targets = Physics2D.OverlapCircleAll(en.transform.position, 1.8f, FlareManager.EnemyMask);
-            Flamey.Instance.SpawnObject(Prefab).transform.position = en.transform.position;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 1.8f, FlareManager.EnemyMask);
+            Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
             foreach(Collider2D col in targets){
                 col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
             }
@@ -89,6 +93,9 @@ public class Explosion : OnKillEffects
     {
         return "On-Kill Effect";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 
@@ -101,6 +108,8 @@ public class Necromancer : OnKillEffects
     public float dmgPerc;
     public static Necromancer Instance;
     static GameObject Prefab;
+    static GameObject PrefabMega;
+    float MegaGhoulProbability;
 
     public Necromancer(float prob, float dmgPerc){
         this.prob = prob;
@@ -108,6 +117,7 @@ public class Necromancer : OnKillEffects
         if(Instance == null){
             Instance = this;
             Prefab = Resources.Load<GameObject>("Prefab/Ghoul");
+            PrefabMega = Resources.Load<GameObject>("Prefab/MegaGhoul");
         }else{
             Instance.Stack(this);
         }
@@ -117,11 +127,16 @@ public class Necromancer : OnKillEffects
         return this == Instance;
     }
 
-    public void ApplyEffect(Enemy en = null)
+    public void ApplyEffect(Vector2 pos)
     {
-        if(en==null){return;}
-        if(UnityEngine.Random.Range(0f,1f) < prob){
-            Flamey.Instance.SpawnObject(Prefab).transform.position = en.transform.position;
+        
+        if(Random.Range(0f,1f) < prob){
+            if(MegaGhoulProbability > Random.Range(0f,1f)){
+                Flamey.Instance.SpawnObject(PrefabMega).transform.position = pos;
+            }else{
+                Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+            }
+            
         }
     }
     public void Stack(Necromancer necromancer){
@@ -141,6 +156,7 @@ public class Necromancer : OnKillEffects
     private void CheckMaxed(){
         if(prob >= .5f){
             Character.Instance.SetupCharacter("Necro");
+            MegaGhoulProbability = 0.1f;
             maxed = true;
         }
     }
@@ -153,6 +169,14 @@ public class Necromancer : OnKillEffects
         return string.Format("Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100), Mathf.Round(dmgPerc * 100));
     }
 
+    public static int getAttackTimes(){
+        
+        switch(SkillTreeManager.Instance.getLevel("Necromancer")){
+            case 1: return 5;
+            case 2: return 7;
+            case 0: default: return 3 ;
+        }
+    }
     public string getIcon()
     {
         return "NecroUnlock";
@@ -166,6 +190,9 @@ public class Necromancer : OnKillEffects
     public string getType()
     {
         return "On-Kill Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }
 
@@ -188,6 +215,7 @@ public class Bullets : OnKillEffects
         if(Instance == null){
             Instance = this;
             Prefab = Resources.Load<GameObject>("Prefab/Bullet");
+            if(SkillTreeManager.Instance.getLevel("Pirate") >= 2){ this.amount *= 2;}
         }else{
             Instance.Stack(this);
         }
@@ -197,29 +225,46 @@ public class Bullets : OnKillEffects
         return this == Instance;
     }
 
-    public void ApplyEffect(Enemy en = null)
+    public void ApplyEffect(Vector2 pos)
     {
-        if(en==null){return;}
-        if(UnityEngine.Random.Range(0f,1f) < prob){
+        
+        if(Random.Range(0f,1f) < prob){
             
-            SpawnBullets(en.transform.position);
+            SpawnBullets(pos);
             Flamey.Instance.addEmbers(10);
         }
     }
     private void SpawnBullets(Vector2 pos){
-        int randomRotation = UnityEngine.Random.Range(0,360);
-        for(int i =0; i != amount; i++){
-            GameObject go = Flamey.Instance.SpawnObject(Prefab);
-            go.transform.position = pos;
-            go.transform.rotation = Quaternion.Euler(0,0,i*(360/amount) + randomRotation);
+        float randomRotation = Random.Range(0,360);
+        
+        if(SkillTreeManager.Instance.getLevel("Pirate") >= 1){
+
+            for(int i = 0; i != amount; i++){
+                Enemy e = Enemy.getClosestEnemy(pos, i);
+                if(e!=null){
+                    randomRotation = Vector2.SignedAngle( Vector2.up, (Vector2)e.HitCenter.position - pos);
+                }
+
+                GameObject go = Flamey.Instance.SpawnObject(Prefab);
+                go.transform.position = pos;
+                go.transform.rotation = Quaternion.Euler(0,0,randomRotation);
+            }          
             
+        }else{
+            for(int i =0; i != amount; i++){
+                GameObject go = Flamey.Instance.SpawnObject(Prefab);
+                go.transform.position = pos;
+                go.transform.rotation = Quaternion.Euler(0,0,i*(360/amount) + randomRotation);
+            }
         }
+       
+        
 
     }
     public void Stack(Bullets necromancer){
         prob += necromancer.prob;
         dmg += necromancer.dmg;
-        amount += necromancer.amount;
+        amount += necromancer.amount * (SkillTreeManager.Instance.getLevel("Pirate") >= 2 ? 2 : 1);
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
@@ -264,5 +309,8 @@ public class Bullets : OnKillEffects
     public string getType()
     {
         return "On-Kill Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }

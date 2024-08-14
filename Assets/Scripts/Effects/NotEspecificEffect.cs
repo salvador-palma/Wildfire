@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -108,7 +109,9 @@ public class FlameCircle : NotEspecificEffect
         }
     }
 
-    
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class MoneyMultipliers : NotEspecificEffect
@@ -185,6 +188,9 @@ public class MoneyMultipliers : NotEspecificEffect
     {
         return "Especial Effect";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class CandleTurrets : NotEspecificEffect
@@ -195,6 +201,8 @@ public class CandleTurrets : NotEspecificEffect
 
     public static CandleTurrets Instance;
     public static GameObject CandleCircle;
+
+    UnityEngine.UI.Image cooldownImage;
     
     public CandleTurrets(int dmg, float atkSpeed, int amount){
        
@@ -202,7 +210,8 @@ public class CandleTurrets : NotEspecificEffect
         this.dmg = dmg;
         this.atkSpeed = atkSpeed;
         if(Instance == null){
-            Instance = this;     
+            Instance = this;
+            this.amount *= SkillTreeManager.Instance.getLevel("Ritual") >= 2 ? 2 : 1;     
             StartCandleCircle();
             UpdateAmount();
         }else{
@@ -259,19 +268,16 @@ public class CandleTurrets : NotEspecificEffect
         
         dmg += candleTurrets.dmg;
         atkSpeed += candleTurrets.atkSpeed;
-        amount += candleTurrets.amount;
+        amount += candleTurrets.amount * (SkillTreeManager.Instance.getLevel("Ritual") >= 2 ? 2 : 1);
         RemoveUselessAugments();
     }
-    bool checkedForAmount = false;
+
+
     private void RemoveUselessAugments(){
        
-        if(amount >= 6 && !checkedForAmount){
-            checkedForAmount = true;
+        if(amount >= 6){
             amount = 6;
-            CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
-            GameObject.Find("logs").SetActive(false);
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("CandleAmount");
+            Deck.Instance.removeClassFromDeck("CandleAmount");
         } 
         if(atkSpeed >= 3f){
             atkSpeed = 3f;
@@ -284,12 +290,31 @@ public class CandleTurrets : NotEspecificEffect
     public bool maxed;
     private void CheckMaxed(){
         if(amount >= 6f && atkSpeed >= 3f){
-            Character.Instance.SetupCharacter("Arcanist");
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            Character.Instance.SetupCharacter("Ritual",() => SpawnExtraAssets(null,null));
             maxed = true;
         }
     }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/CandleDmg"));
+    }
 
-    
+
+    private int damageTicks;
+    public void AddDamageTick(){
+        damageTicks++;
+
+        if(damageTicks > 100){
+            damageTicks = 0;
+            dmg+=5;
+        }
+        cooldownImage.fillAmount = ((float)damageTicks)/100;
+    }
+
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class Summoner : NotEspecificEffect
@@ -394,5 +419,7 @@ public class Summoner : NotEspecificEffect
         }
     }
 
-    
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }

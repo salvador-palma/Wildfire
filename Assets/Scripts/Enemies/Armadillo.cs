@@ -43,8 +43,12 @@ public class Armadillo : Enemy
         }
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
+        if(hitsUntilUnroll > 0 && source!= null && source.Equals("Lava Pool")){
+
+            Dmg = SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10;
+        }
         base.Hitted(Dmg, TextID, ignoreArmor, hitsUntilUnroll <= 0 ? onHit : false, except);
         if(onHit && hitsUntilUnroll > 0){
             hitsUntilUnroll--;

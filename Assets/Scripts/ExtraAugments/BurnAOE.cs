@@ -12,36 +12,56 @@ public class BurnAOE : MonoBehaviour
     public float LastingTime;
     float lt;
     List<Enemy> colliding;
+    public bool EverLasting;
     private void Start() {
         colliding = new List<Enemy>();
         lt = BurnOnLand.Instance.lasting;
         Damage = BurnOnLand.Instance.damage;
-        Vector2 scale = transform.localScale * BurnOnLand.Instance.size;
-        transform.localScale = scale;
+        if(!EverLasting){
+            Vector2 scale = transform.localScale * BurnOnLand.Instance.size;
+            transform.localScale = scale;
+        }
+        
+        
 
     }
     void Update()
     {
         t-=Time.deltaTime;
-        lt-=Time.deltaTime;
+        
         if(t<=0){
             t= Timer;
             try{
-                foreach (Enemy item in colliding)
-                {
-                    if(item == null || !item.canTarget()){continue;}
-                    item.Hitted(Damage,9, ignoreArmor:true, onHit: false);
-                    
+                if(SkillTreeManager.Instance.getLevel("Lava Pool") >= 2){
+                    foreach (Enemy item in colliding)
+                    {
+                        if(item == null){continue;}
+                        item.Hitted(EverLasting ? BurnOnLand.Instance.damage : Damage,9, ignoreArmor:false, onHit: false, source: "Lava Pool");
+                        item.Armor -= Math.Max(1, (int)(item.Armor * .05f));
+                    }
+                }else{
+                    foreach (Enemy item in colliding)
+                    {
+                        if(item == null){continue;}
+
+                        item.Hitted(Damage,9, ignoreArmor:false, onHit: false, source: "Lava Pool");
+                        
+                    }
                 }
+                
             }catch(InvalidOperatorException e){
                 Debug.Log(e);
             }
             
         }
-        if(lt<=0){
-            lt = LastingTime;
-            GetComponent<Animator>().Play("EndAOEBurn");
+        if(!EverLasting){
+            lt-=Time.deltaTime;
+            if(lt<=0){
+                lt = LastingTime;
+                GetComponent<Animator>().Play("EndAOEBurn");
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collider){

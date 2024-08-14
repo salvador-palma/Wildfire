@@ -88,4 +88,7 @@ public class ThornsOnHitted : OnHittedEffects
     {
         return "On-Hitted Effect";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }

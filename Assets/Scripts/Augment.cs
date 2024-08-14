@@ -14,22 +14,22 @@ public enum Tier{
 public class Augment
 {
     public string Title;
-    public string[] Description;
+    public string Description;
     [HideInInspector] public Tier tier;
     [HideInInspector] public Sprite icon;
-    [HideInInspector] public UnityAction[] actions;
+    [HideInInspector] public UnityAction action;
     
     public string AugmentClass;
     bool baseStat;
     bool baseCard;
     bool baseCardUpgrade;
-    public Augment(string augmentClass,string t, string[] d, string i, Tier ti, UnityAction[] a, bool baseStat = false, bool baseCard = false, bool baseCardUpgrade = false){
-        Title = t;
+    public Augment(string augmentClass,string title, string desc, string ic, Tier ti, UnityAction action, bool baseStat = false, bool baseCard = false, bool baseCardUpgrade = false){
+        Title = title;
 
-        Description = d;
-        actions = a;
+        Description = desc;
+        this.action = action;
         tier = ti;
-        icon = Resources.Load<Sprite>("Icons/" + i);
+        icon = Resources.Load<Sprite>("Icons/" + ic);
         
         AugmentClass = augmentClass;
         this.baseStat = baseStat;
@@ -37,38 +37,15 @@ public class Augment
         this.baseCardUpgrade = baseCardUpgrade;
     }
     public void Activate(){
-        if(Description.Length == 1){actions[0]();}else{
-            actions[getLevel()]();
-        }
-    }
-    
-    public int getLevel(){
-       return SkillTreeManager.Instance.getLevel(AugmentClass);
+        action();
     }
     
     public string getDescription(){
-        try{
-            if(Description.Length == 1){return Description[0];}
-            return Description[getLevel()];
-        }catch{
-            Debug.LogError("Error: " + AugmentClass + " at level " + getLevel() + " does not exist");
-            return "";
-        }
-        
+        return Description;
     }
-    
-    public string getNextDescription(){
-        try{
-            return Description[getLevel()+1];
-        }catch{
-            return "Max Level";
-        }
-        
-    }
-   
 
     public bool playable(){
-        return baseStat || (baseCard && getLevel() > 0) || (baseCardUpgrade && getLevel() >= 0);
+        return baseStat || ((baseCard||baseCardUpgrade) && SkillTreeManager.Instance.getLevel(AugmentClass) >= 0);
     }
     public string getAugmentClass(){return AugmentClass;}
 
@@ -77,22 +54,14 @@ public class Augment
     }
 
     public SerializedAugment Serialize(){
-        return new SerializedAugment(Title, getLevel());
+        return new SerializedAugment(Title);
     }
     public string getDescription(int lvl){
-        try{
-            return Description[lvl];
-        }catch{
-            return Description[0];
-        }
+        return Description;
         
     }
     public void Activate(int lvl){
-        if(actions.Length == 1){
-            actions[0]();
-        }else{
-            actions[lvl]();
-        }
+        action();
         
     }
 }

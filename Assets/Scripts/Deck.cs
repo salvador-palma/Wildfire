@@ -57,9 +57,7 @@ public class Deck : MonoBehaviour
     }
 
     void FillDeck(){
-        if(DeckBuilder.Instance == null){
-                Console.Log("<color=#0000ff> FillDeck: DeckBuilder was not initialized </color>");
-        }
+        
         augments = DeckBuilder.Instance.getAllCards();
     }   
     Augment pickFromDeck(){
@@ -90,7 +88,6 @@ public class Deck : MonoBehaviour
         slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.Title;
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment == null ? null : augment.icon;
         slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.getDescription();
-        slot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[augment.isUnlockableMidGame() ? 5:augment.getLevel()];
         currentAugments[i] = augment;
         
     }
@@ -242,29 +239,17 @@ public class Deck : MonoBehaviour
             FillDeck();
 
             if(!withLoad){return;}
-            Console.Log("<color=#0000ff> Passed Loading </color>");
+            
+
             gameState = GameState.LoadGameState();
-            if(Flamey.Instance == null){
-                Console.Log("<color=#0000ff> Flamey was not initialized </color>");
-            }
+            
             Flamey.Instance.addEmbers(gameState.CollectedEmbers);
             
             PhaseTiers = gameState.NextTiers;
-            if(GameUI.Instance == null){
-                Console.Log("<color=#0000ff> GameUI was not initialized </color>");
-            }
-            if(DeckBuilder.Instance == null){
-                Console.Log("<color=#0000ff> DeckBuilder was not initialized </color>");
-            }
-            if(LocalBestiary.INSTANCE == null){
-                Console.Log("<color=#0000ff> LocalBestiary was not initialized </color>");
-            }
-            if(EnemySpawner.Instance == null){
-                Console.Log("<color=#0000ff> EnemySpawner was not initialized </color>");
-            }
+            
             foreach(SerializedAugment a in gameState.augments){
                 GameUI.Instance.AddAugment(a);
-                DeckBuilder.Instance.getAugmentByName(a.title).Activate(a.level);
+                DeckBuilder.Instance.getAugmentByName(a.title).Activate();
             }
             Flamey.Instance.Health = gameState.Health;
             Flamey.Instance.MaxHealth = gameState.MaxHP;
@@ -273,7 +258,7 @@ public class Deck : MonoBehaviour
             EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
 
         }catch(Exception e){
-            Console.Log("LoadGame: " + e.Message);
+            
         }
         
     }
@@ -339,9 +324,7 @@ public class GameState{
 [Serializable]
 public class SerializedAugment{
     public string title;
-    public int level;
-    public SerializedAugment(string title, int level){
+    public SerializedAugment(string title){
         this.title = title;
-        this.level = level;
     }
 }

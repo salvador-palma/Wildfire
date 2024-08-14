@@ -43,7 +43,7 @@ public class Hedgehog : Enemy
     }
     public int TitForTat = 10;
     int TitCounter = 0;
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
 
 

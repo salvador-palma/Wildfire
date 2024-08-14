@@ -49,6 +49,8 @@ public class FlareManager : MonoBehaviour
             case 1: return f.Dmg * CritUnlock.Instance.mult;
             case 2: return f.Dmg + KrakenSlayer.Instance.extraDmg;
             case 3: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
+            case 4: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5;
+            case 5: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult;
             default: return f.Dmg;
         }
     }

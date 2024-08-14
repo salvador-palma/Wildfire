@@ -55,7 +55,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
    
 
-    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
@@ -81,12 +81,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Die(bool onKill = true){
         if(this==null){return;}
-        if(onKill){Flamey.Instance.ApplyOnKill(this);}
+        
         Flamey.Instance.addEmbers(calculateEmbers());
         flame.TotalKills++;
         PlayHitSoundFx();
-        CameraShake.Shake(0.4f,0.15f);
+        CameraShake.Shake(0.4f,0.05f);
         incDeathAmount();
+        if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
         Destroy(gameObject);
     }
 
@@ -201,26 +202,18 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
 
-
-    public static Enemy getClosestEnemy(Vector2 pos){
-        GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
-        if(go.Length == 0){return null;}
-        try{
-            GameObject minimum = go[0];
-            float minDist = float.PositiveInfinity;
-            foreach(GameObject enemy in go){
-                float calc = Vector2.Distance(enemy.GetComponent<Enemy>().HitCenter.position, pos);
-                if(minDist > calc){
-                    minDist = calc;
-                    minimum = enemy;
-                }
-            }
-            return minimum.GetComponent<Enemy>();
-        }catch{
-            Debug.Log("Covered Error! Flamey.getRandomHomingEnemy()");
-
-        }
-        return null;
+    public static Vector2 getPredicatedEnemyPosition(Comparison<Enemy> sortingFactor){
+        List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
+        if(selected.Count == 0){return Vector2.zero;}
+        selected.Sort(sortingFactor);
+        return selected.First().HitCenter.position;
+        
+    }
+    public static Enemy getClosestEnemy(Vector2 pos, int index = 0){
+        Enemy[] go = GameObject.FindGameObjectsWithTag("Enemy").Select(e=>e.GetComponent<Enemy>()).Where(e=>e.canTarget()).ToArray();
+        Array.Sort(go, (a,b)=> Vector2.Distance(a.HitCenter.position, pos) < Vector2.Distance(b.HitCenter.position, pos)? -1 : 1);
+        if(go.Length <= index){return null;}
+        return go[index];
     }
 
 }

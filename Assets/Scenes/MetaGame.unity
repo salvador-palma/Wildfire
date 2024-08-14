@@ -5804,22 +5804,26 @@ MonoBehaviour:
   - Name: Lava Pool
     Type: On-Land Effect
     AbilityDescription1: Lava Pools burn Enemies standing on top of them, dealing
-      damage each second
-    AbilityDescription2: Probability On-Land maximum increases to 50%
-    AbilityDescription3: Gain +25% Damage against Enemies with Hooves and +100% against
-      burrowed ones
+      damage each second. Animals with hooves will only take 10% of the damage, while
+      enemies burried underground will not take damage at all
+    AbilityDescription2: Animals with hooves take 50% of the damage and Animals burried
+      underground take 100% damage.
+    AbilityDescription3: Each time a Lava Pool deals damage it will melt 5% of the
+      enemy's armor
   - Name: Necromancer
     Type: On-Death Effect
     AbilityDescription1: Ghouls will spawn from dead enemies and will inflict a percentage
       of your damage to nearby enemies for a total of 3 times
-    AbilityDescription2: Ghouls will hit for up to 5 times. The final hit will deal
-      True Damage
-    AbilityDescription3: Ghouls will proc On-Death effects when they disappear
+    AbilityDescription2: Max Hit amount increases to 5. The final hit deals True
+      Damage
+    AbilityDescription3: Max Hit amount increases to 7. Ghouls will proc On-Death
+      effects when they disappear, including Necromancer
   - Name: Ritual
     Type: Special Effect
     AbilityDescription1: Candles stand by your side shooting random targets. Their
       flames do not proc On-Hit/On-Land Effects
-    AbilityDescription2: Candles will shoot trice as fast if the Campfire gets stunned
+    AbilityDescription2: Candles will shoot six times faster when the Campfire gets
+      stunned
     AbilityDescription3: Every time you gain a candle, gain an extra one
   - Name: Immolate
     Type: Time-Based Effect
@@ -5831,13 +5835,13 @@ MonoBehaviour:
     Type: On-Death Effect
     AbilityDescription1: Roundshots will come out of enemy corpses, dealing Damage
       and applying On-Hit Effects to enemies hit. Additionally, loot +10 Embers
-    AbilityDescription2: When looting, gain +20 additional Embers
-    AbilityDescription3: Roundshots will always shoot in the direction of a target
+    AbilityDescription2: Roundshots will be aimed towards nearby enemies
+    AbilityDescription3: Everytime you gain +1 Roundshot, gain an extra one
   - Name: Burst Shot
     Type: On-Shoot Effect
     AbilityDescription1: Shoot a burst of shots everytime you throw a certain amount
       of flames
-    AbilityDescription2: Unlock Targeting options (Same, Random)
+    AbilityDescription2: Unlock Targeting options (Random, Same, Most Max HP)
     AbilityDescription3: Burst everytime you get Hit
   - Name: Magical Shot
     Type: On-Shoot Effect

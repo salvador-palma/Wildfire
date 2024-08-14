@@ -106,10 +106,13 @@ public class Worm : Enemy
         return !isUnderground && !diggingUp;
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null)
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
     {
-        
-        if(!isUnderground){ base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);}
+        if(!isUnderground)
+        { base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);}
+        else if(isUnderground && SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 && source != null && source.Equals("Lava Pool")){
+        base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+        }
     }
 
     public override void CheckFlip()

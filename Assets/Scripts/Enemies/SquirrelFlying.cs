@@ -40,6 +40,12 @@ public class SquirrelFlying : Squirrel
         }
         
     }
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
+    {
+        if(!(flying && source != null && source.Equals("Lava Pool"))){
+            base.Hitted(Dmg, TextID, ignoreArmor, onHit);   
+        }
+    }
     public override bool canTarget(){return !flying;}
     private void Land(){
         flying = false;

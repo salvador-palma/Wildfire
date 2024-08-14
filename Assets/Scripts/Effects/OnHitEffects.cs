@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface Effect{
     public string getText();
@@ -13,6 +14,8 @@ public interface Effect{
     public string getDescription();
     public string getIcon();
     public string getCaps();
+    public GameObject getAbilityOptionMenu();
+    
 }
 public interface OnHitEffects: Effect
 {
@@ -90,7 +93,9 @@ public class VampOnHit : OnHitEffects
         return "VampUnlock";
     }
 
-    
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class IceOnHit : OnHitEffects
@@ -173,6 +178,9 @@ public class IceOnHit : OnHitEffects
     {
         return "IceUnlock";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class ShredOnHit : OnHitEffects
@@ -251,6 +259,9 @@ public class ShredOnHit : OnHitEffects
     {
         return "ShredUnlock";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class ExecuteOnHit : OnHitEffects
@@ -327,6 +338,9 @@ public class ExecuteOnHit : OnHitEffects
     {
         return "Assassins";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class StatikOnHit : OnHitEffects
@@ -334,15 +348,22 @@ public class StatikOnHit : OnHitEffects
     
     public static StatikOnHit Instance;
     public GameObject prefab;
+    public GameObject prefabPowered;
+    private GameObject statikMeter;
+    private Slider statikMeterSlider;
     public float prob;
     public int dmg;
     public int ttl;
+
+    public int procAmount; //for character
     public StatikOnHit(float prob, int dmg, int ttl){
         
         this.prob = prob;
         this.dmg = dmg;
         this.ttl = ttl;
         prefab = Resources.Load<GameObject>("Prefab/StatikShiv");
+        prefabPowered = Resources.Load<GameObject>("Prefab/StatikShivEmpowered");
+        statikMeter = Resources.Load<GameObject>("Prefab/AbilityCharacter/Statik Meter UI");
         if(Instance == null){
             Instance = this;
         }else{
@@ -355,9 +376,34 @@ public class StatikOnHit : OnHitEffects
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
 
+            
+
+            if(Character.Instance.isCharacter("Statik")){
+                procAmount++;
+                statikMeterSlider.value = procAmount;
+                if(procAmount > 100){
+                    GameObject g2 = Flamey.Instance.SpawnObject(prefabPowered);
+                    g2.transform.position = en.HitCenter.position;
+                    StatikShiv s2 = g2.GetComponent<StatikShiv>();
+
+                    procAmount = 0;
+                    statikMeterSlider.value = procAmount;
+
+                    s2.TTL = 30;
+                    s2.isPowered = true;
+                    s2.MAXTTL = 30;
+                    s2.Damage = (int)dmg;
+                    s2.currentTarget = en;
+                    s2.locationOfEnemy = en.HitCenter.position;
+                    s2.Started = true;
+                    return;
+                }
+            }
+
             GameObject g = Flamey.Instance.SpawnObject(prefab);
             g.transform.position = en.HitCenter.position;
             StatikShiv s = g.GetComponent<StatikShiv>();
+
             s.TTL = ttl;
             s.MAXTTL = ttl;
             s.Damage = this.dmg;
@@ -365,6 +411,7 @@ public class StatikOnHit : OnHitEffects
             s.locationOfEnemy = en.HitCenter.position;
             s.Started = true;
 
+            
             
         }
         
@@ -392,6 +439,9 @@ public class StatikOnHit : OnHitEffects
     private void CheckMaxed(){
         if(prob >= 1f && ttl >= 10){
             Character.Instance.SetupCharacter("Statik");
+            GameObject g = GameUI.Instance.SpawnUI(statikMeter);
+            statikMeterSlider = g.GetComponent<Slider>();
+           
             maxed = true;
         }
     }
@@ -422,5 +472,8 @@ public class StatikOnHit : OnHitEffects
     public string getIcon()
     {
         return "StatikUnlock";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }

@@ -15,6 +15,7 @@ public class BurnOnLand : OnLandEffect
 {
     public static BurnOnLand Instance;
     public GameObject prefab;
+    public GameObject prefabEverlast;
     public float size;
     public int damage;
     public float timegap;
@@ -29,6 +30,8 @@ public class BurnOnLand : OnLandEffect
         if(Instance == null){
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/BurnAOE");
+            prefabEverlast = Resources.Load<GameObject>("Prefab/AbilityCharacter/BurnAOE Everlasting");
+
         }else{
             Instance.Stack(this);
         }
@@ -69,10 +72,18 @@ public class BurnOnLand : OnLandEffect
     public bool maxed;
     private void CheckMaxed(){
         if(prob >= .5f && size >= 2.5f && lasting >= 10){
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Lava");
+            
             maxed = true;
+            
+            
         }
     }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        Flamey.Instance.SpawnObject(prefabEverlast);
+    }
+  
     public bool addList(){
         return Instance == this;
     }
@@ -99,6 +110,9 @@ public class BurnOnLand : OnLandEffect
     public string getIcon()
     {
         return "LavaPoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }
 
@@ -196,6 +210,9 @@ public class IceOnLand : OnLandEffect
     {
         return "IcePoolUnlock";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class DrainOnLand : OnLandEffect
@@ -286,5 +303,8 @@ public class DrainOnLand : OnLandEffect
     public string getIcon()
     {
         return "DrainPoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }

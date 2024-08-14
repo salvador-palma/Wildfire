@@ -67,6 +67,14 @@ public class GameUI : MonoBehaviour
     [Header("Character Pop Up")]
     [SerializeField] TextMeshProUGUI CharacterNameDescriptionTxt;
     [SerializeField] GameObject CharacterImage;
+    
+    [Header("Spawnable UI")]
+    public GameObject AbilityOptionContainer;
+    public GameObject SpawnableUIPanel;
+    public event EventHandler SpawnExtrasEvent;
+    public GameObject UICooldownsContainer;
+    public GameObject UICooldownsTemplate;
+    public GameObject UIActiveCooldownsTemplate;
 
     private void Awake() {
         Instance = this;
@@ -137,7 +145,7 @@ public class GameUI : MonoBehaviour
 
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
         go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription(serA.level);
+        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -177,12 +185,21 @@ public class GameUI : MonoBehaviour
     }
     public void DisplayEffectInfo(Effect e){
         if(latestInfoEffect==null){EffectIcon.enabled = true; EffectIcon.transform.parent.Find("Caps Label").gameObject.SetActive(true);}
+        
+        foreach(Transform abilityOption in AbilityOptionContainer.transform){abilityOption.gameObject.SetActive(false);}
+
         latestInfoEffect = e;
         EffectTexts[0].text = e.getText();
         EffectTexts[1].text = e.getType();
         EffectTexts[2].text = e.getDescription();
         EffectTexts[3].text = e.getCaps();
+
         EffectIcon.sprite = Resources.Load<Sprite>("Icons/"+e.getIcon());
+
+        GameObject optionMenu = e.getAbilityOptionMenu();
+        if(optionMenu==null){return;}
+
+        optionMenu.SetActive(true);
 
     }
 
@@ -195,7 +212,7 @@ public class GameUI : MonoBehaviour
         if(Time.timeScale == 1f){
             FastForwardButtons[0].interactable = true;
             FastForwardButtons[1].interactable = false;
-            SpeedUp(3f);
+            SpeedUp(3.5f);
 
         }else{
             FastForwardButtons[0].interactable = false;
@@ -332,6 +349,30 @@ public class GameUI : MonoBehaviour
     public void UpdateProfileCharacter(){
         Character.Instance.TransformVesselToCharacter(ProfileVessel);
     }
+
+
+    /* ===== EXTRA UI ===== */
+    public GameObject SpawnUI(GameObject prefab){
+        return Instantiate(prefab, SpawnableUIPanel.transform);
+    }
+    public void SpawnExtras(){
+        SpawnExtrasEvent?.Invoke(this, new EventArgs());
+    }
+
+    public Image SpawnUIMetric(Sprite icon){
+        GameObject go = Instantiate(UICooldownsTemplate,UICooldownsContainer.transform);
+        go.SetActive(true);
+        go.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        go.transform.GetChild(1).GetComponent<Image>().sprite = icon;
+        return go.transform.GetChild(0).GetComponent<Image>();
+    } 
+    public Button SpawnUIActiveMetric(Sprite icon){
+        GameObject go = Instantiate(UIActiveCooldownsTemplate,UICooldownsContainer.transform);
+        go.SetActive(true);
+        go.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        go.transform.GetChild(1).GetComponent<Image>().sprite = icon;
+        return go.GetComponent<Button>();
+    } 
 }
 
 public class SimpleStat{

@@ -5,7 +5,9 @@ using System.Linq;
 using System.Numerics;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 public class Flamey : MonoBehaviour
 {
@@ -55,7 +57,7 @@ public class Flamey : MonoBehaviour
     public bool GameEnd;
 
     [Header("Status Effects")]
-    private float stunTimeLeft;
+    public float stunTimeLeft;
     public int poisonsLeft;
 
     //FINAL STATS COUNTERS
@@ -65,10 +67,20 @@ public class Flamey : MonoBehaviour
     [HideInInspector] public ulong TotalDamageTaken;
     [HideInInspector] public ulong TotalHealed;
 
+
+    [SerializeField] public GameObject VisualDebug;
+
   
     private float secondTimer = 0.25f;
     private float tick = 0.25f;
     private int tickNumber;
+
+    [ContextMenu("Call Extra Function")]
+    void ExtraFunction()
+    {
+        Stun(5f);
+    }
+
     private void Awake() {
         
         Health = MaxHealth;
@@ -187,12 +199,21 @@ public class Flamey : MonoBehaviour
         return 1/asp;
     }
 
-    private Enemy getHoming(){
+    public Enemy getHoming(int index = 0){
         
         List<Enemy> g =  new List<Enemy>();
         g.AddRange(GameObject.FindGameObjectsWithTag("Enemy").Select( item => item.GetComponent<Enemy>()).Where(x => x.canTarget()));
         
-        return g.Count!=0 ? g.Min() : null;
+        if(g.Count <= 0){
+            return null;
+        }else{
+            if(index == 0){
+                return g.Min();
+            }
+            g.Sort();
+            return g[index];
+            
+        }
     }
     public UnityEngine.Vector2 getRandomHomingPosition(){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
@@ -226,6 +247,12 @@ public class Flamey : MonoBehaviour
     }
     public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake=true, int idHitTxt= 2){
 
+        if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2 && BurstShot.Instance != null){
+            BurstShot.Instance.Burst();
+        }
+
+
+
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
 
         TotalDamageTaken+=(ulong)dmgeff;
@@ -236,7 +263,7 @@ public class Flamey : MonoBehaviour
         if(Health <= 0){EndGame();}
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, idHitTxt);
-        if(isShake){CameraShake.Shake(0.5f,0.35f);} 
+        if(isShake){CameraShake.Shake(0.5f,0.20f);} 
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
@@ -300,7 +327,20 @@ public class Flamey : MonoBehaviour
             deck.removeClassFromDeck("BltSpeed");
         }
     }
-    public void multBulletSpeed(float amount){BulletSpeed = Math.Min(BulletSpeed * amount, 20f);}
+    public void multBulletSpeed(float amount){
+        BulletSpeed = Math.Min(BulletSpeed * amount, 20f);
+        if(BulletSpeed == 20f){
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("BltSpeed");
+        }
+    }
+    public void multAccuracy(float amount){
+        accuracy = Math.Min(accuracy * amount, 100f);
+        if(accuracy >= 100f){
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("Acc");
+        }
+    }
 
     public void addDmg(int amount){Dmg += amount;}
     public void multDmg(int amount){Dmg *= amount;}
@@ -418,9 +458,10 @@ public class Flamey : MonoBehaviour
         foreach (OnHittedEffects oh in onHittedEffects){oh.ApplyEffect(e);}
     }
 
-    public void ApplyOnKill(Enemy e){
-        foreach (OnKillEffects oh in onKillEffects){oh.ApplyEffect(e);}
+    public void ApplyOnKill(Vector2 pos){
+        foreach (OnKillEffects oh in onKillEffects){oh.ApplyEffect(pos);}
     }
+
     public void ApplyTimed(){
         foreach (TimeBasedEffect oh in timedEffects){oh.ApplyEffect();}
     }
@@ -430,6 +471,14 @@ public class Flamey : MonoBehaviour
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);
     }
+    public void callFunctionAfter(UnityAction a, float f){
+       StartCoroutine(callFunctionAfterCoroutine(a,f));
+    }
+    public IEnumerator callFunctionAfterCoroutine(UnityAction a, float f){
+        yield return new WaitForSeconds(f);
+        a();
+    }
+   
    
 
 

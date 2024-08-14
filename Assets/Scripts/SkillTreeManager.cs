@@ -57,7 +57,6 @@ public class SkillTreeManager : MonoBehaviour
         ReadData();
     }
     private void Start(){
-        //changeUpgradeInfoTexts(displayedSkill);
         changeEmberAmountUI();
     }
     
@@ -154,7 +153,7 @@ public class SkillTreeManager : MonoBehaviour
             {
                 
                 case 0:
-                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[0].color = new Color(1,1,1,0.3f);
                     passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
                     passivesText[1].color = new Color(1,1,1,0.3f);
                     passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
