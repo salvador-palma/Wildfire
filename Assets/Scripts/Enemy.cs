@@ -212,7 +212,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public static Enemy getClosestEnemy(Vector2 pos, int index = 0){
         Enemy[] go = GameObject.FindGameObjectsWithTag("Enemy").Select(e=>e.GetComponent<Enemy>()).Where(e=>e.canTarget()).ToArray();
         Array.Sort(go, (a,b)=> Vector2.Distance(a.HitCenter.position, pos) < Vector2.Distance(b.HitCenter.position, pos)? -1 : 1);
-        if(go.Length <= index){return null;}
+        if(go.Length == 0){return null;}
+        if(go.Length <= index){return go[go.Length - 1];}
         return go[index];
     }
 

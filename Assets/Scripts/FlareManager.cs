@@ -47,10 +47,13 @@ public class FlareManager : MonoBehaviour
         switch(type){
             case 0: return f.Dmg;
             case 1: return f.Dmg * CritUnlock.Instance.mult;
-            case 2: return f.Dmg + KrakenSlayer.Instance.extraDmg;
-            case 3: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
-            case 4: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5;
-            case 5: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult;
+            case 2: return f.Dmg * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
+            case 3: return f.Dmg + KrakenSlayer.Instance.extraDmg;
+            case 4: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
+            case 5: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
+            case 6: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5;
+            case 7: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult;
+            case 8: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
             default: return f.Dmg;
         }
     }

@@ -18,7 +18,16 @@ public class FixedOptionMenu : MonoBehaviour
         Left.onClick.AddListener(() => Move(-1));
         Right.onClick.AddListener(() => Move(1));
         
-        UpdatableText.text = Options[BurstShot.Instance.currentTargetingOption];
+        switch(AbilityName){
+            case "Burst Shot":
+                UpdatableText.text = Options[BurstShot.Instance.currentTargetingOption];
+            break;
+            case "Multicaster":
+                UpdatableText.text = Options[SecondShot.Instance.currentTargetingOption];
+            break;
+        
+        }
+        
     }
   
     private void Move(int dir){
@@ -38,6 +47,8 @@ public class FixedOptionMenu : MonoBehaviour
                 PlayerPrefs.GetInt("BurstShotTargetingOption", currentID);
             break;
             case "Multicaster":
+                SecondShot.Instance.currentTargetingOption = currentID;
+                PlayerPrefs.GetInt("MulticasterTargetingOption", currentID);
             break;
         
         }

@@ -27,6 +27,10 @@ public class VampOnHit : OnHitEffects
     public static VampOnHit Instance;
     public float perc;
     public float prob;
+
+    float DamageToOverheal = 1000;
+    float DamageOverhealed = 0;
+    private Image cooldownImage;
     public VampOnHit(float perc, float prob){
         
         this.perc = perc;
@@ -40,10 +44,24 @@ public class VampOnHit : OnHitEffects
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            if(Flamey.Instance.Health != Flamey.Instance.MaxHealth){
-                Flamey.Instance.addHealth(Math.Abs(dmg * perc));
+            if(Character.Instance.isCharacter("Vampire")){
+                float AmountHealed = Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f));
+                float AmountOverhealed = Flamey.Instance.Health + AmountHealed - Flamey.Instance.MaxHealth;
+                AmountHealed -= AmountOverhealed;
+                DamageOverhealed += AmountOverhealed;
+
+                if(DamageOverhealed > DamageToOverheal){
+                    DamageOverhealed = 0;
+                    Flamey.Instance.MaxHealth++;
+                }
+                cooldownImage.fillAmount = DamageOverhealed/DamageToOverheal; 
+
+                Flamey.Instance.addHealth(AmountHealed);
+            }else{
+                if(Flamey.Instance.Health != Flamey.Instance.MaxHealth){
+                    Flamey.Instance.addHealth(Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f)));
+                }
             }
-            
         }
     }
     public void Stack(VampOnHit vampOnHit){
@@ -56,15 +74,25 @@ public class VampOnHit : OnHitEffects
             prob = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("VampProb");
-        }      
+        }
+        if(perc >= 1f && SkillTreeManager.Instance.getLevel("Vampire") < 2)  {
+            perc = 1;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("VampPerc");
+        }    
         if(!maxed){CheckMaxed();}
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= 1f){
-            Character.Instance.SetupCharacter("Vampire");
+        if(prob >= 1f && perc >= 1f){
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            
+            Character.Instance.SetupCharacter("Vampire",()=>SpawnExtraAssets(null,null));
             maxed = true;
         }
+    }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/VampUnlock"));
     }
     public bool addList(){
         return Instance == this;
@@ -86,7 +114,11 @@ public class VampOnHit : OnHitEffects
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}%", Mathf.Round(prob*100), Mathf.Round(perc*100));
+        if(SkillTreeManager.Instance.getLevel("Vampire") < 2){
+            return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. 100%)", Mathf.Round(prob*100), Mathf.Round(perc*100));
+        }
+        return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. Infinite%)", Mathf.Round(prob*100), Mathf.Round(perc*100));
+        
     }
     public string getIcon()
     {
@@ -189,6 +221,11 @@ public class ShredOnHit : OnHitEffects
     public static ShredOnHit Instance;
     public float percReduced;
     public float prob;
+
+    float DamageToArmor = 500;
+    float DamageArmor = 0;
+    private Image cooldownImage;
+
     public ShredOnHit(float prob, float percReduced){
        
         this.percReduced = percReduced;
@@ -204,7 +241,30 @@ public class ShredOnHit : OnHitEffects
         if(en==null){return;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            en.Armor -=  (int)(en.Armor *  percReduced);
+            float actualPercReduced = percReduced;
+            if(SkillTreeManager.Instance.getLevel("Resonance") >= 1){
+                actualPercReduced += (Flamey.Instance.accuracy/100f + (Flamey.Instance.BulletSpeed-5)/15f)/10;
+            }
+            float prevArmor = en.Armor;
+            en.Armor -=  (int)(en.Armor *  actualPercReduced);
+
+            if(Character.Instance.isCharacter("Shred")){
+                DamageArmor += prevArmor - en.Armor;
+                if(DamageArmor > DamageToArmor){
+                    DamageArmor = 0;
+                    Flamey.Instance.Armor++;
+                }
+                cooldownImage.fillAmount = DamageArmor/DamageToArmor; 
+            }
+            
+
+            if(SkillTreeManager.Instance.getLevel("Resonance") >= 2){
+                if(prevArmor - en.Armor > 0){
+                    Flamey.Instance.addHealth(prevArmor - en.Armor);
+                }
+                
+            }
+            
         }
     }
     public void Stack(ShredOnHit shredOnHit){
@@ -228,9 +288,14 @@ public class ShredOnHit : OnHitEffects
     public bool maxed;
     private void CheckMaxed(){
         if(percReduced >= 0.5f && prob >= 1f){
-            Character.Instance.SetupCharacter("Shred");
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            Character.Instance.SetupCharacter("Shred",()=>SpawnExtraAssets(null,null));
             maxed = true;
         }
+    }
+
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ShredUnlock"));
     }
     public bool addList(){
         return Instance == this;

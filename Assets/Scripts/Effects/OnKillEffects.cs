@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -20,14 +21,29 @@ public class Explosion : OnKillEffects
     public float prob;
     public int dmg;
     public static Explosion Instance;
+    
     public static GameObject Prefab;
-
+    float radiusExplosion;
+    
+    private int ExplosionsUntilTrueDamage=20;
+    private int ExplosionsDone;
+    private Image cooldownImage;
+    
     public Explosion(float prob, int dmg){
         this.prob = prob;
         this.dmg = dmg;
         if(Instance == null){
             Instance = this;
-            Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath");
+            if(SkillTreeManager.Instance.getLevel("Explosion")>=1){
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeathGiant");
+                radiusExplosion = 1.8f;
+            }else{
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath");
+                radiusExplosion = 1.2f;
+            }
+            if(SkillTreeManager.Instance.getLevel("Explosion")>=2){
+                cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ExplodeUnlock"));
+            }
         }else{
             Instance.Stack(this);
         }
@@ -40,13 +56,36 @@ public class Explosion : OnKillEffects
     public void ApplyEffect(Vector2 pos)
     {
         
-        if(UnityEngine.Random.Range(0f,1f) < prob){
-            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 1.8f, FlareManager.EnemyMask);
+        if(Random.Range(0f,1f) < prob){
+            
+
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
             Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
             foreach(Collider2D col in targets){
-                col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
+                col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:ExplosionsDone>=ExplosionsUntilTrueDamage, onHit:false);
+            }
+
+            if(Character.Instance.isCharacter("Explosion")){
+                ExplodeCampfire(Flamey.Instance.transform.position);
+            }
+
+            if(SkillTreeManager.Instance.getLevel("Explosion")>=2){
+                ExplosionsDone++;
+                if(ExplosionsDone >= ExplosionsUntilTrueDamage){
+                    ExplosionsDone=0;
+                }
+                
+                cooldownImage.fillAmount = ((float)ExplosionsDone)/ExplosionsUntilTrueDamage;
             }
             
+            
+        }
+    }
+    public void ExplodeCampfire(Vector2 pos){
+        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
+        Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+        foreach(Collider2D col in targets){
+            col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
         }
     }
     public void Stack(Explosion vampOnDeath){

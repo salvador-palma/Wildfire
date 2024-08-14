@@ -5854,9 +5854,9 @@ MonoBehaviour:
     Type: On-Shoot Effect
     AbilityDescription1: Some shots will critically strike, enhancing their Damage
       significantly
-    AbilityDescription2: 25% Chance of Critical Striking a Critical Shot, applying
+    AbilityDescription2: No Limit on Critical Strike Multiplier
+    AbilityDescription3: 10% Chance of Critical Striking a Critical Shot, applying
       the Damage multiplier again
-    AbilityDescription3: No Limit on Critical Strike Multiplier
   - Name: Snow Pool
     Type: On-Land Effect
     AbilityDescription1: Snow Pools slow enemies stepping on it. They do not stack
@@ -5883,7 +5883,8 @@ MonoBehaviour:
   - Name: Vampire
     Type: On-Hit Effect
     AbilityDescription1: Heal for a percentage of the Damage you deal
-    AbilityDescription2: If an enemy dies, heal twice as much
+    AbilityDescription2: If the enemy has less HP than you have Damage, heal double
+      the amount
     AbilityDescription3: No Limit on Healing Percentage
   - Name: Assassin
     Type: On-Hit Effect
@@ -5907,8 +5908,9 @@ MonoBehaviour:
     Type: On-Shoot Effect
     AbilityDescription1: Whenever you shoot a flame there's a chance you shoot another
       one right after
-    AbilityDescription2: Unlock Targeting options (Same, Random, Second Closest)
-    AbilityDescription3: Flames have a 25% chance of ricocheting
+    AbilityDescription2: Unlock Targeting options (Same, Random, Second Target, Mouse
+      Position)
+    AbilityDescription3: Flames have a 10% chance of ricocheting
   - Name: Thorns
     Type: On-Hitted Effect
     AbilityDescription1: Enemies that directly hit you get damaged back by a percentage

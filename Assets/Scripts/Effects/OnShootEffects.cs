@@ -20,10 +20,18 @@ public class SecondShot : OnShootEffects{
     public static SecondShot Instance;
     public bool maxed;
     public float perc;
+
+    public int currentTargetingOption;
+
+    public GameObject optionMenu;
+    Enemy secondaryTarget;
     public SecondShot(float p){
         perc = p;
         if(Instance == null){
             Instance = this;
+            currentTargetingOption = PlayerPrefs.GetInt("MulticasterTargetingOption", 0);
+            optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("Multicaster").gameObject;
+            
         }else{
             Instance.Stack(this);
         }
@@ -39,15 +47,43 @@ public class SecondShot : OnShootEffects{
     }
     private async void ShootWithDelay(){
         await Task.Delay(100);
-        Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
+        
+        Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
+        try{
+            switch(currentTargetingOption)
+            {
+                default:
+                case 0://Same
+                    f.setTarget(Flamey.Instance.current_homing.HitCenter.position);
+                    break;
+                case 1://Random
+                    f.setTarget(Flamey.Instance.getRandomHomingPosition());
+                    break;
+                case 2://Second Closest
+                    if(secondaryTarget==null){getHoming();}
+                    if(secondaryTarget==null){f.setTarget(Flamey.Instance.current_homing.HitCenter.position);}
+                    else{f.setTarget(secondaryTarget.HitCenter.position);}
+                    break;
+                case 3://Mouse
+                    Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    f.setTarget(worldPosition);
+                    break;
+            }
+        }catch{
+            Debug.LogWarning("Prevented error: Multicaster");
+        }
     }
 
+    
+
     public void Stack(SecondShot secondShot){
-        perc = 1;
         perc += secondShot.perc;
         RemoveUselessAugments();
     }
 
+    private void getHoming(){
+        secondaryTarget = Flamey.Instance.getRandomHomingEnemy();
+    }
     private void RemoveUselessAugments(){
         if(perc > 1f){
             perc = 1f;
@@ -88,7 +124,7 @@ public class SecondShot : OnShootEffects{
         return "MulticasterUnlock";
     }
     public GameObject getAbilityOptionMenu(){
-        return null;
+        return SkillTreeManager.Instance.getLevel("Multicaster") >= 1 ? optionMenu : null;
     }
    
 }
@@ -264,7 +300,7 @@ public class KrakenSlayer : OnShootEffects{
 
     public int ApplyEffect()
     {
-        if(purpleON){return 4;}
+        if(purpleON){return 6;}
         curr--;
 
         if(curr <= 0){
@@ -273,10 +309,10 @@ public class KrakenSlayer : OnShootEffects{
                 FlamesUntilPurple--;
                 if(FlamesUntilPurple <= 0){
                     FlamesUntilPurple = FlamesPurpleCooldown;
-                    return 4;
+                    return 6;
                 }
             }
-            return 2;
+            return 3;
         }
         return 0;
     }
@@ -380,7 +416,9 @@ public class CritUnlock : OnShootEffects{
     public int ApplyEffect()
     {
         if(Distribuitons.RandomUniform(0f,1f) <= perc){
-           
+            if(SkillTreeManager.Instance.getLevel("Critical Strike") >= 2 && UnityEngine.Random.Range(0f,1f) < 0.1f){
+                return 2;
+            }
             return 1;
         }
         return 0;
@@ -398,7 +436,7 @@ public class CritUnlock : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritChance");
         }
-        if(mult >= 5f){
+        if(mult >= 5f && SkillTreeManager.Instance.getLevel("Critical Strike") < 2){
             mult = 5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritMult");
@@ -422,7 +460,11 @@ public class CritUnlock : OnShootEffects{
     }
     public string getCaps()
     {
-        return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
+        
+        if(SkillTreeManager.Instance.getLevel("Critical Strike") >= 1){
+            return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
+        }
+        return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. Infinite)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
     }
 
     public string getIcon()

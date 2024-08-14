@@ -250,6 +250,13 @@ public class Flamey : MonoBehaviour
         if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2 && BurstShot.Instance != null){
             BurstShot.Instance.Burst();
         }
+        
+
+        if(Character.Instance.isCharacter("Crit")){
+            if(UnityEngine.Random.Range(0f,1f) < CritUnlock.Instance.perc){
+                Dmg = (int)Math.Max(Dmg*0.1f, -4.5f * (CritUnlock.Instance.mult -5) + Dmg);
+            }
+        }
 
 
 
