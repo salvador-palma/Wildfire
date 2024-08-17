@@ -30,6 +30,7 @@ public class Beatle : Enemy
     }
 
     public override void UpdateEnemy()  {
+        
         if(hidden){
             moveBall();
         }else{
@@ -51,9 +52,13 @@ public class Beatle : Enemy
        if(Flamey.Instance.current_homing == this){ Flamey.Instance.current_homing  = null; untarget();}
        
     }
-    protected override void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Hide");
-        
+   
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Hide");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
     public override bool canTarget()
     {

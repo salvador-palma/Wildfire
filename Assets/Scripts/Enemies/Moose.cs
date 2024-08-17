@@ -64,8 +64,13 @@ public class Moose : Enemy
 
         }
     }
-    protected override void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Howl");
+    
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Howl");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
         if(source!= null && source.Equals("Lava Pool")){

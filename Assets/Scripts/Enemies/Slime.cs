@@ -19,7 +19,13 @@ public class Slime : Enemy
     }
 
     public void SlideOn(){
-        Speed = maxSpeed;
+        if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
+            if(getSlowInfo("IceLand")[0] <= 0){
+                Speed = maxSpeed;
+            }
+        }else{
+            Speed = maxSpeed;
+        }
     }
     public void SlideOff(){
         Speed = 0.0001f;

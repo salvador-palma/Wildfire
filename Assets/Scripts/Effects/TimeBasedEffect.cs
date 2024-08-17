@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface TimeBasedEffect : Effect
 {
@@ -18,11 +19,17 @@ public class HealthRegen : TimeBasedEffect
     public float perRound;
 
     public int tickAmount;
+    private Image cooldownImage;
+    private int activeRoundsLeft;
+    private int activeRoundsCooldown = 5;
+    private GameObject pheonix;
+    private GameObject pheonixPrefab;
     public HealthRegen(float perSec, float perRound){
         this.perSec = perSec;
         this.perRound = perRound;
         if(Instance == null){
             Instance = this;
+            pheonixPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/Pheonix");
         }else{
             Instance.Stack(this);
         }
@@ -53,8 +60,50 @@ public class HealthRegen : TimeBasedEffect
     public void Stack(HealthRegen healthRegen){
         perSec += healthRegen.perSec;
         perRound += healthRegen.perRound;
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    
+
+    private void CheckMaxed(){
+        if(perSec >= 100 && perRound >= 100 && !Character.Instance.isACharacter()){
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            Character.Instance.SetupCharacter("Regeneration", () => SpawnExtraAssets(null,null));
+            maxed = true;
+        }
+
+    }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        pheonix = Flamey.Instance.SpawnObject(pheonixPrefab);
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Regen"));
+        activeRoundsLeft=activeRoundsCooldown;
+        cooldownImage.fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+
+        Deck.RoundOver += UpdateActive;
+    }
+    public bool PassiveAvailable(){
+        return Character.Instance.isCharacter("Regeneration") && activeRoundsLeft==activeRoundsCooldown;
+    }
+    public void ReleasePheonix(){
+
+        cooldownImage.fillAmount = 0;
+        activeRoundsLeft= 0;
+        foreach (Enemy en in EnemySpawner.Instance.PresentEnemies)
+        {
+            en.extraAtkSpeedDelay = 10;
+            en.Stun(10);
+        }
+        pheonix.GetComponent<Animator>().Play("Flight");
         
     }
+    
+    private void UpdateActive(object sender, EventArgs e){
+        if(activeRoundsLeft<activeRoundsCooldown){
+            activeRoundsLeft++;
+            cooldownImage.fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+        }
+    }
+    
     
     public string getDescription()
     {
@@ -113,7 +162,9 @@ public class LightningEffect : TimeBasedEffect
     {
         if(current_interval <=0 ){
             current_interval = interval;
-            for(int i = 0; i < 3; i++)
+            int amount = 2;
+            if(Character.Instance.isCharacter("Thunder")){amount*=2;}
+            for(int i = 0; i < amount; i++)
             {
                 Vector2 v = Flamey.Instance.getRandomHomingPosition();
                 GameObject go =  Flamey.Instance.SpawnObject(lightning);
@@ -140,13 +191,19 @@ public class LightningEffect : TimeBasedEffect
         dmg += lightningEffect.dmg;
         RemoveUselessAugments();
     }
-
+    bool maxed;
     void RemoveUselessAugments(){
         if(interval <= 1){
             interval = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThunderInterval");
-        } 
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    private void CheckMaxed(){
+        if(interval <= 1 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Thunder");
+        }
     }
     
     public string getDescription()
@@ -191,6 +248,7 @@ public class Immolate : TimeBasedEffect
         this.interval = interval;
         this.radius = radius;
         if(Instance == null){
+            this.interval = 16;
             Instance = this;
             ring = Resources.Load<GameObject>("Prefab/Ring");
         }else{
@@ -237,8 +295,8 @@ public class Immolate : TimeBasedEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateInterval");
         } 
-        if(radius >= 2f){
-            radius = 2f;
+        if(radius >= 1.5f){
+            radius = 1.5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateRadius");
         }
@@ -250,7 +308,7 @@ public class Immolate : TimeBasedEffect
     }
     public string getCaps()
     {
-        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
+        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 150 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
     }
 
     public string getIcon()

@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public string Name;
     public int Damage;
     public float AttackDelay;
+    public float extraAtkSpeedDelay;
     public float AttackRange;
     public float Speed;
     public int Health;
@@ -23,6 +24,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public Transform HitCenter;
 
     public bool inEffect;
+
+    public bool Stunned;
+
 
     [SerializeField] private float slowfactor;
     protected float SlowFactor{
@@ -42,10 +46,19 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            Attacking = true;
            removeSlowingEffects();
            GetComponent<Animator>().SetTrigger("InRange");
-           InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+        //    InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+           StartCoroutine(PlayAttackAnimation(AttackDelay));
+        }
+    }
+    protected virtual IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("EnemyAttack");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
         }
     }
     public virtual void Move(){
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime);
     }
 
@@ -54,12 +67,28 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
    
+    public virtual void Stun(float f, string source = null){
+        StartCoroutine(StunCoroutine(f));
+    }
+    private IEnumerator StunCoroutine(float f){
+        if(!Stunned){
+            Stunned = true;
+            GetComponent<Animator>().enabled = false;
+            yield return new WaitForSeconds(f);
+            Stunned = false;
+            GetComponent<Animator>().enabled = true;
+        }
+    }
 
     public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
+        if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
+            Dmg *= 2;
+        }
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
-            Dmg = (int)(B + (Dmg-B)*(onHit ? Flamey.Instance.ArmorPen : 0));
+            float armorPen = onHit || Character.Instance.isCharacter("Assassin")? Flamey.Instance.ArmorPen : 0;
+            Dmg = (int)(B + (Dmg-B)*armorPen);
         }
 
         if(onHit){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
@@ -107,10 +136,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public virtual void Attack(){
         flame.Hitted(Damage, ArmorPen, this);
     }
-    protected virtual void PlayAttackAnimation(){
-       
-        GetComponent<Animator>().Play("EnemyAttack");
-    }
+    
     
     
     public void target(){
@@ -163,6 +189,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(prevInfo == null || prevInfo[0] <= 0){
             SlowFactor += percentage; 
         }
+        if(IceOnLand.Instance!= null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 2 && prevInfo[0] > 0){
+            Stun(2f, "IceLand");
+        }
 
         SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
         CheckEnemyIceSkin();
@@ -193,10 +222,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         }
     }
     private void CheckEnemyIceSkin(){
-        if(SlowEffectsDuration.Any(k => k.Value[0] > 0)){
+
+        if(SlowEffectsDuration["IceHit"][0] > 0){
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = true;
         }else{
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if(!SlowEffectsDuration.Any(k => k.Value[0] > 0)){
             SlowFactor = 0;
         }
     }

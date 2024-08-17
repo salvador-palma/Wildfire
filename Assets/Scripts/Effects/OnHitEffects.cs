@@ -84,7 +84,7 @@ public class VampOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= 1f && perc >= 1f){
+        if(prob >= 1f && perc >= 1f && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             
             Character.Instance.SetupCharacter("Vampire",()=>SpawnExtraAssets(null,null));
@@ -137,6 +137,9 @@ public class IceOnHit : OnHitEffects
     public static IceOnHit Instance;
     public float duration;
     public float prob;
+    private Button activeCooldownImage;
+    private int activeRoundsLeft;
+    private int activeRoundsCooldown = 2;
     public IceOnHit(float duration, float prob){
        
         this.duration = duration;
@@ -150,9 +153,10 @@ public class IceOnHit : OnHitEffects
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(en==null || en.getSlowInfo("IceHit")[0] > 0){return;}
+        if(Flamey.Instance.MaxHealth <= 1000){return;}
         if(UnityEngine.Random.Range(0f,1f) < prob){   
-
-            en.SlowDown(duration/1000f, Mathf.Min(0.75f,(Flamey.Instance.MaxHealth-1000) * 0.00033f), "IceHit");
+            int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
+            en.SlowDown(duration/1000f, Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator, 0, 0.75f), "IceHit");
             DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
 
         }
@@ -176,9 +180,42 @@ public class IceOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= 1f && duration >= 10000){
-            Character.Instance.SetupCharacter("Ice");
+        if(prob >= 1f && duration >= 10000 && !Character.Instance.isACharacter()){
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            Character.Instance.SetupCharacter("Freeze", () => SpawnExtraAssets(null,null));
             maxed = true;
+        }
+
+    }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/IceUnlock"));
+        activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+        Deck.RoundOver += UpdateActive;
+        activeCooldownImage.onClick.AddListener(() => {
+            
+            Flamey.Instance.GetComponent<Animator>().SetBool("IceSquimo", true);
+            foreach (Enemy enemy in EnemySpawner.Instance.PresentEnemies)
+            {
+                enemy.SlowEffectsDuration["IceHit"] = new float[2];
+                int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
+                enemy.SlowDown(30, .99f, "IceHit");
+            }
+            
+            Flamey.Instance.callFunctionAfter(() =>{Flamey.Instance.GetComponent<Animator>().SetBool("IceSquimo", false);}, 30f);
+            activeCooldownImage.interactable = false;
+            activeRoundsLeft = 0;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
+
+        });
+    }
+    
+    private void UpdateActive(object sender, EventArgs e){
+        if(activeRoundsLeft<activeRoundsCooldown){
+            activeRoundsLeft++;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+        }
+        if(activeRoundsLeft>=activeRoundsCooldown){
+             activeCooldownImage.interactable = true;
         }
     }
     public bool addList(){
@@ -201,8 +238,10 @@ public class IceOnHit : OnHitEffects
     }
     public string getCaps()
     {
-        float percentage = Mathf.Min(0.75f,(Flamey.Instance.MaxHealth-1000) * 0.00033f);
+        int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
+        float percentage = Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator,0f,0.75f);
         Debug.Log("Duration: " + duration);
+        
         return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/10f)/100f);
     }
 
@@ -287,7 +326,7 @@ public class ShredOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(percReduced >= 0.5f && prob >= 1f){
+        if(percReduced >= 0.5f && prob >= 1f && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Shred",()=>SpawnExtraAssets(null,null));
             maxed = true;
@@ -351,6 +390,11 @@ public class ExecuteOnHit : OnHitEffects
             float f = en.Health;
             Vector2 v = en.transform.position;
             en.Health = 0;
+            Debug.Log("Executed");
+            if(SkillTreeManager.Instance.getLevel("Assassin")>=2){
+                Flamey.Instance.ApplyOnKill(en.HitCenter.position);
+                Flamey.Instance.ApplyOnKill(en.HitCenter.position);
+            }
             await Task.Delay(50);
             DamageUI.InstantiateTxtDmg(v, "EXECUTED",5);
         }
@@ -371,7 +415,7 @@ public class ExecuteOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(percToKill >= 0.5f && Flamey.Instance.ArmorPen >= .8f ){
+        if(percToKill >= 0.5f && Flamey.Instance.ArmorPen >= .8f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Assassin");
             maxed = true;
         }
@@ -396,7 +440,10 @@ public class ExecuteOnHit : OnHitEffects
     }
     public string getCaps()
     {
-        return string.Format("Armor Penetration: {0}% (Max. 80%) <br>Execution: {1}% (Max. 50%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
+        if(SkillTreeManager.Instance.getLevel("Assassin")>=1){
+            return string.Format("Armor Penetration: {0}% (Max. 80%) <br>Execution: {1}% (Max. 50%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
+        }
+        return string.Format("Armor Penetration: {0}% (Max. 80%)", Mathf.Round(Flamey.Instance.ArmorPen * 100));
     }
 
     public string getIcon()
@@ -502,7 +549,7 @@ public class StatikOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= 1f && ttl >= 10){
+        if(prob >= 1f && ttl >= 10 && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Statik");
             GameObject g = GameUI.Instance.SpawnUI(statikMeter);
             statikMeterSlider = g.GetComponent<Slider>();

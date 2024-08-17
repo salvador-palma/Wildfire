@@ -32,16 +32,16 @@ public class IceAOE : MonoBehaviour
 
             Enemy e = collider.GetComponent<Enemy>();
             if(!e.canTarget()){return;}
-            float[] info = e.getSlowInfo("IcePool");
+            float[] info = e.getSlowInfo("IceLand");
             
             float lastingAmount = Math.Max(lt, info==null? -1 : info[0]);
-            e.SlowDown(lastingAmount, 1-Slow, "IcePool");
+            e.SlowDown(lastingAmount, Slow, "IceLand");
   
         }
     }
     private void OnTriggerExit2D(Collider2D collider){
         if(collider.tag == "Enemy"){
-            collider.GetComponent<Enemy>().removeSlow("IcePool");
+            collider.GetComponent<Enemy>().removeSlow("IceLand");
         }
     }
 

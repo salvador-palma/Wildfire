@@ -63,8 +63,12 @@ public class Bison : Enemy
         }
     }
 
-    override protected void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Attack");
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Attack");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
     public override void CheckFlip()
     {

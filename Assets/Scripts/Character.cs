@@ -63,6 +63,9 @@ public class Character : MonoBehaviour
         if(active == -1){return false;}
         return characterDatas[active].AbilityName.Equals(ability_name);
     }
+    public bool isACharacter(){
+        return active != -1;
+    }
     public bool isCharacterUnlocked(string ability_name = null){
         if(ability_name == null){
             //active

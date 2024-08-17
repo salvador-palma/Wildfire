@@ -12,9 +12,11 @@ public class ImmolateObject : MonoBehaviour
     {
         dmg = Immolate.Instance.dmg;
         float x = Immolate.Instance.radius;
-        float y = transform.localScale.y * x / transform.localScale.x;
+        float y = Immolate.Instance.radius;
         speed = x*2/3f;
         objective = new Vector2(x,y);
+        GetComponent<SpriteRenderer>().flipX = Random.Range(0f,1f) < .5f;
+        GetComponent<SpriteRenderer>().flipY = Random.Range(0f,1f) < .5f;
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class ImmolateObject : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Enemy"){
             Enemy e = other.GetComponent<Enemy>();
-            e.Hitted(dmg, 9, ignoreArmor:true, onHit:false);
+            e.Hitted(dmg, 9, ignoreArmor:false, onHit:false);
         }
     }
 }

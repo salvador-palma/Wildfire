@@ -59,6 +59,7 @@ public class Flamey : MonoBehaviour
     [Header("Status Effects")]
     public float stunTimeLeft;
     public int poisonsLeft;
+    public bool Unhittable;
 
     //FINAL STATS COUNTERS
     [HideInInspector] public int TotalKills;
@@ -116,12 +117,14 @@ public class Flamey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameEnd){return;}
+        if(GameEnd || Health <= 0){return;}
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
         }
         
         
+        
+
         if(current_homing == null){
             Console.Log("Searching enemies...");
             target(getHoming());
@@ -151,7 +154,16 @@ public class Flamey : MonoBehaviour
             shoot();
         }
 
-        if(Health <= 0){EndGame();}
+        if(Health <= 0){
+            if(HealthRegen.Instance != null && Character.Instance.isCharacter("Regeneration") && HealthRegen.Instance.PassiveAvailable()){
+                HealthRegen.Instance.ReleasePheonix();
+                Unhittable = true; 
+                
+            }else{
+                EndGame();
+            }
+            
+        }
 
         secondTimer-=Time.deltaTime;
         if(secondTimer <= 0){
@@ -247,6 +259,8 @@ public class Flamey : MonoBehaviour
     }
     public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake=true, int idHitTxt= 2){
 
+        if(Unhittable){return;}
+
         if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2 && BurstShot.Instance != null){
             BurstShot.Instance.Burst();
         }
@@ -267,7 +281,16 @@ public class Flamey : MonoBehaviour
         if(onhitted){ApplyOnHitted(attacker);}
 
         Health -= dmgeff;
-        if(Health <= 0){EndGame();}
+        if(Health <= 0){
+            if(HealthRegen.Instance != null && Character.Instance.isCharacter("Regeneration") && HealthRegen.Instance.PassiveAvailable()){
+                HealthRegen.Instance.ReleasePheonix();
+                
+                Unhittable = true; 
+                
+            }else{
+                EndGame();
+            }
+        }
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, idHitTxt);
         if(isShake){CameraShake.Shake(0.5f,0.20f);} 
@@ -368,22 +391,34 @@ public class Flamey : MonoBehaviour
 
     public void addHealth(int max_increase, float healperc){
         MaxHealth += max_increase;
+        if(HealthRegen.Instance != null && SkillTreeManager.Instance.getLevel("Regeneration") >= 1 && Health > 0){
+            healperc *= 2;
+        } 
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
         TotalHealed+=(ulong)(MaxHealth * healperc);
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
     public void addHealth(float HealAmount){
-        
+        if(HealthRegen.Instance != null && Health > 0){
+            if(SkillTreeManager.Instance.getLevel("Regeneration") >= 1){
+                HealAmount *= 2;
+            }
+            if(SkillTreeManager.Instance.getLevel("Regeneration") >= 2){
+                float factor = (float)Math.Clamp(Math.Pow(Health-MaxHealth,2)/Math.Pow(MaxHealth,2) + 1, 1, 2);
+                HealAmount *= factor;
+            }
+        } 
         TotalHealed+=(ulong)HealAmount;
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
-        DamageUI.InstantiateTxtDmg(transform.position, ""+ HealAmount, 3);
+        DamageUI.InstantiateTxtDmg(transform.position, ""+ Mathf.Round(HealAmount * 10.0f) * 0.1f, 3);
     }
 
     public void Stun(float t){
 
-        if(Character.Instance.isCharacter("Thorns")){
+        if(Character.Instance.isCharacter("Snow Pool")){
+            Debug.Log("Blocked Stun");
             return;
         }
 
@@ -459,6 +494,7 @@ public class Flamey : MonoBehaviour
         return res;
     }
     public void ApplyOnLand(UnityEngine.Vector2 pos){
+        
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
     public void ApplyOnHitted(Enemy e){
@@ -466,6 +502,7 @@ public class Flamey : MonoBehaviour
     }
 
     public void ApplyOnKill(Vector2 pos){
+        
         foreach (OnKillEffects oh in onKillEffects){oh.ApplyEffect(pos);}
     }
 

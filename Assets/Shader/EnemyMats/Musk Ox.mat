@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Musk Ox
+  m_Shader: {fileID: -6465566751694194690, guid: edae286d265f1ff4fb3b71487da6e272, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 5e53dfed1db3f5f4097ddcd1946c2bd9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Fuzzy_1: 0
+    - _Fuzzy_2: 0
+    - _Fuzzy_3: 0
+    - _Fuzzy_4: 0
+    - _Fuzzy_5: 0
+    - _Fuzzy_6: 0
+    - _Range_1: 0.03
+    - _Range_2: 0.06
+    - _Range_3: 0.03
+    - _Range_4: 0.09
+    - _Range_5: 0.06
+    - _Range_6: 0.06
+    m_Colors:
+    - _Place_1: {r: 0.9150943, g: 0.4366842, b: 0.34100214, a: 1}
+    - _Place_2: {r: 1, g: 0.54846483, b: 0.4575472, a: 0}
+    - _Place_3: {r: 0.1981132, g: 0.09142722, b: 0.05513528, a: 1}
+    - _Place_4: {r: 0.2924528, g: 0.16196011, b: 0.120016016, a: 0}
+    - _Place_5: {r: 0.5188679, g: 0.24641691, b: 0.18845673, a: 0}
+    - _Place_6: {r: 0.5754717, g: 0.32793978, b: 0.23616058, a: 0}
+    - _Replace_1: {r: 0.5686275, g: 0.47450984, b: 0.5254902, a: 1}
+    - _Replace_2: {r: 0.6039216, g: 0.5254902, b: 0.5686275, a: 1}
+    - _Replace_3: {r: 0.16078432, g: 0.15686275, b: 0.16078432, a: 1}
+    - _Replace_4: {r: 0.19215688, g: 0.20000002, b: 0.19215688, a: 1}
+    - _Replace_5: {r: 0.46274513, g: 0.3372549, b: 0.40784317, a: 0}
+    - _Replace_6: {r: 0.49411768, g: 0.38431376, b: 0.45098042, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &3074949191027487416
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

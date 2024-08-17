@@ -104,7 +104,7 @@ public class FlameCircle : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 4f){
+        if(amount >= 4f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Orbital");
         }
     }
@@ -143,7 +143,7 @@ public class MoneyMultipliers : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(mult >= 3f){
+        if(mult >= 3f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Money");
         }
     }
@@ -289,7 +289,7 @@ public class CandleTurrets : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 6f && atkSpeed >= 3f){
+        if(amount >= 6f && atkSpeed >= 3f && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Ritual",() => SpawnExtraAssets(null,null));
             maxed = true;
@@ -413,7 +413,7 @@ public class Summoner : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 10 && atkSpeed >= 3f && speed >= 4f){
+        if(amount >= 10 && atkSpeed >= 3f && speed >= 4f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Bee Summoner");
             maxed = true;
         }

@@ -71,7 +71,7 @@ public class BurnOnLand : OnLandEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && lasting >= 10){
+        if(prob >= .5f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Lava");
             
@@ -178,8 +178,8 @@ public class IceOnLand : OnLandEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && slow >= 0.5f && lasting >= 10){
-            Character.Instance.SetupCharacter("Snow");
+        if(prob >= .5f && size >= 2.5f && slow >= 0.5f && lasting >= 10 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Snow Pool");
             maxed = true;
         }
     }
@@ -219,11 +219,13 @@ public class DrainOnLand : OnLandEffect
 {
     public static DrainOnLand Instance;
     public GameObject prefab;
+    public GameObject prefabCarnivore;
     public float size;
     public float perc;
     public float timegap;
     public float prob;
     public float lasting;
+    public float carnivoreChance;
     public DrainOnLand(float size, float perc, float prob, float lasting){
         this.prob = prob;
         this.size = size;
@@ -233,6 +235,7 @@ public class DrainOnLand : OnLandEffect
         if(Instance == null){
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/DrainAOE");
+            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore");
         }else{
             Instance.Stack(this);
         }
@@ -240,8 +243,14 @@ public class DrainOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < carnivoreChance){
+                GameObject go = Flamey.Instance.SpawnObject(prefabCarnivore);
+                go.transform.position = pos;
+            }else{
+                GameObject go = Flamey.Instance.SpawnObject(prefab);
+                go.transform.position = pos;
+            }
+            
         }
     }
     public void Stack(DrainOnLand burnOnLand){
@@ -252,8 +261,8 @@ public class DrainOnLand : OnLandEffect
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 0.5f){
-            prob = .5f;
+        if(prob >= .25f){
+            prob = .25f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolProb");
         }
@@ -272,8 +281,9 @@ public class DrainOnLand : OnLandEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && lasting >= 10){
-            Character.Instance.SetupCharacter("Flower");
+        if(prob >= .25f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Flower Field");
+            carnivoreChance = 0.25f;
             maxed = true;
         }
     }

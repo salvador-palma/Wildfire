@@ -160,9 +160,16 @@ public class DeckBuilder : MonoBehaviour
 
             new Augment("Assassin" ,"Assassin's Path", "Unlock the ability to pierce armor and execute enemies", "Assassins", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Assassin");
-                Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.025f));
+                
                 Flamey.Instance.addArmorPen(0.05f);
-                Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen","Execute"});            
+                if(SkillTreeManager.Instance.getLevel("Assassin")>=1){
+                    Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen","Execute"});   
+                    Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.025f));         
+                }else{
+                    Deck.Instance.AddAugmentClass(new List<string>{"ArmorPen"});   
+                    Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0));           
+                }
+                
             }), baseCard: true),  
             new Augment("Execute","Execution Enforcer", "You can execute enemies for +2.5% of their Max Health", "Execute", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.025f)))),
             new Augment("Execute","Soul Collector", "You can execute enemies for +5% of their Max Health", "Execute", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ExecuteOnHit(0.05f)))),
@@ -239,7 +246,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("StatikTTL","Amping Up!", "Your Static Energy will be able to cross through 5 more enemies", "StatikTTL", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,5)))),
             
 
-            new Augment("Snow Pool" ,"Ice Pool", "Unlock the ability to create Snow Pools that slow down enemies", "IcePoolUnlock", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Snow Pool" ,"Snow Pool", "Unlock the ability to create Snow Pools that slow down enemies", "IcePoolUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Snow Pool");
                 Flamey.Instance.addOnLandEffect(new IceOnLand(1f, 0.1f, 0.05f, 1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"IcePoolDuration","IcePoolProb","IcePoolSlow","IcePoolSize"});            
@@ -264,9 +271,9 @@ public class DeckBuilder : MonoBehaviour
                 Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ThornsPerc","ThornsProb"});            
             }), baseCard: true),  
-            new Augment("ThornsPerc","Innocent Spikes", "Your Thorn effect will reflect +5% of your Armor", "ThornsPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .05f)))),
-            new Augment("ThornsPerc","Spiky Vengeance", "Your Thorn effect will reflect +10% of your Armor", "ThornsPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .1f)))),
-            new Augment("ThornsPerc","PufferFish", "Your Thorn effect will reflect +20% of your Armor", "ThornsPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .2f)))),
+            new Augment("ThornsPerc","Innocent Spikes", "Your Thorn effect will reflect +10% of your Armor", "ThornsPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .1f)))),
+            new Augment("ThornsPerc","Spiky Vengeance", "Your Thorn effect will reflect +20% of your Armor", "ThornsPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .2f)))),
+            new Augment("ThornsPerc","PufferFish", "Your Thorn effect will reflect +50% of your Armor", "ThornsPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .5f)))),
             new Augment("ThornsProb","Prickly Fire", "Gain +5% chance to proc your Thorns effect", "ThornsProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.05f, 0)))),
             new Augment("ThornsProb","Thorns everywhere!", "Gain +10% chance to proc your Thorns effect", "ThornsProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.1f, 0)))),
             new Augment("ThornsProb","Cactus on Fire", "Gain +25% chance to proc your Thorns effect", "ThornsProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.25f, 0)))),
@@ -294,12 +301,12 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"DrainPoolPerc","DrainPoolProb","DrainPoolSize","DrainPoolDuration"});            
             }), baseCard: true),  
 
-            new Augment("DrainPoolPerc","Harvesting", "Your Drain Pool will heal you for +0.5% Enemy Max HP per tick", "DrainPoolPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.005f,0,0)))),
-            new Augment("DrainPoolPerc","Carnivorous Plant", "Your Drain Pool will heal you for +1% Enemy Max HP per tick", "DrainPoolPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0)))),
-            new Augment("DrainPoolPerc","Photosynthesis", "Your Drain Pool will heal you for +2% Enemy Max HP per tick", "DrainPoolPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.02f,0,0)))),
+            new Augment("DrainPoolPerc","Harvesting", "Your Drain Pool will heal you for +0.25% Enemy Max HP per tick", "DrainPoolPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.0025f,0,0)))),
+            new Augment("DrainPoolPerc","Carnivorous Plant", "Your Drain Pool will heal you for +0.5% Enemy Max HP per tick", "DrainPoolPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.005f,0,0)))),
+            new Augment("DrainPoolPerc","Photosynthesis", "Your Drain Pool will heal you for +1% Enemy Max HP per tick", "DrainPoolPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0)))),
             new Augment("DrainPoolProb","Sowing the Field", "Gain +5% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.05f,0)))),
             new Augment("DrainPoolProb","Garden's Embrace", "Gain +10% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.1f,0)))),
-            new Augment("DrainPoolProb","Lifebloom Aura", "Gain +25% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.25f,0)))),
+            new Augment("DrainPoolProb","Lifebloom Aura", "Gain +20% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.2f,0)))),
             new Augment("DrainPoolSize","Sprouting", "Your Drain Pool grows by +2.5 units", "DrainPoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.25f,0,0,0)))),
             new Augment("DrainPoolSize","Flowering Surge", "Your Drain Pool grows by +5 units", "DrainPoolSize", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.5f,0,0,0)))),
             new Augment("DrainPoolSize","Botanical Boom", "Your Drain Pool grows by +10 units", "DrainPoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(1f,0,0,0)))),
@@ -355,12 +362,12 @@ public class DeckBuilder : MonoBehaviour
 
             new Augment("Regeneration" ,"Regeneration", "Unlock the ability to regenerate Health", "Regen", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Regeneration");
-                Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 10f));
+                Flamey.Instance.addTimeBasedEffect(new HealthRegen(5f, 10f));
                 Deck.Instance.AddAugmentClass(new List<string>{"RegenPerSecond","RegenPerRound"});            
             }), baseCard: true),  
-            new Augment("RegenPerSecond","Self-Healing Fire", "Each second you will regen +10 Health", "RegenPerSecond", Tier.Silver, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 0)))), 
-            new Augment("RegenPerSecond","Perseverance", "Each second you will regen +20 Health", "RegenPerSecond", Tier.Gold, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(20f, 0)))), 
-            new Augment("RegenPerSecond","Heart of Fire", "Each second you will regen +50 Health", "RegenPerSecond", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(50f, 0)))), 
+            new Augment("RegenPerSecond","Self-Healing Fire", "Each second you will regen +5 Health", "RegenPerSecond", Tier.Silver, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(5f, 0)))), 
+            new Augment("RegenPerSecond","Perseverance", "Each second you will regen +10 Health", "RegenPerSecond", Tier.Gold, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(10f, 0)))), 
+            new Augment("RegenPerSecond","Heart of Fire", "Each second you will regen +25 Health", "RegenPerSecond", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(25f, 0)))), 
             new Augment("RegenPerRound","Emergency Bandage", "At the end of each round you gain +10 Max HP", "RegenPerRound", Tier.Silver, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 10)))),  
             new Augment("RegenPerRound","Leftovers", "At the end of each round you gain +25 Max HP", "RegenPerRound", Tier.Gold, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 25)))), 
             new Augment("RegenPerRound","Free Healthcare", "At the end of each round you gain +50 Max HP", "RegenPerRound", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new HealthRegen(0, 50)))), 

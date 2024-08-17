@@ -34,8 +34,13 @@ public class Skunk : Enemy
     }
 
 
-    override protected void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Stun");
+    
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Stun");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
 
 

@@ -93,7 +93,7 @@ public class SecondShot : OnShootEffects{
         if(!maxed){CheckMaxed();}
     }
     private void CheckMaxed(){
-        if(perc >= 1f){
+        if(perc >= 1f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Multicaster");
         }
     }
@@ -211,7 +211,7 @@ public class BurstShot : OnShootEffects{
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 20 && interval <= 10){
+        if(amount >= 20 && interval <= 10 && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Burst", new UnityAction(()=>SpawnExtraAssets(null,null)));
             maxed = true;
@@ -333,7 +333,7 @@ public class KrakenSlayer : OnShootEffects{
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(interval <= 0){
+        if(interval <= 0 && !Character.Instance.isACharacter()){
             GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Magical Shot", () => SpawnExtraAssets(null, null));
 
@@ -346,8 +346,9 @@ public class KrakenSlayer : OnShootEffects{
         Deck.RoundOver += UpdateActive;
         activeCooldownImage.onClick.AddListener(() => {
             purpleON = true;
+            Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",true);
             
-            Flamey.Instance.callFunctionAfter(() => purpleON = false, 5f);
+            Flamey.Instance.callFunctionAfter(() =>{ purpleON = false; Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",false);}, 5f);
             activeCooldownImage.interactable = false;
             activeRoundsLeft = 0;
             activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
@@ -445,7 +446,7 @@ public class CritUnlock : OnShootEffects{
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(perc >= .8f && mult >= 5f){
+        if(perc >= .8f && mult >= 5f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Crit");
             maxed = true;
         }

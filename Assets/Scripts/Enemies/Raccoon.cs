@@ -28,6 +28,7 @@ public class Raccoon : Enemy
         MaxHealth = Health;
     }
     public override void UpdateEnemy()  {
+        
         Move();
         if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !Stealing){
            GetComponent<Animator>().SetTrigger("InRange");
@@ -38,6 +39,7 @@ public class Raccoon : Enemy
         }
     }
     public override void Move(){
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed* (1-SlowFactor) * Time.deltaTime * (Stealing? -1f : 1));
     }
     public override void Attack()

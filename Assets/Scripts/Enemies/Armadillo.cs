@@ -32,6 +32,7 @@ public class Armadillo : Enemy
     }
 
     public override void Move(){
+        
         if(hitsUntilUnroll> 0){
             transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * rollingSpeedMultiplier * Time.deltaTime);
         }else{

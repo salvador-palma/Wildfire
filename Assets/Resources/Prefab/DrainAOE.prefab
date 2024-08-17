@@ -54,8 +54,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -99,7 +97,6 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8721496126903620102}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -123,8 +120,7 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.06669019, y: -0.050869316}
   m_Size: {x: 4.3521285, y: 2.2625375}
   m_Direction: 1
@@ -157,7 +153,7 @@ Rigidbody2D:
   m_Constraints: 0
 --- !u!95 &8721496126903620111
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,7 +167,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -204,16 +199,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowers:
-  - {fileID: -194818066077126744, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
-  - {fileID: -194818066077126744, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
-  - {fileID: 1688127093310603583, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
-  - {fileID: 7958929529641746168, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
-  - {fileID: -7271880148870568012, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
-  - {fileID: -1872591478575451559, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
   - {fileID: -5588888737662910949, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
   - {fileID: 2119802022730792222, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
   - {fileID: 5087154339777923634, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
   - {fileID: 3028422702807503905, guid: e2dec2c0757c8524282bd26263f860c3, type: 3}
+  carnivore: {fileID: 21300000, guid: 1858c09a7c4c7b3489a61cd190862d5f, type: 3}
   perc: 0
   Timer: 1
   LastingTime: 0
+  isCarnivore: 0

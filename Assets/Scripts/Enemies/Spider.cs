@@ -55,7 +55,7 @@ public class Spider : Enemy
     public override void Move(){
 
 
-
+        if(Stunned){return;}
         float x = centerPoint.position.x + Mathf.Cos(angle) * radiusX;
         float y = centerPoint.position.y + Mathf.Sin(angle) * radiusY;
 

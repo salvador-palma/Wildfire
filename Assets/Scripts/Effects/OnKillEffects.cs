@@ -103,7 +103,7 @@ public class Explosion : OnKillEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f){
+        if(prob >= .5f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Explosion");
             maxed = true;
         }
@@ -193,7 +193,7 @@ public class Necromancer : OnKillEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f){
+        if(prob >= .5f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Necro");
             MegaGhoulProbability = 0.1f;
             maxed = true;
@@ -321,7 +321,7 @@ public class Bullets : OnKillEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= .5f && amount >= 6){
+        if(prob >= .5f && amount >= 6 && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Pirate");
             maxed = true;
         }

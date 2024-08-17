@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Lightning : MonoBehaviour
@@ -25,15 +26,28 @@ public class Lightning : MonoBehaviour
             if(particles[i].remainingLifetime <= 0){
                 check =true;
                 Vector2 WorldPos = transform.TransformPoint(particles[i].position);
-                Collider2D[] targets = Physics2D.OverlapCircleAll(WorldPos, 0.5f, FlareManager.EnemyMask);
+                Enemy[] targets = Physics2D.OverlapCircleAll(WorldPos, 0.5f, FlareManager.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
                 if(targets.Length > 0){
                     GameObject ex = Instantiate(Prefab);
                     ex.transform.position = WorldPos;
                 }
-                foreach(Collider2D col in targets){
-                    col.GetComponent<Enemy>().Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: true, onHit: false);
+                if(SkillTreeManager.Instance.getLevel("Thunder")>=2){
+                    foreach(Enemy col in targets){
+
+                        col.Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
+                        col.Stun(2f);
+                    }
+                }else{
+                    foreach(Enemy col in targets){
+                        col.Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
+                    }
+                }
+                
+                if(SkillTreeManager.Instance.getLevel("Thunder")>=1){
+                    Flamey.Instance.ApplyOnLand(WorldPos);
                 }
                 Flamey.Instance.ApplyOnLand(WorldPos);
+                
             }
         }
     }

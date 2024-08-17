@@ -4903,6 +4903,8 @@ MonoBehaviour:
     color: {r: 1, g: 0.4392157, b: 0.99607843, a: 1}
   - fontAsset: {fileID: 11400000, guid: 486427f241c28644fb30c2387de8cbbd, type: 2}
     color: {r: 0.36862746, g: 0, b: 0.30588236, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 19a7434caca7efd40ac5e59e53c37010, type: 2}
+    color: {r: 1, g: 0.42745098, b: 0.7529412, a: 1}
   TextDmgTemplate: {fileID: 3633900077226613852, guid: 5e7410176e12e1546b75257c0db84b33, type: 3}
   targetCanvas: {fileID: 2079703109}
 --- !u!114 &312507740
@@ -10975,6 +10977,7 @@ MonoBehaviour:
   GameEnd: 1
   stunTimeLeft: 0
   poisonsLeft: 0
+  Unhittable: 0
   TotalKills: 0
   TotalShots: 0
   TotalDamage: 0
@@ -11150,7 +11153,7 @@ MonoBehaviour:
     BodyFrontColor: {r: 0.93725497, g: 0.7803922, b: 0.62352943, a: 1}
   - Name: Ice Cube
     AnimationBool: Ice
-    AbilityName: Ice
+    AbilityName: Freeze
     AbilityDescription: <b>Active:</b> Become unhittable for 5 seconds (Cooldown
       1 round)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
@@ -11234,7 +11237,7 @@ MonoBehaviour:
     BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
   - Name: Mt. Everest
     AnimationBool: Snow
-    AbilityName: Snow
+    AbilityName: Snow Pool
     AbilityDescription: <b>Active:</b> Cover the whole arena in Snow (1 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
     BodyFront: {fileID: 0}
@@ -11244,7 +11247,7 @@ MonoBehaviour:
     BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
   - Name: Flora
     AnimationBool: Flower
-    AbilityName: Flower
+    AbilityName: Flower Field
     AbilityDescription: Overhealing will turn into Extra Damage instead
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -11317,7 +11320,7 @@ MonoBehaviour:
     BodyFrontColor: {r: 0.9921569, g: 0.6, b: 0.13333334, a: 1}
   - Name: Pheonix
     AnimationBool: Regen
-    AbilityName: Regen
+    AbilityName: Regeneration
     AbilityDescription: When you die, reborn at full HP and kill every enemy on screen
       (5 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
@@ -11325,17 +11328,17 @@ MonoBehaviour:
     Prop: {fileID: 21300000, guid: bf96fe3a6a2d30a449fd3330064b6442, type: 3}
     Face: {fileID: 21300000, guid: f26bde648b6c389418ac83a3d1c87d0a, type: 3}
     BodyBackColor: {r: 1, g: 0.33333334, b: 0, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 0, a: 1}
+    BodyFrontColor: {r: 1, g: 0.33333334, b: 0, a: 1}
   - Name: Azureoth
     AnimationBool: Blue
     AbilityName: Magical Shot
-    AbilityDescription: <b>Active:</b> Turn Purple during 5 seconds (3 Round Cooldown)
+    AbilityDescription: <b>Active:</b> Turn Purple during 5 seconds (1 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
-    BodyBackColor: {r: 0.3019608, g: 0.49803925, b: 1, a: 1}
-    BodyFrontColor: {r: 0.9686275, g: 1, b: 0.62352943, a: 1}
+    Face: {fileID: 21300000, guid: 676fe0ce83a11b045916f079b9a29a98, type: 3}
+    BodyBackColor: {r: 0.83921576, g: 0.6313726, b: 0.38823533, a: 1}
+    BodyFrontColor: {r: 0.7411765, g: 0.454902, b: 0.30980393, a: 1}
 --- !u!1001 &818081748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37965,7 +37968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.63995, y: -0.0025024414}
+  m_AnchoredPosition: {x: -247.6399, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
