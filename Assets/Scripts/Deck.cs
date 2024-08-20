@@ -31,18 +31,18 @@ public class Deck : MonoBehaviour
 
     
     private void Awake(){
-        Debug.Log("Done here Deck");
+       
         
         Instance = this;
         RoundOver += ClearRemainderObjects;
-        // Console.Log("<color=#00ff00> Deck Initialized! </color>");
+      
         
     }
 
     
 
     private void Start() {
-        Console.Log("<color=#00ff00> Deck Started! </color>");
+        
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
             
             gameState = new GameState();
@@ -59,6 +59,7 @@ public class Deck : MonoBehaviour
     void FillDeck(){
         
         augments = DeckBuilder.Instance.getAllCards();
+        
     }   
     Augment pickFromDeck(){
         Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
@@ -294,6 +295,8 @@ public class GameState{
     public int CollectedEmbers;
     public float Health;
     public int MaxHP;
+    public float AtkSpeed;
+    public string Character;
     public int[] EnemyIDs;
     public int CurrentRound;
     public bool[] NextTiers;

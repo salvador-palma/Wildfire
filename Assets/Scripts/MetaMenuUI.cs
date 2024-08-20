@@ -16,6 +16,7 @@ public class MetaMenuUI : MonoBehaviour
     //Deug
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
+    [SerializeField] private GameObject CharacterSelectPanel;
     [SerializeField] private GameObject SkillTree;
     static public MetaMenuUI Instance;
     
@@ -48,9 +49,13 @@ public class MetaMenuUI : MonoBehaviour
         
         SkillTreeManager.Instance.toggleSkillTree(SkillTreePanel);
     }
+    public void CharacterSelectMenuToggle(){
+        Character.Instance.toggleCharacterPanel(CharacterSelectPanel);
+        
+    }
 
     public void BestiaryMenuToggle(){
-        BestiaryPanel.SetActive(!BestiaryPanel.activeInHierarchy);
+        BestiaryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
     }
  
     public void UpgradeButton(){

@@ -4832,6 +4832,7 @@ RectTransform:
   - {fileID: 1955198433}
   - {fileID: 616796709}
   - {fileID: 1350612376}
+  - {fileID: 1035603636}
   - {fileID: 1114862440}
   - {fileID: 762835910}
   - {fileID: 2000852781}
@@ -4905,6 +4906,14 @@ MonoBehaviour:
     color: {r: 0.36862746, g: 0, b: 0.30588236, a: 1}
   - fontAsset: {fileID: 11400000, guid: 19a7434caca7efd40ac5e59e53c37010, type: 2}
     color: {r: 1, g: 0.42745098, b: 0.7529412, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 17cbeda4000105144a009cad9f1ae163, type: 2}
+    color: {r: 0.6039216, g: 0.40784314, b: 0.28235295, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 78967891906ec174086105303ab060c1, type: 2}
+    color: {r: 0.909804, g: 0.7568628, b: 0.94117653, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 78967891906ec174086105303ab060c1, type: 2}
+    color: {r: 0.909804, g: 0.7568628, b: 0.94117653, a: 1}
+  - fontAsset: {fileID: 11400000, guid: 59ed048e6227c074291118e22b96ca1b, type: 2}
+    color: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
   TextDmgTemplate: {fileID: 3633900077226613852, guid: 5e7410176e12e1546b75257c0db84b33, type: 3}
   targetCanvas: {fileID: 2079703109}
 --- !u!114 &312507740
@@ -5036,7 +5045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -191.09253}
+  m_AnchoredPosition: {x: 0, y: -191.09254}
   m_SizeDelta: {x: 0, y: -382.195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &323553275
@@ -6592,6 +6601,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8063c158dea9ab49a83d43e511d779a, type: 3}
+--- !u!1 &448100960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 448100961}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &448100961
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448100960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.03749, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1082039078}
+  m_Father: {fileID: 1035603636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: -0.10290909, y: 0}
+  m_SizeDelta: {x: 960.83, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &453212346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10912,7 +10957,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 811388236}
-  - component: {fileID: 811388241}
   - component: {fileID: 811388237}
   - component: {fileID: 811388240}
   - component: {fileID: 811388238}
@@ -10958,6 +11002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 1000
   Health: 0
+  Shield: 0
   Dmg: 50
   Armor: 0
   ArmorPen: 0
@@ -10974,6 +11019,7 @@ MonoBehaviour:
   - {fileID: 8390132637401387638, guid: 998599fd892b00b4ca3a5ed939ad2a26, type: 3}
   FlareSpotPrefab: {fileID: 9207615669171026501, guid: 59c00f86f086e2249bcfcde8b18bd183, type: 3}
   HealthSlider: {fileID: 1350612377}
+  ShieldSlider: {fileID: 1035603637}
   GameEnd: 1
   stunTimeLeft: 0
   poisonsLeft: 0
@@ -11074,271 +11120,11 @@ MonoBehaviour:
     CollectedEmbers: 0
     Health: 0
     MaxHP: 0
+    AtkSpeed: 0
+    Character: 
     EnemyIDs: 
     CurrentRound: 0
     NextTiers: 
---- !u!114 &811388241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811388234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0336ea0003f9ad40bd6cedf42189387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: -1
-  characterDatas:
-  - Name: Double Faced
-    AnimationBool: Multi
-    AbilityName: Multicaster
-    AbilityDescription: Gain +0.2 Attack Speed per round without limit
-    BodyBack: {fileID: 21300000, guid: 2ae2fd1c31d7862458b9099b38c9f01e, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 000cd88b89c055d4f8e23dd923528234, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Rose Warrior
-    AnimationBool: Thorns
-    AbilityName: Thorns
-    AbilityDescription: Immune to all Stuns
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: 7f3add2241b179f428c2d6712cc1e900, type: 3}
-    Face: {fileID: 21300000, guid: 9a9e25e8b10a30d4ab7e084c8e7516ae, type: 3}
-    BodyBackColor: {r: 0.23529413, g: 0.6862745, b: 0.49411768, a: 1}
-    BodyFrontColor: {r: 0.45098042, g: 1, b: 0.7843138, a: 1}
-  - Name: Saturn
-    AnimationBool: Orbital
-    AbilityName: Orbital
-    AbilityDescription: Gain +2 Orbits
-    BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 21300000, guid: be0e031c93bc602498ca2e8b759baadc, type: 3}
-    Face: {fileID: 21300000, guid: aa98c36d2babcce4094fb8b81b8b0453, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Sir Flareington
-    AnimationBool: Money
-    AbilityName: Money
-    AbilityDescription: Shiny spawn chance increases to 1%
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: ed3dc51ae158ea94cbc82000d40a38eb, type: 3}
-    Face: {fileID: 21300000, guid: 0a3d5b38e35bc284783cd61e5990ab31, type: 3}
-    BodyBackColor: {r: 0.77647066, g: 0.75294125, b: 0.7960785, a: 1}
-    BodyFrontColor: {r: 0.9058824, g: 0.8705883, b: 0.9568628, a: 1}
-  - Name: Fire Bee
-    AnimationBool: Bee
-    AbilityName: Bee Summoner
-    AbilityDescription: Manage your Hive!
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: aaba9973b4cab8f45bb1fac810bcf374, type: 3}
-    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
-    BodyBackColor: {r: 0.26666668, g: 0.10980393, b: 0.0627451, a: 1}
-    BodyFrontColor: {r: 0.9490197, g: 0.6666667, b: 0.08627451, a: 1}
-  - Name: Von Van Pyre
-    AnimationBool: Vampire
-    AbilityName: Vampire
-    AbilityDescription: Gain +1 Max HP for each 1000 HP Overhealed
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: 26f597fa10cc8a7408c6320da27d60cf, type: 3}
-    Face: {fileID: 21300000, guid: 6e39dc0060db5e142ba961155e060a0e, type: 3}
-    BodyBackColor: {r: 0.9921569, g: 0.8588236, b: 0.70980394, a: 1}
-    BodyFrontColor: {r: 0.93725497, g: 0.7803922, b: 0.62352943, a: 1}
-  - Name: Ice Cube
-    AnimationBool: Ice
-    AbilityName: Freeze
-    AbilityDescription: <b>Active:</b> Become unhittable for 5 seconds (Cooldown
-      1 round)
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 14afa6e652243ac4b918120a9cb3a98d, type: 3}
-    BodyBackColor: {r: 0.64705884, g: 0.82745105, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Echo
-    AnimationBool: Shred
-    AbilityName: Shred
-    AbilityDescription: Gain +1 Armor for each 100 Shredded Armor
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: b5793142d42d6a14194b0b216ef6cbf3, type: 3}
-    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
-    BodyBackColor: {r: 0.5803922, g: 0.43529415, b: 0.86274517, a: 1}
-    BodyFrontColor: {r: 0.86274517, g: 0.5529412, b: 0.7411765, a: 1}
-  - Name: Ash Pyre
-    AnimationBool: Assassin
-    AbilityName: Assassin
-    AbilityDescription: Gain +1 Armor for each 100 Shredded Armor
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: b336ad4404a8c98458df00144fb3cbe0, type: 3}
-    Face: {fileID: 21300000, guid: f1aa7f189907849459a89e40af7c719e, type: 3}
-    BodyBackColor: {r: 0.19215688, g: 0.21568629, b: 0.30980393, a: 1}
-    BodyFrontColor: {r: 0.11764707, g: 0.14117648, b: 0.24705884, a: 1}
-  - Name: Tesla Coil
-    AnimationBool: Statik
-    AbilityName: Statik
-    AbilityDescription: Gain 1 Energy Point each time you release Static Energy,
-      at 100 points release a Super Charge. Super Charges have increased range, duration,
-      deal True Damage and are able to apply On-Hit Effects (including Static Energy)
-    BodyBack: {fileID: 21300000, guid: 1ecc71e4b6e116642bc01dfa7ef05880, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 5020ccbd4b437ed44be03b312eb14763, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Bomber
-    AnimationBool: Explosion
-    AbilityName: Explosion
-    AbilityDescription: After every explosion another one will detonate near the
-      Campfire
-    BodyBack: {fileID: 21300000, guid: 7102881627f786c49ae93c002898a613, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: d9f1d435da110ec46946ffd7a87e15df, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: King Ghoul
-    AnimationBool: Necro
-    AbilityName: Necro
-    AbilityDescription: 5% Chance of spawning a Mega Ghoul that deals Damage in Area
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 906f946758a536b4897cf7083d6e534e, type: 3}
-    BodyBackColor: {r: 0.37647063, g: 0.58431375, b: 0.7960785, a: 1}
-    BodyFrontColor: {r: 0.24705884, g: 0.5137255, b: 0.7843138, a: 1}
-  - Name: Captain Ember Teach
-    AnimationBool: Pirate
-    AbilityName: Pirate
-    AbilityDescription: Roundshots can penetrate through 3 enemies
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: 6f48d94b85168264a81177fb14686f82, type: 3}
-    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
-    BodyBackColor: {r: 0.5764706, g: 0.2627451, b: 0.14901961, a: 1}
-    BodyFrontColor: {r: 0.9921569, g: 0.9921569, b: 0, a: 1}
-  - Name: Mt. Vesuvius
-    AnimationBool: Lava
-    AbilityName: Lava
-    AbilityDescription: A Permanent Lava Pool will sit by Mt. Vesuvius
-    BodyBack: {fileID: 21300000, guid: d8b444b3850195047830fb643c86c232, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 10a69fde5f389ad4c8ffb40c9f14cc44, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Mt. Everest
-    AnimationBool: Snow
-    AbilityName: Snow Pool
-    AbilityDescription: <b>Active:</b> Cover the whole arena in Snow (1 Round Cooldown)
-    BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: fefab17c3a6ea064e81f9423bf0f9f00, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Flora
-    AnimationBool: Flower
-    AbilityName: Flower Field
-    AbilityDescription: Overhealing will turn into Extra Damage instead
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: 5d0bf28d09d77464f8ead33b3218644b, type: 3}
-    Face: {fileID: 21300000, guid: a0b150097291d1f41853d1f099fed361, type: 3}
-    BodyBackColor: {r: 0.3019608, g: 0.7803922, b: 0.2901961, a: 1}
-    BodyFrontColor: {r: 0.77647066, g: 0.909804, b: 0.3647059, a: 1}
-  - Name: Blaze Brigade
-    AnimationBool: Burst
-    AbilityName: Burst
-    AbilityDescription: '<b>Active: </b> Shoot 250 Bullets in Burst (3 Round Cooldown)'
-    BodyBack: {fileID: 21300000, guid: b90f329d505d5d34a92c6a822994eee3, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 3aa3fe38f76a8b140add2a7bfa8ed2a7, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Blue Flame
-    AnimationBool: Blue
-    AbilityName: Blue
-    AbilityDescription: '<b>Active: </b> Turn Purple for 5s (1 Round Cooldown)'
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
-    BodyBackColor: {r: 0.5019608, g: 0.6, b: 0.9960785, a: 1}
-    BodyFrontColor: {r: 0.9960785, g: 0.9960785, b: 0.627451, a: 1}
-  - Name: Powered Up
-    AnimationBool: Crit
-    AbilityName: Crit
-    AbilityDescription: Critically Defend based on your Crit Chance and Multiplier,
-      reducing incoming damage up to 90%
-    BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
-    BodyFront: {fileID: 0}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: fde246b7da30c694183caf38810526eb, type: 3}
-    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
-    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-  - Name: Ankh-Ra
-    AnimationBool: Ritual
-    AbilityName: Ritual
-    AbilityDescription: Gain +5 Candle Damage for each 100 enemies killed by candles
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: d852b27049c437543927ee596a7834f9, type: 3}
-    Face: {fileID: 21300000, guid: ed395a8413d76e94c8f26f03df4679b3, type: 3}
-    BodyBackColor: {r: 0.6156863, g: 0.23137257, b: 0.7960785, a: 1}
-    BodyFrontColor: {r: 0.882353, g: 0.36862746, b: 0.9843138, a: 1}
-  - Name: Monk
-    AnimationBool: Immolate
-    AbilityName: Immolate
-    AbilityDescription: 'Immolated waves return after reaching the maximum radius
-
-'
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
-    Face: {fileID: 21300000, guid: abc453dbadeb8114b8379921275b6a09, type: 3}
-    BodyBackColor: {r: 0.9921569, g: 0.69411767, b: 0.47058827, a: 1}
-    BodyFrontColor: {r: 0.9921569, g: 0.89019614, b: 0.60784316, a: 1}
-  - Name: Zeus
-    AnimationBool: Thunder
-    AbilityName: Thunder
-    AbilityDescription: Cast double the Thunders
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: c665cb1953416c64f83fe2e2da93a14c, type: 3}
-    Face: {fileID: 21300000, guid: 76a9b5e049a6c9b418a85b8572bb01e6, type: 3}
-    BodyBackColor: {r: 0.9921569, g: 0.7254902, b: 0, a: 1}
-    BodyFrontColor: {r: 0.9921569, g: 0.6, b: 0.13333334, a: 1}
-  - Name: Pheonix
-    AnimationBool: Regen
-    AbilityName: Regeneration
-    AbilityDescription: When you die, reborn at full HP and kill every enemy on screen
-      (5 Round Cooldown)
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 21300000, guid: bf96fe3a6a2d30a449fd3330064b6442, type: 3}
-    Face: {fileID: 21300000, guid: f26bde648b6c389418ac83a3d1c87d0a, type: 3}
-    BodyBackColor: {r: 1, g: 0.33333334, b: 0, a: 1}
-    BodyFrontColor: {r: 1, g: 0.33333334, b: 0, a: 1}
-  - Name: Azureoth
-    AnimationBool: Blue
-    AbilityName: Magical Shot
-    AbilityDescription: <b>Active:</b> Turn Purple during 5 seconds (1 Round Cooldown)
-    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
-    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
-    Prop: {fileID: 0}
-    Face: {fileID: 21300000, guid: 676fe0ce83a11b045916f079b9a29a98, type: 3}
-    BodyBackColor: {r: 0.83921576, g: 0.6313726, b: 0.38823533, a: 1}
-    BodyFrontColor: {r: 0.7411765, g: 0.454902, b: 0.30980393, a: 1}
 --- !u!1001 &818081748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12994,6 +12780,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966775886}
   m_CullTransparentMesh: 1
+--- !u!1 &972496136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972496137}
+  - component: {fileID: 972496139}
+  - component: {fileID: 972496138}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &972496137
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972496136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1035603636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &972496138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972496136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6886792, g: 0.21764861, b: 0.21764861, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &972496139
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972496136}
+  m_CullTransparentMesh: 1
 --- !u!1 &977767864
 GameObject:
   m_ObjectHideFlags: 0
@@ -13430,6 +13291,95 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8063c158dea9ab49a83d43e511d779a, type: 3}
+--- !u!1 &1035603635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1035603636}
+  - component: {fileID: 1035603637}
+  m_Layer: 5
+  m_Name: Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1035603636
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035603635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 972496137}
+  - {fileID: 448100961}
+  m_Father: {fileID: 312507737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000090267, y: -26.2}
+  m_SizeDelta: {x: 37.638, y: 10.306}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1035603637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035603635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 1082039078}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 1
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1042857903
 GameObject:
   m_ObjectHideFlags: 0
@@ -18739,6 +18689,81 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1082039077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082039078}
+  - component: {fileID: 1082039080}
+  - component: {fileID: 1082039079}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1082039078
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082039077}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 448100961}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 9.379974, y: 0}
+  m_SizeDelta: {x: 1.09, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1082039079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082039077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1082039080
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082039077}
+  m_CullTransparentMesh: 1
 --- !u!1 &1114862439
 GameObject:
   m_ObjectHideFlags: 0
@@ -37968,7 +37993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.6399, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.63992, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -42422,6 +42447,7 @@ MonoBehaviour:
     Wave: 1
     description: 
     abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 9f74cb916ae343b45aa2d863740d7543, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 50.7}
   - name: Caterpillar
@@ -42432,6 +42458,7 @@ MonoBehaviour:
       <br>
       Their behaviour is relatively normal'
     abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
     IconSize: {x: 225.56, y: 214.14}
     IconPos: {x: -3.9, y: 61.4}
   - name: Worm
@@ -42444,6 +42471,7 @@ MonoBehaviour:
         the round <color=#FF7000>burrowed</color> underground. \nWhile <color=#FF7000>burrowed</color>,
         become <color=#53D1FF>untargetable</color> and <color=#53D1FF>immune</color>
         to damage. These animals will come out on their own"
+    ShinyMaterial: {fileID: 2100000, guid: fd1552a7a4dab4143acc30b5a359043b, type: 2}
     IconSize: {x: 222.53, y: 211.27}
     IconPos: {x: 0.0000042915, y: 58.8}
   - name: Spider
@@ -42457,6 +42485,7 @@ MonoBehaviour:
         <size=80%>This
         animal moves around the campfire, enclosing it, instead of taking a straight
         path. '
+    ShinyMaterial: {fileID: 2100000, guid: 8dd49dff7acbb124daec149801ff57ff, type: 2}
     IconSize: {x: 262.12, y: 248.84}
     IconPos: {x: -8.3, y: 21.6}
   - name: Beatle
@@ -42471,6 +42500,7 @@ MonoBehaviour:
         animal is an expert at rolling <color=#934F28>Dung Balls.</color> The more
         they roll the more the balls grow. Once in range, the Dung Ball will be shot
         at the campfire dealing <color=#FF5858>+50 dmg.'
+    ShinyMaterial: {fileID: 2100000, guid: 761063bc5197a024ba52bb65dfc114c1, type: 2}
     IconSize: {x: 274.31, y: 260.42}
     IconPos: {x: -19.7, y: 6.7}
   - name: Grasshoper
@@ -42489,6 +42519,7 @@ MonoBehaviour:
 
         <size=80%>This
         animal hops around instead of having a consistent movement speed'
+    ShinyMaterial: {fileID: 2100000, guid: 4452a647442cb8b4582b496b787c5d2a, type: 2}
     IconSize: {x: 199.83, y: 189.71}
     IconPos: {x: -6.3, y: 12.2}
   - name: Snail
@@ -42496,22 +42527,9 @@ MonoBehaviour:
     Wave: 2
     description: 
     abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 706713ec878d2c8479261fdc2a3f3ac8, type: 2}
     IconSize: {x: 203.11, y: 192.82}
     IconPos: {x: 1.7, y: 53}
-  - name: Squirel
-    enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
-    Wave: 2
-    description: 
-    abilities:
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
-
-        <size=80%>This
-        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
-        it get out of sight before it dies the <color=#934F28>acorn</color> will
-        detonate, dealing <color=#FF5858>+25 dmg.'
-    IconSize: {x: 185.86, y: 176.44}
-    IconPos: {x: -5.5, y: 2.16}
   - name: Mole
     enemy: {fileID: 6721927114820824289, guid: b48228c738c1e774bbc301b8b4b7ce2b, type: 3}
     Wave: 2
@@ -42522,6 +42540,7 @@ MonoBehaviour:
         the round <color=#FF7000>burrowed</color> underground. \nWhile <color=#FF7000>burrowed</color>,
         become <color=#53D1FF>untargetable</color> and <color=#53D1FF>immune</color>
         to damage. These animals will come out on their own"
+    ShinyMaterial: {fileID: 2100000, guid: 813d31e6cff7cbe45a3558f1fd118747, type: 2}
     IconSize: {x: 148.92, y: 141.38}
     IconPos: {x: -0.73, y: -9.7}
   - name: Bunny
@@ -42534,22 +42553,45 @@ MonoBehaviour:
 
         <size=80%>This
         animal hops around instead of having a consistent movement speed'
+    ShinyMaterial: {fileID: 2100000, guid: 848f7b49151fbb94589b3b6475dbf0b5, type: 2}
     IconSize: {x: 150.75, y: 143.12}
     IconPos: {x: 4.5, y: -7.7}
-  - name: Scorpion
-    enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
+  - name: Squirel
+    enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
+    Wave: 2
+    description: 
+    abilities:
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
+
+        <size=80%>This
+        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
+        it get out of sight before it dies the <color=#934F28>acorn</color> will
+        detonate, dealing <color=#FF5858>+25 dmg.'
+    ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
+    IconSize: {x: 185.86, y: 176.44}
+    IconPos: {x: -5.5, y: 2.16}
+  - name: Headgehog
+    enemy: {fileID: 5813437837199226000, guid: 26ff5fc6f58c63e46a34b963fba143df, type: 3}
     Wave: 3
     description: 
-    abilities: []
-    IconSize: {x: 192, y: 182.27}
-    IconPos: {x: -5.7, y: 15.8}
-  - name: Turtle
-    enemy: {fileID: 8018407032486470828, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
-    Wave: 3
-    description: 
-    abilities: []
-    IconSize: {x: 300.32, y: 285.12}
-    IconPos: {x: 4.4, y: 17.3}
+    abilities:
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Thorns -</color>
+
+        <size=80%>After
+        getting in range, this animal will cover itself, becoming <color=#FFFF00>Unhittable</color>
+        and dealing <color=#FF5858>+15 dmg</color> when it gets struck by <color=#FF99F3>On-Hit
+        Effects'
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Unhittable -</color>
+
+        <size=80%>This
+        animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
+        for Armor Penetration) '
+    ShinyMaterial: {fileID: 2100000, guid: b128667e0b5872f4188cdbde9f69114d, type: 2}
+    IconSize: {x: 192.35, y: 182.61}
+    IconPos: {x: 0.00000047684, y: 5.245}
   - name: Raccon
     enemy: {fileID: 4160200665350817852, guid: f2b3de56f11c62841a7595a6a00d68d6, type: 3}
     Wave: 3
@@ -42562,8 +42604,25 @@ MonoBehaviour:
         animal has different goals in mind. Instead of trying to damage you, it will
         <color=#FF7000>steal</color> <color=#FFCC7C>+100 embers.</color> You can
         recover them by killing it before it gets out of sight.'
+    ShinyMaterial: {fileID: 2100000, guid: c7532238a4a62944ebb5e698429d3677, type: 2}
     IconSize: {x: 179.98, y: 170.87}
     IconPos: {x: -2.3, y: -9.1}
+  - name: Turtle
+    enemy: {fileID: 8018407032486470828, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
+    Wave: 3
+    description: 
+    abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
+    IconSize: {x: 300.32, y: 285.12}
+    IconPos: {x: 4.4, y: 17.3}
+  - name: Scorpion
+    enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
+    Wave: 3
+    description: 
+    abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
+    IconSize: {x: 192, y: 182.27}
+    IconPos: {x: -5.7, y: 15.8}
   - name: Armadillo
     enemy: {fileID: 4317406584369839249, guid: b5aaec1beb537104aa96f34019d52471, type: 3}
     Wave: 4
@@ -42582,40 +42641,8 @@ MonoBehaviour:
         <size=80%>This
         animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
         for Armor Penetration) '
+    ShinyMaterial: {fileID: 2100000, guid: 27b71070d57df0d43b217ee22094dbd0, type: 2}
     IconSize: {x: 193.98, y: 184.16}
-    IconPos: {x: -3.9, y: 4.7066e-11}
-  - name: Headgehog
-    enemy: {fileID: 5813437837199226000, guid: 26ff5fc6f58c63e46a34b963fba143df, type: 3}
-    Wave: 4
-    description: 
-    abilities:
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Thorns -</color>
-
-        <size=80%>After
-        getting in range, this animal will cover itself, becoming <color=#FFFF00>Unhittable</color>
-        and dealing <color=#FF5858>+15 dmg</color> when it gets struck by <color=#FF99F3>On-Hit
-        Effects'
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Unhittable -</color>
-
-        <size=80%>This
-        animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
-        for Armor Penetration) '
-    IconSize: {x: 192.35, y: 182.61}
-    IconPos: {x: 0.00000047684, y: 5.245}
-  - name: Hog
-    enemy: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
-    Wave: 4
-    description: 
-    abilities:
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Charge -</color>
-
-        <size=80%>Begins
-        the round by <color=#FF7000>charging</color> a powerfull first attack that
-        deal <color=#FF5858>2x damage</color> '
-    IconSize: {x: 79.62, y: 75.59}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Skunk
     enemy: {fileID: 534645426103554320, guid: f8709f5ff08527b4da5ab3a0a256202f, type: 3}
@@ -42626,8 +42653,9 @@ MonoBehaviour:
       description: '<size=100%><color=#FFFF00>- Stink Spray -</color>
 
         <size=80%>Attacks
-        will <color=#53D1FF>stun</color> the campfire for 0.75s. <color=#53D1FF>Stun</color>
+        will <color=#CA6AF6>stun</color> the campfire for 0.75s. <color=#CA6AF6>Stun</color>
         effects override eachother instead of stacking.'
+    ShinyMaterial: {fileID: 2100000, guid: a0d8feea200332c43bb7458dfa4e5637, type: 2}
     IconSize: {x: 149.38, y: 141.81}
     IconPos: {x: 6.3, y: 4.7066e-11}
   - name: Beaver
@@ -42642,6 +42670,7 @@ MonoBehaviour:
         of trying to damage you, it will <color=#FF7000>steal</color> your <color=#934F28>logs,</color>
         taking away <color=#0CD405>-100 Max Health.</color> You can recover them
         by killing it before it gets out of sight.'
+    ShinyMaterial: {fileID: 2100000, guid: 6dc84235316fa8143ac27c91ab8ec4ad, type: 2}
     IconSize: {x: 200.56, y: 190.4}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Flying Squirrel
@@ -42663,8 +42692,23 @@ MonoBehaviour:
         the round by <color=#FF7000>flying</color> from trees, landing somewhere
         in the middle of the campsite. While flying, it is <color=#53D1FF>untargetable</color>
         and <color=#53D1FF>immune.</color>'
+    ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 4.7066e-11}
+  - name: Hog
+    enemy: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
+    Wave: 4
+    description: 
+    abilities:
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Charge -</color>
+
+        <size=80%>Begins
+        the round by <color=#FF7000>charging</color> a powerfull first attack that
+        deal <color=#FF5858>2x damage</color> '
+    ShinyMaterial: {fileID: 2100000, guid: 7a256037dd6480249b45f439df1369d6, type: 2}
+    IconSize: {x: 79.62, y: 75.59}
+    IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Frog
     enemy: {fileID: 9092957358169502411, guid: 422a418c11319fc42ae10b374eecf739, type: 3}
     Wave: 5
@@ -42680,6 +42724,7 @@ MonoBehaviour:
 
         <size=80%>Has
         increased <color=#FFCC7C>range</color> and is able to damage you from afar'
+    ShinyMaterial: {fileID: 2100000, guid: 9918386288a1f8945b43ed034ae14237, type: 2}
     IconSize: {x: 55.74, y: 52.92}
     IconPos: {x: 2.3, y: 1.9}
   - name: Snake
@@ -42688,23 +42733,9 @@ MonoBehaviour:
     description: Snakes are one of the fastest animals and have a small hitbox so
       having a good amount of accuracy and bullet speed is crucial to beat them.
     abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 57faef2aa412e68489ce420135cf7aa2, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: -2.3, y: 5.245}
-  - name: Bear
-    enemy: {fileID: 4544615441581723125, guid: ba9e790fe95de3743a10cc26240acd59, type: 3}
-    Wave: 5
-    description: 
-    abilities:
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Honey Pot -</color>
-
-        <size=80%>Whenever
-        it gets below half <color=#0CD405>Max HP</color> it starts to consume <color=#934F28>Honey.</color>
-        Each scoop of <color=#934F28>Honey</color> heals for <color=#0CD405>+1000HP.</color>
-        It only stops consuming once its <color=#0CD405>Full Health</color> or it
-        dies.'
-    IconSize: {x: 174.48, y: 165.64}
-    IconPos: {x: -1.745, y: -3.24}
   - name: Wolf
     enemy: {fileID: 4792462256598324463, guid: 1f67f19206edff64e9426a95f5f167b6, type: 3}
     Wave: 5
@@ -42725,8 +42756,25 @@ MonoBehaviour:
         campfire and <color=#FF7000>activates</color> nearby wolves. <color=#FF7000>Activated</color>
         wolves gain <color=#AFEDFF>x2.5 movement speed,</color> <color=#FF5858>+0.5
         Armor Penetrarion</color> and <color=#FF5858>+50 Dmg.'
+    ShinyMaterial: {fileID: 2100000, guid: 7ac0110e026313f4390cb7e88ed0ca8f, type: 2}
     IconSize: {x: 161.82, y: 153.63}
     IconPos: {x: -3.9, y: 4.7066e-11}
+  - name: Bear
+    enemy: {fileID: 4544615441581723125, guid: ba9e790fe95de3743a10cc26240acd59, type: 3}
+    Wave: 5
+    description: 
+    abilities:
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Honey Pot -</color>
+
+        <size=80%>Whenever
+        it gets below half <color=#0CD405>Max HP</color> it starts to consume <color=#934F28>Honey.</color>
+        Each scoop of <color=#934F28>Honey</color> heals for <color=#0CD405>+1000HP.</color>
+        It only stops consuming once its <color=#0CD405>Full Health</color> or it
+        dies.'
+    ShinyMaterial: {fileID: 2100000, guid: 6182d5a9d9e4df84b9dd00ac6ceb719d, type: 2}
+    IconSize: {x: 174.48, y: 165.64}
+    IconPos: {x: -1.745, y: -3.24}
   - name: Venomous Snake
     enemy: {fileID: 3041678152358119314, guid: 16cac42e03d3ad94398a40ea8508f026, type: 3}
     Wave: 6
@@ -42739,8 +42787,22 @@ MonoBehaviour:
         apply <color=#CA6AF6>8 Poison Ticks.</color> Each <color=#CA6AF6>Poison Tick</color>
         deals 1:50 of <color=#0CD405>current Health.</color> <color=#CA6AF6>Poison
         Ticks</color> are stackable and are cleared once the round ends'
+    ShinyMaterial: {fileID: 2100000, guid: 22efa679a12eb5c4c9a9f8de280399a6, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: -2.4, y: 3}
+  - name: Stray Wolf
+    enemy: {fileID: 203073599222081888, guid: 43c751c59a70f224a9b1ee1a0a8944b1, type: 3}
+    Wave: 6
+    description: 
+    abilities:
+    - icon: {fileID: 0}
+      description: '<size=100%><color=#FFFF00>- Stray -</color>
+
+        <size=80%>Stray
+        wolves are used to living alone and are always <color=#FE7200>activated</color>.'
+    ShinyMaterial: {fileID: 2100000, guid: 7a03f79ac9188fe4190331f6c3024a23, type: 2}
+    IconSize: {x: 150.25, y: 150.25}
+    IconPos: {x: -2.7, y: 2.3}
   - name: Alligator
     enemy: {fileID: 2074136074127113371, guid: 364f3c39a09d19c4a9150c660f40f191, type: 3}
     Wave: 6
@@ -42752,8 +42814,9 @@ MonoBehaviour:
       description: '<size=100%><color=#FFFF00>- Stunning Bite -</color>
 
         <size=80%>Attacks
-        <color=#53D1FF>stun</color> the campfire for 0.75s. <color=#53D1FF>Stun</color>
+        <color=#CA6AF6>stun</color> the campfire for 0.75s. <color=#CA6AF6>Stun</color>
         effects override eachother instead of stacking.'
+    ShinyMaterial: {fileID: 2100000, guid: db8441eadb6c88d4da9eb1041471e703, type: 2}
     IconSize: {x: 177.17, y: 168.2}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Bison
@@ -42767,6 +42830,7 @@ MonoBehaviour:
         <size=80%>Begins
         the round by <color=#FF7000>charging</color> a powerfull first attack. Each
         charge increases the first attack''s power by <color=#FF5858>+25 dmg</color> '
+    ShinyMaterial: {fileID: 2100000, guid: 22d6b1a9fb18e304d8c702faf68dbb8c, type: 2}
     IconSize: {x: 169.17, y: 165.62}
     IconPos: {x: -1.95, y: 7.800001}
   - name: Moose
@@ -42780,6 +42844,7 @@ MonoBehaviour:
         <size=80%>Heals
         nearby animals 7 times for <color=#0CD405>+100HP</color> everytime it <color=#FE7200>howls</color>.
         This doesn''t apply to itself or other animals of the same species'
+    ShinyMaterial: {fileID: 2100000, guid: 114274f6779d32d4db01cb5f78760549, type: 2}
     IconSize: {x: 134.89, y: 134.89}
     IconPos: {x: 0, y: 0}
   - name: Musk Ox
@@ -42794,20 +42859,9 @@ MonoBehaviour:
         nearby animals 7 times with <color=#919191>+100 Armor</color> everytime it
         <color=#FE7200>howls</color>. This doesn''t apply to itself or other animals
         of the same species'
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
-  - name: Stray Wolf
-    enemy: {fileID: 203073599222081888, guid: 43c751c59a70f224a9b1ee1a0a8944b1, type: 3}
-    Wave: 6
-    description: 
-    abilities:
-    - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Stray -</color>
-
-        <size=80%>Stray
-        wolves are used to living alone and are always <color=#FE7200>activated</color>.'
-    IconSize: {x: 150.25, y: 150.25}
-    IconPos: {x: -2.7, y: 2.3}
   BestiaryPanels:
   - {fileID: 8349844217330568559}
   - {fileID: 7897323448835946187}

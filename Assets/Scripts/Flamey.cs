@@ -16,6 +16,7 @@ public class Flamey : MonoBehaviour
     [Header("Stats")]
     public int MaxHealth = 1000;
     public float Health;
+    public float Shield;
     public int Dmg= 50;
 
     public int Armor = 0;
@@ -52,6 +53,7 @@ public class Flamey : MonoBehaviour
     [Header("References")]
     private Animator anim;
     [SerializeField]private Slider HealthSlider;
+    [SerializeField]private Slider ShieldSlider;
     
 
     public bool GameEnd;
@@ -79,7 +81,7 @@ public class Flamey : MonoBehaviour
     [ContextMenu("Call Extra Function")]
     void ExtraFunction()
     {
-        Stun(5f);
+        Hitted(50, 0.5f, null, onhitted:false);
     }
 
     private void Awake() {
@@ -265,22 +267,36 @@ public class Flamey : MonoBehaviour
             BurstShot.Instance.Burst();
         }
         
-
         if(Character.Instance.isCharacter("Crit")){
             if(UnityEngine.Random.Range(0f,1f) < CritUnlock.Instance.perc){
                 Dmg = (int)Math.Max(Dmg*0.1f, -4.5f * (CritUnlock.Instance.mult -5) + Dmg);
             }
         }
 
-
-
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
-
         TotalDamageTaken+=(ulong)dmgeff;
 
         if(onhitted){ApplyOnHitted(attacker);}
 
-        Health -= dmgeff;
+        float shieldDamage = Shield - dmgeff;
+        
+        if(shieldDamage < 0){
+            Health += shieldDamage;
+            DamageUI.InstantiateTxtDmg(transform.position, "-"+ Math.Abs(shieldDamage), idHitTxt);
+        }
+        if(Shield > 0){
+            if(shieldDamage<0){
+                DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield), 24);
+            }else{
+                DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield - shieldDamage), 24);
+            }
+            
+
+            Shield = Math.Max(shieldDamage, 0);
+        }
+        
+
+        
         if(Health <= 0){
             if(HealthRegen.Instance != null && Character.Instance.isCharacter("Regeneration") && HealthRegen.Instance.PassiveAvailable()){
                 HealthRegen.Instance.ReleasePheonix();
@@ -292,12 +308,17 @@ public class Flamey : MonoBehaviour
             }
         }
         UpdateHealthUI();
-        DamageUI.InstantiateTxtDmg(transform.position, "-"+dmgeff, idHitTxt);
+        
         if(isShake){CameraShake.Shake(0.5f,0.20f);} 
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
         HealthSlider.value = Health;
+
+        ShieldSlider.maxValue = MaxHealth;
+        ShieldSlider.value = Shield;
+
+
     }
 
     bool called;
@@ -413,6 +434,13 @@ public class Flamey : MonoBehaviour
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position, ""+ Mathf.Round(HealAmount * 10.0f) * 0.1f, 3);
+    }
+
+    public void addShield(float amount){
+        Shield = Math.Min(MaxHealth * 0.3f , Shield + amount);
+        UpdateHealthUI();
+        if((int)Shield < (int)(MaxHealth * 0.3f)){DamageUI.InstantiateTxtDmg(transform.position, ""+ Mathf.Round(amount * 10.0f) * 0.1f, 25);}
+        
     }
 
     public void Stun(float t){
@@ -539,8 +567,13 @@ public class Flamey : MonoBehaviour
     }
 
     public void addEmbers(int n){
+        if(MoneyMultipliers.Instance != null){
+            n = (int)(n * MoneyMultipliers.Instance.mult);
+        }
         Embers += n;
         GameUI.Instance.SetEmberAmount(Embers);
+        
+        
     }
     public int removeEmbers(int n){
         int removed = Math.Min(Embers, n);

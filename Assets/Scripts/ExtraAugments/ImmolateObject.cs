@@ -11,12 +11,11 @@ public class ImmolateObject : MonoBehaviour
     void Start()
     {
         dmg = Immolate.Instance.dmg;
-        float x = Immolate.Instance.radius;
-        float y = Immolate.Instance.radius;
+        float x = Immolate.Instance.radius/2f;
+        float y = Immolate.Instance.radius/2f;
         speed = x*2/3f;
         objective = new Vector2(x,y);
-        GetComponent<SpriteRenderer>().flipX = Random.Range(0f,1f) < .5f;
-        GetComponent<SpriteRenderer>().flipY = Random.Range(0f,1f) < .5f;
+        
     }
 
     // Update is called once per frame
@@ -36,12 +35,32 @@ public class ImmolateObject : MonoBehaviour
     public void Die(){
         Destroy(gameObject);
     }
-
+    public void ImmolateEnemy(int type, Enemy e){
+        switch(type){
+            case -1: 
+                e.Hitted(dmg, 0, ignoreArmor:false, onHit:false);
+                break;
+            case 0: //FIRE
+                e.Hitted(dmg, 9, ignoreArmor:true, onHit:false);
+                break;
+            case 1: //WATER
+                Flamey.Instance.addHealth(Flamey.Instance.MaxHealth * 0.01f);
+                e.Hitted(dmg, 13, ignoreArmor:false, onHit:false);
+                break;
+            case 2: //EARTH
+                Flamey.Instance.addShield(1);
+                e.Hitted(dmg, 22, ignoreArmor:false, onHit:false);
+                break;
+            case 3: //AIR
+                e.Stun(0.5f);
+                e.Hitted(dmg, 23, ignoreArmor:false, onHit:false);
+                break;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Enemy"){
-            Enemy e = other.GetComponent<Enemy>();
-            e.Hitted(dmg, 9, ignoreArmor:false, onHit:false);
+            ImmolateEnemy(Immolate.Instance.ImmolateType, other.GetComponent<Enemy>());
         }
     }
 }

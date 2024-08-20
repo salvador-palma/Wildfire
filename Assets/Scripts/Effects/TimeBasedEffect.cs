@@ -1,5 +1,6 @@
 
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -141,13 +142,14 @@ public class LightningEffect : TimeBasedEffect
     public int interval;
     int current_interval;
     public int dmg;
-
+    Image cooldownImage;
 
     public LightningEffect(int interval, int dmg, float percRed){
         this.dmg = dmg;
         this.interval = interval;
         if(Instance == null){
             Instance = this;
+            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ThunderUnlock"));
             lightning = Resources.Load<GameObject>("Prefab/Lightning");
         }else{
             Instance.Stack(this, percRed);
@@ -160,6 +162,8 @@ public class LightningEffect : TimeBasedEffect
 
     public void ApplyEffect()
     {
+        current_interval--;
+        
         if(current_interval <=0 ){
             current_interval = interval;
             int amount = 2;
@@ -172,9 +176,8 @@ public class LightningEffect : TimeBasedEffect
             }
             
 
-        }else{
-            current_interval--;
         }
+        cooldownImage.fillAmount = 1 - ((float)current_interval)/interval;
     }
     public void ApplyRound(){}
 
@@ -237,12 +240,26 @@ public class LightningEffect : TimeBasedEffect
 public class Immolate : TimeBasedEffect
 {
     public static Immolate Instance;
+    public int ImmolateType = -1; //0-Fire, 1-Water, 2-Earth, 3-Air 
+    /*
+        Fire - True Damage
+        Water - Healing and Cleansing
+        Earth - Shield
+        Air - Small Stun
+    */
+    public GameObject[] ImmolateRings;
+   
     public static GameObject ring;
     public int interval;
     int current_interval;
     public int dmg;
     public float radius;
-
+    private Image cooldownImage;
+    private GameObject elementsPanelPrefab;
+    private GameObject[] spiritPrefab;
+    private GameObject spirit;
+    GameObject elementsPanel; 
+    bool isCharacter;
     public Immolate(int interval, int dmg, float radius, float percRed){
         this.dmg = dmg;
         this.interval = interval;
@@ -250,7 +267,24 @@ public class Immolate : TimeBasedEffect
         if(Instance == null){
             this.interval = 16;
             Instance = this;
+            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ImmolateUnlock"));
             ring = Resources.Load<GameObject>("Prefab/Ring");
+            ImmolateRings = new GameObject[4];
+            ImmolateRings[0] = Resources.Load<GameObject>("Prefab/AbilityCharacter/FireRing");
+            ImmolateRings[1] = Resources.Load<GameObject>("Prefab/AbilityCharacter/WaterRing");
+            ImmolateRings[2] = Resources.Load<GameObject>("Prefab/AbilityCharacter/EarthRing");
+            ImmolateRings[3] = Resources.Load<GameObject>("Prefab/AbilityCharacter/AirRing");
+            spiritPrefab = new GameObject[4];
+            spiritPrefab[0] = Resources.Load<GameObject>("Prefab/AbilityCharacter/SpiritFire");
+            spiritPrefab[1] = Resources.Load<GameObject>("Prefab/AbilityCharacter/SpiritWater");
+            spiritPrefab[2] = Resources.Load<GameObject>("Prefab/AbilityCharacter/SpiritEarth");
+            spiritPrefab[3] = Resources.Load<GameObject>("Prefab/AbilityCharacter/SpiritAir");
+
+            elementsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/ElementSelectionPanel");
+            
+            isCharacter = Character.Instance.isCharacter("Immolate");
+
+
         }else{
             Instance.Stack(this, percRed);
         }
@@ -262,15 +296,24 @@ public class Immolate : TimeBasedEffect
 
     public void ApplyEffect()
     {
+        current_interval--;
+        
         if(current_interval <=0 ){
-            current_interval = interval;
             
-            Flamey.Instance.SpawnObject(ring);
+            if(isCharacter){
+                spirit.GetComponent<Animator>().Play("SpiritShoot");
+                current_interval = interval;  
+            }else{
+                current_interval = interval;  
+                ShootImmolate();
+            }
             
 
-        }else{
-            current_interval--;
         }
+        cooldownImage.fillAmount = 1 - ((float)current_interval)/interval;
+    }
+    public void ShootImmolate(){
+        Flamey.Instance.SpawnObject(ImmolateType == -1 ? ring : ImmolateRings[ImmolateType]);    
     }
     public void ApplyRound(){}
 
@@ -295,20 +338,48 @@ public class Immolate : TimeBasedEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateInterval");
         } 
-        if(radius >= 1.5f){
-            radius = 1.5f;
+        if(radius >= 2f){
+            radius = 2f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateRadius");
         }
+        if(!maxed){CheckMaxed();}
     }
-    
+    public bool maxed;
+    private void CheckMaxed(){
+        if(interval <= 8 && radius >= 2f && !Character.Instance.isACharacter()){
+            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
+            EnemySpawner.Instance.Paused = true;
+            elementsPanel = GameUI.Instance.SpawnUI(elementsPanelPrefab);
+            Transform elementContainer = elementsPanel.transform.Find("Elements");
+            elementContainer.Find("Fire").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
+            elementContainer.Find("Water").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
+            elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
+            elementContainer.Find("Air").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
+            maxed = true;
+        }
+    }
+    public void TransformIntoCharacter(int n){
+        Debug.Log("Chose: " + n);
+        elementsPanel.GetComponent<Animator>().Play("ExitOptions");
+        
+        ImmolateType = n;
+        Character.Instance.SetupCharacter("Immolate", () => SpawnExtraAssets(null, null));
+    }
+    public void SpawnExtraAssets(object sender, EventArgs e){
+        isCharacter=true;
+        elementsPanel.SetActive(false);
+        spirit = Flamey.Instance.SpawnObject(spiritPrefab[ImmolateType]);
+        
+    }
+
     public string getDescription()
     {
         return "Each few amount of seconds, you will release a <color=#FFCC7C>wave of energy</color> that travels through the campsite dealing <color=#FF5858>damage</color> to enemies caught by it and ignoring <color=#919191>Armor</color> completely";
     }
     public string getCaps()
     {
-        return string.Format("Interval: {0}s (Min. 4s)<br>Travel Radius: {1} units (Max 150 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
+        return string.Format("Interval: {0}s (Min. 2s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
     }
 
     public string getIcon()

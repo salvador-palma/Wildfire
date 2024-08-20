@@ -119,41 +119,58 @@ public class MoneyMultipliers : NotEspecificEffect
     public static MoneyMultipliers Instance;
 
     public float mult;
-    public float p;
-    public MoneyMultipliers(float p, float mult, bool init = false){
+    public int perRound;
+    public float ShinyChance;
+    public float ShinyMultiplier;
+    public MoneyMultipliers(int perRound, float mult){
         this.mult = mult;
-        this.p = p;
-        if(init){
-            Instance = this;
-            return;
-        }
-
-        if(Instance == null){
-            Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0.1f, 1f, true));
-
-        }    
-        Instance.Stack(this);
+        this.perRound = perRound;
         
+        if(Instance == null){
+            Instance = this;
+            mult = Math.Max(1, mult);
+            Deck.RoundOver += GiveEmbersRound;
+            ReloadShinyStats();
+            return;
+
+        }else{
+            Instance.Stack(this);
+        }  
+    }
+    public void ReloadShinyStats(){
+        switch(SkillTreeManager.Instance.getLevel("Ember Generation")){
+            case 1:
+                ShinyChance = 0.0001f;
+                ShinyMultiplier = 10;
+                break;
+            case 2:
+                ShinyChance = 0.001f;
+                ShinyMultiplier=100;
+                break;
+        }
+        if(Character.Instance.isCharacter("Ember Generation")){
+            ShinyChance = 0.01f;
+            ShinyMultiplier=100;
+        }
+    }
+    public void GiveEmbersRound(object sender ,EventArgs e){
+        Flamey.Instance.addEmbers(perRound);
     }
     public void Stack(MoneyMultipliers moneyMultipliers){
-        p+=moneyMultipliers.p;
+        perRound+=moneyMultipliers.perRound;
         mult+=moneyMultipliers.mult;
         RemoveUselessAugments();
-        if(!maxed){CheckMaxed();}
+        
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(mult >= 3f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Money");
+        if(mult >= 2f && perRound >= 250 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Ember Generation");
+            ReloadShinyStats();
         }
     }
-    private void RemoveUselessAugments(){
-        if(p >= 1){
-            p = 1;
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("MoneyProb");
-        }  
-          
+    private void RemoveUselessAugments(){ 
+        if(!maxed){CheckMaxed();}
     }
     public bool addList()
     {
@@ -167,11 +184,15 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Whenever you kill an enemy, there's a chance to loot more <color=#FFCC7C>embers</color> and multiply them. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
+        
+        return "Multiply your <color=#FFCC7C>ember</color> gains and passively win some each round. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%)<br>Multiplier: x{1}", Mathf.Round(p*100), Mathf.Round(mult*100)*0.01f);
+        if(ShinyChance > 0){
+            return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound, Mathf.Round(mult*100)*0.01f, (ShinyChance*100).ToString("F2"), ShinyMultiplier);
+        }
+        return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}", perRound, Mathf.Round(mult*100)*0.01f);
     }
 
     public string getIcon()

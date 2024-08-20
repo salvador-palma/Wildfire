@@ -59,7 +59,6 @@ public class EnemySpawner : MonoBehaviour
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
-        //current_round = 57;
         resetInstances();
     }
     public void Start(){
@@ -79,13 +78,10 @@ public class EnemySpawner : MonoBehaviour
         
     }
     public void StartGame(){ 
-        Console.Log("Starting Enemy Spawner...");
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
 
-            if(Deck.Instance == null){
-                Console.Log("<color=#0000ff> Deck was not initialized </color>");
-            }
+            
             Deck.Instance.LoadGame(false);
 
             PickedEnemies = pickEnemies(current_round);
@@ -93,23 +89,28 @@ public class EnemySpawner : MonoBehaviour
                 current_round = -1;
                 isOnAugments = true;
                 Deck.Instance.StartAugments(true, true);
-                Console.Log("Initial Augments Started");
+                
             }else{
                 GameEnd = false;
-                Console.Log("No Abilities Unlocked");
+               
             }
+            InitDefaultEffects();
             
         }else{
-            if(Deck.Instance == null){
-                Console.Log("<color=#0000ff> Deck was not initialized!</color>");
-            }
+            InitDefaultEffects();
             Deck.Instance.LoadGame(true);
-            Console.Log("Loading Game...");
             newRound();
         }
-
+        
         InitBinoculars();
         PlayerPrefs.DeleteKey("PlayerLoad");    
+    }
+    private void InitDefaultEffects(){
+        if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
+            Debug.Log("Inited Money Generation");
+            Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
+        }
+        GameUI.Instance.defineEffectList();
     }
     private Vector2 getPoint(){
         double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
@@ -119,13 +120,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update() {
-        if(GameEnd){Console.Log("Enemy Spawner not Running!");return;}
         
+        if(GameEnd){return;}
         UpdateEnemies();
         if(!isOn){
-            Console.Log("Waiting for round to finish...");
+            
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
-                Console.Log("Round finished!");
+
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
                 else{
                     isOnAugments = true;
@@ -139,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
         if(TimerEnemySpawnCounter > 0){
             TimerEnemySpawnCounter-= Time.deltaTime;
         }else{
-            Console.Log("Spawning Enemy...");
+
             TimerEnemySpawnCounter = TimerEnemySpawn;
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;
@@ -158,12 +159,20 @@ public class EnemySpawner : MonoBehaviour
     }
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public void SpawnEnemy(GameObject enemy){
+
         GameObject g = Instantiate(enemy);
         Enemy e = g.GetComponent<Enemy>();
         addEnemy(e);
         CheckForBinoculars(e);
         g.transform.position = getPoint();
-        g.GetComponent<Enemy>().CheckFlip();
+        e.CheckFlip();
+
+        if(MoneyMultipliers.Instance != null){
+            if(UnityEngine.Random.Range(0f,1f) < MoneyMultipliers.Instance.ShinyChance){
+                e.Shiny = true;
+                g.GetComponent<Renderer>().material = LocalBestiary.INSTANCE.getShinyMaterial(enemy);
+            }
+        }
         
     }
     private void SetSpawnLimits(){
@@ -240,7 +249,6 @@ public class EnemySpawner : MonoBehaviour
             RT.sizeDelta = IconSize;
         }
     }
-    
     private void InitBinoculars(){
 
         for (int i = 0; i < HindSightDeepness; i++)
@@ -263,7 +271,9 @@ public class EnemySpawner : MonoBehaviour
         }
         if (round >= 60)
             return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
-        return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;
+        int picked = pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10));
+       
+        return PickedEnemies[picked].gameObject;
         
     }
     private int pickEnemyIndex(List<float> prob){

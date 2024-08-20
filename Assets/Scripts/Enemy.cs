@@ -26,6 +26,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public bool inEffect;
 
     public bool Stunned;
+    public bool Shiny;
 
 
     [SerializeField] private float slowfactor;
@@ -122,10 +123,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
     protected virtual int calculateEmbers(){
-        if(MoneyMultipliers.Instance == null){
-            return EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], 0.1f);
+        if(Shiny){
+            return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * MoneyMultipliers.Instance.ShinyMultiplier); 
         }
-        return (int)((EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], MoneyMultipliers.Instance.p)) * MoneyMultipliers.Instance.mult);
+        return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
+        
     }
 
     public abstract int getDeathAmount();

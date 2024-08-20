@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.Unity.VisualStudio.Editor;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,14 +26,22 @@ public class Character : MonoBehaviour
         public Color BodyFrontColor;
         
     }
+    
     public static Character Instance { get; private set; }
 
+    [Header("Runtime Data")]
     public int active = -1;
 
     public CharacterData[] characterDatas;
+    
+
+   
+
+
 
     private void Awake() {
         Instance = this;
+        SetupCharacterSelectOptions();
     }
 
     public void SetupCharacter(string abilty_name, UnityAction ExtraSetup = null){
@@ -46,6 +55,8 @@ public class Character : MonoBehaviour
             Debug.Log("Cannot play more than one character at a time");
             return;
         }
+
+        Deck.Instance.gameState.Character = type.AbilityName;
         
         active = Array.FindIndex(characterDatas, e => e == type);
         GameUI.Instance.UpdateProfileCharacter();
@@ -122,6 +133,7 @@ public class Character : MonoBehaviour
     
     
 
+
     private void SetupSkin(CharacterData type)
     {
         Flamey.Instance.GetComponent<Animator>().SetBool(type.AnimationBool, true);
@@ -133,5 +145,58 @@ public class Character : MonoBehaviour
         
     }
 
-    
+    // *********************************************************************************************** //
+    // ************************************ CHARACTER UI SECTION ************************************* //
+    // *********************************************************************************************** //
+    [Header("Character Select UI")]
+    public GameObject CharacterSelectContainer;
+    public TextMeshProUGUI CharacterName;
+    public TextMeshProUGUI SkillDescription;
+    [SerializeField] private int currentSelectedCharacter = 0;
+    [SerializeField] private GameObject MainFlameVessel;
+    private void SetupCharacterSelectOptions(){
+        GameObject template = CharacterSelectContainer.transform.GetChild(0).gameObject;
+        foreach (CharacterData character in characterDatas)
+        {
+            GameObject g  = Instantiate(template, CharacterSelectContainer.transform);
+            TransformVesselToCharacter(g, character.AbilityName);
+            g.SetActive(true);
+        }
+    }
+    public void MoveCharacterSelectOption(int dir){
+        int previous = currentSelectedCharacter;
+        currentSelectedCharacter += dir;
+        if(currentSelectedCharacter <0){currentSelectedCharacter = characterDatas.Count()-1;}
+        if(currentSelectedCharacter > characterDatas.Count()-1){currentSelectedCharacter = 0;}
+        CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition = new Vector2(344.5f + (-155.10608f) * currentSelectedCharacter, CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition.y); 
+        UpdateCharacterInfo(characterDatas[currentSelectedCharacter]);
+
+        
+        MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[previous].AnimationBool, false);
+        MainFlameVessel.GetComponent<Animator>().SetTrigger("Reset");
+        MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[currentSelectedCharacter].AnimationBool, true);
+        
+    }
+    private void UpdateCharacterInfo(CharacterData data){
+        
+        CharacterName.text = data.Name;
+        SkillDescription.text = "<size=100%><color=#FFFF00>-Ability -</color><size=80%><br>" + data.AbilityDescription;
+    }
+
+    public void toggleCharacterPanel(GameObject CharacterSelectPanel){
+        if(CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000){
+            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        }else{
+
+            
+            
+            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(4000, 0);
+        }
+    }
+}
+
+[Serializable]
+public class CharacterData{
+    public string Name;
+    public bool Unlocked;
 }

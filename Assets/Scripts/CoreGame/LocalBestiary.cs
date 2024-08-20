@@ -33,6 +33,7 @@ public class AnimalRunTimeData{
     public int Wave;
     [TextAreaAttribute]public string description;
     public AnimalAbility[] abilities;
+    public Material ShinyMaterial;
     public Vector2 IconSize; //left top
     public Vector2 IconPos; //right bottom
 }
@@ -349,6 +350,10 @@ public class LocalBestiary : MonoBehaviour
     }
     public int getEnemyID(Enemy enemy){
         return animals.TakeWhile(e => e.enemy != enemy).Count();
+    }
+    public Material getShinyMaterial(GameObject enemy){
+        AnimalRunTimeData animal = animals.First(e=> e.enemy.gameObject == enemy);
+        return animal == null ? null : animal.ShinyMaterial;
     }
     public int[] getEnemiesID(Enemy[] enemies){
         int[] result = new int[enemies.Length];

@@ -337,7 +337,9 @@ public class GameUI : MonoBehaviour
     }
     public void CharacterUnlockedPopDown(){
         GetComponent<Animator>().Play("CharacterUnlockedPopDown");
-         EnemySpawner.Instance.Paused = false;
+        
+        EnemySpawner.Instance.Paused = false;
+        
         EnemySpawner.Instance.newRound();
     }
 
@@ -373,6 +375,9 @@ public class GameUI : MonoBehaviour
         go.transform.GetChild(1).GetComponent<Image>().sprite = icon;
         return go.GetComponent<Button>();
     } 
+
+    
+   
 }
 
 public class SimpleStat{

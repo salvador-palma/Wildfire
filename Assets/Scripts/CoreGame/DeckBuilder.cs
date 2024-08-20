@@ -390,8 +390,17 @@ public class DeckBuilder : MonoBehaviour
 
             new Augment("Immolate" ,"Immolate", "Unlock the ability to release Heat Waves", "ImmolateUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Immolate");
-                Flamey.Instance.addTimeBasedEffect(new Immolate(100, 50, 0.3f, 0));
-                Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
+                if(SkillTreeManager.Instance.getLevel("Immolate") >= 1){
+                    Flamey.Instance.addTimeBasedEffect(new Immolate(100, 50, 0.3f, 0));
+                }else{
+                    Flamey.Instance.addTimeBasedEffect(new Immolate(50, 50, 0.3f, 0));
+                }
+
+                if(SkillTreeManager.Instance.getLevel("Immolate") >= 2){
+                    Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
+                }
+                Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});       
+                     
             }), baseCard: true),  
             new Augment("ImmolateInterval","Heat Discharge", "Immolate cooldown decreases by 10%", "ImmolateInterval", Tier.Silver, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.1f)))), 
             new Augment("ImmolateInterval","Accumulated Heat", "Immolate cooldown decreases by 25%", "ImmolateInterval", Tier.Gold, new UnityAction(() => Flamey.Instance.addTimeBasedEffect(new Immolate(0, 0,0, 0.25f)))),  
