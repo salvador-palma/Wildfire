@@ -68,13 +68,12 @@ public class HealthRegen : TimeBasedEffect
 
     private void CheckMaxed(){
         if(perSec >= 100 && perRound >= 100 && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Regeneration", () => SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Regeneration");
             maxed = true;
         }
 
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         pheonix = Flamey.Instance.SpawnObject(pheonixPrefab);
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Regen"));
         activeRoundsLeft=activeRoundsCooldown;
@@ -265,7 +264,8 @@ public class Immolate : TimeBasedEffect
         this.interval = interval;
         this.radius = radius;
         if(Instance == null){
-            this.interval = 16;
+            this.interval = 10;
+            this.radius=2f;
             Instance = this;
             cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ImmolateUnlock"));
             ring = Resources.Load<GameObject>("Prefab/Ring");
@@ -348,29 +348,36 @@ public class Immolate : TimeBasedEffect
     public bool maxed;
     private void CheckMaxed(){
         if(interval <= 8 && radius >= 2f && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            EnemySpawner.Instance.Paused = true;
-            elementsPanel = GameUI.Instance.SpawnUI(elementsPanelPrefab);
-            Transform elementContainer = elementsPanel.transform.Find("Elements");
-            elementContainer.Find("Fire").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
-            elementContainer.Find("Water").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
-            elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
-            elementContainer.Find("Air").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
+            StartSelectScreen();
             maxed = true;
         }
     }
-    public void TransformIntoCharacter(int n){
-        Debug.Log("Chose: " + n);
-        elementsPanel.GetComponent<Animator>().Play("ExitOptions");
-        
-        ImmolateType = n;
-        Character.Instance.SetupCharacter("Immolate", () => SpawnExtraAssets(null, null));
+    public void StartSelectScreen(){
+        EnemySpawner.Instance.Paused = true;
+        elementsPanel = GameUI.Instance.SpawnUI(elementsPanelPrefab);
+        Transform elementContainer = elementsPanel.transform.Find("Elements");
+        elementContainer.Find("Fire").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
+        elementContainer.Find("Water").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
+        elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
+        elementContainer.Find("Air").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
-        isCharacter=true;
-        elementsPanel.SetActive(false);
-        spirit = Flamey.Instance.SpawnObject(spiritPrefab[ImmolateType]);
+    public void TransformIntoCharacter(int n){
+
+        elementsPanel.GetComponent<Animator>().Play("ExitOptions");
+        ImmolateType = n;
+        switch(n){
+            case 0: Character.Instance.SetupCharacter("ImmolateFire"); break;
+            case 1: Character.Instance.SetupCharacter("ImmolateWater"); break;
+            case 2: Character.Instance.SetupCharacter("ImmolateEarth"); break;
+            case 3: Character.Instance.SetupCharacter("ImmolateAir"); break;
+        }
         
+    }
+    public void SpawnExtraAssets(int n = -1){
+        if(n != -1){ImmolateType = n;}
+        isCharacter=true;
+        if(elementsPanel!=null){elementsPanel.SetActive(false);}
+        spirit = Flamey.Instance.SpawnObject(spiritPrefab[ImmolateType]);
     }
 
     public string getDescription()

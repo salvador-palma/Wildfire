@@ -77,6 +77,7 @@ public class EnemySpawner : MonoBehaviour
         
         
     }
+    
     public void StartGame(){ 
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
@@ -107,7 +108,7 @@ public class EnemySpawner : MonoBehaviour
     }
     private void InitDefaultEffects(){
         if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
-            Debug.Log("Inited Money Generation");
+
             Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
         }
         GameUI.Instance.defineEffectList();

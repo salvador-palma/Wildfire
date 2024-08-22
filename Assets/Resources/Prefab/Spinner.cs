@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spinner : MonoBehaviour
 {
     public float speed;
-    public float multiplier = 1.2f;
+    public float multiplier = 10f;
 
     public GameObject[] Spinners;
     
@@ -29,11 +29,11 @@ public class Spinner : MonoBehaviour
     public void kill(){
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    protected virtual void OnTriggerEnter2D(Collider2D other) {
         
         if(other.tag == "Enemy"){
             Enemy e = other.GetComponent<Enemy>();
-            e.Hitted(FlameCircle.Instance.damage, 0, ignoreArmor:false, onHit: true);
+            e.Hitted(FlameCircle.Instance.damage, 0, ignoreArmor:FlameCircle.Instance.PlanetType==1, onHit: true);
             Enemy.SpawnExplosion(other.transform.position);
         }
     }

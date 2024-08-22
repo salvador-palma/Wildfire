@@ -72,15 +72,11 @@ public class BurnOnLand : OnLandEffect
     public bool maxed;
     private void CheckMaxed(){
         if(prob >= .5f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
             Character.Instance.SetupCharacter("Lava");
-            
             maxed = true;
-            
-            
         }
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         Flamey.Instance.SpawnObject(prefabEverlast);
     }
   
@@ -283,7 +279,7 @@ public class DrainOnLand : OnLandEffect
     private void CheckMaxed(){
         if(prob >= .25f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Flower Field");
-            carnivoreChance = 0.25f;
+            
             maxed = true;
         }
     }

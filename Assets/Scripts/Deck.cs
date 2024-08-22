@@ -56,7 +56,7 @@ public class Deck : MonoBehaviour
 
     }
 
-    void FillDeck(){
+    public void FillDeck(){
         
         augments = DeckBuilder.Instance.getAllCards();
         
@@ -237,7 +237,7 @@ public class Deck : MonoBehaviour
     }
     public void LoadGame(bool withLoad){
         try{ 
-            FillDeck();
+            // FillDeck();
 
             if(!withLoad){return;}
             
@@ -259,7 +259,7 @@ public class Deck : MonoBehaviour
             EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
 
         }catch(Exception e){
-            
+            Debug.Log(e.ToString());
         }
         
     }

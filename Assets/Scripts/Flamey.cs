@@ -105,6 +105,15 @@ public class Flamey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Character: " + Character.Instance);
+        Debug.Log("SkillTree: " + SkillTreeManager.Instance);
+        Debug.Log("SkillTree Statik: " + SkillTreeManager.Instance.getLevel("Static Energy"));
+        Debug.Log("Character Active: " + Character.Instance.active);
+
+        Deck.Instance.FillDeck();
+        Character.Instance.SetupActiveLooks();
+        
+
         target(getHoming());
         AtkSpeed = atkSpeed;
         timerASCounter = AtkSpeedToSeconds(atkSpeed);;

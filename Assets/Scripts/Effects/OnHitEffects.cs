@@ -30,7 +30,7 @@ public class VampOnHit : OnHitEffects
 
     float DamageToOverheal = 1000;
     float DamageOverhealed = 0;
-    private Image cooldownImage;
+    public Image cooldownImage;
     public VampOnHit(float perc, float prob){
         
         this.perc = perc;
@@ -85,15 +85,11 @@ public class VampOnHit : OnHitEffects
     public bool maxed;
     private void CheckMaxed(){
         if(prob >= 1f && perc >= 1f && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            
-            Character.Instance.SetupCharacter("Vampire",()=>SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Vampire");
             maxed = true;
         }
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
-        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/VampUnlock"));
-    }
+    
     public bool addList(){
         return Instance == this;
     }
@@ -181,13 +177,12 @@ public class IceOnHit : OnHitEffects
     public bool maxed;
     private void CheckMaxed(){
         if(prob >= 1f && duration >= 10000 && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Freeze", () => SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Freeze");
             maxed = true;
         }
 
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/IceUnlock"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         Deck.RoundOver += UpdateActive;
@@ -327,13 +322,12 @@ public class ShredOnHit : OnHitEffects
     public bool maxed;
     private void CheckMaxed(){
         if(percReduced >= 0.5f && prob >= 1f && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Shred",()=>SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Shred");
             maxed = true;
         }
     }
 
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ShredUnlock"));
     }
     public bool addList(){
@@ -551,11 +545,12 @@ public class StatikOnHit : OnHitEffects
     private void CheckMaxed(){
         if(prob >= 1f && ttl >= 10 && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Statik");
-            GameObject g = GameUI.Instance.SpawnUI(statikMeter);
-            statikMeterSlider = g.GetComponent<Slider>();
-           
             maxed = true;
         }
+    }
+    public void SpawnExtraAssets(){
+        GameObject g = GameUI.Instance.SpawnUI(statikMeter);
+        statikMeterSlider = g.GetComponent<Slider>();
     }
     public bool addList(){
         return Instance == this;

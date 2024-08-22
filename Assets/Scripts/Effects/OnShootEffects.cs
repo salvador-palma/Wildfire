@@ -74,8 +74,6 @@ public class SecondShot : OnShootEffects{
         }
     }
 
-    
-
     public void Stack(SecondShot secondShot){
         perc += secondShot.perc;
         RemoveUselessAugments();
@@ -212,12 +210,11 @@ public class BurstShot : OnShootEffects{
     public bool maxed;
     private void CheckMaxed(){
         if(amount >= 20 && interval <= 10 && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Burst", new UnityAction(()=>SpawnExtraAssets(null,null)));
+            Character.Instance.SetupCharacter("Burst");
             maxed = true;
         }
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BurstAmount"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         Deck.RoundOver += UpdateActive;
@@ -334,13 +331,11 @@ public class KrakenSlayer : OnShootEffects{
     public bool maxed;
     private void CheckMaxed(){
         if(interval <= 0 && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Magical Shot", () => SpawnExtraAssets(null, null));
-
+            Character.Instance.SetupCharacter("Magical Shot");
             maxed = true;
         }
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BlueFlameInterval"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         Deck.RoundOver += UpdateActive;

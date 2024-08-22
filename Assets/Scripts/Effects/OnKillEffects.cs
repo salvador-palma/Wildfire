@@ -148,7 +148,7 @@ public class Necromancer : OnKillEffects
     public static Necromancer Instance;
     static GameObject Prefab;
     static GameObject PrefabMega;
-    float MegaGhoulProbability;
+    public float MegaGhoulProbability;
 
     public Necromancer(float prob, float dmgPerc){
         this.prob = prob;
@@ -195,7 +195,6 @@ public class Necromancer : OnKillEffects
     private void CheckMaxed(){
         if(prob >= .5f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Necro");
-            MegaGhoulProbability = 0.1f;
             maxed = true;
         }
     }

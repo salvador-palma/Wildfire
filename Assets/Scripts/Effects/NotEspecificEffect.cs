@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface NotEspecificEffect : Effect{
     public bool addList();
@@ -17,6 +18,9 @@ public class FlameCircle : NotEspecificEffect
     public int damage;
     public static FlameCircle Instance;
     public Spinner SpinnerInstance;
+    GameObject planetsPanelPrefab;
+    GameObject planetsPanel;
+    public int PlanetType = -1;
     
     public FlameCircle(int amount, int damage){
        
@@ -26,6 +30,7 @@ public class FlameCircle : NotEspecificEffect
         if(Instance == null){
             Instance = this;
             GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount));
+            planetsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/PlanetSelectionPanel");
             SpinnerInstance = g.GetComponent<Spinner>();
             Deck.RoundOver += SetSpinFalse;
             Deck.RoundStart += SetSpinTrue;
@@ -105,10 +110,59 @@ public class FlameCircle : NotEspecificEffect
     public bool maxed;
     private void CheckMaxed(){
         if(amount >= 4f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Orbital");
+            StartSelectScreen();
+            maxed=true;
         }
     }
+    public void StartSelectScreen(){
+        EnemySpawner.Instance.Paused = true;
+        planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
+        Transform elementContainer = planetsPanelPrefab.transform.Find("Elements");
+        elementContainer.Find("Mercury").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
+        elementContainer.Find("Venus").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
+        elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
+        elementContainer.Find("Mars").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
+        elementContainer.Find("Jupiter").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(4));
+        elementContainer.Find("Saturn").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(5));
+        elementContainer.Find("Uranus").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(6));
+        elementContainer.Find("Neptune").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(7));
+    }
+    public void TransformIntoCharacter(int n){
 
+        planetsPanel.GetComponent<Animator>().Play("ExitOptions");
+        PlanetType = n;
+        switch(n){
+            case 0: Character.Instance.SetupCharacter("OrbitalMercury"); break;
+            case 1: Character.Instance.SetupCharacter("OrbitalVenus"); break;
+            case 2: Character.Instance.SetupCharacter("OrbitalEarth"); break;
+            case 3: Character.Instance.SetupCharacter("OrbitalMars"); break;
+            case 4: Character.Instance.SetupCharacter("OrbitalJupiter"); break;
+            case 5: Character.Instance.SetupCharacter("OrbitalSaturn"); break;
+            case 6: Character.Instance.SetupCharacter("OrbitalUranus"); break;
+            case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
+        }
+        
+    }
+    public void SpawnExtraAssets(int n){
+        switch(n){
+            case 0:SpinnerInstance.multiplier *= 1.5f; break;
+            case 1:break;
+            case 2:Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Earth")).GetComponent<Spinner>();break;
+            case 3:SpinnerInstance.GetComponent<Animator>().enabled=true;break;
+            case 4:
+                Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter")).GetComponent<Spinner>();
+                SpinnerInstance.kill();
+                SpinnerInstance = next;
+            break;
+            case 5:
+                Spinner next2 = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn")).GetComponent<Spinner>();
+                SpinnerInstance.kill();
+                SpinnerInstance = next2;
+            break;
+            case 6:break;
+            case 7: SpinnerInstance.multiplier *= .25f;break;
+        }
+    }
     public GameObject getAbilityOptionMenu(){
         return null;
     }
@@ -166,7 +220,6 @@ public class MoneyMultipliers : NotEspecificEffect
     private void CheckMaxed(){
         if(mult >= 2f && perRound >= 250 && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Ember Generation");
-            ReloadShinyStats();
         }
     }
     private void RemoveUselessAugments(){ 
@@ -311,12 +364,11 @@ public class CandleTurrets : NotEspecificEffect
     public bool maxed;
     private void CheckMaxed(){
         if(amount >= 6f && atkSpeed >= 3f && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Ritual",() => SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Ritual");
             maxed = true;
         }
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/CandleDmg"));
     }

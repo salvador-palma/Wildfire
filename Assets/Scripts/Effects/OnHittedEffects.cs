@@ -75,13 +75,12 @@ public class ThornsOnHitted : OnHittedEffects
 
     private void CheckMaxed(){
         if(prob >= 1f && !Character.Instance.isACharacter()){
-            GameUI.Instance.SpawnExtrasEvent += SpawnExtraAssets;
-            Character.Instance.SetupCharacter("Thorns" ,() => SpawnExtraAssets(null,null));
+            Character.Instance.SetupCharacter("Thorns");
             maxed = true;
         }
 
     }
-    public void SpawnExtraAssets(object sender, EventArgs e){
+    public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/ThornsUnlock"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         Deck.RoundOver += UpdateActive;

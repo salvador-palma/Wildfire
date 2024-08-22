@@ -304,13 +304,7 @@ public class GameUI : MonoBehaviour
     }
 
     public void StartGameEvent(){
-        Console.Log("Start Game Event.");
-        try{
-            EnemySpawner.Instance.StartGame();
-        }catch(Exception e){
-            Console.Log("<color=#ff0000>"+e.ToString()+"</color>");
-        }
-        
+        EnemySpawner.Instance.StartGame();
     }
 
     public void SetEmberAmount(int n){
@@ -327,9 +321,10 @@ public class GameUI : MonoBehaviour
     }
     public void CharacterUnlockedPopUp(){
         if(Character.Instance.isCharacterUnlocked()){
-            EnemySpawner.Instance.Paused = true;
+            EnemySpawner.Instance.Paused = false;
             EnemySpawner.Instance.newRound();
         }else{
+            Character.Instance.Unlock();
             FillCharacterPopUpInfo();
             GetComponent<Animator>().Play("CharacterUnlockedPopUp");
         }
@@ -339,13 +334,11 @@ public class GameUI : MonoBehaviour
         GetComponent<Animator>().Play("CharacterUnlockedPopDown");
         
         EnemySpawner.Instance.Paused = false;
-        
         EnemySpawner.Instance.newRound();
     }
 
     private void FillCharacterPopUpInfo(){
-        CharacterNameDescriptionTxt.SetText(string.Format("{0}<br><color=#999999><size=10>{1}</size></color>",
-                                            Character.Instance.getName().ToUpper(), Character.Instance.getDescription()));
+        CharacterNameDescriptionTxt.SetText(string.Format("{0}<br><color=#999999><size=10>{1}</size></color>",Character.Instance.getName().ToUpper(), Character.Instance.getDescription()));
         Character.Instance.TransformVesselToCharacter(CharacterImage);
     }
     public void UpdateProfileCharacter(){
@@ -358,7 +351,8 @@ public class GameUI : MonoBehaviour
         return Instantiate(prefab, SpawnableUIPanel.transform);
     }
     public void SpawnExtras(){
-        SpawnExtrasEvent?.Invoke(this, new EventArgs());
+        // SpawnExtrasEvent?.Invoke(this, new EventArgs());
+        Character.Instance.SetupBehaviour();
     }
 
     public Image SpawnUIMetric(Sprite icon){
