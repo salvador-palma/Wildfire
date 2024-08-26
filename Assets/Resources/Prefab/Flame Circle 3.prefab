@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: -3606725877715237912}
   - component: {fileID: 5245800486123925147}
   - component: {fileID: 3250287023450562443}
-  - component: {fileID: 4433486461870496863}
+  - component: {fileID: 8135491530940707460}
   m_Layer: 0
   m_Name: Flame Circle 3
   m_TagString: OrbitalHit
@@ -338,13 +338,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  multiplier: 8
   Spinners:
   - {fileID: 5497235368296122204, guid: ddd6d51b18fe62d4095b365f4d7a1669, type: 3}
   - {fileID: 7162470908152817607, guid: 91aad738fc10474438633ce0bd8dcb6f, type: 3}
   - {fileID: 5071763888348970798}
   - {fileID: 2330845518204565445, guid: 0b3fd5aef4455194bb7026334a8e0bdd, type: 3}
-  canSpin: 1
+  canSpin: 0
 --- !u!50 &5245800486123925147
 Rigidbody2D:
   serializedVersion: 4
@@ -967,7 +966,7 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 5071763888348970798}
---- !u!95 &4433486461870496863
+--- !u!95 &8135491530940707460
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -977,7 +976,7 @@ Animator:
   m_GameObject: {fileID: 5071763888348970798}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7043a1c0baff1c740b6da4bd21260625, type: 2}
+  m_Controller: {fileID: 9100000, guid: 46e951e969845424490eed0f991cd3c2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

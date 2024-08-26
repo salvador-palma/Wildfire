@@ -121,7 +121,7 @@ public class HealthRegen : TimeBasedEffect
 
     public string getText()
     {
-        return "Health Regen";
+        return "Regeneration";
     }
 
     public string getType()
@@ -264,8 +264,6 @@ public class Immolate : TimeBasedEffect
         this.interval = interval;
         this.radius = radius;
         if(Instance == null){
-            this.interval = 10;
-            this.radius=2f;
             Instance = this;
             cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ImmolateUnlock"));
             ring = Resources.Load<GameObject>("Prefab/Ring");
@@ -333,11 +331,15 @@ public class Immolate : TimeBasedEffect
     }
 
     void RemoveUselessAugments(){
-        if(interval <= 8){
+        if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2){
+            interval = 16;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("ImmolateInterval");
+        }else if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2) {
             interval = 8;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateInterval");
-        } 
+        }
         if(radius >= 2f){
             radius = 2f;
             Deck deck = Deck.Instance;
@@ -347,7 +349,10 @@ public class Immolate : TimeBasedEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(interval <= 8 && radius >= 2f && !Character.Instance.isACharacter()){
+        if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f && !Character.Instance.isACharacter()){
+            StartSelectScreen();
+            maxed = true;
+        }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f && !Character.Instance.isACharacter()){
             StartSelectScreen();
             maxed = true;
         }

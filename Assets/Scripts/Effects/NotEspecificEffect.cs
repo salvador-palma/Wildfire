@@ -28,12 +28,18 @@ public class FlameCircle : NotEspecificEffect
         prevamount = amount;
         this.damage = damage;
         if(Instance == null){
+
             Instance = this;
-            GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount));
+            Spinner.multiplier=9f;
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=2){this.amount=2;}
+            GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+this.amount));
             planetsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/PlanetSelectionPanel");
             SpinnerInstance = g.GetComponent<Spinner>();
             Deck.RoundOver += SetSpinFalse;
             Deck.RoundStart += SetSpinTrue;
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=1){
+                Spinner.multiplier*=2f;
+            }
             
         }else{
             Instance.Stack(this);
@@ -47,21 +53,40 @@ public class FlameCircle : NotEspecificEffect
         
     }
     public void SetSpinFalse(object sender ,EventArgs e){
+        Debug.Log(Spinner.multiplier);
         SetSpin(false);
     }
     public void SetSpinTrue(object sender ,EventArgs e){
+        
         SetSpin(true);
     }
     public void SetSpin(bool b){
         SpinnerInstance.canSpin = b;
+        if(PlanetType==3){
+            SpinnerInstance.GetComponent<Animator>().enabled=b;
+
+        }
+
     }
     public void UpdateAmount(){
-        if(amount != prevamount){
-            prevamount = amount;
+        if(amount >= 4 && !Character.Instance.isACharacter()){EnemySpawner.Instance.Paused = true;}
+        if(PlanetType==4){
+            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter "+amount)).GetComponent<Spinner>();
+            SpinnerInstance.kill();
+            SpinnerInstance = next;
+        }else if(PlanetType==5){
+            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn "+amount)).GetComponent<Spinner>();
+            SpinnerInstance.kill();
+            SpinnerInstance = next;
+            
+        }else{
             Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
             SpinnerInstance.kill();
             SpinnerInstance = next;
         }
+        
+            
+        
     }
     public bool addList()
     {
@@ -84,7 +109,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getText()
     {
-        return "Orbital Flames";
+        return "Orbits";
     }
 
     public string getType()
@@ -93,9 +118,19 @@ public class FlameCircle : NotEspecificEffect
     }
 
     public void Stack(FlameCircle flameCircle){
-        amount = Mathf.Min(flameCircle.amount + amount, 4);
+
+        if(flameCircle.amount>0){
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=2){
+                amount = Mathf.Min(flameCircle.amount + 1 + amount, 4);
+            }else{
+                amount = Mathf.Min(flameCircle.amount + amount, 4);
+            }
+            UpdateAmount();
+        }
+        
+        
         damage += flameCircle.damage;
-        UpdateAmount();
+        
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
@@ -117,18 +152,10 @@ public class FlameCircle : NotEspecificEffect
     public void StartSelectScreen(){
         EnemySpawner.Instance.Paused = true;
         planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
-        Transform elementContainer = planetsPanelPrefab.transform.Find("Elements");
-        elementContainer.Find("Mercury").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
-        elementContainer.Find("Venus").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
-        elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
-        elementContainer.Find("Mars").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
-        elementContainer.Find("Jupiter").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(4));
-        elementContainer.Find("Saturn").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(5));
-        elementContainer.Find("Uranus").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(6));
-        elementContainer.Find("Neptune").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(7));
+        
     }
     public void TransformIntoCharacter(int n){
-
+        SetSpin(true);
         planetsPanel.GetComponent<Animator>().Play("ExitOptions");
         PlanetType = n;
         switch(n){
@@ -142,25 +169,29 @@ public class FlameCircle : NotEspecificEffect
             case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
         }
         
+        
     }
     public void SpawnExtraAssets(int n){
+        PlanetType = n;
+        Debug.Log("SpawningExtra");
         switch(n){
-            case 0:SpinnerInstance.multiplier *= 1.5f; break;
+            case 0:Spinner.multiplier *= 1.5f; break;
             case 1:break;
             case 2:Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Earth")).GetComponent<Spinner>();break;
             case 3:SpinnerInstance.GetComponent<Animator>().enabled=true;break;
             case 4:
-                Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter")).GetComponent<Spinner>();
-                SpinnerInstance.kill();
-                SpinnerInstance = next;
+                UpdateAmount();
             break;
             case 5:
-                Spinner next2 = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn")).GetComponent<Spinner>();
-                SpinnerInstance.kill();
-                SpinnerInstance = next2;
+                UpdateAmount();
             break;
-            case 6:break;
-            case 7: SpinnerInstance.multiplier *= .25f;break;
+            case 6:
+                amount = 4;
+                UpdateAmount();
+                SpinnerInstance.canSpin=true;
+                Deck.Instance.removeClassFromDeck("OrbitalAmount");
+            break;
+            case 7: Spinner.multiplier *= .25f;break;
         }
     }
     public GameObject getAbilityOptionMenu(){
@@ -330,7 +361,7 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getText()
     {
-        return "Candle Turrets";
+        return "Ritual";
     }
 
     public string getType()
@@ -399,7 +430,11 @@ public class Summoner : NotEspecificEffect
 
     public List<Bee> bees;
     public static Summoner Instance;
-    public static GameObject Bee;
+    public GameObject[] BeeTypes;
+
+    private int activeRoundsLeft;
+    private int activeRoundsCooldown = 5;
+    private UnityEngine.UI.Image cooldownImage;
     
     public Summoner(int dmg, float atkSpeed, float speed, int amount){
        
@@ -410,19 +445,48 @@ public class Summoner : NotEspecificEffect
         if(Instance == null){
             Instance = this;     
             bees = new List<Bee>();
-            Bee = Resources.Load<GameObject>("Prefab/Bee");
+            BeeTypes = new GameObject[]{
+                Resources.Load<GameObject>("Prefab/WorkerBee"),
+                Resources.Load<GameObject>("Prefab/PuncherBee"),
+                Resources.Load<GameObject>("Prefab/AssassinBee"),
+                Resources.Load<GameObject>("Prefab/AgileBee"),
+                Resources.Load<GameObject>("Prefab/WarriorBee"),
+                Resources.Load<GameObject>("Prefab/PollinatorBee"),
+                Resources.Load<GameObject>("Prefab/ChemicalBee"),
+            };
+            Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
+            b.UpdateStats();
+            bees.Add(b);
             ApplyEffect();
         }else{
             Instance.Stack(this);
         }
     }
-
+    public void addBee(int amount, int type){
+        int max = SkillTreeManager.Instance.getLevel("Bee Summoner") >= 1 ? 15 : 10;
+        
+        if(amount + this.amount > max){
+            if(Character.Instance.isCharacter("Bee Summoner")){
+                this.amount += amount ;
+                bees.Add(Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>());
+                RemoveUselessAugments();
+                return;
+            }else{
+                amount = max - this.amount;
+            }
+            
+        }
+        for(int i = 0;i<amount;i++){
+            Bee b = Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>();
+            b.UpdateStats();
+            bees.Add(b);
+        }
+        this.amount += amount; 
+        RemoveUselessAugments();
+    }
     public void ApplyEffect()
     {
-        for(int i = bees.Count; i < amount; i++){
-            bees.Add(Flamey.Instance.SpawnObject(Bee).GetComponent<Bee>());
-        }
-
+        RoundUpdate();
         foreach(Bee b in bees){
             b.UpdateStats();
         }
@@ -439,6 +503,9 @@ public class Summoner : NotEspecificEffect
     }
     public string getCaps()
     {
+        if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 1){
+            return string.Format("Bee Amount: {0} (Max. 15)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
+        }
         return string.Format("Bee Amount: {0} (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
     }
 
@@ -461,18 +528,17 @@ public class Summoner : NotEspecificEffect
         
         dmg += summoner.dmg;
         atkSpeed += summoner.atkSpeed;
-        amount += summoner.amount;
         speed += summoner.speed;
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(amount > 10){
-            amount = 10;
+        if(( amount >= 10 && SkillTreeManager.Instance.getLevel("Bee Summoner") < 1) || amount>=15){
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("SummonAmount");
+            deck.removeClassFromDeck("SummonAmountExtra");
         } 
-        if(atkSpeed >= 3f){
-            atkSpeed = 3f;
+        if(atkSpeed >= 4f){
+            atkSpeed = 4f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("SummonAtkSpeed");
         } 
@@ -486,9 +552,26 @@ public class Summoner : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 10 && atkSpeed >= 3f && speed >= 4f && !Character.Instance.isACharacter()){
+        if(amount >= 15 && atkSpeed >= 4f && speed >= 4f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Bee Summoner");
             maxed = true;
+        }
+    }
+    public void SpawnExtraAssets(){
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/SummonAmount"));
+    }
+    public void RoundUpdate(){
+        if(cooldownImage !=null){
+
+        
+            if(activeRoundsLeft<activeRoundsCooldown){
+                activeRoundsLeft++;
+                if(activeRoundsLeft==activeRoundsCooldown){
+                    activeRoundsLeft=0;
+                    addBee(1,0);
+                }
+                cooldownImage.fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+            }
         }
     }
 

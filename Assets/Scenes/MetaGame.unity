@@ -6308,158 +6308,204 @@ MonoBehaviour:
   Abilities:
   - Name: Static Energy
     Type: On-Hit Effect
-    AbilityDescription1: Static Energy will jump from enemy to enemy, reducing its
-      damage as it goes until the max distance has been reached
-    AbilityDescription2: On-Hit Effects will be applied on enemies hit by Static
-      Energy
-    AbilityDescription3: Static Energy's power will not decay anymore
+    AbilityDescription1: <color=#FFCC7C>Static Energy</color> will jump from enemy
+      to enemy, reducing its <color=#FF5858>damage</color> as it reaches a max distance
+    AbilityDescription2: <color=#FF99F3>On-Hit Effects</color> will be applied on
+      enemies hit by <color=#FFCC7C>Static Energy</color>
+    AbilityDescription3: <color=#FFCC7C>Static Energy's</color> <color=#FF5858>damage</color>
+      will not decay anymore
   - Name: Lava Pool
     Type: On-Land Effect
-    AbilityDescription1: Lava Pools burn Enemies standing on top of them, dealing
-      damage each second. Animals with hooves will only take 10% of the damage, while
-      enemies burried underground will not take damage at all
+    AbilityDescription1: <color=#FFCC7C>Lava Pools</color> burn Enemies standing
+      on top of them, dealing <color=#FF5858>damage</color> each second. Animals
+      with <color=#934F28>hooves</color> will only take 10% of the <color=#FF5858>damage</color>,
+      while enemies <color=#FF7000>burried</color> underground will <color=#FF5858>not</color>
+      take <color=#FF5858>damage</color> at all
     AbilityDescription2: Animals with hooves take 50% of the damage and Animals burried
       underground take 100% damage.
     AbilityDescription3: Each time a Lava Pool deals damage it will melt 5% of the
       enemy's armor
   - Name: Necromancer
     Type: On-Death Effect
-    AbilityDescription1: Ghouls will spawn from dead enemies and will inflict a percentage
-      of your damage to nearby enemies for a total of 3 times
-    AbilityDescription2: Max Hit amount increases to 5. The final hit deals True
-      Damage
-    AbilityDescription3: Max Hit amount increases to 7. Ghouls will proc On-Death
-      effects when they disappear, including Necromancer
+    AbilityDescription1: <color=#53D1FF>Ghouls</color> will spawn from dead enemies
+      and will inflict a percentage of <color=#FF5858>your damage</color> to nearby
+      enemies for a total of <color=#FFCC7C>3 times
+    AbilityDescription2: Max Hit amount increases to <color=#FFCC7C>5.</color> The
+      final hit deals <color=#FF5858>True Damage
+    AbilityDescription3: Max Hit amount increases to <color=#FFCC7C>7.</color> <color=#53D1FF>Ghouls</color>
+      will proc <color=#FF99F3>On-Death Effects</color> when they disappear, including
+      <color=#FFFF00>Necromancer
   - Name: Ritual
     Type: Special Effect
-    AbilityDescription1: Candles stand by your side shooting random targets. Their
-      flames do not proc On-Hit/On-Land Effects
-    AbilityDescription2: Candles will shoot six times faster when the Campfire gets
-      stunned
-    AbilityDescription3: Every time you gain a candle, gain an extra one
+    AbilityDescription1: <color=#FFCC7C>Candles</color> stand by your side shooting
+      random targets. Their flames do <color=#FF5858>not</color> proc <color=#FF99F3>On-Hit/On-Land
+      Effects
+    AbilityDescription2: <color=#FFCC7C>Candles</color> will shoot <color=#FFCC7C>six</color>
+      times faster when the <color=#FF7000>Campfire</color> gets <color=#53D1FF>stunned
+    AbilityDescription3: Every time you gain a <color=#FFCC7C>Candle</color>, gain
+      an <color=#FFCC7C>extra one</color>
   - Name: Immolate
     Type: Time-Based Effect
-    AbilityDescription1: Release Immolating waves that travel through the campsite,
-      dealing damage to everyone hit
-    AbilityDescription2: Starting interval gets reduced in half
-    AbilityDescription3: Immolate will count as a Shooting Effect
+    AbilityDescription1: Release <color=#FF7000>Immolating</color> waves that travel
+      through the <color=#FFCC7C>campsite,</color> dealing <color=#FF5858>damage</color>
+      to everyone hit
+    AbilityDescription2: Starting <color=#FFCC7C>interval</color> gets reduced in
+      half
+    AbilityDescription3: Minimum <color=#FFCC7C>interval</color> gets reduced in
+      half
   - Name: Pirate
     Type: On-Death Effect
-    AbilityDescription1: Roundshots will come out of enemy corpses, dealing Damage
-      and applying On-Hit Effects to enemies hit. Additionally, loot +10 Embers
-    AbilityDescription2: Roundshots will be aimed towards nearby enemies
-    AbilityDescription3: Everytime you gain +1 Roundshot, gain an extra one
+    AbilityDescription1: <color=#FFCC7C>Roundshots</color> will come out of enemy
+      corpses, dealing <color=#FF5858>damage</color> and applying <color=#FF99F3>On-Hit
+      Effects</color> to enemies hit. Additionally, loot <color=#FFCC7C>+10 Embers</color>
+    AbilityDescription2: <color=#FFCC7C>Roundshots</color> will be aimed towards
+      nearby enemies
+    AbilityDescription3: Everytime you gain <color=#FFCC7C>one Roundshot</color>,
+      gain an <color=#FFCC7C>extra one</color>
   - Name: Burst Shot
     Type: On-Shoot Effect
-    AbilityDescription1: Shoot a burst of shots everytime you throw a certain amount
-      of flames
-    AbilityDescription2: Unlock Targeting options (Random, Same, Most Max HP)
-    AbilityDescription3: Burst everytime you get Hit
+    AbilityDescription1: Shoot a <color=#FFCC7C>burst of shots</color> everytime
+      you throw a certain amount of flames
+    AbilityDescription2: Unlock <color=#FFCC7C>Targeting</color> options <color=#FFCC7C>(Random,
+      Same, Most Max HP)
+    AbilityDescription3: <color=#FFCC7C>Burst</color> everytime you get Hit
   - Name: Magical Shot
     Type: On-Shoot Effect
-    AbilityDescription1: Shoot a Magical Shot everytime you throw a certain amount
-      of flames. Magical Shots deal Extra Damage to targets.
-    AbilityDescription2: Starting interval gets reduced in half
-    AbilityDescription3: Shoot a Prismatic Shot every 20 Magical Shots, dealing 5x
-      Damage
+    AbilityDescription1: Shoot a <color=#53D1FF>Magical Shot</color> everytime you
+      throw a certain amount of flames. <color=#53D1FF>Magical Shots</color> deal
+      <color=#FF5858>Extra Damage</color> to targets.
+    AbilityDescription2: Starting <color=#FFCC7C>interval</color> gets reduced in
+      half
+    AbilityDescription3: Shoot a <color=#FF99F3>Prismatic Shot</color> every <color=#FFCC7C>20</color>
+      <color=#53D1FF>Magical Shots,</color> dealing <color=#FF5858>5x Damage
   - Name: Critical Strike
     Type: On-Shoot Effect
-    AbilityDescription1: Some shots will critically strike, enhancing their Damage
-      significantly
-    AbilityDescription2: No Limit on Critical Strike Multiplier
-    AbilityDescription3: 10% Chance of Critical Striking a Critical Shot, applying
-      the Damage multiplier again
+    AbilityDescription1: Some shots will <color=#FFCC7C>critically strike,</color>
+      enhancing their <color=#FF5858>damage</color> significantly
+    AbilityDescription2: No Limit on <color=#FFCC7C>Critical Strike Multiplier
+    AbilityDescription3: <color=#FFCC7C>10%</color> Chance of <color=#FF5858>Critical
+      Striking</color> a <color=#FFCC7C>Critical Shot,</color> applying the <color=#FF5858>damage
+      multiplier</color> again
   - Name: Snow Pool
     Type: On-Land Effect
-    AbilityDescription1: Snow Pools slow enemies stepping on it. They do not stack
-      with other Snow Pools.
-    AbilityDescription2: Snow Pools will not let enemies stepping on it Jump
-    AbilityDescription3: Snow Pools permanently decrease Enemy attack speed by 10%
+    AbilityDescription1: <color=#AFEDFF>Snow Pools</color> slow enemies stepping
+      on it. They do not stack with other<color=#AFEDFF> Snow Pools.
+    AbilityDescription2: <color=#AFEDFF>Snow Pools </color>will not let enemies stepping
+      on it <color=#FF7000>Jump
+    AbilityDescription3: <color=#AFEDFF>Snow Pools </color>will <color=#53D1FF>stun</color><color=#AFEDFF>
+      slowed</color> enemies for <color=#FFCC7C>2 seconds
   - Name: Thunder
     Type: Time-Based Effect
-    AbilityDescription1: Thunders will spawn at convenient locations dealing massive
-      amounts of Damage and applying On-Land Effects
-    AbilityDescription2: Thunders will apply On-Land Effects twice
-    AbilityDescription3: Unlock Targeting options (Same, Random, Tankiest)
+    AbilityDescription1: <color=#FFCC7C>Thunders</color> will spawn at convenient
+      locations dealing massive amounts of <color=#FF5858>damage</color> and applying
+      <color=#FF99F3>On-Land Effects
+    AbilityDescription2: <color=#FFCC7C>Thunders</color> will apply <color=#FF99F3>On-Land
+      Effects</color> twice
+    AbilityDescription3: '<color=#FFCC7C>Thunders</color> will <color=#53D1FF>stun</color>
+      enemies for <color=#FFCC7C>2 seconds '
   - Name: Bee Summoner
     Type: Special Effect
-    AbilityDescription1: Gain the ability to control and summon Bees
-    AbilityDescription2: Gain +5 Hive Size
-    AbilityDescription3: Unlock the Queen
+    AbilityDescription1: Gain the ability to control and summon<color=#FFCC7C> Bees
+    AbilityDescription2: Gain <color=#FFCC7C>+5 </color>Maximum Hive Size
+    AbilityDescription3: Unlock new <color=#FFCC7C>Bee</color> types <color=#FFCC7C>(Puncher,
+      Assassin, Warrior, Agile, Chemical and Pollinator)
   - Name: Orbits
     Type: Special Effect
-    AbilityDescription1: Small circles will orbit around the campfire, applying On-Hit
-      Effects to enemies hit
-    AbilityDescription2: Orbits will spin twice as fast
-    AbilityDescription3: Any increase in orbits will be doubled
+    AbilityDescription1: Small <color=#FFCC7C>orbits</color> will circle the campfire,
+      applying <color=#FF99F3>On-Hit Effects</color> to enemies hit
+    AbilityDescription2: <color=#FFCC7C>Orbits</color> will spin twice as fast
+    AbilityDescription3: Any increase in <color=#FFCC7C>orbits</color> will be doubled
   - Name: Vampire
     Type: On-Hit Effect
-    AbilityDescription1: Heal for a percentage of the Damage you deal
-    AbilityDescription2: If the enemy has less HP than you have Damage, heal double
+    AbilityDescription1: <color=#0CD405>Heal</color> for a percentage of the <color=#FF5858>damage</color>
+      you deal
+    AbilityDescription2: If the enemy has less <color=#0CD405>HP</color> than you
+      have <color=#FF5858>damage,</color> <color=#0CD405>heal</color> <color=#FFCC7C>double</color>
       the amount
-    AbilityDescription3: No Limit on Healing Percentage
+    AbilityDescription3: No Limit on <color=#FFCC7C>Healing Percentage
   - Name: Assassin
     Type: On-Hit Effect
-    AbilityDescription1: Armor Penetration and the ability to Execute enemies when
-      their HP is below a certain threshold
-    AbilityDescription2: Executing cap increases to 50%
-    AbilityDescription3: Armor Penetration applies to all sources of Damage
+    AbilityDescription1: <color=#FFCC7C>Armor Penetration</color> and the ability
+      to <color=#FFCC7C>Execute</color> enemies when their <color=#0CD405>HP</color>
+      is below a certain percentage
+    AbilityDescription2: '<color=#FFCC7C>Executing</color> percentage limit increases
+      to <color=#FFCC7C>50%</color> '
+    AbilityDescription3: <color=#FFCC7C>Armor Penetration</color> applies to all
+      sources of <color=#FF5858>damage
   - Name: Explosion
     Type: On-Death Effect
-    AbilityDescription1: Generate Explosions from the corpses of enemies, damaging
-      nearby enemies
-    AbilityDescription2: Explosions grow by 50%
-    AbilityDescription3: Every 20 Explosions generate one that deals True Damage
+    AbilityDescription1: Generate <color=#FFCC7C>Explosions</color> from the corpses
+      of enemies, <color=#FF5858>damaging</color> nearby enemies
+    AbilityDescription2: <color=#FFCC7C>Explosions</color> grow by <color=#FFCC7C>50%</color>
+    AbilityDescription3: Every <color=#FFCC7C>20 Explosions</color> generate one
+      that deals <color=#FF5858>True Damage
   - Name: Flower Field
     Type: On-Land Effect
-    AbilityDescription1: Flowers will heal you by a Max HP percentage of enemies
-      that step on it
-    AbilityDescription2: Anti-Heals enemies stepping on top of the flower
-    AbilityDescription3: Every 30 Health Drains one will apply 3 dots of Poison instead
+    AbilityDescription1: <color=#FFCC7C>Flowers</color> will heal you by a <color=#0CD405>Max
+      HP</color> percentage of enemies that step on it. If there are more than <color=#FFCC7C>5</color>
+      enemies on top of it, it will die prematurely.
+    AbilityDescription2: <color=#FFCC7C>Flowers</color> can handle <color=#FFCC7C>+10</color>
+      more enemies on top of them
+    AbilityDescription3: <color=#FFCC7C>Flowers</color> <color=#53D1FF>stun</color>
+      nearby enemies for <color=#FFCC7C>2 seconds</color> before dying
   - Name: Multicaster
     Type: On-Shoot Effect
-    AbilityDescription1: Whenever you shoot a flame there's a chance you shoot another
-      one right after
-    AbilityDescription2: Unlock Targeting options (Same, Random, Second Target, Mouse
-      Position)
-    AbilityDescription3: Flames have a 10% chance of ricocheting
+    AbilityDescription1: Whenever you shoot a flame there's a chance you shoot <color=#FFCC7C>another
+      one</color> right after
+    AbilityDescription2: Unlock <color=#FFCC7C>Targeting</color> options <color=#FFCC7C>(Same,
+      Random, Second Target, Mouse Position)
+    AbilityDescription3: Flames have a <color=#FFCC7C>10%</color> chance of <color=#FFCC7C>ricocheting
   - Name: Thorns
     Type: On-Hitted Effect
-    AbilityDescription1: Enemies that directly hit you get damaged back by a percentage
-      of your armor
-    AbilityDescription2: Thorns will proc On-Hit Effects
-    AbilityDescription3: Affected enemies get stunned for 5s
+    AbilityDescription1: Enemies that directly hit you get <color=#FF5858>damaged</color>
+      back by a percentage of your <color=#919191>armor
+    AbilityDescription2: <color=#FFCC7C>Thorns</color> will proc <color=#FF99F3>On-Hit
+      Effects
+    AbilityDescription3: <color=#FFCC7C>Thorns</color> will deal <color=#FF5858>damage</color>
+      in <color=#FFCC7C>area</color> instead of only <color=#FF5858>damaging</color>
+      the attacker
   - Name: Resonance
     Type: On-Hit Effect
-    AbilityDescription1: Use the power of Sound Waves to shred enemy Armor
-    AbilityDescription2: Shred up to 20% more Armor based on Bullet Speed and Accuracy
-    AbilityDescription3: Heal for the amount of Armor Shredded
+    AbilityDescription1: Use the power of <color=#FFCC7C>Sound</color> to shred enemy
+      <color=#919191>Armor
+    AbilityDescription2: Shred up to <color=#FFCC7C>20%</color> more <color=#919191>Armor</color>
+      based on <color=#AFEDFF>Bullet Speed</color> and <color=#AFEDFF>Accuracy
+    AbilityDescription3: <color=#0CD405>Heal</color> for the amount of <color=#919191>Armor
+      Shredded
   - Name: Freeze
     Type: On-Hit Effect
-    AbilityDescription1: Freezing enemies will slow them. The power of the Slow increases
-      the more Max HP you have
-    AbilityDescription2: Slows twice as much
-    AbilityDescription3: Slowed enemies take 200% more Damage
+    AbilityDescription1: <color=#FFCC7C>Freezing</color> enemies will <color=#AFEDFF>slow</color>
+      them. The power of the <color=#AFEDFF>Slow</color> increases the more <color=#0CD405>Max
+      HP</color> you have
+    AbilityDescription2: <color=#AFEDFF>Slows</color> <color=#FFCC7C>twice</color>
+      as much
+    AbilityDescription3: <color=#AFEDFF>Slowed</color> enemies take <color=#AFEDFF>200%</color>
+      more <color=#FF5858>damage
   - Name: Gambling
     Type: Special Effect
-    AbilityDescription1: Gain the ability to gamble for augments during the Augment
-      Picking Phase
-    AbilityDescription2: Landing repeated Augments will upgrade them all for the
-      next tier
-    AbilityDescription3: Gambling Augments will be able to pick other Gambling Augments
+    AbilityDescription1: Gain the ability to <color=#FFCC7C>gamble</color> for augments
+      during the <color=#FFCC7C>Augment Picking</color> phase
+    AbilityDescription2: Chance to get a <color=#FFCC7C>gambling</color> augment
+      gets <color=#FFCC7C>doubled
+    AbilityDescription3: <color=#FFCC7C>Gambling Augments</color> will be able to
+      pick other <color=#FFCC7C>Gambling Augments</color>
   - Name: Regeneration
     Type: Time-Based Effect
-    AbilityDescription1: Heal missing HP each second and gain bonus MaxHP per round
-    AbilityDescription2: Healing effects from any source will be 3 times more efficient
-    AbilityDescription3: Increased regeneration when low Health up to 500%
+    AbilityDescription1: Heal <color=#0CD405>missing HP</color> each second and gain
+      bonus <color=#0CD405>MaxHP</color> per round
+    AbilityDescription2: <color=#0CD405>Healing</color> effects from any source will
+      be <color=#FFCC7C>3 times</color> more efficient
+    AbilityDescription3: Increased <color=#0CD405>regeneration</color> when low <color=#0CD405>Health</color>
+      up to <color=#FFCC7C>500%
   - Name: Ember Generation
     Type: Special Effect
-    AbilityDescription1: Gain the ability to multiply earned Embers and generate
-      a few per Round
-    AbilityDescription2: +0.0001% chance of seeing a Shiny Animal. Shiny animal drops
-      are multiplied by x10
-    AbilityDescription3: +0.001% chance of seeing a Shiny Animal. Shiny animal drops
-      are multiplied by x100
+    AbilityDescription1: Gain the ability to <color=#FFCC7C>multiply</color> earned
+      <color=#FFCC7C>Embers</color> and <color=#FFCC7C>generate</color> a few per
+      round
+    AbilityDescription2: 0.01% chance of seeing a <color=#53D1FF>Shiny</color> Animal.
+      <color=#53D1FF>Shiny</color> animal drops are multiplied by <color=#FFCC7C>x10
+    AbilityDescription3: +0.1% chance of seeing a <color=#53D1FF>Shiny</color> Animal.
+      <color=#53D1FF>Shiny</color> animal drops are multiplied by <color=#FFCC7C>x100
   emberText: {fileID: 71933622}
   titleText: {fileID: 924204466}
   typeText: {fileID: 557520742}
@@ -11128,6 +11174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0336ea0003f9ad40bd6cedf42189387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InMenu: 1
   active: 31
   characterDatas:
   - Name: Flame
@@ -11550,7 +11597,8 @@ MonoBehaviour:
   - Name: Earth
     AnimationBool: OrbitalEarth
     AbilityName: OrbitalEarth
-    AbilityDescription: The Moon will orbit around you, dealing 4xDmg
+    AbilityDescription: The Moon will orbit around you, dealing 4xDmg and applying
+      On-Land Effects when colliding with an enemy
     BodyBack: {fileID: 21300000, guid: 2ff95046897ea5049973ce2f633cf265, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -11578,7 +11626,7 @@ MonoBehaviour:
   - Name: Jupiter
     AnimationBool: OrbitalJupiter
     AbilityName: OrbitalJupiter
-    AbilityDescription: Orbits double in size
+    AbilityDescription: Gain x1.5 Orbital radius and size
     BodyBack: {fileID: 21300000, guid: 080406d0f02f80b4cbaa6869b452bb37, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -11592,7 +11640,7 @@ MonoBehaviour:
   - Name: Saturn
     AnimationBool: OrbitalSaturn
     AbilityName: OrbitalSaturn
-    AbilityDescription: Gain +2 Orbits around in a different Orbital Field
+    AbilityDescription: Gain +2 Extra Orbits in different Orbital Fields
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: 4e20d23e6bf61a240b84b84d90ab51ba, type: 3}
@@ -11606,8 +11654,7 @@ MonoBehaviour:
   - Name: Uranus
     AnimationBool: OrbitalUranus
     AbilityName: OrbitalUranus
-    AbilityDescription: Orbits have a 10% Chance to Proc-On Land Effects when they
-      collide with an enemy
+    AbilityDescription: Start the game with 4 Orbits that deal twice the Damage
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: ff7ef5240a6cf504a9a68a511c62ff0a, type: 3}
@@ -11621,7 +11668,7 @@ MonoBehaviour:
   - Name: Neptune
     AnimationBool: OrbitalNeptune
     AbilityName: OrbitalNeptune
-    AbilityDescription: Orbits spin 2x Slower but Stun enemeis for 2s upon collision
+    AbilityDescription: Orbits spin 4x Slower but Stun enemeis for 2s upon collision
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}

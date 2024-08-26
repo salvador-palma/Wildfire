@@ -47,7 +47,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            Attacking = true;
            removeSlowingEffects();
            GetComponent<Animator>().SetTrigger("InRange");
-        //    InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+        //    StartCoroutine(PlayAttackAnimation(AttackDelay));
            StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
     }
@@ -241,6 +241,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(selected.Count == 0){return Vector2.zero;}
         selected.Sort(sortingFactor);
         return selected.First().HitCenter.position;
+        
+    }
+    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor){
+        List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
+        if(selected.Count == 0){return null;}
+        selected.Sort(sortingFactor);
+        return selected.First();
         
     }
     public static Enemy getClosestEnemy(Vector2 pos, int index = 0){

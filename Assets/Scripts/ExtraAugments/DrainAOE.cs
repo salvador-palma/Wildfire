@@ -18,9 +18,9 @@ public class DrainAOE : MonoBehaviour
     public bool isCarnivore;
     private void Start() {
         colliding = new List<Enemy>();
-        lt = DrainOnLand.Instance.lasting;
-        perc = DrainOnLand.Instance.perc;
-        Vector2 scale = transform.localScale * DrainOnLand.Instance.size * (isCarnivore? 1.5f : 1);
+        lt = DrainOnLand.Instance==null? 1f : DrainOnLand.Instance.lasting;
+        perc = DrainOnLand.Instance==null? 0.01f : DrainOnLand.Instance.perc;
+        Vector2 scale = transform.localScale * (DrainOnLand.Instance==null?1f:DrainOnLand.Instance.size) * (isCarnivore? 1.5f : 1);
         transform.localScale = scale;
         if(isCarnivore){
             GetComponent<SpriteRenderer>().sprite = carnivore;

@@ -368,7 +368,7 @@ public class KrakenSlayer : OnShootEffects{
 
     public string getText()
     {
-        return "Blue Flame";
+        return "Magical Shot";
     }
 
     public string getType()

@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
     }
     
     public static Character Instance { get; private set; }
-
+    public bool InMenu;
     [Header("Runtime Data")]
     public int active;
 
@@ -41,11 +41,14 @@ public class Character : MonoBehaviour
     
 
     private void Awake() {
-        Instance = this;
+        if(Instance==null){
+            Instance = this;
+        }
+        
         ReadData();
         SetupCharacterSelectOptions();
         active = PlayerPrefs.GetInt("Character", 0);
-        if(active != 0){
+        if(active != 0 && InMenu){
             if(characterDatas[active].AnimationBool != "None"){
                 MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, true);
             }
@@ -217,10 +220,18 @@ public class Character : MonoBehaviour
                  break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Ember Generation":
+                if(FlameCircle.Instance == null && SkillTreeManager.Instance.getLevel("Ember Generation") >= 0){
+                    Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
+                }
                 MoneyMultipliers.Instance.ReloadShinyStats();
                 break;
             /*--------------------------------------------------------------------------------------------------*/
-            case "Bee Summoner": Debug.Log("Bee Summoner Not Done"); break;
+            case "Bee Summoner": 
+                if(Summoner.Instance == null && SkillTreeManager.Instance.getLevel("Bee Summoner") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Beekeeper").Activate();
+                }
+                Summoner.Instance.SpawnExtraAssets(); 
+                break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Vampire":
                 if(VampOnHit.Instance == null && SkillTreeManager.Instance.getLevel("Vampire") >= 0){
@@ -431,7 +442,7 @@ public class Character : MonoBehaviour
         TransformVesselToCharacter(CharacterSelectContainer.transform.GetChild(index+1).gameObject,ability_name);
         
 
-        
+        if(!InMenu){return;}
         if(characterDatas[active].AnimationBool != "None"){
             MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, false);
         }
@@ -469,8 +480,6 @@ public class Character : MonoBehaviour
         CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition = new Vector2(344.5f + (-155.10608f) * offset, CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition.y); 
         
         if(characterDatas[currentDisplayedCharacter].Supratype != ""){
-            
-            
             if(characterDatas.Any(c => c.Subtype == characterDatas[currentDisplayedCharacter].Supratype && c.Unlocked)){
                 if(SkillTreeManager.Instance.getLevel(characterDatas[currentDisplayedCharacter].AbilityToSkillTree)>=0){
                     SetupCharacterSupTypeOptions(characterDatas[currentDisplayedCharacter].Supratype);
@@ -486,7 +495,7 @@ public class Character : MonoBehaviour
                 if(t.gameObject.activeInHierarchy){Destroy(t.gameObject);}
             }
         }
-
+        if(!InMenu){return;}
         if(characterDatas[currentDisplayedCharacter].Unlocked && (characterDatas[currentDisplayedCharacter].AbilityToSkillTree == "" || SkillTreeManager.Instance.getLevel(characterDatas[currentDisplayedCharacter].AbilityToSkillTree)>=0)){
             if(characterDatas[active].AnimationBool != "None"){
             MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, false);

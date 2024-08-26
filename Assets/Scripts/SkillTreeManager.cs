@@ -172,7 +172,7 @@ public class SkillTreeManager : MonoBehaviour
             
 
             titleText.text = ability.Name;
-            typeText.text = "Not-Done Effect";
+            typeText.text = ability.Type;
 
             int price = DeckBuilder.Instance.getPrice(skill, level + 1);
             purchaseButtonText.text = string.Format("Upgrade ({0})",  price == - 1 ? "Maxed Out" : price);
@@ -184,6 +184,9 @@ public class SkillTreeManager : MonoBehaviour
         }
 
 
+    }
+    public Ability getAbility(string SkillTreeName){
+        return Abilities.Where(a=> a.Name == SkillTreeName).FirstOrDefault();
     }
     
     public ColorBlock GetColors(int level){

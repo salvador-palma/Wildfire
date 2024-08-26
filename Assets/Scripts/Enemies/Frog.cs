@@ -66,7 +66,7 @@ public class Frog : Enemy
                     Attacking = true;
                     hasReachedRange = true;
                     GetComponent<Animator>().SetTrigger("InRange");
-                    InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+                    StartCoroutine(PlayAttackAnimation(AttackDelay));
                 }
             }else{
                 if(timer > 0){

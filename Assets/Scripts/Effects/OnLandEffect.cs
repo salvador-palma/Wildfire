@@ -185,7 +185,7 @@ public class IceOnLand : OnLandEffect
 
     public string getText()
     {
-        return "Ice Pool";
+        return "Snow Pool";
     }
 
     public string getType()

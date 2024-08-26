@@ -105,11 +105,7 @@ public class Flamey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Character: " + Character.Instance);
-        Debug.Log("SkillTree: " + SkillTreeManager.Instance);
-        Debug.Log("SkillTree Statik: " + SkillTreeManager.Instance.getLevel("Static Energy"));
-        Debug.Log("Character Active: " + Character.Instance.active);
-
+        
         Deck.Instance.FillDeck();
         Character.Instance.SetupActiveLooks();
         
@@ -248,10 +244,13 @@ public class Flamey : MonoBehaviour
         }
         return UnityEngine.Vector2.zero;
     }
-    public Enemy getRandomHomingEnemy(){
+    public Enemy getRandomHomingEnemy(bool targetable = false){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
+        if(targetable){go = go.Where(i=>i.GetComponent<Enemy>().canTarget()).ToArray();}
+        if(go.Length == 0){return null;}
         try{
             GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+            
             return g.GetComponent<Enemy>();
         }catch{
             Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
@@ -531,7 +530,7 @@ public class Flamey : MonoBehaviour
         return res;
     }
     public void ApplyOnLand(UnityEngine.Vector2 pos){
-        
+       
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
     public void ApplyOnHitted(Enemy e){

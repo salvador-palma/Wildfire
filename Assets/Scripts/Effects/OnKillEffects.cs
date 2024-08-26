@@ -341,7 +341,7 @@ public class Bullets : OnKillEffects
 
     public string getText()
     {
-        return "Bullet Shooter";
+        return "Pirate";
     }
 
     public string getType()

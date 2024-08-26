@@ -17,10 +17,10 @@ public class DeckBuilder : MonoBehaviour
         if(Instance==null){Instance = this;}
         if(Instance==this){DefineAugmentClasses();}
 
-        firstLayerPrices = new int[]{500, 1500, 4500};
-        secondLayerPrices = new int[]{1000, 3000, 9000};
-        thirdLayerPrices = new int[]{2000, 6000, 18000};
-        fourthLayerPrices = new int[]{4000, 12000, 36000};
+        firstLayerPrices = new int[]{500, 2500, 12500};
+        secondLayerPrices = new int[]{1000, 5000, 25000};
+        thirdLayerPrices = new int[]{2000, 10000, 50000};
+        fourthLayerPrices = new int[]{4000, 20000, 100000};
     }
     
     public int getPrice(string skill, int level){
@@ -289,9 +289,9 @@ public class DeckBuilder : MonoBehaviour
             new Augment("Ember Generation","Robbery", "Gain +100 embers per round", "MoneyProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(100, 0))), baseCardUpgrade:true),
 
             
-            new Augment("Gambling","Not enough refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => {for (int i = 0; i < 2; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}}), baseCardUpgrade:true),
-            new Augment("Gambling","Feelin' Blessed", "Gain 4 random silver augments", "GambleImprove", Tier.Gold, new UnityAction(() => {for (int i = 0; i < 4; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Silver));}}), baseCardUpgrade:true),
-            new Augment("Gambling","Roll the Dice", "Gain 4 random gold augments", "GambleImprove", Tier.Prismatic, new UnityAction(() => {for (int i = 0; i < 4; i++){Deck.Instance.ActivateAugment(Deck.Instance.randomPicking(Tier.Gold));}}), baseCardUpgrade:true),
+            new Augment("Gambling","Not enough refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => Deck.Instance.Gamble(2, Tier.Silver, "Not enough refreshes")), baseCardUpgrade:true),
+            new Augment("Gambling","Feelin' Blessed", "Gain 4 random silver augments", "GambleImprove", Tier.Gold, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Silver, "Feelin' Blessed")), baseCardUpgrade:true),
+            new Augment("Gambling","Roll the Dice", "Gain 4 random gold augments", "GambleImprove", Tier.Prismatic, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Gold, "Roll the Dice")), baseCardUpgrade:true),
 
 
             
@@ -391,14 +391,12 @@ public class DeckBuilder : MonoBehaviour
             new Augment("Immolate" ,"Immolate", "Unlock the ability to release Heat Waves", "ImmolateUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Immolate");
                 if(SkillTreeManager.Instance.getLevel("Immolate") >= 1){
-                    Flamey.Instance.addTimeBasedEffect(new Immolate(100, 50, 0.3f, 0));
-                }else{
                     Flamey.Instance.addTimeBasedEffect(new Immolate(50, 50, 0.3f, 0));
+                }else{
+                    Flamey.Instance.addTimeBasedEffect(new Immolate(100, 50, 0.3f, 0));
                 }
 
-                if(SkillTreeManager.Instance.getLevel("Immolate") >= 2){
-                    Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});            
-                }
+                
                 Deck.Instance.AddAugmentClass(new List<string>{"ImmolateInterval","ImmolateDmg","ImmolateRadius"});       
                      
             }), baseCard: true),  
@@ -432,20 +430,37 @@ public class DeckBuilder : MonoBehaviour
 
             new Augment("Bee Summoner" ,"Beekeeper", "Unlock the ability to own a Bee Swarm", "SummonUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Bee Summoner");
-                Flamey.Instance.addNotEspecificEffect(new Summoner(5, 0.25f, 0.5f, 1));
-                Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount"});            
+                Flamey.Instance.addNotEspecificEffect(new Summoner(25, 0.25f, 0.5f, 1));
+                if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){
+                    Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount","SummonAmountExtra"});      
+                }else{
+                    Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount"});      
+                }
+                      
             }), baseCard: true),  
-            new Augment("SummonAtkSpeed","Rapid Shooters", "Bees will increase their attack speed by +20", "SummonAtkSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.35f, 0, 0)))), 
-            new Augment("SummonAtkSpeed","Bee-autiful Pets", "Bees will increase their attack speed by +40", "SummonAtkSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.35f, 0, 0)))), 
-            new Augment("SummonAtkSpeed","Bee Swarm", "Bees will increase their attack speed by +80", "SummonAtkSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.35f, 0, 0)))), 
+            new Augment("SummonAtkSpeed","Rapid Shooters", "Bees will increase their attack speed by +20", "SummonAtkSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.20f, 0, 0)))), 
+            new Augment("SummonAtkSpeed","Bee-autiful Pets", "Bees will increase their attack speed by +40", "SummonAtkSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.40f, 0, 0)))), 
+            new Augment("SummonAtkSpeed","Bee Swarm", "Bees will increase their attack speed by +80", "SummonAtkSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.80f, 0, 0)))), 
             new Augment("SummonDmg","Baby Bee", "Bees will deal +10 damage", "SummonDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(10, 0, 0, 0)))),
             new Augment("SummonDmg","Bee Stronger", "Bees will deal +25 damage", "SummonDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(25, 0, 0, 0)))),
             new Augment("SummonDmg","Queen-like Power", "Bees will deal +50 damage", "SummonDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(50, 0, 0, 0)))),  
             new Augment("SummonSpeed","Speeding Up", "Increase Bee speed by +0.25", "SummonSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, 0.25f, 0)))),  
             new Augment("SummonSpeed","Agility", "Increase Bee speed by +0.5", "SummonSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, .5f, 0)))),
             new Augment("SummonSpeed","Bee Acrobatic League", "Increase Bee speed by +1", "SummonSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, 1f, 0)))),
-            new Augment("SummonAmount","Bee Hive", "Your Bee Swarm gains 2 extra Bees", "SummonAmount", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, 0, 2)))), 
+            
+            new Augment("SummonAmount","Worker Bee", "Your Bee Swarm gains an extra Worker Bee", "SummonAmount", Tier.Silver, new UnityAction(() => Summoner.Instance.addBee(1, 0))), 
+            new Augment("SummonAmount","More Workers", "Your Bee Swarm gains 2 extra Worker Bees", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(2, 0))), 
+
+            new Augment("SummonAmountExtra","Puncher Bee", "Your Bee Swarm gains an extra Puncher Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 1))),
+            new Augment("SummonAmountExtra","Assassin Bee", "Your Bee Swarm gains an extra Assassin Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 2))),
+            new Augment("SummonAmountExtra","Agile Bee", "Your Bee Swarm gains an extra Agile Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 3))),
+            new Augment("SummonAmountExtra","Warrior Bee", "Your Bee Swarm gains an extra Warrior Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 4))),
+            new Augment("SummonAmountExtra","Pollinator Bee", "Your Bee Swarm gains an extra Pollinator Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 5))),
+            new Augment("SummonAmountExtra","Chemical Bee", "Your Bee Swarm gains an extra Chemical Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 6))),
+        
         };
+
+        
 
     }
 

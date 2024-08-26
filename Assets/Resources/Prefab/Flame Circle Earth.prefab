@@ -243,9 +243,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7488360274688708091}
-  - component: {fileID: 4771493325730513075}
   - component: {fileID: 35074730548679145}
   - component: {fileID: 7585491544919790813}
+  - component: {fileID: -6958522917841721525}
   m_Layer: 0
   m_Name: Flame Circle Earth
   m_TagString: OrbitalHit
@@ -270,26 +270,6 @@ Transform:
   - {fileID: 3206363302095895138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -900.145}
---- !u!114 &4771493325730513075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6905970741243081385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df1a3edd978e1a946900d46a90d60bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  multiplier: 5
-  Spinners:
-  - {fileID: 6905970741243081385}
-  - {fileID: 7162470908152817607, guid: 91aad738fc10474438633ce0bd8dcb6f, type: 3}
-  - {fileID: 5071763888348970798, guid: 6c13accc9d265bd41962d3d13cdb99bc, type: 3}
-  - {fileID: 2330845518204565445, guid: 0b3fd5aef4455194bb7026334a8e0bdd, type: 3}
-  canSpin: 1
 --- !u!50 &35074730548679145
 Rigidbody2D:
   serializedVersion: 4
@@ -360,6 +340,21 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 6905970741243081385}
+--- !u!114 &-6958522917841721525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905970741243081385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ac9a299c1465f41ba59488eadd1f56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  Spinners: []
+  canSpin: 1
 --- !u!1 &8420836878470740724
 GameObject:
   m_ObjectHideFlags: 0

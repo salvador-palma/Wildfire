@@ -46,7 +46,7 @@ public class Moose : Enemy
            Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
            GetComponent<Animator>().SetBool("InRangeBool", true);
-           InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+           StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
     }
     public override void Attack()

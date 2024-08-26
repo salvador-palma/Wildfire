@@ -96,7 +96,7 @@ public class VampOnHit : OnHitEffects
 
     public string getText()
     {
-        return "The Blood Mage";
+        return "Vampire";
     }
 
     public string getType()
@@ -219,7 +219,7 @@ public class IceOnHit : OnHitEffects
 
     public string getText()
     {
-        return "Ice Soul";
+        return "Freeze";
     }
 
     public string getType()
@@ -336,7 +336,7 @@ public class ShredOnHit : OnHitEffects
 
     public string getText()
     {
-        return "Shredding Flames";
+        return "Resonance";
     }
 
     public string getType()
@@ -420,7 +420,7 @@ public class ExecuteOnHit : OnHitEffects
 
     public string getText()
     {
-        return "Assassin's Path";
+        return "Assassin";
     }
 
     public string getType()
@@ -558,7 +558,7 @@ public class StatikOnHit : OnHitEffects
 
     public string getText()
     {
-        return "Statik Energy";
+        return "Static Energy";
     }
 
     public string getType()
