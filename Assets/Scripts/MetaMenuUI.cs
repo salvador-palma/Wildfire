@@ -17,7 +17,7 @@ public class MetaMenuUI : MonoBehaviour
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject CharacterSelectPanel;
-    [SerializeField] private GameObject SkillTree;
+    [SerializeField] public GameObject SkillTree;
     static public MetaMenuUI Instance;
     
 
@@ -64,31 +64,46 @@ public class MetaMenuUI : MonoBehaviour
         
     }
     private IEnumerator currentCouroutine;
-    public void moveSkillTree(Vector2 pos){
+    public void moveSkillTree(Transform buttonTr){
         if(currentCouroutine!=null){StopCoroutine (currentCouroutine);}
-        currentCouroutine = SmoothLerp (0.5f, pos);
+        currentCouroutine = SmoothLerp (buttonTr);
         StartCoroutine (currentCouroutine);
     }
     
-    private IEnumerator SmoothLerp (float time, Vector2 pos)
+    private IEnumerator SmoothLerp (Transform tr)
     {
-        Vector3 startingPos  = SkillTree.transform.localPosition;
-        Vector3 finalPos = pos;
-
-        float elapsedTime = 0;
+        Vector3 Target = new Vector3(-3f,0,0);
         
-        while (elapsedTime < time)
-        {
-            SkillTree.transform.localPosition = Vector3.Lerp(startingPos, finalPos, elapsedTime / time);
-            elapsedTime += Time.deltaTime;
+        Transform button = tr.Find("Icon");
+        Vector2 direction = Target - button.position;
+        
+        
+        
+        float elapsed = 0;
+        while(elapsed<2f && Vector3.Distance( button.position, Target) > .1f){
+            SkillTree.transform.position = (Vector2)SkillTree.transform.position + direction * Time.deltaTime;
+            elapsed+=Time.deltaTime;
             yield return null;
+        }
+            
+        
+    }
+    public void Update(){
+        if(Input.GetAxis("Mouse ScrollWheel") != 0 && SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x <= 0){
+            if(currentCouroutine!=null){StopCoroutine(currentCouroutine);}
+            float f = Input.GetAxis("Mouse ScrollWheel");
+            float cur = SkillTree.transform.localScale.x;
+            cur *= 1+f;
+            float v = Math.Clamp(cur, 0.267755f,  2.88112f);
+
+            SkillTree.transform.localScale = new Vector2(v,v);
         }
     }
 
-
+    public bool SaveStateEnabled = false;
     public void ClickedPlay(){
         Debug.Log(Application.persistentDataPath);
-        if(File.Exists(Application.persistentDataPath +"/gameState.json")){
+        if(File.Exists(Application.persistentDataPath +"/gameState.json") && SaveStateEnabled){
             StartChat();
             ChatSingular("Do you wish to continue your previous unfinished run?",
                             AvatarBank[0], "Rowl",
@@ -112,6 +127,9 @@ public class MetaMenuUI : MonoBehaviour
         ChatPanel.GetComponent<Animator>().Play("Outro");
         Message.text = "";
         Array.ForEach(Options, e => e.gameObject.SetActive(false));
+    }
+    public void DeactivateChat(){
+        ChatPanel.gameObject.SetActive(false);
     }
     private void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
         
@@ -149,7 +167,7 @@ public class MetaMenuUI : MonoBehaviour
                     case '.':
                     case '!':
                     case '?':
-                        yield return new WaitForSeconds(0.4f);
+                        yield return new WaitForSeconds(0.1f);
                         break;
                     case ',':
                         yield return new WaitForSeconds(0.05f);
@@ -206,6 +224,7 @@ public class MetaMenuUI : MonoBehaviour
     public void UnlockOff(){
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
     }
+
 }
 
 

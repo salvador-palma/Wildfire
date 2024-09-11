@@ -28,16 +28,20 @@ public class Bee : MonoBehaviour
             target = getTarget();
             if(target==null){return;}
         }
-
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        if(Vector2.Distance(transform.position, target.HitCenter.position) >= 1f){
+            Move();
+        }
         checkFlip();
         if(atkTimer > 0){
             atkTimer -= Time.deltaTime;
         }else{
-            if(Vector2.Distance(transform.position, target.transform.position) < 1.5f){
-                Attack();
+            if(Vector2.Distance(transform.position, target.HitCenter.position) < 1f){
+                GetComponent<Animator>().Play(sp.flipX ? "AttackReverse" : "Attack");
             }
         }
+    }
+    protected virtual void Move(){
+        transform.position = Vector2.MoveTowards(transform.position, target.HitCenter.position, speed * Time.deltaTime);
     }
     protected virtual Enemy getTarget(){
         return Flamey.Instance.getRandomHomingEnemy(true);
@@ -45,7 +49,9 @@ public class Bee : MonoBehaviour
          
     }
     protected virtual void Attack(){
+        
         atkTimer = 1/atkSpeed;
+        if(target==null){return;}
         target.Hitted(dmg, 12, ignoreArmor:false, onHit:true);
     }
     protected void checkFlip(){

@@ -94,7 +94,7 @@ public class StatikShiv : MonoBehaviour
             Debug.Log("Powered");
             e.Hitted(Damage, 14, ignoreArmor: true, onHit: true);
         }else{
-            e.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , "Statik Energy");
+            e.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , except:"Static Energy");
         }
         
     }

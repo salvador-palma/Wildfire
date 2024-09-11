@@ -15,8 +15,9 @@ public class BeeChemical : Bee
     }
     protected override void Attack()
     {
-        atkTimer = 1/atkSpeed;
         
+        atkTimer = 1/atkSpeed;
+        if(target==null){return;}
         if(victims.ContainsKey(target)){
             victims[target] += 5;
         }else{
@@ -25,25 +26,7 @@ public class BeeChemical : Bee
         target=null;
         
     }
-    public override void Update()
-    {
-        if(EnemySpawner.Instance.isOnAugments){return;}
-
-        if(target == null){
-            target = getTarget();
-            if(target==null){return;}
-        }
-
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-        checkFlip();
-        if(atkTimer > 0){
-            atkTimer -= Time.deltaTime;
-        }else{
-            if(Vector2.Distance(transform.position, target.transform.position) < 1.5f){
-                Attack();
-            }
-        }
-    }
+    
     public IEnumerator TimedAttack(){
         while(Flamey.Instance.Health > 0){
             foreach (Enemy enemy in victims.Keys.ToArray()){

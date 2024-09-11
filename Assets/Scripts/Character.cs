@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
         public Sprite Face;
         public Color BodyBackColor;
         public Color BodyFrontColor;
+        public GameObject Environment;
         public bool Unlocked;
         public string AbilityToSkillTree;
         public string Subtype;
@@ -53,8 +54,11 @@ public class Character : MonoBehaviour
                 MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, true);
             }
         }
+        SkillTreeManager.Instance.treeReset += resetCharacter;
         
     }
+
+
     // *********************************************************************************************** //
     // *************************************** IN-GAME SECTION *************************************** //
     // *********************************************************************************************** //
@@ -152,8 +156,11 @@ public class Character : MonoBehaviour
 
     private void SetupEnvironment(CharacterData type)
     {
-        
-        
+        if(type.Environment != null){
+            Instantiate(type.Environment);
+            Destroy(GameObject.Find("Floor"));
+            Debug.Log("Environment Change");
+        }
     }
     
     // *********************************************************************************************** //
@@ -451,10 +458,8 @@ public class Character : MonoBehaviour
         if(characterDatas[active].AnimationBool != "None"){
             MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, true);
         }
-        
-        
-        
     }
+
     public void MoveCharacterSelectOption(int dir){
         int newIndex = currentDisplayedCharacter + dir;
         while (newIndex >= -1 && newIndex < characterDatas.Count() + 1)
@@ -574,9 +579,8 @@ public class Character : MonoBehaviour
         }
     }
     private void CreateFile(){
-        //RAW FILE HERE
-        Debug.Log("Stuck on Create File");
-        WritingData();
+        string str = "{\"active\":0,\"list\":[{\"Name\":\"Flame\",\"Unlocked\":true},{\"Name\":\"Double Faced\",\"Unlocked\":false},{\"Name\":\"Rose Warrior\",\"Unlocked\":false},{\"Name\":\"Sir Flareington\",\"Unlocked\":false},{\"Name\":\"Fire Bee\",\"Unlocked\":false},{\"Name\":\"Von Van Pyre\",\"Unlocked\":false},{\"Name\":\"Ice Cube\",\"Unlocked\":false},{\"Name\":\"Echo\",\"Unlocked\":false},{\"Name\":\"Ash Pyre\",\"Unlocked\":false},{\"Name\":\"Tesla Coil\",\"Unlocked\":false},{\"Name\":\"Bomber\",\"Unlocked\":false},{\"Name\":\"King Ghoul\",\"Unlocked\":false},{\"Name\":\"Captain Ember Teach\",\"Unlocked\":false},{\"Name\":\"Mt. Vesuvius\",\"Unlocked\":false},{\"Name\":\"Mt. Everest\",\"Unlocked\":false},{\"Name\":\"Flora\",\"Unlocked\":false},{\"Name\":\"Blaze Brigade\",\"Unlocked\":false},{\"Name\":\"Powered Up\",\"Unlocked\":false},{\"Name\":\"Ankh-Ra\",\"Unlocked\":false},{\"Name\":\"Pheonix\",\"Unlocked\":false},{\"Name\":\"Monk\",\"Unlocked\":false},{\"Name\":\"Fire Monk\",\"Unlocked\":false},{\"Name\":\"Water Monk\",\"Unlocked\":false},{\"Name\":\"Air Monk\",\"Unlocked\":false},{\"Name\":\"Earth Monk\",\"Unlocked\":false},{\"Name\":\"Azureoth\",\"Unlocked\":false},{\"Name\":\"Orbital\",\"Unlocked\":false},{\"Name\":\"Mercury\",\"Unlocked\":false},{\"Name\":\"Venus\",\"Unlocked\":false},{\"Name\":\"Earth\",\"Unlocked\":false},{\"Name\":\"Mars\",\"Unlocked\":false},{\"Name\":\"Jupiter\",\"Unlocked\":false},{\"Name\":\"Saturn\",\"Unlocked\":false},{\"Name\":\"Uranus\",\"Unlocked\":false},{\"Name\":\"Neptune\",\"Unlocked\":false},{\"Name\":\"Zeus\",\"Unlocked\":false}]}";
+        File.WriteAllText(Application.persistentDataPath +"/characters.json", str);        
     }
     
     public bool isCharacterUnlocked(string character_name = null){
@@ -589,6 +593,11 @@ public class Character : MonoBehaviour
         }else{
             characterDatas.First(c=>c.Name==character_name).Unlocked = true;
         }
+        if(GameVariables.GetVariable("ClorisWardrobe") == -1){
+            GameVariables.SetVariable("ClorisWardrobe", 0);
+            
+
+        }
         WritingData();
     }
     
@@ -598,15 +607,27 @@ public class Character : MonoBehaviour
         {
             if(character.Subtype!=""){continue;}
             if(character.AbilityToSkillTree==""){i++; continue;}
-            if(SkillTreeManager.Instance.getLevel(character.AbilityToSkillTree)>=0){
-                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(false);
-                
-            }else{
+            if(SkillTreeManager.Instance.getLevel(character.AbilityToSkillTree)<0 && character.Unlocked){
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(true);
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").Find("Text").GetComponentInChildren<TextMeshProUGUI>().text = "Requires "+character.AbilityToSkillTree;
+            }else{
+                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(false);
             }
+            
             i++;
         }
+    }
+    public void resetCharacter(object sender, EventArgs e){
+        MainFlameVessel.GetComponent<Animator>().SetBool(characterDatas[active].AnimationBool, false);
+        active = 0;
+        PlayerPrefs.SetInt("Character", 0);
+        MainFlameVessel.GetComponent<Animator>().SetTrigger("Reset");
+    }
+    public bool HasAtLeastOneCharacter(){
+        foreach(CharacterData character in characterDatas){
+            if(character.Name != "Flame" && character.Unlocked){return true;}
+        }
+        return false;
     }
 }
 [Serializable]

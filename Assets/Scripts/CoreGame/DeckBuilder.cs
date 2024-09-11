@@ -17,10 +17,10 @@ public class DeckBuilder : MonoBehaviour
         if(Instance==null){Instance = this;}
         if(Instance==this){DefineAugmentClasses();}
 
-        firstLayerPrices = new int[]{500, 2500, 12500};
-        secondLayerPrices = new int[]{1000, 5000, 25000};
-        thirdLayerPrices = new int[]{2000, 10000, 50000};
-        fourthLayerPrices = new int[]{4000, 20000, 100000};
+        firstLayerPrices = new int[]{1000, 5000, 20000};
+        secondLayerPrices = new int[]{2500, 10000, 50000};
+        thirdLayerPrices = new int[]{5000, 20000, 100000};
+        fourthLayerPrices = new int[]{10000, 40000, 200000};
     }
     
     public int getPrice(string skill, int level){
@@ -57,13 +57,13 @@ public class DeckBuilder : MonoBehaviour
             new Augment("Acc","Steady Aim", "Increase your accuracy by +30%", "Acc", Tier.Gold, new UnityAction(() => Flamey.Instance.addAccuracy(30)),baseStat: true),
             new Augment("Acc","Eagle Eye", "Double your current accuracy", "Acc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.multAccuracy(2f)),baseStat: true),
             
-            new Augment("AtkSpeed","Swifty Flames", "Increase your attack speed by +50", "AtkSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addAttackSpeed(.5f)), baseStat: true),
-            new Augment("AtkSpeed","Fire Dance", "Increase your attack speed by +100", "AtkSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addAttackSpeed(1f)), baseStat: true),
-            new Augment("AtkSpeed","Flamethrower", "Double your current attack speed", "AtkSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.multAttackSpeed(2f)), baseStat: true),
+            new Augment("AtkSpeed","Swifty Flames", "Increase your attack speed by +30", "AtkSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addAttackSpeed(.3f)), baseStat: true),
+            new Augment("AtkSpeed","Fire Dance", "Increase your attack speed by +60", "AtkSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addAttackSpeed(.6f)), baseStat: true),
+            new Augment("AtkSpeed","Flamethrower", "Mutliply your attack speed by x1.5", "AtkSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.multAttackSpeed(1.5f)), baseStat: true),
 
             new Augment("BltSpeed","Quick Shot", "Gain +0.8 Bullet Speed", "BltSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addBulletSpeed(.8f)), baseStat: true),
             new Augment("BltSpeed","Fire-Express", "Gain +2 Bullet Speed", "BltSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addBulletSpeed(2f)), baseStat: true),
-            new Augment("BltSpeed","HiperDrive", "Gain +5 Bullet Speed", "BltSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addBulletSpeed(5f)), baseStat: true),
+            new Augment("BltSpeed","HiperDrive", "Gain +4 Bullet Speed", "BltSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addBulletSpeed(4f)), baseStat: true),
             
             new Augment("Health","Warm Soup", "Heal 50% of your Max Health and gain +100 HP", "Health", Tier.Silver, new UnityAction(() => Flamey.Instance.addHealth(100,.5f)),baseStat: true),
             new Augment("Health","Sunfire Cape", "Heal 75% of your Max Health and gain +250 HP", "Health", Tier.Gold, new UnityAction(() => Flamey.Instance.addHealth(250,.75f)),baseStat: true),
@@ -111,9 +111,9 @@ public class DeckBuilder : MonoBehaviour
             new Augment("VampProb","Steal to Heal", "Gain +5% chance to proc your Vampire effect", "VampProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.05f)))),
             new Augment("VampProb","Eternal Hunger", "Gain +10% chance to proc your Vampire effect", "VampProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.1f)))), 
             new Augment("VampProb","Soul Harvester", "Gain +25% chance to proc your Vampire effect", "VampProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0f,0.25f)))),       
-            new Augment("VampPerc","Sustenance", "Gain +3% Heal on your Vampire effect", "VampPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.03f,0f)))),
-            new Augment("VampPerc","Vampire Survivor", "Gain +7% Heal on your Vampire effect", "VampPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.07f,0f)))),  
-            new Augment("VampPerc","Blood Pact", "Gain +15% Heal on your Vampire effect", "VampPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.15f,0f)))),  
+            new Augment("VampPerc","Sustenance", "Gain +5% Heal on your Vampire effect", "VampPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.05f,0f)))),
+            new Augment("VampPerc","Vampire Survivor", "Gain +10% Heal on your Vampire effect", "VampPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.1f,0f)))),  
+            new Augment("VampPerc","Blood Pact", "Gain +20% Heal on your Vampire effect", "VampPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new VampOnHit(0.2f,0f)))),  
    
             
             new Augment("Burst Shot" ,"Burst Shot", "Unlock the ability to send burst shots", "BurstUnlock", Tier.Prismatic, new UnityAction(()=> {
@@ -145,17 +145,17 @@ public class DeckBuilder : MonoBehaviour
 
 
             
-            new Augment("Resonance" ,"Resonance", "Unlock the ability to shred enemy armor", "ShredUnlock", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Resonance" ,"Resonance", "Unlock the ability to shred enemy armor through Sound", "ShredUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Resonance");
                 Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ShredProb","ShredPerc"});            
             }), baseCard: true),   
-            new Augment("ShredProb","Weaken", "Gain +5% chance to proc Resonance", "ShredProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.05f, 0f)))),
-            new Augment("ShredProb","Armor Corruptor", "Gain +15% chance to proc Resonance", "ShredProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.15f, 0f)))),
-            new Augment("ShredProb","Disintegration Field", "Gain +35% chance to proc Resonance", "ShredProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.35f, 0f)))),
-            new Augment("ShredPerc","Cheese Shredder", "Resonance reduces +5% more enemy armor per proc", "ShredPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.05f)))),  
-            new Augment("ShredPerc","Black Cleaver", "Resonance effect reduces +10% more enemy armor per proc", "ShredPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.1f)))),  
-            new Augment("ShredPerc","Molecular Decomposition", "Resonance effect reduces +25% more enemy armor per proc", "ShredPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.25f)))),  
+            new Augment("ShredProb","Reverb", "Gain +5% chance to proc Resonance", "ShredProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.05f, 0f)))),
+            new Augment("ShredProb","Turn it Up!", "Gain +15% chance to proc Resonance", "ShredProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.15f, 0f)))),
+            new Augment("ShredProb","Echoing Fracture", "Gain +35% chance to proc Resonance", "ShredProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0.35f, 0f)))),
+            new Augment("ShredPerc","Bass Boost", "Resonance reduces +5% more enemy armor per proc", "ShredPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.05f)))),  
+            new Augment("ShredPerc","Harmonic Shredding", "Resonance effect reduces +10% more enemy armor per proc", "ShredPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.1f)))),  
+            new Augment("ShredPerc","Sonic Rupture", "Resonance effect reduces +25% more enemy armor per proc", "ShredPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new ShredOnHit(0, 0.25f)))),  
 
 
             new Augment("Assassin" ,"Assassin's Path", "Unlock the ability to pierce armor and execute enemies", "Assassins", Tier.Prismatic, new UnityAction(()=> {
@@ -301,18 +301,18 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"DrainPoolPerc","DrainPoolProb","DrainPoolSize","DrainPoolDuration"});            
             }), baseCard: true),  
 
-            new Augment("DrainPoolPerc","Harvesting", "Your Drain Pool will heal you for +0.25% Enemy Max HP per tick", "DrainPoolPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.0025f,0,0)))),
-            new Augment("DrainPoolPerc","Carnivorous Plant", "Your Drain Pool will heal you for +0.5% Enemy Max HP per tick", "DrainPoolPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.005f,0,0)))),
-            new Augment("DrainPoolPerc","Photosynthesis", "Your Drain Pool will heal you for +1% Enemy Max HP per tick", "DrainPoolPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0)))),
-            new Augment("DrainPoolProb","Sowing the Field", "Gain +5% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.05f,0)))),
-            new Augment("DrainPoolProb","Garden's Embrace", "Gain +10% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.1f,0)))),
-            new Augment("DrainPoolProb","Lifebloom Aura", "Gain +20% probability of spawning a Drain Pool when your shot lands", "DrainPoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.2f,0)))),
-            new Augment("DrainPoolSize","Sprouting", "Your Drain Pool grows by +2.5 units", "DrainPoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.25f,0,0,0)))),
-            new Augment("DrainPoolSize","Flowering Surge", "Your Drain Pool grows by +5 units", "DrainPoolSize", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.5f,0,0,0)))),
-            new Augment("DrainPoolSize","Botanical Boom", "Your Drain Pool grows by +10 units", "DrainPoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(1f,0,0,0)))),
-            new Augment("DrainPoolDuration","Lasting Petals", "Your Drain Pool lasts for +0.75 seconds", "DrainPoolDuration", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.75f)))),
-            new Augment("DrainPoolDuration","Everlasting Blossom", "Your Drain Pool lasts for +1.5 seconds", "DrainPoolDuration", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,1.5f)))),
-            new Augment("DrainPoolDuration","Garden of Eden", "Your Drain Pool lasts for +3 seconds", "DrainPoolDuration", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,3f)))),
+            new Augment("DrainPoolPerc","Harvesting", "Your Flowers will heal you for +0.25% Enemy Max HP per tick", "DrainPoolPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.0025f,0,0)))),
+            new Augment("DrainPoolPerc","Carnivorous Plant", "Your Flowers will heal you for +0.5% Enemy Max HP per tick", "DrainPoolPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.005f,0,0)))),
+            new Augment("DrainPoolPerc","Photosynthesis", "Your Flowers will heal you for +1% Enemy Max HP per tick", "DrainPoolPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,.01f,0,0)))),
+            new Augment("DrainPoolProb","Sowing the Field", "Gain +5% probability of spawning a Flower when your shot lands", "DrainPoolProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.05f,0)))),
+            new Augment("DrainPoolProb","Garden's Embrace", "Gain +10% probability of spawning a Flower when your shot lands", "DrainPoolProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.1f,0)))),
+            new Augment("DrainPoolProb","Lifebloom Aura", "Gain +20% probability of spawning a Flower when your shot lands", "DrainPoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0.2f,0)))),
+            new Augment("DrainPoolSize","Sprouting", "Your Flowers grow by +2.5 units", "DrainPoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.25f,0,0,0)))),
+            new Augment("DrainPoolSize","Flowering Surge", "Your Flowers grow by +5 units", "DrainPoolSize", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0.5f,0,0,0)))),
+            new Augment("DrainPoolSize","Botanical Boom", "Your Flowers grow by +10 units", "DrainPoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(1f,0,0,0)))),
+            new Augment("DrainPoolDuration","Lasting Petals", "Your Flowers last for +0.75 seconds", "DrainPoolDuration", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,0.75f)))),
+            new Augment("DrainPoolDuration","Everlasting Blossom", "Your Flowers last for +1.5 seconds", "DrainPoolDuration", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,1.5f)))),
+            new Augment("DrainPoolDuration","Garden of Eden", "Your Flowers last for +3 seconds", "DrainPoolDuration", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new DrainOnLand(0,0,0,3f)))),
             
             
             
@@ -430,8 +430,8 @@ public class DeckBuilder : MonoBehaviour
 
             new Augment("Bee Summoner" ,"Beekeeper", "Unlock the ability to own a Bee Swarm", "SummonUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Bee Summoner");
-                Flamey.Instance.addNotEspecificEffect(new Summoner(25, 0.25f, 0.5f, 1));
-                if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){
+                Flamey.Instance.addNotEspecificEffect(new Summoner(25, 0.5f, 0.5f, 1));
+                if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 1){
                     Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount","SummonAmountExtra"});      
                 }else{
                     Deck.Instance.AddAugmentClass(new List<string>{"SummonAtkSpeed","SummonDmg", "SummonSpeed","SummonAmount"});      

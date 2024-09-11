@@ -226,7 +226,7 @@ public class Flamey : MonoBehaviour
         if(g.Count <= 0){
             return null;
         }else{
-            if(index == 0){
+            if(index == 0 || index > g.Count()-1){
                 return g.Min();
             }
             g.Sort();
@@ -438,6 +438,15 @@ public class Flamey : MonoBehaviour
                 HealAmount *= factor;
             }
         } 
+
+        if(Character.Instance.isCharacter("Vampire") && Health + HealAmount > MaxHealth){
+            float AmountOverhealed = Health + HealAmount - MaxHealth;
+            HealAmount -= AmountOverhealed;
+            VampOnHit.Instance.OverHeal(AmountOverhealed);
+        }
+        
+        if(MaxHealth==Health){return;}
+
         TotalHealed+=(ulong)HealAmount;
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();

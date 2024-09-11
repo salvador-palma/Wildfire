@@ -82,6 +82,8 @@ public class GameUI : MonoBehaviour
         FinalStatsButton.onClick.AddListener(()=>{FinalStatsPanel.SetActive(!FinalStatsPanel.activeInHierarchy);});
         
         if(GameVariables.GetVariable("BestiaryReady") <= 0){MenuTabs[2].SetActive(false);ButtonTabs[2].gameObject.SetActive(false);}
+        if(!Character.Instance.HasAtLeastOneCharacter()){MenuTabs[3].SetActive(false);ButtonTabs[3].gameObject.SetActive(false);}
+        if(!SkillTreeManager.Instance.HasAtLeastOneSkill()){MenuTabs[1].SetActive(false);ButtonTabs[1].gameObject.SetActive(false);}
     }
     
 
@@ -249,7 +251,11 @@ public class GameUI : MonoBehaviour
     public void GameOverEffect(){
         int n = EnemySpawner.Instance.current_round; 
         RoundsLastedText.text = "YOU'VE SURVIVED UNTIL " + n/10 +"h"+ ((n%10)*6).ToString("00")  + " ";
-        Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        foreach (Transform item in  Flamey.Instance.transform)
+        {
+            item.GetComponent<SpriteRenderer>().sortingOrder += 2;
+        }
+        // Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
         setUpFinalStats();
     }

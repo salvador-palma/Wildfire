@@ -44,9 +44,8 @@ public class HealthRegen : TimeBasedEffect
     {
         if(tickAmount <= 0){
             tickAmount = 4;
-            if(Flamey.Instance.Health < Flamey.Instance.MaxHealth){
-                Flamey.Instance.addHealth(perSec);
-            }
+            Flamey.Instance.addHealth(perSec);
+            
             
         }else{
             tickAmount--;

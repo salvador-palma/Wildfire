@@ -28,6 +28,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public GameObject ExplosionGhoulPrefab;
     
     public bool GameEnd = true;
+
+    public static Dictionary<string, int> DeathPerEnemy;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         new List<float>(){1,0,0},
@@ -59,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
+        DeathPerEnemy = new Dictionary<string, int>();
         resetInstances();
     }
     public void Start(){
@@ -159,6 +162,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
+    public float ShinyChance = 0f;
+    public float ShinyMultiplier = 10f;
     public void SpawnEnemy(GameObject enemy){
 
         GameObject g = Instantiate(enemy);
@@ -168,12 +173,13 @@ public class EnemySpawner : MonoBehaviour
         g.transform.position = getPoint();
         e.CheckFlip();
 
-        if(MoneyMultipliers.Instance != null){
-            if(UnityEngine.Random.Range(0f,1f) < MoneyMultipliers.Instance.ShinyChance){
-                e.Shiny = true;
-                g.GetComponent<Renderer>().material = LocalBestiary.INSTANCE.getShinyMaterial(enemy);
-            }
+        
+        
+        if(UnityEngine.Random.Range(0f,1f) < ShinyChance){
+            e.Shiny = true;
+            g.GetComponent<Renderer>().material = LocalBestiary.INSTANCE.getShinyMaterial(enemy);
         }
+        
         
     }
     private void SetSpawnLimits(){
@@ -314,6 +320,7 @@ public class EnemySpawner : MonoBehaviour
 
         BurnOnLand.Instance = null;
         IceOnLand.Instance = null;
+        DrainOnLand.Instance = null;
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
@@ -323,9 +330,8 @@ public class EnemySpawner : MonoBehaviour
         HealthRegen.Instance = null;
         LightningEffect.Instance = null;
         Immolate.Instance = null;
-        try{
-        LocalBestiary.INSTANCE.getEnemyList().ForEach(e => e.ResetStatic());  
-        }catch{}   
+        
+
 
     }
 
@@ -338,6 +344,16 @@ public class EnemySpawner : MonoBehaviour
         
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
+    }
+
+
+    //==== DEATH COUNTER ==== //
+    public static void AddDeath(string enemy_name){
+        if(DeathPerEnemy.ContainsKey(enemy_name)){
+            DeathPerEnemy[enemy_name]++;
+        }else{
+            DeathPerEnemy[enemy_name] = 1;
+        }
     }
     
 }

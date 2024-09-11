@@ -16,14 +16,14 @@ public class Rowl : NPC
         switch(GameVariables.GetVariable("SkillTreeReady")){
             case 1:QueueDialogue(1);
             break;
-            case 2:QueueDialogue(3);
+            case 3:QueueDialogue(3);
             break;
         }
 
     }
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("SkillTreeReady") <= 0){
+        if(GameVariables.GetVariable("SkillTreeReady") <= 0 && !hasAvailableDialogue()){
             StartDialogue(0);
             return;
         }

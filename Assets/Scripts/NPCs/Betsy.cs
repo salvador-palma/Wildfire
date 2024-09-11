@@ -66,6 +66,11 @@ public class Betsy : NPC
                 break;
         }
 
+        if(GameVariables.GetVariable("ShinyTalk")==0){
+            QueueDialogue(8);
+            GameVariables.SetVariable("ShinyTalk",1);
+        }
+
         
     }
 
@@ -92,6 +97,9 @@ public class Betsy : NPC
     public void unlockBestiary(){
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "BETSY'S BESTIARY", "You can now check the stats and abilities of <color=#FFCC7C>animals</color> you've defeated and gather <color=#FFCC7C>milestones</color>", 2);
     }
+    public void unlockShiny(){
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "SHINY TRACKER", "You can now keep track of <sprite name=\"Shiny\"> Shiny animals that you've encountered", 5);
+    }
     public void Default(){
         DefaultClickBehaviour.Invoke();
     }
@@ -99,7 +107,7 @@ public class Betsy : NPC
     public void UnlockBees(){
         MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the <color=#FFCC7C>Bee Summoner</color> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\">Rowl", 0);
         Rowl.QueueDialogue(2);
-        SkillTreeManager.Instance.Upgrade("SummonUnlock");
+        SkillTreeManager.Instance.Upgrade("Bee Summoner", Unlock:true);
         SkillTreeManager.Instance.InvokeUIReset();
     }
     public override void ClickedCharacter(){

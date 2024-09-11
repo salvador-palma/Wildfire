@@ -28,6 +28,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public bool Stunned;
     public bool Shiny;
 
+    
+
 
     [SerializeField] private float slowfactor;
     protected float SlowFactor{
@@ -116,7 +118,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         flame.TotalKills++;
         PlayHitSoundFx();
         CameraShake.Shake(0.4f,0.05f);
-        incDeathAmount();
+        
+        EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
         if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
         Destroy(gameObject);
     }
@@ -124,15 +127,15 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     protected virtual int calculateEmbers(){
         if(Shiny){
-            return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * MoneyMultipliers.Instance.ShinyMultiplier); 
+            // return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * MoneyMultipliers.Instance.ShinyMultiplier); 
+            return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
+
         }
         return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
         
     }
 
-    public abstract int getDeathAmount();
-    public abstract void incDeathAmount();
-    public abstract void ResetStatic();
+    
     
 
     public virtual void Attack(){

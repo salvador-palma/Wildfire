@@ -7,6 +7,7 @@ public class BeeAssassin : Bee
     protected override void Attack()
     {
         atkTimer = 1/atkSpeed;
+        if(target==null){return;}
         target.Hitted(dmg, 12, ignoreArmor:true, onHit:true);
     }
     public override void UpdateStats()

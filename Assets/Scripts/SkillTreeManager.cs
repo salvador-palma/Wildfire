@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,9 @@ public class SkillTreeManager : MonoBehaviour
     private void Awake() {
         Instance = this;
         anim = GetComponent<Animator>();
+
+        
+
         ReadData();
     }
     private void Start(){
@@ -65,7 +69,8 @@ public class SkillTreeManager : MonoBehaviour
         return result==null ? -1 : result.level;
     }
 
-    public bool Upgrade(string skill_name){
+    
+    public bool Upgrade(string skill_name, bool Unlock = false){
         Skills skill = GetSkill(skill_name);
         int price = DeckBuilder.Instance.getPrice(skill_name, skill.level + 1);
         if(price == -1){return false;}
@@ -73,6 +78,8 @@ public class SkillTreeManager : MonoBehaviour
         if(price == -2){
             changeEmberAmountUI();
             skill.level++;
+            if(Unlock){skill.level=-1;}
+            
             WritingData();
             return true;
         }
@@ -81,7 +88,9 @@ public class SkillTreeManager : MonoBehaviour
             PlayerData.embers-=price;
             changeEmberAmountUI();
             skill.level++;
+            CheckForConstelationUnlock();
             WritingData();
+
             return true;
         }
         return false;
@@ -115,7 +124,7 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
      public void CreateFile(){
-        string str = "{\"embers\":0,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-1},{\"type\":\"Immolate\",\"level\":-3},{\"type\":\"Critical Strike\",\"level\":-1},{\"type\":\"Pirate\",\"level\":-3},{\"type\":\"Snow Pool\",\"level\":-3},{\"type\":\"Necromancer\",\"level\":-3},{\"type\":\"Ember Generation\",\"level\":-3},{\"type\":\"Explosion\",\"level\":-3},{\"type\":\"Vampire\",\"level\":-3},{\"type\":\"Multicaster\",\"level\":-1},{\"type\":\"Static Energy\",\"level\":-3},{\"type\":\"Gambling\",\"level\":-3},{\"type\":\"Ritual\",\"level\":-3},{\"type\":\"Thunder\",\"level\":-3},{\"type\":\"Regeneration\",\"level\":-1},{\"type\":\"Magical Shot\",\"level\":-3},{\"type\":\"Lava Pool\",\"level\":-3},{\"type\":\"Burst Shot\",\"level\":-3},{\"type\":\"Bee Summoner\",\"level\":-3},{\"type\":\"Thorns\",\"level\":-3},{\"type\":\"Freeze\",\"level\":-3},{\"type\":\"Orbits\",\"level\":-1},{\"type\":\"Flower Field\",\"level\":-3},{\"type\":\"Resonance\",\"level\":-3}]}";
+        string str = "{\"embers\":0,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-1},{\"type\":\"Immolate\",\"level\":-3},{\"type\":\"Critical Strike\",\"level\":-1},{\"type\":\"Pirate\",\"level\":-2},{\"type\":\"Snow Pool\",\"level\":-3},{\"type\":\"Necromancer\",\"level\":-2},{\"type\":\"Ember Generation\",\"level\":-1},{\"type\":\"Explosion\",\"level\":-3},{\"type\":\"Vampire\",\"level\":-2},{\"type\":\"Multicaster\",\"level\":-1},{\"type\":\"Static Energy\",\"level\":-3},{\"type\":\"Gambling\",\"level\":-2},{\"type\":\"Ritual\",\"level\":-1},{\"type\":\"Thunder\",\"level\":-3},{\"type\":\"Regeneration\",\"level\":-1},{\"type\":\"Magical Shot\",\"level\":-3},{\"type\":\"Lava Pool\",\"level\":-3},{\"type\":\"Burst Shot\",\"level\":-2},{\"type\":\"Bee Summoner\",\"level\":-3},{\"type\":\"Thorns\",\"level\":-3},{\"type\":\"Freeze\",\"level\":-2},{\"type\":\"Orbits\",\"level\":-1},{\"type\":\"Flower Field\",\"level\":-3},{\"type\":\"Resonance\",\"level\":-2}]}";
         File.WriteAllText(Application.persistentDataPath +"/skills.json", str);
     }
 
@@ -136,7 +145,7 @@ public class SkillTreeManager : MonoBehaviour
     //UI PARTITION
     public void DisplaySkill(string skill, int level){
         Debug.Log("Displaying Skill...");
-        anim.SetTrigger("DisplayInfo");
+        anim.SetBool("DisplayInfo", true);
         
         
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
@@ -231,10 +240,36 @@ public class SkillTreeManager : MonoBehaviour
         treeReset?.Invoke(this, new EventArgs());
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
-        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+        
         SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
 
     }
+
+    public bool HasAtLeastOneSkill(){
+        return PlayerData.skills.Any(a => a.level >= 0);
+    }
+
+    //CONSTELATION
+    public void StartSkillTreeCutscene(bool on){
+        
+        GetComponentInParent<Animator>().SetBool("Constelation", on);
+    }
+    public void CheckForConstelationUnlock(){
+        bool result = PlayerData.skills.All(e => e.level >= 0);
+        int save = GameVariables.GetVariable("ConstelationCutScene");
+        if(save == -1 && result){
+            GameVariables.SetVariable("ConstelationCutScene", 1);
+            StartSkillTreeCutscene(true);
+        }
+
+    }
+    public void ResetSkillTreeDimensions(){
+        anim.SetBool("DisplayInfo", false);
+        GameObject SkillTree = MetaMenuUI.Instance.SkillTree;
+        SkillTree.transform.localScale = new Vector2(0.2642097f,0.2642097f);
+        SkillTree.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,15);
+    }
+    
 
 
    

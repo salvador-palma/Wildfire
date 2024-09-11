@@ -519,7 +519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  multiplier: 8
   Spinners:
   - {fileID: 5497235368296122204, guid: ddd6d51b18fe62d4095b365f4d7a1669, type: 3}
   - {fileID: 7162470908152817607, guid: 91aad738fc10474438633ce0bd8dcb6f, type: 3}
@@ -582,7 +581,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

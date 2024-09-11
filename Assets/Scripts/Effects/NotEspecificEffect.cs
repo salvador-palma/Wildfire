@@ -205,8 +205,7 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public float mult;
     public int perRound;
-    public float ShinyChance;
-    public float ShinyMultiplier;
+    
     public MoneyMultipliers(int perRound, float mult){
         this.mult = mult;
         this.perRound = perRound;
@@ -223,19 +222,20 @@ public class MoneyMultipliers : NotEspecificEffect
         }  
     }
     public void ReloadShinyStats(){
+        EnemySpawner.Instance.ShinyChance = 0.00001f;
         switch(SkillTreeManager.Instance.getLevel("Ember Generation")){
             case 1:
-                ShinyChance = 0.0001f;
-                ShinyMultiplier = 10;
+                EnemySpawner.Instance.ShinyChance *= 10;
+                EnemySpawner.Instance.ShinyMultiplier = 10;
                 break;
             case 2:
-                ShinyChance = 0.001f;
-                ShinyMultiplier=100;
+                EnemySpawner.Instance.ShinyChance *= 100;
+                EnemySpawner.Instance.ShinyMultiplier=100;
                 break;
         }
         if(Character.Instance.isCharacter("Ember Generation")){
-            ShinyChance = 0.01f;
-            ShinyMultiplier=100;
+            EnemySpawner.Instance.ShinyChance *= 10;
+            EnemySpawner.Instance.ShinyMultiplier=100;
         }
     }
     public void GiveEmbersRound(object sender ,EventArgs e){
@@ -273,8 +273,8 @@ public class MoneyMultipliers : NotEspecificEffect
     }
     public string getCaps()
     {
-        if(ShinyChance > 0){
-            return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound, Mathf.Round(mult*100)*0.01f, (ShinyChance*100).ToString("F2"), ShinyMultiplier);
+        if(EnemySpawner.Instance.ShinyChance > 0){
+            return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound, Mathf.Round(mult*100)*0.01f, (EnemySpawner.Instance.ShinyChance*100).ToString("F2"), EnemySpawner.Instance.ShinyMultiplier);
         }
         return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}", perRound, Mathf.Round(mult*100)*0.01f);
     }
@@ -437,12 +437,13 @@ public class Summoner : NotEspecificEffect
     private UnityEngine.UI.Image cooldownImage;
     
     public Summoner(int dmg, float atkSpeed, float speed, int amount){
-       
+        
         this.amount = amount;
         this.dmg = dmg;
         this.atkSpeed = atkSpeed;
         this.speed = speed;
         if(Instance == null){
+            if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){this.amount*=2;}
             Instance = this;     
             bees = new List<Bee>();
             BeeTypes = new GameObject[]{
@@ -454,20 +455,23 @@ public class Summoner : NotEspecificEffect
                 Resources.Load<GameObject>("Prefab/PollinatorBee"),
                 Resources.Load<GameObject>("Prefab/ChemicalBee"),
             };
-            Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
-            b.UpdateStats();
-            bees.Add(b);
+            for(int i =0; i!=this.amount; i++){
+                 Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
+                b.UpdateStats();
+                bees.Add(b);
+            }
+           
             ApplyEffect();
         }else{
             Instance.Stack(this);
         }
     }
     public void addBee(int amount, int type){
-        int max = SkillTreeManager.Instance.getLevel("Bee Summoner") >= 1 ? 15 : 10;
-        
-        if(amount + this.amount > max){
+        int max = 14;
+        if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){amount*=2;}
+        if(amount + this.amount > 14){
             if(Character.Instance.isCharacter("Bee Summoner")){
-                this.amount += amount ;
+                this.amount += amount;
                 bees.Add(Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>());
                 RemoveUselessAugments();
                 return;
@@ -503,10 +507,8 @@ public class Summoner : NotEspecificEffect
     }
     public string getCaps()
     {
-        if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 1){
-            return string.Format("Bee Amount: {0} (Max. 15)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
-        }
-        return string.Format("Bee Amount: {0} (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
+
+        return string.Format("Bee Amount: {0} (Max. 14)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
     }
 
     public string getIcon()
@@ -532,7 +534,7 @@ public class Summoner : NotEspecificEffect
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(( amount >= 10 && SkillTreeManager.Instance.getLevel("Bee Summoner") < 1) || amount>=15){
+        if( amount >= 14){
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("SummonAmount");
             deck.removeClassFromDeck("SummonAmountExtra");
@@ -552,7 +554,7 @@ public class Summoner : NotEspecificEffect
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(amount >= 15 && atkSpeed >= 4f && speed >= 4f && !Character.Instance.isACharacter()){
+        if(amount >= 14 && atkSpeed >= 4f && speed >= 4f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Bee Summoner");
             maxed = true;
         }

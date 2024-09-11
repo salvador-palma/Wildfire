@@ -64,8 +64,5 @@ public class Bunny : Enemy
         jumping = false;
     }
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

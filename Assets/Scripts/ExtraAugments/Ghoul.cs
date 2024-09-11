@@ -31,7 +31,7 @@ public class Ghoul : MonoBehaviour
     }
     private void Update() {
         if(Spawning){return;}
-        if(EnemySpawner.Instance.isOnAugments){Die();}
+        if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
 
         if(target == null){
             target = Enemy.getClosestEnemy(transform.position);
@@ -42,24 +42,26 @@ public class Ghoul : MonoBehaviour
         if(AtkIntervalTimer > 0){
             AtkIntervalTimer -= Time.deltaTime;
         }else{
-            if(remainingAttacks<=0){Die();}
+            if(remainingAttacks<=0){GetComponent<Animator>().Play("DespawnGhoul");return;}
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             checkFlip();
             if(Vector2.Distance(transform.position, target.transform.position) < 1.5f){
-                Attack();
+                GetComponent<Animator>().Play("GhoulAttack");
             }
         }
         
     }
 
-    private void Die(){
+    public void Die(){
         if(SkillTreeManager.Instance.getLevel("Necromancer")>=2){
             Flamey.Instance.ApplyOnKill(transform.position);
         }
         Destroy(gameObject);
     }
+    
     private void Attack(){
         remainingAttacks--;
+        if(target==null){return;}
         if(isMega){
             
             Enemy[] colcol = Physics2D.OverlapCircleAll(target.HitCenter.position, radius).Select(E => E.GetComponent<Enemy>()).ToArray();
@@ -97,6 +99,7 @@ public class Ghoul : MonoBehaviour
             }
         }
     }
+    
     public void SetSpawn(){
         Spawning = false;
     }

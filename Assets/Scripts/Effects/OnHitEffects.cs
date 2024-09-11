@@ -44,25 +44,16 @@ public class VampOnHit : OnHitEffects
     public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            if(Character.Instance.isCharacter("Vampire")){
-                float AmountHealed = Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f));
-                float AmountOverhealed = Flamey.Instance.Health + AmountHealed - Flamey.Instance.MaxHealth;
-                AmountHealed -= AmountOverhealed;
-                DamageOverhealed += AmountOverhealed;
-
-                if(DamageOverhealed > DamageToOverheal){
-                    DamageOverhealed = 0;
-                    Flamey.Instance.MaxHealth++;
-                }
-                cooldownImage.fillAmount = DamageOverhealed/DamageToOverheal; 
-
-                Flamey.Instance.addHealth(AmountHealed);
-            }else{
-                if(Flamey.Instance.Health != Flamey.Instance.MaxHealth){
-                    Flamey.Instance.addHealth(Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f)));
-                }
-            }
+            Flamey.Instance.addHealth(Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f)));
         }
+    }
+    public void OverHeal(float f){
+        DamageOverhealed += f;
+        if(DamageOverhealed > DamageToOverheal){
+            DamageOverhealed = 0;
+            Flamey.Instance.MaxHealth++;
+        }
+        cooldownImage.fillAmount = DamageOverhealed/DamageToOverheal; 
     }
     public void Stack(VampOnHit vampOnHit){
         perc += vampOnHit.perc;
@@ -84,7 +75,7 @@ public class VampOnHit : OnHitEffects
     }
     public bool maxed;
     private void CheckMaxed(){
-        if(prob >= 1f && perc >= 1f && !Character.Instance.isACharacter()){
+        if(prob >= 1f && !Character.Instance.isACharacter()){
             Character.Instance.SetupCharacter("Vampire");
             maxed = true;
         }

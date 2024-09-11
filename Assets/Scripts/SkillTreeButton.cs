@@ -71,12 +71,13 @@ public class SkillTreeButton : MonoBehaviour
         Vector2 LookUpPos = transform.localPosition;
         LookUpPos.x += 100f;
         LookUpPos.y += -20f;
-        MetaMenuUI.Instance.moveSkillTree(LookUpPos * -1f);
+        MetaMenuUI.Instance.moveSkillTree(transform);
     
     }
     public void ClickedUpgrade(){
         if(SkillTreeManager.Instance.Upgrade(AbilityName)){
             ReloadColor();
+            ReloadFunctionality();
             if(level==0){StartCoroutine("NextPathCouroutine");}
         }
         SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
@@ -97,7 +98,16 @@ public class SkillTreeButton : MonoBehaviour
     }
     private void ReloadFunctionality(){
         Button self = GetComponent<Button>();
+        if(level == -1){
+            gameObject.SetActive(true);
+            GetComponent<Animator>().Play("ButtonBuyable",-1,UnityEngine.Random.Range(0f,5f));
 
+        }else{
+            if(gameObject.activeInHierarchy){
+                GetComponent<Animator>().Play("Static");
+            }
+            
+        }
         if(level >= -1){
             self.interactable = true;
             self.transform.Find("Icon").GetComponent<Image>().enabled= true;
@@ -105,9 +115,9 @@ public class SkillTreeButton : MonoBehaviour
             self.interactable = false;
             self.transform.Find("Icon").GetComponent<Image>().enabled= false;
         }
-        
 
     }
+    
     
     public IEnumerator NextPathCouroutine(){
         foreach(Animator item in nextPaths){item.Play(UNLOCKING);}
