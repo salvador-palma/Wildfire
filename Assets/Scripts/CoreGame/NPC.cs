@@ -183,7 +183,7 @@ public class GameVariables{
     }
     
     public static void SetVariable(string name, int value){
-        Debug.Log("Setting Var: " + name + "; " + value);
+        Debug.Log("Setting Variable: " + name + " to:" + value);
         GameVariables gv = getInstance();
 
         if(gv.variableList.variables.Any(i => i.name == name)){

@@ -5,15 +5,22 @@ using UnityEngine;
 public class Spinner : MonoBehaviour
 {
     public float speed;
-    public float multiplier = 1.2f;
+    public static float multiplier;
 
     public GameObject[] Spinners;
     
-    public bool canSpin = true;
-    private void Start() {
+    public bool canSpin;
+    protected virtual void Start() {
         
         speed = Flamey.Instance.BulletSpeed;
-        canSpin = true;
+        if(!EnemySpawner.Instance.Paused){
+            canSpin = true;
+            if(FlameCircle.Instance.PlanetType==3){
+                GetComponent<Animator>().enabled=true;
+            }
+        
+        }
+       
         
     }
     private void Update() {
@@ -29,12 +36,5 @@ public class Spinner : MonoBehaviour
     public void kill(){
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D other) {
-        
-        if(other.tag == "Enemy"){
-            Enemy e = other.GetComponent<Enemy>();
-            e.Hitted(FlameCircle.Instance.damage, 0, ignoreArmor:false, onHit: true);
-            Enemy.SpawnExplosion(other.transform.position);
-        }
-    }
+    
 }

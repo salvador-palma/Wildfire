@@ -40,6 +40,7 @@ public class Squirrel : Enemy
         }
     }
     public override void Move(){
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed* (1-SlowFactor)  * Time.deltaTime * (placedBomb? -1f : 1));
     }
     public override void Attack()
@@ -67,9 +68,6 @@ public class Squirrel : Enemy
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
     
 }

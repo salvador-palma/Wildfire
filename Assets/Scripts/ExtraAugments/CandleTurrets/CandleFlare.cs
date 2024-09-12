@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CandleFlare : Flare
@@ -32,6 +33,26 @@ public class CandleFlare : Flare
         FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
         FlareSpot.transform.position = vec;
         FlareSpot.transform.localScale *= 0.35f;
+    }
+
+    override protected void HitGround(Vector2 vec){
+        Flamey.Instance.ApplyOnLand(vec);
+
+        Destroy(FlareSpot);
+        
+
+        Enemy[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, FlareManager.EnemyMask).Select(e=>e.GetComponent<Enemy>()).ToArray();
+        if(colliders.Length > 0){
+            GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
+            g.transform.position = vec;
+        }
+        
+        foreach(Enemy e in colliders){
+            if(Character.Instance.isCharacter("Ritual") && e.Health < CandleTurrets.Instance.dmg){
+                CandleTurrets.Instance.AddDamageTick();
+            }
+            e.Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+        }
     }
 
     

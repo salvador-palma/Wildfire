@@ -47,7 +47,7 @@ public class MuskOx : Enemy
            Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
            GetComponent<Animator>().SetBool("InRangeBool", true);
-           InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+           StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
     }
     public override void Attack()
@@ -63,14 +63,23 @@ public class MuskOx : Enemy
 
         }
     }
-    protected override void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Howl");
+    
+     override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Howl");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
+    }
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+        if(source!= null && source.Equals("Lava Pool")){
+            base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except);
+        }else{
+            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+        }
     }
 
     public void EndHowl(){howling=false;}
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

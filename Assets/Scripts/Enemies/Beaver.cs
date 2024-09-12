@@ -38,6 +38,7 @@ public class Beaver : Enemy
         }
     }
     public override void Move(){
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (Stealing? -1f : 1));
     }
     public override void Attack()
@@ -57,16 +58,13 @@ public class Beaver : Enemy
     }
 
     public override void Die(bool onKill = true){
-        if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.75f), 0f);}
+        if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.9f), 0f);}
        
         base.Die();
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 
 
 }

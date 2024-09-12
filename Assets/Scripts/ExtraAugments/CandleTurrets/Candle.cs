@@ -15,6 +15,11 @@ public class Candle : MonoBehaviour
         if(Flamey.Instance.current_homing == null){return;}
         if(atkSpeedTimer <= 0){
             atkSpeedTimer = 1/CandleTurrets.Instance.atkSpeed;
+
+            if(Flamey.Instance.stunTimeLeft > 0 &&  SkillTreeManager.Instance.getLevel("Ritual") >= 1){
+                atkSpeedTimer /= 6;
+            }
+            
             Instantiate(candleFlare).GetComponent<CandleFlare>().setPosition(transform.position);
 
         }else{

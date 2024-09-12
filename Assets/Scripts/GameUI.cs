@@ -26,6 +26,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundCounter;
     int current_Tab = 0;
 
+    
     [Header("Augments")]
     [SerializeField] GameObject AugmentContainer;
     [SerializeField] GameObject AugmentTemplate;
@@ -35,6 +36,7 @@ public class GameUI : MonoBehaviour
     [Header("Stats")]
     [SerializeField] TextMeshProUGUI[] StatsTexts;
     [SerializeField] Slider healthSlider;
+    [SerializeField] GameObject ProfileVessel;
     [SerializeField] TextMeshProUGUI EmberAmountTxt;
     
     [Header("Effects")]
@@ -43,7 +45,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] GameObject EffectContainer;
     [SerializeField] GameObject EffectTemplate;
     [SerializeField] TextMeshProUGUI[] EffectTexts;
-    [SerializeField] Image EffectIcon;
+    [SerializeField] GameObject PassiveContainer;
 
 
     [SerializeField] Animator BlackScreen;
@@ -62,6 +64,17 @@ public class GameUI : MonoBehaviour
     List<SimpleStat> FinalStats;
     [SerializeField] GameObject[] StatTemplates;
     
+    [Header("Character Pop Up")]
+    [SerializeField] TextMeshProUGUI CharacterNameDescriptionTxt;
+    [SerializeField] GameObject CharacterImage;
+    
+    [Header("Spawnable UI")]
+    public GameObject AbilityOptionContainer;
+    public GameObject SpawnableUIPanel;
+    public event EventHandler SpawnExtrasEvent;
+    public GameObject UICooldownsContainer;
+    public GameObject UICooldownsTemplate;
+    public GameObject UIActiveCooldownsTemplate;
 
     private void Awake() {
         Instance = this;
@@ -69,6 +82,8 @@ public class GameUI : MonoBehaviour
         FinalStatsButton.onClick.AddListener(()=>{FinalStatsPanel.SetActive(!FinalStatsPanel.activeInHierarchy);});
         
         if(GameVariables.GetVariable("BestiaryReady") <= 0){MenuTabs[2].SetActive(false);ButtonTabs[2].gameObject.SetActive(false);}
+        if(!Character.Instance.HasAtLeastOneCharacter()){MenuTabs[3].SetActive(false);ButtonTabs[3].gameObject.SetActive(false);}
+        if(!SkillTreeManager.Instance.HasAtLeastOneSkill()){MenuTabs[1].SetActive(false);ButtonTabs[1].gameObject.SetActive(false);}
     }
     
 
@@ -132,7 +147,7 @@ public class GameUI : MonoBehaviour
 
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
         go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription(serA.level);
+        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -171,13 +186,47 @@ public class GameUI : MonoBehaviour
         
     }
     public void DisplayEffectInfo(Effect e){
-        if(latestInfoEffect==null){EffectIcon.enabled = true; EffectIcon.transform.parent.Find("Caps Label").gameObject.SetActive(true);}
+        if(latestInfoEffect==null){PassiveContainer.SetActive(true); PassiveContainer.transform.parent.Find("Caps Label").gameObject.SetActive(true);}
+        
+        foreach(Transform abilityOption in AbilityOptionContainer.transform){abilityOption.gameObject.SetActive(false);}
+
+        Ability ability = SkillTreeManager.Instance.getAbility(e.getText());
+        int level = SkillTreeManager.Instance.getLevel(ability.Name);
+
+        EffectTexts[3].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
+        EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
+        EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
+        EffectTexts[3].color = Color.white;
+        EffectTexts[4].color = Color.white;
+        EffectTexts[5].color = Color.white;
+        switch (level+1)
+        {    
+            case 0:
+                EffectTexts[3].color = new Color(1,1,1,0.3f);
+                EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
+                EffectTexts[4].color = new Color(1,1,1,0.3f);
+                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                EffectTexts[5].color = new Color(1,1,1,0.3f);
+            break;
+            case 1:
+                EffectTexts[4].color = new Color(1,1,1,0.3f);
+                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                EffectTexts[5].color = new Color(1,1,1,0.3f);
+            break;
+            case 2:
+                EffectTexts[5].color = new Color(1,1,1,0.3f);
+            break;
+        }
+
         latestInfoEffect = e;
         EffectTexts[0].text = e.getText();
         EffectTexts[1].text = e.getType();
-        EffectTexts[2].text = e.getDescription();
-        EffectTexts[3].text = e.getCaps();
-        EffectIcon.sprite = Resources.Load<Sprite>("Icons/"+e.getIcon());
+        EffectTexts[2].text = e.getCaps();
+
+        GameObject optionMenu = e.getAbilityOptionMenu();
+        if(optionMenu==null){return;}
+
+        optionMenu.SetActive(true);
 
     }
 
@@ -190,7 +239,7 @@ public class GameUI : MonoBehaviour
         if(Time.timeScale == 1f){
             FastForwardButtons[0].interactable = true;
             FastForwardButtons[1].interactable = false;
-            SpeedUp(3f);
+            SpeedUp(3.5f);
 
         }else{
             FastForwardButtons[0].interactable = false;
@@ -202,7 +251,11 @@ public class GameUI : MonoBehaviour
     public void GameOverEffect(){
         int n = EnemySpawner.Instance.current_round; 
         RoundsLastedText.text = "YOU'VE SURVIVED UNTIL " + n/10 +"h"+ ((n%10)*6).ToString("00")  + " ";
-        Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        foreach (Transform item in  Flamey.Instance.transform)
+        {
+            item.GetComponent<SpriteRenderer>().sortingOrder += 2;
+        }
+        // Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
         setUpFinalStats();
     }
@@ -282,19 +335,71 @@ public class GameUI : MonoBehaviour
     }
 
     public void StartGameEvent(){
-        Console.Log("Start Game Event.");
-        try{
-            EnemySpawner.Instance.StartGame();
-        }catch(Exception e){
-            Console.Log("<color=#ff0000>"+e.ToString()+"</color>");
-        }
-        
+        EnemySpawner.Instance.StartGame();
     }
 
     public void SetEmberAmount(int n){
         EmberAmountTxt.text = n.ToString();
     }
+
+    /* ===== CHARACTERS ===== */
     
+    public void playCharacterTransition(){
+        GetComponent<Animator>().SetTrigger("Character Transition");
+    }
+    public void CharacterTransitionLooksSetup(){
+        Character.Instance.SetupActiveLooks();
+    }
+    public void CharacterUnlockedPopUp(){
+        if(Character.Instance.isCharacterUnlocked()){
+            EnemySpawner.Instance.Paused = false;
+            EnemySpawner.Instance.newRound();
+        }else{
+            Character.Instance.Unlock();
+            FillCharacterPopUpInfo();
+            GetComponent<Animator>().Play("CharacterUnlockedPopUp");
+        }
+ 
+    }
+    public void CharacterUnlockedPopDown(){
+        GetComponent<Animator>().Play("CharacterUnlockedPopDown");
+        
+        EnemySpawner.Instance.Paused = false;
+        EnemySpawner.Instance.newRound();
+    }
+
+    private void FillCharacterPopUpInfo(){
+        CharacterNameDescriptionTxt.SetText(string.Format("{0}<br><color=#999999><size=10>{1}</size></color>",Character.Instance.getName().ToUpper(), Character.Instance.getDescription()));
+        Character.Instance.TransformVesselToCharacter(CharacterImage);
+    }
+    public void UpdateProfileCharacter(){
+        Character.Instance.TransformVesselToCharacter(ProfileVessel);
+    }
+
+
+    /* ===== EXTRA UI ===== */
+    public GameObject SpawnUI(GameObject prefab){
+        return Instantiate(prefab, SpawnableUIPanel.transform);
+    }
+    
+
+    public Image SpawnUIMetric(Sprite icon){
+        GameObject go = Instantiate(UICooldownsTemplate,UICooldownsContainer.transform);
+        go.SetActive(true);
+        go.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        go.transform.GetChild(1).GetComponent<Image>().sprite = icon;
+        return go.transform.GetChild(0).GetComponent<Image>();
+    } 
+    public Button SpawnUIActiveMetric(Sprite icon){
+        GameObject go = Instantiate(UIActiveCooldownsTemplate,UICooldownsContainer.transform);
+        go.SetActive(true);
+        go.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        go.transform.GetChild(1).GetComponent<Image>().sprite = icon;
+        return go.GetComponent<Button>();
+    } 
+
+    
+   
 }
 
 public class SimpleStat{

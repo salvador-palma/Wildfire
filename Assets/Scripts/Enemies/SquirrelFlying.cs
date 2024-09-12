@@ -33,6 +33,7 @@ public class SquirrelFlying : Squirrel
     }
 
     public override void Move(){
+        if(Stunned){return;}
         if(!flying){
             transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (placedBomb? -1f : 1));
         }else{
@@ -40,14 +41,17 @@ public class SquirrelFlying : Squirrel
         }
         
     }
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
+    {
+        if(!(flying && source != null && source.Equals("Lava Pool"))){
+            base.Hitted(Dmg, TextID, ignoreArmor, onHit);   
+        }
+    }
     public override bool canTarget(){return !flying;}
     private void Land(){
         flying = false;
         GetComponent<Animator>().SetTrigger("InGround");
     }
 
-    public static new int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

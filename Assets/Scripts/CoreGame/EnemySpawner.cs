@@ -25,8 +25,11 @@ public class EnemySpawner : MonoBehaviour
     float TimerEnemySpawnCounter;
 
     [SerializeField] public GameObject ExplosionPrefab;
+    [SerializeField] public GameObject ExplosionGhoulPrefab;
     
     public bool GameEnd = true;
+
+    public static Dictionary<string, int> DeathPerEnemy;
     
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         new List<float>(){1,0,0},
@@ -45,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy[] PickedEnemies;
     public List<Enemy> PresentEnemies;
 
+    public bool Paused;
 
     //ENEMY PREVIEWER
     [Header("Binoculars")]
@@ -57,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake() {
         Instance = this;
         PresentEnemies = new List<Enemy>();
-        //current_round = 57;
+        DeathPerEnemy = new Dictionary<string, int>();
         resetInstances();
     }
     public void Start(){
@@ -76,14 +80,12 @@ public class EnemySpawner : MonoBehaviour
         
         
     }
+    
     public void StartGame(){ 
-        Console.Log("Starting Enemy Spawner...");
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
 
-            if(Deck.Instance == null){
-                Console.Log("<color=#0000ff> Deck was not initialized </color>");
-            }
+            
             Deck.Instance.LoadGame(false);
 
             PickedEnemies = pickEnemies(current_round);
@@ -91,23 +93,28 @@ public class EnemySpawner : MonoBehaviour
                 current_round = -1;
                 isOnAugments = true;
                 Deck.Instance.StartAugments(true, true);
-                Console.Log("Initial Augments Started");
+                
             }else{
                 GameEnd = false;
-                Console.Log("No Abilities Unlocked");
+               
             }
+            InitDefaultEffects();
             
         }else{
-            if(Deck.Instance == null){
-                Console.Log("<color=#0000ff> Deck was not initialized!</color>");
-            }
+            InitDefaultEffects();
             Deck.Instance.LoadGame(true);
-            Console.Log("Loading Game...");
             newRound();
         }
-
+        
         InitBinoculars();
         PlayerPrefs.DeleteKey("PlayerLoad");    
+    }
+    private void InitDefaultEffects(){
+        if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
+
+            Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
+        }
+        GameUI.Instance.defineEffectList();
     }
     private Vector2 getPoint(){
         double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
@@ -117,13 +124,13 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update() {
-        if(GameEnd){Console.Log("Enemy Spawner not Running!");return;}
         
+        if(GameEnd){return;}
         UpdateEnemies();
         if(!isOn){
-            Console.Log("Waiting for round to finish...");
+            
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
-                Console.Log("Round finished!");
+
                 if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
                 else{
                     isOnAugments = true;
@@ -137,7 +144,7 @@ public class EnemySpawner : MonoBehaviour
         if(TimerEnemySpawnCounter > 0){
             TimerEnemySpawnCounter-= Time.deltaTime;
         }else{
-            Console.Log("Spawning Enemy...");
+
             TimerEnemySpawnCounter = TimerEnemySpawn;
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;
@@ -155,13 +162,24 @@ public class EnemySpawner : MonoBehaviour
         }
     }
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
+    public float ShinyChance = 0f;
+    public float ShinyMultiplier = 10f;
     public void SpawnEnemy(GameObject enemy){
+
         GameObject g = Instantiate(enemy);
         Enemy e = g.GetComponent<Enemy>();
         addEnemy(e);
         CheckForBinoculars(e);
         g.transform.position = getPoint();
-        g.GetComponent<Enemy>().CheckFlip();
+        e.CheckFlip();
+
+        
+        
+        if(UnityEngine.Random.Range(0f,1f) < ShinyChance){
+            e.Shiny = true;
+            g.GetComponent<Renderer>().material = LocalBestiary.INSTANCE.getShinyMaterial(enemy);
+        }
+        
         
     }
     private void SetSpawnLimits(){
@@ -180,6 +198,10 @@ public class EnemySpawner : MonoBehaviour
 
         Flamey.Instance.notEspecificEffects.ForEach(effect => effect.ApplyEffect());
         Flamey.Instance.ApplyTimedRound();
+
+        if(Character.Instance.isCharacter("Multicaster")){
+            Flamey.Instance.addAttackSpeed(0.2f);
+        }
 
         StartRound();
         
@@ -234,7 +256,6 @@ public class EnemySpawner : MonoBehaviour
             RT.sizeDelta = IconSize;
         }
     }
-    
     private void InitBinoculars(){
 
         for (int i = 0; i < HindSightDeepness; i++)
@@ -257,7 +278,9 @@ public class EnemySpawner : MonoBehaviour
         }
         if (round >= 60)
             return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
-        return PickedEnemies[pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10))].gameObject;
+        int picked = pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10));
+       
+        return PickedEnemies[picked].gameObject;
         
     }
     private int pickEnemyIndex(List<float> prob){
@@ -297,6 +320,7 @@ public class EnemySpawner : MonoBehaviour
 
         BurnOnLand.Instance = null;
         IceOnLand.Instance = null;
+        DrainOnLand.Instance = null;
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
@@ -306,9 +330,8 @@ public class EnemySpawner : MonoBehaviour
         HealthRegen.Instance = null;
         LightningEffect.Instance = null;
         Immolate.Instance = null;
-        try{
-        LocalBestiary.INSTANCE.getEnemyList().ForEach(e => e.ResetStatic());  
-        }catch{}   
+        
+
 
     }
 
@@ -321,6 +344,16 @@ public class EnemySpawner : MonoBehaviour
         
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
+    }
+
+
+    //==== DEATH COUNTER ==== //
+    public static void AddDeath(string enemy_name){
+        if(DeathPerEnemy.ContainsKey(enemy_name)){
+            DeathPerEnemy[enemy_name]++;
+        }else{
+            DeathPerEnemy[enemy_name] = 1;
+        }
     }
     
 }

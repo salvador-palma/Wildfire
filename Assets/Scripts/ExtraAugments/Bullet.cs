@@ -14,13 +14,16 @@ public class Bullet : MonoBehaviour
     Vector2 SpawnPos;
     Rigidbody2D rb;
     void Start(){
+        if(Character.Instance.isCharacter("Pirate")){
+            ttl = 3;
+        }
         SpawnPos = transform.position;
         speed = Flamey.Instance.BulletSpeed;
         rb = GetComponent<Rigidbody2D>();
         dmg = Bullets.Instance.dmg;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
 

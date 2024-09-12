@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public string Name;
     public int Damage;
     public float AttackDelay;
+    public float extraAtkSpeedDelay;
     public float AttackRange;
     public float Speed;
     public int Health;
@@ -23,6 +24,12 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public Transform HitCenter;
 
     public bool inEffect;
+
+    public bool Stunned;
+    public bool Shiny;
+
+    
+
 
     [SerializeField] private float slowfactor;
     protected float SlowFactor{
@@ -42,10 +49,19 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            Attacking = true;
            removeSlowingEffects();
            GetComponent<Animator>().SetTrigger("InRange");
-           InvokeRepeating("PlayAttackAnimation",0f, AttackDelay);
+        //    StartCoroutine(PlayAttackAnimation(AttackDelay));
+           StartCoroutine(PlayAttackAnimation(AttackDelay));
+        }
+    }
+    protected virtual IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("EnemyAttack");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
         }
     }
     public virtual void Move(){
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime);
     }
 
@@ -54,12 +70,28 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
    
+    public virtual void Stun(float f, string source = null){
+        StartCoroutine(StunCoroutine(f));
+    }
+    private IEnumerator StunCoroutine(float f){
+        if(!Stunned){
+            Stunned = true;
+            GetComponent<Animator>().enabled = false;
+            yield return new WaitForSeconds(f);
+            Stunned = false;
+            GetComponent<Animator>().enabled = true;
+        }
+    }
 
-    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
+        if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
+            Dmg *= 2;
+        }
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
-            Dmg = (int)(B + (Dmg-B)*(onHit ? Flamey.Instance.ArmorPen : 0));
+            float armorPen = onHit || Character.Instance.isCharacter("Assassin")? Flamey.Instance.ArmorPen : 0;
+            Dmg = (int)(B + (Dmg-B)*armorPen);
         }
 
         if(onHit){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
@@ -81,35 +113,35 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Die(bool onKill = true){
         if(this==null){return;}
-        if(onKill){Flamey.Instance.ApplyOnKill(this);}
+        
         Flamey.Instance.addEmbers(calculateEmbers());
         flame.TotalKills++;
         PlayHitSoundFx();
-        CameraShake.Shake(0.4f,0.15f);
-        incDeathAmount();
+        CameraShake.Shake(0.4f,0.05f);
+        
+        EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
+        if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
         Destroy(gameObject);
     }
 
 
     protected virtual int calculateEmbers(){
-        if(MoneyMultipliers.Instance == null){
-            return EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], 0.1f);
+        if(Shiny){
+            // return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * MoneyMultipliers.Instance.ShinyMultiplier); 
+            return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
+
         }
-        return (int)((EmberDropRange[0] + Distribuitons.RandomBinomial(EmberDropRange[1] - EmberDropRange[0], MoneyMultipliers.Instance.p)) * MoneyMultipliers.Instance.mult);
+        return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
+        
     }
 
-    public abstract int getDeathAmount();
-    public abstract void incDeathAmount();
-    public abstract void ResetStatic();
+    
     
 
     public virtual void Attack(){
         flame.Hitted(Damage, ArmorPen, this);
     }
-    protected virtual void PlayAttackAnimation(){
-       
-        GetComponent<Animator>().Play("EnemyAttack");
-    }
+    
     
     
     public void target(){
@@ -162,6 +194,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(prevInfo == null || prevInfo[0] <= 0){
             SlowFactor += percentage; 
         }
+        if(IceOnLand.Instance!= null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 2 && prevInfo[0] > 0){
+            Stun(2f, "IceLand");
+        }
 
         SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
         CheckEnemyIceSkin();
@@ -192,35 +227,38 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         }
     }
     private void CheckEnemyIceSkin(){
-        if(SlowEffectsDuration.Any(k => k.Value[0] > 0)){
+
+        if(SlowEffectsDuration["IceHit"][0] > 0){
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = true;
         }else{
             transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if(!SlowEffectsDuration.Any(k => k.Value[0] > 0)){
             SlowFactor = 0;
         }
     }
 
 
-
-    public static Enemy getClosestEnemy(Vector2 pos){
-        GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
+    public static Vector2 getPredicatedEnemyPosition(Comparison<Enemy> sortingFactor){
+        List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
+        if(selected.Count == 0){return Vector2.zero;}
+        selected.Sort(sortingFactor);
+        return selected.First().HitCenter.position;
+        
+    }
+    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor){
+        List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
+        if(selected.Count == 0){return null;}
+        selected.Sort(sortingFactor);
+        return selected.First();
+        
+    }
+    public static Enemy getClosestEnemy(Vector2 pos, int index = 0){
+        Enemy[] go = GameObject.FindGameObjectsWithTag("Enemy").Select(e=>e.GetComponent<Enemy>()).Where(e=>e.canTarget()).ToArray();
+        Array.Sort(go, (a,b)=> Vector2.Distance(a.HitCenter.position, pos) < Vector2.Distance(b.HitCenter.position, pos)? -1 : 1);
         if(go.Length == 0){return null;}
-        try{
-            GameObject minimum = go[0];
-            float minDist = float.PositiveInfinity;
-            foreach(GameObject enemy in go){
-                float calc = Vector2.Distance(enemy.GetComponent<Enemy>().HitCenter.position, pos);
-                if(minDist > calc){
-                    minDist = calc;
-                    minimum = enemy;
-                }
-            }
-            return minimum.GetComponent<Enemy>();
-        }catch{
-            Debug.Log("Covered Error! Flamey.getRandomHomingEnemy()");
-
-        }
-        return null;
+        if(go.Length <= index){return go[go.Length - 1];}
+        return go[index];
     }
 
 }

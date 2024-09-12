@@ -55,9 +55,22 @@ public class Hog : Enemy
        
     }
 
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+        if(source!= null && source.Equals("Lava Pool")){
+            base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except);
+        }else{
+            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+        }
+    }
 
-    override protected void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Attack");
+
+   
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Attack");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
     public override void CheckFlip()
     {
@@ -72,8 +85,5 @@ public class Hog : Enemy
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

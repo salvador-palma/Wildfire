@@ -17,13 +17,15 @@ public class AnimalSaveData {
     public int AnimalID;
     public int DeathAmount;
     public int RetrievedRewards;
-    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;}
+    public int ShinyCaptured;
+    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;ShinyCaptured=-1;}
 }
 [System.Serializable]
 public class BestiarySaveData{
     public List<AnimalSaveData> animals;
     public BestiarySaveData(){animals = new List<AnimalSaveData>();}
     public void AddMilestone(int ID, int N){animals[ID].DeathAmount+=N;}
+    public void AddMilestoneShiny(int ID, int N){animals[ID].ShinyCaptured+=N;}
 }
 
 [System.Serializable]
@@ -33,6 +35,7 @@ public class AnimalRunTimeData{
     public int Wave;
     [TextAreaAttribute]public string description;
     public AnimalAbility[] abilities;
+    public Material ShinyMaterial;
     public Vector2 IconSize; //left top
     public Vector2 IconPos; //right bottom
 }
@@ -53,7 +56,7 @@ public class LocalBestiary : MonoBehaviour
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
     public event EventHandler ClaimRewardEvent;
-    private int lastID;
+    private int lastID = -1;
     [SerializeField] List<AnimalRunTimeData> animals;
 
     [SerializeField] GameObject[] BestiaryPanels;
@@ -88,7 +91,9 @@ public class LocalBestiary : MonoBehaviour
 
     public void Awake(){
         INSTANCE = this;
-        gameObject.SetActive(false);
+        if(SceneManager.GetActiveScene().name == "Game"){
+            gameObject.SetActive(false);
+        }
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
@@ -117,7 +122,7 @@ public class LocalBestiary : MonoBehaviour
 
         //PROFILE
         title = InfoPanel.Find("Title").GetComponent<TextMeshProUGUI>();
-        AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(0).GetComponent<Image>();
+        AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(1).GetComponent<Image>();
 
         //MILESTONES
         
@@ -157,6 +162,7 @@ public class LocalBestiary : MonoBehaviour
         }
         void checkMilestoneProgress(){
             int milestone_lvl = getMilestoneProgressInt(index);
+            int shiny_lvl = GetShinyProgress(index);
             if(milestone_lvl==-1){
                 newSlotImage.GetComponent<Image>().color = Color.black;
                 newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[0];
@@ -164,6 +170,9 @@ public class LocalBestiary : MonoBehaviour
                 newSlot.GetComponent<Button>().onClick.AddListener(()=>DisplayProfile(index));
                 newSlot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[milestone_lvl >= 6 ? 5 : milestone_lvl];
                 
+            }
+            if(shiny_lvl >= 0){
+                newSlot.transform.Find("Shiny").gameObject.SetActive(true);
             }
 
             if(SceneManager.GetActiveScene().name != "Game"){
@@ -191,7 +200,7 @@ public class LocalBestiary : MonoBehaviour
         }
     }
     private void ChangeTab(int direction){
-        
+        if(lastID==-1){return;}
         int currentIndex = Array.IndexOf(BestiaryTabs, BestiaryDisplayTab);
         BestiaryPanels[currentIndex].SetActive(false);
         currentIndex+= direction;
@@ -236,10 +245,15 @@ public class LocalBestiary : MonoBehaviour
         AnimalRunTimeData animal = animals[ID];
 
         AnimalImage.sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
+        AnimalImage.material = null;
         title.text = animal.name;
         RectTransform TRR = AnimalImage.GetComponent<RectTransform>();
         TRR.anchoredPosition = animal.IconPos;
         TRR.sizeDelta = animal.IconSize;
+
+        int shiny_lvl = GetShinyProgress(ID);
+        InfoPanel.Find("BestiaryInfoImage").GetChild(0).gameObject.SetActive(shiny_lvl >=0);
+        
     }
     private void DisplayStats(int ID, TextMeshProUGUI[] labels){
 
@@ -289,6 +303,16 @@ public class LocalBestiary : MonoBehaviour
         }
     }
 
+    public void ToggleShinyView(){
+        Debug.Log("ChangingMatPre");
+        if(AnimalImage.material == AnimalImage.defaultMaterial){
+            Debug.Log("ChangingMat");
+            AnimalImage.material = animals[lastID].ShinyMaterial;
+        }else{
+            AnimalImage.material = AnimalImage.defaultMaterial;
+        }
+        
+    }
     /* ===== MILESTONES ===== */
     private int[] getMilestoneProgress(int ID, bool returnID=false){
         AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
@@ -310,7 +334,9 @@ public class LocalBestiary : MonoBehaviour
         }
         return i;
     }
-
+    private int GetShinyProgress(int ID){
+        return saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID).ShinyCaptured;
+    }
     private void ClaimRewards(int AnimalToClaimID){
         int claimed_rewards = saved_milestones.animals[AnimalToClaimID].RetrievedRewards;
         int rewards_capable_to_claim = getMilestoneProgressInt(AnimalToClaimID);
@@ -350,6 +376,10 @@ public class LocalBestiary : MonoBehaviour
     public int getEnemyID(Enemy enemy){
         return animals.TakeWhile(e => e.enemy != enemy).Count();
     }
+    public Material getShinyMaterial(GameObject enemy){
+        AnimalRunTimeData animal = animals.First(e=> e.enemy.gameObject == enemy);
+        return animal == null ? null : animal.ShinyMaterial;
+    }
     public int[] getEnemiesID(Enemy[] enemies){
         int[] result = new int[enemies.Length];
         for (int i = 0; i < enemies.Length; i++)
@@ -370,11 +400,32 @@ public class LocalBestiary : MonoBehaviour
         return animals.Select(a => a.enemy).ToList();
     }
     public void UpdateBestiaryValues(){
-        for (int i = 0; i < animals.Count; i++)
-        {
-            saved_milestones.AddMilestone(i, animals[i].enemy.getDeathAmount());
+        bool caughtShiny = false;;
+        
+        foreach(KeyValuePair<string, int> animal in EnemySpawner.DeathPerEnemy){
+            try{
+                if(animal.Key.Contains("Shiny")){
+                    
+                    string ReplacedString = animal.Key.Replace("Shiny","");
+                    saved_milestones.AddMilestoneShiny(animals.FindIndex(0, animals.Count(), a=>a.name == ReplacedString), animal.Value);
+                    caughtShiny=true;
+                        
+                }else{
+                    
+                    saved_milestones.AddMilestone(animals.FindIndex(0, animals.Count(), a=>a.name == animal.Key), animal.Value);
+                }
+            }catch{
+                Debug.Log("Error in Bestiary Update: " + animal.Key);
+            }
+        }
+        
+        
+        if(caughtShiny && GameVariables.GetVariable("ShinyTalk") == -1){
+            GameVariables.SetVariable("ShinyTalk",0);
             
         }
+        
+        
         WritingData();
     }
 

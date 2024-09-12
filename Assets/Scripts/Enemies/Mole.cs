@@ -68,6 +68,7 @@ public class Mole : Enemy
     }
     public override void Move()
     {
+        if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
     }
 
@@ -101,14 +102,13 @@ public class Mole : Enemy
         return !isUnderground && !diggingUp;
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null)
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
     {
         
-        if(!isUnderground){ base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);}
+        if(!isUnderground || (SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 && source != null && source.Equals("Lava Pool"))){ 
+            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+        }
     }
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

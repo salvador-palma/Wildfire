@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public interface OnHittedEffects : Effect
@@ -17,6 +18,10 @@ public class ThornsOnHitted : OnHittedEffects
 
     public float perc;
     public float prob;
+
+    private Button activeCooldownImage;
+    private int activeRoundsLeft;
+    private int activeRoundsCooldown = 1;
 
     public ThornsOnHitted(float prob, float perc){
         
@@ -40,21 +45,64 @@ public class ThornsOnHitted : OnHittedEffects
 
         if(Random.Range(0f,1f) < prob){
             if(Flamey.Instance.Armor == 0){return;}
-            en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: true);
+            if(SkillTreeManager.Instance.getLevel("Thorns")>=2){
+                Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, FlareManager.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                foreach(Enemy enemy in targets){
+                    enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                }
+            }else{
+                en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+            }
+            
         }
 
     }
     public void Stack(ThornsOnHitted thornsOnHitted){
+        
         prob += thornsOnHitted.prob;
         perc += thornsOnHitted.perc;
         RemoveUselessAugments();
     }
+    public bool maxed;
     private void RemoveUselessAugments(){
         if(prob >= 1){
             prob = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThornsProb");
         }      
+        if(!maxed){CheckMaxed();}
+    }
+
+    private void CheckMaxed(){
+        if(prob >= 1f && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Thorns");
+            maxed = true;
+        }
+
+    }
+    public void SpawnExtraAssets(){
+        activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/ThornsUnlock"));
+        activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+        Deck.RoundOver += UpdateActive;
+        activeCooldownImage.onClick.AddListener(() => {
+            
+            Flamey.Instance.Unhittable = true;
+            Flamey.Instance.GetComponent<Animator>().SetBool("ThornsArmor", true);
+            Flamey.Instance.callFunctionAfter(() =>{Flamey.Instance.GetComponent<Animator>().SetBool("ThornsArmor", false);Flamey.Instance.Unhittable = false;}, 30f);
+            activeCooldownImage.interactable = false;
+            activeRoundsLeft = 0;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
+
+        });
+    }
+    private void UpdateActive(object sender, EventArgs e){
+        if(activeRoundsLeft<activeRoundsCooldown){
+            activeRoundsLeft++;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+        }
+        if(activeRoundsLeft>=activeRoundsCooldown){
+             activeCooldownImage.interactable = true;
+        }
     }
     public string getDescription()
     {
@@ -78,5 +126,8 @@ public class ThornsOnHitted : OnHittedEffects
     public string getType()
     {
         return "On-Hitted Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }

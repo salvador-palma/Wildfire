@@ -1,21 +1,18 @@
 using System;
-using System.Buffers.Text;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using NUnit.Framework;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 [System.Serializable]
 public class Skills{
-    
     public string type;
-    public int value;
-    public int max_value;
-
+    public int level;
 }
 [System.Serializable]
 public class SerializableList<T> {
@@ -23,76 +20,83 @@ public class SerializableList<T> {
     public int skillTreeEmbers;
     public List<T> skills;
 }
+[Serializable]
+public class Ability{
+    public string Name;
+    public string Type;
+    [TextArea] public string AbilityDescription1;
+    [TextArea] public string AbilityDescription2;
+    [TextArea] public string AbilityDescription3;
+}
 public class SkillTreeManager : MonoBehaviour
 {
-
+    
     [SerializeField] SerializableList<Skills> PlayerData;
+    [SerializeField] Ability[] Abilities;
     public static SkillTreeManager Instance;
-    [SerializeField] Color[] UpgradeColors;
- 
-    [SerializeField] TextMeshProUGUI[] UpgradeInfoTexts;
-    [SerializeField] TextMeshProUGUI[] UpgradeExtraTexts; //0-Title 1-Cost 2-Upgrade/Unlock
-    [SerializeField] Color DisabledColor;
-    [SerializeField] GameObject[] BeforeAndAfter;
-    [SerializeField] RectTransform UpgradeInfoContentPanel;
-    [SerializeField] TextMeshProUGUI emberAmountTxt;
-    [SerializeField] TextMeshProUGUI emberLossTxt;
-   
 
+    [Header("UI TMP")]
+    [SerializeField] TextMeshProUGUI emberText;
+
+    [Header("Info Panel")]
+    [SerializeField] TextMeshProUGUI titleText;
+    [SerializeField] TextMeshProUGUI typeText;
+    [SerializeField] TextMeshProUGUI purchaseButtonText;
+    [SerializeField] TextMeshProUGUI[] passivesText;
+    [SerializeField] Animator anim;
     public event EventHandler treeReset;
+
+    [Header("Color Pallete")]
+    [SerializeField] ColorBlock UnlockedColor;
+    [SerializeField] ColorBlock SilverColor;
+    [SerializeField] ColorBlock GoldColor;
+    [SerializeField] ColorBlock PrismaticColor;
+
     private void Awake() {
         Instance = this;
+        anim = GetComponent<Animator>();
+
+        
+
         ReadData();
     }
     private void Start(){
-        //changeUpgradeInfoTexts(displayedSkill);
         changeEmberAmountUI();
     }
     
-
-    public Color getColor(string augmentClass){
-        int maxlvl = getMaxLevel(augmentClass);
-        int lvl = getLevel(augmentClass);
-        if(lvl==-1 || lvl > maxlvl){return Color.white;}
-        if(maxlvl == 4){
-            return UpgradeColors[lvl+1];
-        }else if(maxlvl == 2){
-            return UpgradeColors[lvl*2 + 1];
-        }else{
-            return UpgradeColors[lvl*5];
-        }
-    }
-    
-
     public int getLevel(string skill){
-        Skills result = GetSkills(skill);
-        return result==null ? 0 : result.value;
+        Skills result = GetSkill(skill);
+        return result==null ? -1 : result.level;
     }
-    public int getMaxLevel(string skill){
-        return GetSkills(skill).max_value;
-    }
-    public void Upgrade(string skill){
-        Skills item = GetSkills(skill);
-        if(item.value != -1){
-            
-            int price = DeckBuilder.Instance.getPrice(skill, getLevel(skill));
-            if(price == -1 || price > PlayerData.embers){
-                Debug.Log("Not enough cash. You have " + PlayerData.embers + " and need " + price);
-                return;
-            }
-            PlayerData.skillTreeEmbers+=price;
-            PlayerData.embers -= price;
+
+    
+    public bool Upgrade(string skill_name, bool Unlock = false){
+        Skills skill = GetSkill(skill_name);
+        int price = DeckBuilder.Instance.getPrice(skill_name, skill.level + 1);
+        if(price == -1){return false;}
+
+        if(price == -2){
             changeEmberAmountUI();
-        }
-        
-        if(item.value < item.max_value){
-            item.value++;
+            skill.level++;
+            if(Unlock){skill.level=-1;}
             
             WritingData();
-        }   
-        
+            return true;
+        }
+        if(price < PlayerData.embers){
+            PlayerData.skillTreeEmbers+=price;
+            PlayerData.embers-=price;
+            changeEmberAmountUI();
+            skill.level++;
+            CheckForConstelationUnlock();
+            WritingData();
+
+            return true;
+        }
+        return false;
     }
-    public Skills GetSkills(string skill){
+    public Skills GetSkill(string skill){
+        
         foreach (Skills item in PlayerData.skills)
         {
             if(item.type == skill){return item;}
@@ -101,23 +105,26 @@ public class SkillTreeManager : MonoBehaviour
         return null;
     }
     public void WritingData(){
-        //Debug.Log("Writing Data to " + Application.dataPath + "/skills.json");
+        
         
         string json = JsonUtility.ToJson(PlayerData);
         File.WriteAllText(Application.persistentDataPath + "/skills.json", json);
+        Debug.Log("Finished Writing Skill Tree...");
     }
+    
     public void ReadData(){
-        //Debug.Log("Reading Data...");
+        
         if(File.Exists(Application.persistentDataPath +"/skills.json")){
             string json = File.ReadAllText(Application.persistentDataPath +"/skills.json");
             PlayerData = JsonUtility.FromJson<SerializableList<Skills>>(json);
+            Debug.Log("Finished Reading Skill Tree...");
         }else{
             CreateFile();
             ReadData();
         }
     }
      public void CreateFile(){
-        string str = "{\"embers\":100000,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Dmg\",\"value\":0,\"max_value\":4},{\"type\":\"Acc\",\"value\":0,\"max_value\":4},{\"type\":\"AtkSpeed\",\"value\":0,\"max_value\":4},{\"type\":\"BltSpeed\",\"value\":0,\"max_value\":4},{\"type\":\"Armor\",\"value\":0,\"max_value\":4},{\"type\":\"Health\",\"value\":0,\"max_value\":4},{\"type\":\"GambleUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"GambleImprove\",\"value\":-1,\"max_value\":2},{\"type\":\"MulticasterUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"MulticasterProb\",\"value\":-1,\"max_value\":2},{\"type\":\"CritUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"CritChance\",\"value\":-1,\"max_value\":2},{\"type\":\"CritMult\",\"value\":-1,\"max_value\":2},{\"type\":\"VampUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"VampProb\",\"value\":-1,\"max_value\":2},{\"type\":\"VampPerc\",\"value\":-1,\"max_value\":2},{\"type\":\"BurstUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"BurstInterval\",\"value\":-1,\"max_value\":2},{\"type\":\"BurstAmount\",\"value\":-1,\"max_value\":2},{\"type\":\"IceUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"IceProb\",\"value\":-1,\"max_value\":2},{\"type\":\"IceDuration\",\"value\":-1,\"max_value\":2},{\"type\":\"Assassins\",\"value\":-1,\"max_value\":1},{\"type\":\"Execute\",\"value\":-1,\"max_value\":2},{\"type\":\"ArmorPen\",\"value\":-1,\"max_value\":2},{\"type\":\"OrbitalUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"OrbitalAmount\",\"value\":-1,\"max_value\":2},{\"type\":\"OrbitalDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"ShredUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"ShredProb\",\"value\":-1,\"max_value\":2},{\"type\":\"ShredPerc\",\"value\":-1,\"max_value\":2},{\"type\":\"RegenUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"IcePoolUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"IcePoolDuration\",\"value\":-1,\"max_value\":2},{\"type\":\"IcePoolProb\",\"value\":-1,\"max_value\":2},{\"type\":\"IcePoolSlow\",\"value\":-1,\"max_value\":2},{\"type\":\"IcePoolSize\",\"value\":-1,\"max_value\":2},{\"type\":\"ThornsUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"ThornsPerc\",\"value\":-1,\"max_value\":2},{\"type\":\"ThornsProb\",\"value\":-1,\"max_value\":2},{\"type\":\"MoneyUnlock\",\"value\":0,\"max_value\":1},{\"type\":\"MoneyProb\",\"value\":-1,\"max_value\":2},{\"type\":\"MoneyMult\",\"value\":-1,\"max_value\":2},{\"type\":\"DrainPoolUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"DrainPoolProb\",\"value\":-1,\"max_value\":2},{\"type\":\"DrainPoolDuration\",\"value\":-1,\"max_value\":2},{\"type\":\"DrainPoolSize\",\"value\":-1,\"max_value\":2},{\"type\":\"DrainPoolPerc\",\"value\":-1,\"max_value\":2},{\"type\":\"ExplodeUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"ExplodeProb\",\"value\":-1,\"max_value\":2},{\"type\":\"ExplodeDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"NecroUnlock\",\"value\":0,\"max_value\":1},{\"type\":\"NecroProb\",\"value\":-1,\"max_value\":2},{\"type\":\"NecroStats\",\"value\":-1,\"max_value\":2},{\"type\":\"BulletsUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"BulletsProb\",\"value\":-1,\"max_value\":2},{\"type\":\"BulletsDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"BulletsAmount\",\"value\":-1,\"max_value\":2},{\"type\":\"RegenUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"RegenPerSecond\",\"value\":-1,\"max_value\":2},{\"type\":\"RegenPerRound\",\"value\":-1,\"max_value\":2},{\"type\":\"ThunderUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"ThunderInterval\",\"value\":-1,\"max_value\":2},{\"type\":\"ThunderDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"ImmolateUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"ImmolateInterval\",\"value\":-1,\"max_value\":2},{\"type\":\"ImmolateDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"ImmolateRadius\",\"value\":-1,\"max_value\":2},{\"type\":\"CandleUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"CandleDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"CandleAtkSpeed\",\"value\":-1,\"max_value\":2},{\"type\":\"CandleAmount\",\"value\":-1,\"max_value\":2},{\"type\":\"SummonUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"SummonAtkSpeed\",\"value\":-1,\"max_value\":2},{\"type\":\"SummonDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"SummonSpeed\",\"value\":-1,\"max_value\":2},{\"type\":\"SummonAmount\",\"value\":-1,\"max_value\":2},{\"type\":\"BlueFlameUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"BlueFlameInterval\",\"value\":-1,\"max_value\":2},{\"type\":\"BlueFlameDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"StatikUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"StatikProb\",\"value\":-1,\"max_value\":2},{\"type\":\"StatikDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"StatikTTL\",\"value\":-1,\"max_value\":2},{\"type\":\"LavaPoolUnlock\",\"value\":-1,\"max_value\":1},{\"type\":\"LavaPoolDmg\",\"value\":-1,\"max_value\":2},{\"type\":\"LavaPoolSize\",\"value\":-1,\"max_value\":2},{\"type\":\"LavaPoolProb\",\"value\":-1,\"max_value\":2},{\"type\":\"LavaPoolDuration\",\"value\":-1,\"max_value\":2}]}";
+        string str = "{\"embers\":0,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-1},{\"type\":\"Immolate\",\"level\":-3},{\"type\":\"Critical Strike\",\"level\":-1},{\"type\":\"Pirate\",\"level\":-2},{\"type\":\"Snow Pool\",\"level\":-3},{\"type\":\"Necromancer\",\"level\":-2},{\"type\":\"Ember Generation\",\"level\":-1},{\"type\":\"Explosion\",\"level\":-3},{\"type\":\"Vampire\",\"level\":-2},{\"type\":\"Multicaster\",\"level\":-1},{\"type\":\"Static Energy\",\"level\":-3},{\"type\":\"Gambling\",\"level\":-2},{\"type\":\"Ritual\",\"level\":-1},{\"type\":\"Thunder\",\"level\":-3},{\"type\":\"Regeneration\",\"level\":-1},{\"type\":\"Magical Shot\",\"level\":-3},{\"type\":\"Lava Pool\",\"level\":-3},{\"type\":\"Burst Shot\",\"level\":-2},{\"type\":\"Bee Summoner\",\"level\":-3},{\"type\":\"Thorns\",\"level\":-3},{\"type\":\"Freeze\",\"level\":-2},{\"type\":\"Orbits\",\"level\":-1},{\"type\":\"Flower Field\",\"level\":-3},{\"type\":\"Resonance\",\"level\":-2}]}";
         File.WriteAllText(Application.persistentDataPath +"/skills.json", str);
     }
 
@@ -136,72 +143,91 @@ public class SkillTreeManager : MonoBehaviour
    
 
     //UI PARTITION
-    public void DisplaySkill(string skill, SkillTreeButton extra){
-        if(skill==null){
-            return;
-        }
-        GetComponentInParent<Animator>().SetBool("InfoDisplay",true);
-        Skills s = GetSkills(skill);
-        if(s.max_value == 1){
-            UpgradeExtraTexts[2].text = s.value == s.max_value ? "Unlocked" : "Unlock";
-            
-            Array.ForEach(BeforeAndAfter, x => x.SetActive(false));
-            UpgradeInfoContentPanel.sizeDelta = new Vector2(168,44);
-        }else{
-            List<Augment> augments = DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill});
+    public void DisplaySkill(string skill, int level){
+        anim.SetBool("DisplayInfo", true);
+        
+        
+        Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
+        if(ability != null){
 
-            augments.Sort((a,b)=> a.tier - b.tier );
-            int b = 0;
-            for(int i =0; i!= 3; i++){
-                if(b >= augments.Count || ( b < augments.Count && (int)augments[b].tier != i)){
-                    UpgradeInfoTexts[i].text = "";
-                    UpgradeInfoTexts[i+3].text = "";
-                    UpgradeInfoTexts[i].transform.parent.GetComponent<Image>().color = DisabledColor;
-                    UpgradeInfoTexts[i+3].transform.parent.GetComponent<Image>().color = DisabledColor;
-                    continue;
-                }
+            passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
+            passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
+            passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
+            passivesText[0].color = Color.white;
+            passivesText[1].color = Color.white;
+            passivesText[2].color = Color.white;
+
+            switch (level+1)
+            {
                 
-                UpgradeInfoTexts[i].text = augments[b].getDescription();
-                UpgradeInfoTexts[i+3].text = augments[b].getNextDescription();
-                UpgradeInfoTexts[i].transform.parent.GetComponent<Image>().color = Color.white;
-                UpgradeInfoTexts[i+3].transform.parent.GetComponent<Image>().color = Color.white;
-                b++;
+                case 0:
+                    passivesText[0].color = new Color(1,1,1,0.3f);
+                    passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
+                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
+                case 1:
+                    passivesText[1].color = new Color(1,1,1,0.3f);
+                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
+                case 2:
+                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    break;
             }
-
-            UpgradeExtraTexts[2].text = "Upgrade";
+           
             
-            UpgradeInfoContentPanel.sizeDelta = new Vector2(168,395);
-            Array.ForEach(BeforeAndAfter, x => x.SetActive(true));
+
+            titleText.text = ability.Name;
+            typeText.text = ability.Type;
+
+            int price = DeckBuilder.Instance.getPrice(skill, level + 1);
+            purchaseButtonText.text = string.Format("Upgrade ({0})",  price == - 1 ? "Maxed Out" : price);
+
+            
+            
+        }else{
+            Debug.LogWarning("Skill Not Found: " + skill);
         }
-        UpgradeExtraTexts[0].text = extra.DisplayTitle;
-        UpgradeExtraTexts[1].text = s.value == s.max_value ? "" :  "Cost:" + DeckBuilder.Instance.getPrice(skill, getLevel(skill));
-        
-        
+
 
     }
+    public Ability getAbility(string SkillTreeName){
+        return Abilities.Where(a=> a.Name == SkillTreeName).FirstOrDefault();
+    }
     
+    public ColorBlock GetColors(int level){
+        switch(level){
+            case 0:
+                return SilverColor;
+            case 1:
+                return GoldColor;
+            case 2:
+                return PrismaticColor;
+            default:
+                return UnlockedColor;
+        }
+    }
     public void changeEmberAmountUI(int amount = 0){
         PlayerData.embers += amount;
-        emberAmountTxt.text = PlayerData.embers.ToString();
+        emberText.text = PlayerData.embers.ToString();
     }
 
     public void resetSkillTree(){
-        List<string> exceptions = new List<string>(){"SummonUnlock", "NecroUnlock", "MoneyUnlock"};
-        
-
-        foreach (Skills item in PlayerData.skills)
-        {
-            if(exceptions.Contains(item.type) && item.value > -1){
-                item.value = 0;
+        List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster"};
+        List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate", "Necromancer", "Gambling"};
+        foreach(Skills skill in PlayerData.skills){
+            if(exceptionsLayer1.Contains(skill.type)){
+                skill.level = Math.Min(skill.level, -1);
+            }else if(exceptionsLayer2.Contains(skill.type)){
+                skill.level = Math.Min(skill.level, -2);
+            }else{
+                skill.level = -3;
             }
-            else{
-                item.value = item.max_value == 4 ? 0 : -1;
-            }
-            
-
         }
-
         GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+
         PlayerData.embers += PlayerData.skillTreeEmbers;
         PlayerData.skillTreeEmbers = 0;
         changeEmberAmountUI();
@@ -213,10 +239,36 @@ public class SkillTreeManager : MonoBehaviour
         treeReset?.Invoke(this, new EventArgs());
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
-        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+        
         SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
 
     }
+
+    public bool HasAtLeastOneSkill(){
+        return PlayerData.skills.Any(a => a.level >= 0);
+    }
+
+    //CONSTELATION
+    public void StartSkillTreeCutscene(bool on){
+        
+        GetComponentInParent<Animator>().SetBool("Constelation", on);
+    }
+    public void CheckForConstelationUnlock(){
+        bool result = PlayerData.skills.All(e => e.level >= 0);
+        int save = GameVariables.GetVariable("ConstelationCutScene");
+        if(save == -1 && result){
+            GameVariables.SetVariable("ConstelationCutScene", 1);
+            StartSkillTreeCutscene(true);
+        }
+
+    }
+    public void ResetSkillTreeDimensions(){
+        anim.SetBool("DisplayInfo", false);
+        GameObject SkillTree = MetaMenuUI.Instance.SkillTree;
+        SkillTree.transform.localScale = new Vector2(0.2642097f,0.2642097f);
+        SkillTree.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,15);
+    }
+    
 
 
    

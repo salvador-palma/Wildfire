@@ -35,18 +35,28 @@ public class Snake : Enemy
         }
     }
 
-   
-
-    protected override void PlayAttackAnimation(){
-       if(isPoisonous){
-        GetComponent<Animator>().Play("EnemyAttackPoison");
-       }else{
-        GetComponent<Animator>().Play("EnemyAttack");
-       }
+    public override void Move()
+    {
+        if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
+            if(getSlowInfo("IceLand")[0] <= 0){
+                base.Move();
+            }
+        }else{base.Move();}
+        
     }
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            if(isPoisonous){
+                GetComponent<Animator>().Play("EnemyAttackPoison");
+            }else{
+                GetComponent<Animator>().Play("EnemyAttack");
+            }
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
+    }
+
+    
 }

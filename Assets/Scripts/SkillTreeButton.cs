@@ -8,88 +8,123 @@ using UnityEngine.UI;
 
 public class SkillTreeButton : MonoBehaviour
 {
-    const string UNLOCKED = "SkillTreeButtonUnlocked";
-    const string LOCKED = "SkillTreeButtonLocked";
-    const string UNLOCKING = "SkillTreeButtonUnlock";
+    const string UNLOCKED = "LineOn";
+    const string LOCKED = "LineOff";
+    const string UNLOCKING = "LineSkill";
 
     public static SkillTreeButton SelectedButton;
 
-    public string DisplayTitle;
-    [SerializeField] bool UnlockableField;
-    [SerializeField] string[] UnlockableClasses;
+    public string AbilityName;
 
-    [SerializeField] string AugmentClass;
-   
+    
+    public int level;
+
     [SerializeField] List<SkillTreeButton> previousNode;
-    [SerializeField] List<SkillTreeLine> nextPaths;
-    private bool wasUnlocked;
+    [SerializeField] List<SkillTreeButton> followingNode;
+    [SerializeField] List<Animator> nextPaths;
+    
     void Start(){virtualStart(); SkillTreeManager.Instance.treeReset += virtualStart;}
 
-    private void virtualStart(object sender, EventArgs e){virtualStart();ResetLines();}
-    private void ResetLines(){nextPaths.ForEach(l => l.PlayInit());}
+    private void virtualStart(object sender, EventArgs e){virtualStart();}
     public void virtualStart(){
-        wasUnlocked = false;
+        
         GetComponent<Button>().onClick.RemoveAllListeners();
-        int lvl = getLevel();
-        if(lvl==-1){GetComponent<Animator>().Play(LOCKED);}
-        else if(lvl>=0){GetComponent<Animator>().Play(UNLOCKED);}
-        if(lvl>=1){NextPaths(false);}
+        ReloadColor();
+        ReloadFunctionality();
+
+        nextPaths.ForEach(path => path.Play(level >= 0 ? UNLOCKED : LOCKED));
+
+        if( level == -3 ){
+            gameObject.SetActive(false);
+        }
         
         GetComponent<Button>().onClick.AddListener(Clicked);
-        UpdateImage();
+       
     }
     public void ping(){
         bool result =true;
-        foreach (SkillTreeButton item in previousNode)
+        foreach (SkillTreeButton skills in previousNode)
         {
-            result = result && item.wasBought();
+            result = result && skills.getLevel() >= 0;
         }
-        if(result && !wasUnlocked){Unlock();SkillTreeManager.Instance.Upgrade(AugmentClass);UpdateImage();}
-    }
-    private void Unlock(){
-        wasUnlocked = true;
-        GetComponent<Animator>().Play(UNLOCKING);
+        if(result){
+            if(Step()){
+                
+                if(level == -1){
+                    followingNode.ForEach(skill =>{
+                        if(skill.level == -3){
+                            skill.gameObject.SetActive(true); skill.Step();
+                        }
+                    });
+                }
+            }
+        }
     }
     public void Clicked(){
-        // Upgrade();
-        // UpdateImage();
         SelectedButton = this;
         
         int lvl = getLevel();
-        if(lvl ==-1){return;}
-        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
-        MetaMenuUI.Instance.moveSkillTree(transform.localPosition * -1f);
+        if(lvl <=-2){return;}
+
+        SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
+        Vector2 LookUpPos = transform.localPosition;
+        LookUpPos.x += 100f;
+        LookUpPos.y += -20f;
+        MetaMenuUI.Instance.moveSkillTree(transform);
     
     }
     public void ClickedUpgrade(){
-        Upgrade();
-        UpdateImage();
-        SkillTreeManager.Instance.DisplaySkill(AugmentClass, this);
+        if(SkillTreeManager.Instance.Upgrade(AbilityName)){
+            ReloadColor();
+            ReloadFunctionality();
+            if(level==0){StartCoroutine("NextPathCouroutine");}
+        }
+        SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
+    }
+    public bool Step(){
+        if( SkillTreeManager.Instance.Upgrade(AbilityName)){
+            ReloadColor();
+            ReloadFunctionality();
+            return true;
+        }
+        return false;
     }
    
-    private void Upgrade(){
+    private void ReloadColor(){
+        level = getLevel();
+        GetComponent<Button>().colors = SkillTreeManager.Instance.GetColors(level);
+      
+    }
+    private void ReloadFunctionality(){
+        Button self = GetComponent<Button>();
+        if(level == -1){
+            gameObject.SetActive(true);
+            GetComponent<Animator>().Play("ButtonBuyable",-1,UnityEngine.Random.Range(0f,5f));
 
-        SkillTreeManager.Instance.Upgrade(AugmentClass);
-        if(getLevel()==1){NextPaths(true);}
+        }else{
+            if(gameObject.activeInHierarchy){
+                GetComponent<Animator>().Play("Static");
+            }
+            
+        }
+        if(level >= -1){
+            self.interactable = true;
+            self.transform.Find("Icon").GetComponent<Image>().enabled= true;
+        }else{
+            self.interactable = false;
+            self.transform.Find("Icon").GetComponent<Image>().enabled= false;
+        }
+
     }
     
-    public void NextPaths(bool withPing){
-        foreach (SkillTreeLine item in nextPaths)
-        {
-            item.PlayUnlock(withPing);
-        }
+    
+    public IEnumerator NextPathCouroutine(){
+        foreach(Animator item in nextPaths){item.Play(UNLOCKING);}
+        yield return new WaitForSeconds(1);
+        followingNode.ForEach(skill => skill.ping());
     }
-
-    private void UpdateImage(){
-        transform.Find("FillImage").GetComponent<Image>().color = SkillTreeManager.Instance.getColor(AugmentClass);
-    }
-
-    public bool wasBought(){
-        return getLevel()>=1; 
-    }
-
-    private int getLevel(){
-        return SkillTreeManager.Instance.getLevel(AugmentClass);
+    public int getLevel(){
+        return SkillTreeManager.Instance.getLevel(AbilityName);
     }
 
 

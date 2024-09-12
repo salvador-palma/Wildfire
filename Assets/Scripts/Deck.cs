@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
@@ -31,23 +33,23 @@ public class Deck : MonoBehaviour
 
     
     private void Awake(){
-        Debug.Log("Done here Deck");
+       
         
         Instance = this;
         RoundOver += ClearRemainderObjects;
-        // Console.Log("<color=#00ff00> Deck Initialized! </color>");
+      
         
     }
 
     
 
     private void Start() {
-        Console.Log("<color=#00ff00> Deck Started! </color>");
+        
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
             
             gameState = new GameState();
         }
-
+        GamblingStack=new List<Augment>();
         currentAugments = new Augment[3];
         
         refreshedAugments = new List<Augment>();
@@ -56,11 +58,18 @@ public class Deck : MonoBehaviour
 
     }
 
-    void FillDeck(){
-        if(DeckBuilder.Instance == null){
-                Console.Log("<color=#0000ff> FillDeck: DeckBuilder was not initialized </color>");
-        }
+    public void FillDeck(){
+        
         augments = DeckBuilder.Instance.getAllCards();
+
+        if(SkillTreeManager.Instance.getLevel("Gambling") >= 1){
+            augments.AddRange(new List<Augment>(){
+                new Augment("Gambling","Not enough refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => Deck.Instance.Gamble(2, Tier.Silver, "Not enough refreshes")), baseCardUpgrade:true),
+                new Augment("Gambling","Feelin' Blessed", "Gain 4 random silver augments", "GambleImprove", Tier.Gold, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Silver, "Feelin' Blessed")), baseCardUpgrade:true),
+                new Augment("Gambling","Roll the Dice", "Gain 4 random gold augments", "GambleImprove", Tier.Prismatic, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Gold, "Roll the Dice")), baseCardUpgrade:true)
+            });
+        }
+        
     }   
     Augment pickFromDeck(){
         Augment aug = filteredAugments[UnityEngine.Random.Range(0, filteredAugments.Count)];
@@ -85,13 +94,12 @@ public class Deck : MonoBehaviour
             ChangeSingular(pickFromDeck(), Slots[i], i);
         }
     }
-    public void ChangeSingular(Augment augment, GameObject slot, int i){
+    public void ChangeSingular(Augment augment, GameObject slot, int i, bool forGamble = false){
 
         slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.Title;
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment == null ? null : augment.icon;
         slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.getDescription();
-        slot.transform.Find("Stars").GetComponent<Image>().sprite = Stars[augment.isUnlockableMidGame() ? 5:augment.getLevel()];
-        currentAugments[i] = augment;
+        if(!forGamble){currentAugments[i] = augment;}
         
     }
     
@@ -103,18 +111,19 @@ public class Deck : MonoBehaviour
         currPhase++;
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
         
-        RoundStart?.Invoke(this, new EventArgs());
+        
 
         ActivateAugment(currentAugments[i]);
+        
         refreshedAugments.Clear();
-
-        
-        EnemySpawner.Instance.newRound();
-        
-        
-
         currentAugments = new Augment[]{null,null,null};
         
+        if(!EnemySpawner.Instance.Paused){
+            RoundStart?.Invoke(this, new EventArgs());
+            EnemySpawner.Instance.newRound();
+        }
+        
+
     }
 
     public void StartAugments(bool isPrismaticRound, bool OnlyUnlockables = false){
@@ -176,7 +185,12 @@ public class Deck : MonoBehaviour
     }
 
     public Augment randomPicking(Tier tier){
+
         List<Augment> tempAugments = augments.FindAll( a => a.tier == tier);
+
+        if(SkillTreeManager.Instance.getLevel("Gambling") < 2){
+            tempAugments.RemoveAll(a => a.AugmentClass=="Gambling");
+        }
         
         return tempAugments[UnityEngine.Random.Range(0, tempAugments.Count)];
     }
@@ -239,32 +253,20 @@ public class Deck : MonoBehaviour
     }
     public void LoadGame(bool withLoad){
         try{ 
-            FillDeck();
+            // FillDeck();
 
             if(!withLoad){return;}
-            Console.Log("<color=#0000ff> Passed Loading </color>");
+            
+
             gameState = GameState.LoadGameState();
-            if(Flamey.Instance == null){
-                Console.Log("<color=#0000ff> Flamey was not initialized </color>");
-            }
+            
             Flamey.Instance.addEmbers(gameState.CollectedEmbers);
             
             PhaseTiers = gameState.NextTiers;
-            if(GameUI.Instance == null){
-                Console.Log("<color=#0000ff> GameUI was not initialized </color>");
-            }
-            if(DeckBuilder.Instance == null){
-                Console.Log("<color=#0000ff> DeckBuilder was not initialized </color>");
-            }
-            if(LocalBestiary.INSTANCE == null){
-                Console.Log("<color=#0000ff> LocalBestiary was not initialized </color>");
-            }
-            if(EnemySpawner.Instance == null){
-                Console.Log("<color=#0000ff> EnemySpawner was not initialized </color>");
-            }
+            
             foreach(SerializedAugment a in gameState.augments){
                 GameUI.Instance.AddAugment(a);
-                DeckBuilder.Instance.getAugmentByName(a.title).Activate(a.level);
+                DeckBuilder.Instance.getAugmentByName(a.title).Activate();
             }
             Flamey.Instance.Health = gameState.Health;
             Flamey.Instance.MaxHealth = gameState.MaxHP;
@@ -273,7 +275,7 @@ public class Deck : MonoBehaviour
             EnemySpawner.Instance.PickedEnemies = LocalBestiary.INSTANCE.getEnemiesFromIDs(gameState.EnemyIDs);
 
         }catch(Exception e){
-            Console.Log("LoadGame: " + e.Message);
+            Debug.Log(e.ToString());
         }
         
     }
@@ -295,6 +297,81 @@ public class Deck : MonoBehaviour
     }
 
 
+    /*=========== GAMBLING SECTION ============= */
+    [Header("Gambling Section")]
+    [SerializeField] Transform ExtraSlotContainer;
+    [SerializeField] GameObject ExtraOriginalVessel;
+    public List<Augment> GamblingStack;
+    public void PlayOutroExtraSlotsGambling(){
+        SlotsParent.GetComponent<Animator>().Play("ExtraOutroSlots");
+        StartCoroutine(ExtraOutroSlotsAfter());
+        
+
+    }
+    public IEnumerator ExtraOutroSlotsAfter(){
+        yield return new WaitForSeconds(2);
+        if(GamblingStack.Count() == 0){
+            EnemySpawner.Instance.Paused = false;
+            RoundStart?.Invoke(this, new EventArgs());
+            EnemySpawner.Instance.newRound();
+        }else{
+            Debug.Log("Getting Stack");
+            
+            Augment a = GamblingStack.First();
+            GamblingStack.Remove(a);
+            ActivateAugment(a);
+            Debug.Log("Over Stack");
+        }
+    }
+
+    
+    public void Gamble(int amount, Tier tier, string original_name){
+        
+        EnemySpawner.Instance.Paused = true;
+        Augment[] result = new Augment[amount];
+        for(int i = 0; i < amount; i++){
+            result[i] = randomPicking(tier);
+            if(result[i].AugmentClass=="Gambling"){
+                GamblingStack.Add(result[i]);
+            }else{
+                ActivateAugment(result[i]);
+            }
+        }
+        switch(tier){
+            case Tier.Silver:
+                SetupGamblingResult(DeckBuilder.Instance.getAugmentByName(original_name), result, tierSprites[0], tierSprites[1]);break;
+            case Tier.Gold:
+                SetupGamblingResult(DeckBuilder.Instance.getAugmentByName(original_name), result, tierSprites[2], tierSprites[3]);break;
+            case Tier.Prismatic:
+                SetupGamblingResult(DeckBuilder.Instance.getAugmentByName(original_name), result, tierSprites[4], tierSprites[5]);break;
+        }
+    }
+    public void SetupGamblingResult(Augment og, Augment[] results, Sprite sprite, Sprite back){
+        ChangeColorsExtra(ExtraOriginalVessel);
+        ChangeSingular(og, ExtraOriginalVessel, -1, forGamble:true);
+        foreach(Transform child in ExtraSlotContainer.transform){
+            if(child.name.Contains("Clone")){Destroy(child.gameObject);}
+        }
+        Transform template = ExtraSlotContainer.transform.GetChild(0).transform;
+        foreach (Augment item in results)
+        {
+            Transform tr = Instantiate(template, ExtraSlotContainer);
+            ChangeColorsExtra(tr.gameObject);
+            ChangeSingular(item, tr.gameObject, -1, forGamble:true);
+            tr.gameObject.SetActive(true);
+            
+        }
+        
+        SlotsParent.GetComponent<Animator>().Play("ExtraSlots");
+
+        void ChangeColorsExtra(GameObject vessel){
+            vessel.GetComponent<Image>().sprite = back;
+            vessel.transform.Find("Shadow").GetComponent<Image>().sprite = sprite;
+        }
+    }
+    
+
+
 }
 
 
@@ -309,6 +386,8 @@ public class GameState{
     public int CollectedEmbers;
     public float Health;
     public int MaxHP;
+    public float AtkSpeed;
+    public string Character;
     public int[] EnemyIDs;
     public int CurrentRound;
     public bool[] NextTiers;
@@ -339,9 +418,7 @@ public class GameState{
 [Serializable]
 public class SerializedAugment{
     public string title;
-    public int level;
-    public SerializedAugment(string title, int level){
+    public SerializedAugment(string title){
         this.title = title;
-        this.level = level;
     }
 }

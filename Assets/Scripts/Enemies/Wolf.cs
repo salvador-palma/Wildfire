@@ -125,17 +125,20 @@ public class Wolf : Enemy
         }
         base.Die(onKill);
     }
-
-    protected override void PlayAttackAnimation(){
-        if(isStray){
-            GetComponent<Animator>().Play("StrayAttack");
-        }else if(isAlpha){
-            GetComponent<Animator>().Play("AlphaAttack");
-        }else{
-            GetComponent<Animator>().Play("DefaultAttack");
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            if(isStray){
+                GetComponent<Animator>().Play("StrayAttack");
+            }else if(isAlpha){
+                GetComponent<Animator>().Play("AlphaAttack");
+            }else{
+                GetComponent<Animator>().Play("DefaultAttack");
+            }
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
         }
-  
     }
+    
 
     public void scaleSprite(){
         Vector2 s = transform.localScale;
@@ -144,8 +147,5 @@ public class Wolf : Enemy
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

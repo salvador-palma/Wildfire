@@ -38,19 +38,31 @@ public class Bunny : Enemy
             if(timer > 0){
                 timer-=Time.deltaTime;
             }else{
-                timer = jumpTimer;
-                jumping = true;
-                GetComponent<Animator>().Play("Jump");
+                if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
+                    if(getSlowInfo("IceLand")[0] <= 0){
+                        timer = jumpTimer;
+                        jumping = true;
+                        GetComponent<Animator>().Play("Jump");
+                    }
+                }else{
+                    timer = jumpTimer;
+                    jumping = true;
+                    GetComponent<Animator>().Play("Jump");
+                }
+                
             }
         }
     }
+
+    public override void Stun(float f, string source = null){
+        if(source != null && source == "IceLand" && jumping){return;}
+        base.Stun(f);
+    }
+    
 
     public void Landed(){
         jumping = false;
     }
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

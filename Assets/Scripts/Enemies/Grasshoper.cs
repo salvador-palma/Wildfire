@@ -62,25 +62,38 @@ public class Grasshoper : Enemy
             if(timer > 0){
                 timer-=Time.deltaTime;
             }else if(!check){
-                check = true;
-                GetComponent<Animator>().Play("Jump");
+                if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
+                    if(getSlowInfo("IceLand")[0] <= 0){
+                        
+                        GetComponent<Animator>().Play("Jump");
+                    }
+                }else{
+                    
+                    GetComponent<Animator>().Play("Jump");
+                }
             }
         }
+    }
+
+    public override void Stun(float f, string source = null){
+        if(source != null && source == "IceLand" && jumping){return;}
+        base.Stun(f);
     }
     
     public void Landed(){
         jumping = false;
         timer = jumpTimer;
-        check=false;
+        check = false;
     }
     public void Jumping(){
         jumping = true;
+        check = true;
     }
 
     float prevX;
     public override void Move(){
 
-
+        if(Stunned){return;}
 
         float x = centerPoint.position.x + Mathf.Cos(angle) * radiusX;
         float y = centerPoint.position.y + Mathf.Sin(angle) * radiusY;
@@ -106,8 +119,5 @@ public class Grasshoper : Enemy
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

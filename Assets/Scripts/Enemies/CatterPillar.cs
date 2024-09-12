@@ -17,11 +17,18 @@ public class CatterPillar : Enemy
         }
         MaxHealth = Health;
     }
-    
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    public override void Move()
+    {
+        if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
+            if(getSlowInfo("IceLand")[0] <= 0){
+                base.Move();
+            }
+        }else{
+            base.Move();
+        }
+        
+    }
+    
     
 }

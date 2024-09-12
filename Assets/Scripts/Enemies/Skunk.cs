@@ -34,13 +34,15 @@ public class Skunk : Enemy
     }
 
 
-    override protected void PlayAttackAnimation(){
-        GetComponent<Animator>().Play("Stun");
+    
+    override protected IEnumerator PlayAttackAnimation(float delay){
+        while(Health>0){
+            GetComponent<Animator>().Play("Stun");
+            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        }
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

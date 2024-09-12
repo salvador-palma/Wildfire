@@ -7,8 +7,10 @@ using UnityEngine;
 public class StatikShiv : MonoBehaviour
 {
     public GameObject StatikPrefab;
+    public GameObject StatikEmpoweredPrefab;
     public Enemy currentTarget;
     public Vector2 locationOfEnemy;
+    public bool isPowered;
     float LineTimeFixed;
     public float LineTime = 100;
     public float NextDelayFixed;
@@ -67,15 +69,14 @@ public class StatikShiv : MonoBehaviour
             alreadyPassed.Add(currentTarget);
 
             Enemy target = Next();
-            if(target == null){Destroy(gameObject);return;}
+            if(target == null){Destroy(gameObject); if(isPowered){Debug.Log("Early Recall");} return;}
             ActivateLine(target.HitCenter.position);
-            GameObject go = Instantiate(StatikPrefab);
+            GameObject go = Instantiate(isPowered ? StatikEmpoweredPrefab : StatikPrefab);
             
             go.transform.position = target.HitCenter.position;
             SetupNext(go.GetComponent<StatikShiv>(), target);
             DealDamage(target);
-            
-            
+
         }catch(Exception e){
             string str = e.StackTrace;
         }
@@ -89,14 +90,26 @@ public class StatikShiv : MonoBehaviour
     }
 
     private void DealDamage(Enemy e){   
-        e.Hitted(Damage, 6, ignoreArmor: false, onHit:true, "Statik Energy");
+        if(isPowered){
+            Debug.Log("Powered");
+            e.Hitted(Damage, 14, ignoreArmor: true, onHit: true);
+        }else{
+            e.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , except:"Static Energy");
+        }
+        
     }
 
     private void SetupNext(StatikShiv statikShiv, Enemy t){
         if(TTL == MAXTTL){AudioManager.Instance.PlayFX(2, 2, 0.95f, 1.05f);}
+
+        if(isPowered){
+            statikShiv.isPowered = true;
+        }
+
         statikShiv.alreadyPassed = alreadyPassed;
-        statikShiv.TTL = TTL - 1;
-        statikShiv.Damage = (int)(Damage * 0.9f);
+        statikShiv.TTL =  TTL - 1;
+        statikShiv.MAXTTL = isPowered ? 30 : MAXTTL;
+        statikShiv.Damage = SkillTreeManager.Instance.getLevel("Static Energy") >= 2 ? Damage : (int)(Damage * 0.9f);
         statikShiv.currentTarget = t;
         statikShiv.NextDelay = NextDelayFixed;
         statikShiv.LineTime = LineTimeFixed;

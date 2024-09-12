@@ -105,6 +105,16 @@ public class Flare : MonoBehaviour
     }
 
     virtual protected void HitGround(Vector2 vec){
+
+        if(SecondShot.Instance != null && SkillTreeManager.Instance.getLevel("Multicaster") >= 2 && UnityEngine.Random.Range(0f, 1f) < 0.1f){
+           Debug.Log("Rebound");
+           Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
+           f.transform.position = vec;
+           f.setTarget(Flamey.Instance.getRandomHomingPosition());
+           
+
+        }
+
         Flamey.Instance.ApplyOnLand(vec);
 
         Destroy(FlareSpot);

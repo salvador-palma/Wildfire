@@ -15,6 +15,7 @@ public class BurnOnLand : OnLandEffect
 {
     public static BurnOnLand Instance;
     public GameObject prefab;
+    public GameObject prefabEverlast;
     public float size;
     public int damage;
     public float timegap;
@@ -29,6 +30,8 @@ public class BurnOnLand : OnLandEffect
         if(Instance == null){
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/BurnAOE");
+            prefabEverlast = Resources.Load<GameObject>("Prefab/AbilityCharacter/BurnAOE Everlasting");
+
         }else{
             Instance.Stack(this);
         }
@@ -64,7 +67,19 @@ public class BurnOnLand : OnLandEffect
             deck.removeClassFromDeck("LavaPoolDuration");
         }
         
+        if(!maxed){CheckMaxed();}
     }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .5f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Lava");
+            maxed = true;
+        }
+    }
+    public void SpawnExtraAssets(){
+        Flamey.Instance.SpawnObject(prefabEverlast);
+    }
+  
     public bool addList(){
         return Instance == this;
     }
@@ -91,6 +106,9 @@ public class BurnOnLand : OnLandEffect
     public string getIcon()
     {
         return "LavaPoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }
 
@@ -147,7 +165,19 @@ public class IceOnLand : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("IcePoolSize");
         }
-        
+        if(lasting >= 10){
+            lasting = 10;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("IcePoolDuration");
+        }
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .5f && size >= 2.5f && slow >= 0.5f && lasting >= 10 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Snow Pool");
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -155,7 +185,7 @@ public class IceOnLand : OnLandEffect
 
     public string getText()
     {
-        return "Ice Pool";
+        return "Snow Pool";
     }
 
     public string getType()
@@ -176,17 +206,22 @@ public class IceOnLand : OnLandEffect
     {
         return "IcePoolUnlock";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class DrainOnLand : OnLandEffect
 {
     public static DrainOnLand Instance;
     public GameObject prefab;
+    public GameObject prefabCarnivore;
     public float size;
     public float perc;
     public float timegap;
     public float prob;
     public float lasting;
+    public float carnivoreChance;
     public DrainOnLand(float size, float perc, float prob, float lasting){
         this.prob = prob;
         this.size = size;
@@ -196,6 +231,7 @@ public class DrainOnLand : OnLandEffect
         if(Instance == null){
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/DrainAOE");
+            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore");
         }else{
             Instance.Stack(this);
         }
@@ -203,8 +239,14 @@ public class DrainOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < carnivoreChance){
+                GameObject go = Flamey.Instance.SpawnObject(prefabCarnivore);
+                go.transform.position = pos;
+            }else{
+                GameObject go = Flamey.Instance.SpawnObject(prefab);
+                go.transform.position = pos;
+            }
+            
         }
     }
     public void Stack(DrainOnLand burnOnLand){
@@ -215,8 +257,8 @@ public class DrainOnLand : OnLandEffect
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 0.5f){
-            prob = .5f;
+        if(prob >= .25f){
+            prob = .25f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolProb");
         }
@@ -231,7 +273,15 @@ public class DrainOnLand : OnLandEffect
             deck.removeClassFromDeck("DrainPoolDuration");
         }
         
-        
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(prob >= .25f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Flower Field");
+            
+            maxed = true;
+        }
     }
     public bool addList(){
         return Instance == this;
@@ -259,5 +309,8 @@ public class DrainOnLand : OnLandEffect
     public string getIcon()
     {
         return "DrainPoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
     }
 }

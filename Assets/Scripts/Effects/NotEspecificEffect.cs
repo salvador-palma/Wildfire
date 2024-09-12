@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface NotEspecificEffect : Effect{
     public bool addList();
@@ -16,6 +17,9 @@ public class FlameCircle : NotEspecificEffect
     public int damage;
     public static FlameCircle Instance;
     public Spinner SpinnerInstance;
+    GameObject planetsPanelPrefab;
+    GameObject planetsPanel;
+    public int PlanetType = -1;
     
     public FlameCircle(int amount, int damage){
        
@@ -23,11 +27,18 @@ public class FlameCircle : NotEspecificEffect
         prevamount = amount;
         this.damage = damage;
         if(Instance == null){
+
             Instance = this;
-            GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount));
+            Spinner.multiplier=9f;
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=2){this.amount=2;}
+            GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+this.amount));
+            planetsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/PlanetSelectionPanel");
             SpinnerInstance = g.GetComponent<Spinner>();
             Deck.RoundOver += SetSpinFalse;
             Deck.RoundStart += SetSpinTrue;
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=1){
+                Spinner.multiplier*=2f;
+            }
             
         }else{
             Instance.Stack(this);
@@ -41,21 +52,40 @@ public class FlameCircle : NotEspecificEffect
         
     }
     public void SetSpinFalse(object sender ,EventArgs e){
+        Debug.Log(Spinner.multiplier);
         SetSpin(false);
     }
     public void SetSpinTrue(object sender ,EventArgs e){
+        
         SetSpin(true);
     }
     public void SetSpin(bool b){
         SpinnerInstance.canSpin = b;
+        if(PlanetType==3){
+            SpinnerInstance.GetComponent<Animator>().enabled=b;
+
+        }
+
     }
     public void UpdateAmount(){
-        if(amount != prevamount){
-            prevamount = amount;
+        if(amount >= 4 && !Character.Instance.isACharacter()){EnemySpawner.Instance.Paused = true;}
+        if(PlanetType==4){
+            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter "+amount)).GetComponent<Spinner>();
+            SpinnerInstance.kill();
+            SpinnerInstance = next;
+        }else if(PlanetType==5){
+            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn "+amount)).GetComponent<Spinner>();
+            SpinnerInstance.kill();
+            SpinnerInstance = next;
+            
+        }else{
             Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
             SpinnerInstance.kill();
             SpinnerInstance = next;
         }
+        
+            
+        
     }
     public bool addList()
     {
@@ -78,7 +108,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getText()
     {
-        return "Orbital Flames";
+        return "Orbits";
     }
 
     public string getType()
@@ -87,9 +117,19 @@ public class FlameCircle : NotEspecificEffect
     }
 
     public void Stack(FlameCircle flameCircle){
-        amount = Mathf.Min(flameCircle.amount + amount, 4);
+
+        if(flameCircle.amount>0){
+            if(SkillTreeManager.Instance.getLevel("Orbits")>=2){
+                amount = Mathf.Min(flameCircle.amount + 1 + amount, 4);
+            }else{
+                amount = Mathf.Min(flameCircle.amount + amount, 4);
+            }
+            UpdateAmount();
+        }
+        
+        
         damage += flameCircle.damage;
-        UpdateAmount();
+        
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
@@ -99,9 +139,63 @@ public class FlameCircle : NotEspecificEffect
             deck.removeClassFromDeck("OrbitalAmount");
         }  
           
+        if(!maxed){CheckMaxed();}
     }
-
-    
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 4f && !Character.Instance.isACharacter()){
+            StartSelectScreen();
+            maxed=true;
+        }
+    }
+    public void StartSelectScreen(){
+        EnemySpawner.Instance.Paused = true;
+        planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
+        
+    }
+    public void TransformIntoCharacter(int n){
+        SetSpin(true);
+        planetsPanel.GetComponent<Animator>().Play("ExitOptions");
+        PlanetType = n;
+        switch(n){
+            case 0: Character.Instance.SetupCharacter("OrbitalMercury"); break;
+            case 1: Character.Instance.SetupCharacter("OrbitalVenus"); break;
+            case 2: Character.Instance.SetupCharacter("OrbitalEarth"); break;
+            case 3: Character.Instance.SetupCharacter("OrbitalMars"); break;
+            case 4: Character.Instance.SetupCharacter("OrbitalJupiter"); break;
+            case 5: Character.Instance.SetupCharacter("OrbitalSaturn"); break;
+            case 6: Character.Instance.SetupCharacter("OrbitalUranus"); break;
+            case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
+        }
+        
+        
+    }
+    public void SpawnExtraAssets(int n){
+        PlanetType = n;
+        Debug.Log("SpawningExtra");
+        switch(n){
+            case 0:Spinner.multiplier *= 1.5f; break;
+            case 1:break;
+            case 2:Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Earth")).GetComponent<Spinner>();break;
+            case 3:SpinnerInstance.GetComponent<Animator>().enabled=true;break;
+            case 4:
+                UpdateAmount();
+            break;
+            case 5:
+                UpdateAmount();
+            break;
+            case 6:
+                amount = 4;
+                UpdateAmount();
+                SpinnerInstance.canSpin=true;
+                Deck.Instance.removeClassFromDeck("OrbitalAmount");
+            break;
+            case 7: Spinner.multiplier *= .25f;break;
+        }
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class MoneyMultipliers : NotEspecificEffect
@@ -109,34 +203,57 @@ public class MoneyMultipliers : NotEspecificEffect
     public static MoneyMultipliers Instance;
 
     public float mult;
-    public float p;
-    public MoneyMultipliers(float p, float mult, bool init = false){
+    public int perRound;
+    
+    public MoneyMultipliers(int perRound, float mult){
         this.mult = mult;
-        this.p = p;
-        if(init){
-            Instance = this;
-            return;
-        }
-
-        if(Instance == null){
-            Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0.1f, 1f, true));
-
-        }    
-        Instance.Stack(this);
+        this.perRound = perRound;
         
+        if(Instance == null){
+            Instance = this;
+            mult = Math.Max(1, mult);
+            Deck.RoundOver += GiveEmbersRound;
+            ReloadShinyStats();
+            return;
+
+        }else{
+            Instance.Stack(this);
+        }  
+    }
+    public void ReloadShinyStats(){
+        EnemySpawner.Instance.ShinyChance = 0.00001f;
+        switch(SkillTreeManager.Instance.getLevel("Ember Generation")){
+            case 1:
+                EnemySpawner.Instance.ShinyChance *= 10;
+                EnemySpawner.Instance.ShinyMultiplier = 10;
+                break;
+            case 2:
+                EnemySpawner.Instance.ShinyChance *= 100;
+                EnemySpawner.Instance.ShinyMultiplier=100;
+                break;
+        }
+        if(Character.Instance.isCharacter("Ember Generation")){
+            EnemySpawner.Instance.ShinyChance *= 10;
+            EnemySpawner.Instance.ShinyMultiplier=100;
+        }
+    }
+    public void GiveEmbersRound(object sender ,EventArgs e){
+        Flamey.Instance.addEmbers(perRound);
     }
     public void Stack(MoneyMultipliers moneyMultipliers){
-        p+=moneyMultipliers.p;
+        perRound+=moneyMultipliers.perRound;
         mult+=moneyMultipliers.mult;
         RemoveUselessAugments();
+        
     }
-    private void RemoveUselessAugments(){
-        if(p >= 1){
-            p = 1;
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("MoneyProb");
-        }  
-          
+    public bool maxed;
+    private void CheckMaxed(){
+        if(mult >= 2f && perRound >= 250 && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Ember Generation");
+        }
+    }
+    private void RemoveUselessAugments(){ 
+        if(!maxed){CheckMaxed();}
     }
     public bool addList()
     {
@@ -150,11 +267,15 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getDescription()
     {
-        return "Whenever you kill an enemy, there's a chance to loot more <color=#FFCC7C>embers</color> and multiply them. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
+        
+        return "Multiply your <color=#FFCC7C>ember</color> gains and passively win some each round. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%)<br>Multiplier: x{1}", Mathf.Round(p*100), Mathf.Round(mult*100)*0.01f);
+        if(EnemySpawner.Instance.ShinyChance > 0){
+            return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound, Mathf.Round(mult*100)*0.01f, (EnemySpawner.Instance.ShinyChance*100).ToString("F2"), EnemySpawner.Instance.ShinyMultiplier);
+        }
+        return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}", perRound, Mathf.Round(mult*100)*0.01f);
     }
 
     public string getIcon()
@@ -171,6 +292,9 @@ public class MoneyMultipliers : NotEspecificEffect
     {
         return "Especial Effect";
     }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class CandleTurrets : NotEspecificEffect
@@ -181,6 +305,8 @@ public class CandleTurrets : NotEspecificEffect
 
     public static CandleTurrets Instance;
     public static GameObject CandleCircle;
+
+    UnityEngine.UI.Image cooldownImage;
     
     public CandleTurrets(int dmg, float atkSpeed, int amount){
        
@@ -188,7 +314,8 @@ public class CandleTurrets : NotEspecificEffect
         this.dmg = dmg;
         this.atkSpeed = atkSpeed;
         if(Instance == null){
-            Instance = this;     
+            Instance = this;
+            this.amount *= SkillTreeManager.Instance.getLevel("Ritual") >= 2 ? 2 : 1;     
             StartCandleCircle();
             UpdateAmount();
         }else{
@@ -233,7 +360,7 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getText()
     {
-        return "Candle Turrets";
+        return "Ritual";
     }
 
     public string getType()
@@ -245,19 +372,16 @@ public class CandleTurrets : NotEspecificEffect
         
         dmg += candleTurrets.dmg;
         atkSpeed += candleTurrets.atkSpeed;
-        amount += candleTurrets.amount;
+        amount += candleTurrets.amount * (SkillTreeManager.Instance.getLevel("Ritual") >= 2 ? 2 : 1);
         RemoveUselessAugments();
     }
-    bool checkedForAmount = false;
+
+
     private void RemoveUselessAugments(){
        
-        if(amount >= 6 && !checkedForAmount){
-            checkedForAmount = true;
+        if(amount >= 6){
             amount = 6;
-            CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
-            GameObject.Find("logs").SetActive(false);
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("CandleAmount");
+            Deck.Instance.removeClassFromDeck("CandleAmount");
         } 
         if(atkSpeed >= 3f){
             atkSpeed = 3f;
@@ -265,9 +389,35 @@ public class CandleTurrets : NotEspecificEffect
             deck.removeClassFromDeck("CandleAtkSpeed");
         } 
           
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 6f && atkSpeed >= 3f && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Ritual");
+            maxed = true;
+        }
+    }
+    public void SpawnExtraAssets(){
+        CandleCircle.transform.GetChild(6).gameObject.SetActive(true);
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/CandleDmg"));
     }
 
-    
+
+    private int damageTicks;
+    public void AddDamageTick(){
+        damageTicks++;
+
+        if(damageTicks > 100){
+            damageTicks = 0;
+            dmg+=5;
+        }
+        cooldownImage.fillAmount = ((float)damageTicks)/100;
+    }
+
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }
 
 public class Summoner : NotEspecificEffect
@@ -279,30 +429,67 @@ public class Summoner : NotEspecificEffect
 
     public List<Bee> bees;
     public static Summoner Instance;
-    public static GameObject Bee;
+    public GameObject[] BeeTypes;
+
+    private int activeRoundsLeft;
+    private int activeRoundsCooldown = 5;
+    private UnityEngine.UI.Image cooldownImage;
     
     public Summoner(int dmg, float atkSpeed, float speed, int amount){
-       
+        
         this.amount = amount;
         this.dmg = dmg;
         this.atkSpeed = atkSpeed;
         this.speed = speed;
         if(Instance == null){
+            if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){this.amount*=2;}
             Instance = this;     
             bees = new List<Bee>();
-            Bee = Resources.Load<GameObject>("Prefab/Bee");
+            BeeTypes = new GameObject[]{
+                Resources.Load<GameObject>("Prefab/WorkerBee"),
+                Resources.Load<GameObject>("Prefab/PuncherBee"),
+                Resources.Load<GameObject>("Prefab/AssassinBee"),
+                Resources.Load<GameObject>("Prefab/AgileBee"),
+                Resources.Load<GameObject>("Prefab/WarriorBee"),
+                Resources.Load<GameObject>("Prefab/PollinatorBee"),
+                Resources.Load<GameObject>("Prefab/ChemicalBee"),
+            };
+            for(int i =0; i!=this.amount; i++){
+                 Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
+                b.UpdateStats();
+                bees.Add(b);
+            }
+           
             ApplyEffect();
         }else{
             Instance.Stack(this);
         }
     }
-
+    public void addBee(int amount, int type){
+        int max = 14;
+        if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){amount*=2;}
+        if(amount + this.amount > 14){
+            if(Character.Instance.isCharacter("Bee Summoner")){
+                this.amount += amount;
+                bees.Add(Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>());
+                RemoveUselessAugments();
+                return;
+            }else{
+                amount = max - this.amount;
+            }
+            
+        }
+        for(int i = 0;i<amount;i++){
+            Bee b = Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>();
+            b.UpdateStats();
+            bees.Add(b);
+        }
+        this.amount += amount; 
+        RemoveUselessAugments();
+    }
     public void ApplyEffect()
     {
-        for(int i = bees.Count; i < amount; i++){
-            bees.Add(Flamey.Instance.SpawnObject(Bee).GetComponent<Bee>());
-        }
-
+        RoundUpdate();
         foreach(Bee b in bees){
             b.UpdateStats();
         }
@@ -319,7 +506,8 @@ public class Summoner : NotEspecificEffect
     }
     public string getCaps()
     {
-        return string.Format("Bee Amount: {0} (Max. 10)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
+
+        return string.Format("Bee Amount: {0} (Max. 14)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
     }
 
     public string getIcon()
@@ -341,18 +529,17 @@ public class Summoner : NotEspecificEffect
         
         dmg += summoner.dmg;
         atkSpeed += summoner.atkSpeed;
-        amount += summoner.amount;
         speed += summoner.speed;
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(amount > 10){
-            amount = 10;
+        if( amount >= 14){
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("SummonAmount");
+            deck.removeClassFromDeck("SummonAmountExtra");
         } 
-        if(atkSpeed >= 3f){
-            atkSpeed = 3f;
+        if(atkSpeed >= 4f){
+            atkSpeed = 4f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("SummonAtkSpeed");
         } 
@@ -362,7 +549,34 @@ public class Summoner : NotEspecificEffect
             deck.removeClassFromDeck("SummonSpeed");
         } 
           
+        if(!maxed){CheckMaxed();}
+    }
+    public bool maxed;
+    private void CheckMaxed(){
+        if(amount >= 14 && atkSpeed >= 4f && speed >= 4f && !Character.Instance.isACharacter()){
+            Character.Instance.SetupCharacter("Bee Summoner");
+            maxed = true;
+        }
+    }
+    public void SpawnExtraAssets(){
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/SummonAmount"));
+    }
+    public void RoundUpdate(){
+        if(cooldownImage !=null){
+
+        
+            if(activeRoundsLeft<activeRoundsCooldown){
+                activeRoundsLeft++;
+                if(activeRoundsLeft==activeRoundsCooldown){
+                    activeRoundsLeft=0;
+                    addBee(1,0);
+                }
+                cooldownImage.fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+            }
+        }
     }
 
-    
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
 }

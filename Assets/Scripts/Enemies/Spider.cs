@@ -55,7 +55,7 @@ public class Spider : Enemy
     public override void Move(){
 
 
-
+        if(Stunned){return;}
         float x = centerPoint.position.x + Mathf.Cos(angle) * radiusX;
         float y = centerPoint.position.y + Mathf.Sin(angle) * radiusY;
 
@@ -79,8 +79,5 @@ public class Spider : Enemy
         
     }
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }

@@ -43,11 +43,13 @@ public class Hedgehog : Enemy
     }
     public int TitForTat = 10;
     int TitCounter = 0;
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null){
+    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
 
 
 
-
+        if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
+            Dmg *= 2;
+        }
         if(onHit && !Covered){
             Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);
         }
@@ -55,7 +57,8 @@ public class Hedgehog : Enemy
 
         if(!ignoreArmor){
             float B = Dmg/(1+(Armor/100f));
-            Dmg = (int)(B + (Dmg-B)*(onHit ? Flamey.Instance.ArmorPen : 0));
+            float armorPen = onHit || Character.Instance.isCharacter("Assassin")? Flamey.Instance.ArmorPen : 0;
+            Dmg = (int)(B + (Dmg-B)*armorPen);
         }
 
         
@@ -76,8 +79,5 @@ public class Hedgehog : Enemy
     }
 
 
-    public static int DEATH_AMOUNT = 0;
-    public override int getDeathAmount(){return DEATH_AMOUNT;}
-    public override void incDeathAmount(){DEATH_AMOUNT++;}
-    public override void ResetStatic(){DEATH_AMOUNT = 0;}
+    
 }
