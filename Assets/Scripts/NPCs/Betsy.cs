@@ -105,7 +105,7 @@ public class Betsy : NPC
     }
     [SerializeField] NPC Rowl;
     public void UnlockBees(){
-        MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the <color=#FFCC7C>Bee Summoner</color> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\">Rowl", 0);
+        MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the <color=#FFCC7C>Bee Summoner</color> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\"> Rowl", 0);
         Rowl.QueueDialogue(2);
         SkillTreeManager.Instance.Upgrade("Bee Summoner", Unlock:true);
         SkillTreeManager.Instance.InvokeUIReset();

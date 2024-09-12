@@ -37,6 +37,8 @@ public class MetaMenuUI : MonoBehaviour
     [SerializeField] Sprite[] Unlockables;
     private void Awake() {
         Instance = this;
+        QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = -1;
     }
     public void StartGame(){
         SceneManager.LoadScene("Game");

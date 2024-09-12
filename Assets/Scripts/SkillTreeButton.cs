@@ -61,7 +61,6 @@ public class SkillTreeButton : MonoBehaviour
         }
     }
     public void Clicked(){
-        Debug.Log("Clicked Skill...");
         SelectedButton = this;
         
         int lvl = getLevel();

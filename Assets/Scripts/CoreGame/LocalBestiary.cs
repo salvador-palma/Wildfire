@@ -401,22 +401,24 @@ public class LocalBestiary : MonoBehaviour
     }
     public void UpdateBestiaryValues(){
         bool caughtShiny = false;;
-        try{
-            foreach(KeyValuePair<string, int> animal in EnemySpawner.DeathPerEnemy){
+        
+        foreach(KeyValuePair<string, int> animal in EnemySpawner.DeathPerEnemy){
+            try{
                 if(animal.Key.Contains("Shiny")){
-                    Debug.Log("Bestiary Update: " + animal.Key);
+                    
                     string ReplacedString = animal.Key.Replace("Shiny","");
                     saved_milestones.AddMilestoneShiny(animals.FindIndex(0, animals.Count(), a=>a.name == ReplacedString), animal.Value);
                     caughtShiny=true;
-                    
+                        
                 }else{
-                    Debug.Log("Bestiary Update: " + animal.Key);
+                    
                     saved_milestones.AddMilestone(animals.FindIndex(0, animals.Count(), a=>a.name == animal.Key), animal.Value);
                 }
+            }catch{
+                Debug.Log("Error in Bestiary Update: " + animal.Key);
             }
-        }catch{
-            Debug.Log("Error in Bestiary Update");
         }
+        
         
         if(caughtShiny && GameVariables.GetVariable("ShinyTalk") == -1){
             GameVariables.SetVariable("ShinyTalk",0);

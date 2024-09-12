@@ -109,7 +109,7 @@ public class SkillTreeManager : MonoBehaviour
         
         string json = JsonUtility.ToJson(PlayerData);
         File.WriteAllText(Application.persistentDataPath + "/skills.json", json);
-        Debug.Log("Finished Writing...");
+        Debug.Log("Finished Writing Skill Tree...");
     }
     
     public void ReadData(){
@@ -117,7 +117,7 @@ public class SkillTreeManager : MonoBehaviour
         if(File.Exists(Application.persistentDataPath +"/skills.json")){
             string json = File.ReadAllText(Application.persistentDataPath +"/skills.json");
             PlayerData = JsonUtility.FromJson<SerializableList<Skills>>(json);
-            Debug.Log("Finished Reading...");
+            Debug.Log("Finished Reading Skill Tree...");
         }else{
             CreateFile();
             ReadData();
@@ -144,7 +144,6 @@ public class SkillTreeManager : MonoBehaviour
 
     //UI PARTITION
     public void DisplaySkill(string skill, int level){
-        Debug.Log("Displaying Skill...");
         anim.SetBool("DisplayInfo", true);
         
         

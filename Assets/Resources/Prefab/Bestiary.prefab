@@ -498,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1859522928141554284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -518,10 +518,10 @@ RectTransform:
   - {fileID: 8495389477668019115}
   m_Father: {fileID: 9045337272100669272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8081900708691570957
 CanvasRenderer:
@@ -3421,7 +3421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8495389477668019115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3784,7 +3784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1300216794389595120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3801,7 +3801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.779, y: -34.1}
+  m_AnchoredPosition: {x: 70.5, y: -37}
   m_SizeDelta: {x: 26.239, y: 25.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6922278727414743219
@@ -5450,7 +5450,7 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 848f7b49151fbb94589b3b6475dbf0b5, type: 2}
     IconSize: {x: 150.75, y: 143.12}
     IconPos: {x: 4.5, y: -7.7}
-  - name: Squirel
+  - name: Squirrel
     enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
     Wave: 2
     description: 

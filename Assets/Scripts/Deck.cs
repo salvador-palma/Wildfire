@@ -120,7 +120,6 @@ public class Deck : MonoBehaviour
         
         if(!EnemySpawner.Instance.Paused){
             RoundStart?.Invoke(this, new EventArgs());
-            Debug.Log("Not Paused");
             EnemySpawner.Instance.newRound();
         }
         

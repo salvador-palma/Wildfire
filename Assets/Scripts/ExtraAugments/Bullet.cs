@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         dmg = Bullets.Instance.dmg;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
 
