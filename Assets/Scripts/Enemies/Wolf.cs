@@ -70,19 +70,25 @@ public class Wolf : Enemy
     }
 
     public void Activate(){
-        if(isAlpha || isStray){
+        if(isStray){
             return;
         }
         GetComponent<Animator>().SetTrigger("isActive");
         Speed = RunningSpeed;
+        Damage += 50;
+        ArmorPen = Math.Min(1,ArmorPen+.25f);
     }
 
     public void TurnAlpha(){
         isAlpha = true;
-
+        
+        Flamey.Instance.target(this);
+        Speed = RunningSpeed;
+        Damage += 50;
+        ArmorPen = Math.Min(1,ArmorPen+.25f);
         howling = true;
         GetComponent<Animator>().Play("Howl");
-        Speed = RunningSpeed;
+        
         
     }
 

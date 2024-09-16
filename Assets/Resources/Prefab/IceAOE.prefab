@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8721496126903620108}
   m_Layer: 0
   m_Name: IceAOE
-  m_TagString: Untagged
+  m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,8 +54,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -99,7 +97,6 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8721496126903620102}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -123,8 +120,7 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.06669019, y: -0.050869316}
   m_Size: {x: 4.3521285, y: 2.2625375}
   m_Direction: 1
@@ -140,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b10d83d78cff2249a151a7708257b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slow: 0
+  LastingTime: 0
 --- !u!50 &8721496126903620097
 Rigidbody2D:
   serializedVersion: 4
@@ -169,7 +167,7 @@ Rigidbody2D:
   m_Constraints: 0
 --- !u!95 &8721496126903620111
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -183,7 +181,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

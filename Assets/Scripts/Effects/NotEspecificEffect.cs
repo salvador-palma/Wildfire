@@ -73,11 +73,6 @@ public class FlameCircle : NotEspecificEffect
             Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter "+amount)).GetComponent<Spinner>();
             SpinnerInstance.kill();
             SpinnerInstance = next;
-        }else if(PlanetType==5){
-            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn "+amount)).GetComponent<Spinner>();
-            SpinnerInstance.kill();
-            SpinnerInstance = next;
-            
         }else{
             Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
             SpinnerInstance.kill();
@@ -182,8 +177,7 @@ public class FlameCircle : NotEspecificEffect
                 UpdateAmount();
             break;
             case 5:
-                UpdateAmount();
-            break;
+                Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn")).GetComponent<Spinner>();break;
             case 6:
                 amount = 4;
                 UpdateAmount();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,9 +21,22 @@ public class Spinner : MonoBehaviour
             }
         
         }
+        Deck.RoundOver += SpinToggle;
+        Deck.RoundStart += SpinTogglefalse;
        
         
     }
+
+    private void SpinTogglefalse(object sender, EventArgs e)
+    {
+        canSpin = true;
+    }
+
+    private void SpinToggle(object sender, EventArgs e)
+    {
+        canSpin = false;
+    }
+
     private void Update() {
         if(canSpin){
             transform.Rotate(0,0,speed*multiplier*Time.deltaTime);

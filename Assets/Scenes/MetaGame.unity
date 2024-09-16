@@ -3211,7 +3211,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 698c219ef34df594ab901af015621aef, type: 3}
   - {fileID: 21300000, guid: cc830bc63225d5e4f92f2da99fcdac62, type: 3}
   - {fileID: 21300000, guid: 8891772be816e964da805ad3bf4f55f9, type: 3}
-  SaveStateEnabled: 0
+  SaveStateEnabled: 1
 --- !u!114 &275411190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27448,6 +27448,16 @@ PrefabInstance:
     - target: {fileID: 3460015415434498060, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.data[1].description
+      value: '<size=100%><color=#FFFF00>- Alpha -</color>
+
+        <size=80%>When
+        an <color=#FFFF00>Alpha</color> howls, it <color=#FF7000>taunts</color> the
+        campfire and <color=#FF7000>activates</color> nearby wolves. <color=#FF7000>Activated</color>
+        wolves gain <color=#AFEDFF>x2.5 movement speed,</color> <color=#FF5858>+0.25
+        Armor Penetration</color> and <color=#FF5858>+50 Dmg.'
       objectReference: {fileID: 0}
     - target: {fileID: 5533112890008238485, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -257,6 +257,7 @@ public class GameUI : MonoBehaviour
         }
         // Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
+        Deck.Instance.VisualOutroSlots();
         setUpFinalStats();
     }
     

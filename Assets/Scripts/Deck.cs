@@ -126,6 +126,10 @@ public class Deck : MonoBehaviour
 
     }
 
+    public void VisualOutroSlots(){
+        SlotsParent.GetComponent<Animator>().Play("OutroSlots");
+    }
+
     public void StartAugments(bool isPrismaticRound, bool OnlyUnlockables = false){
         if(Flamey.Instance.GameEnd){return;}
 

@@ -27,6 +27,7 @@ public class DrainAOE : MonoBehaviour
         }else{
             GetComponent<SpriteRenderer>().sprite = flowers[UnityEngine.Random.Range(0, flowers.Length-1)];
         }
+         if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
         
 
     }

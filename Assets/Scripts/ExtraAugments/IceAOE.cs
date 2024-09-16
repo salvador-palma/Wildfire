@@ -16,6 +16,7 @@ public class IceAOE : MonoBehaviour
         Slow = IceOnLand.Instance.slow;
         Vector2 scale = transform.localScale * IceOnLand.Instance.size;
         transform.localScale = scale;
+         if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
 
     }
     void Update()

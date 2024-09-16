@@ -21,6 +21,7 @@ public class BurnAOE : MonoBehaviour
             Vector2 scale = transform.localScale * BurnOnLand.Instance.size;
             transform.localScale = scale;
         }
+        if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
         
         
 
@@ -37,7 +38,7 @@ public class BurnAOE : MonoBehaviour
                     {
                         if(item == null){continue;}
                         item.Hitted(EverLasting ? BurnOnLand.Instance.damage : Damage,9, ignoreArmor:false, onHit: false, source: "Lava Pool");
-                        item.Armor -= Math.Max(1, (int)(item.Armor * .05f));
+                        item.Armor -= Math.Max(0, (int)(item.Armor * .02f));
                     }
                 }else{
                     foreach (Enemy item in colliding)
