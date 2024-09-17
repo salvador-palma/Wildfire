@@ -199,13 +199,12 @@ public class MetaMenuUI : MonoBehaviour
         StartChat();
         Name.text = defaultName;
         Message.text = "";
-        
         foreach (Dialogue d in dialogue)
         {   
-            
             ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
-
             yield return new WaitUntil(() => triggerNext >= 2);
+            ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
+
             triggerNext = 0;
         }
         EndChat();
