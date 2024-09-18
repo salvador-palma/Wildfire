@@ -268,7 +268,8 @@ public class Flamey : MonoBehaviour
         return 0.8f - 0.008f * perc;
     }
     public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake=true, int idHitTxt= 2){
-
+        
+        if(onhitted){ApplyOnHitted(attacker);}
         if(Unhittable){return;}
 
         if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2 && BurstShot.Instance != null){
@@ -284,7 +285,7 @@ public class Flamey : MonoBehaviour
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
         TotalDamageTaken+=(ulong)dmgeff;
 
-        if(onhitted){ApplyOnHitted(attacker);}
+        
 
         float shieldDamage = Shield - dmgeff;
         

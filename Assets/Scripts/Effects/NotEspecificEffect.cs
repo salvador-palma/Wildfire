@@ -219,7 +219,7 @@ public class MoneyMultipliers : NotEspecificEffect
         switch(SkillTreeManager.Instance.getLevel("Ember Generation")){
             case 1:
                 EnemySpawner.Instance.ShinyChance *= 10;
-                EnemySpawner.Instance.ShinyMultiplier = 10;
+                EnemySpawner.Instance.ShinyMultiplier=10;
                 break;
             case 2:
                 EnemySpawner.Instance.ShinyChance *= 100;
@@ -228,7 +228,7 @@ public class MoneyMultipliers : NotEspecificEffect
         }
         if(Character.Instance.isCharacter("Ember Generation")){
             EnemySpawner.Instance.ShinyChance *= 10;
-            EnemySpawner.Instance.ShinyMultiplier=100;
+            EnemySpawner.Instance.ShinyMultiplier*=10;
         }
     }
     public void GiveEmbersRound(object sender ,EventArgs e){

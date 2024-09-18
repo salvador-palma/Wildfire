@@ -1,21 +1,22 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class Mines : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TextMeshProUGUI MineAmountText;
     [SerializeField] TMP_InputField WageAmountText;
+    [SerializeField] GameObject OutGamePanel;
     [SerializeField] GameObject InGamePanel;
     [SerializeField] Transform grid;
     [SerializeField] TextMeshProUGUI MultiplierTxt;
     [SerializeField] TextMeshProUGUI CashOutTxt;
+    [SerializeField] TextMeshProUGUI TotalEmberAmount;
+    [SerializeField] TextMeshProUGUI GainEmberAmount;
 
     [Header("Values")]
     [SerializeField] private int bet;
@@ -27,8 +28,21 @@ public class Mines : MonoBehaviour
     private void Start() {
         WageAmountText.text = "1000";
 
-        Debug.Log("Winnging Probability: " + calculateWinningProbability(3,3));
-        Debug.Log("Multiplier: " + calculateMultiplier(calculateWinningProbability(3,3)));
+        TotalEmberAmount.text = SkillTreeManager.Instance.PlayerData.embers.ToString();
+        WageAmountText.onValueChanged.AddListener(OnValueChanged);
+    }
+
+    private void OnValueChanged(string arg0)
+    {
+        try{
+            int n = int.Parse(arg0);
+            if(n < 0){WageAmountText.text = "0";}
+            if(n > SkillTreeManager.Instance.PlayerData.embers){WageAmountText.text = SkillTreeManager.Instance.PlayerData.embers.ToString();}
+        }catch{
+            WageAmountText.text="0";
+        }
+        
+        
     }
 
     public float calculateWinningProbability(int spaces_cleared, int bombs){
@@ -55,6 +69,7 @@ public class Mines : MonoBehaviour
     {
         ClearPreviousGame();
         bet = int.Parse(WageAmountText.text);
+        AddEmbersToSkillTree(-1 * bet);
         clearedSlots = 0;
         mines = new int[mineAmount];
         multiplier=0;
@@ -76,7 +91,10 @@ public class Mines : MonoBehaviour
     {
         foreach (Transform pot in grid)
         {
-            pot.GetComponent<Animator>().Play("Default");
+            pot.GetComponent<Animator>().SetTrigger("Down");
+            
+            
+            
         }
     }
 
@@ -92,11 +110,13 @@ public class Mines : MonoBehaviour
     public void UpdateSetupUI(bool On){
         WageAmountText.interactable = !On;
         InGamePanel.SetActive(On);
+        OutGamePanel.SetActive(!On);
     }
 
     //====== IN GAME SECTION =======
 
     public void Clicked(int ID){
+        grid.GetChild(ID).GetComponent<Animator>().ResetTrigger("Down");
         if(!inGame){return;}
         if(mines.Contains(ID)){
             grid.GetChild(ID).GetComponent<Animator>().Play("EaterPopUp");
@@ -104,20 +124,23 @@ public class Mines : MonoBehaviour
             EndGame();
         }else{
             grid.GetChild(ID).GetComponent<Animator>().Play("FlowerPopUp");
+            InGamePanel.GetComponent<Animator>().SetTrigger("Right");
             IncrementClearSlots();
         }
     }
+
 
     private void IncrementClearSlots()
     {
         clearedSlots++;
         multiplier = calculateMultiplier(calculateWinningProbability(clearedSlots,mineAmount));
-        MultiplierTxt.text = multiplier.ToString();
+        MultiplierTxt.text = "x" + multiplier.ToString("F2");
         CashOutTxt.text = Math.Round(bet*multiplier).ToString();
 
     }
     public void Cashout(){
         Debug.Log("Won: +" + Math.Round(bet*multiplier) + " Embers");
+        AddEmbersToSkillTree((int)Math.Round(bet*multiplier));
         EndGame();
     }
 
@@ -125,4 +148,48 @@ public class Mines : MonoBehaviour
         UpdateSetupUI(false);
         inGame = false;
     }
+
+    public void AddEmbersToSkillTree(int n){
+        GainEmberAmount.text = (n < 0 ? "" : "+") + n.ToString();
+        if(n>0){
+            GainEmberAmount.color = new Color(1, .67f, 0);
+        }else{
+            GainEmberAmount.color = new Color(.89f, .36f, .3f);
+        }
+        SkillTreeManager.Instance.AddEmbers(n);
+        GetComponent<Animator>().Play("GainEmbers");
+        
+    }   
+    public void UpdateEmberAmount(){
+
+        cur = int.Parse(TotalEmberAmount.text);
+        obj = SkillTreeManager.Instance.PlayerData.embers;
+
+        speed = Math.Max(10, (int)(Math.Abs(cur-obj)/100f));
+        dir = cur < obj ? 1 : -1;
+        TextOn= true;
+        
+    }
+
+    public int cur;
+    public int obj;
+    public float interval = .0001f;
+    public float intervalTimer = .0001f;
+    public int speed = 10;
+    public int dir;
+    public bool TextOn = false;
+    private void Update() {
+        if(TextOn){
+            if(intervalTimer<0){
+                intervalTimer = interval;
+                cur+=dir*speed;
+                TotalEmberAmount.text = cur.ToString();
+            }else{
+                intervalTimer-=Time.deltaTime;
+            }
+            if((dir==1 && cur > obj )||(dir==-1 && cur < obj )){TextOn = false;cur = obj; TotalEmberAmount.text = cur.ToString();}
+            
+        }
+    }
+
 }

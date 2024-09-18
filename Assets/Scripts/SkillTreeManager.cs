@@ -31,7 +31,7 @@ public class Ability{
 public class SkillTreeManager : MonoBehaviour
 {
     
-    [SerializeField] SerializableList<Skills> PlayerData;
+    [SerializeField] public SerializableList<Skills> PlayerData;
     [SerializeField] Ability[] Abilities;
     public static SkillTreeManager Instance;
 
@@ -134,9 +134,14 @@ public class SkillTreeManager : MonoBehaviour
             string jsonR = File.ReadAllText(Application.persistentDataPath +"/skills.json");
             SerializableList<Skills> p  = JsonUtility.FromJson<SerializableList<Skills>>(jsonR);
             p.embers += n;
+            
             string jsonW = JsonUtility.ToJson(p);
             File.WriteAllText(Application.persistentDataPath + "/skills.json", jsonW);
         }
+    }
+    public void AddEmbers(int n){
+        PlayerData.embers += n;
+        WritingData();
     }
 
 

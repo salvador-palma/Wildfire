@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
@@ -257,7 +258,7 @@ public class GameUI : MonoBehaviour
         }
         // Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
         GetComponent<Animator>().Play("GameOver");
-        Deck.Instance.VisualOutroSlots();
+        if(EnemySpawner.Instance.isOnAugments){Deck.Instance.VisualOutroSlots();}
         setUpFinalStats();
     }
     

@@ -88,6 +88,7 @@ public class ThornsOnHitted : OnHittedEffects
             
             Flamey.Instance.Unhittable = true;
             Flamey.Instance.GetComponent<Animator>().SetBool("ThornsArmor", true);
+            
             Flamey.Instance.callFunctionAfter(() =>{Flamey.Instance.GetComponent<Animator>().SetBool("ThornsArmor", false);Flamey.Instance.Unhittable = false;}, 30f);
             activeCooldownImage.interactable = false;
             activeRoundsLeft = 0;
