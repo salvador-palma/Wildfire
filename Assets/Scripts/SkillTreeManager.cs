@@ -16,7 +16,7 @@ public class Skills{
 }
 [System.Serializable]
 public class SerializableList<T> {
-    public int embers;
+    public long embers;
     public int skillTreeEmbers;
     public List<T> skills;
 }
@@ -139,7 +139,7 @@ public class SkillTreeManager : MonoBehaviour
             File.WriteAllText(Application.persistentDataPath + "/skills.json", jsonW);
         }
     }
-    public void AddEmbers(int n){
+    public void AddEmbers(long n){
         PlayerData.embers += n;
         WritingData();
     }
