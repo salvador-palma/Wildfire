@@ -113,14 +113,18 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Die(bool onKill = true){
         if(this==null){return;}
+        try{
+            Flamey.Instance.addEmbers(calculateEmbers());
+            flame.TotalKills++;
+            PlayHitSoundFx();
+            CameraShake.Shake(0.4f,0.05f);
+            
+            EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
+            if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
+        }catch{
+            Debug.Log("Error at: Enemy.Die()");
+        }
         
-        Flamey.Instance.addEmbers(calculateEmbers());
-        flame.TotalKills++;
-        PlayHitSoundFx();
-        CameraShake.Shake(0.4f,0.05f);
-        
-        EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
-        if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
         Destroy(gameObject);
     }
 

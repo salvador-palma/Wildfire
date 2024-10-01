@@ -124,6 +124,9 @@ public class Flamey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space)){
+            timerAS = 0;
+        }
         if(GameEnd || Health <= 0){return;}
         if(Input.GetKeyDown(KeyCode.Escape)){
             GameUI.Instance.TogglePausePanel();
@@ -237,7 +240,11 @@ public class Flamey : MonoBehaviour
     public UnityEngine.Vector2 getRandomHomingPosition(){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
         try{
+
             GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+            while(!g.GetComponent<Enemy>().canTarget()){
+                g = go[UnityEngine.Random.Range(0, go.Length)];
+            }
             return g.GetComponent<Enemy>().HitCenter.position;
         }catch{
             Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");

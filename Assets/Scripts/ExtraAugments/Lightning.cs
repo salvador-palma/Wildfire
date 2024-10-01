@@ -33,7 +33,7 @@ public class Lightning : MonoBehaviour
                 }
                 if(SkillTreeManager.Instance.getLevel("Thunder")>=2){
                     foreach(Enemy col in targets){
-
+                        if(!col.canTarget()){continue;}
                         col.Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
                         col.Stun(2f);
                     }

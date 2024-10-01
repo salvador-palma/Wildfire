@@ -100,7 +100,7 @@ public class NPC : MonoBehaviour
         if(own_dialogues.dequeueAuto){
            afterEvent.AddListener(()=>DequeueDialogue(ID));
         }
-        StartCoroutine(MetaMenuUI.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
+        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
     }
     private void StartQueuedDialogue(){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
@@ -119,6 +119,10 @@ public class NPC : MonoBehaviour
     }
     protected void UpdateNotification(object sender = null, EventArgs e= null){
         transform.GetChild(0).gameObject.SetActive(hasPingNotification() || hasAvailableDialogue());
+    }
+
+    protected void SetVariable(string name, int value){
+        GameVariables.SetVariable(name, value); 
     }
 
     /* ===== I/O FUNCTIONS ===== */

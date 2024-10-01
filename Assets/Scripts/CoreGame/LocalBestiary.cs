@@ -62,7 +62,7 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] GameObject[] BestiaryPanels;
     [SerializeField] Sprite[] Stars;
     [SerializeField] Color[] StarsColor;
-    [SerializeField] BestiarySaveData saved_milestones;
+    [SerializeField] public BestiarySaveData saved_milestones;
 
     //GENERAL
     TextMeshProUGUI title;
@@ -91,9 +91,7 @@ public class LocalBestiary : MonoBehaviour
 
     public void Awake(){
         INSTANCE = this;
-        if(SceneManager.GetActiveScene().name == "Game"){
-            gameObject.SetActive(false);
-        }
+        
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
@@ -105,6 +103,7 @@ public class LocalBestiary : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "Game"){
             BestiaryTabs = new string[2]{"STATS","ABILITIES"};
+            gameObject.SetActive(false);
         }
     }
     
@@ -135,6 +134,22 @@ public class LocalBestiary : MonoBehaviour
     }
 
     /* ===== BESTIARY SLOTS ===== */
+    public void UpdateSlots(){
+        
+        try{
+            foreach (Transform item in Container.transform)
+            {
+                if(item.gameObject.activeSelf){
+                    Destroy(item.gameObject);
+                }
+                
+            }
+        }catch{
+            Debug.Log("No Bestiary Container (for some reason)");
+        }
+        
+        InitSlots();
+    }
     private void InitSlots(){
         AvailableClaims=0;
         int i = 0;
@@ -334,6 +349,21 @@ public class LocalBestiary : MonoBehaviour
         }
         return i;
     }
+    public int getMilestoneAmount(string name){
+        return getMilestoneAmount(animals.FindIndex(0, animals.Count(), a=>a.name == name));
+    }
+    public int getMilestoneAmount(int ID){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
+        return animalSaveData.DeathAmount;
+    }
+    public void UnlockView(string name){
+        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
+        
+
+        saved_milestones.AddMilestone(ID , 1);
+        WritingData();
+    }
     private int GetShinyProgress(int ID){
         return saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID).ShinyCaptured;
     }
@@ -344,7 +374,6 @@ public class LocalBestiary : MonoBehaviour
         for (int i = claimed_rewards; i < rewards_capable_to_claim; i++)
         {
            total_rewards_in_embers += milestone_rewards[i];
-          
         }
         AvailableClaims--;
         saved_milestones.animals[AnimalToClaimID].RetrievedRewards = rewards_capable_to_claim;

@@ -236,6 +236,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         void IncrementBinocularHindSight(){
+            
             Debug.Log("Increment Binocular");
             int j = 0;
             for (int i = start_from; i < start_from+HindSightDeepness; i++)
@@ -250,6 +251,7 @@ public class EnemySpawner : MonoBehaviour
                     Debug.Log("Increment Ignore");
                 }
             }
+            LocalBestiary.INSTANCE.UpdateSlots();
         }
         void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize){
             RT.anchoredPosition = IconPos;
@@ -354,6 +356,18 @@ public class EnemySpawner : MonoBehaviour
         }else{
             DeathPerEnemy[enemy_name] = 1;
         }
+
+        string og = enemy_name.Contains("Shiny") ? enemy_name.Replace("Shiny","") : enemy_name;
+        if(LocalBestiary.INSTANCE.getMilestoneAmount(og) < 0){
+            Debug.Log("Bestiary Doesn't have: " + og);
+
+            LocalBestiary.INSTANCE.UnlockView(og);
+            Debug.Log("Unlocked: " + og);
+            LocalBestiary.INSTANCE.UpdateSlots();
+            Debug.Log("Slots Updated");
+        }
+
+
     }
     
 }

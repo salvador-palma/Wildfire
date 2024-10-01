@@ -61,6 +61,7 @@ public class SkillTreeManager : MonoBehaviour
         ReadData();
     }
     private void Start(){
+        
         changeEmberAmountUI();
     }
     
@@ -140,7 +141,8 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
     public void AddEmbers(long n){
-        PlayerData.embers += n;
+        
+        PlayerData.embers = Math.Min(PlayerData.embers + n, 2147483647);
         WritingData();
     }
 

@@ -113,6 +113,7 @@ public class Plinko : MonoBehaviour
         }
 
         roundEmberAmount+=n;
+        
        
         GetComponent<Animator>().Play("GainEmbers");
         TotalRun += n;

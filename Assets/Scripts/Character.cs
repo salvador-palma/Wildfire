@@ -62,10 +62,10 @@ public class Character : MonoBehaviour
     // *********************************************************************************************** //
     // *************************************** IN-GAME SECTION *************************************** //
     // *********************************************************************************************** //
-    public void SetupCharacter(string abilty_name, UnityAction ExtraSetup = null){
-        SetupCharacter(characterDatas.Where(e => e.AbilityName == abilty_name).First(), ExtraSetup);
+    public void SetupCharacter(string abilty_name){
+        SetupCharacter(characterDatas.Where(e => e.AbilityName == abilty_name).First());
     }
-    public void SetupCharacter(CharacterData type, UnityAction ExtraSetup = null){
+    public void SetupCharacter(CharacterData type){
         if(type == null){
             throw new ArgumentNullException("Type cannot be null");
         }
@@ -80,8 +80,6 @@ public class Character : MonoBehaviour
         GameUI.Instance.UpdateProfileCharacter();
         if(EnemySpawner.Instance.current_round <= 0){
             SetupActiveLooks();
-            if(ExtraSetup != null){ExtraSetup();}
-            
         }else{
             EnemySpawner.Instance.Paused = true;
             GameUI.Instance.playCharacterTransition();
