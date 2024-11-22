@@ -51,7 +51,7 @@ public class LocalBestiary : MonoBehaviour
     public static LocalBestiary INSTANCE;
     public static int AvailableClaims;
     string[] BestiaryTabs = new string[3]{"STATS","ABILITIES", "MILESTONES"};
-    public int[] milestones = new int[5]{100, 500, 1500, 5000, 15000};
+    public int[] milestones = new int[5]{100, 500, 2500, 10000, 50000};
     private int[] milestone_rewards = new int[5]{500, 1000, 2500, 7500, 20000};
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES

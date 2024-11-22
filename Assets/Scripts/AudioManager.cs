@@ -13,7 +13,6 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         
     }
-    //0.049 0.074 0.074   own 0.02
 
     public void PlayFX(int SourceIndex, int SoundIndex, float rangeMin = -1f, float rangeMax = 0f){
         if (playing > 10) return;
@@ -22,6 +21,12 @@ public class AudioManager : MonoBehaviour
         }
         StartCoroutine(Playclip(AudioClips[SoundIndex],audioSources[SourceIndex]));
         
+    }
+    public static void Speak(AudioClip audioClip, float max, float min){
+        Instance.audioSources[0].pitch = Random.Range(min, max);
+        Instance.audioSources[0].clip =  audioClip;
+        Instance.audioSources[0].Play(); 
+
     }
 
     IEnumerator Playclip(AudioClip clip, AudioSource source)

@@ -14,6 +14,7 @@ using UnityEngine.UI;
 public class MetaMenuUI : MonoBehaviour
 {
     //Deug
+    [SerializeField] private GameObject MarketPanel;
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject CharacterSelectPanel;
@@ -49,6 +50,9 @@ public class MetaMenuUI : MonoBehaviour
 
     public void BestiaryMenuToggle(){
         BestiaryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+    }
+    public void MarketMenuToggle(){
+        MarketPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 7000, 0);
     }
  
     public void UpgradeButton(){
@@ -107,6 +111,7 @@ public class MetaMenuUI : MonoBehaviour
                                 new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 0); GameState.Delete(); Chat.Instance.EndChat(); PlayOutro();})
                             });
         }else{
+            
             PlayOutro();
         }
     }

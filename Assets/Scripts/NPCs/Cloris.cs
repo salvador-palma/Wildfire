@@ -9,8 +9,10 @@ public class Cloris : NPC
     {
         if(GameVariables.GetVariable("ClorisWardrobe") == 0){
             GameVariables.SetVariable("ClorisWardrobe",1);
+            CompleteQuest(6);
             QueueDialogue(3);
         }
+      
 
     }
     public override void ClickedCharacter(){

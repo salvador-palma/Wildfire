@@ -25,8 +25,9 @@ public class Betsy : NPC
         */
         LocalBestiary B = LocalBestiary.INSTANCE;
 
-        if(GameVariables.GetVariable("BestiaryReady") <= 0 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= 3){
+        if(GameVariables.GetVariable("BestiaryReady") <= 0 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= 5){
             GameVariables.SetVariable("BestiaryReady", 1); 
+            CompleteQuest(0);
             QueueDialogue(1);
         }
         if(GameVariables.GetVariable("BeeQuest") <= 0 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= B.get_Amount_Of_Enemies_With_Milestones_Above(-1)/2){
@@ -48,20 +49,28 @@ public class Betsy : NPC
         
         switch(binocularLvl){
             case 0:
-            Debug.Log(B.get_Amount_Of_Enemies_With_Milestones_Above(0));
-                if(B.get_Amount_Of_Enemies_With_Milestones_Above(0) >= 10){
-                    QueueDialogue(2);}
+            
+                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[0]) >= 5 &&  GameVariables.GetVariable("BlackMarketReady") < 0){
+                    GameVariables.SetVariable("BlackMarketReady",0);
+                    CompleteQuest(1);
+                    QueueDialogue(9);
+                }
                 break;
             case 1:
-                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[0]) >= 10){ 
-                    QueueDialogue(3);}
+                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[1]) >= 10){ 
+                    
+                    CompleteQuest(2);
+                    QueueDialogue(3);
+                    }
                 break;
             case 2:
-                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[1]) >= 15){ 
+                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[2]) >= 15){ 
+                    CompleteQuest(3);
                     QueueDialogue(4);}
                 break;
             case 3:
-                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[2]) >= 25){ 
+                if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[3]) >= 20){ 
+                    CompleteQuest(4);
                     QueueDialogue(5);}
                 break;
         }
@@ -75,6 +84,7 @@ public class Betsy : NPC
     }
 
     public void SetBinocularLevel(int n){
+        if(n < GameVariables.GetVariable("BinocularLevel")){return;}
          GameVariables.SetVariable("BinocularLevel",n);
          CharacterLoad();
          UpdateNotification();
@@ -104,6 +114,7 @@ public class Betsy : NPC
         DefaultClickBehaviour.Invoke();
     }
     [SerializeField] NPC Rowl;
+    [SerializeField] NPC Naal;
     public void UnlockBees(){
         MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "BEE SUMMONER", "You can now unlock the <color=#FFCC7C>Bee Summoner</color> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\"> Rowl", 0);
         Rowl.QueueDialogue(2);

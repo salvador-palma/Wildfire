@@ -12,6 +12,11 @@ public class Dialogue{
     [TextArea]public string message;
     public Sprite avatar;
     public string Name;
+    public Dialogue(string message, Sprite avatar, string name){
+        this.message = message;
+        this.avatar = avatar;
+        Name = name;
+    }
     
 }
 [System.Serializable]
@@ -19,6 +24,10 @@ public class RunTimeDialogues{
     public Dialogue[] dialogues;
     public UnityEvent afterEvent;
     public bool dequeueAuto;
+    public RunTimeDialogues(Dialogue[] dialogues,UnityEvent afterEvent){
+        this.dialogues = dialogues;
+        this.afterEvent = afterEvent;
+    }
 }
 [System.Serializable]
 public class CharacterSavedDialogues{
@@ -45,6 +54,9 @@ public class NPC : MonoBehaviour
     [SerializeField] public static NPCSaveData savedData;
     public List<RunTimeDialogues> runTimeDialogues;
     public string Name;
+    public AudioClip[] voice;
+    public float maxFreq;
+    public float minFreq;
     public UnityEvent DefaultClickBehaviour;
 
     private void Start() {
@@ -92,7 +104,9 @@ public class NPC : MonoBehaviour
         WritingData();
         UpdateNotification();
     }
-
+    public void StartDialogue(int[] IDs){
+        StartDialogue(IDs[UnityEngine.Random.Range(0, IDs.Length)]);
+    }
     public void StartDialogue(int ID){
         RunTimeDialogues own_dialogues = runTimeDialogues[ID];
         UnityEvent afterEvent = own_dialogues.afterEvent;
@@ -100,7 +114,8 @@ public class NPC : MonoBehaviour
         if(own_dialogues.dequeueAuto){
            afterEvent.AddListener(()=>DequeueDialogue(ID));
         }
-        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
+        
+        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent, v:voice[UnityEngine.Random.Range(0, voice.Length-1)], max:maxFreq, min:minFreq));
     }
     private void StartQueuedDialogue(){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
@@ -135,7 +150,7 @@ public class NPC : MonoBehaviour
             savedData = new NPCSaveData();
             savedData.data = new List<CharacterSavedDialogues>();
         }
-         hasRead = true;
+        hasRead = true;
     }
 
     public static void WritingData(){
@@ -146,9 +161,18 @@ public class NPC : MonoBehaviour
     }
 
     public void SetHovered(bool check) {
+        InteractiveCursor.ChangeCursor(check? 1 : 0);
         GetComponent<Animator>().SetBool("NPCHovering", check);
     }
     
+    public void UnlockQuest(int n){
+        GameVariables.UnlockQuest(n);
+        QuestBoard.ReloadQuests();
+    }
+    public void CompleteQuest(int n){
+        GameVariables.CompleteQuest(n);
+        QuestBoard.ReloadQuests();
+    }
     
    
 }
@@ -160,8 +184,14 @@ public class GameVariables{
         public string name;
         public int value;
     }
-    [System.Serializable]
-    class VariableList{public List<Variable> variables;}
+    
+    [Serializable]
+    class VariableList{
+        public int[] OnGoingQuests = new int[0];
+        public int[] CompletedQuests = new int[0];
+
+        public List<Variable> variables;
+    }
     private static GameVariables Instance;
     private VariableList variableList;
     private GameVariables(){ReadData(); Instance = this;}
@@ -207,6 +237,47 @@ public class GameVariables{
         }
     }
 
+
+
+    public static void UnlockQuest(int id){
+        Debug.Log("Quest Started: " + id);
+        int[] OnGoing = getInstance().variableList.OnGoingQuests;
+        if(OnGoing.Contains(id)){
+            Debug.Log("Quest was already Active: " + id);
+        }else if(!getInstance().variableList.CompletedQuests.Contains(id)){
+            getInstance().variableList.OnGoingQuests = OnGoing.Append(id).ToArray();
+            getInstance().WritingData();
+        }
+        if(GetVariable("QuestBookReady") == -1){
+            if(getInstance().variableList.OnGoingQuests.Length + getInstance().variableList.CompletedQuests.Length >= 2){
+                SetVariable("QuestBookReady", 0);
+            }
+        }
+
+        QuestBoard.ReloadQuests();
+        
+    }
+    public static void CompleteQuest(int id){
+        Debug.Log("Quest Completed: " + id);
+        int[][] Quests = GetQuests();
+        if(Quests[1].Contains(id)){
+            Debug.Log("Quest was already Completed: " + id);
+        }else{
+            getInstance().variableList.OnGoingQuests =  Quests[0].Where(x => x != id).ToArray();
+            getInstance().variableList.CompletedQuests = getInstance().variableList.CompletedQuests.Append(id).ToArray();
+            getInstance().WritingData();
+        }
+
+        QuestBoard.ReloadQuests();
+
+
+    }
+    public static int[][] GetQuests(){
+        GameVariables gv = getInstance();
+        return new int[][] {gv.variableList.OnGoingQuests,gv.variableList.CompletedQuests};
+    }
+
+    
 
 
 
