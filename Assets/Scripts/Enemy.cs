@@ -104,7 +104,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     
     private void PlayHitSoundFx(){
-        AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
+        // AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
     }
     public void PlayHitAnimation(int dmg, int textID){
         GetComponent<Animator>().Play("EnemyHit");

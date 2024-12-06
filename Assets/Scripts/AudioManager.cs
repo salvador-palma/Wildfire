@@ -1,39 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
+
+using System.Dynamic;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-    [SerializeField] AudioClip[] AudioClips;
-    [SerializeField] AudioSource[] audioSources;
-    private int playing;
-    void Start()
-    {
-        Instance = this;
-        
-    }
+    public static AudioManager Instance { get; private set;}
 
-    public void PlayFX(int SourceIndex, int SoundIndex, float rangeMin = -1f, float rangeMax = 0f){
-        if (playing > 10) return;
-        if(rangeMin != -1f){
-            audioSources[SourceIndex].pitch = Random.Range(rangeMin, rangeMax);
+    private EventInstance ambienceEventInstance;
+    private void Awake() {
+        if (Instance != null){
+            Debug.LogError("More than one Audio Manager found!");
         }
-        StartCoroutine(Playclip(AudioClips[SoundIndex],audioSources[SourceIndex]));
-        
+        Instance = this;
     }
-    public static void Speak(AudioClip audioClip, float max, float min){
-        Instance.audioSources[0].pitch = Random.Range(min, max);
-        Instance.audioSources[0].clip =  audioClip;
-        Instance.audioSources[0].Play(); 
-
+    private void Start() {
+        InitializeAmbience(FMODEvents.Instance.Campsite);
+    }
+    private void InitializeAmbience(EventReference eventReference){
+        ambienceEventInstance = CreateInstance(eventReference);
+        ambienceEventInstance.start();
+    }
+    private void PlayOneShotSelf(EventReference sound, Vector3 worldPos){
+        RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+    public static void PlayOneShot(EventReference sound, Vector3 worldPos){
+        Instance.PlayOneShotSelf(sound, worldPos);
     }
 
-    IEnumerator Playclip(AudioClip clip, AudioSource source)
-	{
-		playing++;
-		source.PlayOneShot(clip);
-		yield return new WaitForSeconds(clip.length);
-		playing--;
-	}
+    public EventInstance CreateInstance(EventReference eventReference){
+        EventInstance eventInstance= RuntimeManager.CreateInstance(eventReference);
+        return eventInstance;
+    }
+
+    public void SetAmbienceParameter(string param, float value){
+        ambienceEventInstance.setParameterByName(param, value);
+    }
 }

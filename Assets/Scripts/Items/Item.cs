@@ -21,7 +21,8 @@ public class Item : MonoBehaviour
 
     private void Start() {
         if(Items == null){Items = new Dictionary<Item, int>();}
-
+        Transform parent = transform.parent;
+        
         level = GameVariables.GetVariable(Name + " Item");
         if(level == -1 && initial){
             level = 0;
@@ -31,6 +32,9 @@ public class Item : MonoBehaviour
         if(level<=-1){gameObject.SetActive(false);}
     }
     
+    private void StoreShuffle(){
+        Transform parent = transform.parent;
+    }
     public void Purchase(){
 
         gameObject.SetActive(false);

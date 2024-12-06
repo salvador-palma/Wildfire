@@ -191,7 +191,7 @@ public class Flamey : MonoBehaviour
         TotalShots++;
         anim.Play("FlameShoot");
 
-        AudioManager.Instance.PlayFX(0,0,0.9f, 1.1f);
+        
         int FlameType = ApplyOnShoot();
 
         FlareManager.InstantiateFlare(FlameType);

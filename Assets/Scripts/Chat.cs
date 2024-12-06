@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,7 +26,7 @@ public class Chat : MonoBehaviour
 
     
     public void StartChat(){
-        
+        AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
         ChatPanel.gameObject.SetActive(true);
         ChatPanel.Play("Intro");
     }
@@ -38,7 +39,7 @@ public class Chat : MonoBehaviour
     public void DeactivateChat(){
         ChatPanel.gameObject.SetActive(false);
     }
-    public void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null, AudioClip voice=null, float max=1, float min=0){
+    public void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
         
         Name.text = name;
         Message.text = "";
@@ -54,14 +55,13 @@ public class Chat : MonoBehaviour
                 //Options[i].gameObject.SetActive(true);
             }
         }
-        
-        StartCoroutine(ShowTextTimed(msg, optionTxt, voice, max, min));
+
+        StartCoroutine(ShowTextTimed(msg, optionTxt, FMODEvents.GetVoice(name)));
     }
-    public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, AudioClip voice=null, float max=1, float min=0){
+    public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, EventReference sound = new EventReference()){
         string formatting_buffer = "";
         
-        int intervalSound = 4;
-        int curinterval = 0;
+        
         foreach(char c in msg){
             
             if(triggerNext>0){
@@ -81,16 +81,16 @@ public class Chat : MonoBehaviour
                     case '.':
                     case '!':
                     case '?':
-                        yield return new WaitForSeconds(0.1f);
+                        yield return new WaitForSeconds(0.2f);
                         break;
                     case ',':
-                        yield return new WaitForSeconds(0.05f);
+                        yield return new WaitForSeconds(0.1f);
                         break;
                     case ' ':
-                        yield return new WaitForSeconds(0.02f);
+                        yield return new WaitForSeconds(0.04f);
                         break;
                     default:
-                        if(curinterval <= 0){curinterval = intervalSound; AudioManager.Speak(voice, max, min);}else{curinterval--;} 
+                        AudioManager.PlayOneShot(sound, Vector2.zero);
                         yield return new WaitForSeconds(0.01f);
                         break;
                 }
@@ -114,13 +114,13 @@ public class Chat : MonoBehaviour
     }
 
     
-    public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null, bool endAfter = true, AudioClip v=null, float max=1, float min=0){
+    public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null, bool endAfter = true){
         StartChat();
         Name.text = defaultName;
         Message.text = "";
         foreach (Dialogue d in dialogue)
         {   
-            ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name, voice:v, max:max, min:min);
+            ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
             yield return new WaitUntil(() => triggerNext >= 2);
             ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
 

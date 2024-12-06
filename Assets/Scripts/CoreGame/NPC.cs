@@ -19,6 +19,7 @@ public class Dialogue{
     }
     
 }
+
 [System.Serializable]
 public class RunTimeDialogues{ 
     public Dialogue[] dialogues;
@@ -54,9 +55,8 @@ public class NPC : MonoBehaviour
     [SerializeField] public static NPCSaveData savedData;
     public List<RunTimeDialogues> runTimeDialogues;
     public string Name;
-    public AudioClip[] voice;
-    public float maxFreq;
-    public float minFreq;
+    
+    
     public UnityEvent DefaultClickBehaviour;
 
     private void Start() {
@@ -115,7 +115,7 @@ public class NPC : MonoBehaviour
            afterEvent.AddListener(()=>DequeueDialogue(ID));
         }
         
-        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent, v:voice[UnityEngine.Random.Range(0, voice.Length-1)], max:maxFreq, min:minFreq));
+        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
     }
     private void StartQueuedDialogue(){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
@@ -161,6 +161,10 @@ public class NPC : MonoBehaviour
     }
 
     public void SetHovered(bool check) {
+        if(check){
+            AudioManager.PlayOneShot(FMODEvents.Instance.BubblePop , transform.position);
+        }
+        
         InteractiveCursor.ChangeCursor(check? 1 : 0);
         GetComponent<Animator>().SetBool("NPCHovering", check);
     }

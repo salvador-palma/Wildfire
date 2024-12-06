@@ -100,8 +100,7 @@ public class StatikShiv : MonoBehaviour
     }
 
     private void SetupNext(StatikShiv statikShiv, Enemy t){
-        if(TTL == MAXTTL){AudioManager.Instance.PlayFX(2, 2, 0.95f, 1.05f);}
-
+        
         if(isPowered){
             statikShiv.isPowered = true;
         }
