@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
@@ -11,15 +13,26 @@ public class Item : MonoBehaviour
     public static Dictionary<Item, int> Items;
 
     [SerializeField] public string Name;
-    [SerializeField] public string[] Unlocks;
+    [SerializeField] public Item[] Unlocks;
     [SerializeField] bool initial;
     
-    public int level;
+    [HideInInspector] public int level;
+
+
+
+
 
     public int MinimumPrice;
+    public Sprite Icon;
+    [TextArea] public string Description;
     [SerializeField] public Dialogue[] presentation;
 
-    private void Start() {
+
+    [Header("References")]
+    public Transform DisplayPanel;
+    public Naal naal;
+    static int itemCount = 0;
+    public void ItemStart() {
         if(Items == null){Items = new Dictionary<Item, int>();}
         Transform parent = transform.parent;
         
@@ -29,24 +42,50 @@ public class Item : MonoBehaviour
             GameVariables.SetVariable(Name + " Item" , level);
         }
         Items[this] = level;
-        if(level<=-1){gameObject.SetActive(false);}
+        
+        if(level!= 0 || itemCount >= 6){
+            gameObject.SetActive(false);
+            if(level==0){
+                Debug.Log("Limit: " + Name);
+            }
+        }else{
+            itemCount++;
+            GetComponent<Button>().onClick.AddListener(()=>Display(true));
+        }
     }
     
-    private void StoreShuffle(){
-        Transform parent = transform.parent;
-    }
+    
     public void Purchase(){
-
         gameObject.SetActive(false);
         Unlock();
     }
     public void Unlock(){
         level = 1;
         GameVariables.SetVariable(Name + " Item" , level);
+        foreach (Item item in Unlocks)
+        {
+            GameVariables.SetVariable(item.Name + " Item" , 0);
+        } 
     }
 
-    static int getLevel(string name){
+    static public int getLevel(string name){
         return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value;
+    }
+
+    public void Display(bool on){
+        if(on){
+            DisplayPanel.Find("Icon").GetChild(0).GetComponent<Image>().sprite = Icon;
+            DisplayPanel.Find("Description").GetComponent<TextMeshProUGUI>().text = Description;
+            DisplayPanel.Find("Title").GetComponent<TextMeshProUGUI>().text = Name;
+
+            Button NoButton = DisplayPanel.Find("Not Interested").GetComponent<Button>();
+            NoButton.onClick.RemoveAllListeners(); NoButton.onClick.AddListener(()=>Display(false));
+
+            Button YesButton = DisplayPanel.Find("Bargain").GetComponent<Button>();
+            YesButton.onClick.RemoveAllListeners(); YesButton.onClick.AddListener(()=>{naal.BargainItem(this);Display(false);});
+            
+        }
+        DisplayPanel.gameObject.SetActive(!DisplayPanel.gameObject.activeInHierarchy);
     }
 
 }

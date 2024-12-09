@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ public class Chat : MonoBehaviour
     [SerializeField] TextMeshProUGUI Message;
     [SerializeField] Button[] Options;
     [SerializeField] TextMeshProUGUI Name;
+    
+    [SerializeField] public Slider MoodSlider;
 
     [Header("Chat DataBase")]
     [SerializeField] public Sprite[] AvatarBank;
@@ -52,9 +55,11 @@ public class Chat : MonoBehaviour
                 Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
                 Options[i].onClick.RemoveAllListeners();
                 Options[i].onClick.AddListener(optionAction[i]);
-                //Options[i].gameObject.SetActive(true);
+                
             }
         }
+
+        MoodSlider.gameObject.SetActive(name=="Jhat" && Item.getLevel("Essence Gauge") > 0);
 
         StartCoroutine(ShowTextTimed(msg, optionTxt, FMODEvents.GetVoice(name)));
     }

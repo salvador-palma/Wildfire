@@ -44,7 +44,8 @@ public class Naal : NPC
     [SerializeField] TMP_InputField counterOfferInput;
     public Sprite defaultSprite;
 
-    public Slider MoodSlider;
+    
+    public Transform ItemGrid;
 
     protected override void CharacterLoad()
     {
@@ -54,10 +55,14 @@ public class Naal : NPC
             case -1:gameObject.SetActive(false);break;
             case 0:QueueDialogue(0);GameVariables.SetVariable("BlackMarketReady", 1); break;
         }
+
+        foreach (Transform t in ItemGrid){
+            t.GetComponent<Item>().ItemStart();
+        }
     }
     public void ReadMood(){
         Mood = GameVariables.GetVariable("NaalMood");
-        MoodSlider.value = Mood;
+        Chat.Instance.MoodSlider.value = Mood;
     }
     public void WriteMood(int m){
         
@@ -88,17 +93,18 @@ public class Naal : NPC
         GameVariables.SetVariable("NaalPresentation", 1);
     }
     
-
+    
     //****** HAGGLE SYSTEM *******//
     int bargainingRounds = 0;
     int patience = 5;
     int charismaTries = 0;
     int charismaLimit = 0;
     int declineAmt = 0;
+    
     public void BargainItem(Item item){
 
         
-        MoodSlider.gameObject.SetActive(true);
+        
         patience = Random.Range(4, Math.Max(6, 6 + (int)(Mood/100f * 5)));
         Debug.Log("Bargaining...");
         bargainingRounds = 0;
@@ -443,7 +449,7 @@ public class Naal : NPC
             return;
         }
         Debug.Log("Not Last Offer");
-        Chat.Instance.ChatSingular(costumMsg, defaultSprite, "Naal", new string[]{"<size=80%>Deal!","<size=80%>Bargain","<size=80%>Persuade","<size=80%>Leave"}, new UnityAction[]{
+        Chat.Instance.ChatSingular(costumMsg, defaultSprite, "Jhat", new string[]{"<size=80%>Deal!","<size=80%>Bargain","<size=80%>Persuade","<size=80%>Leave"}, new UnityAction[]{
             new UnityAction(()=>Deal(lastNPCOffer)), 
             new UnityAction(()=>Bargain(true)),
             new UnityAction(()=>Persuade(lastNPCOffer)),
@@ -580,7 +586,7 @@ public class Naal : NPC
 
             break;
             case -1:
-                WriteMood(Mood-5);
+                WriteMood(Mood-10);
                 ev2.AddListener(()=>ShowOffer(ItemAtHand.Name + " for " + lastNPCOffer + " embers, what do you think?"));
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
@@ -592,6 +598,7 @@ public class Naal : NPC
                 after:ev2, endAfter:false));
             break;
             case 0:
+                WriteMood(Mood-5);
                 ev2.AddListener(()=>ShowOffer("Again, " + lastNPCOffer + " embers for it, deal?"));
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
@@ -660,7 +667,7 @@ public class Naal : NPC
     }
 
     private void QuitStore(){
-        MoodSlider.gameObject.SetActive(false);
+        
         Chat.Instance.EndChat();
        
     }
