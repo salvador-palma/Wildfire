@@ -26,14 +26,16 @@ public class Naal : NPC
 
         set {
              
-
-            int digits = value == 0  ? 1 : (int)Math.Floor(Math.Log10(Math.Abs(value))) + 1;
-            int insignificant = digits - (digits/2 + digits%2); 
+            int diff = Math.Abs(value - lastPlayerOffer);
+            int digits = diff == 0  ? 1 : (int)Math.Floor(Math.Log10(Math.Abs(diff))) + 1;
+            
+            int insignificant = digits - (digits/2 + digits%2) ; 
+            insignificant = Math.Max(insignificant,1);
             int rest = (int) (value % Math.Pow(10,insignificant));
             int last = lastNPCOffer2;
             lastNPCOffer2 = value - rest;
 
-            Debug.Log("Set: " + lastNPCOffer2);
+            
             if(lastNPCOffer2 == last){
                 lastNPCOffer2 = (int)Math.Max(lastNPCOffer2-Math.Pow(10, insignificant), lastPlayerOffer);
             }
@@ -153,6 +155,20 @@ public class Naal : NPC
         }
     }
     private int getOfferPrice(int counterOffer){
+        if(counterOffer < 0){
+            UnityEvent ev2 = new UnityEvent();
+            ev2.AddListener(()=>ShowOffer("Then again, what about " + lastNPCOffer + " embers for this?"));
+
+            StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                new Dialogue("Are you serious...? You offer is " + counterOffer + "?", defaultSprite,"Jhat"),
+                new Dialogue("Am I supposed to give you the item AND " + counterOffer*(-1) + "?", defaultSprite,"Jhat"),
+                new Dialogue("Or were you just trying to find a whole in the dev's code?", defaultSprite,"Jhat"),
+                new Dialogue("Let's keep ourselfs on the normal path please", defaultSprite,"Jhat"),
+              
+            },
+            after:ev2, endAfter:false));
+            return 0;
+        }
         if(counterOffer > SkillTreeManager.Instance.PlayerData.embers){
 
             UnityEvent ev2 = new UnityEvent();
@@ -237,18 +253,19 @@ public class Naal : NPC
             Deal(counterOffer);
             return 0;
         }
+
         lastPlayerOffer = counterOffer;
         if(counterOffer < ItemAtHand.MinimumPrice){
             //LOWER THAN MINIMUM PRICE
             //LOOSE 10 TO 20 MOOD
-            Debug.Log("Super Bad Offer!" );
+           
             WriteMood(Mood - Random.Range(10,20));
             makeOffer(0, counterOffer);
 
         }else if(counterOffer < ItemAtHand.MinimumPrice + priceDelta){
             //LOW OFFER
             //LOOSE 5 MOOD
-            Debug.Log("Bad Offer!");
+           
             int delta = counterOffer - ItemAtHand.MinimumPrice;
             WriteMood(Mood - 5);
             makeOffer(1, lastNPCOffer - (int)(delta/(2 - Mood/100f*1.5f)));
@@ -256,7 +273,7 @@ public class Naal : NPC
         }else if(counterOffer < ItemAtHand.MinimumPrice + 2*priceDelta){
             //MEDIUM 
             //NORMAL COUNTER
-            Debug.Log("Medium Offer!" );
+            
             
             makeOffer(2, lastPlayerOffer + (int)(3*(lastNPCOffer-lastPlayerOffer)/4f));
 
@@ -266,9 +283,9 @@ public class Naal : NPC
             
             WriteMood(Mood + 5);
 
-            Debug.Log("Good Offer!");
+           
             float chanceToTake = Math.Min(.1f + Mood * .8f/100f, .9f);
-            Debug.Log("Chance to take the deal: " + chanceToTake + "%");
+            
 
             if(Random.Range(0f,1f) <= chanceToTake){
                 //AGREE ON COUNTER OFFER
@@ -312,10 +329,9 @@ public class Naal : NPC
         switch(DealType(value)){
             case 0:
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
-                new Dialogue("Uff... finally reached an agreement eh?", defaultSprite,"Jhat"),
-                new Dialogue("I'm pretty sure I'm losing money here by selling this at " + value + " embers", defaultSprite,"Jhat"),
-                new Dialogue("So you better compensate for that in your next purchases! Hmpf!", defaultSprite,"Jhat"),
-                new Dialogue("Anywaaays... if you have interest in anything else, just let me know!", defaultSprite,"Jhat"),
+                new Dialogue("Uff... finally! Let me say that I won't be so friendly in the next negotiations ok?" , defaultSprite,"Jhat"),
+                new Dialogue("Now give me those embers and you can go ahead and take what you want", defaultSprite,"Jhat"),
+
                 },
                 after:ev1, endAfter:false));
             break;
@@ -340,7 +356,8 @@ public class Naal : NPC
         
     }
     private void CloseDeal(int value){
-
+        Debug.Log("Deal: " + value);
+        ItemAtHand.Purchase();
         QuitStore();
     }
     public void CounterOffer(){
@@ -353,6 +370,19 @@ public class Naal : NPC
     private void makeOffer(int type, int value, int subtype=0){
         
         value = Norm(value, lastNPCOffer);
+        if(value == lastPlayerOffer){
+
+            UnityEvent ev1 = new UnityEvent();
+            ev1.AddListener(()=>CloseDeal(lastPlayerOffer));
+
+            StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                new Dialogue("You know what? We are arguing over a difference so small that it's insignificant", defaultSprite,"Jhat"),
+                new Dialogue("Sometimes we just gotta let our pride aside ok? Today, I'm going to be the bigger man and accept your deal!", defaultSprite,"Jhat"),
+                new Dialogue(lastPlayerOffer +  " embers was it? Let's shake hands!", defaultSprite,"Jhat"),
+            },
+            after:ev1, endAfter:false));
+            return;
+        }
         switch(type){
             case 0:
                 
@@ -395,7 +425,7 @@ public class Naal : NPC
                 UnityEvent ev4 = new UnityEvent();
                 ev4.AddListener(()=>ShowOffer("What do you think of " + value + "?"));
 
-                switch (Random.Range(0,3))
+                switch (Random.Range(0,5))
                 {
                     case 0:
                         StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
@@ -418,13 +448,29 @@ public class Naal : NPC
                         },
                         after:ev4, endAfter:false));
                         break;
+                    case 3:
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("Look, I can't just sell you items for such low prices ok? Otherwise this business would crash!", defaultSprite,"Jhat"),
+                            new Dialogue("If that happens you can say goodbye to any future items! Hmpf!", defaultSprite,"Jhat"),
+                            new Dialogue("I'll lower the price a tiny bit but you need to give in a bit too!", defaultSprite,"Jhat")
+                        },
+                        after:ev4, endAfter:false));
+                        break;
+                    case 4:
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("It's not the lowest offer I've heard... that's really the only thing I can say about that!", defaultSprite,"Jhat"),
+                            new Dialogue("Unfortunately, " + lastPlayerOffer + " embers is still not a price I can settle with!", defaultSprite,"Jhat"),
+                            new Dialogue("I'm going to slowly lower my offer but you need to lower your expectations a bit! Hmpf!", defaultSprite,"Jhat")
+                        },
+                        after:ev4, endAfter:false));
+                        break;
                     
                 }
                 
              break;
             case 3:
                 UnityEvent ev5 = new UnityEvent();
-                ev5.AddListener(()=>ShowOffer("Look! Let's not waste our time ok? Shall we meet halfway? What about " + value + "?"));
+                ev5.AddListener(()=>ShowOffer("Look! Why don't we meet halfway? What about " + value + "?"));
 
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("Hmmm... It's not really a bad deal...", defaultSprite,"Jhat"),
@@ -438,17 +484,17 @@ public class Naal : NPC
         lastNPCOffer = value;        
     }
     private void ShowOffer(string costumMsg){
-        Debug.Log("Round: " + bargainingRounds + " Patience: " + patience);
+        
         bargainingRounds++;
         if (bargainingRounds > patience){
-            Debug.Log("Last Offer");
+            
             Chat.Instance.ChatSingular("With that said, " + lastNPCOffer + " is my absolute last offer! Take it or leave it!", defaultSprite, "Jhat", new string[]{"<size=80%>Accept!","<size=80%>Decline"}, new UnityAction[]{
                 new UnityAction(()=>Deal(lastNPCOffer)), 
                 new UnityAction(()=>Leave()),
             });
             return;
         }
-        Debug.Log("Not Last Offer");
+        
         Chat.Instance.ChatSingular(costumMsg, defaultSprite, "Jhat", new string[]{"<size=80%>Deal!","<size=80%>Bargain","<size=80%>Persuade","<size=80%>Leave"}, new UnityAction[]{
             new UnityAction(()=>Deal(lastNPCOffer)), 
             new UnityAction(()=>Bargain(true)),
@@ -611,15 +657,29 @@ public class Naal : NPC
                 if(SkillTreeManager.Instance.PlayerData.embers * 4f/3f >= lastNPCOffer && SkillTreeManager.Instance.PlayerData.embers < lastNPCOffer){
 
                     lastNPCOffer = (int)SkillTreeManager.Instance.PlayerData.embers;
-                    Debug.Log("lastNPCOffer:" + lastNPCOffer);
+                    
+                    if(lastNPCOffer==lastPlayerOffer){
+                                  
+                        ev2.AddListener(()=>CloseDeal(lastNPCOffer));
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
+                            new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
+                            new Dialogue("Ok look, given that you tried to put everything you have on the table, I think it's fair for me to take the deal", defaultSprite,"Jhat"), 
+                            new Dialogue( lastNPCOffer + " was it? Deal: closed!", defaultSprite,"Jhat"), 
+                            
+                        },
+                        after:ev2, endAfter:false));
+                    }else{
+                        ev2.AddListener(()=>ShowOffer(lastNPCOffer + " embers for this item, what about that?"));
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
+                            new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
+                            new Dialogue("I saw that you don't really have a lot of embers right? Since you were so nice to me I will lower the deal a bit", defaultSprite,"Jhat"),  
+                        },
+                        after:ev2, endAfter:false));
+                    }   
 
-                    ev2.AddListener(()=>ShowOffer(lastNPCOffer + " embers for this item, what about that?"));
-                    StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
-                        new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
-                        new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
-                        new Dialogue("I saw that you don't really have a lot of embers right? Since you were so nice to me I will lower the deal a bit", defaultSprite,"Jhat"),  
-                    },
-                    after:ev2, endAfter:false));
+                    
                     return;
                 }
                 WriteMood(Mood+5);
@@ -635,14 +695,26 @@ public class Naal : NPC
                 if(SkillTreeManager.Instance.PlayerData.embers * 5f/3f >= lastNPCOffer && SkillTreeManager.Instance.PlayerData.embers < lastNPCOffer){
 
                     lastNPCOffer = (int)SkillTreeManager.Instance.PlayerData.embers;
-                    Debug.Log("lastNPCOffer:" + lastNPCOffer);
-                    ev2.AddListener(()=>ShowOffer(lastNPCOffer + " embers for this item, what about that?"));
-                    StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
-                        new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
-                        new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
-                        new Dialogue("Look, I saw you are quite tight on embers. Since we are friends, just give me what you have and we call it a deal!", defaultSprite,"Jhat"),  
-                    },
-                    after:ev2, endAfter:false));
+                    if(lastNPCOffer==lastPlayerOffer){
+                        ev2.AddListener(()=>ShowOffer(lastNPCOffer + " embers for this item, what about that?"));
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
+                            new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
+                            new Dialogue("I gotta say, the fact that you offered everything you had on you really shows how much you need this item!", defaultSprite,"Jhat"),  
+                            new Dialogue("Given that I'm in a good mood today, I'll let you keep it for that", defaultSprite,"Jhat"),  
+                            new Dialogue(lastNPCOffer + " right? Consider it a deal!", defaultSprite,"Jhat"), 
+                        },
+                        after:ev2, endAfter:false));
+                    }else{
+                        ev2.AddListener(()=>ShowOffer(lastNPCOffer + " embers for this item, what about that?"));
+                        StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                            new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
+                            new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
+                            new Dialogue("Look, I saw you are quite tight on embers. Since we are friends, just give me what you have and we call it a deal!", defaultSprite,"Jhat"),  
+                        },
+                        after:ev2, endAfter:false));
+                    }
+                    
                     return;
                 }
                 WriteMood(Mood+10);
@@ -651,7 +723,7 @@ public class Naal : NPC
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=80%><i><color=#CCCCCC>" + Actions[ActionTaken], defaultSprite,"Jhat"),
                     new Dialogue(Responses[ActionTaken][2+charismaType], defaultSprite,"Jhat"),
-                    new Dialogue("You just made my day with that! I'm going to show you how kindness, no matter how small, always pays off!", defaultSprite,"Jhat"),  
+                    new Dialogue("Ok, ok, since we are friends! I can try to make an exception for you, but don't go out telling everyone!", defaultSprite,"Jhat"),  
                 },
                 after:ev2, endAfter:false));
                 
@@ -673,17 +745,23 @@ public class Naal : NPC
     }
     
     private int Norm(int value, int cur){
-        int digits = value == 0  ? 1 : (int)Math.Floor(Math.Log10(Math.Abs(value))) + 1;
-        int insignificant = digits - (digits/2 + digits%2); 
+
+        int diff = Math.Abs(value - lastPlayerOffer);
+        int digits = diff == 0  ? 1 : (int)Math.Floor(Math.Log10(Math.Abs(diff))) + 1;
+        int insignificant = digits - (digits/2 + digits%2)  ; 
+        insignificant = Math.Max(insignificant,1);
         int rest = (int) (value % Math.Pow(10,insignificant));
         int result = value - rest;
 
-        if(result == cur){
+        if(result == cur || result <= lastPlayerOffer){
             return (int)Math.Max(result-Math.Pow(10, insignificant), lastPlayerOffer);
         }else{
             return result;
         }
     }
 
-   
+  
+   public void IntroduceMarketDone(){
+        GameVariables.SetVariable("JhatIntroduction", 1);
+   }
 }

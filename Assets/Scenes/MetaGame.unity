@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70.9, y: 77.5}
+  m_AnchoredPosition: {x: 50.7, y: 55.3}
   m_SizeDelta: {x: 28.05, y: 28.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6437879
@@ -4599,6 +4599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MarketPanel: {fileID: 425675214}
+  naal: {fileID: 585525776}
   BestiaryPanel: {fileID: 1317806080}
   SkillTreePanel: {fileID: 520883187}
   CharacterSelectPanel: {fileID: 852633092}
@@ -7060,7 +7061,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6393, y: 0}
+  m_AnchoredPosition: {x: 6408, y: 0}
   m_SizeDelta: {x: 818.315, y: 449.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425675216
@@ -10966,6 +10967,50 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+  - dialogues:
+    - message: Oh Y-<size=80%>you came... let me show you around...
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>So this right here is the main shelf... all these items
+        can be quite usefull to you... but they aren't free... of course...
+      avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+      Name: Naal
+    - message: <size=80%>And this one is-
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=115%>WHAAAA! FIRST COSTUMER! STRAIGHT FROM COSTUMER-LAND!!
+      avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
+      Name: Jhat
+    - message: '<size=100%>Hum-ham... <size=80%>As I was saying... this is Jhat...
+        he will take care of selling you these items... '
+      avatar: {fileID: 21300000, guid: a5209b96d4cf21543b03459abcaef214, type: 3}
+      Name: Naal
+    - message: Pleasure to meet you! Hmpf! If you are interested in anything behind
+        me, just let me know!
+      avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
+      Name: Jhat
+    - message: 'But keep in mind that a bit of haggling is the best part of business! '
+      avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
+      Name: Jhat
+    - message: So let's have fun together what do you think?
+      avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
+      Name: Jhat
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: Naal, Assembly-CSharp
+          m_MethodName: IntroduceMarketDone
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -10982,7 +11027,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Mood: 0
+  Mood: 50
   ItemAtHand: {fileID: 0}
   initialOffer: 0
   lastPlayerOffer: 0
@@ -12446,7 +12491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &787333908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22836,6 +22881,20 @@ MonoBehaviour:
       Data3: 1940657086
       Data4: -707800365
     Path: event:/Gyomyo_Talk
+  <Jhat>k__BackingField:
+    Guid:
+      Data1: 1667397565
+      Data2: 1188281339
+      Data3: 1734576277
+      Data4: 360343037
+    Path: event:/Jhat_Talk
+  <Naal>k__BackingField:
+    Guid:
+      Data1: -109303444
+      Data2: 1317578293
+      Data3: -71995997
+      Data4: 898611789
+    Path: event:/Naal_Talk
   <Campsite>k__BackingField:
     Guid:
       Data1: -1762726301
@@ -22857,6 +22916,13 @@ MonoBehaviour:
       Data3: -2127773004
       Data4: 1470398356
     Path: event:/PaperSlide
+  <UnlockedEffect>k__BackingField:
+    Guid:
+      Data1: -3820648
+      Data2: 1098974329
+      Data3: -1234604403
+      Data4: -1694962300
+    Path: event:/Unlocked_Item
 --- !u!1 &1382485322
 GameObject:
   m_ObjectHideFlags: 0
@@ -29641,6 +29707,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3450151133432737509, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
   m_PrefabInstance: {fileID: 4989103454291384645}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1688821894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5747539816356473573, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+  m_PrefabInstance: {fileID: 4989103454291384645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf4849a37f66df4490d245ae76d5213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1692255828
 GameObject:
   m_ObjectHideFlags: 0
@@ -37786,6 +37863,62 @@ PrefabInstance:
     - target: {fileID: 7879409779484698900, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[0].eventID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].eventID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1688821894}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickedChatPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Chat, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Chat, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

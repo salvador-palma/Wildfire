@@ -30,10 +30,13 @@ public class Chat : MonoBehaviour
     
     public void StartChat(){
         AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
+        
         ChatPanel.gameObject.SetActive(true);
         ChatPanel.Play("Intro");
+        
     }
     public void EndChat(){
+       
         ChatPanel.GetComponent<Animator>().Play("Outro");
         Message.text = "";
         triggerNext=0;
@@ -65,7 +68,8 @@ public class Chat : MonoBehaviour
     }
     public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, EventReference sound = new EventReference()){
         string formatting_buffer = "";
-        
+      
+        triggerNext=0;
         
         foreach(char c in msg){
             
@@ -115,16 +119,20 @@ public class Chat : MonoBehaviour
 
     int triggerNext;
     public void ClickedChatPanel(){
+       
         triggerNext++;
     }
 
     
     public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null, bool endAfter = true){
-        StartChat();
+        if(ChatPanel.GetCurrentAnimatorClipInfo(0).Length <= 0  || ChatPanel.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Static"){
+            StartChat();
+        }
         Name.text = defaultName;
         Message.text = "";
         foreach (Dialogue d in dialogue)
         {   
+            
             ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
             yield return new WaitUntil(() => triggerNext >= 2);
             ChatPanel.GetComponent<Animator>().SetTrigger("Switch");

@@ -15,6 +15,7 @@ public class MetaMenuUI : MonoBehaviour
 {
     //Deug
     [SerializeField] private GameObject MarketPanel;
+    [SerializeField] private Naal naal;
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject CharacterSelectPanel;
@@ -57,6 +58,11 @@ public class MetaMenuUI : MonoBehaviour
         Vector2 newPos = new Vector2(MarketPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 7000, 0);
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
         MarketPanel.GetComponent<RectTransform>().anchoredPosition = newPos;
+
+        if(GameVariables.GetVariable("JhatIntroduction") != 1){
+            naal.StartDialogue(2);
+        }
+
     }
  
     public void UpgradeButton(){
@@ -128,14 +134,22 @@ public class MetaMenuUI : MonoBehaviour
     }
 
     public void UnlockableScreen(string title, string name, string description, int iconID){
+        UnlockableScreen(title, name, description, Unlockables[iconID]);
+    }
+    public void UnlockableScreen(string title, string name, string description, Sprite icon){
+
+        AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 0);
+        AudioManager.PlayOneShot(FMODEvents.Instance.UnlockedEffect, transform.position);
         UnlockableTexts[0].text = title;
         UnlockableTexts[1].text = name;
         UnlockableTexts[2].SetText(description);
-        UnlockableIcon.sprite = Unlockables[iconID];
+        UnlockableIcon.sprite = icon;
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");
 
     }
+    
     public void UnlockOff(){
+        AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 1);
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
     }
 

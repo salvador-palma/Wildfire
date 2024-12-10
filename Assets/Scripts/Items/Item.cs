@@ -56,10 +56,12 @@ public class Item : MonoBehaviour
     
     
     public void Purchase(){
+        MetaMenuUI.Instance.UnlockableScreen("NEW ITEM ACQUIRED!", Name, Description, 1);
         gameObject.SetActive(false);
         Unlock();
     }
     public void Unlock(){
+        return;
         level = 1;
         GameVariables.SetVariable(Name + " Item" , level);
         foreach (Item item in Unlocks)
@@ -73,6 +75,7 @@ public class Item : MonoBehaviour
     }
 
     public void Display(bool on){
+        AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
         if(on){
             DisplayPanel.Find("Icon").GetChild(0).GetComponent<Image>().sprite = Icon;
             DisplayPanel.Find("Description").GetComponent<TextMeshProUGUI>().text = Description;
