@@ -20,10 +20,12 @@ public class Dialogue{
     
 }
 
+
 [System.Serializable]
 public class RunTimeDialogues{ 
     public Dialogue[] dialogues;
     public UnityEvent afterEvent;
+ 
     public bool dequeueAuto;
     public RunTimeDialogues(Dialogue[] dialogues,UnityEvent afterEvent){
         this.dialogues = dialogues;

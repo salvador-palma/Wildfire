@@ -5,6 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour
@@ -18,6 +19,7 @@ public class Item : MonoBehaviour
     
     [HideInInspector] public int level;
 
+    [SerializeField] UnityEvent AfterUnlock;
 
 
 
@@ -58,10 +60,11 @@ public class Item : MonoBehaviour
     public void Purchase(){
         MetaMenuUI.Instance.UnlockableScreen("NEW ITEM ACQUIRED!", Name, Description, 1);
         gameObject.SetActive(false);
+        AfterUnlock?.Invoke();
         Unlock();
     }
     public void Unlock(){
-        return;
+        
         level = 1;
         GameVariables.SetVariable(Name + " Item" , level);
         foreach (Item item in Unlocks)
@@ -72,6 +75,9 @@ public class Item : MonoBehaviour
 
     static public int getLevel(string name){
         return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value;
+    }
+    static public bool has(string name){
+        return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value > 0;
     }
 
     public void Display(bool on){

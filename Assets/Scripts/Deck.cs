@@ -31,6 +31,7 @@ public class Deck : MonoBehaviour
     public static event EventHandler RoundStart;
     public GameState gameState;
 
+    [SerializeField] float GoldAugmentProbability = 0.1f;
     
     private void Awake(){
        
@@ -55,6 +56,7 @@ public class Deck : MonoBehaviour
         refreshedAugments = new List<Augment>();
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
 
+        
 
     }
 
@@ -230,7 +232,7 @@ public class Deck : MonoBehaviour
     }
 
     public void resetPhaseAugmentTier(){
-        PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
+        PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, GoldAugmentProbability));
         currPhase = 0;
     }
     public void AddAugmentClass(List<string> str){
@@ -372,6 +374,12 @@ public class Deck : MonoBehaviour
             vessel.GetComponent<Image>().sprite = back;
             vessel.transform.Find("Shadow").GetComponent<Image>().sprite = sprite;
         }
+    }
+
+
+    private void CheckBlackMarketItems(){
+        string[] AnvilTypes = new string[]{"Wood Anvil","Stone Anvil","Bronze Anvil","Sturdy Anvil","Deluxe Anvil","Royal Anvil","Star Forger"};
+        foreach(string Anvil in AnvilTypes){if(Item.has(Anvil)){GoldAugmentProbability+=0.05f;}}
     }
     
 

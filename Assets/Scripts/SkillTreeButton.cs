@@ -39,6 +39,7 @@ public class SkillTreeButton : MonoBehaviour
         }
         
         GetComponent<Button>().onClick.AddListener(Clicked);
+        UpdatePickBan();
        
     }
     public void ping(){
@@ -117,6 +118,11 @@ public class SkillTreeButton : MonoBehaviour
 
     }
     
+    public void UpdatePickBan(){
+        Skills s = SkillTreeManager.Instance.GetSkill(AbilityName);
+        transform.Find("Pick").gameObject.SetActive(s.pick);
+        transform.Find("Ban").gameObject.SetActive(s.ban);        
+    }
     
     public IEnumerator NextPathCouroutine(){
         foreach(Animator item in nextPaths){item.Play(UNLOCKING);}

@@ -18,7 +18,8 @@ public class AnimalSaveData {
     public int DeathAmount;
     public int RetrievedRewards;
     public int ShinyCaptured;
-    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;ShinyCaptured=-1;}
+    public bool Repeled;
+    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;ShinyCaptured=-1;Repeled=false;}
 }
 [System.Serializable]
 public class BestiarySaveData{
@@ -57,9 +58,12 @@ public class LocalBestiary : MonoBehaviour
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
     public event EventHandler ClaimRewardEvent;
     private int lastID = -1;
+    [Header("Animals")]
     [SerializeField] List<AnimalRunTimeData> animals;
 
     [SerializeField] GameObject[] BestiaryPanels;
+
+    [Header("Milestones")]
     [SerializeField] Sprite[] Stars;
     [SerializeField] Color[] StarsColor;
     [SerializeField] public BestiarySaveData saved_milestones;
@@ -70,6 +74,7 @@ public class LocalBestiary : MonoBehaviour
 
 
     //TABS
+    [Header("Tab References")]
     [SerializeField] Button RightButton;
     [SerializeField] Button LeftButton;
     [SerializeField] TextMeshProUGUI tabTitle;
@@ -84,10 +89,16 @@ public class LocalBestiary : MonoBehaviour
     Button claimRewardButton;
 
     //GRID RELATED
+    [Header("Grid References")]
     [SerializeField] GameObject SlotTemplate;
     [SerializeField] GameObject Container;
 
     [SerializeField] Transform InfoPanel;
+
+    [Header("Ban")]
+  
+    [SerializeField] int RepelLimit;
+    [SerializeField] int RepelAmount;
 
     public void Awake(){
         INSTANCE = this;
@@ -163,8 +174,17 @@ public class LocalBestiary : MonoBehaviour
         GameObject newSlot = Instantiate(SlotTemplate,Container.transform);
         Transform newSlotImage = newSlot.transform.Find("Animal");
         RectTransform RT = newSlotImage.GetComponent<RectTransform>();
+
+        bool hasRepel = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == index).Repeled;
+        newSlot.transform.Find("Banned").gameObject.SetActive(hasRepel);
+        RepelAmount += hasRepel ? 1 : 0;
+
         ResizeImage();
         checkMilestoneProgress();
+
+
+        
+
         newSlot.SetActive(true);
 
         void ResizeImage(){
@@ -268,6 +288,16 @@ public class LocalBestiary : MonoBehaviour
 
         int shiny_lvl = GetShinyProgress(ID);
         InfoPanel.Find("BestiaryInfoImage").GetChild(0).gameObject.SetActive(shiny_lvl >=0);
+
+        Transform Repel = InfoPanel.Find("BestiaryInfoImage").Find("Repel");
+        bool repeled = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID).Repeled;
+        if(RepelLimit > 0 && (RepelLimit != RepelAmount || repeled)){
+            Repel.gameObject.SetActive(true);
+            Repel.transform.GetChild(0).gameObject.SetActive(repeled);
+        }else{
+            Repel.gameObject.SetActive(false);
+        }
+        
         
     }
     private void DisplayStats(int ID, TextMeshProUGUI[] labels){
@@ -316,6 +346,26 @@ public class LocalBestiary : MonoBehaviour
             }
             
         }
+    }
+
+
+    public void UpdateBlackMarketItems(){
+        RepelLimit = new string[]{"Bug Repellent", "Animal Repellent"}.Count(e=> Item.has(e));
+      
+    }
+    public void RepelAnimal(){
+        AnimalSaveData saveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID);
+        if(saveData.Repeled){
+            saveData.Repeled = false;
+            RepelAmount--;
+            Container.transform.GetChild(lastID+1).Find("Banned").gameObject.SetActive(false);
+        }else if(RepelAmount < RepelLimit && !saveData.Repeled){
+            saveData.Repeled = true;
+            RepelAmount++;
+            Container.transform.GetChild(lastID+1).Find("Banned").gameObject.SetActive(true);
+        }
+        DisplayProfile(lastID);
+        WritingData();
     }
 
     public void ToggleShinyView(){

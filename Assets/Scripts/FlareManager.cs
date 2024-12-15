@@ -69,6 +69,9 @@ public class FlareManager : MonoBehaviour
         }
     }
     public static GameObject InstantiateFlare(int type){
+
+        AudioManager.PlayOneShot(FMODEvents.Instance.Fireball, Vector2.zero);
+
         GameObject pooledFlare = getPooledObject();
         if(pooledFlare==null){INSTANCE.IncreasePool(); return InstantiateFlare(type);}
         transformFlare(type,pooledFlare);

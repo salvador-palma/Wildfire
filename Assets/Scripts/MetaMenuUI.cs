@@ -53,6 +53,7 @@ public class MetaMenuUI : MonoBehaviour
         Vector2 newPos = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
         BestiaryPanel.GetComponent<RectTransform>().anchoredPosition = newPos;
+        if(newPos.x <= 0){LocalBestiary.INSTANCE.UpdateBlackMarketItems();}
     }
     public void MarketMenuToggle(){
         Vector2 newPos = new Vector2(MarketPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 7000, 0);

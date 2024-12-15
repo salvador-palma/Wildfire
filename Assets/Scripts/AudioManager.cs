@@ -14,8 +14,11 @@ public class AudioManager : MonoBehaviour
     private EventInstance ambienceEventInstance;
     private void Awake() {
         if (Instance != null){
-            Debug.LogError("More than one Audio Manager found!");
+
+            Debug.LogError("More than one Audio Manager found! Destroying...");
+            Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
         Instance = this;
     }
     private void Start() {
@@ -28,7 +31,7 @@ public class AudioManager : MonoBehaviour
     private void PlayOneShotSelf(EventReference sound, Vector3 worldPos){
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
-    public static void PlayOneShot(EventReference sound, Vector3 worldPos){
+    public static void PlayOneShot(EventReference sound, Vector2 worldPos){
         Instance.PlayOneShotSelf(sound, worldPos);
     }
 

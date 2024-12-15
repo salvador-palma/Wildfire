@@ -88,6 +88,7 @@ public class Naal : NPC
     }
 
     [SerializeField] NPC Betsy;
+    [SerializeField] NPC Rowl;
 
     
     public void UnlockBlackMarket(){
@@ -95,7 +96,20 @@ public class Naal : NPC
         GameVariables.SetVariable("NaalPresentation", 1);
     }
     
-    
+    //********** QUESTS **********//
+    public void UnlockCandle(){
+        UnlockQuest(10);
+        Rowl.QueueDialogue(4);
+        SkillTreeManager.Instance.Upgrade("Ritual", Unlock:true);
+        SkillTreeManager.Instance.InvokeUIReset();
+
+    }
+    public void UnlockSkull(){
+        UnlockQuest(11);
+        Rowl.QueueDialogue(5);
+        SkillTreeManager.Instance.Upgrade("Necromancer", Unlock:true);
+        SkillTreeManager.Instance.InvokeUIReset();
+    }
     //****** HAGGLE SYSTEM *******//
     int bargainingRounds = 0;
     int patience = 5;
@@ -356,7 +370,7 @@ public class Naal : NPC
         
     }
     private void CloseDeal(int value){
-        Debug.Log("Deal: " + value);
+        SkillTreeManager.Instance.AddEmbers(-1*value);
         ItemAtHand.Purchase();
         QuitStore();
     }

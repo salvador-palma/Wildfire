@@ -17,16 +17,23 @@ public class FMODEvents : MonoBehaviour
 
     [field:Header("Ambience SFX")]
     [field: SerializeField] public EventReference Campsite { get; private set; }
+    [field: SerializeField] public EventReference Night { get; private set; }
 
     [field:Header("Menu SFX")]
     [field: SerializeField] public EventReference BubblePop { get; private set; }
     [field: SerializeField] public EventReference PaperSlide { get; private set; }
     [field: SerializeField] public EventReference UnlockedEffect { get; private set; }
+    [field: SerializeField] public EventReference MoneyDrop { get; private set; }
+
+    [field:Header("Game SFX")]
+    [field: SerializeField] public EventReference Fireball { get; private set; }
     
     private void Awake() {
         if (Instance != null){
-            Debug.LogError("More than one FMOD Events found!");
+            Debug.LogError("More than one FMOD Events found! Destroying...");
+            Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
         Instance = this;
     }
 

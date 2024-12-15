@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
@@ -18,6 +19,9 @@ public class GameUI : MonoBehaviour
 
     [Header("FastForward")]
     [SerializeField]Button[] FastForwardButtons;
+    private float[] TimeScaleTime = new float[]{2,2.75f,3.5f};
+    private int[] TimeScaleValue = new int[]{2,3,4};
+    private int TimeScaleIndex;
     [Header("Menu")]
     [SerializeField] Color ActiveTab;
     [SerializeField] Color InactiveTab;
@@ -85,6 +89,10 @@ public class GameUI : MonoBehaviour
         if(GameVariables.GetVariable("BestiaryReady") <= 0){MenuTabs[2].SetActive(false);ButtonTabs[2].gameObject.SetActive(false);}
         if(!Character.Instance.HasAtLeastOneCharacter()){MenuTabs[3].SetActive(false);ButtonTabs[3].gameObject.SetActive(false);}
         if(!SkillTreeManager.Instance.HasAtLeastOneSkill()){MenuTabs[1].SetActive(false);ButtonTabs[1].gameObject.SetActive(false);}
+
+        if(!Item.has("Hourglass")){Array.ForEach(FastForwardButtons, e=>e.gameObject.SetActive(false));}
+        if(Item.has("Magical Hourglass")){TimeScaleIndex++;}
+        if(Item.has("Celestial Hourglass")){TimeScaleIndex++;}
     }
     
 
@@ -240,7 +248,7 @@ public class GameUI : MonoBehaviour
         if(Time.timeScale == 1f){
             FastForwardButtons[0].interactable = true;
             FastForwardButtons[1].interactable = false;
-            SpeedUp(3.5f);
+            SpeedUp(TimeScaleTime[TimeScaleIndex]);
 
         }else{
             FastForwardButtons[0].interactable = false;

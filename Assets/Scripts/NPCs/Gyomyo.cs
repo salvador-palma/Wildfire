@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Gyomyo : NPC
@@ -66,9 +67,9 @@ public class Gyomyo : NPC
             DateTime d = DateTime.Today;
 
             if((int)d.DayOfWeek % 2 == 0){
-                StartDialogue(7);//MINI GAME 1
+                InviteCasino("Drop the Acorn");//MINI GAME 1
             }else{
-                StartDialogue(8);//MINI GAME 2
+                InviteCasino("Flower Field");//MINI GAME 2
             }
                 
             return;
@@ -78,7 +79,17 @@ public class Gyomyo : NPC
         
         
     }
-
+    public void InviteCasino(string MiniGameName){
+        string invitation = "Hey man! Wanna hit the Casino? '"+MiniGameName+"' is today's game!";
+        Chat.Instance.StartChat();
+        Chat.Instance.ChatSingular(invitation,
+                        Chat.Instance.AvatarBank[1], "Gyomyo",
+                        new string[2]{"No", "Yes"},
+                        new UnityAction[2]{
+                            new UnityAction(()=>{Chat.Instance.EndChat();}),
+                            new UnityAction(()=>{Chat.Instance.EndChat(); GoCasino();})
+        });
+    }
     public void GoCasino(){
         MetaMenuUI.Instance.GetComponent<Animator>().Play("CurtainsOn");
         

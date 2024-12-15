@@ -14,7 +14,7 @@ public class Flamey : MonoBehaviour
     public static Flamey Instance {get; private set;}
 
     [Header("Stats")]
-    public int MaxHealth = 1000;
+    public int MaxHealth = 250;
     public float Health;
     public float Shield;
     public int Dmg= 50;
@@ -118,9 +118,10 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         
         FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
-           
-    }
 
+        CheckBlackMarketItems();   
+    }
+   
     // Update is called once per frame
     void Update()
     {
@@ -190,7 +191,7 @@ public class Flamey : MonoBehaviour
         if(EnemySpawner.Instance.isOnAugments || current_homing == null){return;}
         TotalShots++;
         anim.Play("FlameShoot");
-
+        
         
         int FlameType = ApplyOnShoot();
 
@@ -605,6 +606,25 @@ public class Flamey : MonoBehaviour
         Embers = Math.Max(0, Embers - n);
         GameUI.Instance.SetEmberAmount(Embers);
         return removed;
+    }
+
+
+    void CheckBlackMarketItems(){
+        
+        string[] HealthItems = new string[]{"Soggy Logs", "Dry Logs", "High-Quality Log Pack"};
+        foreach(string HealthItem in HealthItems){if(Item.has(HealthItem)){MaxHealth+=250;Health+=250;}}
+
+        string[] AtkSpeedItems = new string[]{"Leaf Basket", "Twig Basket", "Pine Cone Basket", "Giant Pinecone"};
+        foreach(string AtkSpeedItem in AtkSpeedItems){if(Item.has(AtkSpeedItem)){atkSpeed += 0.25f;}}
+
+        string[] DmgItems = new string[]{"Old Stolen Fuel Bucket", "Old Petrol Tank", "5L Petrol Tank", "10L Premium Gas Tank"};
+        int[] DmgValues = new int[]{10,15,20,30};
+        for(int i = 0; i != DmgItems.Length; i++){if(Item.has(DmgItems[i])){Dmg+=DmgValues[i];}}
+
+        string[] AccItems = new string[]{"Ash Bag", "Enchanted Ashes", "Ancient Ashes"};
+        float[] AccValues = new float[]{.15f, .15f, 0.2f};
+        for(int i = 0; i != AccItems.Length; i++){if(Item.has(AccItems[i])){accuracy+=AccValues[i];}}
+
     }
     
 }

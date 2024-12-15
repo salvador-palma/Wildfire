@@ -13,6 +13,8 @@ using UnityEngine.UI;
 public class Skills{
     public string type;
     public int level;
+    public bool ban;
+    public bool pick;
 }
 [System.Serializable]
 public class SerializableList<T> {
@@ -43,6 +45,7 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI typeText;
     [SerializeField] TextMeshProUGUI purchaseButtonText;
     [SerializeField] TextMeshProUGUI[] passivesText;
+    
     [SerializeField] Animator anim;
     public event EventHandler treeReset;
 
@@ -52,12 +55,18 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] ColorBlock GoldColor;
     [SerializeField] ColorBlock PrismaticColor;
 
+    [Header("Black Market")]
+    [SerializeField] private int BanLimit;
+    [SerializeField] private int BanAmount;
+    [SerializeField] private int PrePickLimit;
+    [SerializeField] private int PrePickAmount;
+
+    [SerializeField] Button[] PickBanButtons;
+
+
     private void Awake() {
         Instance = this;
         anim = GetComponent<Animator>();
-
-        
-
         ReadData();
     }
     private void Start(){
@@ -85,6 +94,7 @@ public class SkillTreeManager : MonoBehaviour
             return true;
         }
         if(price < PlayerData.embers){
+            AudioManager.PlayOneShot(FMODEvents.Instance.MoneyDrop, transform.position);
             PlayerData.skillTreeEmbers+=price;
             PlayerData.embers-=price;
             changeEmberAmountUI();
@@ -95,6 +105,39 @@ public class SkillTreeManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void BanSkill(){
+
+        SkillTreeButton ability = SkillTreeButton.SelectedButton;
+        Skills skill = GetSkill(ability.AbilityName);
+        if(skill.ban){
+            skill.ban = false;
+            BanAmount--;
+        }else{
+            if(BanAmount<BanLimit){
+                skill.ban = true;
+                BanAmount++;
+            }
+        }
+        ability.UpdatePickBan();
+        DisplaySkill(ability.AbilityName, ability.level);
+        WritingData();
+    }
+    public void PrePickSkill(){
+        SkillTreeButton ability = SkillTreeButton.SelectedButton;
+        Skills skill = GetSkill(ability.AbilityName);
+        if(skill.pick){
+            skill.pick = false;
+            PrePickAmount--;
+        }else{
+            if(PrePickAmount<PrePickLimit){
+                skill.pick = true;
+                PrePickAmount++;
+            }
+        }
+        ability.UpdatePickBan();
+        DisplaySkill(ability.AbilityName, ability.level);
+        WritingData();
     }
     public Skills GetSkill(string skill){
         
@@ -125,7 +168,7 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
      public void CreateFile(){
-        string str = "{\"embers\":0,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-1},{\"type\":\"Immolate\",\"level\":-3},{\"type\":\"Critical Strike\",\"level\":-1},{\"type\":\"Pirate\",\"level\":-2},{\"type\":\"Snow Pool\",\"level\":-3},{\"type\":\"Necromancer\",\"level\":-2},{\"type\":\"Ember Generation\",\"level\":-1},{\"type\":\"Explosion\",\"level\":-3},{\"type\":\"Vampire\",\"level\":-2},{\"type\":\"Multicaster\",\"level\":-1},{\"type\":\"Static Energy\",\"level\":-3},{\"type\":\"Gambling\",\"level\":-2},{\"type\":\"Ritual\",\"level\":-1},{\"type\":\"Thunder\",\"level\":-3},{\"type\":\"Regeneration\",\"level\":-1},{\"type\":\"Magical Shot\",\"level\":-3},{\"type\":\"Lava Pool\",\"level\":-3},{\"type\":\"Burst Shot\",\"level\":-2},{\"type\":\"Bee Summoner\",\"level\":-3},{\"type\":\"Thorns\",\"level\":-3},{\"type\":\"Freeze\",\"level\":-2},{\"type\":\"Orbits\",\"level\":-1},{\"type\":\"Flower Field\",\"level\":-3},{\"type\":\"Resonance\",\"level\":-2}]}";
+        string str = "{ \"embers\": 0, \"skillTreeEmbers\": 0, \"skills\": [ { \"type\": \"Assassin\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Immolate\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Critical Strike\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Pirate\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Snow Pool\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Necromancer\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Ember Generation\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Explosion\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Vampire\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Multicaster\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Static Energy\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Gambling\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Ritual\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Thunder\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Regeneration\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Magical Shot\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Lava Pool\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Burst Shot\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Bee Summoner\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Thorns\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Freeze\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Orbits\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Flower Field\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Resonance\", \"level\": -2, \"ban\": false, \"pick\": false } ] }";
         File.WriteAllText(Application.persistentDataPath +"/skills.json", str);
     }
 
@@ -142,11 +185,21 @@ public class SkillTreeManager : MonoBehaviour
     }
     public void AddEmbers(long n){
         
-        PlayerData.embers = Math.Min(PlayerData.embers + n, 2147483647);
+        if(n < 0){AudioManager.PlayOneShot(FMODEvents.Instance.MoneyDrop, transform.position);}
+        PlayerData.embers = Math.Max(0, Math.Min(PlayerData.embers + n, 2147483647));
+        changeEmberAmountUI(0);
         WritingData();
     }
 
+    public void UpdateBlackMarketItems(){
 
+        BanLimit = new string[]{"Bellow","Deluxe Bellow"}.Count(s=>Item.has(s));
+        PrePickLimit = new string[]{"Marshmallow Bowl","Marshmallow Bag"}.Count(s=>Item.has(s));
+        BanAmount = PlayerData.skills.Count(s => s.ban) ;
+        PrePickAmount = PlayerData.skills.Count(s => s.pick);
+
+
+    }
    
 
     //UI PARTITION
@@ -156,17 +209,14 @@ public class SkillTreeManager : MonoBehaviour
         
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
         if(ability != null){
-
             passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
             passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
             passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
             passivesText[0].color = Color.white;
             passivesText[1].color = Color.white;
             passivesText[2].color = Color.white;
-
             switch (level+1)
             {
-                
                 case 0:
                     passivesText[0].color = new Color(1,1,1,0.3f);
                     passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
@@ -191,8 +241,13 @@ public class SkillTreeManager : MonoBehaviour
 
             int price = DeckBuilder.Instance.getPrice(skill, level + 1);
             purchaseButtonText.text = string.Format("Upgrade ({0})",  price == - 1 ? "Maxed Out" : price);
-
+            purchaseButtonText.transform.parent.gameObject.SetActive(price != - 1);
             
+            //PICK BAN DISPLAY
+            Skills s = GetSkill(skill);
+
+            PickBanButtons[0].gameObject.SetActive(!s.pick && (BanAmount != BanLimit || s.ban) && level > -1);
+            PickBanButtons[1].gameObject.SetActive(!s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
             
         }else{
             Debug.LogWarning("Skill Not Found: " + skill);
@@ -222,8 +277,8 @@ public class SkillTreeManager : MonoBehaviour
     }
 
     public void resetSkillTree(){
-        List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster"};
-        List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate", "Necromancer", "Gambling"};
+        List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling"};
+        List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate"};
         foreach(Skills skill in PlayerData.skills){
             if(exceptionsLayer1.Contains(skill.type)){
                 skill.level = Math.Min(skill.level, -1);
@@ -232,7 +287,11 @@ public class SkillTreeManager : MonoBehaviour
             }else{
                 skill.level = -3;
             }
+            skill.ban = false;
+            skill.pick = false;
         }
+        BanAmount = 0;
+        PrePickAmount = 0;
         GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
 
         PlayerData.embers += PlayerData.skillTreeEmbers;
@@ -246,8 +305,14 @@ public class SkillTreeManager : MonoBehaviour
         treeReset?.Invoke(this, new EventArgs());
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
-        
-        SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+
+        Vector2 newPos = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
+        SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = newPos;
+
+        if(newPos.x <= 0){
+            UpdateBlackMarketItems();
+        }
 
     }
 

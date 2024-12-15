@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
@@ -58,7 +59,7 @@ public class Chat : MonoBehaviour
                 Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
                 Options[i].onClick.RemoveAllListeners();
                 Options[i].onClick.AddListener(optionAction[i]);
-                
+                 
             }
         }
 
@@ -130,14 +131,16 @@ public class Chat : MonoBehaviour
         }
         Name.text = defaultName;
         Message.text = "";
+        int i = 0;
         foreach (Dialogue d in dialogue)
         {   
-            
+           
             ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
             yield return new WaitUntil(() => triggerNext >= 2);
             ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
 
             triggerNext = 0;
+            i++;
         }
         if(endAfter){
             EndChat();
