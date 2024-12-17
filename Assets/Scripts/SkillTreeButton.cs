@@ -27,7 +27,7 @@ public class SkillTreeButton : MonoBehaviour
 
     private void virtualStart(object sender, EventArgs e){virtualStart();}
     public void virtualStart(){
-        
+        if(!gameObject.activeInHierarchy){return;}
         GetComponent<Button>().onClick.RemoveAllListeners();
         ReloadColor();
         ReloadFunctionality();
@@ -43,12 +43,7 @@ public class SkillTreeButton : MonoBehaviour
        
     }
     public void ping(){
-        bool result =true;
-        foreach (SkillTreeButton skills in previousNode)
-        {
-            result = result && skills.getLevel() >= 0;
-        }
-        if(result){
+        if(hasAllPreviousSkills()){
             if(Step()){
                 
                 if(level == -1){
@@ -58,23 +53,30 @@ public class SkillTreeButton : MonoBehaviour
                         }
                     });
                 }
+                
             }
         }
     }
+    public bool hasAllPreviousSkills(){
+        bool result =true;
+        foreach (SkillTreeButton skills in previousNode)
+        {
+            result = result && skills.getLevel() >= 0;
+        }
+        return result;
+    }
     public void Clicked(){
+        
         SelectedButton = this;
         
         int lvl = getLevel();
         if(lvl <=-2){return;}
-
         SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
-        Vector2 LookUpPos = transform.localPosition;
-        LookUpPos.x += 100f;
-        LookUpPos.y += -20f;
         MetaMenuUI.Instance.moveSkillTree(transform);
     
     }
     public void ClickedUpgrade(){
+        if(!hasAllPreviousSkills()){return;}
         if(SkillTreeManager.Instance.Upgrade(AbilityName)){
             ReloadColor();
             ReloadFunctionality();

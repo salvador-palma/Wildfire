@@ -12,18 +12,19 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set;}
 
     private EventInstance ambienceEventInstance;
+    private bool initialized = false;
     private void Awake() {
         if (Instance != null){
 
-            Debug.LogError("More than one Audio Manager found! Destroying...");
+           
             Destroy(gameObject);
+        }else{
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
+        
     }
-    private void Start() {
-        InitializeAmbience(FMODEvents.Instance.Campsite);
-    }
+   
     private void InitializeAmbience(EventReference eventReference){
         ambienceEventInstance = CreateInstance(eventReference);
         ambienceEventInstance.start();
@@ -41,6 +42,28 @@ public class AudioManager : MonoBehaviour
     }
 
     public void SetAmbienceParameter(string param, float value){
+        if(!initialized){
+            initialized=true;
+            InitializeAmbience(FMODEvents.Instance.Campsite);
+        }
         ambienceEventInstance.setParameterByName(param, value);
     }
+
+    public static void PlayMusicTrack(OST level){
+        PlayMusicTrack((float)level);
+    }
+    public static void PlayMusicTrack(float n){
+        Instance.SetAmbienceParameter("Level", n);
+        Instance.SetAmbienceParameter("OST_Intensity", 1);
+        
+    }
+    public static void StopMusicTrack(){
+        Instance.SetAmbienceParameter("OST_Intensity", 0);
+    }
+}
+public enum OST{
+    CAMPSITE = 0,
+    NIGHT = 1,
+    BOSS = 2,
+    CASINO = 3
 }

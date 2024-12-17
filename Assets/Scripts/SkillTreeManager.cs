@@ -60,6 +60,7 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private int BanAmount;
     [SerializeField] private int PrePickLimit;
     [SerializeField] private int PrePickAmount;
+    [SerializeField] TextMeshProUGUI PreBanExplanation;
 
     [SerializeField] Button[] PickBanButtons;
 
@@ -185,7 +186,7 @@ public class SkillTreeManager : MonoBehaviour
     }
     public void AddEmbers(long n){
         
-        if(n < 0){AudioManager.PlayOneShot(FMODEvents.Instance.MoneyDrop, transform.position);}
+        //if(n < 0){AudioManager.PlayOneShot(FMODEvents.Instance.MoneyDrop, transform.position);}
         PlayerData.embers = Math.Max(0, Math.Min(PlayerData.embers + n, 2147483647));
         changeEmberAmountUI(0);
         WritingData();
@@ -247,7 +248,12 @@ public class SkillTreeManager : MonoBehaviour
             Skills s = GetSkill(skill);
 
             PickBanButtons[0].gameObject.SetActive(!s.pick && (BanAmount != BanLimit || s.ban) && level > -1);
+            PickBanButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.ban);
             PickBanButtons[1].gameObject.SetActive(!s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
+            PickBanButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.pick);
+
+
+            PreBanExplanation.text = s.ban? "This skill will not appear during the night" : s.pick? "You will start the night with this skill" : "";
             
         }else{
             Debug.LogWarning("Skill Not Found: " + skill);
@@ -277,6 +283,10 @@ public class SkillTreeManager : MonoBehaviour
     }
 
     public void resetSkillTree(){
+        
+        anim.SetBool("DisplayInfo", false);
+        anim.Play("InfoPanelOf");
+
         List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling"};
         List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate"};
         foreach(Skills skill in PlayerData.skills){
@@ -292,7 +302,7 @@ public class SkillTreeManager : MonoBehaviour
         }
         BanAmount = 0;
         PrePickAmount = 0;
-        GetComponentInParent<Animator>().SetBool("InfoDisplay",false);
+       
 
         PlayerData.embers += PlayerData.skillTreeEmbers;
         PlayerData.skillTreeEmbers = 0;
@@ -302,6 +312,8 @@ public class SkillTreeManager : MonoBehaviour
         
     }
     public void InvokeUIReset(){
+        
+        
         treeReset?.Invoke(this, new EventArgs());
     }
     public void toggleSkillTree(GameObject SkillTreePanel){

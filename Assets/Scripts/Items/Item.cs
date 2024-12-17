@@ -39,8 +39,8 @@ public class Item : MonoBehaviour
         Transform parent = transform.parent;
         
         level = GameVariables.GetVariable(Name + " Item");
-        if(level == -1 && initial){
-            level = 0;
+        if(level == -1){
+            level = initial ? 0 : level;
             GameVariables.SetVariable(Name + " Item" , level);
         }
         Items[this] = level;

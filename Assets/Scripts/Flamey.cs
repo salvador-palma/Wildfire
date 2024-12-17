@@ -611,18 +611,24 @@ public class Flamey : MonoBehaviour
 
     void CheckBlackMarketItems(){
         
+        Debug.Log("CHECKING ITEMS...");
+        MaxHealth=250;
+        Health=250;
         string[] HealthItems = new string[]{"Soggy Logs", "Dry Logs", "High-Quality Log Pack"};
         foreach(string HealthItem in HealthItems){if(Item.has(HealthItem)){MaxHealth+=250;Health+=250;}}
 
+        atkSpeed = .5f;
         string[] AtkSpeedItems = new string[]{"Leaf Basket", "Twig Basket", "Pine Cone Basket", "Giant Pinecone"};
         foreach(string AtkSpeedItem in AtkSpeedItems){if(Item.has(AtkSpeedItem)){atkSpeed += 0.25f;}}
 
+        Dmg = 30;
         string[] DmgItems = new string[]{"Old Stolen Fuel Bucket", "Old Petrol Tank", "5L Petrol Tank", "10L Premium Gas Tank"};
-        int[] DmgValues = new int[]{10,15,20,30};
+        int[] DmgValues = new int[]{10,10,20,30};
         for(int i = 0; i != DmgItems.Length; i++){if(Item.has(DmgItems[i])){Dmg+=DmgValues[i];}}
 
+
         string[] AccItems = new string[]{"Ash Bag", "Enchanted Ashes", "Ancient Ashes"};
-        float[] AccValues = new float[]{.15f, .15f, 0.2f};
+        float[] AccValues = new float[]{15f, 15f, 20f};
         for(int i = 0; i != AccItems.Length; i++){if(Item.has(AccItems[i])){accuracy+=AccValues[i];}}
 
     }

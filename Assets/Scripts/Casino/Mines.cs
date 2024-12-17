@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Linq;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Mines : MonoBehaviour
@@ -75,9 +77,9 @@ public class Mines : MonoBehaviour
         clearedSlots = 0;
        
         multiplier=0;
-        MultiplierTxt.text = "x1";
+        MultiplierTxt.text = "";
         CashOutTxt.text = bet.ToString();
-        Debug.Log(mines.ToString());
+        
 
         mines = Enumerable.Range(0, 25).ToArray();
         
@@ -102,7 +104,7 @@ public class Mines : MonoBehaviour
         foreach (Transform pot in grid)
         {
             pot.GetComponent<Animator>().SetTrigger("Down");
-            
+            pot.GetComponent<Button>().interactable = true;
             
             
         }
@@ -127,19 +129,31 @@ public class Mines : MonoBehaviour
 
     public void Clicked(int ID){
         grid.GetChild(ID).GetComponent<Animator>().ResetTrigger("Down");
+        grid.GetChild(ID).GetComponent<Button>().interactable = false;
         if(!inGame){return;}
         if(mines.Contains(ID)){
             grid.GetChild(ID).GetComponent<Animator>().Play("EaterPopUp");
             WageAmountText.text = Math.Min( int.Parse(WageAmountText.text), SkillTreeManager.Instance.PlayerData.embers).ToString();
             EndGame();
+            AudioManager.PlayOneShot(FMODEvents.Instance.FlowerWrong, transform.position);
         }else{
             grid.GetChild(ID).GetComponent<Animator>().Play("FlowerPopUp");
             InGamePanel.GetComponent<Animator>().SetTrigger("Right");
+
+            PlaySoundProgress();
             IncrementClearSlots();
         }
     }
 
-
+    private void PlaySoundProgress(){
+        
+        var instance = RuntimeManager.CreateInstance(FMODEvents.Instance.FlowerProgress);
+        
+        instance.setParameterByName("CorrectGuesses", Math.Clamp(clearedSlots/25f,0f,1f));
+        instance.start();
+        instance.release();
+        
+    }
     private void IncrementClearSlots()
     {
         clearedSlots++;
@@ -156,6 +170,11 @@ public class Mines : MonoBehaviour
 
     private void EndGame(){
         UpdateSetupUI(false);
+        foreach (Transform pot in grid)
+        {
+
+            pot.GetComponent<Button>().interactable = false;
+        }
         inGame = false;
     }
 
@@ -205,6 +224,7 @@ public class Mines : MonoBehaviour
                 intervalTimer = interval;
                 cur+=dir*speed;
                 TotalEmberAmount.text = cur.ToString();
+                AudioManager.PlayOneShot(FMODEvents.Instance.MoneyTick,transform.position);
             }else{
                 intervalTimer-=Time.deltaTime;
             }

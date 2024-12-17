@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public bool Stunned;
     public bool Shiny;
 
-    
+    [field: SerializeField] public EventReference DeathSound { get; private set; }
+    [field: SerializeField] public EventReference AttackSound { get; private set; }
 
 
     [SerializeField] private float slowfactor;
@@ -121,6 +123,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             
             EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
             if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
+
+            AudioManager.PlayOneShot(DeathSound,transform.position);
         }catch{
             Debug.Log("Error at: Enemy.Die()");
         }
@@ -143,6 +147,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     
 
     public virtual void Attack(){
+        AudioManager.PlayOneShot(AttackSound,transform.position);
         flame.Hitted(Damage, ArmorPen, this);
     }
     

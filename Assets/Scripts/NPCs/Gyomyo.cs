@@ -63,15 +63,8 @@ public class Gyomyo : NPC
         }
 
         if(GameVariables.GetVariable("CasinoReady") >= 1 && totalInvested >= 250000){
+            InviteCasino(Casino.getMinigame());
 
-            DateTime d = DateTime.Today;
-
-            if((int)d.DayOfWeek % 2 == 0){
-                InviteCasino("Drop the Acorn");//MINI GAME 1
-            }else{
-                InviteCasino("Flower Field");//MINI GAME 2
-            }
-                
             return;
         }
 
@@ -80,7 +73,7 @@ public class Gyomyo : NPC
         
     }
     public void InviteCasino(string MiniGameName){
-        string invitation = "Hey man! Wanna hit the Casino? '"+MiniGameName+"' is today's game!";
+        string invitation = "Wanna hit the Casino? '"+MiniGameName+"' is today's game!";
         Chat.Instance.StartChat();
         Chat.Instance.ChatSingular(invitation,
                         Chat.Instance.AvatarBank[1], "Gyomyo",

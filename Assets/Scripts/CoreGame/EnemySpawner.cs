@@ -83,21 +83,10 @@ public class EnemySpawner : MonoBehaviour
     
     public void StartGame(){ 
         Flamey.Instance.GameEnd = false;    
-        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){
-
-            
+        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){ 
             Deck.Instance.LoadGame(false);
-
             PickedEnemies = pickEnemies(current_round);
-            if(Deck.Instance.hasAtLeastOneUnlockable()){
-                current_round = -1;
-                isOnAugments = true;
-                Deck.Instance.StartAugments(true, true);
-                
-            }else{
-                GameEnd = false;
-               
-            }
+            GameEnd = false;
             InitDefaultEffects();
             
         }else{
@@ -110,10 +99,20 @@ public class EnemySpawner : MonoBehaviour
         PlayerPrefs.DeleteKey("PlayerLoad");    
     }
     private void InitDefaultEffects(){
+        
         if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
-
             Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
         }
+
+        foreach (Skills skill in SkillTreeManager.Instance.PlayerData.skills)
+        {
+            if(skill.ban){
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
+            }else if(skill.pick){
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}).ForEach(a=>a.action());
+            }
+        }
+
         GameUI.Instance.defineEffectList();
     }
     private Vector2 getPoint(){

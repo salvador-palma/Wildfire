@@ -19,8 +19,8 @@ public class GameUI : MonoBehaviour
 
     [Header("FastForward")]
     [SerializeField]Button[] FastForwardButtons;
-    private float[] TimeScaleTime = new float[]{2,2.75f,3.5f};
-    private int[] TimeScaleValue = new int[]{2,3,4};
+    private float[] TimeScaleTime = new float[]{2,2.75f,3.5f,4f};
+    private int[] TimeScaleValue = new int[]{2,3,4,5};
     private int TimeScaleIndex;
     [Header("Menu")]
     [SerializeField] Color ActiveTab;
@@ -90,9 +90,10 @@ public class GameUI : MonoBehaviour
         if(!Character.Instance.HasAtLeastOneCharacter()){MenuTabs[3].SetActive(false);ButtonTabs[3].gameObject.SetActive(false);}
         if(!SkillTreeManager.Instance.HasAtLeastOneSkill()){MenuTabs[1].SetActive(false);ButtonTabs[1].gameObject.SetActive(false);}
 
-        if(!Item.has("Hourglass")){Array.ForEach(FastForwardButtons, e=>e.gameObject.SetActive(false));}
+        if(Item.has("Hourglass")){TimeScaleIndex++;}
         if(Item.has("Magical Hourglass")){TimeScaleIndex++;}
         if(Item.has("Celestial Hourglass")){TimeScaleIndex++;}
+        FastForwardButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + TimeScaleValue[TimeScaleIndex];
     }
     
 
@@ -248,6 +249,8 @@ public class GameUI : MonoBehaviour
         if(Time.timeScale == 1f){
             FastForwardButtons[0].interactable = true;
             FastForwardButtons[1].interactable = false;
+            FastForwardButtons[1].GetComponent<Animator>().Play("FastForwardDetail");
+            
             SpeedUp(TimeScaleTime[TimeScaleIndex]);
 
         }else{

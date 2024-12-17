@@ -130,7 +130,12 @@ public class Flare : MonoBehaviour
         }
         
         foreach(Collider2D col in colliders){
-            col.GetComponent<Enemy>().Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+            if(col.tag=="Nature"){
+                col.GetComponent<Nature>().Destroy();
+            }else{
+                col.GetComponent<Enemy>().Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+            }
+            
         }
     }
     private void FlareSpotUpdate(){

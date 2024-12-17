@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Plinko : MonoBehaviour
 {
     public GameObject ArmadilloBall;
-    float[] PascalValues = new float[]{0,100f,25f,10f,5f,2f,.5f,0.2f,0.2f,.5f,2f,5f,10f,25f,100f,0};
+    float[] PascalValues = new float[]{0,100f,25f,10f,5f,2f,.5f,0,0,.5f,2f,5f,10f,25f,100f,0};
     public int PascalMultiplier = 1;
 
    
@@ -65,36 +65,23 @@ public class Plinko : MonoBehaviour
                 dir = cur < obj ? 1 : -1;
                 cur+=dir*speed;
                 TotalEmberAmount.text = cur.ToString();
+                AudioManager.PlayOneShot(FMODEvents.Instance.MoneyTick,transform.position);
             }else{
                 intervalTimer-=Time.deltaTime;
             }
-            if((dir==1 && cur > obj )||(dir==-1 && cur < obj )){
-                TextOn = false;cur = obj; TotalEmberAmount.text = cur.ToString();
-                if(left <= 0){
-            
-                    TextOn = false;obj = SkillTreeManager.Instance.PlayerData.embers + roundEmberAmount; cur = obj; TotalEmberAmount.text = cur.ToString();
-                    Debug.Log("TextOff");
-                    SkillTreeManager.Instance.AddEmbers(roundEmberAmount);
-                    
-                    
-                    if(SkillTreeManager.Instance.PlayerData.embers > AcornAmount*int.Parse(AcornValueTxt.text)){
-                        RepeatBtn.interactable = true;
-                    }
-                    BackBtn.interactable=true;
-                    
-                }
+            if((dir==1 && cur >= obj) || (dir==-1 && cur <= obj)){
                 
+                cur = obj;
+                
+                TotalEmberAmount.text = cur.ToString();
+               
+                TextOn =false;
             }
+            
             
         }
     }
     public void UpdateEmberAmount(){
-        cur = int.Parse(TotalEmberAmount.text);
-        obj = SkillTreeManager.Instance.PlayerData.embers + roundEmberAmount;
-
-        speed = Math.Max(10, (int)(Math.Abs(cur-obj)/100f));
-        Debug.Log("TextOn");
-        TextOn= true;
 
         if(TotalRun<0){
             TotalRunEmberAmount.text = "You've lost " + TotalRun.ToString() + " Embers in total";
@@ -103,8 +90,20 @@ public class Plinko : MonoBehaviour
         }else{
             TotalRunEmberAmount.text = "";
         }
+
+        if(left<=0){
+            return;
+        }
+        cur = Math.Min(long.MaxValue,int.Parse(TotalEmberAmount.text));
+        obj = SkillTreeManager.Instance.PlayerData.embers + roundEmberAmount;
+
+        speed = Math.Max(10, (int)(Math.Abs(cur-obj)/100f));
+        TextOn= true;
+
+        
     }
     public void AddEmbersToSkillTree(long n){
+        if(n==0){return;}
         GainEmberAmount.text = (n < 0 ? "" : "+") + n.ToString();
         if(n>0){
             GainEmberAmount.color = new Color(1, .67f, 0);
@@ -114,14 +113,16 @@ public class Plinko : MonoBehaviour
 
         roundEmberAmount+=n;
         
-       
+        
         GetComponent<Animator>().Play("GainEmbers");
+        
+        
         TotalRun += n;
 
     }  
     public void changeMineAmount(int dir){
 
-
+        AudioManager.PlayOneShot(FMODEvents.Instance.ButtonClick, transform.position);
         if(int.Parse(AcornValueTxt.text) == 0){AcornValueTxt.text = "1"; return;}
 
         AcornAmount += dir;
@@ -189,16 +190,41 @@ public class Plinko : MonoBehaviour
         }
     }
     void SpawnArmadillo(){
-        Instantiate(ArmadilloBall, transform).GetComponent<RectTransform>().anchoredPosition = new Vector2( UnityEngine.Random.Range(-75f, 75f),180);
+        GameObject g = Instantiate(ArmadilloBall, transform);
+        g.GetComponent<RectTransform>().anchoredPosition = new Vector2( UnityEngine.Random.Range(-75f, 75f), UnityEngine.Random.Range(225f, 300f));
+        g.GetComponent<Rigidbody2D>().velocity = new Vector2( UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(-2f, 2f));
     }
 
     public void CheckEntry(int id){
-        left--;
         
+        left--;
+        AudioManager.PlayOneShot(FMODEvents.Instance.AcornSlot, transform.position);
         if(!(id==0 || id ==15)){
             AddEmbersToSkillTree((long)(int.Parse(AcornValueTxt.text)*PascalValues[id]));
         }
+        if(left<=0){
+            EndRound();
+        }
+    }
+    private void EndRound(){
+        
+       
 
+        BackBtn.interactable=true;
+        TextOn = false;
+
+        SkillTreeManager.Instance.AddEmbers(roundEmberAmount);
+        obj = SkillTreeManager.Instance.PlayerData.embers; 
+
+        cur = obj; 
+        TotalEmberAmount.text = cur.ToString();
+        Debug.Log("Current: " + cur + " Skills: " + SkillTreeManager.Instance.PlayerData.embers);
+
+        if(SkillTreeManager.Instance.PlayerData.embers >= AcornAmount*int.Parse(AcornValueTxt.text)){
+            RepeatBtn.interactable = true;
+        }
+                    
+                    
         
     }
     public float getMultiplier(int id){

@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Snail : Enemy
 {
     
     [SerializeField]  protected bool withShell;
     [SerializeField] private float maxSpeed;
+
+    [field: SerializeField] public EventReference SlideSound { get; private set; }
     private void Start() {
         base.flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
@@ -32,9 +35,11 @@ public class Snail : Enemy
     public void SlideOn(){
         if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
             if(getSlowInfo("IceLand")[0] <= 0){
-                 Moving = true;
+                AudioManager.PlayOneShot(SlideSound,transform.position);
+                Moving = true;
             }
         }else{
+            AudioManager.PlayOneShot(SlideSound,transform.position);
              Moving = true;
         }
        

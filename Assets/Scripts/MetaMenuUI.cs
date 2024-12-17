@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -27,17 +29,35 @@ public class MetaMenuUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] UnlockableTexts;
     [SerializeField] Image UnlockableIcon;
     [SerializeField] Sprite[] Unlockables;
+
+
+    public event System.EventHandler NightFall;
+
+
     private void Awake() {
         Instance = this;
         
         QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = -1;
+
+        int origin = PlayerPrefs.GetInt("Origin", -1);
+        if(origin == -1){
+            GetComponent<Animator>().Play("Intro");
+        }else{
+            PlayerPrefs.DeleteKey("Origin");
+            GetComponent<Animator>().Play("CurtainsOff");
+        }
+        
+
     }
     public void StartGame(){
         SceneManager.LoadScene("Game");
     }
     public void PlayOutro(){
         GetComponent<Animator>().Play("Outro");
+    }
+    public void NatureToNightTransition(){
+        NightFall?.Invoke(this, new EventArgs());
     }
     
     public void SkillTreeMenuToggle(){
@@ -72,24 +92,32 @@ public class MetaMenuUI : MonoBehaviour
         
     }
     private IEnumerator currentCouroutine;
+    public Vector2 IdealPos;
     public void moveSkillTree(Transform buttonTr){
+        
+        
+        
         if(currentCouroutine!=null){StopCoroutine (currentCouroutine);}
         currentCouroutine = SmoothLerp (buttonTr);
         StartCoroutine (currentCouroutine);
     }
     
-    private IEnumerator SmoothLerp (Transform tr)
+    private IEnumerator SmoothLerp (Transform buttonTr)
     {
-        Vector3 Target = new Vector3(-3f,0,0);
+        // Vector3 Target = new Vector3(-3f,0,0);
         
-        Transform button = tr.Find("Icon");
-        Vector2 direction = Target - button.position;
+        // Transform button = tr.Find("Icon");
+        // Vector2 direction = Target - button.position;
         
         
         
         float elapsed = 0;
-        while(elapsed<2f && Vector3.Distance( button.position, Target) > .1f){
-            SkillTree.transform.position = (Vector2)SkillTree.transform.position + direction * Time.deltaTime;
+        RectTransform rt = SkillTree.GetComponent<RectTransform>(); 
+
+        while(elapsed<2f && Vector3.Distance( buttonTr.position, IdealPos) > .1f){
+
+            Vector2 dir = IdealPos - (Vector2)buttonTr.position;
+            rt.position = (Vector2)rt.position + dir * Time.deltaTime * 2f;
             elapsed+=Time.deltaTime;
             yield return null;
         }
@@ -153,6 +181,9 @@ public class MetaMenuUI : MonoBehaviour
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 1);
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
     }
+
+
+    
 
 }
 

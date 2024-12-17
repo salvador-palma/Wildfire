@@ -56,7 +56,7 @@ public class Deck : MonoBehaviour
         refreshedAugments = new List<Augment>();
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
 
-        
+        CheckBlackMarketItems();
 
     }
 
