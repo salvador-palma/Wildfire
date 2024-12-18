@@ -29,6 +29,7 @@ public class FMODEvents : MonoBehaviour
 
     [field:Header("Game SFX")]
     [field: SerializeField] public EventReference Fireball { get; private set; }
+    [field: SerializeField] public EventReference OrbitalHit { get; private set; }
 
     [field:Header("Specific SFX")]
     [field: SerializeField] public EventReference MotorStop { get; private set; }

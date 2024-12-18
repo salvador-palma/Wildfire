@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class Worm : Enemy
@@ -17,6 +19,10 @@ public class Worm : Enemy
     public float initialDistance;
     public  Vector3 initialPos;
     Transform pathEnd;
+
+    [field: SerializeField] public EventReference PopOutSound { get; private set; }
+    [field: SerializeField] public EventReference DigSound { get; private set; }
+    EventInstance DigSoundInstance;
     void Start()
     {
 
@@ -25,6 +31,9 @@ public class Worm : Enemy
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
+
+        DigSoundInstance = AudioManager.CreateInstance(DigSound);
+        DigSoundInstance.start();
         
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
@@ -84,10 +93,15 @@ public class Worm : Enemy
     }
 
     IEnumerator DigUp(){
+        DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DigSoundInstance.release();
+        AudioManager.PlayOneShot(PopOutSound,transform.position);
+
         isUnderground = false;
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");
         SpawnHole();
+        
         yield return new WaitForSeconds(diggingDelay);
         diggingUp= false;
         lineRenderer.GetComponent<Animator>().Play("TrailOff");

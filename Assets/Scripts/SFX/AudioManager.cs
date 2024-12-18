@@ -36,7 +36,8 @@ public class AudioManager : MonoBehaviour
         Instance.PlayOneShotSelf(sound, worldPos);
     }
 
-    public EventInstance CreateInstance(EventReference eventReference){
+    
+    public static EventInstance CreateInstance(EventReference eventReference){
         EventInstance eventInstance= RuntimeManager.CreateInstance(eventReference);
         return eventInstance;
     }

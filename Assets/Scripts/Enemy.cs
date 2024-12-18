@@ -31,6 +31,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     [field: SerializeField] public EventReference DeathSound { get; private set; }
     [field: SerializeField] public EventReference AttackSound { get; private set; }
+    [field: SerializeField] public EventReference MovingSound { get; private set; }
 
 
     [SerializeField] private float slowfactor;
@@ -151,7 +152,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         flame.Hitted(Damage, ArmorPen, this);
     }
     
-    
+    public void PlayMovingSound()
+    {
+        AudioManager.PlayOneShot(MovingSound,transform.position);
+    }
     
     public void target(){
         transform.GetChild(0).gameObject.SetActive(true);

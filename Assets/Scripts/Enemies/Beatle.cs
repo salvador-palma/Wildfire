@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Beatle : Enemy
 {
     public GameObject Ball;
@@ -10,6 +11,9 @@ public class Beatle : Enemy
     public float BallReleaseSpeed;
     public bool hidden;
     public float ballHitRange;
+
+    [field: SerializeField] public EventReference ThrowSound { get; private set; }
+   
 
     private void Start() {
 
@@ -49,6 +53,7 @@ public class Beatle : Enemy
        Ball.GetComponent<Animator>().Play("Shoot");
        Ball.transform.parent = null;
        hidden = true;
+        AudioManager.PlayOneShot(ThrowSound,transform.position);
        if(Flamey.Instance.current_homing == this){ Flamey.Instance.current_homing  = null; untarget();}
        
     }
@@ -75,6 +80,7 @@ public class Beatle : Enemy
             Destroy(Ball);
             Damage = (int)(Ball.transform.localScale.x/0.6f * Damage);
             base.Attack();
+           
 
             Die();
         }
@@ -101,6 +107,8 @@ public class Beatle : Enemy
         if(Ball!=null){Destroy(Ball);}
         base.Die(onKill);
     }
+
+    
 
 
     
