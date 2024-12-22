@@ -106,6 +106,7 @@ MonoBehaviour:
   Name: Beaver
   Damage: 0
   AttackDelay: 0
+  extraAtkSpeedDelay: 0
   AttackRange: 1.3
   Speed: 0.3
   Health: 650
@@ -116,6 +117,29 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 4391620021054996839}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: -1842381285
+      Data2: 1171171308
+      Data3: 1220400770
+      Data4: -1179108958
+    Path: event:/Enemies/Wave - 4/BeaverGiggle
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -1312040467
+      Data2: 1324190427
+      Data3: 835325357
+      Data4: 1300813993
+    Path: event:/Enemies/Wave - 2/FasterLightSteps
   slowfactor: 0
   StealObjective: 100
   StealAmount: 0

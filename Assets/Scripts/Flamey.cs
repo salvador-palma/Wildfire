@@ -569,6 +569,12 @@ public class Flamey : MonoBehaviour
     public GameObject SpawnObject(GameObject go){
         return Instantiate(go);
     }
+    public static void DeSpawnObject(GameObject go){
+        Destroy(go);
+    }
+    public void CallCoroutine(IEnumerator c){
+        StartCoroutine(c);
+    }
     public void callFunctionAfter(UnityAction a, float f){
        StartCoroutine(callFunctionAfterCoroutine(a,f));
     }
@@ -631,6 +637,7 @@ public class Flamey : MonoBehaviour
         float[] AccValues = new float[]{15f, 15f, 20f};
         for(int i = 0; i != AccItems.Length; i++){if(Item.has(AccItems[i])){accuracy+=AccValues[i];}}
 
+        Dmg = 10;
     }
     
 }

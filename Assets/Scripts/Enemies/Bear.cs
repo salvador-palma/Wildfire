@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Bear : Enemy
 {
 
 
     public int BearState;
     public int HealIncrement;
+    [field: SerializeField] public EventReference HoneySound { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,7 @@ public class Bear : Enemy
     }
 
     public void EatHoney(){
+        AudioManager.PlayOneShot(HoneySound,transform.position);
         Health += HealIncrement;
         DamageUI.InstantiateTxtDmg(transform.position, "+"+HealIncrement, 3);
     }

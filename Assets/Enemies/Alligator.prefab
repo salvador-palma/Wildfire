@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -141,8 +139,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -194,6 +190,7 @@ MonoBehaviour:
   Name: Alligator
   Damage: 150
   AttackDelay: 8
+  extraAtkSpeedDelay: 0
   AttackRange: 1.5
   Speed: 0.55
   Health: 1500
@@ -204,10 +201,34 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 6121361506813954931}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: -1981206156
+      Data2: 1229399408
+      Data3: -1692333655
+      Data4: -674951443
+    Path: event:/Enemies/Wave - 3/BiteLight
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -1312040467
+      Data2: 1324190427
+      Data3: 835325357
+      Data4: 1300813993
+    Path: event:/Enemies/Wave - 2/FasterLightSteps
+  slowfactor: 0
   StunTime: 3
 --- !u!95 &8993820777039798398
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -221,7 +242,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -235,7 +255,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3985377055177494692}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -259,8 +278,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.12180138, y: -0.63967025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,6 +289,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 3.5041933, y: 0.38341135}
   m_EdgeRadius: 0
 --- !u!1 &4054281087720983437
@@ -308,7 +327,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1341490917035041500
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -322,7 +341,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -377,8 +395,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

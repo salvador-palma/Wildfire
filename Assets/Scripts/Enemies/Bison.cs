@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Bison : Enemy
 {
     public int maxCharge;
@@ -11,7 +12,8 @@ public class Bison : Enemy
     
     public bool running = false;
    
-
+    [field: SerializeField] public EventReference SweepSound { get; private set; }
+    [field: SerializeField] public EventReference FirstHitSound { get; private set; }
     private void Start() {
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
@@ -43,6 +45,7 @@ public class Bison : Enemy
     
     public void charge(){
         chargeAmount++;
+        AudioManager.PlayOneShot(SweepSound, transform.position);
     }
 
     bool AttackedAlready = false;
@@ -51,6 +54,7 @@ public class Bison : Enemy
             flame.Hitted(Damage/2, ArmorPen, this);
         }else{
             AttackedAlready = true;
+            AudioManager.PlayOneShot(FirstHitSound, transform.position);
             flame.Hitted(Damage + (chargeAmount*dmgPerCharge), 1, this);
         }
        

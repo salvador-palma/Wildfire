@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
+using FMOD.Studio;
 public class Mole : Enemy
 {
     
@@ -15,6 +17,10 @@ public class Mole : Enemy
 
     public float initialDistance;
     public  Vector3 initialPos;
+
+    [field: SerializeField] public EventReference PopOutSound { get; private set; }
+    [field: SerializeField] public EventReference DigSound { get; private set; }
+    EventInstance DigSoundInstance;
     void Start()
     {
 
@@ -24,6 +30,9 @@ public class Mole : Enemy
         }
         base.flame = Flamey.Instance;
         
+        DigSoundInstance = AudioManager.CreateInstance(DigSound);
+        DigSoundInstance.start();
+
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
             int x = EnemySpawner.Instance.current_round;
@@ -73,6 +82,11 @@ public class Mole : Enemy
     }
 
     IEnumerator DigUp(){
+        
+        DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DigSoundInstance.release();
+        AudioManager.PlayOneShot(PopOutSound,transform.position);
+
         isUnderground = false;
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");

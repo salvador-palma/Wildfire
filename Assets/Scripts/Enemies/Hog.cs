@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Hog : Enemy
 {
     public int chargeAmount;
 
-   
+    [field: SerializeField] public EventReference SweepSound { get; private set; }
+    [field: SerializeField] public EventReference FirstHitSound { get; private set; }
 
     private void Start() {
 
@@ -39,16 +41,21 @@ public class Hog : Enemy
 
     public void decreaseCharge(){
         chargeAmount--;
+        
         if(chargeAmount <0){
             GetComponent<Animator>().Play("Run");
+        }else{
+            AudioManager.PlayOneShot(SweepSound, transform.position);
         }
     }
 
     bool AttackedAlready = false;
     public override void Attack(){
         if(AttackedAlready){
+            AudioManager.PlayOneShot(AttackSound, transform.position);
             flame.Hitted(Damage/2, ArmorPen, this);
         }else{
+            AudioManager.PlayOneShot(FirstHitSound, transform.position);
             AttackedAlready = true;
             flame.Hitted(Damage, ArmorPen, this);
         }

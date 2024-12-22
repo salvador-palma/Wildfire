@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Hedgehog : Enemy
 {
 
     public bool Covered;
     public int ArmorCovered;
+    [field: SerializeField] public EventReference RollSound { get; private set; }
   
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class Hedgehog : Enemy
     }
     public void Cover(){
         Covered = true;
+        AudioManager.PlayOneShot(RollSound,transform.position);
         Armor = ArmorCovered;
     }
     public int TitForTat = 10;

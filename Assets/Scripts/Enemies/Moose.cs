@@ -51,6 +51,8 @@ public class Moose : Enemy
     }
     public override void Attack()
     {
+        
+
         Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HealRadius, FlareManager.EnemyMask);
 
         foreach(Collider2D col in AnimalAround){
@@ -67,6 +69,7 @@ public class Moose : Enemy
     
     override protected IEnumerator PlayAttackAnimation(float delay){
         while(Health>0){
+            AudioManager.PlayOneShot(AttackSound,transform.position);
             GetComponent<Animator>().Play("Howl");
             yield return new WaitForSeconds(delay);
             yield return new WaitForSeconds(extraAtkSpeedDelay);

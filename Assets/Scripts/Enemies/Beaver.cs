@@ -48,6 +48,8 @@ public class Beaver : Enemy
             Flamey.Instance.MaxHealth -= StealAmount;
             Flamey.Instance.Health = Math.Min(Flamey.Instance.MaxHealth,Flamey.Instance.Health);
         }
+
+        AudioManager.PlayOneShot(AttackSound, transform.position);
         Stealing = true;
 
         

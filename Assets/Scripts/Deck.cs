@@ -141,6 +141,7 @@ public class Deck : MonoBehaviour
 
         filteredAugments = FilterAugments(isPrismaticRound, OnlyUnlockables);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
+        AudioManager.PlayOneShot(isPrismaticRound ? FMODEvents.Instance.PrismaticAugment : FMODEvents.Instance.DefaultAugment, transform.position);
         if(isPrismaticRound){GameUI.Instance.FillAll();}
         ChangeSlots();
         EnableRefreshes(!OnlyUnlockables);

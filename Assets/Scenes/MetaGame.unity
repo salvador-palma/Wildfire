@@ -26532,6 +26532,20 @@ MonoBehaviour:
       Data3: 1813878712
       Data4: 146867030
     Path: event:/Menu/MoneyTick
+  <DefaultAugment>k__BackingField:
+    Guid:
+      Data1: 953344025
+      Data2: 1224622448
+      Data3: -322550380
+      Data4: 2071053154
+    Path: event:/Night/SilverAugment
+  <PrismaticAugment>k__BackingField:
+    Guid:
+      Data1: -584316699
+      Data2: 1159651496
+      Data3: -811905613
+      Data4: -991554390
+    Path: event:/Night/PrismaticAugment
   <Fireball>k__BackingField:
     Guid:
       Data1: -905456450
@@ -26546,6 +26560,13 @@ MonoBehaviour:
       Data3: 644374167
       Data4: 1852178031
     Path: event:/Night/Orbital
+  <StatikHit>k__BackingField:
+    Guid:
+      Data1: -751944655
+      Data2: 1150092703
+      Data3: 640737721
+      Data4: -760455739
+    Path: event:/Night/Statik
   <MotorStop>k__BackingField:
     Guid:
       Data1: 425647482
@@ -43625,7 +43646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000076293945, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -43870,7 +43891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000076293945
+      value: -0.0006866455
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

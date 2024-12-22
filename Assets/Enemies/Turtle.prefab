@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -172,8 +170,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -217,7 +213,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8862798018454020762}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -241,8 +236,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.11894965, y: 0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,11 +247,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.7749574, y: 0.67896223}
   m_EdgeRadius: 0
 --- !u!95 &8862798018454020763
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -271,7 +266,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -293,6 +287,7 @@ MonoBehaviour:
   Name: Turtle
   Damage: 50
   AttackDelay: 5
+  extraAtkSpeedDelay: 0
   AttackRange: 1.55
   Speed: 0.085
   Health: 2000
@@ -303,6 +298,30 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 6236854942049564200}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: -1981206156
+      Data2: 1229399408
+      Data3: -1692333655
+      Data4: -674951443
+    Path: event:/Enemies/Wave - 3/BiteLight
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -749705189
+      Data2: 1239339461
+      Data3: -1763333752
+      Data4: -516292172
+    Path: event:/Enemies/Wave - 3/HeavySteps
+  slowfactor: 0
 --- !u!1001 &8297971508363720087
 PrefabInstance:
   m_ObjectHideFlags: 0

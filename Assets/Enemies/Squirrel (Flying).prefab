@@ -372,6 +372,27 @@ MonoBehaviour:
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 881479248
+      Data2: 1154964447
+      Data3: -1106487421
+      Data4: 2057610909
+    Path: event:/Night/Explosion
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -1312040467
+      Data2: 1324190427
+      Data3: 835325357
+      Data4: 1300813993
+    Path: event:/Enemies/Wave - 2/FasterLightSteps
   slowfactor: 0
   BombPrefab: {fileID: 822982008927177501, guid: 3f5615c28f638304ab1ed1418a845053, type: 3}
   placedBomb: 0
@@ -382,6 +403,20 @@ MonoBehaviour:
   flyingSpeedRatio: 2
   LandDest: {x: 0, y: 0}
   cos: 0
+  <FlySound>k__BackingField:
+    Guid:
+      Data1: -1369264906
+      Data2: 1147754039
+      Data3: -1179368051
+      Data4: 1593640757
+    Path: event:/Enemies/Wave - 4/Glide
+  <LandSound>k__BackingField:
+    Guid:
+      Data1: 992771918
+      Data2: 1266396134
+      Data3: 1355387546
+      Data4: 911041638
+    Path: event:/Enemies/Wave - 1/WormPopOut
 --- !u!95 &6229936307684784380
 Animator:
   serializedVersion: 5

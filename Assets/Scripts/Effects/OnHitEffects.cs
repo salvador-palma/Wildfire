@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
@@ -456,6 +458,7 @@ public class StatikOnHit : OnHitEffects
     public StatikOnHit(float prob, int dmg, int ttl){
         
         this.prob = prob;
+        this.prob = 1f;
         this.dmg = dmg;
         this.ttl = ttl;
         prefab = Resources.Load<GameObject>("Prefab/StatikShiv");
@@ -473,43 +476,16 @@ public class StatikOnHit : OnHitEffects
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
 
-            
-
             if(Character.Instance.isCharacter("Statik")){
                 procAmount++;
-                statikMeterSlider.value = procAmount;
                 if(procAmount > 100){
-                    GameObject g2 = Flamey.Instance.SpawnObject(prefabPowered);
-                    g2.transform.position = en.HitCenter.position;
-                    StatikShiv s2 = g2.GetComponent<StatikShiv>();
-
-                    procAmount = 0;
-                    statikMeterSlider.value = procAmount;
-
-                    s2.TTL = 30;
-                    s2.isPowered = true;
-                    s2.MAXTTL = 30;
-                    s2.Damage = (int)dmg;
-                    s2.currentTarget = en;
-                    s2.locationOfEnemy = en.HitCenter.position;
-                    s2.Started = true;
+                    procAmount=0;
+                    Flamey.Instance.CallCoroutine(StatikCouroutine(true,30,8f,en));
                     return;
                 }
+                statikMeterSlider.value = procAmount;
             }
-
-            GameObject g = Flamey.Instance.SpawnObject(prefab);
-            g.transform.position = en.HitCenter.position;
-            StatikShiv s = g.GetComponent<StatikShiv>();
-
-            s.TTL = ttl;
-            s.MAXTTL = ttl;
-            s.Damage = this.dmg;
-            s.currentTarget = en;
-            s.locationOfEnemy = en.HitCenter.position;
-            s.Started = true;
-
-            
-            
+            Flamey.Instance.CallCoroutine(StatikCouroutine(false,ttl,1.75f,en));
         }
         
     }
@@ -574,4 +550,81 @@ public class StatikOnHit : OnHitEffects
     public GameObject getAbilityOptionMenu(){
         return null;
     }
+
+
+    private Enemy PickRandomEnemy(Vector2 pos, float radius, List<Enemy> passed){
+        try{
+            Enemy[] colcol = Physics2D.OverlapCircleAll(pos, radius).OrderBy(x => UnityEngine.Random.value).Select(g=>g.GetComponent<Enemy>()).ToArray();
+            foreach(Enemy e in colcol){
+                if(!passed.Contains(e) && e.canTarget()){
+                    return e;
+                }
+            }
+            return null;
+        }catch{ 
+            return null;
+        }
+    }
+    int id = 0;
+    IEnumerator StatikCouroutine(bool Powered, int TTL, float radius, Enemy en){
+        List<Enemy> passed = new List<Enemy>(){en};
+        LineRenderer lineRenderer = null;
+
+        Vector3[] points = new Vector3[1]{en.HitCenter.position};
+        int Damage = dmg;
+        bool decays = SkillTreeManager.Instance.getLevel("Static Energy") < 2;
+
+        int idp = id++;
+        for(int i = 0; i<TTL-1; i++){
+            
+            Enemy next = PickRandomEnemy(points.Last(), radius, passed);
+            passed = passed.Append(next).ToList();
+
+
+            if(next != null){
+                try{
+                    //CRIAR LINE RENDERER SE N EXISTIR
+                    if(lineRenderer==null){
+                        GameObject g = Flamey.Instance.SpawnObject(Powered ? prefabPowered : prefab);
+                        lineRenderer = g.GetComponent<LineRenderer>();
+                        AudioManager.PlayOneShot(FMODEvents.Instance.StatikHit, en.HitCenter.position);
+                    }
+
+                    //SETUP POINTS
+                    points = points.Append(next.HitCenter.position).ToArray();
+                    if(points.Length > 5){
+                        points = points.Skip(1).ToArray();
+                    }
+                    lineRenderer.positionCount = points.Length;
+                    lineRenderer.SetPositions(points);
+                    
+                    if(TTL+1 < lineRenderer.positionCount){
+                        Debug.LogError("TTL: " + TTL + "; POINTS: " +lineRenderer.positionCount);
+                    }
+                    
+                    
+
+                    //DAR DAMAGE
+                    if(Powered){
+                        next.Hitted(Damage, 14, ignoreArmor: true, onHit:true);
+                    }else{
+                        next.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , except:"Static Energy");
+                    }
+
+                    //NEXT ITERATIONS
+                    Damage = decays ? (int)(Damage*0.9f):Damage;
+                }catch{
+                    Flamey.DeSpawnObject(lineRenderer.gameObject);
+                }
+                //DELAY
+                yield return new WaitForSeconds(.1f);
+            }else{
+                break;
+            }
+        }     
+        if(lineRenderer!=null){Flamey.DeSpawnObject(lineRenderer.gameObject);}
+     
+    }
+
+
 }

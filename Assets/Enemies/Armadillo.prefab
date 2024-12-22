@@ -55,8 +55,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -94,7 +92,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7097794335442574354
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +106,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -130,6 +127,7 @@ MonoBehaviour:
   Name: Armadillo
   Damage: 40
   AttackDelay: 6
+  extraAtkSpeedDelay: 0
   AttackRange: 1.55
   Speed: 0.1
   Health: 200
@@ -140,9 +138,47 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 4547497971000760199}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1279178375
+      Data2: 1102804321
+      Data3: -152924248
+      Data4: -1448038744
+    Path: event:/Enemies/Wave - 4/Punch
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -749705189
+      Data2: 1239339461
+      Data3: -1763333752
+      Data4: -516292172
+    Path: event:/Enemies/Wave - 3/HeavySteps
+  slowfactor: 0
   rollingSpeedMultiplier: 2
   hitsUntilUnroll: 3
   ArmorNotRolling: 750
+  <PopOutSound>k__BackingField:
+    Guid:
+      Data1: 992771918
+      Data2: 1266396134
+      Data3: 1355387546
+      Data4: 911041638
+    Path: event:/Enemies/Wave - 1/WormPopOut
+  <DigSound>k__BackingField:
+    Guid:
+      Data1: 578967634
+      Data2: 1223244131
+      Data3: -1546541935
+      Data4: -519614854
+    Path: event:/Enemies/Wave - 1/WormDig
 --- !u!61 &1574226432847375676
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +187,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915911046628869912}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -175,8 +210,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.31293696, y: -0.6843302}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,6 +221,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.6267422, y: 0.4420731}
   m_EdgeRadius: 0
 --- !u!1 &2052332214556707176
@@ -269,8 +304,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -341,7 +374,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6052901334600042609
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -355,7 +388,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -410,8 +442,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

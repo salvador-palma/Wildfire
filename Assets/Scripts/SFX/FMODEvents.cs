@@ -28,8 +28,11 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference MoneyTick { get; private set; }
 
     [field:Header("Game SFX")]
+    [field: SerializeField] public EventReference DefaultAugment { get; private set; }
+    [field: SerializeField] public EventReference PrismaticAugment { get; private set; }
     [field: SerializeField] public EventReference Fireball { get; private set; }
     [field: SerializeField] public EventReference OrbitalHit { get; private set; }
+    [field: SerializeField] public EventReference StatikHit { get; private set; }
 
     [field:Header("Specific SFX")]
     [field: SerializeField] public EventReference MotorStop { get; private set; }
