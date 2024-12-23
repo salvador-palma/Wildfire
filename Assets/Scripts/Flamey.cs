@@ -46,9 +46,8 @@ public class Flamey : MonoBehaviour
     [Header("Target")]
     [SerializeField] public Enemy current_homing;
 
-    [Header("Prefabs")]
-    [SerializeField] private GameObject[] FlarePrefabs;
-    [SerializeField] public GameObject FlareSpotPrefab;
+    
+    
 
     [Header("References")]
     private Animator anim;
@@ -64,6 +63,7 @@ public class Flamey : MonoBehaviour
     public bool Unhittable;
 
     //FINAL STATS COUNTERS
+    [Header("Final Stats")]
     [HideInInspector] public int TotalKills;
     [HideInInspector] public int TotalShots;
     [HideInInspector] public ulong TotalDamage;
@@ -72,6 +72,13 @@ public class Flamey : MonoBehaviour
 
 
     [SerializeField] public GameObject VisualDebug;
+
+    [Header("Flare Settings")]
+    [SerializeField] GameObject DefaultFlarePrefab;
+    [SerializeField] GameObject DefaultFlareSpotPrefab;
+    public static LayerMask EnemyMask;
+    [SerializeField] public FlareType[] FlareTypes;
+
 
   
     private float secondTimer = 0.25f;
@@ -117,7 +124,7 @@ public class Flamey : MonoBehaviour
         
         UpdateHealthUI();
         
-        FlareManager.EnemyMask = LayerMask.GetMask("Enemy");
+        EnemyMask = LayerMask.GetMask("Enemy");
 
         CheckBlackMarketItems();   
     }
@@ -195,10 +202,7 @@ public class Flamey : MonoBehaviour
         
         int FlameType = ApplyOnShoot();
 
-        FlareManager.InstantiateFlare(FlameType);
-       // Instantiate(FlarePrefabs[FlameType]);
-        
-       
+        ObjectPooling.Spawn(DefaultFlarePrefab.GetComponent<IPoolable>(), new float[]{FlameType});
     }
     public void target(Enemy e){
         
@@ -215,7 +219,7 @@ public class Flamey : MonoBehaviour
     public Flare InstantiateShot(List<string> except = null){
         TotalShots++;
         int FlameType = ApplyOnShoot(except);
-        GameObject go = FlareManager.InstantiateFlare(FlameType);
+        GameObject go = ObjectPooling.Spawn(DefaultFlarePrefab.GetComponent<IPoolable>(), new float[]{FlameType});
         return go.GetComponent<Flare>();
     }
     public static float AtkSpeedToSeconds(float asp){
@@ -637,7 +641,9 @@ public class Flamey : MonoBehaviour
         float[] AccValues = new float[]{15f, 15f, 20f};
         for(int i = 0; i != AccItems.Length; i++){if(Item.has(AccItems[i])){accuracy+=AccValues[i];}}
 
-        Dmg = 10;
+   
     }
+
+    
     
 }

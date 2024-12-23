@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Lightning : MonoBehaviour
+public class Lightning : IPoolable
 {
    
 
@@ -11,6 +11,7 @@ public class Lightning : MonoBehaviour
     private ParticleSystem.Particle[] particles;
     [SerializeField] GameObject Prefab;
     bool check;
+    public float Timer = 1f;
     private void Start() {
         partycleSystem = GetComponent<ParticleSystem>();
        
@@ -19,6 +20,10 @@ public class Lightning : MonoBehaviour
     }
 
     private void LateUpdate() {
+        Timer-=Time.deltaTime;
+        if(Timer <= 0){
+            UnPool();
+        }
         if(check){return;}
         int n = partycleSystem.GetParticles(particles);
         
@@ -26,14 +31,17 @@ public class Lightning : MonoBehaviour
             if(particles[i].remainingLifetime <= 0){
                 check =true;
                 Vector2 WorldPos = transform.TransformPoint(particles[i].position);
-                Enemy[] targets = Physics2D.OverlapCircleAll(WorldPos, 0.5f, FlareManager.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                Enemy[] targets = Physics2D.OverlapCircleAll(WorldPos, 0.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
                 if(targets.Length > 0){
                     GameObject ex = Instantiate(Prefab);
                     ex.transform.position = WorldPos;
                 }
+                
                 if(SkillTreeManager.Instance.getLevel("Thunder")>=2){
+                   
                     foreach(Enemy col in targets){
-                        if(!col.canTarget()){continue;}
+                        if(col==null || !col.canTarget()){continue;}
+                        
                         col.Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
                         col.Stun(2f);
                     }
@@ -50,6 +58,23 @@ public class Lightning : MonoBehaviour
                 
             }
         }
+
+        
     }
 
+    public override string getReference()
+    {
+        return "Thunder";
+    }
+    public override void Pool()
+    {
+        check = false;
+        Timer = 1f;
+        GetComponent<ParticleSystem>().Clear();
+        GetComponent<ParticleSystem>().Play();
+    }
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+    }
 }

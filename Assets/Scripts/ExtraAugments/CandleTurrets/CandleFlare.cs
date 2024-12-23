@@ -30,7 +30,7 @@ public class CandleFlare : Flare
 
     protected override void SummonFlareSpot(Vector2 vec)
     {
-        FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
+        FlareSpot = Instantiate(FlareSpotPrefab);
         FlareSpot.transform.position = vec;
         FlareSpot.transform.localScale *= 0.35f;
     }
@@ -41,10 +41,10 @@ public class CandleFlare : Flare
         Destroy(FlareSpot);
         
 
-        Enemy[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, FlareManager.EnemyMask).Select(e=>e.GetComponent<Enemy>()).ToArray();
+        Enemy[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, Flamey.EnemyMask).Select(e=>e.GetComponent<Enemy>()).ToArray();
         if(colliders.Length > 0){
-            GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
-            g.transform.position = vec;
+            ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{vec.x, vec.y});
+            
         }
         
         foreach(Enemy e in colliders){

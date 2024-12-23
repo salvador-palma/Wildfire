@@ -60,7 +60,7 @@ public class Wolf : Enemy
     public void Howl(){
         
         AudioManager.PlayOneShot(HowlSound,transform.position);
-        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HowlRadius, FlareManager.EnemyMask);
+        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HowlRadius, Flamey.EnemyMask);
 
         foreach(Collider2D col in AnimalAround){
             Enemy e = col.GetComponent<Enemy>();          

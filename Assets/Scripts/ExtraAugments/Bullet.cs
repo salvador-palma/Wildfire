@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : IPoolable
 {
     
 
@@ -13,21 +13,13 @@ public class Bullet : MonoBehaviour
     float maxDistance = 10f;
     Vector2 SpawnPos;
     Rigidbody2D rb;
-    void Start(){
-        if(Character.Instance.isCharacter("Pirate")){
-            ttl = 3;
-        }
-        SpawnPos = transform.position;
-        speed = Flamey.Instance.BulletSpeed;
-        rb = GetComponent<Rigidbody2D>();
-        dmg = Bullets.Instance.dmg;
-    }
+   
     // Update is called once per frame
     void FixedUpdate()
     {
         
 
-        if(Vector2.Distance(transform.position, SpawnPos) > maxDistance || ttl <= 0){Destroy(gameObject);}
+        if(Vector2.Distance(transform.position, SpawnPos) > maxDistance || ttl <= 0){UnPool();}
 
 
         rb.velocity = transform.up * speed * Time.deltaTime * multiplier;
@@ -47,5 +39,29 @@ public class Bullet : MonoBehaviour
             Enemy.SpawnExplosion(other.transform.position);
             
         }
+    }
+    public override void Pool()
+    {
+        if(Character.Instance.isCharacter("Pirate")){
+            ttl = 3;
+        }else{
+            ttl=1;
+        }
+        
+        speed = Flamey.Instance.BulletSpeed;
+        rb = GetComponent<Rigidbody2D>();
+        dmg = Bullets.Instance.dmg;
+    }
+
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+        transform.rotation = Quaternion.Euler(0,0,args[2]);
+        SpawnPos = transform.position;
+    }
+
+    public override string getReference()
+    {
+        return "Roundshot";
     }
 }

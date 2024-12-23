@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 7365131721722614595}
   - component: {fileID: 9205986349547054812}
   - component: {fileID: 7789954038594148839}
-  - component: {fileID: 4176064509869732719}
+  - component: {fileID: 6768749555056580425}
   m_Layer: 0
   m_Name: ExplosionOnDeath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7365131721722614595
 Transform:
   m_ObjectHideFlags: 0
@@ -4899,7 +4899,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4176064509869732719
+--- !u!114 &6768749555056580425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4908,11 +4908,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2495028914246231287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1032a0fb741f2cd4c8badb3ea692f521, type: 3}
+  m_Script: {fileID: 11500000, guid: b0627641c0405e84f8b486acb0367bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PoolName: Explosion
   Timer: 2.5
-  isOn: 1
 --- !u!1 &8252114208132137136
 GameObject:
   m_ObjectHideFlags: 0

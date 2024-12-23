@@ -585,7 +585,8 @@ public class StatikOnHit : OnHitEffects
                 try{
                     //CRIAR LINE RENDERER SE N EXISTIR
                     if(lineRenderer==null){
-                        GameObject g = Flamey.Instance.SpawnObject(Powered ? prefabPowered : prefab);
+
+                        GameObject g = ObjectPooling.Spawn(Powered ? prefabPowered.GetComponent<IPoolable>() : prefab.GetComponent<IPoolable>());
                         lineRenderer = g.GetComponent<LineRenderer>();
                         AudioManager.PlayOneShot(FMODEvents.Instance.StatikHit, en.HitCenter.position);
                     }
@@ -614,7 +615,7 @@ public class StatikOnHit : OnHitEffects
                     //NEXT ITERATIONS
                     Damage = decays ? (int)(Damage*0.9f):Damage;
                 }catch{
-                    Flamey.DeSpawnObject(lineRenderer.gameObject);
+                    lineRenderer.GetComponent<IPoolable>().UnPool();
                 }
                 //DELAY
                 yield return new WaitForSeconds(.1f);
@@ -622,7 +623,7 @@ public class StatikOnHit : OnHitEffects
                 break;
             }
         }     
-        if(lineRenderer!=null){Flamey.DeSpawnObject(lineRenderer.gameObject);}
+        if(lineRenderer!=null){lineRenderer.GetComponent<IPoolable>().UnPool();}
      
     }
 

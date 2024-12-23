@@ -175,8 +175,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Flamey.Instance.target(this);
     }
     public static void SpawnExplosion(Vector2 explosionPos){
-        GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
-        g.transform.position = explosionPos;
+        ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{explosionPos.x, explosionPos.y});
     }
 
 

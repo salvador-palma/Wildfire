@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     float TimerEnemySpawn;
     float TimerEnemySpawnCounter;
 
-    [SerializeField] public GameObject ExplosionPrefab;
+    [SerializeField] public IPoolable ExplosionPrefab;
     [SerializeField] public GameObject ExplosionGhoulPrefab;
     
     public bool GameEnd = true;

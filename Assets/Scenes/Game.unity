@@ -12112,6 +12112,63 @@ MonoBehaviour:
   TotalDamageTaken: 0
   TotalHealed: 0
   VisualDebug: {fileID: 3736166101770931102, guid: 475e05ed9ff8b3843890fb411435ad2d, type: 3}
+  DefaultFlarePrefab: {fileID: 5670772395214100646, guid: 2e25ba8c496e99548b70471384659ce1, type: 3}
+  DefaultFlareSpotPrefab: {fileID: 9207615669171026501, guid: 59c00f86f086e2249bcfcde8b18bd183, type: 3}
+  FlareTypes:
+  - DmgTextID: 0
+    FlareColor: {r: 0.9960785, g: 0.9960785, b: 0, a: 1}
+    SpotColor: {r: 0.99215686, g: 0.7765269, b: 0, a: 0}
+    ParticleColors:
+    - {r: 0.99607843, g: 0.39215687, b: 0, a: 1}
+    - {r: 0.9960785, g: 0.9960785, b: 0, a: 1}
+  - DmgTextID: 1
+    FlareColor: {r: 0.9960785, g: 0.5176471, b: 0, a: 1}
+    SpotColor: {r: 0.9960785, g: 0.56078434, b: 0, a: 0}
+    ParticleColors:
+    - {r: 0.69803923, g: 0.27058825, b: 0, a: 1}
+    - {r: 0.69803923, g: 0.20392159, b: 0, a: 1}
+  - DmgTextID: 17
+    FlareColor: {r: 0.9960785, g: 0.4156863, b: 0.011764707, a: 1}
+    SpotColor: {r: 0.9960785, g: 0.4156863, b: 0.011764707, a: 0}
+    ParticleColors:
+    - {r: 0.32156864, g: 0.12941177, b: 0.007843138, a: 1}
+    - {r: 0.28235295, g: 0.08235294, b: 0, a: 1}
+  - DmgTextID: 7
+    FlareColor: {r: 0, g: 0.9960785, b: 0.94117653, a: 1}
+    SpotColor: {r: 0.14901961, g: 0.9960785, b: 0.9960785, a: 0}
+    ParticleColors:
+    - {r: 0, g: 0.47450984, b: 0.9960785, a: 1}
+    - {r: 0, g: 0.41960788, b: 0.9960785, a: 1}
+  - DmgTextID: 8
+    FlareColor: {r: 0.09803922, g: 0.64705884, b: 0.9960785, a: 1}
+    SpotColor: {r: 0.09803922, g: 0.64705884, b: 0.99607843, a: 0}
+    ParticleColors:
+    - {r: 0, g: 0.19607843, b: 0.41568628, a: 1}
+    - {r: 0.047058824, g: 0.23529412, b: 0.49411765, a: 1}
+  - DmgTextID: 18
+    FlareColor: {r: 0.1254902, g: 0.48235297, b: 0.97647065, a: 1}
+    SpotColor: {r: 0.1254902, g: 0.48235297, b: 0.97647065, a: 0}
+    ParticleColors:
+    - {r: 0, g: 0.13333334, b: 0.28235295, a: 1}
+    - {r: 0.043137256, g: 0.1764706, b: 0.35686275, a: 1}
+  - DmgTextID: 15
+    FlareColor: {r: 0.9960785, g: 0.5372549, b: 0.9960785, a: 1}
+    SpotColor: {r: 0.9960785, g: 0.5372549, b: 0.9960785, a: 0}
+    ParticleColors:
+    - {r: 1, g: 0.18431373, b: 0.99607843, a: 1}
+    - {r: 0.6862745, g: 0.1254902, b: 1, a: 1}
+  - DmgTextID: 20
+    FlareColor: {r: 0.9960785, g: 0.3137255, b: 0.9960785, a: 1}
+    SpotColor: {r: 0.9960785, g: 0.3137255, b: 0.9960785, a: 0}
+    ParticleColors:
+    - {r: 0.69803923, g: 0.07058824, b: 0.5254902, a: 1}
+    - {r: 0.43529415, g: 0.121568635, b: 0.30588236, a: 1}
+  - DmgTextID: 19
+    FlareColor: {r: 0.37647063, g: 0.20784315, b: 0.7254902, a: 1}
+    SpotColor: {r: 0.37647063, g: 0.20784315, b: 0.7254902, a: 0}
+    ParticleColors:
+    - {r: 0.1137255, g: 0.04705883, b: 0.23529413, a: 1}
+    - {r: 0.20392159, g: 0.10196079, b: 0.34117648, a: 1}
 --- !u!95 &811388238
 Animator:
   serializedVersion: 5
@@ -12147,7 +12204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnAugments: 0
   current_round: 0
-  ExplosionPrefab: {fileID: 6982197892161001652, guid: e68e2d8982bd03447b90319865eb4f0f, type: 3}
+  ExplosionPrefab: {fileID: 2759718005379229377, guid: e68e2d8982bd03447b90319865eb4f0f, type: 3}
   ExplosionGhoulPrefab: {fileID: 8853287688916905975, guid: adbdc491307fa1e41888839555d390b5, type: 3}
   GameEnd: 0
   PickedEnemies: []
@@ -23396,6 +23453,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293246118}
   m_CullTransparentMesh: 1
+--- !u!1 &1295397072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1295397074}
+  - component: {fileID: 1295397073}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1295397073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295397072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809fb79fcd886f04e8d6bffd2c7250e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BigPapa: {fileID: 1295397074}
+--- !u!4 &1295397074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295397072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.3173785, y: 0.81332207, z: 0.040611144}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304845630
 GameObject:
   m_ObjectHideFlags: 0
@@ -27547,108 +27649,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548983165}
   m_CullTransparentMesh: 1
---- !u!1 &1559845926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1559845928}
-  - component: {fileID: 1559845927}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1559845927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559845926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7cc5545b563e546820bc8d253b0237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledFlares: []
-  DefaultFlarePrefab: {fileID: 5670772395214100646, guid: 2e25ba8c496e99548b70471384659ce1, type: 3}
-  DefaultFlareSpotPrefab: {fileID: 9207615669171026501, guid: 59c00f86f086e2249bcfcde8b18bd183, type: 3}
-  FlareTypes:
-  - DmgTextID: 0
-    FlareColor: {r: 0.9960785, g: 0.9960785, b: 0, a: 1}
-    SpotColor: {r: 0.99215686, g: 0.7765269, b: 0, a: 0}
-    ParticleColors:
-    - {r: 0.99607843, g: 0.39215687, b: 0, a: 1}
-    - {r: 0.9960785, g: 0.9960785, b: 0, a: 1}
-  - DmgTextID: 1
-    FlareColor: {r: 0.9960785, g: 0.5176471, b: 0, a: 1}
-    SpotColor: {r: 0.9960785, g: 0.56078434, b: 0, a: 0}
-    ParticleColors:
-    - {r: 0.69803923, g: 0.27058825, b: 0, a: 1}
-    - {r: 0.69803923, g: 0.20392159, b: 0, a: 1}
-  - DmgTextID: 17
-    FlareColor: {r: 0.9960785, g: 0.4156863, b: 0.011764707, a: 1}
-    SpotColor: {r: 0.9960785, g: 0.4156863, b: 0.011764707, a: 0}
-    ParticleColors:
-    - {r: 0.32156864, g: 0.12941177, b: 0.007843138, a: 1}
-    - {r: 0.28235295, g: 0.08235294, b: 0, a: 1}
-  - DmgTextID: 7
-    FlareColor: {r: 0, g: 0.9960785, b: 0.94117653, a: 1}
-    SpotColor: {r: 0.14901961, g: 0.9960785, b: 0.9960785, a: 0}
-    ParticleColors:
-    - {r: 0, g: 0.47450984, b: 0.9960785, a: 1}
-    - {r: 0, g: 0.41960788, b: 0.9960785, a: 1}
-  - DmgTextID: 8
-    FlareColor: {r: 0.09803922, g: 0.64705884, b: 0.9960785, a: 1}
-    SpotColor: {r: 0.09803922, g: 0.64705884, b: 0.99607843, a: 0}
-    ParticleColors:
-    - {r: 0, g: 0.19607843, b: 0.41568628, a: 1}
-    - {r: 0.047058824, g: 0.23529412, b: 0.49411765, a: 1}
-  - DmgTextID: 18
-    FlareColor: {r: 0.1254902, g: 0.48235297, b: 0.97647065, a: 1}
-    SpotColor: {r: 0.1254902, g: 0.48235297, b: 0.97647065, a: 0}
-    ParticleColors:
-    - {r: 0, g: 0.13333334, b: 0.28235295, a: 1}
-    - {r: 0.043137256, g: 0.1764706, b: 0.35686275, a: 1}
-  - DmgTextID: 15
-    FlareColor: {r: 0.9960785, g: 0.5372549, b: 0.9960785, a: 1}
-    SpotColor: {r: 0.9960785, g: 0.5372549, b: 0.9960785, a: 0}
-    ParticleColors:
-    - {r: 1, g: 0.18431373, b: 0.99607843, a: 1}
-    - {r: 0.6862745, g: 0.1254902, b: 1, a: 1}
-  - DmgTextID: 20
-    FlareColor: {r: 0.9960785, g: 0.3137255, b: 0.9960785, a: 1}
-    SpotColor: {r: 0.9960785, g: 0.3137255, b: 0.9960785, a: 0}
-    ParticleColors:
-    - {r: 0.69803923, g: 0.07058824, b: 0.5254902, a: 1}
-    - {r: 0.43529415, g: 0.121568635, b: 0.30588236, a: 1}
-  - DmgTextID: 19
-    FlareColor: {r: 0.37647063, g: 0.20784315, b: 0.7254902, a: 1}
-    SpotColor: {r: 0.37647063, g: 0.20784315, b: 0.7254902, a: 0}
-    ParticleColors:
-    - {r: 0.1137255, g: 0.04705883, b: 0.23529413, a: 1}
-    - {r: 0.20392159, g: 0.10196079, b: 0.34117648, a: 1}
---- !u!4 &1559845928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559845926}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8579714, y: -0.5074143, z: 0.11147751}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1562088144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38895,7 +38895,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.63995, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.63998, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -47383,5 +47383,5 @@ SceneRoots:
   - {fileID: 1607839808}
   - {fileID: 687836387}
   - {fileID: 35752738}
-  - {fileID: 1559845928}
   - {fileID: 2071748555}
+  - {fileID: 1295397074}

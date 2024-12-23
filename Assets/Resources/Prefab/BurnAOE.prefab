@@ -14,14 +14,13 @@ GameObject:
   - component: {fileID: 8721496126903620096}
   - component: {fileID: 8721496126903620097}
   - component: {fileID: 8721496126903620111}
-  - component: {fileID: 8721496126903620108}
   m_Layer: 0
   m_Name: BurnAOE
   m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8721496126903620109
 Transform:
   m_ObjectHideFlags: 0
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 2fb8325edc635b74c9abd4bedf113a9f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.5058824, b: 0.53333336, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -188,17 +187,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8721496126903620108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8721496126903620102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1032a0fb741f2cd4c8badb3ea692f521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Timer: 0
-  isOn: 0

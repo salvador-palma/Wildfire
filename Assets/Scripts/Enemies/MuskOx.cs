@@ -55,7 +55,7 @@ public class MuskOx : Enemy
 
         
         
-        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HealRadius, FlareManager.EnemyMask);
+        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HealRadius, Flamey.EnemyMask);
 
         foreach(Collider2D col in AnimalAround){
             Enemy e = col.GetComponent<Enemy>();          

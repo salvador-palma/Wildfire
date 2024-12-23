@@ -14,7 +14,7 @@ public interface OnLandEffect: Effect
 public class BurnOnLand : OnLandEffect
 {
     public static BurnOnLand Instance;
-    public GameObject prefab;
+    public IPoolable prefab;
     public GameObject prefabEverlast;
     public float size;
     public int damage;
@@ -29,7 +29,7 @@ public class BurnOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/BurnAOE");
+            prefab = Resources.Load<GameObject>("Prefab/BurnAOE").GetComponent<IPoolable>();
             prefabEverlast = Resources.Load<GameObject>("Prefab/AbilityCharacter/BurnAOE Everlasting");
 
         }else{
@@ -39,8 +39,7 @@ public class BurnOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
         }
     }
     public void Stack(BurnOnLand burnOnLand){
@@ -116,7 +115,7 @@ public class BurnOnLand : OnLandEffect
 public class IceOnLand : OnLandEffect
 {
     public static IceOnLand Instance;
-    public GameObject prefab;
+    public IPoolable prefab;
     public float size;
     public float slow;
     public float timegap;
@@ -130,7 +129,7 @@ public class IceOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/IceAOE");
+            prefab = Resources.Load<GameObject>("Prefab/IceAOE").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
@@ -138,8 +137,7 @@ public class IceOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
         }
     }
     public void Stack(IceOnLand iceOnLand){
@@ -214,8 +212,8 @@ public class IceOnLand : OnLandEffect
 public class DrainOnLand : OnLandEffect
 {
     public static DrainOnLand Instance;
-    public GameObject prefab;
-    public GameObject prefabCarnivore;
+    public IPoolable prefab;
+    public IPoolable prefabCarnivore;
     public float size;
     public float perc;
     public float timegap;
@@ -230,8 +228,8 @@ public class DrainOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/DrainAOE");
-            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore");
+            prefab = Resources.Load<GameObject>("Prefab/DrainAOE").GetComponent<IPoolable>();
+            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
@@ -240,11 +238,9 @@ public class DrainOnLand : OnLandEffect
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
             if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < carnivoreChance){
-                GameObject go = Flamey.Instance.SpawnObject(prefabCarnivore);
-                go.transform.position = pos;
+                ObjectPooling.Spawn(prefabCarnivore, new float[]{pos.x, pos.y});
             }else{
-                GameObject go = Flamey.Instance.SpawnObject(prefab);
-                go.transform.position = pos;
+                ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
             }
             
         }

@@ -5,7 +5,7 @@ using System;
 using Unity.VisualScripting;
 
 
-public class DrainAOE : MonoBehaviour
+public class DrainAOE : IPoolable
 {
     [SerializeField] Sprite[] flowers;
     [SerializeField] Sprite carnivore;
@@ -87,5 +87,32 @@ public class DrainAOE : MonoBehaviour
         if(collider.tag == "Enemy"){
             colliding.Remove(collider.GetComponent<Enemy>());
         }
+    }
+
+    public override void Pool()
+    {
+        colliding = new List<Enemy>();
+        lt = DrainOnLand.Instance==null? 1f : DrainOnLand.Instance.lasting;
+        perc = DrainOnLand.Instance==null? 0.01f : DrainOnLand.Instance.perc;
+        Vector2 scale = new Vector2(0.2232152f,0.2232152f) * (DrainOnLand.Instance==null?1f:DrainOnLand.Instance.size) * (isCarnivore? 1.5f : 1);
+        transform.localScale = scale;
+        if(isCarnivore){
+            GetComponent<SpriteRenderer>().sprite = carnivore;
+        }else{
+            GetComponent<SpriteRenderer>().sprite = flowers[UnityEngine.Random.Range(0, flowers.Length-1)];
+        }
+         if(EnemySpawner.Instance.isOnAugments){UnPool();}
+
+        Color c = GetComponent<SpriteRenderer>().color;
+        c.a = 1;
+        GetComponent<SpriteRenderer>().color = c;
+    }
+    public override string getReference()
+    {
+        return "Flower";
+    }
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
     }
 }

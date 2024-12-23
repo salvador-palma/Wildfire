@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BurnAOE : MonoBehaviour
+public class BurnAOE : IPoolable
 {
     public int Damage;
     public float Timer =1f;
@@ -13,19 +13,7 @@ public class BurnAOE : MonoBehaviour
     float lt;
     List<Enemy> colliding;
     public bool EverLasting;
-    private void Start() {
-        colliding = new List<Enemy>();
-        lt = BurnOnLand.Instance.lasting;
-        Damage = BurnOnLand.Instance.damage;
-        if(!EverLasting){
-            Vector2 scale = transform.localScale * BurnOnLand.Instance.size;
-            transform.localScale = scale;
-        }
-        if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
-        
-        
-
-    }
+   
     void Update()
     {
         t-=Time.deltaTime;
@@ -75,4 +63,29 @@ public class BurnAOE : MonoBehaviour
             colliding.Remove(collider.GetComponent<Enemy>());
         }
     }
+    public override void Pool()
+    {
+        colliding = new List<Enemy>();
+        lt = BurnOnLand.Instance.lasting;
+        Damage = BurnOnLand.Instance.damage;
+        if(!EverLasting){
+            Vector2 scale = new Vector2(0.2232152f,0.2232152f) * BurnOnLand.Instance.size;
+            transform.localScale = scale;
+        }
+        if(EnemySpawner.Instance.isOnAugments){UnPool();}
+
+        Color c = GetComponent<SpriteRenderer>().color;
+        c.a = 1;
+        GetComponent<SpriteRenderer>().color = c;
+    }
+    public override string getReference()
+    {
+        return "Lava Pool";
+    }
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+    }
+
+    
 }

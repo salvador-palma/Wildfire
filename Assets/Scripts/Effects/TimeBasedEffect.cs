@@ -136,7 +136,7 @@ public class LightningEffect : TimeBasedEffect
 
 {
     public static LightningEffect Instance;
-    public static GameObject lightning;
+    public static IPoolable lightning;
     public int interval;
     int current_interval;
     public int dmg;
@@ -148,7 +148,7 @@ public class LightningEffect : TimeBasedEffect
         if(Instance == null){
             Instance = this;
             cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ThunderUnlock"));
-            lightning = Resources.Load<GameObject>("Prefab/Lightning");
+            lightning = Resources.Load<GameObject>("Prefab/Lightning").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this, percRed);
         }
@@ -169,8 +169,8 @@ public class LightningEffect : TimeBasedEffect
             for(int i = 0; i < amount; i++)
             {
                 Vector2 v = Flamey.Instance.getRandomHomingPosition();
-                GameObject go =  Flamey.Instance.SpawnObject(lightning);
-                go.transform.position = new Vector2(v.x, v.y + 10.91f);
+                ObjectPooling.Spawn(lightning, new float[]{v.x, v.y + 10.91f});
+                
             }
             
 

@@ -57,7 +57,7 @@ public class Squirrel : Enemy
     }
 
     protected void Explode(){
-        Instantiate(EnemySpawner.Instance.ExplosionPrefab).transform.position = BombPrefab.transform.position;
+        ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{BombPrefab.transform.position.x, BombPrefab.transform.position.y});
         AudioManager.PlayOneShot(AttackSound,transform.position);
         flame.Hitted(Damage, ArmorPen, this);
     }

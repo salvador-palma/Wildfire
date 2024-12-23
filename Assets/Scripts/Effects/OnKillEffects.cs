@@ -22,7 +22,7 @@ public class Explosion : OnKillEffects
     public int dmg;
     public static Explosion Instance;
     
-    public static GameObject Prefab;
+    public static IPoolable Prefab;
     float radiusExplosion;
     
     private int ExplosionsUntilTrueDamage=20;
@@ -35,10 +35,10 @@ public class Explosion : OnKillEffects
         if(Instance == null){
             Instance = this;
             if(SkillTreeManager.Instance.getLevel("Explosion")>=1){
-                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeathGiant");
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeathGiant").GetComponent<IPoolable>();
                 radiusExplosion = 1.8f;
             }else{
-                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath");
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath").GetComponent<IPoolable>();
                 radiusExplosion = 1.2f;
             }
             if(SkillTreeManager.Instance.getLevel("Explosion")>=2){
@@ -59,8 +59,9 @@ public class Explosion : OnKillEffects
         if(Random.Range(0f,1f) < prob){
             
 
-            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
-            Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, Flamey.EnemyMask);
+            ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+
             foreach(Collider2D col in targets){
                 col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:ExplosionsDone>=ExplosionsUntilTrueDamage, onHit:false);
             }
@@ -82,8 +83,9 @@ public class Explosion : OnKillEffects
         }
     }
     public void ExplodeCampfire(Vector2 pos){
-        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
-        Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, Flamey.EnemyMask);
+        ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+
         foreach(Collider2D col in targets){
             col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
         }
@@ -244,7 +246,7 @@ public class Bullets : OnKillEffects
     public int dmg;
     public int amount;
     public static Bullets Instance;
-    static GameObject Prefab;
+    static IPoolable Prefab;
 
     public Bullets(float prob, int dmg, int amount){
         this.prob = prob;
@@ -252,7 +254,7 @@ public class Bullets : OnKillEffects
         this.amount = amount;
         if(Instance == null){
             Instance = this;
-            Prefab = Resources.Load<GameObject>("Prefab/Bullet");
+            Prefab = Resources.Load<GameObject>("Prefab/Bullet").GetComponent<IPoolable>();
             if(SkillTreeManager.Instance.getLevel("Pirate") >= 2){ this.amount *= 2;}
         }else{
             Instance.Stack(this);
@@ -282,17 +284,12 @@ public class Bullets : OnKillEffects
                 if(e!=null){
                     randomRotation = Vector2.SignedAngle( Vector2.up, (Vector2)e.HitCenter.position - pos);
                 }
-
-                GameObject go = Flamey.Instance.SpawnObject(Prefab);
-                go.transform.position = pos;
-                go.transform.rotation = Quaternion.Euler(0,0,randomRotation);
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, randomRotation});
             }          
             
         }else{
             for(int i =0; i != amount; i++){
-                GameObject go = Flamey.Instance.SpawnObject(Prefab);
-                go.transform.position = pos;
-                go.transform.rotation = Quaternion.Euler(0,0,i*(360/amount) + randomRotation);
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, i*(360/amount) + randomRotation});
             }
         }
        

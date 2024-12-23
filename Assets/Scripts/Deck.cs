@@ -288,17 +288,14 @@ public class Deck : MonoBehaviour
     }
     private void ClearRemainderObjects(object sender, EventArgs e)
     {
-        int i = 0;
-        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Flare")){
-            if(!g.activeInHierarchy && g.GetComponent<Flare>().FlareSpot != null){
-                Destroy(g.GetComponent<Flare>().FlareSpot);
-                Debug.Log("Destroyed " + i);
-                i++;
-            }
-             
-        }
+        
         foreach(GameObject g in GameObject.FindGameObjectsWithTag("Prop")){
-            Destroy(g);
+            IPoolable p = g.GetComponent<IPoolable>();
+            if(p!=null){
+                p.UnPool();
+            }else{
+                Destroy(g);
+            }
              
         }
     }

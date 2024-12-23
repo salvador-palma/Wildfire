@@ -46,7 +46,7 @@ public class ThornsOnHitted : OnHittedEffects
         if(Random.Range(0f,1f) < prob){
             if(Flamey.Instance.Armor == 0){return;}
             if(SkillTreeManager.Instance.getLevel("Thorns")>=2){
-                Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, FlareManager.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
                 foreach(Enemy enemy in targets){
                     enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
                 }
