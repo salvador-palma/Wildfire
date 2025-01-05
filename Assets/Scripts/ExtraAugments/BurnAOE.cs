@@ -13,7 +13,24 @@ public class BurnAOE : IPoolable
     float lt;
     List<Enemy> colliding;
     public bool EverLasting;
-   
+    static int poolID;
+    int selfID;
+    static Material[] materials;
+    private void Awake() {
+        selfID = poolID++;
+        colliding = new List<Enemy>();
+        if(materials==null){
+            materials = new Material[10];
+            for(int i=0; i<10;i++){
+                SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+                materials[i] = new Material(renderer.material);
+                materials[i].SetVector("_RandomVec", new Vector2(UnityEngine.Random.Range(-100f,100f),UnityEngine.Random.Range(-100f,100f)));
+            }
+        }else{
+            SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+            renderer.material = materials[selfID%10];
+        }
+    }
     void Update()
     {
         t-=Time.deltaTime;
@@ -86,6 +103,12 @@ public class BurnAOE : IPoolable
     {
         transform.position = new Vector2(args[0], args[1]);
     }
+    public override void UnPool()
+    {
+        Renderer renderer = gameObject.GetComponent<Renderer>();
+        renderer.material.SetVector("_RandomVec", new Vector2(UnityEngine.Random.Range(-100f,100f),UnityEngine.Random.Range(-100f,100f)));
+        base.UnPool();
+    }
 
-    
+
 }

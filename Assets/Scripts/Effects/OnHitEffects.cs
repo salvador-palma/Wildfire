@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -253,12 +254,15 @@ public class ShredOnHit : OnHitEffects
     float DamageArmor = 0;
     private Image cooldownImage;
 
+    public static IPoolable MusicNotesParticle;
+
     public ShredOnHit(float prob, float percReduced){
        
         this.percReduced = percReduced;
         this.prob = prob;
         if(Instance == null){
             Instance = this;
+            MusicNotesParticle = Resources.Load<GameObject>("Prefab/MusicNotes").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
@@ -268,6 +272,11 @@ public class ShredOnHit : OnHitEffects
         if(en==null){return;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
+
+            if(en.Armor > 0){
+                ObjectPooling.Spawn(MusicNotesParticle, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
+            }
+
             float actualPercReduced = percReduced;
             if(SkillTreeManager.Instance.getLevel("Resonance") >= 1){
                 actualPercReduced += (Flamey.Instance.accuracy/100f + (Flamey.Instance.BulletSpeed-5)/15f)/10;
@@ -360,30 +369,33 @@ public class ExecuteOnHit : OnHitEffects
     
     public static ExecuteOnHit Instance;
     public float percToKill;
+    private IPoolable Ghost;
     public ExecuteOnHit(float percToKill){
        
         this.percToKill = percToKill;
         
         if(Instance == null){
             Instance = this;
+            Ghost = Resources.Load<GameObject>("Prefab/ExecuteGhost").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
     }
-    public async void  ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(en==null){return;}
         if(en.Health < en.MaxHealth * percToKill){
             float f = en.Health;
             Vector2 v = en.transform.position;
             en.Health = 0;
-            Debug.Log("Executed");
+            
             if(SkillTreeManager.Instance.getLevel("Assassin")>=2){
                 Flamey.Instance.ApplyOnKill(en.HitCenter.position);
                 Flamey.Instance.ApplyOnKill(en.HitCenter.position);
             }
-            await Task.Delay(50);
-            DamageUI.InstantiateTxtDmg(v, "EXECUTED",5);
+            
+            ObjectPooling.Spawn(Ghost, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
+            Debug.Log("EXECUTED");
         }
         
     }

@@ -27,7 +27,7 @@ public class Ghoul : MonoBehaviour
         AtkInterval = 2 - 1.75f*((1/Flamey.Instance.atkSpeed) - 1.333f)/(-1.25f);
         sp = GetComponentInChildren<SpriteRenderer>();
         sp.flipX = Random.Range(0f,1f) < 0.5f;
-        if(isMega){Debug.Log("Mega Started");}
+        if(isMega){GetComponent<Animator>().SetBool("Mega", true);}
     }
     private void Update() {
         if(Spawning){return;}
@@ -46,7 +46,7 @@ public class Ghoul : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             checkFlip();
             if(Vector2.Distance(transform.position, target.transform.position) < 1.5f){
-                GetComponent<Animator>().Play("GhoulAttack");
+                GetComponent<Animator>().Play(isMega? "MegaGhoulAttack" : "GhoulAttack");
             }
         }
         

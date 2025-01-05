@@ -23,14 +23,18 @@ public class ThornsOnHitted : OnHittedEffects
     private int activeRoundsLeft;
     private int activeRoundsCooldown = 1;
 
+    private IPoolable ThornsPrefab;
+
     public ThornsOnHitted(float prob, float perc){
         
         this.prob = prob;
         this.perc = perc;
         if(Instance == null){
             Instance = this;
+            ThornsPrefab = Resources.Load<GameObject>("Prefab/Thorn").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
+            
         }
     }
 
@@ -47,15 +51,23 @@ public class ThornsOnHitted : OnHittedEffects
             if(Flamey.Instance.Armor == 0){return;}
             if(SkillTreeManager.Instance.getLevel("Thorns")>=2){
                 Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                SpawnThorn(en.HitCenter.position, 2);
                 foreach(Enemy enemy in targets){
                     enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
                 }
             }else{
                 en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                SpawnThorn(en.HitCenter.position,1);
             }
             
         }
 
+    }
+    private void SpawnThorn(Vector2 pos, int type){
+        if((int)(Flamey.Instance.Armor * perc)>0){
+            ObjectPooling.Spawn(ThornsPrefab, new float[]{pos.x, pos.y - .4f, type});
+        }
+        
     }
     public void Stack(ThornsOnHitted thornsOnHitted){
         
