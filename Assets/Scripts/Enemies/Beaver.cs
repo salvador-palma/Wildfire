@@ -58,6 +58,7 @@ public class Beaver : Enemy
     private void TurnBack(){
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
+    protected override void ReturnWalk(){}
 
     public override void Die(bool onKill = true){
         if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.95f), 0f);}

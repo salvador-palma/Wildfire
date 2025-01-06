@@ -67,14 +67,7 @@ public class Moose : Enemy
         }
     }
     
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            AudioManager.PlayOneShot(AttackSound,transform.position);
-            GetComponent<Animator>().Play("Howl");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
+
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
         if(source!= null && source.Equals("Lava Pool")){
             base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except);

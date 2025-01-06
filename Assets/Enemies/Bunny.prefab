@@ -89,7 +89,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,6 +172,8 @@ MonoBehaviour:
       Data4: -1911328274
     Path: event:/Enemies/Wave - 2/BunnyJump
   slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Jump
   jumping: 0
   jumpTimer: 2.5
 --- !u!95 &197817752707662347

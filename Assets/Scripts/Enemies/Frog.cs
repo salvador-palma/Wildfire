@@ -94,6 +94,10 @@ public class Frog : Enemy
         if(source != null && source == "IceLand" && jumping){return;}
         base.Stun(f);
     }
+    protected override void ReturnWalk(){
+        hasReachedRange = false;
+        base.ReturnWalk();
+    }
 
     public override void Attack(){
         Attacking = false;

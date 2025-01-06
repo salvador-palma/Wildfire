@@ -67,6 +67,7 @@ public class Squirrel : Enemy
         }
         base.Die();
     }
+    protected override void ReturnWalk(){}
 
 
     

@@ -47,17 +47,6 @@ public class Snake : Enemy
     }
 
     
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            if(isPoisonous){
-                GetComponent<Animator>().Play("EnemyAttackPoison");
-            }else{
-                GetComponent<Animator>().Play("EnemyAttack");
-            }
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
 
     
 }

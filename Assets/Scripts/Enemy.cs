@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FMOD;
 using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
@@ -29,6 +30,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public bool Stunned;
     public bool Shiny;
 
+
+    //FORCED CODE
+    [HideInInspector] public bool hitByShred;
+
     [field: SerializeField] public EventReference DeathSound { get; private set; }
     [field: SerializeField] public EventReference AttackSound { get; private set; }
     [field: SerializeField] public EventReference MovingSound { get; private set; }
@@ -52,17 +57,55 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            Attacking = true;
            removeSlowingEffects();
            GetComponent<Animator>().SetTrigger("InRange");
-        //    StartCoroutine(PlayAttackAnimation(AttackDelay));
            StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
     }
+    public string AttackAnimationName = "EnemyAttack";
+    public string WalkAnimationName = "Walk";
     protected virtual IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            GetComponent<Animator>().Play("EnemyAttack");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
+        bool breaking = false;
+        while(Health>0 && !breaking){
+            if(Vector2.Distance(flame.transform.position, HitCenter.position) > AttackRange ){
+                ReturnWalk();
+                breaking = true;
+            }else{
+                GetComponent<Animator>().Play(AttackAnimationName);
+
+                float startTime = Time.time;
+                yield return new WaitUntil(() =>  Time.time - startTime >= delay || Vector2.Distance(flame.transform.position, HitCenter.position) > AttackRange );
+                yield return new WaitForSeconds(extraAtkSpeedDelay);
+            }
         }
     }
+    protected virtual void ReturnWalk(){
+        Attacking = false;
+        GetComponent<Animator>().ResetTrigger("InRange");
+        GetComponent<Animator>().Play(WalkAnimationName);
+    }
+    [ContextMenu("KnockBackCenter")]
+    public void KnockBackCenter(){
+        StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
+    }
+    public virtual void KnockBack(Vector2 origin, bool retracting, float power){
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power));
+    }
+    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power){
+        float timer = .5f;
+
+        Vector2 diff = (Vector2)HitCenter.position - origin;
+        diff.Normalize();
+        diff *= retracting ? -1 : 1;
+
+        while(timer > 0){
+            timer -= Time.deltaTime;
+            transform.position = (Vector2)transform.position + diff * Time.deltaTime * power;
+            yield return null;
+
+        }
+       
+    }
+
+
     public virtual void Move(){
         if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime);
@@ -105,10 +148,6 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         PlayHitAnimation(Dmg, TextID); 
     }
 
-    
-    private void PlayHitSoundFx(){
-        // AudioManager.Instance.PlayFX(1,1,0.3f, 0.5f);
-    }
     public void PlayHitAnimation(int dmg, int textID){
         GetComponent<Animator>().Play("EnemyHit");
         DamageUI.InstantiateTxtDmg(transform.position, dmg.ToString(), textID);
@@ -119,7 +158,6 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         try{
             Flamey.Instance.addEmbers(calculateEmbers());
             flame.TotalKills++;
-            PlayHitSoundFx();
             CameraShake.Shake(0.4f,0.05f);
             
             EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
@@ -127,7 +165,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
             AudioManager.PlayOneShot(DeathSound,transform.position);
         }catch{
-            Debug.Log("Error at: Enemy.Die()");
+           // Debug.Log("Error at: Enemy.Die()");
         }
         
         Destroy(gameObject);
@@ -155,6 +193,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void PlayMovingSound()
     {
         AudioManager.PlayOneShot(MovingSound,transform.position);
+    }
+    public void PlayAttackingSound()
+    {
+        AudioManager.PlayOneShot(AttackSound,transform.position);
     }
     
     public void target(){

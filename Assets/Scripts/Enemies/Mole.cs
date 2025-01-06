@@ -115,6 +115,7 @@ public class Mole : Enemy
     {
         return !isUnderground && !diggingUp;
     }
+    
 
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
     {

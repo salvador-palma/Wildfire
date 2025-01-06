@@ -134,17 +134,17 @@ public class Wolf : Enemy
         base.Die(onKill);
     }
     override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            if(isStray){
-                GetComponent<Animator>().Play("StrayAttack");
-            }else if(isAlpha){
-                GetComponent<Animator>().Play("AlphaAttack");
+        if(!isStray){
+            if(isAlpha){
+                AttackAnimationName = "AlphaAttack";
+                WalkAnimationName = "AlphaRun";
             }else{
-                GetComponent<Animator>().Play("DefaultAttack");
+                AttackAnimationName = "DefaultAttack";
+                WalkAnimationName = "DefaultRun";
             }
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
         }
+        
+        return base.PlayAttackAnimation(delay);
     }
     
 

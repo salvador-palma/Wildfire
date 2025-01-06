@@ -64,6 +64,11 @@ public class Armadillo : Enemy
         }
         
     }
+    public override void KnockBack(Vector2 origin, bool retracting, float power){
+        if(hitsUntilUnroll <= 0){
+            base.KnockBack(origin, retracting, power);
+        }
+    }
 
     public void UnRoll(){
         DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

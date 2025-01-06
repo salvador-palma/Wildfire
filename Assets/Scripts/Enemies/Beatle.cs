@@ -57,14 +57,9 @@ public class Beatle : Enemy
        if(Flamey.Instance.current_homing == this){ Flamey.Instance.current_homing  = null; untarget();}
        
     }
-   
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            GetComponent<Animator>().Play("Hide");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
+    
+    protected override void ReturnWalk(){}
+    
     public override bool canTarget()
     {
         return !hidden;

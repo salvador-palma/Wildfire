@@ -54,7 +54,7 @@ public class Raccoon : Enemy
     private void TurnBack(){
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
-
+    protected override void ReturnWalk(){}
     public override void Die(bool onKill = true){
         if(!gotAway){ 
             Flamey.Instance.addEmbers(StealAmount);

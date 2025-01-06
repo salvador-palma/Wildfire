@@ -6,8 +6,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -272,8 +276,14 @@ public class ShredOnHit : OnHitEffects
         if(en==null){return;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
-
+            
+           
             if(en.Armor > 0){
+                if(!en.hitByShred){
+                    en.hitByShred = true;
+                    PlayAudio();
+                }
+                
                 ObjectPooling.Spawn(MusicNotesParticle, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
             }
 
@@ -302,6 +312,11 @@ public class ShredOnHit : OnHitEffects
             }
             
         }
+    }
+    
+    private void PlayAudio(){
+         AudioManager.PlayOneShot(FMODEvents.Instance.ResonanceEffect, Vector2.zero);
+        
     }
     public void Stack(ShredOnHit shredOnHit){
         percReduced += shredOnHit.percReduced;
@@ -395,7 +410,7 @@ public class ExecuteOnHit : OnHitEffects
             }
             
             ObjectPooling.Spawn(Ghost, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
-            Debug.Log("EXECUTED");
+            
         }
         
     }

@@ -81,6 +81,8 @@ public class Hedgehog : Enemy
         PlayHitAnimation(Dmg, TextID); 
     }
 
+    protected override void ReturnWalk(){}
+
 
     
 }
