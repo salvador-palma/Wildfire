@@ -294,12 +294,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 100
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 7, y: 15}
   Attacking: 0
   HitCenter: {fileID: 6236854942049564200}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: 273725323
@@ -324,6 +326,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: EnemyAttack
   WalkAnimationName: IdleTurtle
+  SlowSet: 0
 --- !u!1001 &8297971508363720087
 PrefabInstance:
   m_ObjectHideFlags: 0

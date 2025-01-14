@@ -251,12 +251,14 @@ MonoBehaviour:
   MaxHealth: 500
   Armor: 50
   ArmorPen: 0.9
+  WeigthClass: 1
   EmberDropRange: {x: 13, y: 17}
   Attacking: 0
   HitCenter: {fileID: 3538805168687155405}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -1616057566
@@ -281,6 +283,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: EnemyAttackPoison
   WalkAnimationName: RunPoison
+  SlowSet: 0
   isPoisonous: 1
   poisonTicks: 32
 --- !u!61 &1229017429093676878

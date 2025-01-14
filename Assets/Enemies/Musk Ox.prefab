@@ -456,12 +456,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 1000
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 15, y: 25}
   Attacking: 0
   HitCenter: {fileID: 2615351986129088215}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: 273725323
@@ -486,6 +488,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: Howl
   WalkAnimationName: Walk
+  SlowSet: 0
   ArmorPerGrowl: 100
   TimesHealed: 0
   HealRadius: 2.7

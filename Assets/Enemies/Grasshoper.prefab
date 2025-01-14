@@ -192,7 +192,7 @@ MonoBehaviour:
   AttackDelay: 3
   extraAtkSpeedDelay: 0
   AttackRange: 1
-  Speed: 0.3
+  Speed: 1.75
   Health: 100
   MaxHealth: 0
   Armor: 100
@@ -203,6 +203,7 @@ MonoBehaviour:
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -1368718033
@@ -227,14 +228,12 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: EnemyAttack
   WalkAnimationName: Jump
-  centerPoint: {fileID: 0}
-  initialRadiusX: 9.39
-  initialRadiusY: 5.07
-  shrinkLimits: {x: 0.15, y: 0.2}
+  SlowSet: 0
   direction: 1
   jumping: 0
   jumpTimer: 1
   MaxSpeed: 0
+  angleStep: 0.39
 --- !u!61 &7441892780136714138
 BoxCollider2D:
   m_ObjectHideFlags: 0

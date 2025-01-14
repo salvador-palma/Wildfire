@@ -20,6 +20,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public int MaxHealth;
     public int Armor;
     public float ArmorPen;
+    public int WeigthClass;
+    static float[] WeightMultipliers = new float[]{2f,1.25f, .9f, 0.35f};
     public Vector2Int EmberDropRange;
     public bool Attacking;
    
@@ -87,7 +89,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
     }
     public virtual void KnockBack(Vector2 origin, bool retracting, float power){
-        StartCoroutine(KnockBackCouroutine(origin, retracting, power));
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass]));
     }
     protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power){
         float timer = .5f;
@@ -117,15 +119,19 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
    
     public virtual void Stun(float f, string source = null){
-        StartCoroutine(StunCoroutine(f));
+        StartCoroutine(StunCoroutine(f, source));
     }
-    private IEnumerator StunCoroutine(float f){
+    private IEnumerator StunCoroutine(float f,string source = null)
+    {
         if(!Stunned){
+            if(source=="Thunder"){GetComponent<SpriteRenderer>().material.SetFloat("_Shock", 1);}
             Stunned = true;
             GetComponent<Animator>().enabled = false;
             yield return new WaitForSeconds(f);
+            if(source=="Thunder"){GetComponent<SpriteRenderer>().material.SetFloat("_Shock", 0);}
             Stunned = false;
             GetComponent<Animator>().enabled = true;
+            
         }
     }
 

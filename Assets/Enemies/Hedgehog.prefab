@@ -198,12 +198,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 100
   ArmorPen: 1
+  WeigthClass: 1
   EmberDropRange: {x: 6, y: 10}
   Attacking: 0
   HitCenter: {fileID: 6046719825172410078}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -933430240
@@ -228,6 +230,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: EnemyAttack
   WalkAnimationName: Run
+  SlowSet: 0
   Covered: 0
   ArmorCovered: 1000
   <RollSound>k__BackingField:

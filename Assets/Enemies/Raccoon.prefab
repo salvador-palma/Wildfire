@@ -113,12 +113,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 50
   ArmorPen: 0
+  WeigthClass: 2
   EmberDropRange: {x: 0, y: 0}
   Attacking: 0
   HitCenter: {fileID: 7783586137031112506}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -933430240
@@ -143,6 +145,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: EnemyAttack
   WalkAnimationName: Run
+  SlowSet: 0
   StealObjective: 35
   StealAmount: 0
   Stealing: 0

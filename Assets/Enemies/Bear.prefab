@@ -333,12 +333,14 @@ MonoBehaviour:
   MaxHealth: 5000
   Armor: 50
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 10, y: 15}
   Attacking: 0
   HitCenter: {fileID: 7760232499678238036}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: 273725323
@@ -361,6 +363,9 @@ MonoBehaviour:
       Data4: -516292172
     Path: event:/Enemies/Wave - 3/HeavySteps
   slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Walk
+  SlowSet: 0
   BearState: 0
   HealIncrement: 2500
   <HoneySound>k__BackingField:

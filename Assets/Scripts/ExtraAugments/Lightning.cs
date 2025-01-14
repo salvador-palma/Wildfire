@@ -43,7 +43,7 @@ public class Lightning : IPoolable
                         if(col==null || !col.canTarget()){continue;}
                         
                         col.Hitted(LightningEffect.Instance.dmg, 6, ignoreArmor: false, onHit: false);
-                        col.Stun(2f);
+                        col.Stun(1f, source:"Thunder");
                     }
                 }else{
                     foreach(Enemy col in targets){

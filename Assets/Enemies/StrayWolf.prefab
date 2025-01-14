@@ -288,12 +288,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 20
   ArmorPen: 0.75
+  WeigthClass: 2
   EmberDropRange: {x: 13, y: 20}
   Attacking: 0
   HitCenter: {fileID: 8831113287775803521}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -933430240
@@ -318,6 +320,7 @@ MonoBehaviour:
   slowfactor: 0
   AttackAnimationName: StrayAttack
   WalkAnimationName: StrayRun
+  SlowSet: 0
   isStray: 1
   isAlpha: 0
   RunningSpeed: 1
