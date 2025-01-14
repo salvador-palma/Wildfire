@@ -90,6 +90,7 @@ public class EnemySpawner : MonoBehaviour
             InitDefaultEffects();
             
         }else{
+            Debug.Log("There will be errors here");
             InitDefaultEffects();
             Deck.Instance.LoadGame(true);
             newRound();
@@ -107,9 +108,9 @@ public class EnemySpawner : MonoBehaviour
         foreach (Skills skill in SkillTreeManager.Instance.PlayerData.skills)
         {
             if(skill.ban){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
             }else if(skill.pick){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}).ForEach(a=>a.action());
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
             }
         }
 
@@ -154,7 +155,7 @@ public class EnemySpawner : MonoBehaviour
     }
     public void UpdateEnemies(){
         PresentEnemies.ForEach(e => {if(e!=null && !e.Attacking){e.UpdateEnemy(); e.ApplySlowUpdate();}});
-        List<Enemy> deadEnemies = PresentEnemies.Where(e => e==null || e.Health < 0).ToList();
+        List<Enemy> deadEnemies = PresentEnemies.Where(e => e==null || e.Health <= 0).ToList();
         foreach(Enemy enemy in deadEnemies){
             PresentEnemies.Remove(enemy);
             enemy.Die();

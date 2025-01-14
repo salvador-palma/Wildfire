@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnityResonance;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ public class BurnAOE : IPoolable
     static int poolID;
     int selfID;
     static Material[] materials;
+
+    private EventInstance lavaSoundInstance;
     private void Awake() {
         selfID = poolID++;
         colliding = new List<Enemy>();
@@ -30,6 +34,9 @@ public class BurnAOE : IPoolable
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
             renderer.material = materials[selfID%10];
         }
+
+        
+        
     }
     void Update()
     {
@@ -38,6 +45,10 @@ public class BurnAOE : IPoolable
         if(t<=0){
             t= Timer;
             try{
+                if(colliding.Count>0){
+                    AudioManager.PlayOneShot(FMODEvents.Instance.Sizzle, Vector2.zero);
+                }
+
                 if(SkillTreeManager.Instance.getLevel("Lava Pool") >= 2){
                     foreach (Enemy item in colliding)
                     {
@@ -94,6 +105,9 @@ public class BurnAOE : IPoolable
         Color c = GetComponent<SpriteRenderer>().color;
         c.a = 1;
         GetComponent<SpriteRenderer>().color = c;
+
+        lavaSoundInstance = AudioManager.CreateInstance(FMODEvents.Instance.Lava);
+        lavaSoundInstance.start();
     }
     public override string getReference()
     {
@@ -107,8 +121,14 @@ public class BurnAOE : IPoolable
     {
         Renderer renderer = gameObject.GetComponent<Renderer>();
         renderer.material.SetVector("_RandomVec", new Vector2(UnityEngine.Random.Range(-100f,100f),UnityEngine.Random.Range(-100f,100f)));
+
+        
+        lavaSoundInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        lavaSoundInstance.release();
+
         base.UnPool();
     }
+    
 
 
 }

@@ -165,6 +165,7 @@ public class LightningEffect : TimeBasedEffect
         if(current_interval <=0 ){
             current_interval = interval;
             int amount = 2;
+            AudioManager.PlayOneShot(FMODEvents.Instance.Thunder, Vector2.zero);
             if(Character.Instance.isCharacter("Thunder")){amount*=2;}
             for(int i = 0; i < amount; i++)
             {
@@ -310,6 +311,7 @@ public class Immolate : TimeBasedEffect
         cooldownImage.fillAmount = 1 - ((float)current_interval)/interval;
     }
     public void ShootImmolate(){
+        AudioManager.PlayOneShot(FMODEvents.Instance.Immolate, Vector2.zero);
         Flamey.Instance.SpawnObject(ImmolateType == -1 ? ring : ImmolateRings[ImmolateType]);    
     }
     public void ApplyRound(){}

@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Deck : MonoBehaviour
 {
     public static Deck Instance {get; set;}
-    [SerializeField] List<Augment> augments;
+    [SerializeField] public List<Augment> augments;
     [SerializeField] GameObject[] Slots;
     [SerializeField] GameObject SlotsParent;
     private Augment[] currentAugments;

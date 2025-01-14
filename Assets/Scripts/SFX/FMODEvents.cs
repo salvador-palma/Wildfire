@@ -33,7 +33,25 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Fireball { get; private set; }
     [field: SerializeField] public EventReference OrbitalHit { get; private set; }
     [field: SerializeField] public EventReference StatikHit { get; private set; }
-     [field: SerializeField] public EventReference ResonanceEffect { get; private set; }
+    [field: SerializeField] public EventReference ResonanceEffect { get; private set; }
+    [field: SerializeField] public EventReference RoundShot { get; private set; }
+    [field: SerializeField] public EventReference Immolate { get; private set; }
+    [field: SerializeField] public EventReference ThornsSlash { get; private set; }
+    [field: SerializeField] public EventReference Explosion { get; private set; }
+    [field: SerializeField] public EventReference Lava { get; private set; }
+    [field: SerializeField] public EventReference Sizzle { get; private set; }
+    
+    [field: SerializeField] public EventReference Thunder { get; private set; }
+    [field: SerializeField] public EventReference EagleCall { get; private set; }
+    [field: SerializeField] public EventReference EagleHit { get; private set; }
+    [field: SerializeField] public EventReference BeeFlight { get; private set; }
+    [field: SerializeField] public EventReference MegaGhoulBash { get; private set; }
+    [field: SerializeField] public EventReference GhoulBash { get; private set; }
+    [field: SerializeField] public EventReference IceProc { get; private set; }
+    [field: SerializeField] public EventReference EvilLaugh { get; private set; }
+    [field: SerializeField] public EventReference Healing { get; private set; }
+    [field: SerializeField] public EventReference PoisonPop { get; private set; }
+    [field: SerializeField] public EventReference PoisonEffect { get; private set; }
 
     [field:Header("Specific SFX")]
     [field: SerializeField] public EventReference MotorStop { get; private set; }

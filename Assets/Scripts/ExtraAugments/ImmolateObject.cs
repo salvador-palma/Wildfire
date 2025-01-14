@@ -55,7 +55,7 @@ public class ImmolateObject : MonoBehaviour
             case 3: //AIR
                 //e.Stun(0.5f);
                 
-                e.KnockBack(Flamey.Instance.transform.position, false, .4f);
+                e.KnockBack(Flamey.Instance.transform.position, false, .75f);
                 e.Hitted(dmg, 23, ignoreArmor:false, onHit:false);
                 break;
         }

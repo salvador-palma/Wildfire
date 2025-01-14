@@ -6,6 +6,7 @@ using FMODUnity;
 using FMOD.Studio;
 
 using System.Dynamic;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class AudioManager : MonoBehaviour
         }else{
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            
         }
         
     }
@@ -60,6 +62,34 @@ public class AudioManager : MonoBehaviour
     }
     public static void StopMusicTrack(){
         Instance.SetAmbienceParameter("OST_Intensity", 0);
+    }
+
+    private EventInstance HealthSoundInstance;
+    private bool HealthSoundInstanceAffixed;
+    float addHealingFreq = 0.05f;
+    float HealingDecay = 0.1f;
+    float lastTick;
+    public void PlayHealingSound()
+    {
+        if(!HealthSoundInstanceAffixed){
+            HealthSoundInstanceAffixed = true;
+            HealthSoundInstance = CreateInstance(FMODEvents.Instance.Healing);
+        }
+
+        float cur;
+        float target;
+
+        float delta = lastTick == 0 ? lastTick : Time.time - lastTick;
+        lastTick = Time.time;
+        
+
+        
+        HealthSoundInstance.getParameterByName("HealingFreq", out cur, out target);
+        float newVal = Math.Clamp( cur + addHealingFreq - delta * HealingDecay, 0, 1);
+        HealthSoundInstance.setParameterByName("HealingFreq", newVal);
+
+        HealthSoundInstance.start();
+        
     }
 }
 public enum OST{

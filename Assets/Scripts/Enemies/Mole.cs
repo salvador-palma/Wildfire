@@ -115,7 +115,14 @@ public class Mole : Enemy
     {
         return !isUnderground && !diggingUp;
     }
-    
+    public override void Die(bool onKill = true)
+    {
+        if(isUnderground){
+            DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            DigSoundInstance.release();
+        }
+        base.Die(onKill);
+    }
 
     public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
     {

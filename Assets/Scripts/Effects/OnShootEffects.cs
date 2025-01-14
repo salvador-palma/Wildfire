@@ -298,7 +298,7 @@ public class KrakenSlayer : OnShootEffects{
     public int ApplyEffect()
     {
         if(purpleON){return 6;}
-        curr--;
+        
 
         if(curr <= 0){
             curr = interval;
@@ -310,6 +310,8 @@ public class KrakenSlayer : OnShootEffects{
                 }
             }
             return 3;
+        }else{
+            curr--;
         }
         return 0;
     }
@@ -342,7 +344,7 @@ public class KrakenSlayer : OnShootEffects{
         activeCooldownImage.onClick.AddListener(() => {
             purpleON = true;
             Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",true);
-            
+            AudioManager.PlayOneShot(FMODEvents.Instance.EvilLaugh, Vector2.zero);
             Flamey.Instance.callFunctionAfter(() =>{ purpleON = false; Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",false);}, 5f);
             activeCooldownImage.interactable = false;
             activeRoundsLeft = 0;

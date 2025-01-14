@@ -65,6 +65,7 @@ public class ThornsOnHitted : OnHittedEffects
     }
     private void SpawnThorn(Vector2 pos, int type){
         if((int)(Flamey.Instance.Armor * perc)>0){
+            AudioManager.PlayOneShot(FMODEvents.Instance.ThornsSlash, Vector2.zero);
             ObjectPooling.Spawn(ThornsPrefab, new float[]{pos.x, pos.y - .4f, type});
         }
         

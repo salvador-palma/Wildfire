@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using FMOD.Studio;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -441,6 +442,8 @@ public class Flamey : MonoBehaviour
         UpdateHealthUI();
         DamageUI.InstantiateTxtDmg(transform.position,""+ MaxHealth * healperc, 3);
     }
+
+    private EventInstance healthInstance;
     public void addHealth(float HealAmount){
         if(HealthRegen.Instance != null && Health > 0){
             if(SkillTreeManager.Instance.getLevel("Regeneration") >= 1){
@@ -463,6 +466,10 @@ public class Flamey : MonoBehaviour
         TotalHealed+=(ulong)HealAmount;
         Health = Math.Min(Health + HealAmount, MaxHealth);
         UpdateHealthUI();
+
+        AudioManager.Instance.PlayHealingSound();
+        
+
         DamageUI.InstantiateTxtDmg(transform.position, ""+ Mathf.Round(HealAmount * 10.0f) * 0.1f, 3);
     }
 
@@ -489,6 +496,7 @@ public class Flamey : MonoBehaviour
     }
     public void ApplyPoison(){
         poisonsLeft--;
+        AudioManager.PlayOneShot(FMODEvents.Instance.PoisonPop, Vector2.zero);
         Hitted((int)Math.Max(1,Health/25), 1, null, onhitted:false, isShake:false, idHitTxt:14);
     }
     public void addOnHitEffect(OnHitEffects onhit){
@@ -536,6 +544,7 @@ public class Flamey : MonoBehaviour
 
 
     public void ApplyOnHit(float d, float h, Enemy e, string except = null){
+        if(e.Health<=0){return;}
         foreach (OnHitEffects oh in onHitEffects){
             if(oh.getText() == except){continue;}
             oh.ApplyEffect(d,h,e);
@@ -556,6 +565,7 @@ public class Flamey : MonoBehaviour
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
     public void ApplyOnHitted(Enemy e){
+        if(e.Health<=0){return;}
         foreach (OnHittedEffects oh in onHittedEffects){oh.ApplyEffect(e);}
     }
 

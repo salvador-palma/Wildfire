@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class Pheonix : MonoBehaviour
 {
+    public void CallEagle(){
+        AudioManager.PlayOneShot(FMODEvents.Instance.EagleCall, transform.position);
+    }
+    public void HitEagle(){
+        AudioManager.PlayOneShot(FMODEvents.Instance.EagleHit, transform.position);
+    }
     
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.tag == "Enemy"){

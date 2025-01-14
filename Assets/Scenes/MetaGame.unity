@@ -10335,13 +10335,12 @@ MonoBehaviour:
     AbilityDescription3: No Limit on <color=#FFCC7C>Healing Percentage
   - Name: Assassin
     Type: On-Hit Effect
-    AbilityDescription1: <color=#FFCC7C>Armor Penetration</color> and the ability
-      to <color=#FFCC7C>Execute</color> enemies when their <color=#0CD405>HP</color>
-      is below a certain percentage
-    AbilityDescription2: '<color=#FFCC7C>Executing</color> percentage limit increases
-      to <color=#FFCC7C>50%</color> '
-    AbilityDescription3: <color=#FFCC7C>Armor Penetration</color> applies to all
-      sources of <color=#FF5858>damage
+    AbilityDescription1: Gain <color=#FFCC7C>Armor Penetration</color>, ignoring
+      a certain percentage of the Enemy's armor when dealing damage
+    AbilityDescription2: Gain the ability to <color=#FFCC7C>Execute</color> enemies
+      when their <color=#0CD405>HP</color> is below a certain percentage up to 50%
+    AbilityDescription3: When <color=#FFCC7C>Executing</color> an enemy, apply On-Death
+      Effects trice
   - Name: Explosion
     Type: On-Death Effect
     AbilityDescription1: Generate <color=#FFCC7C>Explosions</color> from the corpses
@@ -26574,6 +26573,111 @@ MonoBehaviour:
       Data3: 767411124
       Data4: -741741545
     Path: event:/Night/ResonanceTone
+  <RoundShot>k__BackingField:
+    Guid:
+      Data1: -329448825
+      Data2: 1166275708
+      Data3: -1411365211
+      Data4: 1225565666
+    Path: event:/Night/Roundshot
+  <Immolate>k__BackingField:
+    Guid:
+      Data1: -1695681387
+      Data2: 1164704832
+      Data3: 838368651
+      Data4: 392775696
+    Path: event:/Night/Immolate
+  <ThornsSlash>k__BackingField:
+    Guid:
+      Data1: 444822215
+      Data2: 1207857995
+      Data3: 628596867
+      Data4: 472533906
+    Path: event:/Night/ThornsSlash
+  <Explosion>k__BackingField:
+    Guid:
+      Data1: 881479248
+      Data2: 1154964447
+      Data3: -1106487421
+      Data4: 2057610909
+    Path: event:/Night/Explosion
+  <Lava>k__BackingField:
+    Guid:
+      Data1: -1378892387
+      Data2: 1107919070
+      Data3: 783721636
+      Data4: -594750559
+    Path: event:/Night/Lava
+  <Sizzle>k__BackingField:
+    Guid:
+      Data1: 238364161
+      Data2: 1135459463
+      Data3: 870183572
+      Data4: -278839965
+    Path: event:/Night/Sizzle
+  <Thunder>k__BackingField:
+    Guid:
+      Data1: 1033413146
+      Data2: 1148332316
+      Data3: -1942339939
+      Data4: -1254623646
+    Path: event:/Night/Thunder
+  <EagleCall>k__BackingField:
+    Guid:
+      Data1: -1948219466
+      Data2: 1252797975
+      Data3: 1998498195
+      Data4: 1184931241
+    Path: event:/Night/Eagle
+  <EagleHit>k__BackingField:
+    Guid:
+      Data1: -1628402785
+      Data2: 1316969776
+      Data3: -1360898890
+      Data4: 1318355403
+    Path: event:/Night/EagleSweep
+  <BeeFlight>k__BackingField:
+    Guid:
+      Data1: -1652633807
+      Data2: 1138061618
+      Data3: 1960168883
+      Data4: 240446042
+    Path: event:/Night/BeeFlight
+  <MegaGhoulBash>k__BackingField:
+    Guid:
+      Data1: 2126304748
+      Data2: 1302313496
+      Data3: 23904429
+      Data4: 820518123
+    Path: event:/Night/MegaGhoulBash
+  <GhoulBash>k__BackingField:
+    Guid:
+      Data1: -1130718545
+      Data2: 1186109357
+      Data3: -510377310
+      Data4: 533649459
+    Path: event:/Night/GhoulBash
+  <IceProc>k__BackingField:
+    Guid:
+      Data1: -1078360712
+      Data2: 1219017517
+      Data3: 1590169514
+      Data4: 1891379067
+    Path: event:/Night/Ice
+  <EvilLaugh>k__BackingField:
+    Guid:
+      Data1: 1185297657
+      Data2: 1244525324
+      Data3: -97075836
+      Data4: -1729606539
+    Path: event:/Night/EvilLaugh
+  <Healing>k__BackingField:
+    Guid:
+      Data1: 1937221513
+      Data2: 1169485181
+      Data3: 619462274
+      Data4: 1873119466
+    Path: event:/Night/Healing
   <MotorStop>k__BackingField:
     Guid:
       Data1: 425647482
@@ -43653,7 +43757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00036621094, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.0008239746, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -43898,7 +44002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00021362305
+      value: -0.000869751
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

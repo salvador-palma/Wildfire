@@ -55,7 +55,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
         if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
            Attacking = true;
-           removeSlowingEffects();
+           
            GetComponent<Animator>().SetTrigger("InRange");
            StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
@@ -130,6 +130,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+        if(Health<=0){return;}
 
         if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
             Dmg *= 2;
@@ -241,19 +242,22 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
     public Dictionary<string, float[]> SlowEffectsDuration = new Dictionary<string, float[]>{{"IceHit", new float[2]},{"IceLand", new float[2]}};
+    float SlowDecayRate = 0.2f;
+    public float SlowSet;
     public virtual void SlowDown(float seconds, float percentage, string SlowEffect){
 
         float[] prevInfo = getSlowInfo(SlowEffect);
 
         if(prevInfo == null || prevInfo[0] <= 0){
-            SlowFactor += percentage; 
+            SlowSet += percentage; 
+            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowSet);
         }
         if(IceOnLand.Instance!= null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 2 && prevInfo[0] > 0){
             Stun(2f, "IceLand");
         }
 
         SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
-        CheckEnemyIceSkin();
+        
     }  
     public float[] getSlowInfo(string SlowEffect){
         return SlowEffectsDuration == null ? null : SlowEffectsDuration.GetValueOrDefault(SlowEffect, null);
@@ -264,33 +268,26 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             if(SlowEffectsDuration[slow][0] > 0){
                 SlowEffectsDuration[slow][0] -= Time.deltaTime;
                 if(SlowEffectsDuration[slow][0] <= 0){
-                    SlowFactor -= SlowEffectsDuration[slow][1];
-                    CheckEnemyIceSkin();
+                    SlowSet = Math.Clamp(SlowSet - SlowEffectsDuration[slow][1],0,1);
                 }
             }
         }
+        if(SlowSet > SlowFactor){
+            SlowFactor = SlowSet;
+            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowFactor);
+        }else if(SlowSet < SlowFactor){
+            SlowFactor -= Time.deltaTime * SlowDecayRate;
+            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowFactor);
+        }
+
     } 
-    private void removeSlowingEffects(){
-        SlowEffectsDuration = new Dictionary<string, float[]>{{"IceHit", new float[2]},{"IceLand", new float[2]}};
-        CheckEnemyIceSkin();
-    }
     public void removeSlow(string effect){
         if(SlowEffectsDuration.ContainsKey(effect)){
             SlowEffectsDuration[effect][0] = 0;
-            CheckEnemyIceSkin();
+            //GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowSet);
         }
     }
-    private void CheckEnemyIceSkin(){
 
-        if(SlowEffectsDuration["IceHit"][0] > 0){
-            transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = true;
-        }else{
-            transform.Find("Effect").GetComponent<SpriteRenderer>().enabled = false;
-        }
-        if(!SlowEffectsDuration.Any(k => k.Value[0] > 0)){
-            SlowFactor = 0;
-        }
-    }
 
 
     public static Vector2 getPredicatedEnemyPosition(Comparison<Enemy> sortingFactor){

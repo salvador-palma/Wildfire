@@ -181,13 +181,18 @@ public class DeckBuilder : MonoBehaviour
             
             new Augment("Magical Shot" ,"Magical Shot", "Unlock the ability to shoot magical flames that inflict extra damage", "BlueFlameUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Magical Shot");
+                
                 if(SkillTreeManager.Instance.getLevel("Magical Shot") >= 1){
                     Flamey.Instance.addOnShootEffect(new KrakenSlayer(10, 100));
                 }else{
                     Flamey.Instance.addOnShootEffect(new KrakenSlayer(20, 100));
                 }
                 
-                Deck.Instance.AddAugmentClass(new List<string>{"BlueFlameInterval","BlueFlameDmg"});            
+                
+                
+                
+                Deck.Instance.AddAugmentClass(new List<string>{"BlueFlameInterval","BlueFlameDmg"});   
+
             }), baseCard: true),  
             new Augment("BlueFlameInterval","The Bluer The Better", "You will need 1 shots less to proc Blue Flame", "BlueFlameInterval", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(1, 0)))),
             new Augment("BlueFlameInterval","Propane Combustion", "You will need 3 shots less to proc Blue Flame", "BlueFlameInterval", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(3, 0)))),
@@ -473,9 +478,10 @@ public class DeckBuilder : MonoBehaviour
         return result;
     }
 
-    public List<Augment> GetAugmentsFromClasses(List<string> augmentClasses){
+    public List<Augment> GetAugmentsFromClasses(List<string> augmentClasses, bool inPool=false){
         List<Augment> result = new List<Augment>();
-        foreach (Augment item in AllAugments)
+        List<Augment> iteratingList = inPool  ? Deck.Instance.augments : AllAugments;
+        foreach (Augment item in iteratingList)
         {
             if(augmentClasses.Contains(item.getAugmentClass())){
                 result.Add(item);

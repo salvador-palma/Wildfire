@@ -61,6 +61,7 @@ public class Explosion : OnKillEffects
 
             Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, Flamey.EnemyMask);
             ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+            AudioManager.PlayOneShot(FMODEvents.Instance.Explosion, Vector2.zero);
 
             foreach(Collider2D col in targets){
                 col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:ExplosionsDone>=ExplosionsUntilTrueDamage, onHit:false);
@@ -275,6 +276,7 @@ public class Bullets : OnKillEffects
         }
     }
     private void SpawnBullets(Vector2 pos){
+        AudioManager.PlayOneShot(FMODEvents.Instance.RoundShot, Vector2.zero);
         float randomRotation = Random.Range(0,360);
         
         if(SkillTreeManager.Instance.getLevel("Pirate") >= 1){
@@ -328,7 +330,7 @@ public class Bullets : OnKillEffects
     }
     public string getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f), amount, dmg);
+        return string.Format("Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f), amount, dmg);
     }
 
     public string getIcon()

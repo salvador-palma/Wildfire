@@ -80,6 +80,7 @@ public class Ghoul : MonoBehaviour
                 enemy.Hitted((int)dmg, 8, ignoreArmor:false, onHit:false);
             }
             AtkIntervalTimer = AtkInterval;
+            AudioManager.PlayOneShot(FMODEvents.Instance.MegaGhoulBash, transform.position);
         }else{
             if(SkillTreeManager.Instance.getLevel("Necromancer")>=1 && remainingAttacks==0){
                 target.Hitted((int)dmg, 13, ignoreArmor:true, onHit:false);
@@ -88,10 +89,10 @@ public class Ghoul : MonoBehaviour
             }
             target.Hitted((int)dmg, 13, ignoreArmor:false, onHit:false);
             AtkIntervalTimer = AtkInterval;
+            AudioManager.PlayOneShot(FMODEvents.Instance.GhoulBash, transform.position);
         }
-        
-        
     }
+ 
     private void checkFlip(){
         if(target!=null && sp != null){
             if((target.transform.position.x > transform.position.x && !sp.flipX) || (target.transform.position.x < transform.position.x && sp.flipX)){

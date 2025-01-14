@@ -122,6 +122,14 @@ public class Worm : Enemy
         if(isUnderground){return;}
         base.OnMouseDown();
     }
+    public override void Die(bool onKill = true)
+    {
+        if(isUnderground){
+            DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            DigSoundInstance.release();
+        }
+        base.Die(onKill);
+    }
 
     public override bool canTarget()
     {

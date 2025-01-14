@@ -150,9 +150,14 @@ public class IceOnHit : OnHitEffects
         if(Flamey.Instance.MaxHealth <= 1000){return;}
         if(UnityEngine.Random.Range(0f,1f) < prob){   
             int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
-            en.SlowDown(duration/1000f, Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator, 0, 0.75f), "IceHit");
-            DamageUI.InstantiateTxtDmg(en.transform.position, "SLOWED", 4);
+            float perc = Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator, 0, 0.75f);
+            en.SlowDown(duration/1000f, perc, "IceHit");
 
+            if(en?.Health > dmg && perc>0 && en?.SlowSet > 0){
+                Debug.Log("Sound");
+                AudioManager.PlayOneShot(FMODEvents.Instance.IceProc, Vector2.zero);
+            }
+            
         }
     }
     public void Stack(IceOnHit iceOnHit){
@@ -396,21 +401,28 @@ public class ExecuteOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public void ApplyEffect(float dmg, float health, Enemy en)
     {
-        if(en==null){return;}
-        if(en.Health < en.MaxHealth * percToKill){
-            float f = en.Health;
-            Vector2 v = en.transform.position;
-            en.Health = 0;
+        try{
+
             
-            if(SkillTreeManager.Instance.getLevel("Assassin")>=2){
-                Flamey.Instance.ApplyOnKill(en.HitCenter.position);
-                Flamey.Instance.ApplyOnKill(en.HitCenter.position);
+            if(en==null || en.Health<=0){return;}
+            if(en.Health < en.MaxHealth * percToKill){
+                float f = en.Health;
+                Vector2 v = en.transform.position;
+                Vector2 pos = en.HitCenter.position;
+                en.Health = 0;
+                
+                if(SkillTreeManager.Instance.getLevel("Assassin")>=2){
+                    Flamey.Instance.ApplyOnKill(pos);
+                    Flamey.Instance.ApplyOnKill(pos);
+                }
+                
+                ObjectPooling.Spawn(Ghost, new float[]{pos.x,pos.y});
+                
             }
-            
-            ObjectPooling.Spawn(Ghost, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
-            
+        }catch(Exception e){
+            Debug.LogError(e.Message + "; " + en);
         }
         
     }
@@ -485,7 +497,7 @@ public class StatikOnHit : OnHitEffects
     public StatikOnHit(float prob, int dmg, int ttl){
         
         this.prob = prob;
-        this.prob = 1f;
+        
         this.dmg = dmg;
         this.ttl = ttl;
         prefab = Resources.Load<GameObject>("Prefab/StatikShiv");
