@@ -21,6 +21,7 @@ public class MetaMenuUI : MonoBehaviour
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject CharacterSelectPanel;
+    [SerializeField] private GameObject SettingsSelectPanel;
     [SerializeField] public GameObject SkillTree;
     static public MetaMenuUI Instance;
     
@@ -68,18 +69,22 @@ public class MetaMenuUI : MonoBehaviour
         Character.Instance.toggleCharacterPanel(CharacterSelectPanel);
         
     }
+    public void SettingsMenuToggle(){
+        ToggleMenu(SettingsSelectPanel);   
+    }
+    public bool ToggleMenu(GameObject panel){
+        Vector2 newPos = new Vector2(panel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
+        panel.GetComponent<RectTransform>().anchoredPosition = newPos;
+        return newPos.x <= 0;
+    }
 
     public void BestiaryMenuToggle(){
-        Vector2 newPos = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
-        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
-        BestiaryPanel.GetComponent<RectTransform>().anchoredPosition = newPos;
-        if(newPos.x <= 0){LocalBestiary.INSTANCE.UpdateBlackMarketItems();}
+        bool state = ToggleMenu(BestiaryPanel);
+        if(state){LocalBestiary.INSTANCE.UpdateBlackMarketItems();}
     }
     public void MarketMenuToggle(){
-        Vector2 newPos = new Vector2(MarketPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 7000, 0);
-        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
-        MarketPanel.GetComponent<RectTransform>().anchoredPosition = newPos;
-
+        ToggleMenu(MarketPanel);
         if(GameVariables.GetVariable("JhatIntroduction") != 1){
             naal.StartDialogue(2);
         }
@@ -103,14 +108,7 @@ public class MetaMenuUI : MonoBehaviour
     }
     
     private IEnumerator SmoothLerp (Transform buttonTr)
-    {
-        // Vector3 Target = new Vector3(-3f,0,0);
-        
-        // Transform button = tr.Find("Icon");
-        // Vector2 direction = Target - button.position;
-        
-        
-        
+    {        
         float elapsed = 0;
         RectTransform rt = SkillTree.GetComponent<RectTransform>(); 
 
@@ -133,6 +131,10 @@ public class MetaMenuUI : MonoBehaviour
             float v = Math.Clamp(cur, 0.267755f,  2.88112f);
 
             SkillTree.transform.localScale = new Vector2(v,v);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            SettingsMenuToggle();
         }
     }
 

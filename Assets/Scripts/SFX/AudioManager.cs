@@ -12,6 +12,22 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set;}
 
+    [Header("Volume Mixer")]
+    [Range(0,1)]
+    public float MasterVolume = 1;
+    [Range(0,1)]
+    public float MusicVolume = 1;
+    [Range(0,1)]
+    public float SFXVolume = 1;
+    [Range(0,1)]
+    public float MenuVolume = 1;
+
+    public Bus masterBus;
+    public Bus musicBus;
+    public Bus sfxBus;
+    public Bus menuBus;
+    
+
     private EventInstance ambienceEventInstance;
     private bool initialized = false;
     private void Awake() {
@@ -23,9 +39,19 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Instance = this;
             
+            masterBus = RuntimeManager.GetBus("bus:/");
+            musicBus = RuntimeManager.GetBus("bus:/Music");
+            sfxBus = RuntimeManager.GetBus("bus:/SFX");
+            menuBus = RuntimeManager.GetBus("bus:/Menu");
+
         }
-        
     }
+    // private void Update() {
+    //     masterBus.setVolume(MasterVolume);
+    //     musicBus.setVolume(MusicVolume);
+    //     sfxBus.setVolume(SFXVolume);
+    //     menuBus.setVolume(MenuVolume);
+    // }
    
     private void InitializeAmbience(EventReference eventReference){
         ambienceEventInstance = CreateInstance(eventReference);
