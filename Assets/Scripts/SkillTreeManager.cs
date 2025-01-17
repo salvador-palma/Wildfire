@@ -41,10 +41,10 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI emberText;
 
     [Header("Info Panel")]
-    [SerializeField] TextMeshProUGUI titleText;
-    [SerializeField] TextMeshProUGUI typeText;
-    [SerializeField] TextMeshProUGUI purchaseButtonText;
-    [SerializeField] TextMeshProUGUI[] passivesText;
+    [SerializeField] DynamicText titleText;
+    [SerializeField] DynamicText typeText;
+    [SerializeField] DynamicText purchaseButtonText;
+    [SerializeField] DynamicText[] passivesText;
     
     [SerializeField] Animator anim;
     public event EventHandler treeReset;
@@ -60,7 +60,7 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] private int BanAmount;
     [SerializeField] private int PrePickLimit;
     [SerializeField] private int PrePickAmount;
-    [SerializeField] TextMeshProUGUI PreBanExplanation;
+    [SerializeField] DynamicText PreBanExplanation;
 
     [SerializeField] Button[] PickBanButtons;
 
@@ -210,38 +210,38 @@ public class SkillTreeManager : MonoBehaviour
         
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
         if(ability != null){
-            passivesText[0].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
-            passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
-            passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
-            passivesText[0].color = Color.white;
-            passivesText[1].color = Color.white;
-            passivesText[2].color = Color.white;
+            passivesText[0].SetText("<size=100%><style=\"Yellow\">- Level 1 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription1});
+            passivesText[1].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription2});
+            passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription3});
+            passivesText[0].setColor(Color.white);
+            passivesText[1].setColor(Color.white);
+            passivesText[2].setColor(Color.white);
             switch (level+1)
             {
                 case 0:
-                    passivesText[0].color = new Color(1,1,1,0.3f);
-                    passivesText[1].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
-                    passivesText[1].color = new Color(1,1,1,0.3f);
-                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    passivesText[0].setColor(new Color(1,1,1,0.3f));
+                    passivesText[1].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{"???"});
+                    passivesText[1].setColor(new Color(1,1,1,0.3f));
+                    passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                    passivesText[2].setColor(new Color(1,1,1,0.3f));
                     break;
                 case 1:
-                    passivesText[1].color = new Color(1,1,1,0.3f);
-                    passivesText[2].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    passivesText[1].setColor(new Color(1,1,1,0.3f));
+                    passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                    passivesText[2].setColor(new Color(1,1,1,0.3f));
                     break;
                 case 2:
-                    passivesText[2].color = new Color(1,1,1,0.3f);
+                    passivesText[2].setColor(new Color(1,1,1,0.3f));
                     break;
             }
            
             
 
-            titleText.text = ability.Name;
-            typeText.text = ability.Type;
+            titleText.SetText(ability.Name);
+            typeText.SetText(ability.Type);
 
             int price = DeckBuilder.Instance.getPrice(skill, level + 1);
-            purchaseButtonText.text = string.Format("Upgrade ({0})",  price == - 1 ? "Maxed Out" : price);
+            purchaseButtonText.SetText("Upgrade ({0})", new string[]{price == - 1 ? "Maxed Out" : price.ToString()});
             purchaseButtonText.transform.parent.gameObject.SetActive(price != - 1);
             
             //PICK BAN DISPLAY
@@ -253,7 +253,7 @@ public class SkillTreeManager : MonoBehaviour
             PickBanButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.pick);
 
 
-            PreBanExplanation.text = s.ban? "This skill will not appear during the night" : s.pick? "You will start the night with this skill" : "";
+            PreBanExplanation.SetText(s.ban? "This skill will not appear during the night" : s.pick? "You will start the night with this skill" : ""); 
             
         }else{
             Debug.LogWarning("Skill Not Found: " + skill);
