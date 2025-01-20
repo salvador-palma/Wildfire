@@ -145,9 +145,9 @@ public class MetaMenuUI : MonoBehaviour
             
             Chat.Instance.StartChat();
             Chat.Instance.ChatSingular("Do you wish to continue your previous unfinished run?",
-                            Chat.Instance.AvatarBank[0], "Rowl",
-                            new string[2]{"Yes", "No"},
-                            new UnityAction[2]{
+                            Chat.Instance.AvatarBank[0], name:"Rowl",
+                            optionTxt:new string[2]{"Yes", "No"},
+                            optionAction:new UnityAction[2]{
                                 new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 1); Chat.Instance.EndChat(); PlayOutro();}),
                                 new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 0); GameState.Delete(); Chat.Instance.EndChat(); PlayOutro();})
                             });

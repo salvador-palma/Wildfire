@@ -17,6 +17,11 @@ public static class Translator
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
     }
+    public static void AddIfNotExists(string word){
+        if(translations == null) LoadCSV(csvName);
+        if(translations["English"].Contains(word)) return;
+        AddCsvEntry(word);
+    }
 
     private static void LoadCSV(string filename) 
     {

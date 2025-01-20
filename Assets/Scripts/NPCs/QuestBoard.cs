@@ -87,9 +87,9 @@ public class QuestBoard : NPC
     public void MakeTieBreaker(){
         Chat.Instance.StartChat();
         Chat.Instance.ChatSingular("Whose idea should we follow?",
-                            Chat.Instance.AvatarBank[0], "Rowl",
-                            new string[3]{"Betsy", "Cloris", "Rowl"},
-                            new UnityAction[3]{
+                            Chat.Instance.AvatarBank[0], name:"Rowl",
+                            optionTxt:new string[3]{"Betsy", "Cloris", "Rowl"},
+                            optionAction:new UnityAction[3]{
                                 new UnityAction(()=>{NameQuestBoard(0);}),
                                 new UnityAction(()=>{NameQuestBoard(1);}),
                                 new UnityAction(()=>{NameQuestBoard(2);})

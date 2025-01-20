@@ -35,6 +35,9 @@ public class Item : MonoBehaviour
     public Naal naal;
     static int itemCount = 0;
     public void ItemStart() {
+
+        
+
         if(Items == null){Items = new Dictionary<Item, int>();}
         Transform parent = transform.parent;
         
@@ -48,7 +51,7 @@ public class Item : MonoBehaviour
         if(level!= 0 || itemCount >= 6){
             gameObject.SetActive(false);
             if(level==0){
-                Debug.Log("Limit: " + Name);
+               //Debug.Log("Limit: " + Name);
             }
         }else{
             itemCount++;

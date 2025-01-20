@@ -66,60 +66,11 @@ public class Chat : MonoBehaviour
         MoodSlider.gameObject.SetActive(name=="Jhat" && Item.getLevel("Essence Gauge") > 0);
 
         StartCoroutine(Message.ShowTextTimed(msg, triggerNext, arguments, optionTxt, Options, FMODEvents.GetVoice(name)));
-        //StartCoroutine(ShowTextTimed(msg, optionTxt, FMODEvents.GetVoice(name)));
     }
-    // public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, EventReference sound = new EventReference()){
-    //     string formatting_buffer = "";
-      
-    //     triggerNext=0;
-        
-    //     foreach(char c in msg){
-            
-    //         if(triggerNext>0){
-    //             Message.text = msg;
-    //             break;
-    //         }
-    //         if(c=='<' || formatting_buffer != ""){
-    //             formatting_buffer += c;
-    //             if(c=='>'){
-    //                 Message.text += formatting_buffer;
-    //                 formatting_buffer = "";
-    //             }
-                
-    //         }else{  
-    //             Message.text += c;
-    //             switch(c){
-    //                 case '.':
-    //                 case '!':
-    //                 case '?':
-    //                     yield return new WaitForSeconds(0.2f);
-    //                     break;
-    //                 case ',':
-    //                     yield return new WaitForSeconds(0.1f);
-    //                     break;
-    //                 case ' ':
-    //                     yield return new WaitForSeconds(0.04f);
-    //                     break;
-    //                 default:
-    //                     AudioManager.PlayOneShot(sound, Vector2.zero);
-    //                     yield return new WaitForSeconds(0.01f);
-    //                     break;
-    //             }
-    //         }
-    //     }
-    //     if(optionTxt != null){
-    //         for(int i =0; i < optionTxt.Length; i++){
-    //             Options[i].gameObject.SetActive(true);
-    //         }
-    //     }
-        
-    //     //Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
-    //     triggerNext=1;
-    //     yield break;
-    // }
+    
 
 
-    Int triggerNext;
+    Int triggerNext = new Int(0);
     public void ClickedChatPanel(){
        
         triggerNext.value++;
@@ -136,7 +87,7 @@ public class Chat : MonoBehaviour
         foreach (Dialogue d in dialogue)
         {   
            
-            ChatSingular(d.message, d.avatar, name:d.Name == null || d.Name == "" ? defaultName : d.Name);
+            ChatSingular(d.message, d.avatar, d.arguments, name:d.Name == null || d.Name == "" ? defaultName : d.Name);
             yield return new WaitUntil(() => triggerNext.value >= 2);
             ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
 

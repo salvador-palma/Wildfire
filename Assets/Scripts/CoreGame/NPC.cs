@@ -10,11 +10,13 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Dialogue{
     [TextArea]public string message;
+    public string[] arguments;
     public Sprite avatar;
     public string Name;
-    public Dialogue(string message, Sprite avatar, string name){
+    public Dialogue(string message, Sprite avatar, string name, string[] arguments = null){
         this.message = message;
         this.avatar = avatar;
+        this.arguments = arguments;
         Name = name;
     }
     

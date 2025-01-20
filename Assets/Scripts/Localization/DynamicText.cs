@@ -13,7 +13,7 @@ public class DynamicText : MonoBehaviour
 
     [HideInInspector] public string oldPhrase;
     [HideInInspector] public string[] oldArgs;
-    bool inCouroutine;
+    public bool isChat;
     void Awake(){
         Translator.dropdownValueChange += TranslateComponent;
         
@@ -23,12 +23,12 @@ public class DynamicText : MonoBehaviour
 
     public void TranslateComponent(object sender, EventArgs e) 
     {
-        if(inCouroutine){
-
+        if (onCouroutine && isChat){
+            cond.value = 1;
         }else{
             SetText(oldPhrase,oldArgs);
         }
-        
+
     }
     public void SetTextDirect(string text){
         GetComponent<TextMeshProUGUI>().text = text;
@@ -49,23 +49,10 @@ public class DynamicText : MonoBehaviour
     }
     public void SetText(string text, string[] args = null)
     {
-        //if (string.IsNullOrEmpty(text)) { return; }
-
         string translatedText = text=="" ? "" :Translator.getTranslation(text);
         oldPhrase = translatedText;
         
         translatedText = FitArgs(translatedText, args);
-        // if(args != null){
-        //     oldArgs = new string[args.Length];
-        //     // Inserir argumentos
-        //     for(int i = 0; i < args.Length; i++)
-        //     {
-        //         if (int.TryParse(args[i], out _)) oldArgs[i] = args[i]; // Se for número não busca tradução
-        //         else oldArgs[i] = args[i]=="" ? "" : Translator.getTranslation(args[i]); 
-        //         translatedText = translatedText.Replace("{"+i+"}", oldArgs[i]);
-        //     }
-        // }
-
         GetComponent<TextMeshProUGUI>().text = translatedText;
     }
 
@@ -74,26 +61,23 @@ public class DynamicText : MonoBehaviour
     }
 
 
-    
-
-
-    public IEnumerator ShowTextTimed(string msg, Int condition, string[] arguments = null, string[] optionTxt  = null, UnityEngine.UI.Button[] Options=null, EventReference sound = new EventReference()){
-        inCouroutine = true;
+    Int cond;
+    bool onCouroutine;
+    public IEnumerator ShowTextTimed(string msg, Int condition, string[] arguments = null, string[] optionTxt  = null, UnityEngine.UI.Button[] Options=null, EventReference sound = new EventReference()){       
+        onCouroutine = true;
         string formatting_buffer = "";
-      
+        cond = condition;
         condition.value=0;
+        oldPhrase = msg;
         string translatedText = Translator.getTranslation(msg); //Texto traduzido nao formatado
-        oldPhrase = translatedText; //OldPhrase traduzida
+        //oldPhrase = translatedText; //OldPhrase traduzida
         translatedText = FitArgs(translatedText, arguments); //Texto tradizido formatado / OldArgs traduzidos
-
-        
-
+        oldArgs = arguments;
         TextMeshProUGUI tmp = GetComponent<TextMeshProUGUI>();
         
         foreach(char c in translatedText){
             
-            if(condition.value>0){
-                tmp.text = translatedText;
+            if(condition.value>0){  
                 break;
             }
             if(c=='<' || formatting_buffer != ""){
@@ -119,11 +103,12 @@ public class DynamicText : MonoBehaviour
                         break;
                     default:
                         AudioManager.PlayOneShot(sound, Vector2.zero);
-                        yield return new WaitForSeconds(0.01f);
+                        yield return new WaitForSeconds(0.1f);//0.01f
                         break;
                 }
             }
         }
+        SetText(oldPhrase,oldArgs);
         if(optionTxt != null){
             for(int i =0; i < optionTxt.Length; i++){
                 Options[i].gameObject.SetActive(true);
@@ -131,7 +116,7 @@ public class DynamicText : MonoBehaviour
         }
         
         condition.value=1;
-        inCouroutine = false;
+        onCouroutine = false;
         yield break;
     }
     
