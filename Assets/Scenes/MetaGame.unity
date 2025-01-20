@@ -374,7 +374,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 20000
   Icon: {fileID: 2027495436, guid: 4d241c49b437f494baf860a7e381079a, type: 3}
-  Description: Be able to ban +1 Skill at the beggining of the night
+  Description: Be able to ban <style="LYellow">+1 Skill</style> at the beggining
+    of the night
   presentation:
   - message: Belows uh? They work almost in a paradoxical way...
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -2155,7 +2156,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 400000
   Icon: {fileID: 21300000, guid: 6fc0a7fbfb7b2fa449ba9214daae94ca, type: 3}
-  Description: Increase Gold Augment chance to 40% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">40% <style="LGrey">(+5%)
   presentation:
   - message: This type of anvil is used by the King's mercenaries to craft the best
       equipment in Animalia!
@@ -2445,7 +2446,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3211,7 +3212,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 4000
   Icon: {fileID: -507936191, guid: b76435612ffcd5649924d13fc296bf35, type: 3}
-  Description: Gain +250 Permanent Max HP
+  Description: Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>
   presentation:
   - message: These logs are indeed a bit better than the ones you bought earlier!
       At least they are not soggy, Hmpf!
@@ -3596,9 +3597,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Reset
-
-'
+  m_text: Reset
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
@@ -4043,160 +4042,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.0000038146973}
   m_SizeDelta: {x: 0.000000008731149, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &165929805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 165929806}
-  - component: {fileID: 165929809}
-  - component: {fileID: 165929808}
-  - component: {fileID: 165929807}
-  - component: {fileID: 165929810}
-  m_Layer: 5
-  m_Name: Flint I
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &165929806
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165929805}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5922, y: 1.5922, z: 1.5922}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1646651146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 308.89, y: -731}
-  m_SizeDelta: {x: 70, y: 70}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &165929807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165929805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 1099518727, guid: 55c8c926335ca154dbfef47965ee800a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &165929808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165929805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0a76c5824978a147863ed7062d1dd98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Flint and Steel
-  Unlocks:
-  - {fileID: 1525877553}
-  initial: 1
-  level: 0
-  AfterUnlock:
-    m_PersistentCalls:
-      m_Calls: []
-  MinimumPrice: 30000
-  Icon: {fileID: -2039747568, guid: 55c8c926335ca154dbfef47965ee800a, type: 3}
-  Description: Skip the first 5 rounds (Augments are still picked)
-  presentation:
-  - message: Although primitive, having one of these at hand is always useful in
-      the wild!
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  - message: 'This way you can control exactly when you want to start your fire! '
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  DisplayPanel: {fileID: 571234871}
-  naal: {fileID: 585525776}
---- !u!222 &165929809
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165929805}
-  m_CullTransparentMesh: 1
---- !u!114 &165929810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165929805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 165929807}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &172161247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5414,7 +5259,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 120000
   Icon: {fileID: 21300000, guid: 14385ef906af49e45a77f327979447e4, type: 3}
-  Description: Increase Gold Augment chance to 25% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">25% <style="LGrey">(+5%)
   presentation:
   - message: It's a bit scratched, but it's still a big improvment from that last
       anvil
@@ -6208,6 +6053,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302806152}
   m_CullTransparentMesh: 1
+--- !u!1 &306998719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1899112695220297387, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &306998723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306998719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &310467531
 GameObject:
   m_ObjectHideFlags: 0
@@ -7082,7 +6946,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 12000
   Icon: {fileID: 471380531, guid: ee93eeeba91163148994d5a23f277a2e, type: 3}
-  Description: Gain +250 Permanent Max HP
+  Description: Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>
   presentation:
   - message: This log pack was imported straight from Log-Land! There are no better
       logs than these ones! I'm serious now!
@@ -7157,6 +7021,7 @@ GameObject:
   - component: {fileID: 355966842}
   - component: {fileID: 355966844}
   - component: {fileID: 355966843}
+  - component: {fileID: 355966845}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7205,8 +7070,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Not Interested
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7236,7 +7101,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7280,6 +7145,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355966841}
   m_CullTransparentMesh: 1
+--- !u!114 &355966845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355966841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &369865916
 GameObject:
   m_ObjectHideFlags: 0
@@ -7291,6 +7168,7 @@ GameObject:
   - component: {fileID: 369865917}
   - component: {fileID: 369865919}
   - component: {fileID: 369865918}
+  - component: {fileID: 369865920}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -7414,6 +7292,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369865916}
   m_CullTransparentMesh: 1
+--- !u!114 &369865920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369865916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &378268767
 GameObject:
   m_ObjectHideFlags: 0
@@ -9472,7 +9364,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -11035,7 +10927,7 @@ MonoBehaviour:
     AbilityDescription2: If the enemy has less <style="Green">HP</style> than you
       have <style="Red">damage,</style> <style="Green">heal</style> <style="LYellow">double</style>
       the amount
-    AbilityDescription3: <style="Green">Healing Percentage</style> limit is removed
+    AbilityDescription3: <style="Green">Healing Percentage's</style> limit is removed
   - Name: Assassin
     Type: On-Hit Effect
     AbilityDescription1: Gain <style="Red">Armor Penetration</style> and ignore a
@@ -11047,80 +10939,81 @@ MonoBehaviour:
       Effects</style> thrice '
   - Name: Explosion
     Type: On-Death Effect
-    AbilityDescription1: Generate <color=#FFCC7C>Explosions</color> from the corpses
-      of enemies, <color=#FF5858>damaging</color> nearby enemies
-    AbilityDescription2: <color=#FFCC7C>Explosions</color> grow by <color=#FFCC7C>50%</color>
-    AbilityDescription3: Every <color=#FFCC7C>20 Explosions</color> generate one
-      that deals <color=#FF5858>True Damage
+    AbilityDescription1: Killing an enemy can generate an <style="LYellow">Explosion</style>,
+      damaging nearby enemies.
+    AbilityDescription2: <style="LYellow">Explosions</style> grow by <style="LYellow">50%</style>
+    AbilityDescription3: Every <style="LYellow">20 Explosions</style> generate one
+      that deals <style="Red">True Damage
   - Name: Flower Field
     Type: On-Land Effect
-    AbilityDescription1: <color=#FFCC7C>Flowers</color> will heal you by a <color=#0CD405>Max
-      HP</color> percentage of enemies that step on it. If there are more than <color=#FFCC7C>5</color>
-      enemies on top of it, it will die prematurely.
-    AbilityDescription2: <color=#FFCC7C>Flowers</color> can handle <color=#FFCC7C>+10</color>
-      more enemies on top of them
-    AbilityDescription3: <color=#FFCC7C>Flowers</color> <color=#53D1FF>stun</color>
-      nearby enemies for <color=#FFCC7C>2 seconds</color> before dying
+    AbilityDescription1: <style="LYellow">Flowers</style> will heal you by a percentage
+      of the enemy's <style="Green">Max HP</style>. If there are more than <style="LYellow">5</style>
+      enemies on top of it, the <style="LYellow">flower</style> will die prematurely.
+    AbilityDescription2: <style="LYellow">Flowers</style> can handle <style="LYellow">+10</style>
+      more enemies on top of them before dying
+    AbilityDescription3: Dying <style="LYellow">flowers</style> will <style="Blue">stun</style>
+      enemies for <style="LYellow">1 second</style>
   - Name: Multicaster
     Type: On-Shoot Effect
-    AbilityDescription1: Whenever you shoot a flame there's a chance you shoot <color=#FFCC7C>another
-      one</color> right after
-    AbilityDescription2: Unlock <color=#FFCC7C>Targeting</color> options <color=#FFCC7C>(Same,
-      Random, Second Target, Mouse Position)
-    AbilityDescription3: Flames have a <color=#FFCC7C>10%</color> chance of <color=#FFCC7C>ricocheting
+    AbilityDescription1: Whenever you shoot a flame there's a chance you shoot <style="LYellow">another
+      one</style> right after
+    AbilityDescription2: Unlock new <style="LYellow">Targeting</style> options for
+      the secondary fireball <style="LGrey">(Same, Random, Second Target, Mouse Position)
+    AbilityDescription3: All fireballs have a <style="LYellow">10%</style> chance
+      of <style="LYellow">ricocheting</style> when landing on an enemy
   - Name: Thorns
     Type: On-Hitted Effect
-    AbilityDescription1: Enemies that directly hit you get <color=#FF5858>damaged</color>
-      back by a percentage of your <color=#919191>armor
-    AbilityDescription2: <color=#FFCC7C>Thorns</color> will proc <color=#FF99F3>On-Hit
+    AbilityDescription1: Enemies that directly hit you get <style="Red">damaged</style>
+      back by a percentage of your <style="Grey">armor
+    AbilityDescription2: <style="Yellow">Thorns</style> will proc <style="Pink">On-Hit
       Effects
-    AbilityDescription3: <color=#FFCC7C>Thorns</color> will deal <color=#FF5858>damage</color>
-      in <color=#FFCC7C>area</color> instead of only <color=#FF5858>damaging</color>
+    AbilityDescription3: <style="Yellow">Thorns</style> will deal <style="Red">damaged</style>
+      in <style="LYellow">area</style> instead of only <style="Red">damaging</style>
       the attacker
   - Name: Resonance
     Type: On-Hit Effect
-    AbilityDescription1: Use the power of <color=#FFCC7C>Sound</color> to shred enemy
-      <color=#919191>Armor
-    AbilityDescription2: Shred up to <color=#FFCC7C>20%</color> more <color=#919191>Armor</color>
-      based on <color=#AFEDFF>Bullet Speed</color> and <color=#AFEDFF>Accuracy
-    AbilityDescription3: <color=#0CD405>Heal</color> for the amount of <color=#919191>Armor
+    AbilityDescription1: Use the power of <style="LYellow">Sound</style> to shred
+      enemy <style="Grey">Armor
+    AbilityDescription2: Shred up to <style="LYellow">20%</style> more <style="Grey">Armor</style>
+      based on <style="LBlue">Bullet Speed</style> and <style="LBlue">Accuracy
+    AbilityDescription3: <style="Green">Heal</style> for the amount of <style="Grey">Armor
       Shredded
   - Name: Freeze
     Type: On-Hit Effect
-    AbilityDescription1: <color=#FFCC7C>Freezing</color> enemies will <color=#AFEDFF>slow</color>
-      them. The power of the <color=#AFEDFF>Slow</color> increases the more <color=#0CD405>Max
-      HP</color> you have
-    AbilityDescription2: <color=#AFEDFF>Slows</color> <color=#FFCC7C>twice</color>
-      as much
-    AbilityDescription3: <color=#AFEDFF>Slowed</color> enemies take <color=#AFEDFF>200%</color>
-      more <color=#FF5858>damage
+    AbilityDescription1: <style="LYellow">Freezing</style> an enemy will <style="LBlue">slow</style>
+      them for some seconds. Gain <style="LBlue">+2.6% Slow</style> for every <style="Green">100
+      Bonus Max HP</style> you have.
+    AbilityDescription2: <style="LYellow">Double</style> the intensity of your <style="LBlue">Slow</style>
+      effect
+    AbilityDescription3: <style="LBlue">Slowed</style> enemies take <style="LYellow">200%</style>
+      <style="Red">damage</style> from all sources
   - Name: Gambling
     Type: Special Effect
-    AbilityDescription1: Gain the ability to <color=#FFCC7C>gamble</color> for augments
-      during the <color=#FFCC7C>Augment Picking</color> phase
-    AbilityDescription2: Chance to get a <color=#FFCC7C>gambling</color> augment
-      gets <color=#FFCC7C>doubled
-    AbilityDescription3: <color=#FFCC7C>Gambling Augments</color> will be able to
-      pick other <color=#FFCC7C>Gambling Augments</color>
+    AbilityDescription1: Gain the ability to <style="LYellow">gamble</style> for
+      augments during the <style="LYellow">Augment Picking</style> phase
+    AbilityDescription2: "\rChance to get a <style=\"LYellow\">gambling</style> augment
+      gets <style=\"LYellow\">doubled"
+    AbilityDescription3: <style="LYellow">Gambling Augments</style> will be able
+      to pick other <style="LYellow">Gambling Augments</style>
   - Name: Regeneration
     Type: Time-Based Effect
-    AbilityDescription1: Heal <color=#0CD405>missing HP</color> each second and gain
-      bonus <color=#0CD405>MaxHP</color> per round
-    AbilityDescription2: <color=#0CD405>Healing</color> effects from any source will
-      be <color=#FFCC7C>3 times</color> more efficient
-    AbilityDescription3: Increased <color=#0CD405>regeneration</color> when low <color=#0CD405>Health</color>
-      up to <color=#FFCC7C>500%
+    AbilityDescription1: Heal <style="Green">missing HP</style> each second and gain
+      bonus <style="Green">Max HP</style> per round
+    AbilityDescription2: <style="Green">Healing</style> effects from any source will
+      be <style="Green">2 times</style> more efficient
+    AbilityDescription3: <style="Green">Healing</style> is up to <style="LYellow">200%</style>
+      stronger when low on <style="Green">Health
   - Name: Ember Generation
     Type: Special Effect
-    AbilityDescription1: Gain the ability to <color=#FFCC7C>multiply</color> earned
-      <color=#FFCC7C>Embers</color> and <color=#FFCC7C>generate</color> a few per
-      round
-    AbilityDescription2: 0.01% chance of seeing a <color=#53D1FF><sprite name="Shiny">
-      Shiny</color> Animal. <color=#53D1FF><sprite name="Shiny"> Shiny</color> animal
-      drops are multiplied by <color=#FFCC7C>x10
-    AbilityDescription3: +0.1% chance of seeing a <color=#53D1FF><sprite name="Shiny">
-      Shiny</color> Animal. <color=#53D1FF><sprite name="Shiny"> Shiny</color> animal
-      drops are multiplied by <color=#FFCC7C>x100
+    AbilityDescription1: Gain the ability to <style="LYellow">multiply</style> earned
+      <style="LYellow">Embers</style> and <style="LYellow">generate</style> them
+      per round
+    AbilityDescription2: 0.01% chance of seeing a <style="Blue"><sprite name="Shiny">
+      Shiny</style> Animal. <style="Blue"><sprite name="Shiny"> Shiny</style> animal
+      drops are multiplied by <style="LYellow">x10
+    AbilityDescription3: 0.1% chance of seeing a <style="Blue"><sprite name="Shiny">
+      Shiny</style> Animal.<style="Blue"><sprite name="Shiny"> Shiny</style> animal
+      drops are multiplied by <style="LYellow">x100
   emberText: {fileID: 71933622}
   titleText: {fileID: 924204468}
   typeText: {fileID: 557520744}
@@ -11653,7 +11546,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 878588864, guid: 03afdd6ad7359f248860668f024fe09d, type: 3}
-  Description: Gain +250 Permanent Max HP
+  Description: Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>
   presentation:
   - message: 'Interested in that? Hmpf! These are two of the best logs in the market! '
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -12480,7 +12373,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 2450949
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -13645,7 +13538,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 4000
   Icon: {fileID: -1913376952, guid: c4b6053fd57bddd4897f2bee453fcbb6, type: 3}
-  Description: Gain +15 Permanent Damage
+  Description: Gain <style="LYellow">+15</style> Permanent <style="Red">Damage</style>
   presentation:
   - message: Ok, ok, since master isn't here... Yes this was also stolen from the
       van...
@@ -13784,6 +13677,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605944745}
   m_CullTransparentMesh: 1
+--- !u!1 &618416083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6184013508979861898, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &618416087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618416083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -13941,6 +13853,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 627292678}
   m_CullTransparentMesh: 1
+--- !u!1 &633468884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4686297690480574135, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &633468888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633468884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &647704156
 GameObject:
   m_ObjectHideFlags: 0
@@ -15827,7 +15758,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 4000
   Icon: {fileID: 586030432, guid: 112c6f535485cfc4fbf698dc28c61384, type: 3}
-  Description: Fast-Forward at x3 Speed
+  Description: Fast-Forward at <style="LYellow">x3</style> Speed
   presentation:
   - message: You see, this is one of master's many failed experiments! So I'm not
       sure I can sell you this...
@@ -16481,7 +16412,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 1116251387, guid: d93ba3c0b70d3324fa0a60f4a4ce3baa, type: 3}
-  Description: Gain +15% Permanent Accuracy
+  Description: Gain <style="LYellow">+15%</style> Permanent <style="LYellow">Accuracy</style>
   presentation:
   - message: Master has been collecting these ashes around the campsite. He says
       there's quite a lot of them but doesn't know where they come from
@@ -17936,7 +17867,8 @@ MonoBehaviour:
   - Name: Double Faced
     AnimationBool: Multi
     AbilityName: Multicaster
-    AbilityDescription: Gain +0.2 Attack Speed per round without limit
+    AbilityDescription: Gain <style="LYellow">+0.2 Attack Speed</style> per round
+      without limit
     BodyBack: {fileID: 21300000, guid: 2ae2fd1c31d7862458b9099b38c9f01e, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -17951,7 +17883,8 @@ MonoBehaviour:
   - Name: Ash Pyre
     AnimationBool: Assassin
     AbilityName: Assassin
-    AbilityDescription: Armor Penetration benefits all Damage sources
+    AbilityDescription: <style="Red">Armor Penetration</style> benefits all <style="Red">Damage</style>
+      sources
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: b336ad4404a8c98458df00144fb3cbe0, type: 3}
@@ -17981,7 +17914,7 @@ MonoBehaviour:
   - Name: Mercury
     AnimationBool: OrbitalMercury
     AbilityName: OrbitalMercury
-    AbilityDescription: Orbits spin 1.5x Faster
+    AbilityDescription: Orbits spin <style="LYellow">1.5x Faster</style>
     BodyBack: {fileID: 21300000, guid: 952456dbdc208fc4ebcb3f9201b789fd, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -17996,7 +17929,7 @@ MonoBehaviour:
   - Name: Venus
     AnimationBool: OrbitalVenus
     AbilityName: OrbitalVenus
-    AbilityDescription: Orbits deal True Damage
+    AbilityDescription: Orbits deal <style="Red">True Damage</style>
     BodyBack: {fileID: 21300000, guid: 6ec11c7160582e6489220d3ddb2ddfc1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18011,8 +17944,8 @@ MonoBehaviour:
   - Name: Earth
     AnimationBool: OrbitalEarth
     AbilityName: OrbitalEarth
-    AbilityDescription: The Moon will orbit around you, dealing 4xDmg and applying
-      On-Land Effects when colliding with an enemy
+    AbilityDescription: The Moon will orbit around you, dealing <style="Red">4xDmg</style>
+      and applying <style="Pink">On-Land Effects</style> when colliding with an enemy
     BodyBack: {fileID: 21300000, guid: 2ff95046897ea5049973ce2f633cf265, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18027,7 +17960,7 @@ MonoBehaviour:
   - Name: Mars
     AnimationBool: OrbitalMars
     AbilityName: OrbitalMars
-    AbilityDescription: Orbit will increase and decrease in radius
+    AbilityDescription: Orbits will increase and decrease in radius
     BodyBack: {fileID: 21300000, guid: 6ec11c7160582e6489220d3ddb2ddfc1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18042,7 +17975,7 @@ MonoBehaviour:
   - Name: Jupiter
     AnimationBool: OrbitalJupiter
     AbilityName: OrbitalJupiter
-    AbilityDescription: Gain x1.5 Orbital radius and size
+    AbilityDescription: Gain <style="LYellow">x1.5</style> Orbital radius and size
     BodyBack: {fileID: 21300000, guid: 080406d0f02f80b4cbaa6869b452bb37, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18057,7 +17990,8 @@ MonoBehaviour:
   - Name: Saturn
     AnimationBool: OrbitalSaturn
     AbilityName: OrbitalSaturn
-    AbilityDescription: Gain +2 Extra Orbits in different Orbital Fields
+    AbilityDescription: Gain <style="LYellow">+2 Extra Orbits</style> in different
+      Orbital Fields
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: 4e20d23e6bf61a240b84b84d90ab51ba, type: 3}
@@ -18072,7 +18006,8 @@ MonoBehaviour:
   - Name: Uranus
     AnimationBool: OrbitalUranus
     AbilityName: OrbitalUranus
-    AbilityDescription: Start the game with 4 Orbits that deal twice the Damage
+    AbilityDescription: Start the game with <style="LYellow">4 Orbits</style> that
+      deal twice the <style="Red">Damage</style>
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: ff7ef5240a6cf504a9a68a511c62ff0a, type: 3}
@@ -18087,7 +18022,8 @@ MonoBehaviour:
   - Name: Neptune
     AnimationBool: OrbitalNeptune
     AbilityName: OrbitalNeptune
-    AbilityDescription: Orbits spin 4x Slower but Stun enemeis for 2s upon collision
+    AbilityDescription: Orbits spin <style="LYellow">4x Slower</style> but <style="Blue">Stun</style>
+      enemies for <style="LYellow">2 seconds</style> upon collision
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18102,8 +18038,8 @@ MonoBehaviour:
   - Name: Pheonix
     AnimationBool: Regen
     AbilityName: Regeneration
-    AbilityDescription: When you die, reborn at full HP and kill every enemy on screen
-      (5 Round Cooldown)
+    AbilityDescription: When you die, reborn at <style="Green">full HP</style> and
+      kill every enemy on screen <style="LGrey">(5 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: bf96fe3a6a2d30a449fd3330064b6442, type: 3}
@@ -18118,8 +18054,9 @@ MonoBehaviour:
   - Name: Powered Up
     AnimationBool: Crit
     AbilityName: Crit
-    AbilityDescription: Critically Defend based on your Crit Chance and Multiplier,
-      reducing incoming damage up to 90%
+    AbilityDescription: Critically Defend based on your <style="LYellow">Crit Chance</style>
+      and <style="LYellow">Multiplier,</style> reducing incoming <style="Red">damage</style>
+      up to <style="LYellow">90%
     BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18134,7 +18071,8 @@ MonoBehaviour:
   - Name: Von Van Pyre
     AnimationBool: Vampire
     AbilityName: Vampire
-    AbilityDescription: Gain +1 Max HP for each 1000 HP Overhealed
+    AbilityDescription: Gain <style="Green">+1 Max HP</style> for each <style="Green">1000
+      HP</style> Overhealed
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 26f597fa10cc8a7408c6320da27d60cf, type: 3}
@@ -18149,8 +18087,8 @@ MonoBehaviour:
   - Name: Ice Cube
     AnimationBool: Ice
     AbilityName: Freeze
-    AbilityDescription: <color=#FFCC7C>Active:</color> Freeze every enemy in sight
-      for 30 seconds
+    AbilityDescription: <style="Yellow">Active:</style> Freeze every enemy in sight
+      for <style="LYellow">30 seconds</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18165,7 +18103,8 @@ MonoBehaviour:
   - Name: Echo
     AnimationBool: Shred
     AbilityName: Shred
-    AbilityDescription: Gain +1 Armor for each 500 Shredded Armor
+    AbilityDescription: Gain <style="Grey">+1 Armor</style> for each <style="Grey">500
+      Shredded Armor</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: b5793142d42d6a14194b0b216ef6cbf3, type: 3}
@@ -18180,7 +18119,8 @@ MonoBehaviour:
   - Name: Captain Ember Teach
     AnimationBool: Pirate
     AbilityName: Pirate
-    AbilityDescription: Roundshots can penetrate through 3 enemies
+    AbilityDescription: <style="LYellow">Roundshots</style> can penetrate through
+      <style="LYellow">3</style> enemies
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 6f48d94b85168264a81177fb14686f82, type: 3}
@@ -18195,7 +18135,8 @@ MonoBehaviour:
   - Name: Blaze Brigade
     AnimationBool: Burst
     AbilityName: Burst
-    AbilityDescription: '<b>Active: </b> Shoot 250 Bullets in Burst (3 Round Cooldown)'
+    AbilityDescription: '<style="Yellow">Active: </style> Shoot 250 Bullets in Burst
+      <style="LGrey">(3 Round Cooldown)'
     BodyBack: {fileID: 21300000, guid: b90f329d505d5d34a92c6a822994eee3, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18210,8 +18151,8 @@ MonoBehaviour:
   - Name: Rose Warrior
     AnimationBool: Thorns
     AbilityName: Thorns
-    AbilityDescription: <color=#FFCC7C>Active:</color> Become Unhittable for 30 seconds
-      (2 Round Cooldown)
+    AbilityDescription: <style="Yellow">Active:</style> Become Unhittable for <style="LYellow">30
+      seconds</style> <style="LGrey">(2 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 7f3add2241b179f428c2d6712cc1e900, type: 3}
@@ -18226,8 +18167,7 @@ MonoBehaviour:
   - Name: Mt. Everest
     AnimationBool: Snow
     AbilityName: Snow Pool
-    AbilityDescription: Become an immovable mountain, immune to all sorts of Crowd
-      Control
+    AbilityDescription: Become an immovable mountain, immune to all sorts of <style="LYellow">Effects</style>
     BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18242,8 +18182,9 @@ MonoBehaviour:
   - Name: Flora
     AnimationBool: Flower
     AbilityName: Flower Field
-    AbilityDescription: 10% Chance of spawning Carnivore Plants that deal Damage
-      to the enemies instead of healing you
+    AbilityDescription: <style="LYellow">10%</style> Chance of spawning <style="LYellow">Carnivore
+      Plants</style> that deal <style="Red">Damage</style> to the enemies instead
+      of healing you
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 5d0bf28d09d77464f8ead33b3218644b, type: 3}
@@ -18258,8 +18199,8 @@ MonoBehaviour:
   - Name: Bomber
     AnimationBool: Explosion
     AbilityName: Explosion
-    AbilityDescription: After every explosion another one will detonate near the
-      Campfire
+    AbilityDescription: After every <style="LYellow">explosion</style> another one
+      will detonate near the Campfire
     BodyBack: {fileID: 21300000, guid: 7102881627f786c49ae93c002898a613, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18274,9 +18215,11 @@ MonoBehaviour:
   - Name: Tesla Coil
     AnimationBool: Statik
     AbilityName: Statik
-    AbilityDescription: Gain 1 Energy Point each time you release Static Energy,
-      at 100 points release a Super Charge. Super Charges have increased range, duration,
-      deal True Damage and are able to apply On-Hit Effects (including Static Energy)
+    AbilityDescription: Gain <style="LYellow">1 Energy Point</style> each time you
+      release <style="Yellow">Static Energy</style>, at 100 points release a <style="Blue">Super
+      Charge. Super Charges</style> have increased range, duration, deal <style="Red">True
+      Damage</style> and are able to apply <style="Pink">On-Hit Effects <style="LGrey">(including
+      Static Energy)
     BodyBack: {fileID: 21300000, guid: 1ecc71e4b6e116642bc01dfa7ef05880, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18291,8 +18234,8 @@ MonoBehaviour:
   - Name: Azureoth
     AnimationBool: Blue
     AbilityName: Magical Shot
-    AbilityDescription: <color=#FFCC7C>Active:</color>  Turn Purple during 5 seconds
-      (1 Round Cooldown)
+    AbilityDescription: <style="Yellow">Active:</style> Turn <style="Pink">Purple</style>
+      during 5 seconds <style="LGrey">(1 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -18307,7 +18250,7 @@ MonoBehaviour:
   - Name: Zeus
     AnimationBool: Thunder
     AbilityName: Thunder
-    AbilityDescription: Cast double the Thunders
+    AbilityDescription: Cast <style="LYellow">double</style> the <style="LYellow">Thunders</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: c665cb1953416c64f83fe2e2da93a14c, type: 3}
@@ -18322,7 +18265,8 @@ MonoBehaviour:
   - Name: Mt. Vesuvius
     AnimationBool: Lava
     AbilityName: Lava
-    AbilityDescription: A Permanent Lava Pool will sit by Mt. Vesuvius
+    AbilityDescription: A Permanent <style="Yellow">Lava Pool</style> will sit by
+      Mt. Vesuvius
     BodyBack: {fileID: 21300000, guid: d8b444b3850195047830fb643c86c232, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -18352,7 +18296,8 @@ MonoBehaviour:
   - Name: Fire Monk
     AnimationBool: ImmolateFire
     AbilityName: ImmolateFire
-    AbilityDescription: Immolate will deal True Damage
+    AbilityDescription: <style="Yellow">Immolate</style> will deal <style="Red">True
+      Damage</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -18367,7 +18312,8 @@ MonoBehaviour:
   - Name: Water Monk
     AnimationBool: ImmolateWater
     AbilityName: ImmolateWater
-    AbilityDescription: Everytime Immolate hits an enemy heal 1% of your Max HP
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      heal <style="LYellow">1%</style> of your <style="Green">Max HP</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -18382,7 +18328,8 @@ MonoBehaviour:
   - Name: Air Monk
     AnimationBool: ImmolateAir
     AbilityName: ImmolateAir
-    AbilityDescription: Everytime Immolate hits an enemy they get stunned for 0.5s
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      they get <style="Blue">knocked back</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -18397,8 +18344,9 @@ MonoBehaviour:
   - Name: Earth Monk
     AnimationBool: ImmolateEarth
     AbilityName: ImmolateEarth
-    AbilityDescription: Everytime Immolate hits an enemy gain +1 Shield for a max
-      of 0.3 of your Max HP
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      gain <style="Grey">+1 Shield</style> for a max of 0.3 of your <style="Green">Max
+      HP</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -18413,7 +18361,7 @@ MonoBehaviour:
   - Name: Sir Flareington
     AnimationBool: Money
     AbilityName: Ember Generation
-    AbilityDescription: <sprite name="Shiny"> Shiny spawn chance increases to 1%
+    AbilityDescription: <sprite name="Shiny"> Shiny spawn chance increases to <style="LYellow">1%</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: ed3dc51ae158ea94cbc82000d40a38eb, type: 3}
@@ -18428,7 +18376,8 @@ MonoBehaviour:
   - Name: King Ghoul
     AnimationBool: Necro
     AbilityName: Necro
-    AbilityDescription: 5% Chance of spawning a Mega Ghoul that deals Damage in Area
+    AbilityDescription: <style="LYellow">5%</style> Chance of spawning a <style="Blue">Mega
+      Ghoul</style> that deals <style="Red">Damage</style> in Area
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -18443,7 +18392,8 @@ MonoBehaviour:
   - Name: Ankh-Ra
     AnimationBool: Ritual
     AbilityName: Ritual
-    AbilityDescription: Gain +5 Candle Damage for each 100 enemies killed by candles
+    AbilityDescription: Gain <style="Red">+5 Candle Damage</style> for each <style="LYellow">100</style>
+      enemies killed by candles
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: d852b27049c437543927ee596a7834f9, type: 3}
@@ -18458,7 +18408,8 @@ MonoBehaviour:
   - Name: Fire Bee
     AnimationBool: Bee
     AbilityName: Bee Summoner
-    AbilityDescription: Gain +1 Worker Bee every 5 Rounds (without limit)
+    AbilityDescription: Gain <style="LYellow">+1 Worker Bee</style> every <style="LYellow">5
+      Rounds <style="LGrey">(without limit)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: aaba9973b4cab8f45bb1fac810bcf374, type: 3}
@@ -18472,8 +18423,8 @@ MonoBehaviour:
     Supratype: 
   CharacterSelectContainer: {fileID: 911966202}
   CharacterSubTypeContainer: {fileID: 1258750953}
-  CharacterName: {fileID: 1692255830}
-  SkillDescription: {fileID: 961887304}
+  CharacterName: {fileID: 1692255832}
+  SkillDescription: {fileID: 961887306}
   currentDisplayedCharacter: 27
   MainFlameVessel: {fileID: 811388234}
 --- !u!114 &852633095
@@ -19205,6 +19156,7 @@ GameObject:
   - component: {fileID: 895395437}
   - component: {fileID: 895395439}
   - component: {fileID: 895395438}
+  - component: {fileID: 895395440}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -19253,8 +19205,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Interested
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19284,7 +19236,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -19328,6 +19280,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895395436}
   m_CullTransparentMesh: 1
+--- !u!114 &895395440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895395436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &895523862
 GameObject:
   m_ObjectHideFlags: 0
@@ -19571,7 +19535,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 30000
   Icon: {fileID: 21300000, guid: 0b56f30be7019654f8acbe89174011ca, type: 3}
-  Description: Increase Gold Augment chance to 15% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">15% <style="LGrey">(+5%)
   presentation:
   - message: I don't even know how a log came in this shape but for all I care we
       can use this as an anvil!
@@ -19886,7 +19850,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 1334803061, guid: 28b78858ba2ee7e41b8022b8d75d386c, type: 3}
-  Description: Gain +10 Permanent Damage
+  Description: Gain <style="LYellow">+10</style> Permanent <style="Red">Damage</style>
   presentation:
   - message: This bucket of high-quality deluxe fuel was imported from Petrol-Land
       so I'm not sure you will be able to afford it! Hmpf!
@@ -20038,6 +20002,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 1
+--- !u!1 &915113750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2567667905959779091, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &915113754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915113750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &915789914
 GameObject:
   m_ObjectHideFlags: 0
@@ -20613,7 +20596,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 75000
   Icon: {fileID: -514238537, guid: 6f37db85b870eee4ebc41dfeeb9bd88e, type: 3}
-  Description: Gain +30 Permanent Damage
+  Description: Gain <style="LYellow">+30</style> Permanent <style="Red">Damage</style>
   presentation:
   - message: Yep that's right! Premium Deluxe 5-Star Petrol right in front of your
       eyes!
@@ -21023,6 +21006,7 @@ GameObject:
   - component: {fileID: 961887303}
   - component: {fileID: 961887305}
   - component: {fileID: 961887304}
+  - component: {fileID: 961887306}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -21105,7 +21089,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -21149,6 +21133,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961887302}
   m_CullTransparentMesh: 1
+--- !u!114 &961887306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961887302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &962784310
 GameObject:
   m_ObjectHideFlags: 0
@@ -21578,9 +21576,10 @@ MonoBehaviour:
   - Title: Fully Upgraded
     Avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
     Description: Unlock every skill in Rowl's Skill Tree
-  - Title: Summoning Ankh-Ra
+  - Title: The Ancient Ritual
     Avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
-    Description: Have 6 candles around your campfire
+    Description: <i>"When the flame hexagon burns bright, Ankh-Ra shall appear to
+      defend the night"</i>
   - Title: Legend of the Necromancer
     Avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
     Description: <i>"When 25 Ghouls stand tall in sight, King Ghoul shall join the
@@ -22729,6 +22728,7 @@ GameObject:
   - component: {fileID: 1030922463}
   - component: {fileID: 1030922465}
   - component: {fileID: 1030922464}
+  - component: {fileID: 1030922466}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -22778,8 +22778,8 @@ MonoBehaviour:
   m_text: <size=80%>When an enemy dies, there's a chance to generate an Explosion
     that damages nearby enemies
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22809,7 +22809,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -22853,6 +22853,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030922462}
   m_CullTransparentMesh: 1
+--- !u!114 &1030922466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030922462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &1031754546
 GameObject:
   m_ObjectHideFlags: 0
@@ -23558,8 +23572,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MinimumPrice: 30000
-  Icon: {fileID: 0}
-  Description: Gain +20% Permanent Accuracy
+  Icon: {fileID: -958885974, guid: c42e81431c49dac45832533c0b4ac941, type: 3}
+  Description: Gain <style="LYellow">+20%</style> Permanent <style="LYellow">Accuracy</style>
   presentation:
   - message: Thank god you are interested! I can't sleep with this thing always looking
       at me!
@@ -25365,7 +25379,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 50000
   Icon: {fileID: -1838507974, guid: fd8ed6538d4c85342a8acc844de1d83d, type: 3}
-  Description: Be able to pick +1 Skill at the beggining of the night
+  Description: Be able to pick <style="LYellow">+1 Skill</style> at the beggining
+    of the night
   presentation:
   - message: 'Ahh... Of course you are interested! Who doesn''t like marshmallows
       right? '
@@ -26194,7 +26209,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 12000
   Icon: {fileID: 729950809, guid: 73b119d7e7409a24ea364d11df8bd18e, type: 3}
-  Description: Gain +15% Permanent Accuracy
+  Description: Gain <style="LYellow">+15%</style> Permanent <style="LYellow">Accuracy</style>
   presentation:
   - message: Be careful! Fragile item over here!
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -26690,6 +26705,7 @@ GameObject:
   - component: {fileID: 1249318445}
   - component: {fileID: 1249318447}
   - component: {fileID: 1249318446}
+  - component: {fileID: 1249318448}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -26769,7 +26785,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -26813,6 +26829,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249318444}
   m_CullTransparentMesh: 1
+--- !u!114 &1249318448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249318444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252497140
 GameObject:
   m_ObjectHideFlags: 0
@@ -28126,7 +28154,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 120000
   Icon: {fileID: 612668583, guid: 9fef8fa914d14954a8651a5ae40a6882, type: 3}
-  Description: Be able to ban +1 Skill at the beggining of the night
+  Description: Be able to ban <style="LYellow">+1 Skill</style> at the beggining
+    of the night
   presentation:
   - message: Oh you are actually interested in this? Or are you just trying to buy
       my whole store an item at a time? Hmpf!
@@ -28978,7 +29007,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 200000
   Icon: {fileID: 21300000, guid: c3e488db56778d044922c3465e03ae4f, type: 3}
-  Description: Increase Gold Augment chance to 30% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">30% <style="LGrey">(+5%)
   presentation:
   - message: Now we are talking! This is the most common tool used by professional
       blacksmiths!
@@ -29507,7 +29536,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 30000
   Icon: {fileID: 958613058, guid: 35309ab7f0e59234d91426f58380f8a3, type: 3}
-  Description: Fast-Forward at x4 Speed
+  Description: Fast-Forward at <style="LYellow">x4</style> Speed
   presentation:
   - message: This hourglass makes time go EVEN faster! I thought going faster than
       it was going wasn't possible!
@@ -30291,7 +30320,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 75000
   Icon: {fileID: 167935703, guid: 307043206917b174ea1c071553157dee, type: 3}
-  Description: Gain +25 Permanent Attack Speed
+  Description: Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack
+    Speed</style>
   presentation:
   - message: You see, this is the world's biggest pinecone! Yep, and it's standing
       right there!
@@ -30452,7 +30482,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 75000
   Icon: {fileID: 21300000, guid: ccc35a2b1d42fef4dbfe4e28555a1218, type: 3}
-  Description: Increase Gold Augment chance to 20% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">20% <style="LGrey">(+5%)
   presentation:
   - message: A wood anvil seems like a bad idea in theory, imagine in practice! At
       least this stone anvil will not burn easily!
@@ -30831,7 +30861,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 698746893, guid: 0a51549e5d5f5904cb3f41cb1a298c85, type: 3}
-  Description: Gain +25 Permanent Attack Speed
+  Description: Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack
+    Speed</style>
   presentation:
   - message: Out of all the stuff on the shelf, you are interested in the basket
       of leaves?...
@@ -31565,6 +31596,7 @@ GameObject:
   - component: {fileID: 1460474670}
   - component: {fileID: 1460474672}
   - component: {fileID: 1460474671}
+  - component: {fileID: 1460474673}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -31644,7 +31676,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -31688,6 +31720,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460474669}
   m_CullTransparentMesh: 1
+--- !u!114 &1460474673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460474669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1468807264
 GameObject:
   m_ObjectHideFlags: 0
@@ -33291,160 +33335,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1525877550
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1525877551}
-  - component: {fileID: 1525877554}
-  - component: {fileID: 1525877553}
-  - component: {fileID: 1525877552}
-  - component: {fileID: 1525877555}
-  m_Layer: 5
-  m_Name: Flint II
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1525877551
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525877550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5922, y: 1.5922, z: 1.5922}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1646651146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 308.89, y: -1148.6}
-  m_SizeDelta: {x: 70, y: 70}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1525877552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525877550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -698093355, guid: ccba682f904462d4eb1311313240f707, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &1525877553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525877550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0a76c5824978a147863ed7062d1dd98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Match Box
-  Unlocks:
-  - {fileID: 1999907274}
-  initial: 0
-  level: 0
-  AfterUnlock:
-    m_PersistentCalls:
-      m_Calls: []
-  MinimumPrice: 120000
-  Icon: {fileID: -156403469, guid: ccba682f904462d4eb1311313240f707, type: 3}
-  Description: Skip the first 10 rounds (Augments are still picked)
-  presentation:
-  - message: Now we are talking! This is way better than that Flint and Steel!
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  - message: We now have way more control on how, when and where the fire is lighted
-      up!
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  DisplayPanel: {fileID: 571234871}
-  naal: {fileID: 585525776}
---- !u!222 &1525877554
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525877550}
-  m_CullTransparentMesh: 1
---- !u!114 &1525877555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525877550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1525877552}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1527457845
 GameObject:
   m_ObjectHideFlags: 0
@@ -33643,6 +33533,7 @@ GameObject:
   - component: {fileID: 1557166130}
   - component: {fileID: 1557166132}
   - component: {fileID: 1557166131}
+  - component: {fileID: 1557166133}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -33693,8 +33584,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33724,7 +33615,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -33768,6 +33659,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557166129}
   m_CullTransparentMesh: 1
+--- !u!114 &1557166133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557166129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1001 &1562088144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33944,7 +33849,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 4000
   Icon: {fileID: 1388366304, guid: 5860e63c8ab000943b36a9d6a7ad16f0, type: 3}
-  Description: Gain +25 Permanent Attack Speed
+  Description: Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack
+    Speed</style>
   presentation:
   - message: 'What''s better than a basket of leaves? A basket of twigs of course! '
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -34551,7 +34457,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 800000
   Icon: {fileID: 21300000, guid: 0e7902f978410e14e82fbe1b22f5c3a2, type: 3}
-  Description: Increase Gold Augment chance to 45% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">45% <style="LGrey">(+5%)
   presentation:
   - message: Words cannot describe how awesome this item is! An anvil made out of
       prismanium with mythril details and a literal out of this world design!
@@ -35700,7 +35606,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 30000
   Icon: {fileID: -1867615458, guid: e441ed60cf06c3344b1c1cd1ede43599, type: 3}
-  Description: Gain +20 Permanent Damage
+  Description: Gain <style="LYellow">+20</style> Permanent <style="Red">Damage</style>
   presentation:
   - message: Hey! I've seen what you have been doing with those other petrol tanks
       I've sold you! Hmpf!
@@ -36067,7 +35973,6 @@ RectTransform:
   - {fileID: 1415299698}
   - {fileID: 1635129170}
   - {fileID: 1832320755}
-  - {fileID: 165929806}
   - {fileID: 902412853}
   - {fileID: 1066810513}
   - {fileID: 1182736131}
@@ -36076,14 +35981,12 @@ RectTransform:
   - {fileID: 1905635195}
   - {fileID: 1439011625}
   - {fileID: 2056923431}
-  - {fileID: 1525877551}
   - {fileID: 249500899}
   - {fileID: 1360800200}
   - {fileID: 1837619342}
   - {fileID: 1383794137}
   - {fileID: 404213116}
   - {fileID: 2085849084}
-  - {fileID: 1999907272}
   - {fileID: 75233111}
   - {fileID: 1583366919}
   m_Father: {fileID: 583229345}
@@ -37161,6 +37064,7 @@ GameObject:
   - component: {fileID: 1692255829}
   - component: {fileID: 1692255831}
   - component: {fileID: 1692255830}
+  - component: {fileID: 1692255832}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -37240,7 +37144,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -37284,6 +37188,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692255828}
   m_CullTransparentMesh: 1
+--- !u!114 &1692255832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692255828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
 --- !u!1 &1707047695
 GameObject:
   m_ObjectHideFlags: 0
@@ -40314,7 +40232,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 12000
   Icon: {fileID: 559041767, guid: f4fe42744cc07db4b863cac4b9d4993c, type: 3}
-  Description: Allows you to see Jhat's Mood
+  Description: Allows you to see <style="LYellow">Jhat's Mood</style>
   presentation:
   - message: <size=110%>WAIT! DO-<size=100%>Don't touch that!
     avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
@@ -40497,7 +40415,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 30000
   Icon: {fileID: -1913283195, guid: 353637f171caff447b0c9add71c0e2fc, type: 3}
-  Description: Gain +25 Permanent Attack Speed
+  Description: Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack
+    Speed</style>
   presentation:
   - message: Using pinecones to make your fire start faster is a classic!
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -40650,7 +40569,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 150000
   Icon: {fileID: 1409351459, guid: c9b102ec81eb0204c85a6c816f606e05, type: 3}
-  Description: Be able to pick +1 Skill at the beggining of the night
+  Description: Be able to pick <style="LYellow">+1 Skill</style> at the beggining
+    of the night
   presentation:
   - message: Oh this is where I left them...
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -41548,7 +41468,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 20000
   Icon: {fileID: -1279541210, guid: 481e3f1ebff74af4fad845c4b50ccac5, type: 3}
-  Description: Be able to ban +1 species from appearing during the night
+  Description: Be able to ban <style="LYellow">+1 species</style> from appearing
+    during the night
   presentation:
   - message: Oh! You are interested? So you also have an animal you despise uh?
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -42278,7 +42199,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 1783317581, guid: 738d26357844cd447a41021556894bd9, type: 3}
-  Description: Fast-Forward at x2 Speed
+  Description: Fast-Forward at <style="LYellow">x2</style> Speed
   presentation:
   - message: This product is a bit weeeeird...
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
@@ -42910,6 +42831,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942543804}
   m_CullTransparentMesh: 1
+--- !u!1 &1943421461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2612349686823695367, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1943421465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943421461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944829808
 GameObject:
   m_ObjectHideFlags: 0
@@ -44289,167 +44227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1999907271
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1999907272}
-  - component: {fileID: 1999907275}
-  - component: {fileID: 1999907274}
-  - component: {fileID: 1999907273}
-  - component: {fileID: 1999907276}
-  m_Layer: 5
-  m_Name: Flint III
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1999907272
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999907271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5922, y: 1.5922, z: 1.5922}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1646651146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 66.09001, y: -1566.2}
-  m_SizeDelta: {x: 70, y: 70}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1999907273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999907271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 1070829461, guid: 6b7a42ceb18ac6d419927236af649395, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &1999907274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999907271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0a76c5824978a147863ed7062d1dd98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Lighter
-  Unlocks: []
-  initial: 0
-  level: 0
-  AfterUnlock:
-    m_PersistentCalls:
-      m_Calls: []
-  MinimumPrice: 400000
-  Icon: {fileID: 1097703159, guid: 6b7a42ceb18ac6d419927236af649395, type: 3}
-  Description: Skip the first 15 rounds (Augments are still picked)
-  presentation:
-  - message: Fancy lighter uh? Want it?
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  - message: Having a reusable light source is always way more handy than a pack
-      of matches
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  - message: Well, even if you don't want it now, I know you will crawl back to me
-      later
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  - message: I know your type. You can't stand seeing something not 100% completed!
-      Including buying all the items in this store!
-    avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
-    Name: Jhat
-  DisplayPanel: {fileID: 571234871}
-  naal: {fileID: 585525776}
---- !u!222 &1999907275
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999907271}
-  m_CullTransparentMesh: 1
---- !u!114 &1999907276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999907271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1999907273}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2005023984
 GameObject:
   m_ObjectHideFlags: 0
@@ -45199,7 +44976,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -45805,7 +45582,8 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 100000
   Icon: {fileID: -2144717316, guid: 0df97a3fbb867fa44b7a47078fd6fa0f, type: 3}
-  Description: Be able to ban +1 species from appearing during the night
+  Description: Be able to ban <style="LYellow">+1 species</style> from appearing
+    during the night
   presentation:
   - message: Wasn't the other repellent strong enough? I got your solution right
       here!
@@ -46266,7 +46044,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 300000
   Icon: {fileID: 21300000, guid: d6a97d4f9715a6b4e8c8e4a9b84783a2, type: 3}
-  Description: Increase Gold Augment chance to 35% (+5%)
+  Description: Increase Gold Augment chance to <style="LYellow">35% <style="LGrey">(+5%)
   presentation:
   - message: Just look at these details! What a stylish design! The developer really
       took it's time with this one uh?
@@ -46914,6 +46692,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8063c158dea9ab49a83d43e511d779a, type: 3}
+--- !u!1 &2117522380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 25646323112355317, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+  m_PrefabInstance: {fileID: 6804154460510507626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2117522384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117522380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2120745257
 GameObject:
   m_ObjectHideFlags: 0
@@ -48199,7 +47994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00079345703, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -48236,6 +48031,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 275411193}
     m_Modifications:
+    - target: {fileID: 759144592406620773, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 759144592406620773, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 759144592406620773, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 808422676406691516, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 808422676406691516, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 1040100809538220169, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -48298,7 +48113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1040100809538220169, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4000
+      value: 8119
       objectReference: {fileID: 0}
     - target: {fileID: 1040100809538220169, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -48316,10 +48131,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1064887306039965610, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 1064887306039965610, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064887306039965610, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 1160782789833087031, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1755565200975271918, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 1755565200975271918, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755565200975271918, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 1859522928141554284, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -48344,6 +48183,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1983371108459977354, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 1983371108459977354, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983371108459977354, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 2366228915942639034, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 2366228915942639034, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2366228915942639034, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 2433802427872960141, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -48384,6 +48247,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -134.45999
       objectReference: {fileID: 0}
+    - target: {fileID: 3761059999034257853, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3806356123944697218, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -48401,19 +48268,213 @@ PrefabInstance:
       value: -41.46
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: tabTitle
+      value: 
+      objectReference: {fileID: 915113754}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: RepelButton
       value: 
       objectReference: {fileID: 1230846677}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: animals.Array.data[21].abilities.Array.data[1].description
-      value: '<size=100%><color=#FFFF00>- Alpha -</color>
-
-        <size=80%>When
-        an <color=#FFFF00>Alpha</color> howls, it <color=#FF7000>taunts</color> the
-        campfire and <color=#FF7000>activates</color> nearby wolves. <color=#FF7000>Activated</color>
-        wolves gain <color=#AFEDFF>x2.5 movement speed,</color> <color=#FF5858>+0.25
-        Armor Penetration</color> and <color=#FF5858>+50 Dmg.'
+      propertyPath: animals.Array.data[2].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start the
+        round <style="Orange">burrowed</style> underground. While <style="Orange">burrowed</style>,
+        become <style="Blue">untargetable</style> and <style="Blue">immune</style>
+        to damage. These animals will come out on their own
       objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[3].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This animal
+        moves around the campfire, enclosing it, instead of taking a straight path
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[4].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Dung Roller -</style><br><size=80%>This
+        animal is an expert at rolling <style="Brown">Dung Balls.</style> The more
+        they roll the more the balls grow. Once in range, the Dung Ball will be shot
+        at the campfire dealing <style="Red">+50 dmg.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[5].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This animal
+        moves around the campfire, enclosing it, instead of taking a straight path
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[5].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[7].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start the
+        round <style="Orange">burrowed</style> underground. While <style="Orange">burrowed</style>,
+        become <style="Blue">untargetable</style> and <style="Blue">immune</style>
+        to damage. These animals will come out on their own
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[8].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[9].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This
+        animal sets up <style="Brown">explosive acorns</style> and runs away. If
+        it get out of sight before it dies the <style="Brown">acorn</style> will
+        detonate, dealing <style="Red">+25 dmg.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Thorns -</style><br><size=80%>After getting
+        in range, this animal will cover itself, becoming <style="Yellow">Unhittable</style>
+        and dealing <style="Red">+15 dmg</style> when it gets struck by <style="Pink">On-Hit
+        Effects
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[10].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Unhittable -</style><br><size=80%>This
+        animal can be immune to <style="Pink">On-Hit Effects</style> <style="LGrey">(except
+        for Armor Penetration)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[11].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Thief -</style><br><size=80%>This animal
+        has different goals in mind. Instead of trying to damage you, it will <style="Orange">steal</style>
+        <style="LYellow">+100 embers.</style> You can recover them by killing it
+        before it gets out of sight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Roll -</style><br><size=80%>This animal
+        begins the round by <style="Orange">rolling,</style> gaining <style="LBlue">x2.5
+        speed</style>, <style="Grey">+1000 armor </style> and becoming <style="Yellow">Unhittable.</style>
+        It will unroll after denying 10 <style="Pink">On-Hit Effects
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[14].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Unhittable -</style><br><size=80%>This
+        animal can be immune to <style="Pink">On-Hit Effects</style> <style="LGrey">(except
+        for Armor Penetration)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[15].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Stink Spray -</style><br><size=80%>Attacks
+        will <style="Blue">stun</style> the campfire for 0.75s. <style="Blue">Stun</style>
+        effects override eachother instead of stacking.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[16].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Dam Builder -</style><br><size=80%>Instead
+        of trying to damage you, it will <style="Orange">steal</style> your <style="Brown">logs,</style>
+        taking away <style="Green">-100 Max Health.</style> You can recover them
+        by killing it before it gets out of sight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This
+        animal sets up <style="Brown">explosive acorns</style> and runs away. If
+        it get out of sight before it dies the <style="Brown">acorn</style> will
+        detonate, dealing <style="Red">+25 dmg.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[17].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Flying -</style><br><size=80%>Starts the
+        round by <style="Orange">flying</style> from trees, landing somewhere in
+        the middle of the campsite. While flying, it is <style="Blue">untargetable</style>
+        and <style="Blue">immune</style>
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[18].abilities.Array.data[0].description
+      value: '<size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins the
+        round by <style="Orange">charging</style> a powerfull first attack that deal
+        <style="Red">2x damage</style> '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[19].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[19].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has increased
+        <style="LYellow">range</style> and is able to damage you from afar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Wolf Pack -</style><br><size=80%>For each
+        4 wolves in the campsite, 1 will be considered the <style="Yellow">Alpha.</style>
+        If the <style="Yellow">Alpha</style> dies and there aren't enough on the
+        field, the role will be transfered to other wolves
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[21].abilities.Array.data[1].description
+      value: <size=100%><style="Yellow">- Alpha -</style><br><size=80%>When an <style="Yellow">Alpha</style>
+        howls, it <style="Orange">taunts</style> the campfire and <style="Orange">activates</style>
+        nearby wolves. <style="Orange">Activated</style> wolves gain <style="LBlue">x2.5
+        movement speed,</style> <style="Red">+0.25 Armor Penetration</style> and
+        <style="Red">+50 Dmg
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[22].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Honey Pot -</style><br><size=80%>Whenever
+        it gets below half <style="Green">Max HP</style> it starts to consume <style="Brown">Honey.</style>
+        Each scoop of <style="Brown">Honey</style> heals for <style="Green">+1000HP.</style>
+        It only stops consuming once its <style="Green">Full Health</style> or it
+        dies
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[23].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks apply
+        <style="Purple">8 Poison Ticks.</style> Each <style="Purple">Poison Tick</style>
+        deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison
+        Ticks</style> are stackable and are cleared once the round ends
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[24].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Stray -</style><br><size=80%>Stray wolves
+        are used to living alone and are always <style="Orange">activated</style>
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[25].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks
+        <style="Blue">stun</style> the campfire for 0.75 seconds. <style="Blue">Stun</style>
+        effects override eachother instead of stacking
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[26].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins the
+        round by <style="Orange">charging</style> a powerful first attack. Each charge
+        increases the first attack's power by <style="Red">+25 damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[27].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Caretaker -</style><br><size=80%>Heals
+        nearby animals 7 times for <style="Green">+100HP</style> every time it <style="Orange">howls</style>.
+        This doesn't apply to itself or other animals of the same species
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[28].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Protector -</style><br><size=80%>Protects
+        nearby animals 7 times with <style="Grey">+100 Armor</style> every time it
+        <style="Orange">howls</style>. This doesn't apply to itself or other animals
+        of the same species
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297411825511938058, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116073268162172936, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 5116073268162172936, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116073268162172936, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 5533112890008238485, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -48422,11 +48483,99 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5821252174596761391, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821252174596761391, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103188029883039472, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6103188029883039472, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103188029883039472, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6607933513361248488, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6607933513361248488, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607933513361248488, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6798378516811560325, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6798378516811560325, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798378516811560325, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6973469458627416066, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6973469458627416066, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973469458627416066, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 7463128135247284708, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517070834262309113, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 7517070834262309113, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517070834262309113, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 7676325362175312254, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 7676325362175312254, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676325362175312254, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 7788814287698458026, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7897323447955156646, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349844218211390722, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -48444,7 +48593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00065612793
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -48456,7 +48605,25 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8588942120388084443, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1230846676}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2567667905959779091, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 915113754}
+    - targetCorrespondingSourceObject: {fileID: 6184013508979861898, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 618416087}
+    - targetCorrespondingSourceObject: {fileID: 4686297690480574135, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 633468888}
+    - targetCorrespondingSourceObject: {fileID: 1899112695220297387, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 306998723}
+    - targetCorrespondingSourceObject: {fileID: 2612349686823695367, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1943421465}
+    - targetCorrespondingSourceObject: {fileID: 25646323112355317, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2117522384}
   m_SourcePrefab: {fileID: 100100000, guid: 1963c409691e84e48bcdc708af814299, type: 3}
 --- !u!224 &6999610109217442736
 RectTransform:
@@ -48568,7 +48735,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

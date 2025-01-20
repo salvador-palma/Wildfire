@@ -150,7 +150,7 @@ public class IceOnHit : OnHitEffects
         if(Flamey.Instance.MaxHealth <= 1000){return;}
         if(UnityEngine.Random.Range(0f,1f) < prob){   
             int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
-            float perc = Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator, 0, 0.75f);
+            float perc = Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002666f * fator, 0, 0.75f);
             en.SlowDown(duration/1000f, perc, "IceHit");
 
             if(en?.Health > dmg && perc>0 && en?.SlowSet > 0){
@@ -237,7 +237,7 @@ public class IceOnHit : OnHitEffects
     public string getCaps()
     {
         int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
-        float percentage = Mathf.Clamp((Flamey.Instance.MaxHealth-1000) * 0.00033f * fator,0f,0.75f);
+        float percentage = Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002666f * fator,0f,0.75f);
         Debug.Log("Duration: " + duration);
         
         return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/10f)/100f);

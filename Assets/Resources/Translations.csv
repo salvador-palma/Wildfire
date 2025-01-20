@@ -1,4 +1,5 @@
 English;Português
+#=========================== MENU ===========================#
 Play;Jogar
 Menu;Menu
 Master;Geral
@@ -7,10 +8,18 @@ SFX;SFX
 Volume;Volume
 Language;Linguagem
 Close;Fechar
+QUESTS;MISSÕES
+Upgrades;Melhorias
+#=========================== SKILLS ===========================#
+On-Hit Effect;Efeito de Contacto
+On-Death Effect;Efeito Mortal
+On-Shoot Effect;Efeito de Disparo
+On-Land Effect;Efeito de Aterragem
+#=========================== ANIMALS ===========================#
+#=========================== CHARACTERS ===========================#
+#=========================== QUESTS ===========================#
 Wildlife Observer III;Observador da Natureza III
 Observe 10 different species more than 500 times each;Observa 500 indivíduos de 10 espécies diferentes
-Summoning Ankh-Ra;Chamando Ankh-Ra
-Have 6 candles around your campfire;Obtêm 6 velas à volta da lareira
 All about Bees;Tudo sobre abelhas
 Unlock all Animals in the Bestiary;Desbloqueia todos os animais do Bestiário
 Wildlife Observer I;Observador da Natureza I
@@ -19,8 +28,8 @@ Wildlife Observer II;Observador da Natureza II
 Observe 5 different species more than 100 times each;Observa 100 indivíduos de 5 espécies diferentes
 Fashion and Behaviour;Moda e Comportamento
 Listen to what Cloris has to say and style the campfire;Ouve o que a Cloris tem para dizer e estiliza a lareira
-QUESTS;MISSÕES
-Upgrades;Melhorias
+
+
 <size=100%><style="Yellow">- Level 1 -</style><br><size=80%>{0};<size=100%><style="Yellow">- Nível 1 -</style><br><size=80%>{0}
 <size=100%><style="Yellow">- Level 2 -</style><br><size=80%>{0};<size=100%><style="Yellow">- Nível 2 -</style><br><size=80%>{0}
 <size=100%><style="Yellow">- Level 3 -</style><br><size=80%>{0};<size=100%><style="Yellow">- Nível 3 -</style><br><size=80%>{0}
@@ -32,8 +41,293 @@ Gain the ability to <style="Red">Execute</style> enemies when their <style="Gree
 <style="Red">Executing</style> an enemy will apply <style="Pink">On-Death Effects</style> thrice ;<style="Red">Executar</style> um inimigo irá aplicar <style="Pink">Efeitos Mortais</style> três vezes
 ???;???
 Assassin;Assassino
-On-Hit Effect;Efeito de Contacto
-On-Death Effect;Efeito Mortal
-On-Shoot Effect;Efeito de Disparo
-On-Land Effect;Efeito de Aterragem
+
 This skill will not appear during the night;Esta habilidade não aparecerá durante a noite
+Reset;Limpar
+Whenever you shoot a flame there's a chance you shoot <style="LYellow">another one</style> right after;Quando uma chama for disparada haverá uma chance de disparar <style="LYellow">mais uma</style> de seguida
+Unlock new <style="LYellow">Targeting</style> options for the secondary fireball <style="LGrey">(Same, Random, Second Target, Mouse Position);Desbloqueia novas opções de <style="LYellow">alvo</style> para a chama extra <style="LGrey">(Igual, Aleatório, Alvo secundário, Posição do rato)
+All fireballs have a <style="LYellow">10%</style> chance of <style="LYellow">ricocheting</style> when landing on an enemy;Todas as chamas que acertem num inimigo têm uma chance de <style="LYellow">10%</style> de  fazer <style="LYellow">ricochete</style>
+Multicaster;Multi-Lançador
+Shoot a <style="LYellow">burst of shots</style> everytime you throw a certain amount of flames;Dispara uma <style="LYellow">rajada de chamas</style> sempre que um certo número de labaredas forem disparadas
+Unlock new <style="LYellow">targeting</style> options for your <style="LYellow">burst shots <style="LGrey">(Random, Same, Most Max HP);Desbloqueia novas opções de <style="LYellow">alvo</style> para as <style="LYellow">chamas em rajada <style="LGrey">(Aleatório, Igual, Mais Vida Máxima)
+Bursting will increase the amount of fireballs in your next <style="LYellow">Burst</style> by <style="LYellow">+1.</style> The amount of extra fireballs gained through this passive is reseted at the end of each round;Sempre que a uma <style="LYellow">rajada</style> for disparada, o número de chamas da próxima <style="LYellow">rajada</style> aumenta por <style="LYellow">+1.</style> A quantidade de chamas extra ganhas através desta habilidade é reposta no início de cada ronda
+Burst Shot;Rajada de Chamas
+Shoot a <style="Blue">Magical Shot</style> everytime you throw a certain amount of flames, dealing <style="Red">Extra Damage</style> to enemies;Dispara uma <style="Blue">Chama Mágica</style> sempre que um certo número de labaredas forem disparadas, causando <style="Red">Dano Extra</style>
+The starting <style="LYellow">interval</style> gets reduced in half;O <style="LYellow">intervalo</style> inicial é reduzido para metade
+Shoot a <style="Pink">Prismatic Shot</style> every <style="LYellow">20</style> <style="Blue">Magical Shots,</style> dealing <style="Red">5x Damage;Dispara uma <style="Pink">Chama Prismática</style> a cada <style="LYellow">20</style> <style="Blue">Chamas Mágicas,</style> causando <style="Red">5x Dano
+Magical Shot;Chama Mágica
+<style="LYellow">Static Energy</style> will jump from enemy to enemy, reducing its <style="Red">damage</style> as it bounces;<style="LYellow">Energia Estática</style> passará de inimigo para inimigo, reduzindo o seu <style="Red">dano</style> à medida que o faz
+<style="Pink">On-Hit Effects</style> will be applied on enemies struck by <style="LYellow">Static Energy</style>;<style="Pink">Efeitos de Contacto</style> serão aplicados em inimigos atingidos por <style="LYellow">Energia Estática</style>
+<style="LYellow">Static Energy's</style> <style="Red">damage</style> will not decay anymore;O <style="Red">dano</style> da <style="LYellow">Energia Estática</style> não irá enfraquecer ao passar de inimigo
+Static Energy;Energia Estática
+<style="LYellow">Lava Pools</style> burn Enemies standing on top of them, dealing <style="Red">damage</style> over time. Animals with <style="Brown">hooves</style> will only take 10% of the <style="Red">damage</style>, whilst <style="Orange">burried</color> enemies will <style="Red">not</style> be affected at all;<style="LYellow">Poças de Lava</style> queimam inimigos que pisam nelas, causando <style="Red">dano</style> ao longo do tempo. Animais com <style="Brown">cascos</style> apenas receberão 10% desse <style="Red">dano</style> e inimigos <style="Orange">enterrados</color> <style="Red">não</style> serão afetados de todo
+<style="Red">Damage</style> on animals with <style="Brown">hooves</style> increases to <style="LYellow">50%</style> and to <style="LYellow">100%</style> for <style="Orange">burried</color> ones;<style="Red">Dano</style> a animais com <style="Brown">cascos</style> aumenta para <style="LYellow">50%</style> e para <style="LYellow">100%</style> aos que estejam <style="Orange">enterrados</color>
+Each time a <style="LYellow">Lava Pools</style> deals damage it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor;Sempre que um inimigo for afetado pela <style="LYellow">Poça de Lava</style>, <style="LYellow">5%</style> da sua <style="Grey">armadura</style> será derretida
+Lava Pool;Poça de Lava
+<style="LYellow">Thunders</style> will spawn on a random target, dealing massive amounts of <style="Red">damage</style> and applying <style="Pink">On-Land Effects;<style="LYellow">Relâmpagos</style> serão lançados em alvos aleatórios, causando quantidades significativas de <style="Red">dano</style> e aplicando <style="Pink">Efeitos de Aterragem
+<style="LYellow">Thunders</style> will apply <style="Pink">On-Land Effects</style> <style="LYellow">twice;<style="LYellow">Relâmpagos</style> irão aplicar <style="Pink">Efeitos de Aterragem</style> <style="LYellow">duas vezes
+<style="LYellow">Thunders</color> will <style="Blue">stun</style> enemies for <style="LYellow">1 second;<style="LYellow">Relâmpagos</color> irão <style="Blue">atordoar</style> inimigos durante<style="LYellow">1 segundo
+Thunder;Relâmpago
+Time-Based Effect;Efeito de Tempo
+<style="LYellow">Candles</color> will stand by your side shooting random targets. Their flames <style="Red">won't</style> proc <style="Pink">On-Hit/On-Land Effects;<style="LYellow">Velas</color> ficarão ao lado da lareira a disparar em alvos aleatórios. As suas chamas <style="Red">não</style> aplicarão <style="Pink">Efeitos de Contacto</style> nem de <style="Pink">Aterragem</style>
+<style="LYellow">Candles</color> will shoot <style="LYellow">six</style> times faster when the <style="Yellow">Campfire</style> gets <style="Blue">stunned;<style="LYellow">Velas</color> irão disparar <style="LYellow">6</style> vezes mais rápido quando a <style="Yellow">lareira</style> é <style="Blue">atordoada
+Every time you gain a <style="LYellow">candle</style>, gain an <style="LYellow">extra one</style>;Sempre que obtiver uma <style="LYellow">vela</style>, ganhará <style="LYellow">uma extra</style>
+Ritual;Ritual
+Special Effect;Efeito Especial
+<style="Blue">Ghouls</style> will spawn from dead enemies and will inflict a percentage of <style="Red">your damage</style> to nearby enemies for a total of <style="LYellow">3 times;<style="Blue">Espíritos</style> nascerão de inimigos mortos e irão infligir uma percentage do <style="Red">dano</style> da fogueira a inimigos próximos até <style="LYellow">3 vezes
+Ghouls will hit <style="LYellow">+2</style> more times before disappearing and their last hit deals <style="Red">True Damage;Espíritos atacarão <style="LYellow">+2</style> vezes antes de desaparecerem e o seu último ataque causa <style="Red">Dano Verdadeiro
+Ghouls will hit <style="LYellow">+2</style> more times before disappearing and will apply <style="Pink">On-Death Effects</style> when doing so (including <style="Yellow">Necromancer</style>);Espíritos atacarão <style="LYellow">+2</style> vezes antes de desaparecerem e aplicarão <style="Pink">Efeitos Mortais</style> ao fazê-lo (incluíndo <style="Yellow">Necromante</style>)
+Necromancer;Necromante
+Heal <style="Green">missing HP</style> each second and gain bonus <style="Green">Max HP</style> per round;Recupera <style="Green">vida</style> a cada segundo e ganha <style="Green">Vida Máxima</style> bonus no final de cada ronda
+<style="Green">Healing</style> effects from any source will be <style="Green">2 times</style> more efficient;Efeitos de <style="Green">cura</style> de qualquer fonte serão <style="Green">2 times</style> mais eficientes
+<style="Green">Healing</style> is up to <style="LYellow">200%</style> stronger when low on <style="Green">Health;<style="Green">Cura</style> é até <style="LYellow">200%</style> mais forte quando a lareira tem pouca <style="Green">Vida
+Regeneration;Regeneração
+Some shots will <style="Red">critically strike,</style> enhancing their <style="Red">damage</style> significantly;Algumas chamas irão <style="Red">acertar críticamente,</style> melhorando o seu <style="Red">dano</style> significativamente
+<style="Red">Critical Strike Multiplier</style> will no longer be capped;O <style="Red">multiplicador de acerto crítico</style> não terá limite
+Gain a <style="LYellow">10%</style> chance of <style="Red">Critical Striking</style> a <style="Red">Critical Shot,</style> applying the <style="Red">damage multiplier</style> again;Ganha uma chance de <style="LYellow">10%</style> de <style="Red">acertar críticamente</style> uma <style="Red">Chama Crítica,</style> aplicando o <style="Red">multiplicador de dano</style> novamente
+Critical Strike;Acerto Crítico
+Small <style="LYellow">orbits</style> will circle the campfire, applying <style="Pink">On-Hit Effects</style> to enemies hit;Pequenas <style="LYellow">orbitas</style> circundarão a lareira, aplicando <style="Pink">Efeitos de Contacto</style> a inimigos atingidos
+<style="LYellow">Orbits</style> will spin <style="LYellow">twice</style> as fast;<style="LYellow">Orbitas</style> girarão <style="LYellow">duas vezes</style> mais rápido
+Any increase in <style="LYellow">orbits</style> will be doubled;Qualquer aumento no número de <style="LYellow">orbitas</style> será dobrado
+Orbits;Orbitas
+Gain the ability summon <style="LYellow">Bees</style> that will fight alongside you;Ganha a abilidade de invocar <style="LYellow">Abelhas</style> que lutarão ao teu lado
+Unlock new <style="LYellow">Bee</style> types <style="LGrey">(Puncher, Assassin, Warrior, Agile, Chemical and Pollinator);Desbloqueia novos tipos de <style="LYellow">Abelha</style> <style="LGrey">(Pugilista, Assassina, Guerreira, Ágil, Química e Polinizadora)
+Every time you gain a <style="LYellow">Bee</style>, gain an <style="LYellow">extra one</style> of the same type;Sempre que ganhares uma <style="LYellow">Abelha</style>, ganha <style="LYellow">outra extra</style> da mesma classe
+Bee Summoner;Invocador de Abelhas
+<style="LYellow">Freezing</style> an enemy will <style="LBlue">slow</style> them for some seconds. Gain <style="LBlue">+2.6% Slow</style> for every <style="Green">100 Bonus Max HP</style> you have.;<style="LYellow">Congelar</style> um inimigo irá <style="LBlue">abrandá-lo</style> durante uns segundos. Abranda <style="LBlue">+2.6%</style> por cada <style="Green">100 de Vida Máxima </style>a mais
+<style="LBlue">Slowed</style> enemies take <style="LYellow">200%</style> <style="Red">damage</style> from all sources;Inimigos <style="LBlue">congelados</style> receberão <style="LYellow">200%</style> de <style="Red">damage</style> de todas as fontes
+Freeze;Congelar
+<style="LBlue">Snow Pools</style> will slow enemies stepping on it and they do not stack with other<style="LBlue"> Snow Pools.;<style="LBlue">Poças de Neve</style> abrandarão inimigos que estejam em cima delas, mas não acumulam com outras<style="LBlue"> Poças.
+Enemies standing on a <style="LBlue">Snow Pool</style> will not be able to <style="Orange">Jump;Inimigos que estejam a pisar numa <style="LBlue">Poça de Neve</style> não serão capazes de <style="Orange">Saltar
+<style="LBlue">Slowed</style> enemies that step onto a <style="LBlue">Snow Pool</style> will also get <style="Blue>stunned</style> for <style="LYellow">2 seconds;Inimigos <style="LBlue">abrandados</style> que pisem numa <style="LBlue">Poça de Neve</style> serão também <style="Blue>atordoados</style> por <style="LYellow">2 segundos
+Snow Pool;Poça de Neve
+<style="Green">Heal</style> for a percentage of the <style="Red">damage</style> you deal;<style="Green">Cura</style> por uma percentagem do <style="Red">dano</style> que causas
+If the enemy has less <style="Green">HP</style> than you have <style="Red">damage,</style> <style="Green">heal</style> <style="LYellow">double</style> the amount;Se um inimigo tem menos <style="Green">Vida</style> do que tu tens <style="Red">dano,</style> <style="Green">cura</style> pelo <style="LYellow">dobro</style>
+<style="Green">Healing Percentage's</style> limit is removed;O limite da <style="Green">percentagem de cura</style> é removido
+Vampire;Vampiro
+<style="LYellow">Flowers</style> will heal you by a percentage of the enemy's <style="Green">Max HP</style>. If there are more than <style="LYellow">5</style> enemies on top of it, the <style="LYellow">flower</style> will die prematurely.;<style="LYellow">Flores</style> curam por uma percentagem da <style="Green">Vida Máxima</style> do inimigo. Se houverem mais de <style="LYellow">5</style> inimigos a pisarem na mesma <style="LYellow">flor</style>, ela murchará prematuramente
+<style="LYellow">Flowers</style> can handle <style="LYellow">+10</style> more enemies on top of them before dying;<style="LYellow">Flores</style> poderão aguentar com <style="LYellow">+10</style> inimigos em cima delas antes de murcharem
+Dying <style="LYellow">flowers</style> will <style="Blue">stun</style> enemies for <style="LYellow">1 second</style>;<style="LYellow">Flores</style> que murcherm irão <style="Blue">atordoar</style> inimigos por <style="LYellow">1 segundo</style>
+Flower Field;Campo de Flores
+<style="LYellow">Roundshots</style> will shoot out of dead enemies, dealing <style="Red">damage</style> and applying <style="Pink">On-Hit Effects</style> to the enemies they it. Additionally, loot <style="LYellow">+10 Embers</style>;<style="LYellow">Balas de Canhão</style> sairão disparadas de inimigos mortos, causando <style="Red">dano</style> e aplicando <style="Pink">Efeitos de Contacto</style> a inimigos que acertem. Além disso, saca <style="LYellow">+10 Embers</style> por cada ativação desta habilidade
+<style="LYellow">Roundshots</style> will be aimed towards nearby enemies;<style="LYellow">Balas de Canhão</style> serão apontadas para inimigos próximos
+Every increase in <style="LYellow">Roundshot</style> amount is doubled;Qualquer aumento na quantidade de <style="LYellow">Balas de Canhão</style> é duplicado
+Pirate;Pirata
+Use the power of <style="LYellow">Sound</style> to shred enemy <style="Grey">Armor;Usa o poder do <style="LYellow">Som</style> para triturar a <style="Grey">Armadura</style> de inimigos
+Shred up to <style="LYellow">20%</style> more <style="Grey">Armor</style> based on <style="LBlue">Bullet Speed</style> and <style="LBlue">Accuracy;Tritura até mais <style="LYellow">20%</style> de <style="Grey">Armadura</style> a mais baseado na <style="LBlue">Velocidade de Chama</style> e <style="LBlue">Precisão
+<style="Green">Heal</style> for the amount of <style="Grey">Armor Shredded;<style="Green">Cura</style> pela quantiade de <style="Grey">Armadura</style> triturada
+Resonance;Ressonância
+Enemies that directly hit you get <style="Red">damaged</style> back by a percentage of your <style="Grey">armor;Inimigos que te atinjam diretamente serão <style="Red">danificados</style> de volta por uma percentagem da tua <style="Grey">armadura
+<style="Yellow">Thorns</style> will proc <style="Pink">On-Hit Effects;<style="Yellow">Espinhos</style> irá aplicar <style="Pink">Efeitos de Contacto
+<style="Yellow">Thorns</style> will deal <style="Red">damaged</style> in <style="LYellow">area</style> instead of only <style="Red">damaging</style> the attacker;<style="Yellow">Espinhos</style> irá causar <style="Red">dano</style> em <style="LYellow">área</style> em vez de apenas ao atacante
+Thorns;Espinhos
+On-Hitted Effect;Efeito de Contra-Ataque
+Killing an enemy can generate an <style="LYellow">Explosion</style>, damaging nearby enemies.;Matar um inimigo pode gerar uma <style="LYellow">Explosão</style>, danificando inimigos próximos
+<style="LYellow">Explosions</style> grow by <style="LYellow">50%</style>;<style="LYellow">Explosões</style> aumentam em <style="LYellow">50%</style>
+Every <style="LYellow">20 Explosions</style> generate one that deals <style="Red">True Damage;A cada <style="LYellow">20 Explosões</style> gera uma que causa <style="Red">Dano Verdadeiro
+Explosion;Explosão
+Release <style="Orange">Immolating</style> waves that travel through the <style="LYellow">campsite,</style> dealing <style="Red">damage</style> to everyone hit;Liberta uma onde <style="Orange">imoladora</style> que atravessa um <style="LYellow">campo,</style> causando <style="Red">dano</style> a todos os que atinge
+Starting <style="LYellow">interval</style> gets reduced in half;O <style="LYellow">intervalo</style> inicial é reduzido a metade
+Minimum <style="LYellow">interval</style> gets reduced in half;O <style="LYellow">interval</style> mínimo é reduzido a metade
+Immolate;Imolador
+<style="LYellow">Double</style> the intensity of your <style="LBlue">Slow</style> effect;<style="LYellow">Duplica</style> a intensidade do efeito de <style="LBlue">congelamento</style>
+Earth Monk;Monge da Terra
+<size=100%><style="Yellow">- Ability -</style><size=80%><br>{0};<size=100%><style="Yellow">- Habilidade -</style><size=80%><br>{0}
+Everytime <style="Yellow">Immolate</style> hits an enemy gain <style="Grey">+1 Shield</style> for a max of 0.3 of your <style="Green">Max HP</style>;Sempre que uma <style="Yellow">Onda Imolante</style> atinge um inimigo ganha <style="Grey">+1 Escudo</style> até um máximo de 30% da tua <style="Green">Vida Máxima</style>
+Mt. Vesuvius;Monte Vesúvio
+A Permanent <style="Yellow">Lava Pool</style> will sit by Mt. Vesuvius;Uma <style="Yellow">Poça de Lava</style> permanente ficará ao redor da lareira
+Zeus;Zeus
+Cast <style="LYellow">double</style> the <style="LYellow">Thunders</style>;Lança o <style="LYellow">dobro</style> dos <style="LYellow">Relâmpagos</style>
+Azureoth;Azureoth
+<style="Yellow">Active:</style> Turn <style="Pink">Purple</style> during 5 seconds <style="LGrey">(1 Round Cooldown);<style="Yellow">Activável:</style> Transforma-te em <style="Pink">Prismático</style> durante 5 segundos <style="LGrey">(1 Ronda de Espera);
+Tesla Coil;Bobina de Tesla
+Gain <style="LYellow">1 Energy Point</style> each time you release <style="Yellow">Static Energy</style>, at 100 points release a <style="Blue">Super Charge. Super Charges</style> have increased range, duration, deal <style="Red">True Damage</style> and are able to apply <style="Pink">On-Hit Effects <style="LGrey">(including Static Energy);Ganha <style="LYellow">1 Ponto de Energia</style> cada vez que libertas <style="Yellow">Energia Estática</style>, aos 100 pontos descarrega uma <style="Blue">Super Carga. Super Cargas</style> têm um alcance, duração e dano aumentados, causam <style="Red">Dano Verdadeiro</style> e aplicam <style="Pink">Efeitos de Contacto <style="LGrey">(incluindo Energia Estática);
+Bomber;Bombardeiro
+After every <style="LYellow">explosion</style> another one will detonate near the Campfire;Após cada <style="LYellow">explosão</style> outra irá detonar perto da lareira
+Flora;Flora
+<style="LYellow">10%</style> Chance of spawning <style="LYellow">Carnivore Plants</style> that deal <style="Red">Damage</style> to the enemies instead of healing you;<style="LYellow">10%</style> de chance de invocar <style="LYellow">Plantas Carnívoras</style> que causam <style="Red">Dano</style> aos inimigos em vez curarem
+Mt. Everest;Monte Evereste
+Become an immovable mountain, immune to all sorts of <style="LYellow">Effects</style>;Torna-te uma montanha imóvel, imune a todos os tipos de <style="LYellow">Efeitos</style>
+Rose Warrior;Guerreira das Rosas
+<style="Yellow">Active:</style> Become Unhittable for <style="LYellow">30 seconds</style> <style="LGrey">(2 Round Cooldown);<style="Yellow">Activável:</style> Torna-te Inatingível por <style="LYellow">30 segundos</style> <style="LGrey">(2 Rondas de Espera);
+Blaze Brigade;Brigada da Chama
+<style="Yellow">Active: </style> Shoot 250 Bullets in Burst <style="LGrey">(3 Round Cooldown);<style="Yellow">Activável: </style> Dispara 250 Balas em Rajada <style="LGrey">(3 Rondas de Espera);
+Captain Ember Teach;Capitão Ember Teach
+<style="LYellow">Roundshots</style> can penetrate through <style="LYellow">3</style> enemies;<style="LYellow">Balas de Canhão</style> podem penetrar por <style="LYellow">3</style> inimigos
+Echo;Eco
+Gain <style="Grey">+1 Armor</style> for each <style="Grey">500 Shredded Armor</style>;Ganha <style="Grey">+1 Armadura</style> permanente por cada <style="Grey">500 Armadura Triturada</style>
+Ice Cube;Cubo de Gelo
+<style="Yellow">Active:</style> Freeze every enemy in sight for <style="LYellow">30 seconds</style>;<style="Yellow">Activável:</style> Congela todos os inimigos à vista por <style="LYellow">30 segundos</style>; 
+Von Van Pyre;Von Van Piro
+Gain <style="Green">+1 Max HP</style> for each <style="Green">1000 HP</style> Overhealed;Ganha <style="Green">+1 de Vida Máxima</style> por cada <style="Green">1000 Cura</style> em excesso
+Powered Up;Empoderado
+Critically Defend based on your <style="LYellow">Crit Chance</style> and <style="LYellow">Multiplier,</style> reducing incoming <style="Red">damage</style> up to <style="LYellow">90%;Defende de forma crítica baseado na tua <style="LYellow">Chance de Crítico</style> e <style="LYellow">Multiplicador,</style> reduzindo o <style="Red">dano</style> recebido até <style="LYellow">90%;
+Pheonix;Fénix
+When you die, reborn at <style="Green">full HP</style> and kill every enemy on screen <style="LGrey">(5 Round Cooldown);Quando morres, renasce com a <style="Green">Vida inteira</style> e mata todos os inimigos visíveis <style="LGrey">(5 Rondas de Espera);
+Mercury;Mercúrio
+Orbits spin <style="LYellow">1.5x Faster</style>;Orbitas giram <style="LYellow">1.5x Mais Rápido</style>
+Ash Pyre;Pira de Cinzas
+<style="Red">Armor Penetration</style> benefits all <style="Red">Damage</style> sources;A <style="Red">Penetração de Armadura</style> beneficia todas as fontes de <style="Red">Dano
+Double Faced;Dupla Faceta
+Gain <style="LYellow">+0.2 Attack Speed</style> per round without limit;Ganha <style="LYellow">+0.2 Velocidade de Ataque</style> por ronda sem limite
+Flame;Chama
+Just a normal campfire, ready to protect the Campsite;Apenas uma chama normal, pronta para proteger o Parque
+Fire Bee;Abelha de Fogo
+Gain <style="LYellow">+1 Worker Bee</style> every <style="LYellow">5 Rounds <style="LGrey">(without limit);Ganha <style="LYellow">+1 Abelha Trabalhadora</style> a cada <style="LYellow">5 Rondas <style="LGrey">(sem limite);
+Ankh-Ra;Ankh-Ra
+Gain <style="Red">+5 Candle Damage</style> for each <style="LYellow">100</style> enemies killed by candles;Ganha <style="Red">+5 Dano de Vela</style> por cada <style="LYellow">100</style> inimigos mortos por velas
+King Ghoul;Rei dos Espíritos
+<style="LYellow">5%</style> Chance of spawning a <style="Blue">Mega Ghoul</style> that deals <style="Red">Damage</style> in Area;<style="LYellow">5%</style> de chance de invocar um <style="Blue">Mega Espírito</style> que causa <style="Red">Dano</style> em Área
+Sir Flareington;Sr Flareington
+<sprite name="Shiny"> Shiny spawn chance increases to <style="LYellow">1%</style>;A chance de aparecer um animal <sprite name="Shiny"> Radiante aumenta para <style="LYellow">1%</style>
+Fire Monk;Monge do Fogo
+<style="Yellow">Immolate</style> will deal <style="Red">True Damage</style>;<style="Yellow">Ondas Imolantes</style> causarão <style="Red">Dano Verdadeiro</style>
+Venus;Vénus
+Orbits deal <style="Red">True Damage</style>;Orbitas causam <style="Red">Dano Verdadeiro</style>
+Earth;Terra
+The Moon will orbit around you, dealing <style="Red">4xDmg</style> and applying <style="Pink">On-Land Effects</style> when colliding with an enemy;A Lua orbitará à volta da lareira, causando <style="Red">4xDano</style> e aplicando <style="Pink">Efeitos de Aterragem</style> ao colidir com um inimigo
+Mars;Marte
+Orbits will increase and decrease in radius;<style="LYellow">Orbitas</style> aumentarão e diminuirão em raio
+Jupiter;Júpiter
+Gain <style="LYellow">x1.5</style> Orbital radius and size;Orbitas ganham <style="LYellow">x1.5</style> Raio e Tamanho
+Saturn;Saturno
+Gain <style="LYellow">+2 Extra Orbits</style> in different Orbital Fields;Ganha <style="LYellow">+2 Orbitas</style> em diferentes Campos Orbitais
+Uranus;Urano
+Start the game with <style="LYellow">4 Orbits</style> that deal twice the <style="Red">Damage</style>;Começa a noite já com <style="LYellow">4 Orbitas</style> que causam o dobro do <style="Red">Dano
+Neptune;Neptuno
+Orbits spin <style="LYellow">4x Slower</style> but <style="Blue">Stun</style> enemies for <style="LYellow">2 seconds</style> upon collision;Orbitas giram <style="LYellow">4x Mais Lento</style> mas <style="Blue">Atordoam</style> inimigos por <style="LYellow">2 segundos</style> ao colidir
+Water Monk;Monge da Água
+Everytime <style="Yellow">Immolate</style> hits an enemy heal <style="LYellow">1%</style> of your <style="Green">Max HP</style>;Sempre que uma <style="Yellow">Onda Imolante</style> atinge um inimigo cura <style="LYellow">1%</style> da <style="Green">Vida Máxima</style> da lareira
+Air Monk;Monge do Ar
+Everytime <style="Yellow">Immolate</style> hits an enemy they get <style="Blue">knocked back</style>;Sempre que uma <style="Yellow">Onda Imolante</style> atinge um inimigo eles será <style="Blue">empurrados</style>
+Requires {0};Requere {0}
+Ember Generation;Geração de Brasas
+Slug;Lesma
+ABILITIES;HABILIDADES
+MILESTONES;MARCOS
+Caterpillar;Lagarta
+<size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start the round <style="Orange">burrowed</style> underground. While <style="Orange">burrowed</style>, become <style="Blue">untargetable</style> and <style="Blue">immune</style> to damage. These animals will come out on their own;<size=100%><style="Yellow">- Escavador -</style><br><size=80%>Começa a ronda <style="Orange">enterrado</style> no subsolo. Enquanto <style="Orange">enterrado</style>, torna-se <style="Blue">inatingível</style> e <style="Blue">imune</style> a dano. Estes animais sairão da terra por si próprios;
+Worm;Minhoca
+<size=100%><style="Yellow">- Surround -</style><br><size=80%>This animal moves around the campfire, enclosing it, instead of taking a straight path;<size=100%><style="Yellow">- Cercar -</style><br><size=80%>Este animal move-se à volta da lareira, cercando-a, em vez de seguir um caminho direto
+Spider;Aranha
+<size=100%><style="Yellow">- Dung Roller -</style><br><size=80%>This animal is an expert at rolling <style="Brown">Dung Balls.</style> The more they roll the more the balls grow. Once in range, the Dung Ball will be shot at the campfire dealing <style="Red">+50 dmg.;<size=100%><style="Yellow">- Rola Estrume -</style><br><size=80%>Este animal é um especialista em rolar <style="Brown">Bolas de Estrume</style>, que ficam maiores à medida que rolam. Quando estiver no alcançe, a Bola de Estrume será lançada à lareira causando <style="Red">+50 dano.</style>
+Beatle;Besouro
+<size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal hops around instead of having a consistent movement speed;<size=100%><style="Yellow">- Saltar -</style><br><size=80%>Este animal salta em vez de ter uma velocidade de movimento consistente
+Grasshoper;Gafanhoto
+Snail;Caracol
+Bunny;Coelho
+<size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This animal sets up <style="Brown">explosive acorns</style> and runs away. If it get out of sight before it dies the <style="Brown">acorn</style> will detonate, dealing <style="Red">+25 dmg.;<size=100%><style="Yellow">- Bolota Explosiva -</style><br><size=80%>Este animal coloca <style="Brown">bolotas explosivas</style> e foge. Se sair de vista antes de morrer, a <style="Brown">bolota</style> irá detonar, causando <style="Red">+25 dano.</style>
+Squirrel;Esquilo
+<size=100%><style="Yellow">- Thorns -</style><br><size=80%>After getting in range, this animal will cover itself, becoming <style="Yellow">Unhittable</style> and dealing <style="Red">+15 dmg</style> when it gets struck by <style="Pink">On-Hit Effects;<size=100%><style="Yellow">- Espinhos -</style><br><size=80%>Após se aproximar, este animal irá se cobrir, tornando-se <style="Yellow">Inatingível</style> e causando <style="Red">+15 dano</style> quando atingido por <style="Pink">Efeitos de Contacto.</style>
+<size=100%><style="Yellow">- Unhittable -</style><br><size=80%>This animal can be immune to <style="Pink">On-Hit Effects</style> <style="LGrey">(except for Armor Penetration);<size=100%><style="Yellow">- Inatingível -</style><br><size=80%>Este animal pode ser imune a <style="Pink">Efeitos de Contacto</style> <style="LGrey">(exceto Penetração de Armadura).</style>
+Hedgehog;Ouriço
+<size=100%><style="Yellow">- Thief -</style><br><size=80%>This animal has different goals in mind. Instead of trying to damage you, it will <style="Orange">steal</style> <style="LYellow">+100 embers.</style> You can recover them by killing it before it gets out of sight;<size=100%><style="Yellow">- Ladrão -</style><br><size=80%>Este animal tem objetivos diferentes. Em vez de tentar causar dano, ele irá <style="Orange">roubar</style> <style="LYellow">+100 brasas.</style> Poderás recuperá-las ao matar o Ladrão antes que saia de vista.</style>
+Raccoon;Guaxinim
+Turtle;Tartaruga
+<size=100%><style="Yellow">- Stink Spray -</style><br><size=80%>Attacks will <style="Blue">stun</style> the campfire for 0.75s. <style="Blue">Stun</style> effects override eachother instead of stacking.;<size=100%><style="Yellow">- Spray Fedorento -</style><br><size=80%>Ataques irão <style="Blue">atordoar</style> a lareira por 0.75 segundos. Efeitos de <style="Blue">Atordoamento</style> substituem-se em vez de se acumularem.</style>
+Skunk;Doninha
+<size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins the round by <style="Orange">charging</style> a powerfull first attack that deal <style="Red">2x damage</style> ;<size=100%><style="Yellow">- Investida -</style><br><size=80%>Começa a ronda <style="Orange">carregando</style> um poderoso primeiro ataque que causa <style="Red">2x dano.</style>
+Hog;Javali
+<size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has increased <style="LYellow">range</style> and is able to damage you from afar;<size=100%><style="Yellow">- À Distância -</style><br><size=80%>Este animal tem <style="LYellow">alcance</style> aumentado e é capaz de infligir dano à distância.</style>
+Frog;Sapo
+Snake;Cobra
+<size=100%><style="Yellow">- Wolf Pack -</style><br><size=80%>For each 4 wolves in the campsite, 1 will be considered the <style="Yellow">Alpha.</style> If the <style="Yellow">Alpha</style> dies and there aren't enough on the field, the role will be transfered to other wolves;<size=100%><style="Yellow">- Matilha -</style><br><size=80%>Para cada 4 lobos no parque, 1 será considerado o <style="Yellow">Alfa.</style> Se o <style="Yellow">Alfa</style> morrer e não houverem lobos suficientes no campo, o papel será transferido para outros lobos.</style>
+<size=100%><style="Yellow">- Alpha -</style><br><size=80%>When an <style="Yellow">Alpha</style> howls, it <style="Orange">taunts</style> the campfire and <style="Orange">activates</style> nearby wolves. <style="Orange">Activated</style> wolves gain <style="LBlue">x2.5 movement speed,</style> <style="Red">+0.25 Armor Penetration</style> and <style="Red">+50 Dmg;<size=100%><style="Yellow">- Alfa -</style><br><size=80%>Quando um <style="Yellow">Alfa</style> uiva, ele <style="Orange">provoca</style> a lareira e <style="Orange">ativa</style> lobos próximos. Lobos <style="Orange">ativados</style> ganham <style="LBlue">x2.5 velocidade,</style> <style="Red">+0.25 Penetração de Armadura</style> e <style="Red">+50 Dano.</style>
+Wolf;Lobo
+<size=100%><style="Yellow">- Honey Pot -</style><br><size=80%>Whenever it gets below half <style="Green">Max HP</style> it starts to consume <style="Brown">Honey.</style> Each scoop of <style="Brown">Honey</style> heals for <style="Green">+1000HP.</style> It only stops consuming once its <style="Green">Full Health</style> or it dies;<size=100%><style="Yellow">- Pote de Mel -</style><br><size=80%>Sempre que a sua <style="Green">Vida Máxima</style> fica abaixo de metade, consumirá <style="Brown">Mel.</style> Cada mão de <style="Brown">Mel</style> curará <style="Green">+1000 Vida.</style> O consumo só parará quando estiver com a <style="Green">Vida Cheia</style> ou morrer.</style>
+Bear;Urso
+<size=100%><style="Yellow">- Stray -</style><br><size=80%>Stray wolves are used to living alone and are always <style="Orange">activated</style>;<size=100%><style="Yellow">- Errante -</style><br><size=80%>Lobos vadios estão acostumados a viver sozinhos e estão sempre <style="Orange">ativados.</style>
+Stray Wolf;Lobo Vadio
+<size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks <style="Blue">stun</style> the campfire for 0.75 seconds. <style="Blue">Stun</style> effects override eachother instead of stacking;<size=100%><style="Yellow">- Mordida Atordoante -</style><br><size=80%>Ataques <style="Blue">atordoam</style> a lareira por 0.75 segundos. Efeitos de <style="Blue">Atordoamento</style> substituem-se em vez de se acumularem.</style>
+Alligator;Jacaré
+<size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins the round by <style="Orange">charging</style> a powerful first attack. Each charge increases the first attack's power by <style="Red">+25 damage;<size=100%><style="Yellow">- Investida -</style><br><size=80%>Começa a ronda <style="Orange">carregando</style> um poderoso primeiro ataque. Cada carga aumenta o poder do primeiro ataque em <style="Red">+25 dano.</style>
+Bison;Bisonte
+<size=100%><style="Yellow">- Caretaker -</style><br><size=80%>Heals nearby animals 7 times for <style="Green">+100HP</style> every time it <style="Orange">howls</style>. This doesn't apply to itself or other animals of the same species;<size=100%><style="Yellow">- Zelador -</style><br><size=80%>Cura animais próximos 7 vezes por <style="Green">+100 Vida</style> sempre que <style="Orange">uiva.</style> Isto não se aplica a si próprio ou a outros animais da mesma espécie.</style>
+Moose;Alce
+<size=100%><style="Yellow">- Protector -</style><br><size=80%>Protects nearby animals 7 times with <style="Grey">+100 Armor</style> every time it <style="Orange">howls</style>. This doesn't apply to itself or other animals of the same species;<size=100%><style="Yellow">- Protetor -</style><br><size=80%>Protege animais próximos 7 vezes com <style="Grey">+100 Armadura</style> sempre que <style="Orange">uiva.</style> Isto não se aplica a si próprio ou a outros animais da mesma espécie.</style>
+Musk Ox;Boi Almiscarado
+STATS;ESTATÍSTICAS
+Mole;Toupeira
+Scorpion;Escorpião
+Armadillo;Tatu
+Beaver;Castor
+Flying Squirrel;Esquilo Voador
+<size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks apply <style="Purple">8 Poison Ticks.</style> Each <style="Purple">Poison Tick</style> deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison Ticks</style> are stackable and are cleared once the round ends;<size=100%><style="Yellow">- Veneno -</style><br><size=80%>Ataques aplicam <style="Purple">8 Pontos de Veneno.</style> Cada <style="Purple">Ponto de Veneno</style> causa 1/25 da <style="Green">Vida Máxima.</style> <style="Purple">Pontos de Veneno</style> são acumuláveis e removidos no final da ronda.
+Venomous Snake;Cobra Venenosa
+<size=100%><style="Yellow">- Flying -</style><br><size=80%>Starts the round by <style="Orange">flying</style> from trees, landing somewhere in the middle of the campsite. While flying, it is <style="Blue">untargetable</style> and <style="Blue">immune</style>;<size=100%><style="Yellow">- Voar -</style><br><size=80%>Começa a ronda <style="Orange">voando</style> das árvores e pousando em algum lugar no meio do parque. Enquanto voa, é <style="Blue">inatingível</style> e <style="Blue">imune</style>.
+<size=100%><style="Yellow">- Dam Builder -</style><br><size=80%>Instead of trying to damage you, it will <style="Orange">steal</style> your <style="Brown">logs,</style> taking away <style="Green">-100 Max Health.</style> You can recover them by killing it before it gets out of sight; <size=100%><style="Yellow">- Construtor de Barragens -</style><br><size=80%>Em vez de tentar causar dano, ele irá <style="Orange">roubar</style> <style="Brown">troncos,</style> retirando <style="Green">-100 de Vida Máxima.</style> Se for morto antes de sair de vista, a vida roubada será parcialmente recuperada</style>;
+<size=100%><style="Yellow">- Roll -</style><br><size=80%>This animal begins the round by <style="Orange">rolling,</style> gaining <style="LBlue">x2.5 speed</style>, <style="Grey">+1000 armor </style> and becoming <style="Yellow">Unhittable.</style> It will unroll after denying 10 <style="Pink">On-Hit Effects;<size=100%><style="Yellow">- Rolar -</style><br><size=80%>Este animal começa a ronda <style="Orange">rolando,</style> ganhando <style="LBlue">x2.5 velocidade</style>, <style="Grey">+1000 armadura</style> e tornando-se <style="Yellow">Inatingível.</style> Ele irá desenrolar-se após negar 10 <style="Pink">Efeitos de Contacto.
+Claim Rewards;Reclamar Recompensas
+Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>;Ganha <style="LYellow">+250</style> de <style="Green">Vida Máxima</style> permanente
+<style="Yellow">Soggy Logs;</style><style="Yellow">Lenha Encharcada</style>
+Not Interested;Não Interessado
+Interested;Interessado
+Fast-Forward at <style="LYellow">x2</style> Speed;Acelera o tempo <style="LYellow">x2</style> vezes mais rápido
+<style="Yellow">Hourglass;</style><style="Yellow">Ampulheta</style>
+Gain <style="LYellow">+10</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+10</style> de <style="Red">Dano</style> permanente
+<style="Yellow">Old Stolen Fuel Bucket;</style><style="Yellow">Balde de Combustível Roubado</style>
+Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack Speed</style>;Ganha <style="LYellow">+25</style> de <style="LYellow">Velocidade de Ataque</style> permanente
+<style="Yellow">Leaf Basket;</style><style="Yellow">Cesto de Folhas</style>
+Gain <style="LYellow">+15%</style> Permanent <style="LYellow">Accuracy</style>;Ganha <style="LYellow">+15%</style> de <style="LYellow">Precisão</style> permanente
+<style="Yellow">Ash Bag;</style><style="Yellow">Saco de Cinzas</style>
+Allows you to see <style="LYellow">Jhat's Mood</style>;Permite ver o <style="LYellow">Humor do Jhat</style>
+<style="Yellow">Essence Gauge;</style><style="Yellow">Medidor de Essência</style>
+Gain <style="LYellow">+15</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+15</style> de <style="Red">Dano</style> permanente
+<style="Yellow">Old Petrol Tank;</style><style="Yellow">Tanque de Gasolina Velho</style>
+<style="Yellow">Twig Basket;</style><style="Yellow">Cesto de Galhos</style>
+Fast-Forward at <style="LYellow">x3</style> Speed;Acelera o tempo <style="LYellow">x3</style> vezes mais rápido
+<style="Yellow">Magical Hourglass;</style><style="Yellow">Ampulheta Mágica</style>
+Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>;Ganha <style="LYellow">+250</style> de <style="Green">Vida Máxima</style> permanente
+<style="Yellow">High-Quality Log Pack;</style><style="Yellow">Pacote de Lenha de Alta Qualidade</style>
+<style="Yellow">Enchanted Ashes;</style><style="Yellow">Cinzas Encantadas</style>
+Be able to ban <style="LYellow">+1 Skill</style> at the beggining of the night;Bane <style="LYellow">+1 Habilidade</style> no início da noite
+<style="Yellow">Bellow;</style><style="Yellow">Fole</style>
+Be able to ban <style="LYellow">+1 species</style> from appearing during the night;Bane <style="LYellow">+1 espécie</style> de aparecer durante a noite
+<style="Yellow">Bug Repellent;</style><style="Yellow">Repelente de Insetos</style>
+Fast-Forward at <style="LYellow">x4</style> Speed;Acelera o tempo <style="LYellow">x4</style> vezes mais rápido
+<style="Yellow">Celestial Hourglass;</style><style="Yellow">Ampulheta Celestial</style>
+Gain <style="LYellow">+20</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+20</style> de <style="Red">Dano</style> permanente
+<style="Yellow">5L Petrol Tank;</style><style="Yellow">Tanque de Gasolina de 5L</style>
+<style="Yellow">Pine Cone Basket;</style><style="Yellow">Cesto de Pinhas</style>
+Increase Gold Augment chance to <style="LYellow">15% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">15% <style="LGrey">(+5%)
+<style="Yellow">Wood Anvil;</style><style="Yellow">Bigorna de Madeira</style>
+Gain <style="LYellow">+20%</style> Permanent <style="LYellow">Accuracy</style>;Ganha <style="LYellow">+20%</style> de <style="LYellow">Precisão</style> permanente
+<style="Yellow">Ancient Ashes;</style><style="Yellow">Cinzas Anciãs</style>
+Be able to pick <style="LYellow">+1 Skill</style> at the beggining of the night;Escolhe <style="LYellow">+1 Habilidade</style> no início da noite
+<style="Yellow">Marshmallow Bowl;</style><style="Yellow">Tigela de Marshmallows</style>
+<style="Yellow">Giant Pinecone;</style><style="Yellow">Pinha Gigante</style>
+Gain <style="LYellow">+30</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+30</style> de <style="Red">Dano</style> permanente
+<style="Yellow">10L Premium Gas Tank;</style><style="Yellow">Tanque de Gasolina Premium de 10L</style>
+Unlock a secret mission;Desbloqueia uma missão secreta
+<style="Yellow">Candle;</style><style="Yellow">Vela</style>
+Increase Gold Augment chance to <style="LYellow">20% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">20% <style="LGrey">(+5%)
+<style="Yellow">Stone Anvil;</style><style="Yellow">Bigorna de Pedra</style>
+<style="Yellow">Animal Repellent;</style><style="Yellow">Repelente de Animais</style>
+Increase Gold Augment chance to <style="LYellow">25% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">25% <style="LGrey">(+5%)
+<style="Yellow">Bronze Anvil;</style><style="Yellow">Bigorna de Bronze</style>
+<style="Yellow">Deluxe Bellow;</style><style="Yellow">Fole Luxuoso</style>
+<style="Yellow">Marshmallow Bag;</style><style="Yellow">Saco de Marshmallows</style>
+Increase Gold Augment chance to <style="LYellow">30% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">30% <style="LGrey">(+5%)
+<style="Yellow">Sturdy Anvil;</style><style="Yellow">Bigorna Robusta</style>
+<style="Yellow">Skull;</style><style="Yellow">Crânio</style>
+Increase Gold Augment chance to <style="LYellow">35% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">35% <style="LGrey">(+5%)
+<style="Yellow">Deluxe Anvil;</style><style="Yellow">Bigorna Luxuosa</style>
+Increase Gold Augment chance to <style="LYellow">40% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">40% <style="LGrey">(+5%)
+<style="Yellow">Royal Anvil;</style><style="Yellow">Bigorna Real</style>
+Increase Gold Augment chance to <style="LYellow">45% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">45% <style="LGrey">(+5%)
+<style="Yellow">Star Forger;</style><style="Yellow">Forjador de Estrelas</style>
+<style="Yellow">Dry Logs;</style><style="Yellow">Lenha Seca</style>
+Wildlife Observer IV;Observador da Natureza IV
+Observe 15 different species more than 2500 times each;Observa 2500 indivíduos de 15 espécies diferentes
+Wildlife Observer V;Observador da Natureza V
+Observe 20 different species more than 10.000 times each;Observa 10.000 indivíduos de 20 espécies diferentes
+Impressing the Investors;Impressionando os Investidores
+Collect 250K Embers;Poupa 250K Brasas
+Impressing Gyomyo;Impressionando Gyomyo
+Make a profit of +1M Embers from a single bet in Gyomyo's Casino;Obtém um lucro de mais de +1M Brasas numa única aposta no Casino do Gyomyo
+Fully Upgraded;Completamente Melhorado
+Unlock every skill in Rowl's Skill Tree;Desbloqueia todas as habilidades na Árvore de Habilidades do Rowl
+Legend of the Necromancer;A Lenda do Necromante
+<i>"When 25 Ghouls stand tall in sight, King Ghoul shall join the fight"</i>;<i>"Quando 25 Espíritos se erguerem à vista, o Rei dos Espíritos se juntará à conquista"</i>
+<i>"When the flame hexagon burns bright, Ankh-Ra shall appear to defend the night"</i>;<i>"Quando o hexágono flamejante brilhar, Ankh-Ra aparecerá para a noite vigiar"</i>
+The Ancient Ritual;O Ritual Ancião

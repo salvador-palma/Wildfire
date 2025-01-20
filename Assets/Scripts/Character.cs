@@ -386,8 +386,8 @@ public class Character : MonoBehaviour
     [Header("Character Select UI")]
     public GameObject CharacterSelectContainer;
     public GameObject CharacterSubTypeContainer;
-    public TextMeshProUGUI CharacterName;
-    public TextMeshProUGUI SkillDescription;
+    public DynamicText CharacterName;
+    public DynamicText SkillDescription;
     [SerializeField] private int currentDisplayedCharacter = 0;
     [SerializeField] private GameObject MainFlameVessel;
     private void SetupCharacterSelectOptions(){
@@ -513,11 +513,11 @@ public class Character : MonoBehaviour
     }
     private void UpdateCharacterInfo(CharacterData data){
         if(data.Unlocked){
-            CharacterName.text = data.Name;
-            SkillDescription.text = "<size=100%><color=#FFFF00>- Ability -</color><size=80%><br>" + data.AbilityDescription;
+            CharacterName.SetText(data.Name);
+            SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>{0}", new string[]{data.AbilityDescription});
         }else{
-            CharacterName.text = "???";
-            SkillDescription.text = "<size=100%><color=#FFFF00>- Ability -</color><size=80%><br>???";
+            CharacterName.SetText("???");
+            SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>???");
         }
         
     }
@@ -607,7 +607,7 @@ public class Character : MonoBehaviour
             if(character.AbilityToSkillTree==""){i++; continue;}
             if(SkillTreeManager.Instance.getLevel(character.AbilityToSkillTree)<0 && character.Unlocked){
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(true);
-                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").Find("Text").GetComponentInChildren<TextMeshProUGUI>().text = "Requires "+character.AbilityToSkillTree;
+                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").Find("Text").GetComponentInChildren<DynamicText>().SetText("Requires {0}", new string[]{character.AbilityToSkillTree});
             }else{
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(false);
             }

@@ -34,7 +34,6 @@ public class AnimalRunTimeData{
     public string name;    
     public Enemy enemy;
     public int Wave;
-    [TextAreaAttribute]public string description;
     public AnimalAbility[] abilities;
     public Material ShinyMaterial;
     public Vector2 IconSize; //left top
@@ -69,7 +68,7 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] public BestiarySaveData saved_milestones;
 
     //GENERAL
-    TextMeshProUGUI title;
+    DynamicText title;
     Image AnimalImage;
 
 
@@ -77,7 +76,7 @@ public class LocalBestiary : MonoBehaviour
     [Header("Tab References")]
     [SerializeField] Button RightButton;
     [SerializeField] Button LeftButton;
-    [SerializeField] TextMeshProUGUI tabTitle;
+    [SerializeField] DynamicText tabTitle;
     //STATS
     TextMeshProUGUI[] statLabels = new TextMeshProUGUI[8];
     //ABILITIES
@@ -131,7 +130,7 @@ public class LocalBestiary : MonoBehaviour
         statLabels[7] = BestiaryPanels[0].transform.Find("InputWave").GetComponentInChildren<TextMeshProUGUI>();
 
         //PROFILE
-        title = InfoPanel.Find("Title").GetComponent<TextMeshProUGUI>();
+        title = InfoPanel.Find("Title").GetComponent<DynamicText>();
         AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(1).GetComponent<Image>();
 
         //MILESTONES
@@ -243,7 +242,7 @@ public class LocalBestiary : MonoBehaviour
         if(currentIndex>=BestiaryTabs.Length){currentIndex=0;}
         BestiaryPanels[currentIndex].SetActive(true);
         BestiaryDisplayTab = BestiaryTabs[currentIndex];
-        tabTitle.text = BestiaryDisplayTab;
+        tabTitle.SetText(BestiaryDisplayTab);
         UpdateCurrentTab(lastID);
 
     }
@@ -281,7 +280,7 @@ public class LocalBestiary : MonoBehaviour
 
         AnimalImage.sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
         AnimalImage.material = null;
-        title.text = animal.name;
+        title.SetText(animal.name);
         RectTransform TRR = AnimalImage.GetComponent<RectTransform>();
         TRR.anchoredPosition = animal.IconPos;
         TRR.sizeDelta = animal.IconSize;
@@ -339,7 +338,7 @@ public class LocalBestiary : MonoBehaviour
         {
             if(i <= abilities.Length - 1){
                 abilitiesContainer[i].GetComponentsInChildren<Image>()[1].sprite = abilities[i].icon;
-                abilitiesContainer[i].GetComponentInChildren<TextMeshProUGUI>().text = abilities[i].description;
+                abilitiesContainer[i].GetComponentInChildren<DynamicText>().SetText(abilities[i].description);
                 abilitiesContainer[i].SetActive(true);
             }else{
                 abilitiesContainer[i].SetActive(false);

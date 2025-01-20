@@ -84,8 +84,8 @@ public class Item : MonoBehaviour
         AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
         if(on){
             DisplayPanel.Find("Icon").GetChild(0).GetComponent<Image>().sprite = Icon;
-            DisplayPanel.Find("Description").GetComponent<TextMeshProUGUI>().text = Description;
-            DisplayPanel.Find("Title").GetComponent<TextMeshProUGUI>().text = Name;
+            DisplayPanel.Find("Description").GetComponent<DynamicText>().SetText(Description);
+            DisplayPanel.Find("Title").GetComponent<DynamicText>().SetText("<style=\"Yellow\">"+ Name);
 
             Button NoButton = DisplayPanel.Find("Not Interested").GetComponent<Button>();
             NoButton.onClick.RemoveAllListeners(); NoButton.onClick.AddListener(()=>Display(false));

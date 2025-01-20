@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using System.Linq;
 using UnityEngine.Video;
+using Unity.VisualScripting;
 
 public static class Translator
 {
@@ -41,6 +42,7 @@ public static class Translator
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
+            if(line[0] == '#') continue;
             string[] parts = line.Split(';');
             int lang = 0;
             foreach (string str in translations.Keys)
@@ -50,6 +52,7 @@ public static class Translator
 
 
         }
+        Debug.LogError("FINISHED READING: " + translations["English"].Count + " words");
     }
 
     public static void changeLanguage(string newLanguage)
@@ -62,33 +65,40 @@ public static class Translator
 
     public static string getTranslation(string oldWord)
     {
-        if(translations == null) LoadCSV(csvName);
-        int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
-        int englishIndex = translations["English"].IndexOf(oldWord); // Se nao houver tradução a oldword estara com o valor default em ingles, este indice exite, se nao existe e preciso criar entrada
+        //Debug.Log($"Traduzir {oldWord} para {currentLanguage}");
+        try{
+            if(translations == null) LoadCSV(csvName);
+            int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
+            int englishIndex = translations["English"].IndexOf(oldWord); // Se nao houver tradução a oldword estara com o valor default em ingles, este indice exite, se nao existe e preciso criar entrada
 
-        // Debug.Log(translations[currentLanguage][oldEntryIndex]);
-        // Missing entry
-        if(oldEntryIndex == -1 && englishIndex == -1) {  
-            Debug.Log(translations["English"].ToList());
-            Debug.Log(oldWord);
-            AddCsvEntry(oldWord);
-            return oldWord;
+            // Debug.Log(translations[currentLanguage][oldEntryIndex]);
+            // Missing entry
+            if(oldEntryIndex == -1 && englishIndex == -1) {  
+                
+                
+                AddCsvEntry(oldWord);
+                return oldWord;
+            }
+
+            // Missing translation
+            if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing") // Se a entrada existe em ingles, a old word esta em ingles 
+            || oldEntryIndex != -1 && translations[currentLanguage][oldEntryIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
+                if(oldEntryIndex != -1) return translations["English"][oldEntryIndex];
+                if(englishIndex != -1) return translations["English"][englishIndex];
+            }
+
+            string translatedText = "";
+            if(englishIndex != -1) translatedText = translations[currentLanguage][englishIndex];
+            if(oldEntryIndex != -1) translatedText = translations[currentLanguage][oldEntryIndex];
+             return translatedText;
+            //Debug.Log($"Traduzir {oldWord} para {translatedText}");
+        }catch(Exception e){
+            Debug.LogError(e);
+            Debug.LogError(e.StackTrace);
+            Debug.LogError("Erro ao traduzir " + oldWord);
         }
-
-        // Missing translation
-        if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing") // Se a entrada existe em ingles, a old word esta em ingles 
-        || oldEntryIndex != -1 && translations[currentLanguage][oldEntryIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
-            if(oldEntryIndex != -1) return translations["English"][oldEntryIndex];
-            if(englishIndex != -1) return translations["English"][englishIndex];
-        }
-
-        string translatedText = "";
-        if(englishIndex != -1) translatedText = translations[currentLanguage][englishIndex];
-        if(oldEntryIndex != -1) translatedText = translations[currentLanguage][oldEntryIndex];
-        
-        //Debug.Log($"Traduzir {oldWord} para {translatedText}");
-        
-        return translatedText;
+        return "Error";
+       
     }
 
     // Ads entry 
