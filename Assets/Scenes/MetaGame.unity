@@ -272,17 +272,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6437877}
   m_CullTransparentMesh: 1
---- !u!114 &7573495 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1544754991160409545, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-  m_PrefabInstance: {fileID: 4989103454291384645}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8478762
 GameObject:
   m_ObjectHideFlags: 0
@@ -6072,6 +6061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &310467531
 GameObject:
   m_ObjectHideFlags: 0
@@ -7306,6 +7296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &378268767
 GameObject:
   m_ObjectHideFlags: 0
@@ -12218,6 +12209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &558768133
 GameObject:
   m_ObjectHideFlags: 0
@@ -13696,6 +13688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -13872,6 +13865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &647704156
 GameObject:
   m_ObjectHideFlags: 0
@@ -19557,7 +19551,7 @@ MonoBehaviour:
   - message: ...
     avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
     Name: Naal
-  - message: Ooooh ok I get... Anyways! With the help of this anvil ALONE we can...
+  - message: Ooooh ok I ge-... Anyways! With the help of this anvil ALONE we can...
       uh... transform silver into gold!
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
     Name: Jhat
@@ -20021,6 +20015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &915789914
 GameObject:
   m_ObjectHideFlags: 0
@@ -20356,6 +20351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &924677742
 GameObject:
   m_ObjectHideFlags: 0
@@ -21147,6 +21143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &962784310
 GameObject:
   m_ObjectHideFlags: 0
@@ -22867,6 +22864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1031754546
 GameObject:
   m_ObjectHideFlags: 0
@@ -26694,6 +26692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1249318444
 GameObject:
   m_ObjectHideFlags: 0
@@ -29542,7 +29541,7 @@ MonoBehaviour:
       it was going wasn't possible!
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
     Name: Jhat
-  - message: Honestly, I often use it to literally pass time when I'm alone here...
+  - message: Honestly, I often use it to, literally, pass time when I'm alone here...
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
     Name: Jhat
   - message: Therefore, it is very precious to me! It won't be cheap!
@@ -33673,6 +33672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1001 &1562088144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36183,6 +36183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1651039205
 GameObject:
   m_ObjectHideFlags: 0
@@ -37042,17 +37043,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3450151133432737509, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
   m_PrefabInstance: {fileID: 4989103454291384645}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1688821894 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5747539816356473573, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-  m_PrefabInstance: {fileID: 4989103454291384645}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf4849a37f66df4490d245ae76d5213, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1692255828
 GameObject:
   m_ObjectHideFlags: 0
@@ -37202,6 +37192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1707047695
 GameObject:
   m_ObjectHideFlags: 0
@@ -39533,6 +39524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1809788696
 GameObject:
   m_ObjectHideFlags: 0
@@ -41477,7 +41469,7 @@ MonoBehaviour:
   - message: Personally, I hate donkeys! Hmpf! I'm glad they aren't around forests
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
     Name: Jhat
-  - message: But apparently the species you want to get rid of are around here, so
+  - message: But apparently the species you want to get rid of is around here, so
       this item will not be cheap! Hmpf!
     avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
     Name: Jhat
@@ -41902,11 +41894,12 @@ MonoBehaviour:
       both the key of life and the key of death...
     avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
     Name: Naal
-  - message: <size=80%>It is said that... 6 of these surrounding a campfire... during
-      the night... will summon it...
+  - message: <size=80%>It is said that... <i>When the flame hexagon burns bright...
+      Ankh-Ra shall appear to defend the night</i>...
     avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
     Name: Naal
-  - message: <size=80%>If anyone is up for the job... it's you...
+  - message: <size=80%>I don't really know what it means... but if anyone is up for
+      the job... it's you...
     avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
     Name: Naal
   - message: Ok now that this is over, can I do my thing now? Hmpf!
@@ -43222,6 +43215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1963170813
 GameObject:
   m_ObjectHideFlags: 0
@@ -43728,6 +43722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldPhrase: 
   oldArgs: []
+  isChat: 0
 --- !u!1 &1977108500
 GameObject:
   m_ObjectHideFlags: 0
@@ -47820,81 +47815,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5747539816356473573, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: MoodSlider
-      value: 
-      objectReference: {fileID: 7573495}
-    - target: {fileID: 5747539816356473573, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: AvatarBank.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5747539816356473573, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: AvatarBank.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
     - target: {fileID: 6617177702089033994, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_Name
       value: Chat
-      objectReference: {fileID: 0}
-    - target: {fileID: 7879409779484698900, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[0].eventID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].eventID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1688821894}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickedChatPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Chat, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Chat, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443351742136077226, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47994,7 +47917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -48593,7 +48516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.00074768066
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

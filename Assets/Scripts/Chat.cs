@@ -15,7 +15,7 @@ public class Chat : MonoBehaviour
     [Header("Chat")]
     [SerializeField] Animator ChatPanel;
     [SerializeField] Image Profile;
-    [SerializeField] TextMeshProUGUI Message;
+    [SerializeField] DynamicText Message;
     [SerializeField] Button[] Options;
     [SerializeField] TextMeshProUGUI Name;
     
@@ -39,24 +39,24 @@ public class Chat : MonoBehaviour
     public void EndChat(){
        
         ChatPanel.GetComponent<Animator>().Play("Outro");
-        Message.text = "";
-        triggerNext=0;
+        Message.SetText("");
+        triggerNext.value=0;
         Array.ForEach(Options, e => e.gameObject.SetActive(false));
     }
     public void DeactivateChat(){
         ChatPanel.gameObject.SetActive(false);
     }
-    public void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
+    public void ChatSingular(string msg,Sprite avatar, string[] arguments = null, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
         
         Name.text = name;
-        Message.text = "";
+        Message.SetText("");
         Profile.sprite = avatar;
 
         Array.ForEach(Options, e => e.gameObject.SetActive(false));
 
         if(optionTxt!=null){
             for(int i =0; i < optionTxt.Length; i++){
-                Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
+                Options[i].GetComponentInChildren<DynamicText>().SetText(optionTxt[i]);
                 Options[i].onClick.RemoveAllListeners();
                 Options[i].onClick.AddListener(optionAction[i]);
                  
@@ -65,63 +65,64 @@ public class Chat : MonoBehaviour
 
         MoodSlider.gameObject.SetActive(name=="Jhat" && Item.getLevel("Essence Gauge") > 0);
 
-        StartCoroutine(ShowTextTimed(msg, optionTxt, FMODEvents.GetVoice(name)));
+        StartCoroutine(Message.ShowTextTimed(msg, triggerNext, arguments, optionTxt, Options, FMODEvents.GetVoice(name)));
+        //StartCoroutine(ShowTextTimed(msg, optionTxt, FMODEvents.GetVoice(name)));
     }
-    public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, EventReference sound = new EventReference()){
-        string formatting_buffer = "";
+    // public IEnumerator ShowTextTimed(string msg, string[] optionTxt  = null, EventReference sound = new EventReference()){
+    //     string formatting_buffer = "";
       
-        triggerNext=0;
+    //     triggerNext=0;
         
-        foreach(char c in msg){
+    //     foreach(char c in msg){
             
-            if(triggerNext>0){
-                Message.text = msg;
-                break;
-            }
-            if(c=='<' || formatting_buffer != ""){
-                formatting_buffer += c;
-                if(c=='>'){
-                    Message.text += formatting_buffer;
-                    formatting_buffer = "";
-                }
+    //         if(triggerNext>0){
+    //             Message.text = msg;
+    //             break;
+    //         }
+    //         if(c=='<' || formatting_buffer != ""){
+    //             formatting_buffer += c;
+    //             if(c=='>'){
+    //                 Message.text += formatting_buffer;
+    //                 formatting_buffer = "";
+    //             }
                 
-            }else{  
-                Message.text += c;
-                switch(c){
-                    case '.':
-                    case '!':
-                    case '?':
-                        yield return new WaitForSeconds(0.2f);
-                        break;
-                    case ',':
-                        yield return new WaitForSeconds(0.1f);
-                        break;
-                    case ' ':
-                        yield return new WaitForSeconds(0.04f);
-                        break;
-                    default:
-                        AudioManager.PlayOneShot(sound, Vector2.zero);
-                        yield return new WaitForSeconds(0.01f);
-                        break;
-                }
-            }
-        }
-        if(optionTxt != null){
-            for(int i =0; i < optionTxt.Length; i++){
-                Options[i].gameObject.SetActive(true);
-            }
-        }
+    //         }else{  
+    //             Message.text += c;
+    //             switch(c){
+    //                 case '.':
+    //                 case '!':
+    //                 case '?':
+    //                     yield return new WaitForSeconds(0.2f);
+    //                     break;
+    //                 case ',':
+    //                     yield return new WaitForSeconds(0.1f);
+    //                     break;
+    //                 case ' ':
+    //                     yield return new WaitForSeconds(0.04f);
+    //                     break;
+    //                 default:
+    //                     AudioManager.PlayOneShot(sound, Vector2.zero);
+    //                     yield return new WaitForSeconds(0.01f);
+    //                     break;
+    //             }
+    //         }
+    //     }
+    //     if(optionTxt != null){
+    //         for(int i =0; i < optionTxt.Length; i++){
+    //             Options[i].gameObject.SetActive(true);
+    //         }
+    //     }
         
-        //Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
-        triggerNext=1;
-        yield break;
-    }
+    //     //Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
+    //     triggerNext=1;
+    //     yield break;
+    // }
 
 
-    int triggerNext;
+    Int triggerNext;
     public void ClickedChatPanel(){
        
-        triggerNext++;
+        triggerNext.value++;
     }
 
     
@@ -130,16 +131,16 @@ public class Chat : MonoBehaviour
             StartChat();
         }
         Name.text = defaultName;
-        Message.text = "";
+        Message.SetText("");
         int i = 0;
         foreach (Dialogue d in dialogue)
         {   
            
-            ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
-            yield return new WaitUntil(() => triggerNext >= 2);
+            ChatSingular(d.message, d.avatar, name:d.Name == null || d.Name == "" ? defaultName : d.Name);
+            yield return new WaitUntil(() => triggerNext.value >= 2);
             ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
 
-            triggerNext = 0;
+            triggerNext.value = 0;
             i++;
         }
         if(endAfter){
@@ -149,5 +150,12 @@ public class Chat : MonoBehaviour
         if(after != null){
             after.Invoke();
         }
+    }
+}
+
+public class Int{
+    public int value;
+    public Int(int v){
+        value = v;
     }
 }
