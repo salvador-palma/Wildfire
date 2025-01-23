@@ -16,6 +16,17 @@ Maxed Out;Limite Atingido
 Reset;Limpar
 No;Não
 Yes;Sim
+Error;Erro
+Keep Playing;Continuar
+CONGRATS!;PARABÉNS!
+Return to Campsite;Voltar ao Acampamento
+YOU'VE SURVIVED UNTIL MORNING<br><color=#999999><size=10>(From this point on, animals will become infinitely stronger)</size></color>;SOBREVIVESTE ATÉ DE MANHÃ<br><color=#999999><size=10>(A partir deste ponto, os animais tornar-se-ão infinitamente mais fortes)</size></color>
+END NIGHT;ACABAR A NOITE
+Settings;Definições
+Effects;Efeitos
+Characters;Personagens
+Bestiary;Bestiário
+Augments;Aumentos
 #
 #
 #=========================== SKILLS ===========================#
@@ -284,72 +295,105 @@ The Ancient Ritual;O Ritual Ancião
 #=========================== BLACK MARKET ===========================#
 Not Interested;Não Interessado
 Interested;Interessado
-<style="Yellow">Soggy Logs;</style><style="Yellow">Lenha Encharcada</style>
+<style="Yellow">Soggy Logs;<style="Yellow">Lenha Encharcada</style>
+Soggy Logs;Lenha Encharcada
 Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>;Ganha <style="LYellow">+250</style> de <style="Green">Vida Máxima</style> permanente
-<style="Yellow">Hourglass;</style><style="Yellow">Ampulheta</style>
+<style="Yellow">Hourglass;<style="Yellow">Ampulheta</style>
+Hourglass;Ampulheta
 Fast-Forward at <style="LYellow">x2</style> Speed;Acelera o tempo <style="LYellow">x2</style> vezes mais rápido
-<style="Yellow">Old Stolen Fuel Bucket;</style><style="Yellow">Balde de Combustível Roubado</style>
+<style="Yellow">Old Stolen Fuel Bucket;<style="Yellow">Balde de Combustível Roubado</style>
+Old Stolen Fuel Bucket;Balde de Combustível Roubado
 Gain <style="LYellow">+10</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+10</style> de <style="Red">Dano</style> permanente
-<style="Yellow">Leaf Basket;</style><style="Yellow">Cesto de Folhas</style>
+<style="Yellow">Leaf Basket;<style="Yellow">Cesto de Folhas</style>
+Leaf Basket;Cesto de Folhas
 Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack Speed</style>;Ganha <style="LYellow">+25</style> de <style="LYellow">Velocidade de Ataque</style> permanente
-<style="Yellow">Ash Bag;</style><style="Yellow">Saco de Cinzas</style>
+<style="Yellow">Ash Bag;<style="Yellow">Saco de Cinzas</style>
+Ash Bag;Saco de Cinzas
 Gain <style="LYellow">+15%</style> Permanent <style="LYellow">Accuracy</style>;Ganha <style="LYellow">+15%</style> de <style="LYellow">Precisão</style> permanente
-<style="Yellow">Essence Gauge;</style><style="Yellow">Medidor de Essência</style>
+<style="Yellow">Essence Gauge;<style="Yellow">Medidor de Essência</style>
+Essence Gauge;Medidor de Essência
 Allows you to see <style="LYellow">Jhat's Mood</style>;Permite ver o <style="LYellow">Humor do Jhat</style>
-<style="Yellow">Old Petrol Tank;</style><style="Yellow">Tanque de Gasolina Velho</style>
+<style="Yellow">Old Petrol Tank;<style="Yellow">Tanque de Gasolina Velho</style>
+Old Petrol Tank;Tanque de Gasolina Velho
 Gain <style="LYellow">+15</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+15</style> de <style="Red">Dano</style> permanente
-<style="Yellow">Twig Basket;</style><style="Yellow">Cesto de Galhos</style>
-<style="Yellow">Magical Hourglass;</style><style="Yellow">Ampulheta Mágica</style>
+<style="Yellow">Twig Basket;<style="Yellow">Cesto de Galhos</style>
+Twig Basket;Cesto de Galhos
+<style="Yellow">Magical Hourglass;<style="Yellow">Ampulheta Mágica</style>
+Magical Hourglass;Ampulheta Mágica
 Fast-Forward at <style="LYellow">x3</style> Speed;Acelera o tempo <style="LYellow">x3</style> vezes mais rápido
-<style="Yellow">High-Quality Log Pack;</style><style="Yellow">Pacote de Lenha de Alta Qualidade</style>
+<style="Yellow">High-Quality Log Pack;<style="Yellow">Pacote de Lenha de Alta Qualidade</style>
+High-Quality Log Pack;Pacote de Lenha de Alta Qualidade
 Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>;Ganha <style="LYellow">+250</style> de <style="Green">Vida Máxima</style> permanente
-<style="Yellow">Enchanted Ashes;</style><style="Yellow">Cinzas Encantadas</style>
-<style="Yellow">Bellow;</style><style="Yellow">Fole</style>
+<style="Yellow">Enchanted Ashes;<style="Yellow">Cinzas Encantadas</style>
+Enchanted Ashes;Cinzas Encantadas
+<style="Yellow">Bellow;<style="Yellow">Fole</style>
+Bellow;Fole
 Be able to ban <style="LYellow">+1 Skill</style> at the beggining of the night;Bane <style="LYellow">+1 Habilidade</style> no início da noite
-<style="Yellow">Bug Repellent;</style><style="Yellow">Repelente de Insetos</style>
+<style="Yellow">Bug Repellent;<style="Yellow">Repelente de Insetos</style>
+Bug Repellent;Repelente de Insetos
 Be able to ban <style="LYellow">+1 species</style> from appearing during the night;Bane <style="LYellow">+1 espécie</style> de aparecer durante a noite
-<style="Yellow">Celestial Hourglass;</style><style="Yellow">Ampulheta Celestial</style>
+<style="Yellow">Celestial Hourglass;<style="Yellow">Ampulheta Celestial</style>
+Celestial Hourglass;Ampulheta Celestial
 Fast-Forward at <style="LYellow">x4</style> Speed;Acelera o tempo <style="LYellow">x4</style> vezes mais rápido
-<style="Yellow">5L Petrol Tank;</style><style="Yellow">Tanque de Gasolina de 5L</style>
+<style="Yellow">5L Petrol Tank;<style="Yellow">Tanque de Gasolina de 5L</style>
+5L Petrol Tank;Tanque de Gasolina de 5L
 Gain <style="LYellow">+20</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+20</style> de <style="Red">Dano</style> permanente
-<style="Yellow">Pine Cone Basket;</style><style="Yellow">Cesto de Pinhas</style>
-<style="Yellow">Wood Anvil;</style><style="Yellow">Bigorna de Madeira</style>
+<style="Yellow">Pine Cone Basket;<style="Yellow">Cesto de Pinhas</style>
+Pine Cone Basket;Cesto de Pinhas
+<style="Yellow">Wood Anvil;<style="Yellow">Bigorna de Madeira</style>
+Wood Anvil;Bigorna de Madeira
 Increase Gold Augment chance to <style="LYellow">15% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">15% <style="LGrey">(+5%)
-<style="Yellow">Ancient Ashes;</style><style="Yellow">Cinzas Anciãs</style>
+<style="Yellow">Ancient Ashes;<style="Yellow">Cinzas Anciãs</style>
+Ancient Ashes;Cinzas Anciãs
 Gain <style="LYellow">+20%</style> Permanent <style="LYellow">Accuracy</style>;Ganha <style="LYellow">+20%</style> de <style="LYellow">Precisão</style> permanente
-<style="Yellow">Marshmallow Bowl;</style><style="Yellow">Tigela de Marshmallows</style>
+<style="Yellow">Marshmallow Bowl;<style="Yellow">Tigela de Marshmallows</style>
+Marshmallow Bowl;Tigela de Marshmallows
 Be able to pick <style="LYellow">+1 Skill</style> at the beggining of the night;Escolhe <style="LYellow">+1 Habilidade</style> no início da noite
-<style="Yellow">Giant Pinecone;</style><style="Yellow">Pinha Gigante</style>
-<style="Yellow">10L Premium Gas Tank;</style><style="Yellow">Tanque de Gasolina Premium de 10L</style>
+<style="Yellow">Giant Pinecone;<style="Yellow">Pinha Gigante</style>
+Giant Pinecone;Pinha Gigante
+<style="Yellow">10L Premium Gas Tank;<style="Yellow">Tanque de Gasolina Premium de 10L</style>
+10L Premium Gas Tank;Tanque de Gasolina Premium de 10L
 Gain <style="LYellow">+30</style> Permanent <style="Red">Damage</style>;Ganha <style="LYellow">+30</style> de <style="Red">Dano</style> permanente
-<style="Yellow">Candle;</style><style="Yellow">Vela</style>
+<style="Yellow">Candle;<style="Yellow">Vela</style>
+Candle;Vela
 Unlock a secret mission;Desbloqueia uma missão secreta
-<style="Yellow">Stone Anvil;</style><style="Yellow">Bigorna de Pedra</style>
+<style="Yellow">Stone Anvil;<style="Yellow">Bigorna de Pedra</style>
+Stone Anvil;Bigorna de Pedra
 Increase Gold Augment chance to <style="LYellow">20% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">20% <style="LGrey">(+5%)
-<style="Yellow">Animal Repellent;</style><style="Yellow">Repelente de Animais</style>
-<style="Yellow">Bronze Anvil;</style><style="Yellow">Bigorna de Bronze</style>
+<style="Yellow">Animal Repellent;<style="Yellow">Repelente de Animais</style>
+Animal Repellent;Repelente de Animais
+<style="Yellow">Bronze Anvil;<style="Yellow">Bigorna de Bronze</style>
+Bronze Anvil;Bigorna de Bronze
 Increase Gold Augment chance to <style="LYellow">25% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">25% <style="LGrey">(+5%)
-<style="Yellow">Deluxe Bellow;</style><style="Yellow">Fole Luxuoso</style>
-<style="Yellow">Marshmallow Bag;</style><style="Yellow">Saco de Marshmallows</style>
-<style="Yellow">Sturdy Anvil;</style><style="Yellow">Bigorna Robusta</style>
+<style="Yellow">Deluxe Bellow;<style="Yellow">Fole Luxuoso</style>
+Deluxe Bellow;Fole Luxuoso
+<style="Yellow">Marshmallow Bag;<style="Yellow">Saco de Marshmallows</style>
+Marshmallow Bag;Saco de Marshmallows
+<style="Yellow">Sturdy Anvil;<style="Yellow">Bigorna Robusta</style>
+Sturdy Anvil;Bigorna Robusta
 Increase Gold Augment chance to <style="LYellow">30% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">30% <style="LGrey">(+5%)
-<style="Yellow">Skull;</style><style="Yellow">Crânio</style>
-<style="Yellow">Deluxe Anvil;</style><style="Yellow">Bigorna Luxuosa</style>
+<style="Yellow">Skull;<style="Yellow">Crânio</style>
+Skull;Crânio
+<style="Yellow">Deluxe Anvil;<style="Yellow">Bigorna Luxuosa</style>
+Deluxe Anvil;Bigorna Luxuosa
 Increase Gold Augment chance to <style="LYellow">35% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">35% <style="LGrey">(+5%)
-<style="Yellow">Royal Anvil;</style><style="Yellow">Bigorna Real</style>
+<style="Yellow">Royal Anvil;<style="Yellow">Bigorna Real</style>
+Royal Anvil;Bigorna Real
 Increase Gold Augment chance to <style="LYellow">40% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">40% <style="LGrey">(+5%)
-<style="Yellow">Star Forger;</style><style="Yellow">Forjador de Estrelas</style>
+<style="Yellow">Star Forger;<style="Yellow">Forjador de Estrelas</style>
+Star Forger;Forjador de Estrelas
 Increase Gold Augment chance to <style="LYellow">45% <style="LGrey">(+5%);Aumenta a chance de Aumento Dourado para <style="LYellow">45% <style="LGrey">(+5%)
-<style="Yellow">Dry Logs;</style><style="Yellow">Lenha Seca</style>
+<style="Yellow">Dry Logs;<style="Yellow">Lenha Seca</style>
+Dry Logs;Lenha Seca
 #
 #
-#=========================== GYOMYO ===========================#
-Wanna hit the Casino? '{0}' is today's game!;Queres ir ao Casino? O jogo de hoje é '{0}'!
+#=========================== GYOMYO/CASINO ===========================#
+Wanna hit the Casino? '{0}' is today's game!;Bora ao Casino? O jogo de hoje é '{0}'!
 Water the Flower;Rega a Flor
 Drop the Acorn;Larga a Bolota
 #
 #
-#=========================== HAGGLING (MOSTLY JHAT) ===========================#
+#=========================== HAGGLING/JHAT (AND NAAL) ===========================#
 I don't have a lot to say right now! Hmpf!;Nada a dizer agora por agora! Hmpf!
 Hmmm... <size=60%> the offer is not that bad... and we have been negotiating for far too long now...;Hmmm... <size=60%> a oferta não é assim tão má... e de facto já estamos a negociar há demasiado tempo...
 Again, {0} embers, what do you think?;Novamente, {0} brasas, o que achas?
@@ -380,7 +424,6 @@ Look, I saw you are quite tight on embers. Since we are friends, just give me wh
 Oh here we go, typical haggling conversation...;Oh aqui vamos nós, típica conversa de negociante...
 Are you actually asking me that right now?;Estás mesmo a perguntar-me isso agora?
 *You ask Jhat about its day*;*Perguntas ao Jhat sobre o seu dia*
-You can now access the <color=#FFCC7C>Black Market</color> to buy especial uprades;Podes agora aceder ao <color=#FFCC7C>Mercado Negro</color> para comprar melhorias especiais
 Now give me those embers and you can go ahead and take what you want;Agora passa-me essas brasas leva o que querias
 Woah! We just started bargaining! Are you really going leaving it already?;Uaaaau! Acabámos de começar a negociar! Vais já desistir?
 <size=80%>Persuade;<size=80%>Persuadir
@@ -602,5 +645,626 @@ Words cannot describe how awesome this item is! An anvil made out of prismanium 
 Well, I guess describing it wasn't that hard... Anyways! This is the best possible item I can sell you! ;Bem, acho que descrevê-lo não foi assim tão difícil afinal... De qualquer forma! Este é o melhor item que te posso vender!
 <size=80%>And the most expensive as well...;<size=80%>E o mais caro também...
 <size=80%><i><color=#CCCCCC>{0};<size=80%><i><color=#CCCCCC>{0}
-
-
+#
+#
+##=========================== AUGMENTS ===========================#
+Hard Work;Trabalho Árduo
+Gain +10 Base Damage;Ganha +10 de Dano Base
+Heavy Hitter;Golpe Pesado
+Gain +25 Base Damage;Ganha +25 de Dano Base
+Hephaestus;Hefesto
+Gain +50 Base Damage;Ganha +50 de Dano Base
+Target Practice;Tiro ao Alvo
+Increase your accuracy by +15%;Aumenta a precisão em +15%
+Steady Aim;Mira Firme
+Increase your accuracy by +30%;Aumenta a precisão em +30%
+Eagle Eye;Olho de Águia
+Double your current accuracy;Duplica a precisão atual
+Swifty Flames;Chamas Velozes
+Increase your attack speed by +30;Aumenta a velocidade de ataque em +30
+Fire Dance;Dança do Fogo
+Increase your attack speed by +60;Aumenta a velocidade de ataque em +60
+Flamethrower;Lança-Chamas
+Mutliply your attack speed by x1.5;Multiplica a velocidade de ataque por x1.5
+Quick Shot;Tiro Rápido
+Gain +0.8 Bullet Speed;Ganha +0.8 de Velocidade de Bala
+Fire-Express;Expresso do Fogo
+Gain +2 Bullet Speed;Ganha +2 de Velocidade de Bala
+HiperDrive;Hiper-Propulsão
+Gain +4 Bullet Speed;Ganha +4 Velocidade de Bala
+Warm Soup;Sopinha Quente
+Heal 50% of your Max Health and gain +100 HP;Cura 50% da tua Vida Máxima e ganha +100 Vida
+Sunfire Cape;Manto Solar
+Heal 75% of your Max Health and gain +250 HP;Cura 75% da tua Vida Máxima e ganha +250 Vida
+Absolute Unit;Unidade Absoluta
+Heal 100% of your Max Health and gain +1000 HP;Cura 100% da tua Vida Máxima e ganha +1000 Vida
+Mesh Armor;Armadura de Malha
+Increase your armor by +10;Aumenta a tua armadura em +10
+Long Lasting Fire;Fogo Duradouro
+Increase your armor by +25;Aumenta a tua armadura em +25
+The Armor of God;A Armadura de Deus
+Increase your armor by +50;Aumenta a tua armadura em +50
+Unlock the ability to multicast;Desbloqueia a habilidade de lançar múltiplos tiros
+The more the better;Quanto mais melhor
+When you fire a shot, gain a 5% chance to fire an extra shot;Quando disparas, ganha mais 5% de chance de disparar um tiro extra
+Double Trouble;Problemas a Dobrar
+When you fire a shot, gain a 15% chance to fire an extra shot;Quando disparas, ganha mais 15% de chance de disparar um tiro extra
+Casting Cascade;Cascata de Disparos
+When you fire a shot, gain a 35% chance to fire an extra shot;Quando disparas, ganha mais 35% de chance de disparar um tiro extra
+Unlock the ability to critical strike;Desbloqueia a habilidade de acerto crítico
+Lucky Shots;Tiros de Sorte
+Gain +15% critical strike damage;Ganha +15% de dano crítico
+Critical Thinking;Pensando Criticamente
+Gain +30% critical strike damage;Ganha +30% de dano crítico
+Critical Miracle;Milagre Crítico
+Gain +5% critical strike chance;Ganha +5% de chance de acerto crítico
+Fate's Favor;A Favor do Destino
+Gain +10% critical strike chance;Ganha +10% de chance de acerto crítico
+Overheat;Sobreaquecimento
+Gain +25% critical strike chance and +60% critical strike damage;Ganha +25% de chance de acerto crítico e +60% de dano crítico
+Unlock the ability to life-steal;Desbloqueia a habilidade de roubar vida
+Steal to Heal;Roubar para Curar
+Gain +5% chance to proc your Vampire effect;Ganha +5% de chance de ativar o teu efeito Vampiro
+Eternal Hunger;Fome Eterna
+Gain +10% chance to proc your Vampire effect;Ganha +10% de chance de ativar o teu efeito Vampiro
+Soul Harvester;Ceifador de Almas
+Gain +25% chance to proc your Vampire effect;Ganha +25% de chance de ativar o teu efeito Vampiro
+Sustenance;Sustentamento
+Gain +5% Heal on your Vampire effect;Ganha +5% de Cura no teu efeito Vampiro
+Vampire Survivor;Vampiro Sobrevivente
+Gain +10% Heal on your Vampire effect;Ganha +10% de Cura no teu efeito Vampiro
+Blood Pact;Pacto de Sangue
+Gain +20% Heal on your Vampire effect;Ganha +20% de Cura no teu efeito Vampiro
+Unlock the ability to send burst shots;Desbloqueia a habilidade de enviar rajadas de tiros
+Happy Trigger;Gatilho Leve
+You will need 5 shots less to proc Burst Shot;Precisas de 5 tiros a menos para ativar a Rajada de Tiros
+Bullet Symphony;Sinfonia de Balas
+You will need 10 shots less to proc Burst Shot;Precisas de 10 tiros a menos para ativar a Rajada de Tiros
+Make It Rain;Faz Chover
+You will need 20 shots less to proc Burst Shot;Precisas de 20 tiros a menos para ativar a Rajada de Tiros
+Burst Barricade;Barreira de Rajadas
+Your Burst Shot will +1 flames;A tua Rajada de Tiros terá +1 chama
+Burst Unleashed;Rajada Desencadeada
+Your Burst Shot will +2 flames;A tua Rajada de Tiros terá +2 chamas
+Burst to Victory;Rajada até à Vitória
+Your Burst Shot will +5 flames;A tua Rajada de Tiros terá +5 chamas
+Freeze!;Congela!
+Unlock the ability to Slow enemies using ice(?);Desbloqueia a habilidade de abrandar inimigos usando gelo(?)
+IcyHot;Frio e Quente
+Gain +5% chance to proc your Frost Fire effect;Ganha +5% de chance de ativar o efeito de Congelamento
+Glacial Energy;Energia Glacial
+Gain +15% chance to proc your Frost Fire effect;Ganha +15% de chance de ativar o efeito de Congelamento
+A Dance of Fire and Ice;Uma Dança de Fogo e Gelo
+Gain +35% chance to proc your Frost Fire effect;Ganha +35% de chance de ativar o efeito de Congelamento
+Slowly but Surely;Devagar se vai ao longe
+Your Frost Fire effect lasts for 0.5 seconds more;O efeito de Congelamento dura mais 0.5 segundos
+Frost Bite;Mordida Gelada
+Your Frost Fire effect lasts for 1 seconds more;O efeito de Congelamento dura mais 1 segundo
+Absolute Zero;Absoluto Zero
+Your Frost Fire effect lasts for 2.5 seconds more;O efeito de Congelamento dura mais 2.5 segundos
+Unlock the ability to shred enemy armor through Sound;Desbloqueia a habilidade de triturar a armadura inimiga através do Som
+Reverb;Reverberação
+Gain +5% chance to proc Resonance;Ganha +5% de chance de ativar Ressonância
+Turn it Up!;Aumenta o Volume!
+Gain +15% chance to proc Resonance;Ganha +15% de chance de ativar Ressonância
+Echoing Fracture;Fratura Ecoante
+Gain +35% chance to proc Resonance;Ganha +35% de chance de ativar Ressonância
+Bass Boost;Impulso de Baixo
+Resonance reduces +5% more enemy armor per proc;Ressonância reduz mais 5% de armadura inimiga por ativação
+Harmonic Shredding;Trituração Harmónica
+Resonance effect reduces +10% more enemy armor per proc;O efeito de Ressonância reduz mais 10% de armadura inimiga por ativação
+Sonic Rupture;Ruptura Sónica
+Resonance effect reduces +25% more enemy armor per proc;O efeito de Ressonância reduz mais 25% de armadura inimiga por ativação
+Assassin's Path;O Caminho do Assassino
+Unlock the ability to pierce armor and execute enemies;Desbloqueia a habilidade de perfurar armadura e executar inimigos
+Execution Enforcer;Executor
+You can execute enemies for +2.5% of their Max Health;Podes executar inimigos com +2.5% da sua Vida Máxima
+Soul Collector;Colecionador de Almas
+You can execute enemies for +5% of their Max Health;Podes executar inimigos com +5% da sua Vida Máxima
+La Guillotine;A Guilhotina
+You can execute enemies for +10% of their Max Health;Podes executar inimigos com +10% da sua Vida Máxima
+Shell Breaker;Quebra-Cascos
+Gain +5% Armor Penetration;Ganha +5% de Penetração de Armadura
+Quantum Piercing;Perfuração Quântica
+Gain +10% Armor Penetration;Ganha +10% de Penetração de Armadura
+Lance of Aether;Lança de Éter
+Gain +25% Armor Penetration;Ganha +25% de Penetração de Armadura
+Unlock the ability to shoot magical flames that inflict extra damage;Desbloqueia a habilidade de disparar chamas mágicas que causam dano extra
+The Bluer The Better;Quanto mais Azul melhor
+You will need 1 shots less to proc Blue Flame;Precisas de menos 1 tiro para lançar uma Chama Azul
+Propane Combustion;Combustão de Propano
+You will need 3 shots less to proc Blue Flame;Precisas de menos 3 tiros para lançar uma Chama Azul
+Never ending Blue;Azul sem fim
+You will need 7 shots less to proc Blue Flame;Precisas de menos 7 tiros para lançar uma Chama Azul
+Propane Leakage;Fuga de Propano
+Your Blue Flame deals +25 extra damage;A tua Chama Azul causa +25 de dano extra
+Powerfull Blue;Azul todo poderoso
+Your Blue Flame deals +50 extra damage;A tua Chama Azul causa +50 de dano extra
+Blue Inferno;Inferno Azul
+Your Blue Flame deals +100 extra damage;A tua Chama Azul causa +100 de dano extra
+Orbital Flames;Chamas Orbitais
+A tiny Flame will orbit around you damaging the foes it collides with;Uma pequena Chama irá orbitar à tua volta, danificando os inimigos com que colidir
+Tame the Flames;Domador de Chamas
+Gain +1 Flame in your Orbital Field;Ganha +1 Chama no teu Campo Orbital
+Tiny Flames Win;Chamas Pequenas Vencem
+Your Orbital Flames deal +10 damage;As tuas Chamas Orbitais causam +10 de dano
+Reliable Damage;Dano Fiável
+Your Orbital Flames deal +25 damage;As tuas Chamas Orbitais causam +25 de dano
+Your Orbital Flames deal +50 damage;As tuas Chamas Orbitais causam +50 de dano
+Unlock the ability to create Lava Pools;Desbloqueia a habilidade de criar Poças de Lava
+Hot Tub;Banheira Quente
+Your Lava Pool will inflict +10 damage per second;Poçaa de Lava causarão +10 de dano por segundo
+Magical Scorch;Queimadura Mágica
+Your Lava Pool will inflict +25 damage per second;Poçaa de Lava causarão +25 de dano por segundo
+Conflagration;Conflagração
+Your Lava Pool will inflict +50 damage per second;Poçaa de Lava causarão +50 de dano por segundo
+Hot Steps;Passos Quentes
+Gain +5% probability of spawning a Lava Pool when your shot lands;Ganha +5% de probabilidade de criar uma Poça de Lava quando a chama aterra
+Lava here, Lava there;Lava Aqui, Lava Ali
+Gain +10% probability of spawning a Lava Pool when your shot lands;Ganha +10% de probabilidade de criar uma Poça de Lava quando a chama aterra
+The Apocalypse;O Apocalipse
+Gain +25% probability of spawning a Lava Pool when your shot lands;Ganha +25% de probabilidade de criar uma Poça de Lava quando a chama aterra
+Heat Area;Área de Calor
+Your Lava Pool grows by +2.5 units;Poças de Lava crescem +2.5 unidades
+Lava Lakes;Lagos de Lava
+Your Lava Pool grows by +5 units;Poças de Lava crescem +5 unidades
+Inside the volcano;Dentro do Vulcão
+Your Lava Pool grows by +10 units;Poças de Lava crescem +10 unidades
+Sear the ground;Chamuscando o Chão
+Your Lava Pool lasts for +0.75 seconds;Poças de Lava duram mais +0.75 segundos
+Eternally Hot;Eternamente Quente
+Your Lava Pool lasts for +1.5 seconds;Poças de Lava duram mais +1.5 segundos
+Unsettling Magma;Magma Inquietante
+Your Lava Pool lasts for +3 seconds;Poças de Lava duram mais +3 segundos
+Unlock the ability to release static energy;Desbloqueia a habilidade de libertar energia estática
+Watts Up;Watts para cima
+Gain +5% probability to proc your Static Energy effect;Ganha +5% de probabilidade de ativar o efeito de Energia Estática
+Electrifying Possibilities;Possibilidades Eletrizantes
+Gain +10% probability to proc your Static Energy effect;Ganha +10% de probabilidade de ativar o efeito de Energia Estática
+The Sparkster;O Faíscador
+Gain +25% probability to proc your Static Energy effect;Ganha +25% de probabilidade de ativar o efeito de Energia Estática
+Shock Dart;Dardo de Choque
+Your Static Energy deals +10 extra damage;Energia Estática causa +10 de dano extra
+Shocking Advancement;Avanços Chocantes
+Your Static Energy deals +20 extra damage;Energia Estática causa +20 de dano extra
+Thor;Thor
+Your Static Energy deals +50 extra damage;Energia Estática causa +50 de dano extra
+Conductive materials;Materiais Condutores
+Your Static Energy will be able to cross through 1 more enemy;Energia Estática será capaz de atravessar por mais 1 inimigo
+Feel the Flow;Sente o Fluxo
+Your Static Energy will be able to cross through 2 more enemies;Energia Estática será capaz de atravessar por mais 2 inimigos
+Amping Up!;Amperando!
+Your Static Energy will be able to cross through 5 more enemies;Energia Estática será capaz de atravessar por mais 5 inimigos
+Unlock the ability to create Snow Pools that slow down enemies;Desbloqueia a habilidade de criar Poças de Neve que abrandam inimigos
+Cold Bath;Banho Frio
+Your Snow Pool will slow down enemies for 5% more;Poças de Neve abrandarão os inimigos em mais 5%
+Glacial Grip;Aderência Glacial
+Your Snow Pool will slow down enemies for 10% more;Poças de Neve abrandarão os inimigos em mais 10%
+Frozen Stasis;Estase Congelada
+Your Snow Pool will slow down enemies for 20% more;Poças de Neve abrandarão os inimigos em mais 20%
+Cold Steps;Passos Frios
+Gain +5% probability of spawning an Snow Pool when your shot lands;Ganha +5% de probabilidade de criar uma Poça de Neve quando a chama aterra
+Ice here, Ice there;Gelo Aqui, Gelo Ali
+Gain +10% probability of spawning an Snow Pool when your shot lands;Ganha +10% de probabilidade de criar uma Poça de Neve quando a chama aterra
+The North Pole;O Polo Norte
+Gain +25% probability of spawning an Snow Pool when your shot lands;Ganha +25% de probabilidade de criar uma Poça de Neve quando a chama aterra
+Cold breeze;Brisa Fresca
+Your Snow Pool grows by +2.5 units;Poças de Neve crescem +2.5 unidades
+Frozen Lakes;Lagos Congelados
+Your Snow Pool grows by +5 units;Poças de Neve crescem +5 unidades
+Inside the Iceberg;Dentro do Iceberg
+Your Snow Pool grows by +10 units;Poças de Neve crescem +10 unidades
+Cooling Down;Arrefecimento
+Your Snow Pool lasts for +0.75 seconds;Poças de Neve duram mais +0.75 segundos
+Eternally Cold;Eternamente Frio
+Your Snow Pool lasts for +1.5 seconds;Poças de Neve duram mais +1.5 segundos
+Absolute Frost;Gelo Absoluto
+Your Snow Pool lasts for +3 seconds;Poças de Neve duram mais +3 segundos
+Unlock the ability to deal damage back when hitted;Desbloqueia a habilidade de refletir dano quando atingido
+Innocent Spikes;Espinhos Inocentes
+Your Thorn effect will reflect +10% of your Armor;Espinhos refletirão +10% da Armadura
+Spiky Vengeance;Vingança Espinhosa
+Your Thorn effect will reflect +20% of your Armor;Espinhos refletirão +20% da Armadura
+PufferFish;Peixe-Balão
+Your Thorn effect will reflect +50% of your Armor;Espinhos refletirão +50% da Armadura
+Prickly Fire;Fogo Espinhoso
+Gain +5% chance to proc your Thorns effect;Ganha +5% de chance de ativar o efeito de Espinhos
+Thorns everywhere!;Espinhos por Todo o Lado!
+Gain +10% chance to proc your Thorns effect;Ganha +10% de chance de ativar o efeito de Espinhos
+Cactus on Fire;Cacto em Chamas
+Gain +25% chance to proc your Thorns effect;Ganha +25% de chance de ativar o efeito de Espinhos
+Little by little;Pouco a Pouco
+Your ember multiplier will improve by +10%;O multiplicador de brasas melhorará em +10%
+Stock Trading;Negociação de Ações
+Your ember multiplier will improve by +25%;O multiplicador de brasas melhorará em +25%
+Capitalist Adventure;Aventura Capitalista
+Your ember multiplier will improve by +50%;O multiplicador de brasas melhorará em +50%
+Savings Account;Conta Poupança
+Gain +25 embers per round;Ganha +25 brasas por ronda
+Tax Payment;Pagamento de Impostos
+Gain +50 embers per round;Ganha +50 brasas por ronda
+Robbery;Roubo
+Gain +100 embers per round;Ganha +100 brasas por ronda
+Not enough refreshes;Relançamentos insuficientes
+Gain 2 random silver augments;Ganha 2 aumentos de prata aleatórios
+Feelin' Blessed;Sentindo-se Abençoado
+Gain 4 random silver augments;Ganha 4 aumentos de prata aleatórios
+Roll the Dice;Rola os Dados
+Gain 4 random gold augments;Ganha 4 aumentos de ouro aleatórios
+Unlock the ability to scatter Flowers;Desbloqueia a habilidade de escpalhar Flores
+Harvesting;Colheita
+Your Flowers will heal you for +0.25% Enemy Max HP per tick;Flores curar-te-ão +0.25% da Vida Máxima do Inimigo por segundo
+Carnivorous Plant;Planta Carnívora
+Your Flowers will heal you for +0.5% Enemy Max HP per tick;Flores curar-te-ão +0.5% da Vida Máxima do Inimigo por segundo
+Photosynthesis;Fotossíntese
+Your Flowers will heal you for +1% Enemy Max HP per tick;Flores curar-te-ão +1% da Vida Máxima do Inimigo por segundo
+Sowing the Field;Semeando o Campo
+Gain +5% probability of spawning a Flower when your shot lands;Ganha +5% de probabilidade de criar uma Flor quando a chama aterra
+Garden's Embrace;Embraçando o Jardim
+Gain +10% probability of spawning a Flower when your shot lands;Ganha +10% de probabilidade de criar uma Flor quando a chama aterra
+Lifebloom Aura;Florescimento Vital
+Gain +20% probability of spawning a Flower when your shot lands;Ganha +20% de probabilidade de criar uma Flor quando a chama aterra
+Sprouting;Germinação
+Your Flowers grow by +2.5 units;Flores crescem +2.5 unidades
+Flowering Surge;Surto de Florescimento
+Your Flowers grow by +5 units;Flores crescem +5 unidades
+Botanical Boom;Explosão Botânica
+Your Flowers grow by +10 units;Flores crescem +10 unidades
+Lasting Petals;Pétalas Duradouras
+Your Flowers last for +0.75 seconds;Flores duram mais +0.75 segundos
+Everlasting Blossom;Flor Eterna
+Your Flowers last for +1.5 seconds;Flores duram mais +1.5 segundos
+Garden of Eden;Jardim do Éden
+Your Flowers last for +3 seconds;Flores duram mais +3 segundos
+Unlock the ability to generate explosions whenever enemies die;Desbloqueia a habilidade de gerar explosões sempre que inimigos morrem
+Bomb Rush;Corrida de Bombas
+Gain +5% chance to generate an explosion whenever you kill an enemy;Ganha +5% de chance de gerar uma explosão sempre que matas um inimigo
+Grenade Launcher;Lança-Granadas
+Gain +10% chance to generate an explosion whenever you kill an enemy;Ganha +10% de chance de gerar uma explosão sempre que matas um inimigo
+Bombardment;Bombardeamento
+Gain +25% chance to generate an explosion whenever you kill an enemy;Ganha +25% de chance de gerar uma explosão sempre que matas um inimigo
+Cherry Bomb;Mini-Bomba
+Generated explosions will deal +25 damage;Explosões geradas causarão +25 de dano
+Dynamite Blast;Explosão Dinamite
+Generated explosions will deal +50 damage;Explosões geradas causarão +50 de dano
+Nuke Blast;Explosão Nuclear
+Generated explosions will deal +100 damage;Explosões geradas causarão +100 de dano
+Unlock the ability to summon ghouls whenever enemies die;Desbloqueia a habilidade de invocar espíritos quando inimigos morrem
+Wraith Walkers;Caminhantes Espectrais
+Gain +5% chance to summon a ghoul whenever you kill an enemy;Ganha +5% de chance de invocar um espírito sempre que um inimigo morre
+Soul Shepard;Pastor de Almas
+Gain +10% chance to summon a ghoul whenever you kill an enemy;Ganha +10% de chance de invocar um espírito sempre que um inimigo morre
+Crypt of the Necromancer;Campa do Necromante
+Gain +25% chance to summon a ghoul whenever you kill an enemy;Ganha +25% de chance de invocar um espírito sempre que um inimigo morre
+Phantom Infusion;Infusão Fantasma
+Ghouls' damage will increase by 5% of your damage;O dano dos espíritos aumentará em 5% do dano base
+Death's Embrace;Abraço da Morte
+Ghouls' damage will increase by 15% of your damage;O dano dos espíritos aumentará em 15% do dano base
+Hero's Spirit;Espírito do Herói
+Ghouls' damage will increase by 35% of your damage;O dano dos espíritos aumentará em 35% do dano base
+Unlock the ability to shoot bullets around dead enemies and loot their bodies;Desbloqueia a habilidade de disparar balas de canhão de inimigos mortos e saquear os seus corpos
+Pirate Wannabe;Pirata de Quinta
+Gain +5% chance to release roundshots whenever you kill an enemy;Ganha +5% de chance de disparar balas de canhão sempre que um inimigo morre
+Yes, Captain!;Sim, Capitão!
+Gain +10% chance to release roundshots whenever you kill an enemy;Ganha +10% de chance de disparar balas de canhão sempre que um inimigo morre
+Shoot it, Loot it;Dispara, Saqueia
+Gain +25% chance to release roundshots whenever you kill an enemy;Ganha +25% de chance de disparar balas de canhão sempre que um inimigo morre
+Round Shot;Bala de Canhão
+Roundshots will deal +15 damage;Balas de Canhão causarão +15 de dano
+Arggh!;Arggh!
+Roundshots will deal +30 damage;Balas de Canhão causarão +30 de dano
+Fire of Thieves;Fogo dos Ladrões
+Roundshots will deal +75 damage;Balas de Canhão causarão +75 de dano
+Cannonball Pile;Pilha de Balas de Canhão
+Your Pirate effect will shoot 1 more roundshot;O teu efeito Pirata disparará mais 1 bala de canhão
+Unlock the ability to regenerate Health;Desbloqueia a habilidade de regenerar Vida
+Self-Healing Fire;Fogo Auto-Curativo
+Each second you will regen +5 Health;Regenera +5 de Vida por segundo
+Perseverance;Perseverança
+Each second you will regen +10 Health;Regenera +10 de Vida por segundo
+Heart of Fire;Coração de Fogo
+Each second you will regen +25 Health;Regenera +25 de Vida por segundo
+Emergency Bandage;Banda de Emergência
+At the end of each round you gain +10 Max HP;No final de cada ronda ganha +10 de Vida Máxima
+Leftovers;Restos
+At the end of each round you gain +25 Max HP;No final de cada ronda ganha +25 de Vida Máxima
+Free Healthcare;Saúde Gratuita
+At the end of each round you gain +50 Max HP;No final de cada ronda ganha +50 de Vida Máxima
+Unlock the ability to control Thunder;Desbloqueia a habilidade de controlar Trovões
+Charge it up!;Carrega-o!
+Thunder cooldown decreases by 10%;O tempo de recarga do Trovão diminui em 10%
+Eletric Discharge;Descarga Elétrica
+Thunder cooldown decreases by 25%;O tempo de recarga do Trovão diminui em 25%
+Thunderstorm;Tempestade de Trovão
+Thunder cooldown decreases by 50%;O tempo de recarga do Trovão diminui em 50%
+Volt Tackle;Ataque de Voltagem
+Thunder will deal +25 damage on impact;Trovões causaram +25 de dano no impacto
+Zap Cannon;Canhão de Choque
+Thunder will deal +50 damage on impact;Trovões causaram +50 de dano no impacto
+Lightning Synergy;Sinergia Elétrica
+Thunder will deal +150 damage on impact;Trovões causaram +150 de dano no impacto
+Unlock the ability to release Heat Waves;Desbloqueia a habilidade de lançar Ondas Imolantes
+Heat Discharge;Descarga de Calor
+Immolate cooldown decreases by 10%;O tempo de recarga do Imolante diminui em 10%
+Accumulated Heat;Calor Acumulado
+Immolate cooldown decreases by 25%;O tempo de recarga do Imolante diminui em 25%
+Releasing Everything;Liberando Tudo
+Immolate cooldown decreases by 50%;O tempo de recarga do Imolante diminui em 50%
+Summer Heat;Calor de Verão
+Immolate will deal +20 damage;Imolante causará +20 de dano
+Universal Damage;Dano Universal
+Immolate will deal +40 damage;Imolante causará +40 de dano
+Nuclear Shockwave;Onda de Choque Nuclear
+Immolate will deal +80 damage;Imolante causará +80 de dano
+Waving Flames;Chamas Ondulantes
+Immolating waves will travel for +15 radius;Ondas Imolantes viajarão por +15 de raio
+Spread the Fire;Espalha o Fogo
+Immolating waves will travel for +30 radius;Ondas Imolantes viajarão por +30 de raio
+Across the Globe;À volta do Globo
+Immolating waves will travel for +75 radius;Ondas Imolantes viajarão por +75 de raio    
+Start the Ritual;Começa o Ritual
+Alembic Artistry;Arte do Alambique
+Candles will increase their attack speed by +20;Velas aumentarão a sua velocidade de ataque em +20
+Ancient Wizard;Mago Ancião
+Candles will increase their attack speed by +40;Velas aumentarão a sua velocidade de ataque em +40
+Begin the Ritual;Começa o Ritual
+Candles will increase their attack speed by +80;Velas aumentarão a sua velocidade de ataque em +80
+Apprentice;Aprendiz
+Candles will deal +10 damage;Velas causarão +10 de dano
+Aether Infusion;Infusão de Éter
+Candles will deal +20 damage;Velas causarão +20 de dano
+Witchcraft Master;Mestre da Bruxaria
+Candles will deal +50 damage;Velas causarão +50 de dano
+Philosopher's Stone;Pedra Filosofal
+Gain +1 Candles;Ganha +1 Vela
+Beekeeper;Apicultor
+Unlock the ability to own a Bee Swarm;Desbloqueia a habilidade de possuir um Enxame de Abelhas
+Rapid Shooters;Atiradores Rápidos
+Bees will increase their attack speed by +20;Abelhas aumentarão a sua velocidade de ataque em +20
+Bee-autiful Pets;Animais de Estimação
+Bees will increase their attack speed by +40;Abelhas aumentarão a sua velocidade de ataque em +40
+Bee Swarm;Enxame de Abelhas
+Bees will increase their attack speed by +80;Abelhas aumentarão a sua velocidade de ataque em +80
+Baby Bee;Abelha Bebé
+Bees will deal +10 damage;Abelhas causarão +10 de dano
+Bee Stronger;Abelhão
+Bees will deal +25 damage;Abelhas causarão +25 de dano
+Queen-like Power;Poder tipo Rainha
+Bees will deal +50 damage;Abelhas causarão +50 de dano
+Speeding Up;Acelerando
+Increase Bee speed by +0.25;Aumenta a velocidade das Abelhas em +0.25
+Agility;Agilidade
+Increase Bee speed by +0.5;Aumenta a velocidade das Abelhas em +0.5
+Bee Acrobatic League;Liga Acrobática de Abelhas
+Increase Bee speed by +1;Aumenta a velocidade das Abelhas em +1
+Worker Bee;Abelha Operária
+Your Bee Swarm gains an extra Worker Bee;O teu Enxame de Abelhas ganha uma Abelha Operária
+More Workers;Mais Operários
+Your Bee Swarm gains 2 extra Worker Bees;O teu Enxame de Abelhas ganha 2 Abelhas Operárias
+Puncher Bee;Abelha Pugilista
+Your Bee Swarm gains an extra Puncher Bee;O teu Enxame de Abelhas ganha uma Abelha Pugilista
+Assassin Bee;Abelha Assassina
+Your Bee Swarm gains an extra Assassin Bee;O teu Enxame de Abelhas ganha uma Abelha Assassina
+Agile Bee;Abelha Ágil
+Your Bee Swarm gains an extra Agile Bee;O teu Enxame de Abelhas ganha uma Abelha Ágil
+Warrior Bee;Abelha Guerreira
+Your Bee Swarm gains an extra Warrior Bee;O teu Enxame de Abelhas ganha uma Abelha Guerreira
+Pollinator Bee;Abelha Polinizadora
+Your Bee Swarm gains an extra Pollinator Bee;O teu Enxame de Abelhas ganha uma Abelha Polinizadora
+Chemical Bee;Abelha Química
+Your Bee Swarm gains an extra Chemical Bee;O teu Enxame de Abelhas ganha uma Abelha Química
+#
+#
+#======================== DIALOGUES ========================
+Hey everyone! This right here is <style="LYellow"><sprite name="Naal"> Naal!</style> It's an old friend of mine so be nice!;Ei! Este aqui é o <style="LYellow"><sprite name="Naal"> Naal!</style> É um velho amigo meu, é bom que sejam simpáticos!
+Oh... <size=80%>Hello Everyone... Hope we all get al-;Oh... <size=80%>Olá a todos... Espero que todos nos dêmos be-;
+<size=130%>NEW FRIEND UNLOCKED!!;NOVO AMIGO DESBLOQUEADO!!
+Those are some nice earings <style="LYellow"> Naal!</style> It's a pleasure to meet you! <i>fufufu</i>;Bonitos brincos <style="LYellow"> Naal!</style> Prazer em conhecer-te! <i>fufufu</i>
+Oh- <size=80%>Thank you everyone... Anyway... Betsy... I brougth th-;Oh- <size=80%>Obrigado a todos... De qualquer forma... Betsy... Eu trouxe o-;
+By the way <style="LYellow"> Naal,</style> you didn't forget <style="LYellow">The Binoculars</style> did you? I made a promise to bring them to the young man over there!;Já agora <style="LYellow"> Naal,</style> não te esqueces-te dos <style="LYellow">Binóculos</style>, certo? Eu prometi trazê-los ao jovem ali!
+<size=80%>Ahm... Yes that.. I was just saying that... take them... ;<size=80%>Ahm... Sim isso.. Eu estava a acabar de dizer isso... toma... 
+Ah fantastic! They are impecable;Ah fantástico! Eles estão impecáveis
+<size=90%>Just like the good old camping days...<size=80%> <i>right? ;<size=90%>Tal como os bons velhos tempos, quando iamos todos acampar...<size=80%> <i>não é?
+<style="LYellow">Naal,</style> you know better than anyone that I don't have a good memory! But anyways...;<style="LYellow">Naal,</style> sabes melhor que ninguém que eu não tenho uma boa memória! Mas de qualquer forma...;
+Now we will be able to view species from far away!;Agora podemos ver espécies de longe!
+Oh He-<size=80%>hello... I wasn't expecting you to strike a conversation with me all of a sudden;Oh He-<size=80%>olá... Eu não estava à espera que viesses falar assim comigo de repente
+<size=80%>I'm just not used to it... perhaps you may understand...;<size=80%>Eu... simplesmente não estou habituado a isso... talvez até entendas...;
+Oh the <style="LYellow">Binoculars</style>? <size=80%>There's no need to thank me... It was just a favor I did for <sprite name="Betsy"> <style="LYellow">Betsy...;Oh os <style="LYellow">Binóculos</style>? <size=80%>Não é preciso agradecer... Foi apenas um favor que fiz à <sprite name="Betsy"> <style="LYellow">Betsy...;
+<size=80%>Since we are on that topic... I shall inform you that I have <style="LYellow">more items</style> like that from where those <style="LYellow">Binoculars</style> came from...;<size=80%>Mas já que estamos neste assunto... Tenho a dizer que existem <style="LYellow">mais itens</style> de onde vieram esses <style="LYellow">Binóculos</style>...;
+<size=80%>You see... I'm sort of running a... uh... hmm... <style="LYellow">of-the-grid marketplace</style>, you could say...;<size=80%>Entendes... Eu estou meio que a montar um... uh... hmm... <style="LYellow">mercado negro</style>, digamos assim...;
+<size=80%>The variety of items isn't that much but it can be quite helpful in certain scenarios...;<size=80%>A variedade de itens não é muita, mas pode ser bastante útil em certos cenários...;
+<size=80%>Well... if you have any interest just come by... until then!;<size=80%>Bem... se tiveres algum interesse, passa por aqui... até lá!;
+Oh Y-<size=80%>you came... let me show you around...;Oh V-<size=80%>você veio... deixa-me apresentar-te a tenda...;
+<size=80%>So this right here is the main shelf... all these items can be quite usefull to you... but they aren't free... of course...;<size=80%>Então, aqui está a prateleira principal... todos esses itens podem ser bastante úteis... mas eles não são gratuitos... obviamente...;
+<size=80%>And this one is-;<size=80%>E este aqui é-;
+<size=115%>WHAAAA! FIRST COSTUMER! STRAIGHT FROM COSTUMER-LAND!!;<size=115%>OOOOHHH! PRIMEIRO CLIENTE! DIRETO DA CLIENTE-Ó-LÂNDIA!!
+<size=100%>Hum-ham... <size=80%>As I was saying... this is <sprite name="Jhat"> <style="LYellow">Jhat</style>... he will take care of selling you these items... ;<size=100%>Hum-ham... <size=80%>Como eu estava a dizer... este aqui é o <sprite name="Jhat"> <style="LYellow">Jhat</style>... ele será o responsável por te vender estes itens...;
+Pleasure to meet you! Hmpf! If you are interested in anything behind me, just let me know!;Prazer! Hmpf! Se estiveres interessado em algo aqui atrás, é só avisar!
+But keep in mind that a bit of <style="LYellow">haggling</style> is the best part of business! ;Mas lembra-te de que um pouco de <style="LYellow">negociação</style> é a melhor parte do comércio! 
+So let's have fun together what do you think?;Então vamos nos divertir juntos, que tal?
+YO GUYS WHAT'S THAT?!;YO PESSOAL O QUE É ISTO?!
+Hey be careful with your hands little man! Me and <sprite name="Cloris"><style="LYellow"> Cloris</style> just finished hanging that up!;Ei, cuidado com as mãos, rapazeco! Eu e a <sprite name="Cloris"><style="LYellow"> Cloris</style> acabámos de pendurar isso!
+Ah ah ah, I think someone has had too much sugar these days;Ah ah ah, acho que alguém tem andado a consumir muito açúcar ultimamente
+Anyways, <style="LYellow">Rowl</style>, this is a espacial bulletin board where we can organize <style="LYellow">tasks</style> that need to be completed around the<style="LYellow"> Campsite;De qualquer forma, <style="LYellow">Rowl</style>, este é um quadro especial onde podemos organizar as <style="LYellow">tarefas</style> que precisam de ser feitas no <style="LYellow"> Acampamento;
+Exactly, this way we will always have a sense of direction on what to do next;Exatamente, desta forma teremos sempre uma noção do que falta fazer
+Oh that's a good idea uh? What should we call it tho?;Oh, parece-me uma boa ideia! Como deveríamos chamá-lo então?
+Call it? Little man, it's just a <style="LYellow">'To do List'</style>, there's nothing special about it!;Chamá-lo? Rapazeco, isto é apenas uma <style="LYellow">'Lista de Tarefas'</style>, não há que complicar!
+Well I guess we can have a bit of fun while we are at it! What about naming it <style="LYellow">'Quests & Requests''? ;Bem, acho que podemos nos divertir um pouco já que estamos nisto! Que tal chamá-lo de <style="LYellow">'Missões e Ambições'?
+Seems like a very fashionable name if I do say so myself!;Parece um nome muito na moda a meu ver!
+Nah-ah! We need something more thrilling! Hear me out...;Nah-ah! Precisamos de algo mais emocionante! Oiçam-me masé...
+<align="center"><size=150%>"The Grand Compendium of Noble Tasks bestowed upon the Worthy";<align="center"><size=150%>"O Grande Compêndio de Tarefas Nobres concedidas aos Dignos";
+Tsk. What a ridiculous name. Can this generation ever think before talking?;Tsk. Que nome ridículo. Será que esta geração consegue pensar antes de falar?
+Ai ai ai! I guess we are going to need a tie-breaker vote darling!;Ai ai ai! Acho que vamos precisar de um voto de desempate, querido!
+Isn't camping just the best? The air out here feels so crisp and free!;Acampar não é simplesmente o melhor? O ar aqui fora é tão fresco, tão livre!
+My absolute favorite part? Roasting marshmallows, hands down!;A minha parte favorita? Tostar marshmallows, sem qualquer dúvida!
+Like papa used to say, it's all about finding the perfect balance between golden brown and crispy perfection!;Como o meu pai costumava dizer, é tudo uma questão de encontrar o equilíbrio perfeito entre o dourado e o crocante!
+Why don't you give it a try?!;Porque é que não experimentas?!
+Hey, dude! How's it hanging? Any luck with marshamllows?;Então meu! Como é que vais? Já tiveste sorte com os marshmallows?
+You know, it's not just about the roasting technique. A solid<style="LYellow"> campfire </style>sets the stage for perfection.;Sabes, nem tudo é sobre a técnica de tostar. Uma <style="LYellow"> fogueira </style> sólida define a base para a perfeição.
+If you could lend me a paw I should be able to make it stronger. What do you think?;Se me conseguisses dar uma patinha, eu talvez consiga torná-la mais forte. Que tal?
+Whoa, hold up! You control <style="LYellow">Bees?!;Whoa, espera lá! Controlas <style="LYellow">Abelhas?!
+THAT'S INSANE BRO!;ISSO É DEMAIS MEU!
+That's what you thought I was gonna say right?;Era isso que pensavas que ia dizer, né?
+The truth is <style="LYellow"><sprite name="Betsy"> Betsy</style> also filled me in on some<style="LYellow"> Bee </style> wackery yesterday, so I'm not totally caught off guard.;A verdade é que a <style="LYellow"><sprite name="Betsy"> Betsy</style> também me contou algumas loucuras sobre <style="LYellow"> Abelhas </style> ontem, então eu não estou totalmente fora do assunto.
+In fact, I think I can put that knowledge to good use and amp up our <style="LYellow">campfire.;Na verdade, até acho que posso usar esse conhecimento para melhorar a <style="LYellow">fogueira.
+But, uh, I'm gonna need your expertise to really unlock the full potential.;Mas bem, vou precisar da tua experiência para realmente desbloquear todo o potencial.
+Hey there, buddy!;Hey meu!
+Gotta shoot straight with you - The <style="LYellow">campfire's</style> still not up to snuff!;Tenho-te a dizer, a <style="LYellow">fogueira</style> ainda não está à altura!
+Need more <style="LYellow"><sprite name="Ember"> embers</style>, you say?;Dizes que precisa de mais <style="LYellow"><sprite name="Ember"> brasas</style> é?
+Alright, let me see what I can rustle up...;Tá bem, deixa-me ver o que consigo arranjar...
+Aha! Here you go, found <style="LYellow">1500 <sprite name="Ember"></style> embers chilling in my back pocket;Aha! Cá estão, encontrei <style="LYellow">1500 <sprite name="Ember"></style> brasitas no meu bolso de trás
+Use 'em wisely, alright?;Pensa bem antes de as usar ok?
+Hey Hey Hey! Let me see what you got there!;Ei Ei Ei! Mostra o que tens aí!
+That's a very cute <style="LYellow">candle</style> man! Is this like a present for... someone? ;Isto é uma <style="LYellow">vela</style> muito fixe meu! É de presente para... alguém?
+Oh, I can have it? THANK YOU SO MUCH! You know I love fire-related things bro!;Oh, eu posso ficar com ela? MUITO OBRIGADO! Sabes bem que eu amo coisas relacionadas ao fogo meu!
+In fact, now that I think of it, a candle is really just a mini-fire, I'm convinced that with enough of these we can make our own <style="LYellow">campfire</style> much better!;Na verdade, agora que penso nisso, uma vela é realmente apenas um mini-fogo, estou convencido de que com suficientes poderíamos melhorar muito a nossa própria <style="LYellow">fogueira</style>!
+But, you know... You are the one that needs to unlock the full potential of this knowledge;Mas, sabes como é... Tu é que tens de desbloquear todo o potencial deste conhecimento que te passei
+I'm just here to support! ;Eu estou aqui apenas para apoiar!
+Hey man! Is that another present for me?;Oh! Mais um presente para mim?
+<size=115%>WHA-WHAT IS THIS!?;<size=115%>O-O QUE É ISTO!?
+Why are you walking around with a <style="LYellow">skull</style> in your hand? Are you trying to scare me?;Porque é que tás a andar por aí com uma <style="LYellow">caveira</style> na mão? Era para me assustares?
+Wait! What species does this belong to? I can't seem to recognize it...;Espera lá! Que espécie é esta sequer? Não estou a reconhecer...
+WH-WHAT IN THE MARSHMALLOW! ITS EYES FIRED UP! ;C-COMO MIL MARSHMALLOWS! OS OLHOS ACENDERAM!
+Heck no, you hold on to that! Don't get it close to me!;Nem pensar, fica com isso! Não aproximes de mim!
+But you know, I think this gave me an idea to improve the <style="LYellow">campfire...;Mas realmente, acho que isto me deu uma ideia para melhorar a <style="LYellow">fogueira...
+Imagine creating an army of these guys to protect it... You could even power them with energy from the <style="LYellow">campfire</style> itself!;Imagina só, criar um exército destas coisas para protegê-la... Até poderiamos alimentá-los com energia da própria <style="LYellow">fogueira</style>!
+Hey, I gave the idea, now you do the rest ok?;Bom, já dei a ideia, agora fazes o resto, né?
+Well, would you believe it?;Impressionante não é?
+This campsite used to be a right haven for all sorts of <style="LYellow">critters</style>, but now it's as quiet as a lamb in a field. ;Este acampamento costumava ser um refúgio para todos os tipos de <style="LYellow">criaturas</style>, mas agora está tão quieto quanto um cordeiro numa colina.
+I've a hankering to start me a little <style="LYellow">record book</style>, ya see.;Sabe, estava a pensar começar um pequeno <style="LYellow">livro de registros</style>.
+But, ye know, it's not as easy as pie! I'll need some info to get me started.;Mas, não é tão fácil quanto parece! Vou precisar de algumas informações para o começar.
+Could ye tell me about <style="LYellow">5</style> different <style="LYellow">animals</style> 'round here?;Acha que me consegue falar sobre <style="LYellow">5</style> <style="LYellow">animais</style> diferentes que vivam por aqui?
+That' set me off on the right hoof!;Isso colocar-me-ia no casco certo!
+Well, well, well! You've gone and spotted <style="LYellow">five critters</style> already?;Bem, bem, bem! Já avistou <style="LYellow">cinco criaturas</style>?
+Ain't that just dandy! Oh, what a splendid day indeed!;Maravailha! Oh, que dia esplêndido!
+Now, hold your horses while I set up the <style="LYellow">record book</style>...;Agora, segura os cavalos enquanto eu preparo o <style="LYellow">livro de registros</style>...
+Ah, here it is! I'll name it <b><style="LYellow">"The Bestiary - by <sprite name="Betsy"> Betsy"</style>!;Ah, aqui está! Vou chamá-lo de <b><style="LYellow">"O Bestiário - por <sprite name="Betsy"> Betsy"</style>!
+But listen here youngin'! I'll still need your assistance!;Mas ouve bem jovem! Ainda necessito da sua ajuda!
+If ye happen upon a grand total of <style="LYellow">5 species</style> for more than <style="LYellow">100 times</style>, come holler at me, and I'll have something special for ya as a <color=#FFCC7C>little reward.;Se encontrar um total de <style="LYellow">5 espécies</style> mais de <style="LYellow">100 vezes</style>, venha falar comigo, e terei algo especial para si como <color=#FFCC7C>recompensa.
+What did I tell ya kid? <style="LYellow"><sprite name="Naal"> Naal</style> showed up faster than you could ever think of!;Viu jovem? O <style="LYellow"><sprite name="Naal"> Naal</style> apareceu mais rápido do que poderia imaginar!
+But hey moving on: I chated a bit with him, and turns out it is possible to upgrade those binoculars even further;Mas continuando: conversámos um pouco, e aparentemente é possível melhorar ainda mais esses binóculos
+However! Nothing's free in this world kid! I'll still need you to help me by filling out more of the <style="LYellow">Bestiary;No entanto! Nada é de graça neste mundo, jovem! Ainda vou precisar da sua ajuda para preencher o <style="LYellow">Bestiário
+Although your generation is dumb, I believe that you have already noticed that the<style="LYellow"> Bestiary</style> has a section for you to check how many animals you have seen.;Embora a sua geração não seja muito inteligente, acredito que já tenha notado que o <style="LYellow">Bestiário</style> tem uma secção para verificar quantos animais já avistou.
+If by chance you happen upon a <style="LYellow">500 critters</style> of <style="LYellow">ten different species</style>, I'll upgrade those <style="LYellow">Binoculars</style> for ya;Se por acaso encontrar <style="LYellow">500 criaturas</style> de <style="LYellow">dez espécies diferentes</style>, vou melhorar esses <style="LYellow">Binóculos</style> por si
+Understood? Then, until we meet again, youngster!;Entendido? Então, até breve jovem!
+Well, look at you, eagle-eyed! You've gone and documented a <style="LYellow">100 critters</style> each for <style="LYellow">10 different species</style>! ;Muito bem, jovem olhos de falcão! Já documentou <style="LYellow">100 criaturas</style> de <style="LYellow">10 espécies diferentes</style>!
+Just what's needed to spruce up those <style="LYellow">Binoculars</style>! Here you go, take them for a spin!;Exatamente o que é necessário para melhorar esses <style="LYellow">Binóculos</style>! Aqui estão, experimente-os!
+If you are aiming to upgrade beyond that, I'll need records of <style="LYellow">2500 creatures</style> spanning <style="LYellow">15 different species</style>. Think you're up for the challenge?;Se pretender melhorá-los ainda mais, vou precisar de registros de <style="LYellow">2500 criaturas</style> de <style="LYellow">15 espécies diferentes</style>. Acha que está à altura do desafio?
+Well, I'll be darned, you've really outdone yourself kid! ;Bem, estou impressionada, o jovem realmente superou-se!
+<b><style="LYellow">The Bestiary</style></b> already has records of <style="LYellow">500 critters</style> spread across <style="LYellow">15 different species</style>!;<b><style="LYellow">O Bestiário</style></b> já tem registros de <style="LYellow">500 criaturas</style> espalhadas por <style="LYellow">15 espécies diferentes</style>!
+Hand over them <b><style="LYellow">Binoculars</style></b>, and I'll give 'em a bit of a tweak...;Passe-me esses <b><style="LYellow">Binóculos</style></b>, e eu farei alguns ajustes...
+There we are! Now they're as sharp as can be!;Aqui estão! Agora estão o mais nítidos possível!
+Well... to be honest... there's one last upgrade, but it'll take <style="LYellow">10K records</style> for <style="LYellow">20 different species</style>!;Bem... honestamente... ainda há uma última melhoria, mas levará <style="LYellow">10 mil registros</style> de <style="LYellow">20 espécies diferentes</style>!
+Give me a holler once you've managed that!;Avise-me quando conseguir isso!
+I'll be hornswoggled! <style="LYellow">2500 record</style> of <style="LYellow">25 different critters</style>! That must be a world record!;Estou impressionada! <style="LYellow">2500 registros</style> de <style="LYellow">25 criaturas diferentes</style>! Isto deve ser um recorde mundial!
+Just as I promised, I'll give you the ultimate optical device, so hand over them <b><style="LYellow">Binoculars!;Como prometi, vou lhe dar o melhor dispositivo de observação possível, então entregue-me esses <b><style="LYellow">Binóculos</style></b>!
+There we go, as sharp as it gets! Now off you go, have yourself some fun!;Pronto, agora sím, tão nítido quanto possível! Agora vá, divirta-se!
+Hey, kid! Just curious, what's your favorite critter? Well, for me, it's <style="LYellow">Bees.;Ei, jovem! Só por curiosidade, qual é a sua criatura favorita? Bem, para mim, são as <style="LYellow">Abelhas</style>.
+I reckon they're something special, the way they all pitch in together.;Acho que elas são algo de especial, na maneira como todas trabalham em cooperação.
+Say, since you're doin' such a bang-up job fillin' that <b><style="LYellow">Bestiary</style></b>, here's an offer for ya:;Já que está a fazer um trabalho tão bom a preencher esse <b><style="LYellow">Bestiário</style></b>, aqui está uma oferta para si:
+If you manage to fill it up completely, I'll teach you all there is to know about <style="LYellow">Bees.;Se conseguir preenchê-lo completamente, vou ensinar-lhe tudo o que há para saber sobre <style="LYellow">Abelhas.
+Yep, including how to <style="LYellow">tame</style> 'em! What do you say to that?;Sim, incluindo como <style="LYellow">domá-las</style>! O que acha?
+You've gone and done it! <b><style="LYellow">The Bestiary</style></b> is filled to the brim!;Conseguiu! <b><style="LYellow">O Bestiário</style></b> está completamente preenchido!
+Just as I promised, it's time for a lesson on <style="LYellow">Bees</style>! Gather 'round, and I'll tell you everything there is to know!;Como prometido, é hora de uma lição sobre <style="LYellow">Abelhas</style>! Junte-se, e vou contar-lhe tudo o que há para saber!
+Say what young man? You've found a weird looking animal?;Diga jovem? Encontrou um animal de aparência estranha?
+Exotic colors? Hmmmm... I do recall reading something regarding that back in the day;Cores exóticas? Hmmmm... Lembro-me de ter lido algo sobre isso no meu tempo
+If I'm not mistaken they are called <style="LYellow"><sprite name="Shiny"> Shiny</style> animals;Se não me engano, são chamados de animais <style="LYellow"><sprite name="Shiny"> Radiantes</style>
+I guess you are really lucky youngin'. Those are quite rare to find, some archeologists live for them;É um jovem bastante sortudo. Eles são bastante raros de encontrar, alguns arqueólogos até vivem só para isso
+Well if you find more just come tell me about how they looked like and I'll keep track of them;Bem, se encontrar mais, venha contar-me como eram e eu farei o registo deles
+Oh so you actually did it! <style="LYellow">100</style> Individuals of <style="LYellow">5</style> different species uh?;Oh, então realmente conseguiu! <style="LYellow">100</style> indivíduos de <style="LYellow">5</style> espécies diferentes!
+Just as I promised! I'm gonna give you your reward...;Como prometido! Vou dar-lhe a recompensa...
+There's a slight issue, however. I left the reward back in the city... So I can't give it right now.;No entanto, há um pequeno problema. Deixei a recompensa na cidade... Então não consigo dar-lhe agora.
+But I'm already on it. I've called a <style="LYellow">friend</style>, he will bring it here, so no worries.;Mas já estou a tratar disso. Vou chamar um <style="LYellow">amigo</style>, ele vai trazê-la para cá, então não se preocupe.
+Yooo how's it going man? Word is spreading that this is the hottest spot in the <style="LYellow">Campsite</style>. I came here to check by myself.;Yooo, mékie? Está a espalhar-se a notícia de que este é o lugar mais baril do <style="LYellow">Acampamento</style>. Vim aqui verificar com os meus próprios olhos.
+Gotta admit... I'm <i>hooked</i> - you've made some solid investments! But hey, let me float this idea past ya... ;E tenho que admitir... <i>Fisgou-me</i> à séria- fizeste investimentos sólidos! Mas olha, deixa-me flutuar esta ideia para ti... 
+What if... stay with me here... you could reel in <style="LYellow">embers</style> without struggling? Genius right?;E se... ouve bem... pudesses arrecadar <style="LYellow">brasas</style> sem esforço? Genial, ou não?
+A place where you could play <style="LYellow">minigames</style> for <style="LYellow">embers</style>, of course, if you are skilled at it, they are basically guaranteed.;Num lugar onde pudesses jogar <style="LYellow">minijogos</style> por <style="LYellow">brasas</style>, se fores habilidoso, elas são basicamente garantidas.
+I got some connections to make this project run! Only thing is... ehh... you're a little low in the ember department right now and my reputation is on the line, you know?;Tenho algumas conexões para fazer este projeto funcionar! A única coisa é... ehh... estás um pouco em falta no que toca a brasas e a minha reputação está em jogo, percebes?
+So what if you came back when you have atleast <style="LYellow"><sprite name="Ember"> 250000 embers</style>? Then we could really make some <i>waves</i> uh?;Então porque não voltas quando tiveres pelo menos <style="LYellow"><sprite name="Ember"> 250000 brasas</style>? Aí sim poderíamos realmente fazer os investidores morder o <i>anzol</i>, uh?
+So, got those <style="LYellow">embers</style> stacked up yet? ;Então, já poupaste essas <style="LYellow">brasas</style>?
+Hmm? No? Oh, c'mon, you really need to <i>scale</i> up your game!;Hmm? Não? Oh, vá lá, não me venhas com conversas de <i>pescador</i>!
+Come back when you are pocket <style="LYellow"><sprite name="Ember"> 250000 embers.;Volta quando tiveres <style="LYellow"><sprite name="Ember"> 250000 brasas</style> no bolso.
+Oh you came to chat? Just go get your <style="LYellow">embers</style> man, I won't go anywhere you know?;Oh, vieste conversar? Vai masé buscar as tuas <style="LYellow">brasas</style>, que eu não vou a lado nenhum!
+<style="LYellow"><sprite name="Ember"> 250000</style> will be enough for you to not embarrass me infront of the investors; <style="LYellow"><sprite name="Ember"> 250000</style> serão suficientes para não me envergonhares à frente dos investidores
+Look man, I won't even take your <style="LYellow">embers</style> away, I just gotta show the investors that you aren't a nobody, you know? ;Olha, eu nem vou exigir dares-me as <style="LYellow">brasas</style>, só preciso de mostrar aos investidores que não és um zé-ninguém, entendes?
+That's why you need a good net worth value. Not so tough right? So go ahead and <i>reel</i> them all in!;É por isso que precisas de um bom valor. Não é tão difícil, certo? Então vai lá e <i>pesca</i> elas todas!
+OOOHH, I can smell it! I know exactly what's hiding in that pocket of yours - <style="LYellow"><sprite name="Ember"> 250,000 Embers!;OOOHH, consigo cheirá-las! Sei exatamente o que está escondido nesse teu bolso - <style="LYellow"><sprite name="Ember"> 250,000 Brasas!
+Finally, we can take this to the next level! You got cash, I got connections, talk about the perfect duo, am I right?;Finalmente, podemos levar isto para a próxima <i>remada</i>! Tu tens o dinheiro, eu tenho as conexões, dupla perfeita já viste?
+Alright, alright, lemme just make a quick call.;Bom ok ok, deixa-me só fazer uma chamada rápida.
+<i>hm... exactly... hm hm... hm hm...</i>; <i>hm... exatamente... hm hm... hm hm...</i>
+aaand we're golden! All set up! They work quite fast uh?;E estamos prontos! Tudo montado! Eles trabalham bem rápido, uh?
+Heyyy, wanna hit the casi... wait a second... something's <i>fishy</i> here... where are your <style="LYellow">embers?!;Heyyy, queres ir ao casi... espera lá... algo está estranho aqui... onde é que foram as tuas <style="LYellow">brasas?!
+Don't tell me you are broke now! GAGAGAGA!!;Não me digas que estás falido agora! GAGAGAGA!!
+Look men I hate to be that guy but I can't let you through if you don't have more than <style="LYellow"><sprite name="Ember"> 250K embers</style> with you;Olha, odeio ser esta pessoa, mas não posso deixar-te passar se não tiveres mais de <style="LYellow"><sprite name="Ember"> 250K brasas</style> contigo
+Heyyy, wanna hit the casi... wait a second... something's <i>fishy</i> here... where are your embers?!;Heyyy, queres ir ao casi... espera um segundo... algo está aqui... onde estão as tuas brasas?!
+But hey, you know that <sprite name="Rowl">  <style="LYellow">guy</style> over there? I always see you giving him <style="LYellow">embers</style>. Just go there and take them back no?;Mas olha, sabes aquele <sprite name="Rowl">  <style="LYellow">gajo</style> ali? Vejo-te sempre a trocar <style="LYellow">brasas</style> com ele. Vai lá e pega-as de volta, não?
+What? My embers? Why would you say that?;O quê? As minhas brasas? Por que farias uma coisa dessas?
+I've put blood sweat and tears into making this <style="LYellow">campfire</style> perfect, you can't take that away from me!;Coloquei sangue, suor e lágrimas para tornar esta <style="LYellow">fogueira</style> no que é, não podes tirar isso de mim!
+Hey kid, I don't mean to be rude but this is just how the business works, you know? ;Hey miúdo, não quero ser rude mas é assim que os negócios funcionam, sabes?
+Hmm, yes, maybe this paired with a few pendants... perfection!;Hmm, sim, talvez isto combinado com alguns pendentes... perfeito!
+Oh, hello there! I was just sketching some fresh outfit ideas, you know how it is;Oh, olá! Estava apenas a esboçar algumas ideias de roupas novas, sabes como é
+Fashion is simply everything to me, and being out in the wilds, surrounded by nature, just fuels my creativity!;A moda é simplesmente tudo para mim, e estar aqui a acampar, rodeado pela natureza, apenas alimenta a minha criatividade!
+Oh, but where are my manners? I didn't even introduce myself;Oh, mas onde estão os meus modos? Nem me apresentei
+My name's <style="LYellow">Cloris</style>, darling. If you need anything - fashion tips, perhaps - just give me a call;O meu nome é <style="LYellow">Cloris</style> querido. Se precisares de alguma coisa - dicas de moda, talvez - basta chamar-me
+I'll be around, grazing and glamorizing!;Estarei por aí, pastando e espalhando o glamour!
+Ah, I'm so glad you came to chat!;Ah, estou tão feliz que vieste conversar!
+Listen closely - I've been pondering something rather... daring;Ouve com atenção - tenho ponderado algo bastante... ousado
+Why should fashion be limited to us animals, hmm?;Porque é que a moda tem de ser limitada a nós animais, hmm?
+You see that little happy <style="LYellow">campfire</style> over there?;Vês aquela pequena <style="LYellow">fogueira</style> ali?
+What if... I could style it? Give it a new color, accessorize it, or even reshape its form entirely!;E se... eu pudesse estilizá-la? Dar-lhe uma nova cor, acessórios, ou até mesmo remodelar a sua forma completamente!
+Turning flames into fashion, now that's an interesting idea, don't you think? ;Transformar fogo em moda, isso sim é uma ideia interessante, não achas?
+Just as I like to say, fashion knows no boundaries;Assim como gosto de dizer, a moda não conhece limites
+Darling, fashion isn't just about looking fabulous. It's transformative!;Querido, a moda não é apenas sobre parecer fabuloso. É transformadora!
+What we wear can alter how we feel, how we move - even how we think!;O que vestimos pode alterar como nos sentimos, como nos movemos - até mesmo como pensamos!
+A bold outfit can inspire confidence, while something cozy makes you feel at ease;Uma roupa ousada pode inspirar confiança, enquanto algo confortável faz-te sentir relaxado
+And this goes both ways you know? Our behaviour also influences what we decide to wear;E isso funciona nos dois sentidos, sabes? O nosso comportamento também influencia o que decidimos vestir
+Now imagine using this concept on our little <style="LYellow">campfire</style>. Fashion and behaviour, darling - They're inseparable, even for a fire!;Agora imagina usar este conceito na nossa pequena <style="LYellow">fogueira</style>. Moda e comportamento querido - São inseparáveis, mesmo para uma fogueira!
+I've cracked the code darling! Remember how fashion and behaviour are inseperable?;Descobri o código querido! Lembras-te de como disse que a moda e o comportamento são inseparáveis?
+Well, if our little <style="LYellow">fire</style> keeps using a <style="LYellow">certain skill</style> over and over then both his <style="LYellow">appearance</style> AND <style="LYellow">behaviour</style> will change;Bem, se a nossa pequena <style="LYellow">fogueira</style> continuar a usar uma certa <style="LYellow">habilidade</style> repetidamente, tanto a sua <style="LYellow">aparência</style> quanto o <style="LYellow">comportamento</style> mudarão
+Just take a look!;Vem ver!
+Betsy;Betsy
+Cloris;Cloris
+Rowl;Rowl
+Whose idea should we follow?;Devíamos seguir a ideia de quem?
+Do you wish to continue your previous unfinished run?;Desejas continuar a partir da tua noite anterior?
+#
+#
+#========================= UNLOCKABLES =========================#
+NEW ITEM ACQUIRED!;NOVO ITEM ADQUIRIDO!
+NEW SKILL DISCOVERED!;NOVA HABILIDADE DESCOBERTA!
+UNLOCKED;DESBLOQUEADO
+UPGRADED;MELHORADO
+FLIMSY BINOCULARS;BINÓNUCULOS FRÁGEIS
+Allows you to see what <style="LYellow">enemy</style> will come out next so you can be prepared. To use them just open the <b><style="LYellow">Bestiary</style></b> tab in-game;Permite ver que <style="LYellow">inimigo</style> vai aparecer a seguir para que possas estar preparado. Para os usar, basta abrir a aba do <b><style="LYellow">Bestiário</style></b> durante jogo
+LIGHTWEIGHT BINOCULARS;BINÓNUCULOS LEVES
+Allows you to see the next <style="LYellow"2 enemies;Permite ver os próximos <style="LYellow"2 inimigos
+STURDY BINOCULARS;BINÓNUCULOS RESISTENTES	
+Allows you to see the next <style="LYellow"3 enemies;Permite ver os próximos <style="LYellow"3 inimigos
+HIGH-TECH BINOCULARS;BINÓNUCULOS DE ALTA TECNOLOGIA
+Allows you to see the next <style="LYellow"4 enemies;Permite ver os próximos <style="LYellow"4 inimigos
+BETSY'S BESTIARY;BESTIÁRIO DA BETSY
+You can now check the stats and abilities of <style="LYellow">animals</style> you've defeated and gather <style="LYellow">milestones</style>;Permite verificar as estatísticas e habilidades dos <style="LYellow">animais</style> que derrotás-te e alcançar <style="LYellow">marcos</style>
+SHINY TRACKER;RASTREADOR DE RADIANTES
+You can now keep track of <sprite name=\"Shiny\"> Shiny animals that you've encountered;Agora podes acompanhar os animais <sprite name=\"Shiny\"> Radiantes que encontrás-te
+BEE SUMMONER;INVOCADOR DE ABELHAS
+You can now unlock the <style="LYellow">Bee Summoner</style> ability, go talk to <color=#FFCC7C><sprite name=\"Rowl\"> Rowl;Agora podes desbloquear a habilidade <style="LYellow">Invocador de Abelhas</style>, fala com o <color=#FFCC7C><sprite name=\"Rowl\"> Rowl
+CLORIS' WARDROBE;ARMÁRIO DA CLORIS
+You can now <style="LYellow">style</style> your <style="LYellow">campfire</style> affecting its <style="LYellow">behaviour</style> and <style="LYellow">environment</style>;Agora podes <style="LYellow">estilizar</style> a tua <style="LYellow">fogueira</style> afetando o seu <style="LYellow">comportamento</style> e <style="LYellow">ambiente</style>
+GYOMYO'S CASINO;CASINO DO GYOMYO
+You can now <style="LYellow">gamble</style> your embers;Agora podes <style="LYellow">apostar</style> as tuas brasas
+NAAL'S BLACK MARKET;MERCADO NEGRO DO NAAL
+You can now access the <style="LYellow">Black Market</style> to buy especial uprades;Agora podes aceder ao <style="LYellow">Mercado Negro</style> para comprar melhorias especiais
+ROWL'S SKILL TREE;ÁRVORE DE HABILIDADES DO ROWL
+You can now <style="LYellow">unlock</style> and <style="LYellow">upgrade</style> new abilities for your <style="LYellow">campfire</style>;Agora podes <style="LYellow">desbloquear</style> e <style="LYellow">melhorar</style> novas habilidades para a tua <style="LYellow">fogueira</style>
+#
+#
+#========================== CASINO ========================
+Bet Amount;Montante Apostado
+Go Back;Voltar
+Amount of Carnivore Plants;Quantidade de Plantas Carnívoras
+Start Game;Começar
+You've lost {0} Embers in total;Perdeste {0} Brasas no total
+You've gained +{0} Embers in total;Ganhaste +{0} Brasas no total
+Cashout;Retirar Dinheiro
+Acorn Value;Valor da Bolota
+Amount of Acorns;Quantidade de Bolotas

@@ -300,7 +300,7 @@ public class DeckBuilder : MonoBehaviour
 
 
             
-            new Augment("Flower Field" ,"Flower Field", "Unlock the ability to create Draining Pools", "DrainPoolUnlock", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Flower Field" ,"Flower Field", "Unlock the ability to scatter Flowers", "DrainPoolUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Flower Field");
                 Flamey.Instance.addOnLandEffect(new DrainOnLand(1f, 0.01f, 0.05f, 1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"DrainPoolPerc","DrainPoolProb","DrainPoolSize","DrainPoolDuration"});            
@@ -465,7 +465,7 @@ public class DeckBuilder : MonoBehaviour
         
         };
 
-        
+       
 
     }
 

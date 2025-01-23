@@ -133,7 +133,7 @@ public class Explosion : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -230,7 +230,7 @@ public class Necromancer : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -345,7 +345,7 @@ public class Bullets : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

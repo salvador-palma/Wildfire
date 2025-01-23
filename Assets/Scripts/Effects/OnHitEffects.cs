@@ -284,10 +284,7 @@ public class ShredOnHit : OnHitEffects
             
            
             if(en.Armor > 0){
-                if(!en.hitByShred){
-                    en.hitByShred = true;
-                    PlayAudio();
-                }
+                PlayAudio();
                 
                 ObjectPooling.Spawn(MusicNotesParticle, new float[]{en.HitCenter.position.x, en.HitCenter.position.y});
             }
@@ -320,8 +317,9 @@ public class ShredOnHit : OnHitEffects
     }
     
     private void PlayAudio(){
-         AudioManager.PlayOneShot(FMODEvents.Instance.ResonanceEffect, Vector2.zero);
-        
+        //AudioManager.PlayOneShot(FMODEvents.Instance.ResonanceEffect, Vector2.zero);
+        AudioManager.Instance.SetAmbienceParameter("SoundBoost",1);
+        //AudioManager.Instance.SetAmbienceParameter("SoundBoost",0);
     }
     public void Stack(ShredOnHit shredOnHit){
         percReduced += shredOnHit.percReduced;

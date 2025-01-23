@@ -1494,6 +1494,7 @@ GameObject:
   - component: {fileID: 97240353}
   - component: {fileID: 97240355}
   - component: {fileID: 97240354}
+  - component: {fileID: 97240356}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1542,8 +1543,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Keep Playing
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1573,7 +1574,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1617,6 +1618,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97240352}
   m_CullTransparentMesh: 1
+--- !u!114 &97240356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97240352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &97297701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,6 +1902,7 @@ GameObject:
   - component: {fileID: 116863458}
   - component: {fileID: 116863460}
   - component: {fileID: 116863459}
+  - component: {fileID: 116863461}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -1971,7 +1985,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2015,6 +2029,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116863457}
   m_CullTransparentMesh: 1
+--- !u!114 &116863461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116863457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &122103392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,6 +3345,7 @@ GameObject:
   - component: {fileID: 183699282}
   - component: {fileID: 183699281}
   - component: {fileID: 183699280}
+  - component: {fileID: 183699283}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -3345,8 +3375,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Flame
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3376,7 +3406,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3439,6 +3469,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -84.3}
   m_SizeDelta: {x: 209.58, y: 19.32}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &183699283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183699279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &190162737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3598,6 +3643,7 @@ GameObject:
   - component: {fileID: 215611242}
   - component: {fileID: 215611244}
   - component: {fileID: 215611243}
+  - component: {fileID: 215611245}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -3721,6 +3767,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215611241}
   m_CullTransparentMesh: 1
+--- !u!114 &215611245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215611241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1001 &220587869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3805,6 +3866,7 @@ GameObject:
   - component: {fileID: 222363419}
   - component: {fileID: 222363421}
   - component: {fileID: 222363420}
+  - component: {fileID: 222363422}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -3890,7 +3952,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3934,6 +3996,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222363418}
   m_CullTransparentMesh: 1
+--- !u!114 &222363422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222363418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &223059508
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,7 +4828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 76.62195, y: -21.4996}
+  m_AnchoredPosition: {x: 76.62194, y: -21.4996}
   m_SizeDelta: {x: 153.24388, y: 42.9992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289804286
@@ -5177,6 +5251,7 @@ GameObject:
   - component: {fileID: 302178928}
   - component: {fileID: 302178930}
   - component: {fileID: 302178929}
+  - component: {fileID: 302178931}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -5256,7 +5331,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5300,6 +5375,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302178927}
   m_CullTransparentMesh: 1
+--- !u!114 &302178931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302178927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &312507733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5538,12 +5625,12 @@ MonoBehaviour:
   EffectContainer: {fileID: 1638997069}
   EffectTemplate: {fileID: 75883151}
   EffectTexts:
-  - {fileID: 1655610742}
-  - {fileID: 411026326}
-  - {fileID: 1274434938}
-  - {fileID: 116863459}
-  - {fileID: 1463272947}
-  - {fileID: 346163106}
+  - {fileID: 1655610744}
+  - {fileID: 411026328}
+  - {fileID: 1274434940}
+  - {fileID: 116863461}
+  - {fileID: 1463272949}
+  - {fileID: 346163108}
   PassiveContainer: {fileID: 1248011942}
   BlackScreen: {fileID: 0}
   BlackScreenOver: {fileID: 0}
@@ -6121,6 +6208,7 @@ GameObject:
   - component: {fileID: 346163105}
   - component: {fileID: 346163107}
   - component: {fileID: 346163106}
+  - component: {fileID: 346163108}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -6202,7 +6290,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -6246,6 +6334,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346163104}
   m_CullTransparentMesh: 1
+--- !u!114 &346163108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346163104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &383021789
 GameObject:
   m_ObjectHideFlags: 0
@@ -6808,6 +6911,7 @@ GameObject:
   - component: {fileID: 411026325}
   - component: {fileID: 411026327}
   - component: {fileID: 411026326}
+  - component: {fileID: 411026328}
   m_Layer: 5
   m_Name: Type
   m_TagString: Untagged
@@ -6856,8 +6960,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6887,7 +6991,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -6931,6 +7035,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411026324}
   m_CullTransparentMesh: 1
+--- !u!114 &411026328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411026324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &419619012
 GameObject:
   m_ObjectHideFlags: 0
@@ -7017,6 +7136,7 @@ GameObject:
   - component: {fileID: 424354073}
   - component: {fileID: 424354075}
   - component: {fileID: 424354074}
+  - component: {fileID: 424354076}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -7065,8 +7185,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
-  m_sharedMaterial: {fileID: 5744651652093434468, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7096,7 +7216,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7140,6 +7260,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424354072}
   m_CullTransparentMesh: 1
+--- !u!114 &424354076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424354072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1001 &433806528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7674,6 +7809,7 @@ GameObject:
   - component: {fileID: 466055344}
   - component: {fileID: 466055346}
   - component: {fileID: 466055345}
+  - component: {fileID: 466055347}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7753,7 +7889,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7797,6 +7933,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466055343}
   m_CullTransparentMesh: 1
+--- !u!114 &466055347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466055343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466604786
 GameObject:
   m_ObjectHideFlags: 0
@@ -8064,6 +8212,7 @@ GameObject:
   - component: {fileID: 479962029}
   - component: {fileID: 479962031}
   - component: {fileID: 479962030}
+  - component: {fileID: 479962032}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -8187,6 +8336,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479962028}
   m_CullTransparentMesh: 1
+--- !u!114 &479962032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479962028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &480761238
 GameObject:
   m_ObjectHideFlags: 0
@@ -8539,6 +8703,7 @@ GameObject:
   - component: {fileID: 495511427}
   - component: {fileID: 495511429}
   - component: {fileID: 495511428}
+  - component: {fileID: 495511430}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8585,10 +8750,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: STATS
+  m_text: Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8618,7 +8783,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8662,6 +8827,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495511426}
   m_CullTransparentMesh: 1
+--- !u!114 &495511430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495511426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &504933591
 GameObject:
   m_ObjectHideFlags: 0
@@ -8673,6 +8850,7 @@ GameObject:
   - component: {fileID: 504933592}
   - component: {fileID: 504933594}
   - component: {fileID: 504933593}
+  - component: {fileID: 504933595}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -8721,8 +8899,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8752,7 +8930,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8796,6 +8974,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504933591}
   m_CullTransparentMesh: 1
+--- !u!114 &504933595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504933591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &506691007
 GameObject:
   m_ObjectHideFlags: 0
@@ -9598,8 +9791,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9749,6 +9942,7 @@ GameObject:
   - component: {fileID: 574726182}
   - component: {fileID: 574726184}
   - component: {fileID: 574726183}
+  - component: {fileID: 574726185}
   m_Layer: 5
   m_Name: SubTitle
   m_TagString: Untagged
@@ -9828,7 +10022,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9872,6 +10066,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574726181}
   m_CullTransparentMesh: 1
+--- !u!114 &574726185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574726181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!224 &580421422 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8610669696768592604, guid: dcb5fe4354c1645449bcfc92617c7ba7, type: 3}
@@ -9924,6 +10133,7 @@ GameObject:
   - component: {fileID: 593182234}
   - component: {fileID: 593182236}
   - component: {fileID: 593182235}
+  - component: {fileID: 593182237}
   m_Layer: 5
   m_Name: Caps Label
   m_TagString: Untagged
@@ -10005,7 +10215,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -10049,6 +10259,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593182233}
   m_CullTransparentMesh: 1
+--- !u!114 &593182237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593182233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &596797288
 GameObject:
   m_ObjectHideFlags: 0
@@ -10184,8 +10406,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10333,6 +10555,7 @@ GameObject:
   - component: {fileID: 609708866}
   - component: {fileID: 609708868}
   - component: {fileID: 609708867}
+  - component: {fileID: 609708869}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -10456,6 +10679,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609708865}
   m_CullTransparentMesh: 1
+--- !u!114 &609708869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609708865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &615629613
 GameObject:
   m_ObjectHideFlags: 0
@@ -10467,6 +10705,7 @@ GameObject:
   - component: {fileID: 615629614}
   - component: {fileID: 615629616}
   - component: {fileID: 615629615}
+  - component: {fileID: 615629617}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10515,8 +10754,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Augments
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10546,7 +10785,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10590,6 +10829,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615629613}
   m_CullTransparentMesh: 1
+--- !u!114 &615629617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615629613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &616796708
 GameObject:
   m_ObjectHideFlags: 0
@@ -10780,8 +11031,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Volume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11312,6 +11563,7 @@ GameObject:
   - component: {fileID: 697888095}
   - component: {fileID: 697888097}
   - component: {fileID: 697888096}
+  - component: {fileID: 697888098}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11360,8 +11612,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Return to Campsite
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11391,7 +11643,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -11435,6 +11687,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697888094}
   m_CullTransparentMesh: 1
+--- !u!114 &697888098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697888094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708961371
 GameObject:
   m_ObjectHideFlags: 0
@@ -11606,8 +11870,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Augment History
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11637,7 +11901,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -12550,6 +12814,7 @@ GameObject:
   - component: {fileID: 778836050}
   - component: {fileID: 778836052}
   - component: {fileID: 778836051}
+  - component: {fileID: 778836053}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12598,8 +12863,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bestiary
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12629,7 +12894,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -12673,6 +12938,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778836049}
   m_CullTransparentMesh: 1
+--- !u!114 &778836053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778836049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &795117817
 GameObject:
   m_ObjectHideFlags: 0
@@ -12732,8 +13009,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: x2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13233,8 +13510,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SFX
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13624,6 +13901,7 @@ GameObject:
   - component: {fileID: 828568574}
   - component: {fileID: 828568576}
   - component: {fileID: 828568575}
+  - component: {fileID: 828568577}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -13747,6 +14025,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828568573}
   m_CullTransparentMesh: 1
+--- !u!114 &828568577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828568573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &832385066
 GameObject:
   m_ObjectHideFlags: 0
@@ -13968,6 +14261,7 @@ GameObject:
   - component: {fileID: 849643277}
   - component: {fileID: 849643279}
   - component: {fileID: 849643278}
+  - component: {fileID: 849643280}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -14016,8 +14310,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Whenever you strike an enemy, gain a small chance to apply Burn effect
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
-  m_sharedMaterial: {fileID: 5744651652093434468, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14091,6 +14385,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849643276}
   m_CullTransparentMesh: 1
+--- !u!114 &849643280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849643276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1001 &849949291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14461,8 +14770,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Music
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16647,8 +16956,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16733,6 +17042,7 @@ GameObject:
   - component: {fileID: 1049328699}
   - component: {fileID: 1049328701}
   - component: {fileID: 1049328700}
+  - component: {fileID: 1049328702}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -16781,8 +17091,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16812,7 +17122,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -16856,6 +17166,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049328698}
   m_CullTransparentMesh: 1
+--- !u!114 &1049328702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049328698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1049761266
 GameObject:
   m_ObjectHideFlags: 0
@@ -23072,6 +23397,7 @@ GameObject:
   - component: {fileID: 1158057607}
   - component: {fileID: 1158057606}
   - component: {fileID: 1158057605}
+  - component: {fileID: 1158057608}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -23104,8 +23430,8 @@ MonoBehaviour:
     <size=80%>Just a normal
     campfire, ready to protect the Campsite'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -23135,7 +23461,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -23198,6 +23524,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.0000038146973}
   m_SizeDelta: {x: 0, y: -18.1614}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1158057608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158057604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1170385986
 GameObject:
   m_ObjectHideFlags: 0
@@ -23353,6 +23694,7 @@ GameObject:
   - component: {fileID: 1176998606}
   - component: {fileID: 1176998608}
   - component: {fileID: 1176998607}
+  - component: {fileID: 1176998609}
   m_Layer: 5
   m_Name: No Augments Text
   m_TagString: Untagged
@@ -23432,7 +23774,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -23476,6 +23818,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176998605}
   m_CullTransparentMesh: 1
+--- !u!114 &1176998609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176998605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1182344604
 GameObject:
   m_ObjectHideFlags: 0
@@ -24119,6 +24473,7 @@ GameObject:
   - component: {fileID: 1246754030}
   - component: {fileID: 1246754032}
   - component: {fileID: 1246754031}
+  - component: {fileID: 1246754033}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -24167,8 +24522,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
-  m_sharedMaterial: {fileID: 5744651652093434468, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -24242,6 +24597,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246754029}
   m_CullTransparentMesh: 1
+--- !u!114 &1246754033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246754029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1248011942
 GameObject:
   m_ObjectHideFlags: 0
@@ -24451,6 +24821,7 @@ GameObject:
   - component: {fileID: 1274434937}
   - component: {fileID: 1274434939}
   - component: {fileID: 1274434938}
+  - component: {fileID: 1274434940}
   m_Layer: 5
   m_Name: Caps
   m_TagString: Untagged
@@ -24499,8 +24870,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -24530,7 +24901,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -24574,6 +24945,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274434936}
   m_CullTransparentMesh: 1
+--- !u!114 &1274434940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274434936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1278892622
 GameObject:
   m_ObjectHideFlags: 0
@@ -24721,6 +25107,7 @@ GameObject:
   - component: {fileID: 1285655917}
   - component: {fileID: 1285655919}
   - component: {fileID: 1285655918}
+  - component: {fileID: 1285655920}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -24800,7 +25187,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -24844,6 +25231,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285655916}
   m_CullTransparentMesh: 1
+--- !u!114 &1285655920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285655916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1292252029
 GameObject:
   m_ObjectHideFlags: 0
@@ -25744,8 +26143,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 193/1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25775,7 +26174,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -25959,7 +26358,8 @@ MonoBehaviour:
   - Name: Double Faced
     AnimationBool: Multi
     AbilityName: Multicaster
-    AbilityDescription: Gain +0.2 Attack Speed per round without limit
+    AbilityDescription: Gain <style="LYellow">+0.2 Attack Speed</style> per round
+      without limit
     BodyBack: {fileID: 21300000, guid: 2ae2fd1c31d7862458b9099b38c9f01e, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -25974,7 +26374,8 @@ MonoBehaviour:
   - Name: Ash Pyre
     AnimationBool: Assassin
     AbilityName: Assassin
-    AbilityDescription: Armor Penetration benefits all Damage sources
+    AbilityDescription: <style="Red">Armor Penetration</style> benefits all <style="Red">Damage</style>
+      sources
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: b336ad4404a8c98458df00144fb3cbe0, type: 3}
@@ -25990,9 +26391,9 @@ MonoBehaviour:
     AnimationBool: Orbital
     AbilityName: Orbital
     AbilityDescription: Not Done
-    BodyBack: {fileID: 21300000, guid: e62b952ba5e4a5945a805dc325f3e46f, type: 3}
+    BodyBack: {fileID: 0}
     BodyFront: {fileID: 0}
-    Prop: {fileID: 21300000, guid: be0e031c93bc602498ca2e8b759baadc, type: 3}
+    Prop: {fileID: 0}
     Face: {fileID: 21300000, guid: aa98c36d2babcce4094fb8b81b8b0453, type: 3}
     BodyBackColor: {r: 1, g: 0.9137255, b: 0, a: 1}
     BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
@@ -26004,7 +26405,7 @@ MonoBehaviour:
   - Name: Mercury
     AnimationBool: OrbitalMercury
     AbilityName: OrbitalMercury
-    AbilityDescription: Orbits spin 1.5x Faster
+    AbilityDescription: Orbits spin <style="LYellow">1.5x Faster</style>
     BodyBack: {fileID: 21300000, guid: 952456dbdc208fc4ebcb3f9201b789fd, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26019,7 +26420,7 @@ MonoBehaviour:
   - Name: Venus
     AnimationBool: OrbitalVenus
     AbilityName: OrbitalVenus
-    AbilityDescription: Orbits deal True Damage
+    AbilityDescription: Orbits deal <style="Red">True Damage</style>
     BodyBack: {fileID: 21300000, guid: 6ec11c7160582e6489220d3ddb2ddfc1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26034,8 +26435,8 @@ MonoBehaviour:
   - Name: Earth
     AnimationBool: OrbitalEarth
     AbilityName: OrbitalEarth
-    AbilityDescription: The Moon will orbit around you, dealing 4xDmg and applying
-      On-Land Effects when colliding with an enemy
+    AbilityDescription: The Moon will orbit around you, dealing <style="Red">4xDmg</style>
+      and applying <style="Pink">On-Land Effects</style> when colliding with an enemy
     BodyBack: {fileID: 21300000, guid: 2ff95046897ea5049973ce2f633cf265, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26050,7 +26451,7 @@ MonoBehaviour:
   - Name: Mars
     AnimationBool: OrbitalMars
     AbilityName: OrbitalMars
-    AbilityDescription: Orbit will increase and decrease in radius
+    AbilityDescription: Orbits will increase and decrease in radius
     BodyBack: {fileID: 21300000, guid: 6ec11c7160582e6489220d3ddb2ddfc1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26065,7 +26466,7 @@ MonoBehaviour:
   - Name: Jupiter
     AnimationBool: OrbitalJupiter
     AbilityName: OrbitalJupiter
-    AbilityDescription: Gain x1.5 Orbital radius and size
+    AbilityDescription: Gain <style="LYellow">x1.5</style> Orbital radius and size
     BodyBack: {fileID: 21300000, guid: 080406d0f02f80b4cbaa6869b452bb37, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26080,7 +26481,8 @@ MonoBehaviour:
   - Name: Saturn
     AnimationBool: OrbitalSaturn
     AbilityName: OrbitalSaturn
-    AbilityDescription: Gain +2 Extra Orbits in different Orbital Fields
+    AbilityDescription: Gain <style="LYellow">+2 Extra Orbits</style> in different
+      Orbital Fields
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: 4e20d23e6bf61a240b84b84d90ab51ba, type: 3}
@@ -26095,7 +26497,8 @@ MonoBehaviour:
   - Name: Uranus
     AnimationBool: OrbitalUranus
     AbilityName: OrbitalUranus
-    AbilityDescription: Start the game with 4 Orbits that deal twice the Damage
+    AbilityDescription: Start the game with <style="LYellow">4 Orbits</style> that
+      deal twice the <style="Red">Damage</style>
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: ff7ef5240a6cf504a9a68a511c62ff0a, type: 3}
@@ -26110,7 +26513,8 @@ MonoBehaviour:
   - Name: Neptune
     AnimationBool: OrbitalNeptune
     AbilityName: OrbitalNeptune
-    AbilityDescription: Orbits spin 4x Slower but Stun enemeis for 2s upon collision
+    AbilityDescription: Orbits spin <style="LYellow">4x Slower</style> but <style="Blue">Stun</style>
+      enemies for <style="LYellow">2 seconds</style> upon collision
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26125,8 +26529,8 @@ MonoBehaviour:
   - Name: Pheonix
     AnimationBool: Regen
     AbilityName: Regeneration
-    AbilityDescription: When you die, reborn at full HP and kill every enemy on screen
-      (5 Round Cooldown)
+    AbilityDescription: When you die, reborn at <style="Green">full HP</style> and
+      kill every enemy on screen <style="LGrey">(5 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: bf96fe3a6a2d30a449fd3330064b6442, type: 3}
@@ -26141,8 +26545,9 @@ MonoBehaviour:
   - Name: Powered Up
     AnimationBool: Crit
     AbilityName: Crit
-    AbilityDescription: Critically Defend based on your Crit Chance and Multiplier,
-      reducing incoming damage up to 90%
+    AbilityDescription: Critically Defend based on your <style="LYellow">Crit Chance</style>
+      and <style="LYellow">Multiplier,</style> reducing incoming <style="Red">damage</style>
+      up to <style="LYellow">90%
     BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26157,7 +26562,8 @@ MonoBehaviour:
   - Name: Von Van Pyre
     AnimationBool: Vampire
     AbilityName: Vampire
-    AbilityDescription: Gain +1 Max HP for each 1000 HP Overhealed
+    AbilityDescription: Gain <style="Green">+1 Max HP</style> for each <style="Green">1000
+      HP</style> Overhealed
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 26f597fa10cc8a7408c6320da27d60cf, type: 3}
@@ -26172,8 +26578,8 @@ MonoBehaviour:
   - Name: Ice Cube
     AnimationBool: Ice
     AbilityName: Freeze
-    AbilityDescription: <color=#FFCC7C>Active:</color> Freeze every enemy in sight
-      for 30 seconds
+    AbilityDescription: <style="Yellow">Active:</style> Freeze every enemy in sight
+      for <style="LYellow">30 seconds</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26188,7 +26594,8 @@ MonoBehaviour:
   - Name: Echo
     AnimationBool: Shred
     AbilityName: Shred
-    AbilityDescription: Gain +1 Armor for each 500 Shredded Armor
+    AbilityDescription: Gain <style="Grey">+1 Armor</style> for each <style="Grey">500
+      Shredded Armor</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: b5793142d42d6a14194b0b216ef6cbf3, type: 3}
@@ -26203,7 +26610,8 @@ MonoBehaviour:
   - Name: Captain Ember Teach
     AnimationBool: Pirate
     AbilityName: Pirate
-    AbilityDescription: Roundshots can penetrate through 3 enemies
+    AbilityDescription: <style="LYellow">Roundshots</style> can penetrate through
+      <style="LYellow">3</style> enemies
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 6f48d94b85168264a81177fb14686f82, type: 3}
@@ -26218,7 +26626,8 @@ MonoBehaviour:
   - Name: Blaze Brigade
     AnimationBool: Burst
     AbilityName: Burst
-    AbilityDescription: '<b>Active: </b> Shoot 250 Bullets in Burst (3 Round Cooldown)'
+    AbilityDescription: '<style="Yellow">Active: </style> Shoot 250 Bullets in Burst
+      <style="LGrey">(3 Round Cooldown)'
     BodyBack: {fileID: 21300000, guid: b90f329d505d5d34a92c6a822994eee3, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26233,8 +26642,8 @@ MonoBehaviour:
   - Name: Rose Warrior
     AnimationBool: Thorns
     AbilityName: Thorns
-    AbilityDescription: <color=#FFCC7C>Active:</color> Become Unhittable for 30 seconds
-      (2 Round Cooldown)
+    AbilityDescription: <style="Yellow">Active:</style> Become Unhittable for <style="LYellow">30
+      seconds</style> <style="LGrey">(2 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 7f3add2241b179f428c2d6712cc1e900, type: 3}
@@ -26249,8 +26658,7 @@ MonoBehaviour:
   - Name: Mt. Everest
     AnimationBool: Snow
     AbilityName: Snow Pool
-    AbilityDescription: Become an immovable mountain, immune to all sorts of Crowd
-      Control
+    AbilityDescription: Become an immovable mountain, immune to all sorts of <style="LYellow">Effects</style>
     BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26265,8 +26673,9 @@ MonoBehaviour:
   - Name: Flora
     AnimationBool: Flower
     AbilityName: Flower Field
-    AbilityDescription: 10% Chance of spawning Carnivore Plants that deal Damage
-      to the enemies instead of healing you
+    AbilityDescription: <style="LYellow">10%</style> Chance of spawning <style="LYellow">Carnivore
+      Plants</style> that deal <style="Red">Damage</style> to the enemies instead
+      of healing you
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 5d0bf28d09d77464f8ead33b3218644b, type: 3}
@@ -26281,8 +26690,8 @@ MonoBehaviour:
   - Name: Bomber
     AnimationBool: Explosion
     AbilityName: Explosion
-    AbilityDescription: After every explosion another one will detonate near the
-      Campfire
+    AbilityDescription: After every <style="LYellow">explosion</style> another one
+      will detonate near the Campfire
     BodyBack: {fileID: 21300000, guid: 7102881627f786c49ae93c002898a613, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26297,9 +26706,11 @@ MonoBehaviour:
   - Name: Tesla Coil
     AnimationBool: Statik
     AbilityName: Statik
-    AbilityDescription: Gain 1 Energy Point each time you release Static Energy,
-      at 100 points release a Super Charge. Super Charges have increased range, duration,
-      deal True Damage and are able to apply On-Hit Effects (including Static Energy)
+    AbilityDescription: Gain <style="LYellow">1 Energy Point</style> each time you
+      release <style="Yellow">Static Energy</style>, at 100 points release a <style="Blue">Super
+      Charge. Super Charges</style> have increased range, duration, deal <style="Red">True
+      Damage</style> and are able to apply <style="Pink">On-Hit Effects <style="LGrey">(including
+      Static Energy)
     BodyBack: {fileID: 21300000, guid: 1ecc71e4b6e116642bc01dfa7ef05880, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26314,8 +26725,8 @@ MonoBehaviour:
   - Name: Azureoth
     AnimationBool: Blue
     AbilityName: Magical Shot
-    AbilityDescription: <color=#FFCC7C>Active:</color>  Turn Purple during 5 seconds
-      (1 Round Cooldown)
+    AbilityDescription: <style="Yellow">Active:</style> Turn <style="Pink">Purple</style>
+      during 5 seconds <style="LGrey">(1 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -26330,7 +26741,7 @@ MonoBehaviour:
   - Name: Zeus
     AnimationBool: Thunder
     AbilityName: Thunder
-    AbilityDescription: Cast double the Thunders
+    AbilityDescription: Cast <style="LYellow">double</style> the <style="LYellow">Thunders</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: c665cb1953416c64f83fe2e2da93a14c, type: 3}
@@ -26345,7 +26756,8 @@ MonoBehaviour:
   - Name: Mt. Vesuvius
     AnimationBool: Lava
     AbilityName: Lava
-    AbilityDescription: A Permanent Lava Pool will sit by Mt. Vesuvius
+    AbilityDescription: A Permanent <style="Yellow">Lava Pool</style> will sit by
+      Mt. Vesuvius
     BodyBack: {fileID: 21300000, guid: d8b444b3850195047830fb643c86c232, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -26375,7 +26787,8 @@ MonoBehaviour:
   - Name: Fire Monk
     AnimationBool: ImmolateFire
     AbilityName: ImmolateFire
-    AbilityDescription: Immolate will deal True Damage
+    AbilityDescription: <style="Yellow">Immolate</style> will deal <style="Red">True
+      Damage</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -26390,7 +26803,8 @@ MonoBehaviour:
   - Name: Water Monk
     AnimationBool: ImmolateWater
     AbilityName: ImmolateWater
-    AbilityDescription: Everytime Immolate hits an enemy heal 1% of your Max HP
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      heal <style="LYellow">1%</style> of your <style="Green">Max HP</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -26405,7 +26819,8 @@ MonoBehaviour:
   - Name: Air Monk
     AnimationBool: ImmolateAir
     AbilityName: ImmolateAir
-    AbilityDescription: Everytime Immolate hits an enemy they get stunned for 0.5s
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      they get <style="Blue">knocked back</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -26420,8 +26835,9 @@ MonoBehaviour:
   - Name: Earth Monk
     AnimationBool: ImmolateEarth
     AbilityName: ImmolateEarth
-    AbilityDescription: Everytime Immolate hits an enemy gain +1 Shield for a max
-      of 0.3 of your Max HP
+    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
+      gain <style="Grey">+1 Shield</style> for a max of 0.3 of your <style="Green">Max
+      HP</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: 80661c3b19b21ec4d958523c2abe26b8, type: 3}
@@ -26436,7 +26852,7 @@ MonoBehaviour:
   - Name: Sir Flareington
     AnimationBool: Money
     AbilityName: Ember Generation
-    AbilityDescription: Shiny spawn chance increases to 1%
+    AbilityDescription: <sprite name="Shiny"> Shiny spawn chance increases to <style="LYellow">1%</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: ed3dc51ae158ea94cbc82000d40a38eb, type: 3}
@@ -26451,7 +26867,8 @@ MonoBehaviour:
   - Name: King Ghoul
     AnimationBool: Necro
     AbilityName: Necro
-    AbilityDescription: 5% Chance of spawning a Mega Ghoul that deals Damage in Area
+    AbilityDescription: <style="LYellow">5%</style> Chance of spawning a <style="Blue">Mega
+      Ghoul</style> that deals <style="Red">Damage</style> in Area
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -26466,7 +26883,8 @@ MonoBehaviour:
   - Name: Ankh-Ra
     AnimationBool: Ritual
     AbilityName: Ritual
-    AbilityDescription: Gain +5 Candle Damage for each 100 enemies killed by candles
+    AbilityDescription: Gain <style="Red">+5 Candle Damage</style> for each <style="LYellow">100</style>
+      enemies killed by candles
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: d852b27049c437543927ee596a7834f9, type: 3}
@@ -26481,7 +26899,8 @@ MonoBehaviour:
   - Name: Fire Bee
     AnimationBool: Bee
     AbilityName: Bee Summoner
-    AbilityDescription: Not Done
+    AbilityDescription: Gain <style="LYellow">+1 Worker Bee</style> every <style="LYellow">5
+      Rounds <style="LGrey">(without limit)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: aaba9973b4cab8f45bb1fac810bcf374, type: 3}
@@ -26495,8 +26914,8 @@ MonoBehaviour:
     Supratype: 
   CharacterSelectContainer: {fileID: 1147118009}
   CharacterSubTypeContainer: {fileID: 68173691}
-  CharacterName: {fileID: 183699280}
-  SkillDescription: {fileID: 1158057605}
+  CharacterName: {fileID: 183699283}
+  SkillDescription: {fileID: 1158057608}
   currentDisplayedCharacter: 0
   MainFlameVessel: {fileID: 0}
 --- !u!224 &1338516673
@@ -27586,8 +28005,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0H30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -27617,7 +28036,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -28581,6 +29000,7 @@ GameObject:
   - component: {fileID: 1463272946}
   - component: {fileID: 1463272948}
   - component: {fileID: 1463272947}
+  - component: {fileID: 1463272949}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -28663,7 +29083,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -28707,6 +29127,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463272945}
   m_CullTransparentMesh: 1
+--- !u!114 &1463272949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463272945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1479543188
 GameObject:
   m_ObjectHideFlags: 0
@@ -28718,6 +29153,7 @@ GameObject:
   - component: {fileID: 1479543189}
   - component: {fileID: 1479543191}
   - component: {fileID: 1479543190}
+  - component: {fileID: 1479543192}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -28766,8 +29202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Unlock the ability to Slow enemies using ice(?) '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
-  m_sharedMaterial: {fileID: 5744651652093434468, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -28841,6 +29277,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479543188}
   m_CullTransparentMesh: 1
+--- !u!114 &1479543192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479543188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1488723298
 GameObject:
   m_ObjectHideFlags: 0
@@ -29284,6 +29735,7 @@ GameObject:
   - component: {fileID: 1548061034}
   - component: {fileID: 1548061036}
   - component: {fileID: 1548061035}
+  - component: {fileID: 1548061037}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -29332,8 +29784,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Characters
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -29363,7 +29815,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -29407,6 +29859,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548061033}
   m_CullTransparentMesh: 1
+--- !u!114 &1548061037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548061033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548983165
 GameObject:
   m_ObjectHideFlags: 0
@@ -29689,8 +30153,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME OVER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -29823,8 +30287,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -29854,7 +30318,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -31081,6 +31545,7 @@ GameObject:
   - component: {fileID: 1655610741}
   - component: {fileID: 1655610743}
   - component: {fileID: 1655610742}
+  - component: {fileID: 1655610744}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -31129,8 +31594,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31160,7 +31625,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -31204,6 +31669,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655610740}
   m_CullTransparentMesh: 1
+--- !u!114 &1655610744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655610740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1658612113
 GameObject:
   m_ObjectHideFlags: 0
@@ -31215,6 +31695,7 @@ GameObject:
   - component: {fileID: 1658612114}
   - component: {fileID: 1658612116}
   - component: {fileID: 1658612115}
+  - component: {fileID: 1658612117}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -31263,8 +31744,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Effects
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31294,7 +31775,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -31338,6 +31819,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658612113}
   m_CullTransparentMesh: 1
+--- !u!114 &1658612117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658612113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1663206814
 GameObject:
   m_ObjectHideFlags: 0
@@ -31349,6 +31842,7 @@ GameObject:
   - component: {fileID: 1663206815}
   - component: {fileID: 1663206817}
   - component: {fileID: 1663206816}
+  - component: {fileID: 1663206818}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -31472,6 +31966,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663206814}
   m_CullTransparentMesh: 1
+--- !u!114 &1663206818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663206814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1673912927
 GameObject:
   m_ObjectHideFlags: 0
@@ -31963,6 +32472,7 @@ GameObject:
   - component: {fileID: 1735681329}
   - component: {fileID: 1735681331}
   - component: {fileID: 1735681330}
+  - component: {fileID: 1735681332}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -32011,8 +32521,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32042,7 +32552,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -32086,6 +32596,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735681328}
   m_CullTransparentMesh: 1
+--- !u!114 &1735681332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735681328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1741109427
 GameObject:
   m_ObjectHideFlags: 0
@@ -37092,6 +37617,7 @@ GameObject:
   - component: {fileID: 1761733532}
   - component: {fileID: 1761733534}
   - component: {fileID: 1761733533}
+  - component: {fileID: 1761733535}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -37140,8 +37666,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -37171,7 +37697,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -37215,6 +37741,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761733531}
   m_CullTransparentMesh: 1
+--- !u!114 &1761733535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761733531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1771945897
 GameObject:
   m_ObjectHideFlags: 0
@@ -37802,6 +38343,7 @@ GameObject:
   - component: {fileID: 1804860916}
   - component: {fileID: 1804860918}
   - component: {fileID: 1804860917}
+  - component: {fileID: 1804860919}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -37848,12 +38390,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Settings
-
-'
+  m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -37883,7 +38423,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -37927,6 +38467,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804860915}
   m_CullTransparentMesh: 1
+--- !u!114 &1804860919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804860915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1817785425
 GameObject:
   m_ObjectHideFlags: 0
@@ -39222,8 +39774,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
-  m_sharedMaterial: {fileID: 5744651652093434468, guid: 913f58eedf811624da2de92b447b5e98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -39434,8 +39986,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Master
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -39568,8 +40120,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: YOU'VE  SURVIVED 15 ROUNDS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40656,6 +41208,7 @@ GameObject:
   - component: {fileID: 1963552192}
   - component: {fileID: 1963552194}
   - component: {fileID: 1963552193}
+  - component: {fileID: 1963552195}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -40702,16 +41255,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YOU''VE SURVIVED UNTIL MORNING
-
-    <color=#999999><size=10>(From this
-    point on, animals will become infinitely stronger)</size></color>
-
-
-'
+  m_text: YOU'VE SURVIVED UNTIL MORNING<br><color=#999999><size=10>(From this point
+    on, animals will become infinitely stronger)</size></color>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40741,7 +41289,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -40785,6 +41333,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963552191}
   m_CullTransparentMesh: 1
+--- !u!114 &1963552195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963552191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964237779
 GameObject:
   m_ObjectHideFlags: 0
@@ -40871,6 +41431,7 @@ GameObject:
   - component: {fileID: 1978038873}
   - component: {fileID: 1978038875}
   - component: {fileID: 1978038874}
+  - component: {fileID: 1978038876}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -40919,8 +41480,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: END NIGHT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40950,7 +41511,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -40994,6 +41555,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978038872}
   m_CullTransparentMesh: 1
+--- !u!114 &1978038876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978038872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1981246024
 GameObject:
   m_ObjectHideFlags: 0
@@ -41650,6 +42223,7 @@ GameObject:
   - component: {fileID: 2012625639}
   - component: {fileID: 2012625641}
   - component: {fileID: 2012625640}
+  - component: {fileID: 2012625642}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -41729,7 +42303,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -41773,6 +42347,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012625638}
   m_CullTransparentMesh: 1
+--- !u!114 &2012625642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012625638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020597190
 GameObject:
   m_ObjectHideFlags: 0
@@ -42720,6 +43306,7 @@ GameObject:
   - component: {fileID: 2080975617}
   - component: {fileID: 2080975619}
   - component: {fileID: 2080975618}
+  - component: {fileID: 2080975620}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -42768,8 +43355,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CONGRATS!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -42799,7 +43386,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -42843,6 +43430,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080975616}
   m_CullTransparentMesh: 1
+--- !u!114 &2080975620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080975616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2083839277
 GameObject:
   m_ObjectHideFlags: 0
@@ -43332,6 +43931,7 @@ GameObject:
   - component: {fileID: 2129949906}
   - component: {fileID: 2129949908}
   - component: {fileID: 2129949907}
+  - component: {fileID: 2129949909}
   m_Layer: 5
   m_Name: SubTitle
   m_TagString: Untagged
@@ -43411,7 +44011,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -43455,6 +44055,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129949905}
   m_CullTransparentMesh: 1
+--- !u!114 &2129949909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129949905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &2145073309
 GameObject:
   m_ObjectHideFlags: 0
@@ -43996,8 +44611,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 75
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44027,7 +44642,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -44122,8 +44737,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44153,7 +44768,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -44288,8 +44903,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12/s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44319,7 +44934,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -44420,8 +45035,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: STATS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44451,7 +45066,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -44851,6 +45466,7 @@ GameObject:
   - component: {fileID: 2999269096220151338}
   - component: {fileID: 6024744140305242963}
   - component: {fileID: 7463128135087886729}
+  - component: {fileID: 7463128135087886730}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -44898,8 +45514,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -44929,7 +45545,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -45203,8 +45819,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -45234,7 +45850,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -45437,6 +46053,7 @@ GameObject:
   - component: {fileID: 3782068088284935606}
   - component: {fileID: 6846290339544450967}
   - component: {fileID: 1064887305897373639}
+  - component: {fileID: 6846290339544450968}
   m_Layer: 5
   m_Name: SubTitle
   m_TagString: Untagged
@@ -45690,7 +46307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3195114518793994553
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46030,8 +46647,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1250
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -46061,7 +46678,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -46173,7 +46790,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -46355,7 +46972,6 @@ MonoBehaviour:
   - name: Slug
     enemy: {fileID: 908001879365601688, guid: 13de1d630e56f9444b7c4ee287fcbc14, type: 3}
     Wave: 1
-    description: 
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 9f74cb916ae343b45aa2d863740d7543, type: 2}
     IconSize: {x: 192.35, y: 182.61}
@@ -46363,10 +46979,6 @@ MonoBehaviour:
   - name: Caterpillar
     enemy: {fileID: 3905129715520958871, guid: 58c6691817784a94dba3270c12045bee, type: 3}
     Wave: 1
-    description: 'Caterpillars move in a straight path towards the campfire.
-
-      <br>
-      Their behaviour is relatively normal'
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
     IconSize: {x: 225.56, y: 214.14}
@@ -46374,68 +46986,55 @@ MonoBehaviour:
   - name: Worm
     enemy: {fileID: 2243928030448316220, guid: f86a3a1578543284aa5973cb5d89297f, type: 3}
     Wave: 1
-    description: 
     abilities:
     - icon: {fileID: 21300000, guid: 9a41f862fc4fdec41b8f6f025d69641c, type: 3}
-      description: "<size=100%><color=#FFFF00>- Burrow -</color>\n<size=80%>Start
-        the round <color=#FF7000>burrowed</color> underground. \nWhile <color=#FF7000>burrowed</color>,
-        become <color=#53D1FF>untargetable</color> and <color=#53D1FF>immune</color>
-        to damage. These animals will come out on their own"
+      description: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start
+        the round <style="Orange">burrowed</style> underground. While <style="Orange">burrowed</style>,
+        become <style="Blue">untargetable</style> and <style="Blue">immune</style>
+        to damage. These animals will come out on their own
     ShinyMaterial: {fileID: 2100000, guid: fd1552a7a4dab4143acc30b5a359043b, type: 2}
     IconSize: {x: 222.53, y: 211.27}
     IconPos: {x: 0.0000042915, y: 58.8}
   - name: Spider
     enemy: {fileID: 4844135821487391850, guid: 2f9b71635d5bb6a43b5e8280f581ac42, type: 3}
     Wave: 1
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Surround -</color>
-
-        <size=80%>This
+      description: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This
         animal moves around the campfire, enclosing it, instead of taking a straight
-        path. '
+        path
     ShinyMaterial: {fileID: 2100000, guid: 8dd49dff7acbb124daec149801ff57ff, type: 2}
     IconSize: {x: 262.12, y: 248.84}
     IconPos: {x: -8.3, y: 21.6}
   - name: Beatle
     enemy: {fileID: 7486879263624235867, guid: 937c2c6f8385930429db3ef659897091, type: 3}
     Wave: 1
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Dung Roller -</color>
-
-        <size=80%>This
-        animal is an expert at rolling <color=#934F28>Dung Balls.</color> The more
+      description: <size=100%><style="Yellow">- Dung Roller -</style><br><size=80%>This
+        animal is an expert at rolling <style="Brown">Dung Balls.</style> The more
         they roll the more the balls grow. Once in range, the Dung Ball will be shot
-        at the campfire dealing <color=#FF5858>+50 dmg.'
+        at the campfire dealing <style="Red">+50 dmg.
     ShinyMaterial: {fileID: 2100000, guid: 761063bc5197a024ba52bb65dfc114c1, type: 2}
     IconSize: {x: 274.31, y: 260.42}
     IconPos: {x: -19.7, y: 6.7}
   - name: Grasshoper
     enemy: {fileID: 6782818941692018213, guid: b59ce14e63873504b98db4d3dc6bf7f8, type: 3}
     Wave: 2
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Surround -</color>
-
-        <size=80%>This
+      description: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This
         animal moves around the campfire, enclosing it, instead of taking a straight
-        path. '
+        path
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Hop -</color>
-
-        <size=80%>This
-        animal hops around instead of having a consistent movement speed'
+      description: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
     ShinyMaterial: {fileID: 2100000, guid: 4452a647442cb8b4582b496b787c5d2a, type: 2}
     IconSize: {x: 199.83, y: 189.71}
     IconPos: {x: -6.3, y: 12.2}
   - name: Snail
     enemy: {fileID: 1852813269696119805, guid: 31e8864fb8182ef43bec84cf3a44ddeb, type: 3}
     Wave: 2
-    description: 
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 706713ec878d2c8479261fdc2a3f3ac8, type: 2}
     IconSize: {x: 203.11, y: 192.82}
@@ -46443,84 +47042,68 @@ MonoBehaviour:
   - name: Mole
     enemy: {fileID: 6721927114820824289, guid: b48228c738c1e774bbc301b8b4b7ce2b, type: 3}
     Wave: 2
-    description: 
     abilities:
     - icon: {fileID: 21300000, guid: 9a41f862fc4fdec41b8f6f025d69641c, type: 3}
-      description: "<size=100%><color=#FFFF00>- Burrow -</color>\n<size=80%>Start
-        the round <color=#FF7000>burrowed</color> underground. \nWhile <color=#FF7000>burrowed</color>,
-        become <color=#53D1FF>untargetable</color> and <color=#53D1FF>immune</color>
-        to damage. These animals will come out on their own"
+      description: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start
+        the round <style="Orange">burrowed</style> underground. While <style="Orange">burrowed</style>,
+        become <style="Blue">untargetable</style> and <style="Blue">immune</style>
+        to damage. These animals will come out on their own
     ShinyMaterial: {fileID: 2100000, guid: 813d31e6cff7cbe45a3558f1fd118747, type: 2}
     IconSize: {x: 148.92, y: 141.38}
     IconPos: {x: -0.73, y: -9.7}
   - name: Bunny
     enemy: {fileID: 1783731420939666997, guid: 10cc14674d0b6d24c908226a35e20643, type: 3}
     Wave: 2
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Hop -</color>
-
-        <size=80%>This
-        animal hops around instead of having a consistent movement speed'
+      description: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
     ShinyMaterial: {fileID: 2100000, guid: 848f7b49151fbb94589b3b6475dbf0b5, type: 2}
     IconSize: {x: 150.75, y: 143.12}
     IconPos: {x: 4.5, y: -7.7}
   - name: Squirrel
     enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
     Wave: 2
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
-
-        <size=80%>This
-        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
-        it get out of sight before it dies the <color=#934F28>acorn</color> will
-        detonate, dealing <color=#FF5858>+25 dmg.'
+      description: <size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This
+        animal sets up <style="Brown">explosive acorns</style> and runs away. If
+        it get out of sight before it dies the <style="Brown">acorn</style> will
+        detonate, dealing <style="Red">+25 dmg.
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 185.86, y: 176.44}
     IconPos: {x: -5.5, y: 2.16}
   - name: Hedgehog
     enemy: {fileID: 5813437837199226000, guid: 26ff5fc6f58c63e46a34b963fba143df, type: 3}
     Wave: 3
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Thorns -</color>
-
-        <size=80%>After
-        getting in range, this animal will cover itself, becoming <color=#FFFF00>Unhittable</color>
-        and dealing <color=#FF5858>+15 dmg</color> when it gets struck by <color=#FF99F3>On-Hit
-        Effects'
+      description: <size=100%><style="Yellow">- Thorns -</style><br><size=80%>After
+        getting in range, this animal will cover itself, becoming <style="Yellow">Unhittable</style>
+        and dealing <style="Red">+15 dmg</style> when it gets struck by <style="Pink">On-Hit
+        Effects
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Unhittable -</color>
-
-        <size=80%>This
-        animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
-        for Armor Penetration) '
+      description: <size=100%><style="Yellow">- Unhittable -</style><br><size=80%>This
+        animal can be immune to <style="Pink">On-Hit Effects</style> <style="LGrey">(except
+        for Armor Penetration)
     ShinyMaterial: {fileID: 2100000, guid: b128667e0b5872f4188cdbde9f69114d, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 0.00000047684, y: 5.245}
   - name: Raccoon
     enemy: {fileID: 4160200665350817852, guid: f2b3de56f11c62841a7595a6a00d68d6, type: 3}
     Wave: 3
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Thief -</color>
-
-        <size=80%>This
+      description: <size=100%><style="Yellow">- Thief -</style><br><size=80%>This
         animal has different goals in mind. Instead of trying to damage you, it will
-        <color=#FF7000>steal</color> <color=#FFCC7C>+100 embers.</color> You can
-        recover them by killing it before it gets out of sight.'
+        <style="Orange">steal</style> <style="LYellow">+100 embers.</style> You can
+        recover them by killing it before it gets out of sight
     ShinyMaterial: {fileID: 2100000, guid: c7532238a4a62944ebb5e698429d3677, type: 2}
     IconSize: {x: 179.98, y: 170.87}
     IconPos: {x: -2.3, y: -9.1}
   - name: Turtle
     enemy: {fileID: 8018407032486470828, guid: 2d58414f4dcfad1429cece8fb7edc2c2, type: 3}
     Wave: 3
-    description: 
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
     IconSize: {x: 300.32, y: 285.12}
@@ -46528,7 +47111,6 @@ MonoBehaviour:
   - name: Scorpion
     enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
     Wave: 3
-    description: 
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
     IconSize: {x: 192, y: 182.27}
@@ -46536,112 +47118,86 @@ MonoBehaviour:
   - name: Armadillo
     enemy: {fileID: 4317406584369839249, guid: b5aaec1beb537104aa96f34019d52471, type: 3}
     Wave: 4
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Roll -</color>
-
-        <size=80%>This
-        animal begins the round by <color=#FF7000>rolling,</color> gaining <color=#AFEDFF>x2.5
-        speed</color>, <color=#919191>+1000 armor </color> and becoming <color=#FFFF00>Unhittable.</color>
-        It will unroll after denying 10 <color=#FF99F3>On-Hit Effects'
+      description: <size=100%><style="Yellow">- Roll -</style><br><size=80%>This
+        animal begins the round by <style="Orange">rolling,</style> gaining <style="LBlue">x2.5
+        speed</style>, <style="Grey">+1000 armor </style> and becoming <style="Yellow">Unhittable.</style>
+        It will unroll after denying 10 <style="Pink">On-Hit Effects
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Unhittable -</color>
-
-        <size=80%>This
-        animal can be immune to <color=#FF99F3>On-Hit Effects</color> <color=#FF5858>(except
-        for Armor Penetration) '
+      description: <size=100%><style="Yellow">- Unhittable -</style><br><size=80%>This
+        animal can be immune to <style="Pink">On-Hit Effects</style> <style="LGrey">(except
+        for Armor Penetration)
     ShinyMaterial: {fileID: 2100000, guid: 27b71070d57df0d43b217ee22094dbd0, type: 2}
     IconSize: {x: 193.98, y: 184.16}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Skunk
     enemy: {fileID: 534645426103554320, guid: f8709f5ff08527b4da5ab3a0a256202f, type: 3}
     Wave: 4
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Stink Spray -</color>
-
-        <size=80%>Attacks
-        will <color=#CA6AF6>stun</color> the campfire for 0.75s. <color=#CA6AF6>Stun</color>
-        effects override eachother instead of stacking.'
+      description: <size=100%><style="Yellow">- Stink Spray -</style><br><size=80%>Attacks
+        will <style="Blue">stun</style> the campfire for 0.75s. <style="Blue">Stun</style>
+        effects override eachother instead of stacking.
     ShinyMaterial: {fileID: 2100000, guid: a0d8feea200332c43bb7458dfa4e5637, type: 2}
     IconSize: {x: 149.38, y: 141.81}
     IconPos: {x: 6.3, y: 4.7066e-11}
   - name: Beaver
     enemy: {fileID: 7296929045884615504, guid: d478b7ae2c141bc4db9fa3ae9efdf1b2, type: 3}
     Wave: 4
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Dam Builder -</color>
-
-        <size=80%>Instead
-        of trying to damage you, it will <color=#FF7000>steal</color> your <color=#934F28>logs,</color>
-        taking away <color=#0CD405>-100 Max Health.</color> You can recover them
-        by killing it before it gets out of sight.'
+      description: <size=100%><style="Yellow">- Dam Builder -</style><br><size=80%>Instead
+        of trying to damage you, it will <style="Orange">steal</style> your <style="Brown">logs,</style>
+        taking away <style="Green">-100 Max Health.</style> You can recover them
+        by killing it before it gets out of sight
     ShinyMaterial: {fileID: 2100000, guid: 6dc84235316fa8143ac27c91ab8ec4ad, type: 2}
     IconSize: {x: 200.56, y: 190.4}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Flying Squirrel
     enemy: {fileID: 4064433657471892735, guid: 8c5c7e79c0b647b4cbd788df5f29e67f, type: 3}
     Wave: 4
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Explosive Acorn -</color>
-
-        <size=80%>This
-        animal sets up <color=#934F28>explosive acorns</color> and runs away. If
-        it get out of sight before it dies the <color=#934F28>acorn</color> will
-        detonate, dealing <color=#FF5858>+25 dmg.'
+      description: <size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This
+        animal sets up <style="Brown">explosive acorns</style> and runs away. If
+        it get out of sight before it dies the <style="Brown">acorn</style> will
+        detonate, dealing <style="Red">+25 dmg.
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Flying -</color>
-
-        <size=80%>Starts
-        the round by <color=#FF7000>flying</color> from trees, landing somewhere
-        in the middle of the campsite. While flying, it is <color=#53D1FF>untargetable</color>
-        and <color=#53D1FF>immune.</color>'
+      description: <size=100%><style="Yellow">- Flying -</style><br><size=80%>Starts
+        the round by <style="Orange">flying</style> from trees, landing somewhere
+        in the middle of the campsite. While flying, it is <style="Blue">untargetable</style>
+        and <style="Blue">immune</style>
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 4.7066e-11}
   - name: Hog
     enemy: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
     Wave: 4
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Charge -</color>
-
-        <size=80%>Begins
-        the round by <color=#FF7000>charging</color> a powerfull first attack that
-        deal <color=#FF5858>2x damage</color> '
+      description: '<size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins
+        the round by <style="Orange">charging</style> a powerfull first attack that
+        deal <style="Red">2x damage</style> '
     ShinyMaterial: {fileID: 2100000, guid: 7a256037dd6480249b45f439df1369d6, type: 2}
     IconSize: {x: 79.62, y: 75.59}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Frog
     enemy: {fileID: 9092957358169502411, guid: 422a418c11319fc42ae10b374eecf739, type: 3}
     Wave: 5
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Hop -</color>
-
-        <size=80%>This
-        animal hops around instead of having a consistent movement speed'
+      description: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Ranged -</color>
-
-        <size=80%>Has
-        increased <color=#FFCC7C>range</color> and is able to damage you from afar'
+      description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
+        increased <style="LYellow">range</style> and is able to damage you from afar
     ShinyMaterial: {fileID: 2100000, guid: 9918386288a1f8945b43ed034ae14237, type: 2}
     IconSize: {x: 55.74, y: 52.92}
     IconPos: {x: 2.3, y: 1.9}
   - name: Snake
     enemy: {fileID: 6809423876992207642, guid: 7ca601f6ec0e7234b88ff71efbb924bd, type: 3}
     Wave: 5
-    description: Snakes are one of the fastest animals and have a small hitbox so
-      having a good amount of accuracy and bullet speed is crucial to beat them.
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 57faef2aa412e68489ce420135cf7aa2, type: 2}
     IconSize: {x: 192.35, y: 182.61}
@@ -46649,126 +47205,98 @@ MonoBehaviour:
   - name: Wolf
     enemy: {fileID: 4792462256598324463, guid: 1f67f19206edff64e9426a95f5f167b6, type: 3}
     Wave: 5
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Wolf Pack -</color>
-
-        <size=80%>For
-        each 4 wolves in the campsite, 1 will be considered the <color=#FFFF00>Alpha.</color>
-        If the <color=#FFFF00>Alpha</color> dies and there aren''t enough on the
-        field, the role will be transfered to other wolves.'
+      description: <size=100%><style="Yellow">- Wolf Pack -</style><br><size=80%>For
+        each 4 wolves in the campsite, 1 will be considered the <style="Yellow">Alpha.</style>
+        If the <style="Yellow">Alpha</style> dies and there aren't enough on the
+        field, the role will be transfered to other wolves
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Alpha -</color>
-
-        <size=80%>When
-        an <color=#FFFF00>Alpha</color> howls, it <color=#FF7000>taunts</color> the
-        campfire and <color=#FF7000>activates</color> nearby wolves. <color=#FF7000>Activated</color>
-        wolves gain <color=#AFEDFF>x2.5 movement speed,</color> <color=#FF5858>+0.25
-        Armor Penetration</color> and <color=#FF5858>+50 Dmg.'
+      description: <size=100%><style="Yellow">- Alpha -</style><br><size=80%>When
+        an <style="Yellow">Alpha</style> howls, it <style="Orange">taunts</style>
+        the campfire and <style="Orange">activates</style> nearby wolves. <style="Orange">Activated</style>
+        wolves gain <style="LBlue">x2.5 movement speed,</style> <style="Red">+0.25
+        Armor Penetration</style> and <style="Red">+50 Dmg
     ShinyMaterial: {fileID: 2100000, guid: 7ac0110e026313f4390cb7e88ed0ca8f, type: 2}
     IconSize: {x: 161.82, y: 153.63}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Bear
     enemy: {fileID: 4544615441581723125, guid: ba9e790fe95de3743a10cc26240acd59, type: 3}
     Wave: 5
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Honey Pot -</color>
-
-        <size=80%>Whenever
-        it gets below half <color=#0CD405>Max HP</color> it starts to consume <color=#934F28>Honey.</color>
-        Each scoop of <color=#934F28>Honey</color> heals for <color=#0CD405>+1000HP.</color>
-        It only stops consuming once its <color=#0CD405>Full Health</color> or it
-        dies.'
+      description: <size=100%><style="Yellow">- Honey Pot -</style><br><size=80%>Whenever
+        it gets below half <style="Green">Max HP</style> it starts to consume <style="Brown">Honey.</style>
+        Each scoop of <style="Brown">Honey</style> heals for <style="Green">+1000HP.</style>
+        It only stops consuming once its <style="Green">Full Health</style> or it
+        dies
     ShinyMaterial: {fileID: 2100000, guid: 6182d5a9d9e4df84b9dd00ac6ceb719d, type: 2}
     IconSize: {x: 174.48, y: 165.64}
     IconPos: {x: -1.745, y: -3.24}
   - name: Venomous Snake
     enemy: {fileID: 3041678152358119314, guid: 16cac42e03d3ad94398a40ea8508f026, type: 3}
     Wave: 6
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Poison -</color>
-
-        <size=80%>Attacks
-        apply <color=#CA6AF6>8 Poison Ticks.</color> Each <color=#CA6AF6>Poison Tick</color>
-        deals 1:50 of <color=#0CD405>current Health.</color> <color=#CA6AF6>Poison
-        Ticks</color> are stackable and are cleared once the round ends'
+      description: <size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks
+        apply <style="Purple">8 Poison Ticks.</style> Each <style="Purple">Poison
+        Tick</style> deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison
+        Ticks</style> are stackable and are cleared once the round ends
     ShinyMaterial: {fileID: 2100000, guid: 22efa679a12eb5c4c9a9f8de280399a6, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: -2.4, y: 3}
   - name: Stray Wolf
     enemy: {fileID: 203073599222081888, guid: 43c751c59a70f224a9b1ee1a0a8944b1, type: 3}
     Wave: 6
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Stray -</color>
-
-        <size=80%>Stray
-        wolves are used to living alone and are always <color=#FE7200>activated</color>.'
+      description: <size=100%><style="Yellow">- Stray -</style><br><size=80%>Stray
+        wolves are used to living alone and are always <style="Orange">activated</style>
     ShinyMaterial: {fileID: 2100000, guid: 7a03f79ac9188fe4190331f6c3024a23, type: 2}
     IconSize: {x: 150.25, y: 150.25}
     IconPos: {x: -2.7, y: 2.3}
   - name: Alligator
     enemy: {fileID: 2074136074127113371, guid: 364f3c39a09d19c4a9150c660f40f191, type: 3}
     Wave: 6
-    description: '<size=100%><color=#FFFF00>- Stunning Bite -</color>
-
-'
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Stunning Bite -</color>
-
-        <size=80%>Attacks
-        <color=#CA6AF6>stun</color> the campfire for 0.75s. <color=#CA6AF6>Stun</color>
-        effects override eachother instead of stacking.'
+      description: <size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks
+        <style="Blue">stun</style> the campfire for 0.75 seconds. <style="Blue">Stun</style>
+        effects override eachother instead of stacking
     ShinyMaterial: {fileID: 2100000, guid: db8441eadb6c88d4da9eb1041471e703, type: 2}
     IconSize: {x: 177.17, y: 168.2}
     IconPos: {x: -3.9, y: 4.7066e-11}
   - name: Bison
     enemy: {fileID: 7665266975403006941, guid: 1cf140603a4582a48a1e64db7f93f7d8, type: 3}
     Wave: 6
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Charge -</color>
-
-        <size=80%>Begins
-        the round by <color=#FF7000>charging</color> a powerfull first attack. Each
-        charge increases the first attack''s power by <color=#FF5858>+25 dmg</color> '
+      description: <size=100%><style="Yellow">- Charge -</style><br><size=80%>Begins
+        the round by <style="Orange">charging</style> a powerful first attack. Each
+        charge increases the first attack's power by <style="Red">+25 damage
     ShinyMaterial: {fileID: 2100000, guid: 22d6b1a9fb18e304d8c702faf68dbb8c, type: 2}
     IconSize: {x: 169.17, y: 165.62}
     IconPos: {x: -1.95, y: 7.800001}
   - name: Moose
     enemy: {fileID: 9030358477521101351, guid: 871a9fa517ed26042ba82063be8ae195, type: 3}
     Wave: 6
-    description: 
     abilities:
     - icon: {fileID: 21300000, guid: 54ffaeb9e1cfc0a4f992cb45ac6d55b2, type: 3}
-      description: '<size=100%><color=#FFFF00>- Caretaker -</color>
-
-        <size=80%>Heals
-        nearby animals 7 times for <color=#0CD405>+100HP</color> everytime it <color=#FE7200>howls</color>.
-        This doesn''t apply to itself or other animals of the same species'
+      description: <size=100%><style="Yellow">- Caretaker -</style><br><size=80%>Heals
+        nearby animals 7 times for <style="Green">+100HP</style> every time it <style="Orange">howls</style>.
+        This doesn't apply to itself or other animals of the same species
     ShinyMaterial: {fileID: 2100000, guid: 114274f6779d32d4db01cb5f78760549, type: 2}
     IconSize: {x: 134.89, y: 134.89}
     IconPos: {x: 0, y: 0}
   - name: Musk Ox
     enemy: {fileID: 6824811008063488913, guid: 3afb3ca05a191d54d98e21f2f0c92ebe, type: 3}
     Wave: 6
-    description: 
     abilities:
     - icon: {fileID: 0}
-      description: '<size=100%><color=#FFFF00>- Protector -</color>
-
-        <size=80%>Protects
-        nearby animals 7 times with <color=#919191>+100 Armor</color> everytime it
-        <color=#FE7200>howls</color>. This doesn''t apply to itself or other animals
-        of the same species'
+      description: <size=100%><style="Yellow">- Protector -</style><br><size=80%>Protects
+        nearby animals 7 times with <style="Grey">+100 Armor</style> every time it
+        <style="Orange">howls</style>. This doesn't apply to itself or other animals
+        of the same species
     ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
@@ -46794,7 +47322,7 @@ MonoBehaviour:
     animals: []
   RightButton: {fileID: 2721369341586763178}
   LeftButton: {fileID: 4748357652036321571}
-  tabTitle: {fileID: 1064887305897373639}
+  tabTitle: {fileID: 6846290339544450968}
   AbilitiesPanel:
   - {fileID: 8349844217330568559}
   - {fileID: 7897323448835946187}
@@ -46857,8 +47385,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 250
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -46888,7 +47416,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -47052,6 +47580,7 @@ GameObject:
   - component: {fileID: 4941425569443207555}
   - component: {fileID: 6099649511448079585}
   - component: {fileID: 3761059998925220304}
+  - component: {fileID: 6099649511448079586}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -47397,8 +47926,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 20
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -47428,7 +47957,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -47826,6 +48355,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4686297690388276954}
   m_CullTransparentMesh: 1
+--- !u!114 &6099649511448079586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686297690388276954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!114 &6103188030260536989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47848,8 +48392,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -47879,7 +48423,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -47926,6 +48470,7 @@ GameObject:
   - component: {fileID: 3842082249851522005}
   - component: {fileID: 5336857803194876217}
   - component: {fileID: 7517070833264042132}
+  - component: {fileID: 7517070833264042133}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -48100,8 +48645,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 75%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48131,7 +48676,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -48271,8 +48816,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48302,7 +48847,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -48564,8 +49109,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48595,7 +49140,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -48639,6 +49184,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2567667904961512318}
   m_CullTransparentMesh: 1
+--- !u!114 &6846290339544450968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567667904961512318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &6949921782915924178
 GameObject:
   m_ObjectHideFlags: 0
@@ -48698,8 +49258,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48729,7 +49289,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -48927,7 +49487,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -48963,6 +49523,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7463128135087886730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899112694507243206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!224 &7467482281679363903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49022,8 +49597,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ??????
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -49089,6 +49664,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7517070833264042133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184013508619170279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!114 &7676325361277753619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49111,8 +49701,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -49142,7 +49732,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535

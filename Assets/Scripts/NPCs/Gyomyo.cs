@@ -93,7 +93,7 @@ public class Gyomyo : NPC
     }
     
     public void UnlockCasino(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <color=#FFCC7C>gamble</color> your embers", 6);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6);
        
     }
 }

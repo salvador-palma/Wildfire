@@ -107,11 +107,14 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (Skills skill in SkillTreeManager.Instance.PlayerData.skills)
         {
-            if(skill.ban){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
-            }else if(skill.pick){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
-            }
+            if(skill.type=="Ember Generation" || skill.type=="Gambling"){continue;}
+                
+            DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
+            // if(skill.ban){
+            //     DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
+            // }else if(skill.pick){
+            //     DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
+            // }
         }
 
         GameUI.Instance.defineEffectList();

@@ -98,9 +98,9 @@ public class Deck : MonoBehaviour
     }
     public void ChangeSingular(Augment augment, GameObject slot, int i, bool forGamble = false){
 
-        slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.Title;
+        slot.transform.Find("Title").GetComponent<DynamicText>().SetText(augment == null ? "" : augment.Title);
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment == null ? null : augment.icon;
-        slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.getDescription();
+        slot.transform.Find("Description").GetComponent<DynamicText>().SetText(augment == null ? "" : augment.getDescription());
         if(!forGamble){currentAugments[i] = augment;}
         
     }

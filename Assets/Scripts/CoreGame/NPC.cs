@@ -70,6 +70,14 @@ public class NPC : MonoBehaviour
         CharacterLoad();
         UpdateNotification();
         LocalBestiary.INSTANCE.ClaimRewardEvent += UpdateNotification;
+
+
+        foreach(RunTimeDialogues r in runTimeDialogues){
+            foreach (Dialogue item in r.dialogues)
+            {
+                Translator.AddIfNotExists(item.message);
+            }
+        }
         
     }
 

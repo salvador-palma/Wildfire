@@ -5609,9 +5609,9 @@ MonoBehaviour:
   SettingsSelectPanel: {fileID: 1508483496}
   SkillTree: {fileID: 838082010}
   UnlockableTexts:
-  - {fileID: 1925999018}
-  - {fileID: 1881166907}
-  - {fileID: 741522286}
+  - {fileID: 1925999019}
+  - {fileID: 1881166908}
+  - {fileID: 741522287}
   UnlockableIcon: {fileID: 1792141499}
   Unlockables:
   - {fileID: 21300000, guid: fd7d2acfbcc19794aba2bc76ae877e88, type: 3}
@@ -13073,8 +13073,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runTimeDialogues:
   - dialogues:
-    - message: Hey everyone! This right here is Naal! It's an old friend of mine
-        so be nice!
+    - message: Hey everyone! This right here is <style="LYellow"><sprite name="Naal">
+        Naal!</style> It's an old friend of mine so be nice!
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: Betsy
@@ -13086,8 +13086,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
       Name: Rowl
-    - message: Those are some nice earings <sprite name="Naal"> Naal! It's a pleasure
-        to meet you! <i>fufufu</i>
+    - message: Those are some nice earings <style="LYellow"> Naal!</style> It's a
+        pleasure to meet you! <i>fufufu</i>
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
@@ -13095,8 +13095,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: c1986da584500ad4a90b09c6aad3155e, type: 3}
       Name: Naal
-    - message: By the way <sprite name="Naal"> Naal, you didn't forget <color=#FFCC7C>The
-        Binoculars</color> right? I made a promise to the young man over there!
+    - message: By the way <style="LYellow"> Naal,</style> you didn't forget <style="LYellow">The
+        Binoculars</style> did you? I made a promise to bring them to the young man
+        over there!
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
@@ -13112,8 +13113,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
       Name: Naal
-    - message: Naal, you know better than anyone that I don't have a good memory!
-        But anyways...
+    - message: <style="LYellow">Naal,</style> you know better than anyone that I
+        don't have a good memory! But anyways...
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: Betsy
@@ -13159,18 +13160,19 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: a5209b96d4cf21543b03459abcaef214, type: 3}
       Name: Naal
-    - message: Oh the Binoculars? <size=80%>There's no need to thank me... It was
-        just a favor I did for Betsy...
+    - message: Oh the <style="LYellow">Binoculars</style>? <size=80%>There's no need
+        to thank me... It was just a favor I did for <sprite name="Betsy"> <style="LYellow">Betsy...
       arguments: []
       avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
       Name: Naal
     - message: <size=80%>Since we are on that topic... I shall inform you that I
-        have more items like that from where those Binoculars came from...
+        have <style="LYellow">more items</style> like that from where those <style="LYellow">Binoculars</style>
+        came from...
       arguments: []
       avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
       Name: Naal
-    - message: <size=80%>You see... I'm sort of running a... uh... hmm... of-the-grid
-        marketplace, you could say...
+    - message: <size=80%>You see... I'm sort of running a... uh... hmm... <style="LYellow">of-the-grid
+        marketplace</style>, you could say...
       arguments: []
       avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
       Name: Naal
@@ -13217,8 +13219,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
       Name: Jhat
-    - message: '<size=100%>Hum-ham... <size=80%>As I was saying... this is Jhat...
-        he will take care of selling you these items... '
+    - message: '<size=100%>Hum-ham... <size=80%>As I was saying... this is <sprite
+        name="Jhat"> <style="LYellow">Jhat</style>... he will take care of selling
+        you these items... '
       arguments: []
       avatar: {fileID: 21300000, guid: a5209b96d4cf21543b03459abcaef214, type: 3}
       Name: Naal
@@ -13227,7 +13230,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
       Name: Jhat
-    - message: 'But keep in mind that a bit of haggling is the best part of business! '
+    - message: 'But keep in mind that a bit of <style="LYellow">haggling</style>
+        is the best part of business! '
       arguments: []
       avatar: {fileID: 21300000, guid: ade89d61d61cc9145b78222d6af8b532, type: 3}
       Name: Jhat
@@ -15202,6 +15206,7 @@ GameObject:
   - component: {fileID: 741522284}
   - component: {fileID: 741522285}
   - component: {fileID: 741522286}
+  - component: {fileID: 741522287}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -15326,6 +15331,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &741522287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741522283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &760717490
 GameObject:
   m_ObjectHideFlags: 0
@@ -21539,8 +21559,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
       Name: Rowl
-    - message: Hey be careful with your hands little man! Me and Cloris just finished
-        hanging that up!
+    - message: Hey be careful with your hands little man! Me and <sprite name="Cloris"><style="LYellow">
+        Cloris</style> just finished hanging that up!
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
@@ -21548,8 +21568,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
-    - message: Anyways, Rowl, this is a espacial bulletin board where we can organize
-        tasks that need to be completed around the Campsite
+    - message: Anyways, <style="LYellow">Rowl</style>, this is a espacial bulletin
+        board where we can organize <style="LYellow">tasks</style> that need to be
+        completed around the<style="LYellow"> Campsite
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -21562,17 +21583,17 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: Rowl
-    - message: Call it? Little man, it's just a To Do List, there's nothing special
-        about it!
+    - message: Call it? Little man, it's just a <style="LYellow">'To do List'</style>,
+        there's nothing special about it!
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
     - message: 'Well I guess we can have a bit of fun while we are at it! What about
-        CCC? '
+        naming it <style="LYellow">''Quests & Requests''''? '
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
-    - message: Clor- I mean, Classy Campsite Chores of course!
+    - message: Seems like a very fashionable name if I do say so myself!
       arguments: []
       avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
       Name: Cloris
@@ -21580,8 +21601,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: Rowl
-    - message: <align="center"><size=150%>"The Grand Compendium of Noble Tasks Bestowed
-        Upon the Worthy"
+    - message: <align="center"><size=150%>"The Grand Compendium of Noble Tasks bestowed
+        upon the Worthy"
       arguments: []
       avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
       Name: Rowl
@@ -25850,8 +25871,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
       Name: 
-    - message: It's all about finding the perfect balance between golden brown and
-        crispy perfection!
+    - message: Like papa used to say, it's all about finding the perfect balance
+        between golden brown and crispy perfection!
       arguments: []
       avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
       Name: 
@@ -25868,8 +25889,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
       Name: 
-    - message: You know, it's not just about the roasting technique. A solid<color=#FFCC7C>
-        campfire </color>sets the stage for perfection.
+    - message: You know, it's not just about the roasting technique. A solid<style="LYellow">
+        campfire </style>sets the stage for perfection.
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
@@ -25907,7 +25928,7 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: Whoa, hold up! You control <color=#FFCC7C>Bees?!
+    - message: Whoa, hold up! You control <style="LYellow">Bees?!
       arguments: []
       avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
       Name: 
@@ -25919,14 +25940,14 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
       Name: 
-    - message: The truth is <color=#FFCC7C><sprite name="Betsy"> Betsy</color> also
-        filled me in on some<color=#FFCC7C> Bee </color> wackery yesterday, so I'm
-        not totally caught off guard.
+    - message: The truth is <style="LYellow"><sprite name="Betsy"> Betsy</style>
+        also filled me in on some<style="LYellow"> Bee </style> wackery yesterday,
+        so I'm not totally caught off guard.
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
     - message: In fact, I think I can put that knowledge to good use and amp up our
-        <color=#FFCC7C>campfire.
+        <style="LYellow">campfire.
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
@@ -25955,12 +25976,12 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
       Name: 
-    - message: Gotta shoot straight with you - The <color=#FFCC7C>campfire's</color>
+    - message: Gotta shoot straight with you - The <style="LYellow">campfire's</style>
         still not up to snuff!
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
-    - message: Need more <color=#FFCC7C><sprite name="Ember"> embers</color>, you
+    - message: Need more <style="LYellow"><sprite name="Ember"> embers</style>, you
         say?
       arguments: []
       avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
@@ -25969,7 +25990,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
-    - message: Aha! Here you go, found <color=#FFCC7C>1500 <sprite name="Ember"></color>
+    - message: Aha! Here you go, found <style="LYellow">1500 <sprite name="Ember"></style>
         embers chilling in my back pocket
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
@@ -26023,7 +26044,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
       Name: 
-    - message: 'That''s a very cute candle man! Is this like a present for... someone? '
+    - message: 'That''s a very cute <style="LYellow">candle</style> man! Is this
+        like a present for... someone? '
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
@@ -26033,8 +26055,8 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
       Name: 
     - message: In fact, now that I think of it, a candle is really just a mini-fire,
-        I'm convinced that with enough of these we can make our own campfire much
-        better!
+        I'm convinced that with enough of these we can make our own <style="LYellow">campfire</style>
+        much better!
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
@@ -26072,8 +26094,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
       Name: 
-    - message: Why are you walking around with a skull in your hand? Are you trying
-        to scare me?
+    - message: Why are you walking around with a <style="LYellow">skull</style> in
+        your hand? Are you trying to scare me?
       arguments: []
       avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
       Name: 
@@ -26086,16 +26108,16 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
       Name: 
-    - message: Naahh, you hold on to that! Don't get it close to me!
+    - message: Heck no, you hold on to that! Don't get it close to me!
       arguments: []
       avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
       Name: 
-    - message: But you know, I think this gave me an idea to improve the campfire...
+    - message: But you know, I think this gave me an idea to improve the <style="LYellow">campfire...
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
     - message: Imagine creating an army of these guys to protect it... You could
-        even power them with the energy from the campfire itself!
+        even power them with energy from the <style="LYellow">campfire</style> itself!
       arguments: []
       avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
       Name: 
@@ -31341,12 +31363,12 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
       Name: 
-    - message: 'This campsite used to be a right haven for all sorts of <color=#FFCC7C>critters</color>,
+    - message: 'This campsite used to be a right haven for all sorts of <style="LYellow">critters</style>,
         but now it''s as quiet as a lamb in a field. '
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
-    - message: I've a hankering to start me a little <color=#FFCC7C>record book</color>,
+    - message: I've a hankering to start me a little <style="LYellow">record book</style>,
         ya see.
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
@@ -31356,7 +31378,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: 
-    - message: Could ye tell me about <color=#FFCC7C>5</color> different <color=#FFCC7C>animals</color>
+    - message: Could ye tell me about <style="LYellow">5</style> different <style="LYellow">animals</style>
         'round here?
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
@@ -31382,7 +31404,7 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: Well, well, well! You've gone and spotted <color=#FFCC7C>five critters</color>
+    - message: Well, well, well! You've gone and spotted <style="LYellow">five critters</style>
         already?
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
@@ -31391,12 +31413,12 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: 
-    - message: Now, hold your horses while I set up the <color=#FFCC7C>record book</color>...
+    - message: Now, hold your horses while I set up the <style="LYellow">record book</style>...
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: 
-    - message: Ah, here it is! I'll name it <b><color=#FFCC7C>"The Bestiary - by
-        <sprite name="Betsy"> Betsy"</color>!
+    - message: Ah, here it is! I'll name it <b><style="LYellow">"The Bestiary - by
+        <sprite name="Betsy"> Betsy"</style>!
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
@@ -31404,9 +31426,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: 
-    - message: If ye happen upon a grand total of <color=#FFCC7C>5 species</color>
-        for more than <color=#FFCC7C>100 times</color>, come holler at me, and I'll
-        have something special for ya as a <color=#FFCC7C>little reward.
+    - message: If ye happen upon a grand total of <style="LYellow">5 species</style>
+        for more than <style="LYellow">100 times</style>, come holler at me, and
+        I'll have something special for ya as a <color=#FFCC7C>little reward.
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
@@ -31439,8 +31461,8 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: What did I tell ya kid? <sprite name="Naal"> Naal showed up faster
-        than you could ever think of!
+    - message: What did I tell ya kid? <style="LYellow"><sprite name="Naal"> Naal</style>
+        showed up faster than you could ever think of!
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
@@ -31450,18 +31472,18 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
       Name: 
     - message: However! Nothing's free in this world kid! I'll still need you to
-        help me by filling out more of the <color=#FFCC7C>Bestiary
+        help me by filling out more of the <style="LYellow">Bestiary
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: 
     - message: Although your generation is dumb, I believe that you have already
-        noticed that the<color=#FFCC7C> Bestiary</color> has a section for you to
-        check how many animals you have seen.
+        noticed that the<style="LYellow"> Bestiary</style> has a section for you
+        to check how many animals you have seen.
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
-    - message: If by chance you happen upon a <color=#FFCC7C>500 critters</color>
-        of <color=#FFCC7C>ten different species</color>, I'll upgrade those <color=#FFCC7C>Binoculars</color>
+    - message: If by chance you happen upon a <style="LYellow">500 critters</style>
+        of <style="LYellow">ten different species</style>, I'll upgrade those <style="LYellow">Binoculars</style>
         for ya
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
@@ -31487,19 +31509,19 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a <color=#FFCC7C>100
-        critters</color> each for <color=#FFCC7C>10 different species</color>! '
+    - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a <style="LYellow">100
+        critters</style> each for <style="LYellow">10 different species</style>! '
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
-    - message: Just what's needed to spruce up those <color=#FFCC7C>Binoculars</color>!
+    - message: Just what's needed to spruce up those <style="LYellow">Binoculars</style>!
         Here you go, take them for a spin!
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
-    - message: If you are aiming to upgrade beyond that, I'll need records of <color=#FFCC7C>2500
-        creatures</color> spanning <color=#FFCC7C>15 different species</color>. Think
-        you're up for the challenge?
+    - message: If you are aiming to upgrade beyond that, I'll need records of <style="LYellow">2500
+        creatures</style> spanning <style="LYellow">15 different species</style>.
+        Think you're up for the challenge?
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: 
@@ -31536,13 +31558,13 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: 
-    - message: <b><color=#FFCC7C>The Bestiary</color></b> already has records of
-        <color=#FFCC7C>500 critters</color> spread across <color=#FFCC7C>15 different
-        species</color>!
+    - message: <b><style="LYellow">The Bestiary</style></b> already has records of
+        <style="LYellow">500 critters</style> spread across <style="LYellow">15 different
+        species</style>!
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
-    - message: Hand over them <b><color=#FFCC7C>Binoculars</color></b>, and I'll
+    - message: Hand over them <b><style="LYellow">Binoculars</style></b>, and I'll
         give 'em a bit of a tweak...
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
@@ -31551,8 +31573,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
-    - message: Well... to be honest... there's one last upgrade, but it'll take <color=#FFCC7C>10K
-        records</color> for <color=#FFCC7C>20 different species</color>!
+    - message: Well... to be honest... there's one last upgrade, but it'll take <style="LYellow">10K
+        records</style> for <style="LYellow">20 different species</style>!
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: 
@@ -31589,13 +31611,13 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: I'll be hornswoggled! <color=#FFCC7C>2500 record</color> of <color=#FFCC7C>25
-        different critters</color>! That must be a world record!
+    - message: I'll be hornswoggled! <style="LYellow">2500 record</style> of <style="LYellow">25
+        different critters</style>! That must be a world record!
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
     - message: Just as I promised, I'll give you the ultimate optical device, so
-        hand over them <b><color=#FFCC7C>Binoculars!
+        hand over them <b><style="LYellow">Binoculars!
       arguments: []
       avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
       Name: 
@@ -31622,7 +31644,7 @@ MonoBehaviour:
     dequeueAuto: 1
   - dialogues:
     - message: Hey, kid! Just curious, what's your favorite critter? Well, for me,
-        it's <color=#FFCC7C>Bees.
+        it's <style="LYellow">Bees.
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
@@ -31630,17 +31652,17 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: 
-    - message: 'Say, since you''re doin'' such a bang-up job fillin'' that <b><color=#FFCC7C>Bestiary</color><b>,
+    - message: 'Say, since you''re doin'' such a bang-up job fillin'' that <b><style="LYellow">Bestiary</style></b>,
         here''s an offer for ya:'
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: 
     - message: If you manage to fill it up completely, I'll teach you all there is
-        to know about <color=#FFCC7C>Bees.
+        to know about <style="LYellow">Bees.
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: 
-    - message: Yep, including how to <color=#FFCC7C>tame</color> 'em! What do you
+    - message: Yep, including how to <style="LYellow">tame</style> 'em! What do you
         say to that?
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
@@ -31662,12 +31684,12 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: You've gone and done it! <b><color=#FFCC7C>The Bestiary</color></b>
+    - message: You've gone and done it! <b><style="LYellow">The Bestiary</style></b>
         is filled to the brim!
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
-    - message: Just as I promised, it's time for a lesson on <color=#FFCC7C>Bees</color>!
+    - message: Just as I promised, it's time for a lesson on <style="LYellow">Bees</style>!
         Gather 'round, and I'll tell you everything there is to know!
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
@@ -31698,7 +31720,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
       Name: 
-    - message: If I'm not mistaken they are called <sprite name="Shiny"> Shiny animals
+    - message: If I'm not mistaken they are called <style="LYellow"><sprite name="Shiny">
+        Shiny</style> animals
       arguments: []
       avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
       Name: 
@@ -31729,8 +31752,8 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: Oh so you actually did it! <color=#FFCC7C>100</color> Individuals
-        of <color=#FFCC7C>5</color> different species uh?
+    - message: Oh so you actually did it! <style="LYellow">100</style> Individuals
+        of <style="LYellow">5</style> different species uh?
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: Betsy
@@ -31743,8 +31766,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
       Name: 
-    - message: But I'm already on it. I've called a friend, he will bring it here,
-        so no worries.
+    - message: But I'm already on it. I've called a <style="LYellow">friend</style>,
+        he will bring it here, so no worries.
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
@@ -34891,7 +34914,7 @@ MonoBehaviour:
   runTimeDialogues:
   - dialogues:
     - message: Yooo how's it going man? Word is spreading that this is the hottest
-        spot in the Campsite. I came here to check by myself.
+        spot in the <style="LYellow">Campsite</style>. I came here to check by myself.
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
@@ -34900,13 +34923,14 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
-    - message: What if... stay with me here... you could reel in embers without struggling?
-        Genius right?
+    - message: What if... stay with me here... you could reel in <style="LYellow">embers</style>
+        without struggling? Genius right?
       arguments: []
       avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
       Name: Gyomyo
-    - message: A place where you could play minigames for embers, of course, if you
-        are skilled at it, they are basically guaranteed.
+    - message: A place where you could play <style="LYellow">minigames</style> for
+        <style="LYellow">embers</style>, of course, if you are skilled at it, they
+        are basically guaranteed.
       arguments: []
       avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
       Name: Gyomyo
@@ -34916,8 +34940,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
-    - message: So what if you came back when you have atleast 250000 embers? Then
-        we could really make some <i>waves</i> uh?
+    - message: So what if you came back when you have atleast <style="LYellow"><sprite
+        name="Ember"> 250000 embers</style>? Then we could really make some <i>waves</i>
+        uh?
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
@@ -34926,7 +34951,7 @@ MonoBehaviour:
         m_Calls: []
     dequeueAuto: 1
   - dialogues:
-    - message: 'So, got those embers stacked up yet? '
+    - message: 'So, got those <style="LYellow">embers</style> stacked up yet? '
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
@@ -34934,7 +34959,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
-    - message: Come back when you are pocket 250000 embers.
+    - message: Come back when you are pocket <style="LYellow"><sprite name="Ember">
+        250000 embers.
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
@@ -34943,12 +34969,13 @@ MonoBehaviour:
         m_Calls: []
     dequeueAuto: 0
   - dialogues:
-    - message: Oh you came to chat? Just go get your embers man, I won't go anywhere
-        you know?
+    - message: Oh you came to chat? Just go get your <style="LYellow">embers</style>
+        man, I won't go anywhere you know?
       arguments: []
       avatar: {fileID: 21300000, guid: d279510532044f747914391807058d09, type: 3}
       Name: Gyomyo
-    - message: 250000 will be enough for you to not embarrass me infront of the investors
+    - message: <style="LYellow"><sprite name="Ember"> 250000</style> will be enough
+        for you to not embarrass me infront of the investors
       arguments: []
       avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
       Name: Gyomyo
@@ -34957,8 +34984,8 @@ MonoBehaviour:
         m_Calls: []
     dequeueAuto: 0
   - dialogues:
-    - message: 'Look man, I won''t even take your embers away, I just gotta show
-        the investors that you aren''t a nobody, you know? '
+    - message: 'Look man, I won''t even take your <style="LYellow">embers</style>
+        away, I just gotta show the investors that you aren''t a nobody, you know? '
       arguments: []
       avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
       Name: Gyomyo
@@ -34973,7 +35000,7 @@ MonoBehaviour:
     dequeueAuto: 0
   - dialogues:
     - message: OOOHH, I can smell it! I know exactly what's hiding in that pocket
-        of yours - 250,000 Embers!
+        of yours - <style="LYellow"><sprite name="Ember"> 250,000 Embers!
       arguments: []
       avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
       Name: Gyomyo
@@ -35024,7 +35051,7 @@ MonoBehaviour:
     dequeueAuto: 1
   - dialogues:
     - message: Heyyy, wanna hit the casi... wait a second... something's <i>fishy</i>
-        here... where are your embers?!
+        here... where are your <style="LYellow">embers?!
       arguments: []
       avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
       Name: Gyomyo
@@ -35033,7 +35060,8 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
       Name: Gyomyo
     - message: Look men I hate to be that guy but I can't let you through if you
-        don't have more than 250K embers with you
+        don't have more than <style="LYellow"><sprite name="Ember"> 250K embers</style>
+        with you
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
@@ -35052,12 +35080,14 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
       Name: Gyomyo
     - message: Look men I hate to be that guy but I can't let you through if you
-        don't have more than 250K embers with you
+        don't have more than <style="LYellow"><sprite name="Ember"> 250K embers</style>
+        with you
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
-    - message: But hey, you know that <sprite name="Rowl">  guy over there? I always
-        see you giving him embers. Just go there and take them back no?
+    - message: But hey, you know that <sprite name="Rowl">  <style="LYellow">guy</style>
+        over there? I always see you giving him <style="LYellow">embers</style>.
+        Just go there and take them back no?
       arguments: []
       avatar: {fileID: 21300000, guid: 9acfa8ff8250a9c4699d0d728422cca0, type: 3}
       Name: Gyomyo
@@ -35065,8 +35095,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
       Name: Rowl
-    - message: I've put blood sweat and tears into making this campfire perfect,
-        you can't take that away from me!
+    - message: I've put blood sweat and tears into making this <style="LYellow">campfire</style>
+        perfect, you can't take that away from me!
       arguments: []
       avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
       Name: Rowl
@@ -36889,8 +36919,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
-    - message: My name's Cloris, darling. If you need anything - fashion tips, perhaps
-        - just give me a call
+    - message: My name's <style="LYellow">Cloris</style>, darling. If you need anything
+        - fashion tips, perhaps - just give me a call
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -36927,7 +36957,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
-    - message: You see that little happy campfire over there?
+    - message: You see that little happy <style="LYellow">campfire</style> over there?
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -36980,8 +37010,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 27c84aeed32f6e64996c55df0e182d83, type: 3}
       Name: Cloris
-    - message: Now imagine using this concept on our little campfire. Fashion and
-        behaviour, darling - They're inseparable, even for a fire!
+    - message: Now imagine using this concept on our little <style="LYellow">campfire</style>.
+        Fashion and behaviour, darling - They're inseparable, even for a fire!
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -37007,8 +37037,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
       Name: Cloris
-    - message: Well, if our little fire keeps using a certain skill over and over
-        then both his appearance AND behaviour will change
+    - message: Well, if our little <style="LYellow">fire</style> keeps using a <style="LYellow">certain
+        skill</style> over and over then both his <style="LYellow">appearance</style>
+        AND <style="LYellow">behaviour</style> will change
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -41504,6 +41535,7 @@ GameObject:
   - component: {fileID: 1881166905}
   - component: {fileID: 1881166906}
   - component: {fileID: 1881166907}
+  - component: {fileID: 1881166908}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -41627,6 +41659,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1881166908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1893217358
 GameObject:
   m_ObjectHideFlags: 0
@@ -42541,6 +42588,7 @@ GameObject:
   - component: {fileID: 1925999016}
   - component: {fileID: 1925999017}
   - component: {fileID: 1925999018}
+  - component: {fileID: 1925999019}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -42664,6 +42712,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1925999019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925999015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1001 &1933348911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48134,9 +48197,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6588912352263716263, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_text
+      value: Ah, here it <sprite name="Rowl"> sfsdf
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588912352263716263, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+    - target: {fileID: 6588912352263716263, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6588912352263716263, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
     - target: {fileID: 6617177702089033994, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_Name
       value: Chat
@@ -48254,7 +48329,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00050354004, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.0008544922, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -48853,7 +48928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: -0.00045776367
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

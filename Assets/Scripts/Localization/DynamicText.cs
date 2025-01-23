@@ -103,7 +103,7 @@ public class DynamicText : MonoBehaviour
                         break;
                     default:
                         AudioManager.PlayOneShot(sound, Vector2.zero);
-                        yield return new WaitForSeconds(0.1f);//0.01f
+                        yield return new WaitForSeconds(0.01f);//0.01f
                         break;
                 }
             }

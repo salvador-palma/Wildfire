@@ -49,7 +49,7 @@ public class GameUI : MonoBehaviour
     Effect latestInfoEffect;
     [SerializeField] GameObject EffectContainer;
     [SerializeField] GameObject EffectTemplate;
-    [SerializeField] TextMeshProUGUI[] EffectTexts;
+    [SerializeField] DynamicText[] EffectTexts;
     [SerializeField] GameObject PassiveContainer;
 
 
@@ -144,8 +144,8 @@ public class GameUI : MonoBehaviour
         GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
         
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
-        go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
+        go.transform.GetChild(1).GetComponent<DynamicText>().SetText(a.Title);
+        go.transform.GetChild(2).GetComponent<DynamicText>().SetText(a.getDescription());
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -156,8 +156,8 @@ public class GameUI : MonoBehaviour
         Augment a = DeckBuilder.Instance.getAugmentByName(serA.title);
 
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
-        go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
+        go.transform.GetChild(1).GetComponent<DynamicText>().SetText(a.Title);
+        go.transform.GetChild(2).GetComponent<DynamicText>().SetText(a.getDescription());
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -203,35 +203,36 @@ public class GameUI : MonoBehaviour
         Ability ability = SkillTreeManager.Instance.getAbility(e.getText());
         int level = SkillTreeManager.Instance.getLevel(ability.Name);
 
-        EffectTexts[3].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
-        EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
-        EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
-        EffectTexts[3].color = Color.white;
-        EffectTexts[4].color = Color.white;
-        EffectTexts[5].color = Color.white;
+
+        EffectTexts[3].SetText("<size=100%><style=\"Yellow\">- Level 1 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription1});
+        EffectTexts[4].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription2});
+        EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription3});
+        EffectTexts[3].setColor(Color.white);
+        EffectTexts[4].setColor(Color.white);
+        EffectTexts[5].setColor(Color.white);
         switch (level+1)
         {    
             case 0:
-                EffectTexts[3].color = new Color(1,1,1,0.3f);
-                EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
-                EffectTexts[4].color = new Color(1,1,1,0.3f);
-                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[3].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[4].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[4].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
             case 1:
-                EffectTexts[4].color = new Color(1,1,1,0.3f);
-                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[4].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
             case 2:
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
         }
 
         latestInfoEffect = e;
-        EffectTexts[0].text = e.getText();
-        EffectTexts[1].text = e.getType();
-        EffectTexts[2].text = e.getCaps();
+        EffectTexts[0].SetText(e.getText());
+        EffectTexts[1].SetText(e.getType());
+        EffectTexts[2].SetText(e.getCaps());
 
         GameObject optionMenu = e.getAbilityOptionMenu();
         if(optionMenu==null){return;}
@@ -343,7 +344,7 @@ public class GameUI : MonoBehaviour
         }
     }
     private void setFinalStatTemplate(SimpleStat simpleStat, GameObject template){
-        template.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = simpleStat.Title;
+        template.transform.GetChild(0).GetComponent<DynamicText>().SetText(simpleStat.Title);
         template.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = simpleStat.value + "";
     }
 

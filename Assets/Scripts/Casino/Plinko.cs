@@ -22,7 +22,7 @@ public class Plinko : MonoBehaviour
     [SerializeField] TextMeshProUGUI AcornAmountTxt;
     [SerializeField] TextMeshProUGUI TotalEmberAmount;
     [SerializeField] TextMeshProUGUI GainEmberAmount;
-    [SerializeField] TextMeshProUGUI TotalRunEmberAmount;
+    [SerializeField] DynamicText TotalRunEmberAmount;
 
     [SerializeField] Button RepeatBtn;
     [SerializeField] Button BackBtn;
@@ -35,7 +35,7 @@ public class Plinko : MonoBehaviour
     
     private void Start() {
         AcornValueTxt.text = Math.Min(1000, (int) SkillTreeManager.Instance.PlayerData.embers).ToString();
-        TotalRunEmberAmount.text = "";
+        TotalRunEmberAmount.SetText("");
         TotalEmberAmount.text =  SkillTreeManager.Instance.PlayerData.embers.ToString();
         AcornValueTxt.onValueChanged.AddListener(OnValueChanged);
     }
@@ -84,11 +84,11 @@ public class Plinko : MonoBehaviour
     public void UpdateEmberAmount(){
 
         if(TotalRun<0){
-            TotalRunEmberAmount.text = "You've lost " + TotalRun.ToString() + " Embers in total";
+            TotalRunEmberAmount.SetText("You've lost {0} Embers in total", new string[]{TotalRun.ToString()});
         }else if(TotalRun>0){
-            TotalRunEmberAmount.text = "You've gained +" + TotalRun.ToString() + " Embers in total";
+            TotalRunEmberAmount.SetText("You've gained +{0} Embers in total", new string[]{TotalRun.ToString()});
         }else{
-            TotalRunEmberAmount.text = "";
+            TotalRunEmberAmount.SetText("");
         }
 
         if(left<=0){

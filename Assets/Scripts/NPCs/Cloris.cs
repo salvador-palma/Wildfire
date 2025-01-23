@@ -34,6 +34,6 @@ public class Cloris : NPC
 
     }
     public void UnlockCharacterSelect(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <color=#FFCC7C>style</color> your <color=#FFCC7C>campfire</color> affecting its <color=#FFCC7C>behaviour</color> and <color=#FFCC7C>environment</color>", 4);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <style=\"LYellow\">style</style> your <style=\"LYellow\">campfire</style> affecting its <style=\"LYellow\">behaviour</style> and <style=\"LYellow\">environment</style>", 4);
     }
 }

@@ -100,6 +100,7 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] int RepelAmount;
 
     public void Awake(){
+        
         INSTANCE = this;
         
         RetrieveReferences();
@@ -154,8 +155,8 @@ public class LocalBestiary : MonoBehaviour
                 }
                 
             }
-        }catch{
-            Debug.Log("No Bestiary Container (for some reason)");
+        }catch(Exception e){
+            Debug.Log(e.StackTrace );
         }
         
         InitSlots();
@@ -291,10 +292,10 @@ public class LocalBestiary : MonoBehaviour
         Transform Repel = InfoPanel.Find("BestiaryInfoImage").Find("Repel");
         bool repeled = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID).Repeled;
         if(RepelLimit > 0 && (RepelLimit != RepelAmount || repeled)){
-            Repel.gameObject.SetActive(true);
-            Repel.transform.GetChild(0).gameObject.SetActive(repeled);
+            Repel?.gameObject.SetActive(true);
+            Repel?.transform.GetChild(0).gameObject.SetActive(repeled);
         }else{
-            Repel.gameObject.SetActive(false);
+            Repel?.gameObject.SetActive(false);
         }
         
         

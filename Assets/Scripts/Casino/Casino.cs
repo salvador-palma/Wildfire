@@ -8,7 +8,7 @@ public class Casino : MonoBehaviour
 {
     public static string getMinigame(){
         DateTime d = DateTime.Today;
-        if((int)d.DayOfWeek % 2 == 0){
+        if((int)d.DayOfWeek % 2 == 1){
                 return "Drop the Acorn";//MINI GAME 1
             }else{
                 return "Water the Flower";//MINI GAME 2
@@ -16,7 +16,7 @@ public class Casino : MonoBehaviour
     }
     public static int getMinigameID(){
         DateTime d = DateTime.Today;
-        if((int)d.DayOfWeek % 2 == 0){
+        if((int)d.DayOfWeek % 2 == 1){
                 return 0;//MINI GAME 1
             }else{
                 return 1;//MINI GAME 2

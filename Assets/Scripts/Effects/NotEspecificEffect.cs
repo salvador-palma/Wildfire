@@ -108,7 +108,7 @@ public class FlameCircle : NotEspecificEffect
 
     public string getType()
     {
-        return "Especial Effect";
+        return "Special Effect";
     }
 
     public void Stack(FlameCircle flameCircle){
@@ -284,7 +284,7 @@ public class MoneyMultipliers : NotEspecificEffect
 
     public string getType()
     {
-        return "Especial Effect";
+        return "Special Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -359,7 +359,7 @@ public class CandleTurrets : NotEspecificEffect
 
     public string getType()
     {
-        return "Especial Effect";
+        return "Special Effect";
     }
 
     public void Stack(CandleTurrets candleTurrets){
@@ -516,7 +516,7 @@ public class Summoner : NotEspecificEffect
 
     public string getType()
     {
-        return "Especial Effect";
+        return "Special Effect";
     }
 
     public void Stack(Summoner summoner){

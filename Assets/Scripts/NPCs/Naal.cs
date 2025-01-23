@@ -92,7 +92,7 @@ public class Naal : NPC
 
     
     public void UnlockBlackMarket(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "NAAL'S BLACK MARKET", "You can now access the <color=#FFCC7C>Black Market</color> to buy especial uprades", 3);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "NAAL'S BLACK MARKET", "You can now access the <style=\"LYellow\">Black Market</style> to buy especial uprades", 3);
         GameVariables.SetVariable("NaalPresentation", 1);
     }
     

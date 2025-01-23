@@ -125,7 +125,7 @@ public class HealthRegen : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -229,7 +229,7 @@ public class LightningEffect : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -407,7 +407,7 @@ public class Immolate : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

@@ -27,7 +27,7 @@ public class MetaMenuUI : MonoBehaviour
     
 
     [Header("Unlockable")]
-    [SerializeField] TextMeshProUGUI[] UnlockableTexts;
+    [SerializeField] DynamicText[] UnlockableTexts;
     [SerializeField] Image UnlockableIcon;
     [SerializeField] Sprite[] Unlockables;
 
@@ -171,8 +171,8 @@ public class MetaMenuUI : MonoBehaviour
 
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 0);
         AudioManager.PlayOneShot(FMODEvents.Instance.UnlockedEffect, transform.position);
-        UnlockableTexts[0].text = title;
-        UnlockableTexts[1].text = name;
+        UnlockableTexts[0].SetText(title);
+        UnlockableTexts[1].SetText(name);
         UnlockableTexts[2].SetText(description);
         UnlockableIcon.sprite = icon;
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");

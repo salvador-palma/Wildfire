@@ -19,7 +19,7 @@ public class Mines : MonoBehaviour
     [SerializeField] TextMeshProUGUI CashOutTxt;
     [SerializeField] TextMeshProUGUI TotalEmberAmount;
     [SerializeField] TextMeshProUGUI GainEmberAmount;
-    [SerializeField] TextMeshProUGUI TotalRunEmberAmount;
+    [SerializeField] DynamicText TotalRunEmberAmount;
 
     [Header("Values")]
     [SerializeField] private long bet;
@@ -31,7 +31,7 @@ public class Mines : MonoBehaviour
     [SerializeField] private long TotalRun;
     private void Start() {
         WageAmountText.text = "1000";
-        TotalRunEmberAmount.text = "";
+        TotalRunEmberAmount.SetText("");
         TotalEmberAmount.text = SkillTreeManager.Instance.PlayerData.embers.ToString();
         WageAmountText.onValueChanged.AddListener(OnValueChanged);
     }
@@ -201,11 +201,11 @@ public class Mines : MonoBehaviour
         TextOn= true;
 
         if(TotalRun<0){
-            TotalRunEmberAmount.text = "You've lost " + TotalRun.ToString() + " Embers in total";
+            TotalRunEmberAmount.SetText("You've lost {0} Embers in total", new string[]{TotalRun.ToString()});
         }else if(TotalRun>0){
-            TotalRunEmberAmount.text = "You've gained +" + TotalRun.ToString() + " Embers in total";
+            TotalRunEmberAmount.SetText("You've gained +{0} Embers in total", new string[]{TotalRun.ToString()});
         }else{
-            TotalRunEmberAmount.text = "";
+            TotalRunEmberAmount.SetText("");
         }
         
         
