@@ -116,9 +116,9 @@ public class Explosion : OnKillEffects
     {
         return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-         return string.Format("Chance: {0}% (Max. 50%) <br>Damage: +{1}", Mathf.Round(prob * 100), dmg);
+         return new string[]{"Chance: {0}% (Max. 50%) <br>Damage: +{1}", Mathf.Round(prob * 100).ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -205,9 +205,9 @@ public class Necromancer : OnKillEffects
     {
         return "Everytime you kill an enemy, there's a chance of summoning a <color=#FFCC7C>friendly ghoul</color>. Ghouls can attack enemies for up to <color=#FFCC7C>3 times</color> with a percentage of your <color=#FF5858>base damage.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100), Mathf.Round(dmgPerc * 100));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100).ToString(), Mathf.Round(dmgPerc * 100).ToString()};
     }
 
     public static int getAttackTimes(){
@@ -328,9 +328,9 @@ public class Bullets : OnKillEffects
     {
         return "Everytime you kill an enemy, there's a chance of shooting <color=#FFCC7C>Cannon Balls</color> out of the enemy's corpse, that deal damage and apply <color=#FF99F3>On-Hit effects</color> whenever they hit another creature. If this effect procs, you will also gain <color=#FFCC7C>+10 embers</color>. <color=#AFEDFF>Cannon Balls' speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f), amount, dmg);
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f).ToString(), amount.ToString(), dmg.ToString()};
     }
 
     public string getIcon()

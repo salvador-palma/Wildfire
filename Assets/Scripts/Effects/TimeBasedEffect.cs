@@ -108,9 +108,9 @@ public class HealthRegen : TimeBasedEffect
     {
         return "You can regenerate <color=#0CD405>health</color> per second and gain <color=#0CD405>Max HP</color> at the end of each round";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Regen/s: {0}/s <br>Max HP/round: {1}/round", Mathf.Round(perSec * 100.0f) * 0.01f, Mathf.Round(perRound * 100.0f) * 0.01f);
+        return new string[]{"Regen/s: {0}/s <br>Max HP/round: {1}/round", (Mathf.Round(perSec * 100.0f) * 0.01f).ToString(), (Mathf.Round(perRound * 100.0f) * 0.01f).ToString()};
     }
 
     public string getIcon()
@@ -212,9 +212,9 @@ public class LightningEffect : TimeBasedEffect
     {
         return "Each few amount of seconds, <color=#FFCC7C>3 thunders</color> will spawn at a convenient location dealing <color=#FF5858>damage</color> to enemies struck by it. This ability applies <color=#FF99F3>On-Land Effects";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Interval: {0}s (Min 0.25s)<br>Damage: +{1}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, dmg);
+        return new string[]{"Interval: {0}s (Min 0.25s)<br>Damage: +{1}", (Mathf.Round((float)interval/4 * 100.0f) * 0.01f).ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -390,9 +390,9 @@ public class Immolate : TimeBasedEffect
     {
         return "Each few amount of seconds, you will release a <color=#FFCC7C>wave of energy</color> that travels through the campsite dealing <color=#FF5858>damage</color> to enemies caught by it and ignoring <color=#919191>Armor</color> completely";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Interval: {0}s (Min. 2s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
+        return new string[]{"Interval: {0}s (Min. 2s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", (Mathf.Round((float)interval/4 * 100.0f) * 0.01f).ToString(), Mathf.Round(radius*100).ToString(), dmg.ToString()};
     }
 
     public string getIcon()

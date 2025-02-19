@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
@@ -232,7 +232,8 @@ public class GameUI : MonoBehaviour
         latestInfoEffect = e;
         EffectTexts[0].SetText(e.getText());
         EffectTexts[1].SetText(e.getType());
-        EffectTexts[2].SetText(e.getCaps());
+        string[] caps = e.getCaps();
+        EffectTexts[2].SetText(caps[0], caps.Skip(1).ToArray());
 
         GameObject optionMenu = e.getAbilityOptionMenu();
         if(optionMenu==null){return;}

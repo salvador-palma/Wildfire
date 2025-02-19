@@ -5,6 +5,7 @@ using System.Linq;
 using FMOD;
 using FMODUnity;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
@@ -42,6 +43,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
 
     [SerializeField] private float slowfactor;
+    [SerializeField] public int poisonLeft;
     protected float SlowFactor{
         get{
             return slowfactor;
@@ -61,6 +63,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
            GetComponent<Animator>().SetTrigger("InRange");
            StartCoroutine(PlayAttackAnimation(AttackDelay));
         }
+
+
     }
     public string AttackAnimationName = "EnemyAttack";
     public string WalkAnimationName = "Walk";
@@ -107,6 +111,23 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
        
     }
 
+    public void Poison(int tick)
+    {
+        if(poisonLeft <= 0){
+            GetComponent<SpriteRenderer>().material.SetInt("_Poison", 1);
+        }
+        poisonLeft += tick;
+        
+    }
+    public void ApplyPoison(){
+        if(poisonLeft > 0){
+            Hitted((int)(MaxHealth*Flamey.PoisonDrainPerc), 14, ignoreArmor:true, onHit:false, source:"Poison");
+            poisonLeft--;
+            if(poisonLeft <= 0){
+                GetComponent<SpriteRenderer>().material.SetInt("_Poison", 0);
+            }
+        }
+    }
 
     public virtual void Move(){
         if(Stunned){return;}
@@ -230,6 +251,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public int CompareTo(Enemy other)
     {
+        if(other==null){return 1;}
         return Vector2.Distance(HitCenter.position, flame.transform.position) < Vector2.Distance(other.HitCenter.position, flame.transform.position)? -1 : 1; 
     }
 

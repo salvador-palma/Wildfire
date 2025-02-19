@@ -86,6 +86,9 @@ public class Flamey : MonoBehaviour
     private float tick = 0.25f;
     private int tickNumber;
 
+    [Header("Global Settings")]
+    public static float PoisonDrainPerc = 1/25f;
+
     [ContextMenu("Call Extra Function")]
     void ExtraFunction()
     {
@@ -188,7 +191,12 @@ public class Flamey : MonoBehaviour
         if(secondTimer <= 0){
             secondTimer = tick;
             tickNumber++;
-            if(poisonsLeft > 0  && tickNumber >= 4){tickNumber=0; ApplyPoison();}
+            if(tickNumber >= 4){
+                tickNumber = 0;
+                EnemySpawner.Instance.ApplyPoisonEnemies();
+                if(poisonsLeft > 0){ApplyPoison();}
+            }
+            
             ApplyTimed();
         }
 
@@ -257,9 +265,14 @@ public class Flamey : MonoBehaviour
         }
         return UnityEngine.Vector2.zero;
     }
-    public Enemy getRandomHomingEnemy(bool targetable = false){
+    public Enemy getRandomHomingEnemy(bool targetable = false, Predicate<Enemy> predicate = null){
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
-        if(targetable){go = go.Where(i=>i.GetComponent<Enemy>().canTarget()).ToArray();}
+
+        if(targetable){
+            go = predicate==null ? 
+            go.Where(i=>i.GetComponent<Enemy>().canTarget()).ToArray() : 
+            go.Where(i=>i.GetComponent<Enemy>().canTarget() && predicate(i.GetComponent<Enemy>())).ToArray();
+        }
         if(go.Length == 0){return null;}
         try{
             GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
@@ -285,7 +298,7 @@ public class Flamey : MonoBehaviour
         if(onhitted){ApplyOnHitted(attacker);}
         if(Unhittable){return;}
 
-        if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2 && BurstShot.Instance != null){
+        if(Character.Instance.isCharacter("Burst") && BurstShot.Instance != null){
             BurstShot.Instance.Burst();
         }
         
@@ -497,7 +510,7 @@ public class Flamey : MonoBehaviour
     public void ApplyPoison(){
         poisonsLeft--;
         AudioManager.PlayOneShot(FMODEvents.Instance.PoisonPop, Vector2.zero);
-        Hitted((int)Math.Max(1,Health/25), 1, null, onhitted:false, isShake:false, idHitTxt:14);
+        Hitted((int)Math.Max(1,Health*PoisonDrainPerc), 1, null, onhitted:false, isShake:false, idHitTxt:14);
     }
     public void addOnHitEffect(OnHitEffects onhit){
         if(onhit.addList()){

@@ -73,6 +73,9 @@ public static class Translator
         //Debug.Log($"Traduzir {oldWord} para {currentLanguage}");
         try{
             if(translations == null) LoadCSV(csvName);
+
+            if(System.Text.RegularExpressions.Regex.IsMatch(oldWord, @"^[\d.,]+$")){return oldWord;}
+
             int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
             int englishIndex = translations["English"].IndexOf(oldWord); // Se nao houver tradução a oldword estara com o valor default em ingles, este indice exite, se nao existe e preciso criar entrada
 

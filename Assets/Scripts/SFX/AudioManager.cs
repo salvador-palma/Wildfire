@@ -77,6 +77,7 @@ public class AudioManager : MonoBehaviour
         }
         ambienceEventInstance.setParameterByName(param, value);
     }
+    
 
     public static void PlayMusicTrack(OST level){
         PlayMusicTrack((float)level);
@@ -115,6 +116,29 @@ public class AudioManager : MonoBehaviour
         HealthSoundInstance.setParameterByName("HealingFreq", newVal);
 
         HealthSoundInstance.start();
+        
+    }
+
+    
+    
+    float addResonanceFreq = 0.25f;
+    float ResonanceDecay = 0.1f;
+    float lastResonanceTick;
+
+    public void PlayResonanceSound()
+    {
+        
+        float cur;
+        float target;
+
+        float delta = lastResonanceTick == 0 ? lastResonanceTick : Time.time - lastResonanceTick;
+        lastResonanceTick = Time.time;
+        
+        ambienceEventInstance.getParameterByName("SoundBoost", out cur, out target);
+        float newVal = Math.Clamp( cur + addResonanceFreq - delta * ResonanceDecay, 0, 1);
+        ambienceEventInstance.setParameterByName("SoundBoost", newVal);
+
+       
         
     }
 }

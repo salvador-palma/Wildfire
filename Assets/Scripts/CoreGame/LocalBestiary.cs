@@ -436,16 +436,24 @@ public class LocalBestiary : MonoBehaviour
         ClaimRewardEvent?.Invoke(this, new EventArgs());
     }
     /* ===== API ===== */
-    public Enemy[] getRandomEnemyCombination(int phase, int amount){
+    public Enemy[] getRandomEnemyCombination(int phase, int amount, bool exclude_banned=false){
         AnimalRunTimeData[] result = new AnimalRunTimeData[amount];
+
         List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
+        List<AnimalRunTimeData> notRepeled = phaseAnimals.Where(e => !saved_milestones.animals[getEnemyID(e.enemy)].Repeled).ToList();
+
+        
 
         for (int i = 0; i < result.Length; i++)
         {
             AnimalRunTimeData picked;
             do{
+                if(notRepeled.Count() <= i){
+                    picked = notRepeled.Last();
+                    break;
+                }
+                picked = notRepeled[UnityEngine.Random.Range(0, notRepeled.Count())];
                 
-                picked = phaseAnimals[UnityEngine.Random.Range(0, phaseAnimals.Count())];
             }while(result.Contains(picked));
             result[i] = picked;
         }

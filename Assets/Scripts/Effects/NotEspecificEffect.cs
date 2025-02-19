@@ -52,7 +52,7 @@ public class FlameCircle : NotEspecificEffect
         
     }
     public void SetSpinFalse(object sender ,EventArgs e){
-        Debug.Log(Spinner.multiplier);
+        
         SetSpin(false);
     }
     public void SetSpinTrue(object sender ,EventArgs e){
@@ -91,9 +91,9 @@ public class FlameCircle : NotEspecificEffect
     {
         return "Flames orbit around you in a circle. Colliding with an enemy deals damage and applies <color=#FF99F3>On-Hit Effects</color>. <color=#AFEDFF>Angular speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Orbits: {0} (Max. 4)<br>Damage: {1}", amount, damage);
+        return new string[]{"Orbits: {0} (Max. 4)<br>Damage: {1}", amount.ToString(), damage.ToString()};
     }
 
     public string getIcon()
@@ -264,12 +264,12 @@ public class MoneyMultipliers : NotEspecificEffect
         
         return "Multiply your <color=#FFCC7C>ember</color> gains and passively win some each round. You can check the <color=#FFFF00>Bestiary</color> for more info on enemy specific drop rates.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
         if(EnemySpawner.Instance.ShinyChance > 0){
-            return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound, Mathf.Round(mult*100)*0.01f, (EnemySpawner.Instance.ShinyChance*100).ToString("F2"), EnemySpawner.Instance.ShinyMultiplier);
+            return new string[]{"Embers /Round: +{0}<br>Multiplier: x{1}<br>Shiny Spawn Chance: {2}%<br>Shiny Ember Multiplier: x{3}", perRound.ToString(), (Mathf.Round(mult*100)*0.01f).ToString(), (EnemySpawner.Instance.ShinyChance*100).ToString("F2"), EnemySpawner.Instance.ShinyMultiplier.ToString()};
         }
-        return string.Format("Embers /Round: +{0}<br>Multiplier: x{1}", perRound, Mathf.Round(mult*100)*0.01f);
+        return new string[]{"Embers /Round: +{0}<br>Multiplier: x{1}", perRound.ToString(), (Mathf.Round(mult*100)*0.01f).ToString()};
     }
 
     public string getIcon()
@@ -342,9 +342,9 @@ public class CandleTurrets : NotEspecificEffect
     {
         return "Lit <color=#FFCC7C>candles</color> stand around you shooting at random targets. Their hits will <color=#FF5858>not</color> apply <color=#FF99F3>On-Hit</color> nor <color=#FF99F3>On-Land Effects";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Candle Amount: {0} (Max. 6)<br>Damage: +{1} <br>Attack Speed: {2}/s (Max. 3/s)", amount, dmg, Mathf.Round(atkSpeed * 100f) * 0.01f);
+        return new string[]{"Candle Amount: {0} (Max. 6)<br>Damage: +{1} <br>Attack Speed: {2}/s (Max. 3/s)", amount.ToString(), dmg.ToString(), (Mathf.Round(atkSpeed * 100f) * 0.01f).ToString()};
     }
 
     public string getIcon()
@@ -498,10 +498,9 @@ public class Summoner : NotEspecificEffect
     {
         return "<color=#FFCC7C>Bees</color> will fight by your side, targeting random enemies and applying <color=#FF99F3>On-Hit effects.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-
-        return string.Format("Bee Amount: {0} (Max. 14)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount, dmg, Mathf.Round(atkSpeed *  100)/100, Mathf.Round(speed*  100)/100);
+        return new string[]{"Bee Amount: {0} (Max. 14)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount.ToString(), dmg.ToString(), (Mathf.Round(atkSpeed *  100)/100).ToString(), (Mathf.Round(speed*  100)/100).ToString()};
     }
 
     public string getIcon()

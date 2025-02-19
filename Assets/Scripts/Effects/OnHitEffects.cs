@@ -11,7 +11,6 @@ using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +19,7 @@ public interface Effect{
     public string getType();
     public string getDescription();
     public string getIcon();
-    public string getCaps();
+    public string[] getCaps();
     public GameObject getAbilityOptionMenu();
     
 }
@@ -106,12 +105,12 @@ public class VampOnHit : OnHitEffects
     {
         return "You have a chance of <color=#0CD405>healing</color> a percentage of the <color=#FF5858>damage</color> dealt.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
         if(SkillTreeManager.Instance.getLevel("Vampire") < 2){
-            return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. 100%)", Mathf.Round(prob*100), Mathf.Round(perc*100));
+            return new string[]{"Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. 100%)", Mathf.Round(prob*100).ToString(), Mathf.Round(perc*100).ToString()};
         }
-        return string.Format("Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. Infinite%)", Mathf.Round(prob*100), Mathf.Round(perc*100));
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Healing Percentage: {1}% (Max. Infinite%)", Mathf.Round(prob*100).ToString(), Mathf.Round(perc*100).ToString()};
         
     }
     public string getIcon()
@@ -234,13 +233,13 @@ public class IceOnHit : OnHitEffects
     {
         return "You have a chance of slowing the enemy for a percentage of its <color=#AFEDFF>speed</color> for a certain duration. This effect scales with <color=#0CD405>Max Health</color> <color=#FFCC7C>(+1% slow per 33 Extra Max Health)" ;
     }
-    public string getCaps()
+    public string[] getCaps()
     {
         int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
         float percentage = Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002666f * fator,0f,0.75f);
-        Debug.Log("Duration: " + duration);
         
-        return string.Format("Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100), Mathf.Round(percentage * 100), Mathf.Round(duration/10f)/100f);
+        
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Slow Percentage: {1}% (Max 75%)<br>Duration: {2}s (Max. 10s)", Mathf.Round(prob*100).ToString(), Mathf.Round(percentage * 100).ToString(), (Mathf.Round(duration/10f)/100f).ToString()};
     }
 
     public string getIcon()
@@ -318,7 +317,8 @@ public class ShredOnHit : OnHitEffects
     
     private void PlayAudio(){
         //AudioManager.PlayOneShot(FMODEvents.Instance.ResonanceEffect, Vector2.zero);
-        AudioManager.Instance.SetAmbienceParameter("SoundBoost",1);
+        AudioManager.Instance.PlayResonanceSound();
+        //AudioManager.Instance.SetAmbienceParameter("SoundBoost",1);
         //AudioManager.Instance.SetAmbienceParameter("SoundBoost",0);
     }
     public void Stack(ShredOnHit shredOnHit){
@@ -368,9 +368,9 @@ public class ShredOnHit : OnHitEffects
     {
         return "You have a chance of reducing the target's <color=#919191>armor</color> by a certain percentage" ;
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Percentage Reduced: {1}% (Max. 50%)", Mathf.Round(prob*100), Mathf.Round(percReduced * 100));
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Percentage Reduced: {1}% (Max. 50%)", Mathf.Round(prob*100).ToString(), Mathf.Round(percReduced * 100).ToString()};
     }
 
     public string getIcon()
@@ -462,12 +462,12 @@ public class ExecuteOnHit : OnHitEffects
     {
         return "You <color=#FF5858>penetrate</color> through a percentage of enemy <color=#919191>armor</color>. Additionally, hitting enemies below a portion of their <color=#0CD405>Max Health</color> <color=#FFCC7C>executes</color> them." ;
     }
-    public string getCaps()
+    public string[] getCaps()
     {
         if(SkillTreeManager.Instance.getLevel("Assassin")>=1){
-            return string.Format("Armor Penetration: {0}% (Max. 80%) <br>Execution: {1}% (Max. 50%)", Mathf.Round(Flamey.Instance.ArmorPen * 100), Mathf.Round(percToKill*100));
+            return new string[]{"Armor Penetration: {0}% (Max. 80%) <br>Execution: {1}% (Max. 50%)", Mathf.Round(Flamey.Instance.ArmorPen * 100).ToString(), Mathf.Round(percToKill*100).ToString()};
         }
-        return string.Format("Armor Penetration: {0}% (Max. 80%)", Mathf.Round(Flamey.Instance.ArmorPen * 100));
+        return new string[]{"Armor Penetration: {0}% (Max. 80%)", Mathf.Round(Flamey.Instance.ArmorPen * 100).ToString()};
     }
 
     public string getIcon()
@@ -574,9 +574,9 @@ public class StatikOnHit : OnHitEffects
     {
         return "When you hit an enemy, you have a chance of unleashing a <color=#FFCC7C>static energy chain</color> that travels through enemies nearby, dealing damage to each while applying <color=#FF99F3>On-Hit effects</color>. The more the chain travels the less damage it deals";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Travel Distance: {1} Enemies (Max. 10) <br>Damage: +{2}", Mathf.Round(prob * 100), ttl, dmg);
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Travel Distance: {1} Enemies (Max. 10) <br>Damage: +{2}", Mathf.Round(prob * 100).ToString(), ttl.ToString(), dmg.ToString()};
 
     }
 

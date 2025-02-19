@@ -122,9 +122,9 @@ public class ThornsOnHitted : OnHittedEffects
     {
         return "Everytime you get hit by an enemy you have a chance of returning a percentage of your <color=#919191>Armor</color> as <color=#FF5858>damage</color> back and applying <color=#FF99F3>On-Hit Effects";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Armor to Damage Percentage: {1}%", Mathf.Round(prob*100f), Mathf.Round(perc*100f));
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Armor to Damage Percentage: {1}%", Mathf.Round(prob*100f).ToString(), Mathf.Round(perc*100f).ToString()};
     }
 
     public string getIcon()

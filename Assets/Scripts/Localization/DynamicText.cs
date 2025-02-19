@@ -5,6 +5,7 @@ using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -14,20 +15,30 @@ public class DynamicText : MonoBehaviour
     [HideInInspector] public string oldPhrase;
     [HideInInspector] public string[] oldArgs;
     public bool isChat;
+    private string Scene;
     void Awake(){
-        Translator.dropdownValueChange += TranslateComponent;
-        
+        Translator.dropdownValueChange += TranslateComponent;  
+        Scene = SceneManager.GetActiveScene().name;    
     }
+
 
     // String deverá seguir o formato translateText("Estou a dever {0} pau à {1}", String[] = {"500", "Betclic"})
 
     public void TranslateComponent(object sender, EventArgs e) 
     {
-        if (onCouroutine && isChat){
-            cond.value = 1;
-        }else{
-            SetText(oldPhrase,oldArgs);
+        try{
+            if (onCouroutine && isChat){
+                cond.value = 1;
+            }else{
+                SetText(oldPhrase,oldArgs);
+            }
+        }catch{
+            if(Scene != SceneManager.GetActiveScene().name){
+                Translator.dropdownValueChange -= TranslateComponent;
+            }
+            
         }
+        
 
     }
     public void SetTextDirect(string text){

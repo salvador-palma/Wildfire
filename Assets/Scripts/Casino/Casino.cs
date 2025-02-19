@@ -4,27 +4,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[Serializable]
+public class MiniGameProps{
+    public string name;
+    public GameObject[] prefab;
+}
 public class Casino : MonoBehaviour
 {
+    static int offset = 0;
+    public List<MiniGameProps> minigames;
+    public GameObject settingsPanel;
     public static string getMinigame(){
         DateTime d = DateTime.Today;
-        if((int)d.DayOfWeek % 2 == 1){
-                return "Drop the Acorn";//MINI GAME 1
-            }else{
-                return "Water the Flower";//MINI GAME 2
+        switch((int)d.DayOfWeek % 3 + offset){
+            case 0: return "Drop the Acorn";
+            case 1: return "Water the Flower";
+            case 2: 
+            default:
+            return "Frog Jump";
         }
     }
     public static int getMinigameID(){
         DateTime d = DateTime.Today;
-        if((int)d.DayOfWeek % 2 == 1){
-                return 0;//MINI GAME 1
-            }else{
-                return 1;//MINI GAME 2
-        }
+        return ((int)d.DayOfWeek % 3 ) + offset;
+        
     }
     private void Awake() {
+        foreach(GameObject go in minigames.Find(x => x.name == getMinigame()).prefab){
+            go.SetActive(true);
+        }
         
-        transform.GetChild(getMinigameID()).gameObject.SetActive(true);
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            ToggleSettings();
+        }
+    }
+    void ToggleSettings(){
+        Vector2 newPos = new Vector2(settingsPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
+        settingsPanel.GetComponent<RectTransform>().anchoredPosition = newPos;
     }
     public void GoBack(){
         GetComponent<Animator>().Play("CurtainsOff");

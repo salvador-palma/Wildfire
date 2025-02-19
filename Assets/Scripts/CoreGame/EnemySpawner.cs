@@ -110,11 +110,11 @@ public class EnemySpawner : MonoBehaviour
             if(skill.type=="Ember Generation" || skill.type=="Gambling"){continue;}
                 
             DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
-            // if(skill.ban){
-            //     DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
-            // }else if(skill.pick){
-            //     DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
-            // }
+            if(skill.ban){
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
+            }else if(skill.pick){
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
+            }
         }
 
         GameUI.Instance.defineEffectList();
@@ -163,6 +163,9 @@ public class EnemySpawner : MonoBehaviour
             PresentEnemies.Remove(enemy);
             enemy.Die();
         }
+    }
+    public void ApplyPoisonEnemies(){
+        PresentEnemies.ForEach(e => e.ApplyPoison());
     }
     public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
     public float ShinyChance = 0f;
@@ -344,9 +347,9 @@ public class EnemySpawner : MonoBehaviour
         List<Enemy> result = new List<Enemy>();
         for (int i = 0; i < 6; i++)
         {
-            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3));
+            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3, exclude_banned:true));
         }
-        
+
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
     }

@@ -16,9 +16,7 @@ public class CandleFlare : Flare
     public void setPosition(Vector2 pos){
         transform.position = new Vector2(pos.x + Random.Range(-0.2f,0.2f), pos.y);
     }
-    override public void DestroyGameObject(){
-        Destroy(gameObject);
-    }
+   
     public override void GetTarget()
     {
         if(target == Vector2.zero){
@@ -48,12 +46,47 @@ public class CandleFlare : Flare
         }
         
         foreach(Enemy e in colliders){
+            if(e == null) continue;
             if(Character.Instance.isCharacter("Ritual") && e.Health < CandleTurrets.Instance.dmg){
                 CandleTurrets.Instance.AddDamageTick();
             }
             e.Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
         }
     }
+
+
+    public override string getReference()
+    {
+        return "CandleFlare";
+    }
+
+    public override void Pool()
+    {
+        transform.localRotation = new Quaternion(0f,0f,180f,0f);
+        Reset();
+        GetTarget();
+
+        Damage = CandleTurrets.Instance.dmg;
+        DmgTextID = 11;
+        SpotColor.a = 0;
+        speedAscend = Flamey.Instance.BulletSpeed;
+        speedDescend = 1.5f * speedAscend;
+    }
+
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+        // FlareType flareData = Flamey.Instance.FlareTypes[(int)args[0]];
+        // GetComponent<SpriteRenderer>().color = flareData.FlareColor;
+       
+        // DmgTextID = flareData.DmgTextID;
+        // SpotColor = flareData.FlareColor;
+        // Damage = (int)GetDmgByType((int)args[0]);
+        // ParticleSystem.MainModule main = GetComponentInChildren<ParticleSystem>().main;
+        // main.startColor = new ParticleSystem.MinMaxGradient(flareData.ParticleColors[0], flareData.ParticleColors[1]);
+    }
+
+    
 
     
 }

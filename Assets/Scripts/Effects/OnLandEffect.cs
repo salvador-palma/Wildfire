@@ -97,9 +97,9 @@ public class BurnOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of spawning a <color=#FFCC7C>Lava Pool</color>. The <color=#FFCC7C>Lava Pool</color> deals damage per second to enemies <color=#FFCC7C>stepping</color> on it, ignoring <color=#919191>Armor</color> completely.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Damage: {3}/s", Mathf.Round(prob*100f), size*10, lasting , damage);
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Damage: {3}/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , damage.ToString()};
     }
 
     public string getIcon()
@@ -195,9 +195,9 @@ public class IceOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of spawning an <color=#FFCC7C>Ice Pool</color>. <color=#FFCC7C>Ice Pools</color> <color=#AFEDFF>slow</color> down enemies <color=#FFCC7C>stepping</color> on it for " + Mathf.Round(slow*100) + "%. <color=#FFCC7C>Ice Pools'</color> <color=#AFEDFF>slow</color> does not stack with other <color=#FFCC7C>Ice Pools.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Slow: {3}% (Max. 50%)", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(slow*100));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Slow: {3}% (Max. 50%)", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(slow*100).ToString()};
     }
 
     public string getIcon()
@@ -297,9 +297,9 @@ public class DrainOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of sprouting a <color=#FFCC7C>Flower</color>. Everytime an enemy <color=#FFCC7C>steps</color> on a <color=#FFCC7C>flower</color>, you heal part of their <color=#0CD405>Max HP";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(perc*100f));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(perc*100f).ToString()};
     }
 
     public string getIcon()
