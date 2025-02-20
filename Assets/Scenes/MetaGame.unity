@@ -11283,6 +11283,7 @@ MonoBehaviour:
       enemies struck by <style="LYellow">Static Energy</style>
     AbilityDescription3: <style="LYellow">Static Energy's</style> <style="Red">damage</style>
       will not decay anymore
+    CharacterQuestID: 0
   - Name: Lava Pool
     Type: On-Land Effect
     AbilityDescription1: <style="LYellow">Lava Pools</style> burn Enemies standing
@@ -11295,6 +11296,7 @@ MonoBehaviour:
       for <style="Orange">burried</color> ones
     AbilityDescription3: Each time a <style="LYellow">Lava Pools</style> deals damage
       it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor
+    CharacterQuestID: 0
   - Name: Necromancer
     Type: On-Death Effect
     AbilityDescription1: <style="Blue">Ghouls</style> will spawn from dead enemies
@@ -11305,6 +11307,7 @@ MonoBehaviour:
     AbilityDescription3: Ghouls will hit <style="LYellow">+2</style> more times before
       disappearing and will apply <style="Pink">On-Death Effects</style> when doing
       so (including <style="Yellow">Necromancer</style>)
+    CharacterQuestID: 0
   - Name: Ritual
     Type: Special Effect
     AbilityDescription1: <style="LYellow">Candles</color> will stand by your side
@@ -11314,6 +11317,7 @@ MonoBehaviour:
       times faster when the <style="Yellow">Campfire</style> gets <style="Blue">stunned
     AbilityDescription3: Every time you gain a <style="LYellow">candle</style>, gain
       an <style="LYellow">extra one</style>
+    CharacterQuestID: 0
   - Name: Immolate
     Type: Time-Based Effect
     AbilityDescription1: Release <style="Orange">Immolating</style> waves that travel
@@ -11323,6 +11327,7 @@ MonoBehaviour:
       in half
     AbilityDescription3: Minimum <style="LYellow">interval</style> gets reduced in
       half
+    CharacterQuestID: 0
   - Name: Pirate
     Type: On-Death Effect
     AbilityDescription1: <style="LYellow">Roundshots</style> will shoot out of dead
@@ -11333,6 +11338,7 @@ MonoBehaviour:
       nearby enemies
     AbilityDescription3: Every increase in <style="LYellow">Roundshot</style> amount
       is doubled
+    CharacterQuestID: 0
   - Name: Burst Shot
     Type: On-Shoot Effect
     AbilityDescription1: Shoot a <style="LYellow">burst of shots</style> everytime
@@ -11342,6 +11348,7 @@ MonoBehaviour:
     AbilityDescription3: Bursting will increase the amount of fireballs in your next
       <style="LYellow">Burst</style> by <style="LYellow">+1.</style> The amount of
       extra fireballs gained through this passive is reset at the end of each round
+    CharacterQuestID: 0
   - Name: Magical Shot
     Type: On-Shoot Effect
     AbilityDescription1: Shoot a <style="Blue">Magical Shot</style> everytime you
@@ -11351,6 +11358,7 @@ MonoBehaviour:
       in half
     AbilityDescription3: Shoot a <style="Pink">Prismatic Shot</style> every <style="LYellow">20</style>
       <style="Blue">Magical Shots,</style> dealing <style="Red">5x Damage
+    CharacterQuestID: 0
   - Name: Critical Strike
     Type: On-Shoot Effect
     AbilityDescription1: Some shots will <style="Red">critically strike,</style>
@@ -11360,6 +11368,7 @@ MonoBehaviour:
     AbilityDescription3: Gain a <style="LYellow">10%</style> chance of <style="Red">Critical
       Striking</style> a <style="Red">Critical Shot,</style> applying the <style="Red">damage
       multiplier</style> again
+    CharacterQuestID: 0
   - Name: Snow Pool
     Type: On-Land Effect
     AbilityDescription1: <style="LBlue">Snow Pools</style> will slow enemies stepping
@@ -11369,6 +11378,7 @@ MonoBehaviour:
     AbilityDescription3: <style="LBlue">Slowed</style> enemies that step onto a <style="LBlue">Snow
       Pool</style> will also get <style="Blue>stunned</style> for <style="LYellow">2
       seconds
+    CharacterQuestID: 0
   - Name: Thunder
     Type: Time-Based Effect
     AbilityDescription1: <style="LYellow">Thunders</style> will spawn on a random
@@ -11378,6 +11388,7 @@ MonoBehaviour:
       Effects</style> <style="LYellow">twice
     AbilityDescription3: <style="LYellow">Thunders</color> will <style="Blue">stun</style>
       enemies for <style="LYellow">1 second
+    CharacterQuestID: 0
   - Name: Bee Summoner
     Type: Special Effect
     AbilityDescription1: Gain the ability summon <style="LYellow">Bees</style> that
@@ -11386,6 +11397,7 @@ MonoBehaviour:
       Assassin, Warrior, Agile, Chemical and Pollinator)
     AbilityDescription3: Every time you gain a <style="LYellow">Bee</style>, gain
       an <style="LYellow">extra one</style> of the same type
+    CharacterQuestID: 0
   - Name: Orbits
     Type: Special Effect
     AbilityDescription1: Small <style="LYellow">orbits</style> will circle the campfire,
@@ -11394,6 +11406,7 @@ MonoBehaviour:
       as fast
     AbilityDescription3: Any increase in <style="LYellow">orbits</style> will be
       doubled
+    CharacterQuestID: 0
   - Name: Vampire
     Type: On-Hit Effect
     AbilityDescription1: <style="Green">Heal</style> for a percentage of the <style="Red">damage</style>
@@ -11402,6 +11415,7 @@ MonoBehaviour:
       have <style="Red">damage,</style> <style="Green">heal</style> <style="LYellow">double</style>
       the amount
     AbilityDescription3: <style="Green">Healing Percentage's</style> limit is removed
+    CharacterQuestID: 0
   - Name: Assassin
     Type: On-Hit Effect
     AbilityDescription1: Gain <style="Red">Armor Penetration</style> and ignore a
@@ -11411,6 +11425,7 @@ MonoBehaviour:
       <style="Green">Max HP
     AbilityDescription3: '<style="Red">Executing</style> an enemy will apply <style="Pink">On-Death
       Effects</style> thrice '
+    CharacterQuestID: 0
   - Name: Explosion
     Type: On-Death Effect
     AbilityDescription1: Killing an enemy can generate an <style="LYellow">Explosion</style>,
@@ -11418,6 +11433,7 @@ MonoBehaviour:
     AbilityDescription2: <style="LYellow">Explosions</style> grow by <style="LYellow">50%</style>
     AbilityDescription3: Every <style="LYellow">20 Explosions</style> generate one
       that deals <style="Red">True Damage
+    CharacterQuestID: 0
   - Name: Flower Field
     Type: On-Land Effect
     AbilityDescription1: <style="LYellow">Flowers</style> will heal you by a percentage
@@ -11427,6 +11443,7 @@ MonoBehaviour:
       more enemies on top of them before dying
     AbilityDescription3: Dying <style="LYellow">flowers</style> will <style="Blue">stun</style>
       enemies for <style="LYellow">1 second</style>
+    CharacterQuestID: 0
   - Name: Multicaster
     Type: On-Shoot Effect
     AbilityDescription1: Whenever you shoot a flame there's a chance you shoot <style="LYellow">another
@@ -11435,6 +11452,7 @@ MonoBehaviour:
       the secondary fireball <style="LGrey">(Same, Random, Second Target, Mouse Position)
     AbilityDescription3: All fireballs have a <style="LYellow">10%</style> chance
       of <style="LYellow">ricocheting</style> when landing on an enemy
+    CharacterQuestID: 0
   - Name: Thorns
     Type: On-Hitted Effect
     AbilityDescription1: Enemies that directly hit you get <style="Red">damaged</style>
@@ -11444,6 +11462,7 @@ MonoBehaviour:
     AbilityDescription3: <style="Yellow">Thorns</style> will deal <style="Red">damaged</style>
       in <style="LYellow">area</style> instead of only <style="Red">damaging</style>
       the attacker
+    CharacterQuestID: 0
   - Name: Resonance
     Type: On-Hit Effect
     AbilityDescription1: Use the power of <style="LYellow">Sound</style> to shred
@@ -11452,6 +11471,7 @@ MonoBehaviour:
       based on <style="LBlue">Bullet Speed</style> and <style="LBlue">Accuracy
     AbilityDescription3: <style="Green">Heal</style> for the amount of <style="Grey">Armor
       Shredded
+    CharacterQuestID: 0
   - Name: Freeze
     Type: On-Hit Effect
     AbilityDescription1: <style="LYellow">Freezing</style> an enemy will <style="LBlue">slow</style>
@@ -11461,6 +11481,7 @@ MonoBehaviour:
       effect
     AbilityDescription3: <style="LBlue">Slowed</style> enemies take <style="LYellow">200%</style>
       <style="Red">damage</style> from all sources
+    CharacterQuestID: 0
   - Name: Gambling
     Type: Special Effect
     AbilityDescription1: Gain the ability to <style="LYellow">gamble</style> for
@@ -11469,6 +11490,7 @@ MonoBehaviour:
       gets <style="LYellow">doubled
     AbilityDescription3: <style="LYellow">Gambling Augments</style> will be able
       to pick other <style="LYellow">Gambling Augments</style>
+    CharacterQuestID: 0
   - Name: Regeneration
     Type: Time-Based Effect
     AbilityDescription1: Heal <style="Green">missing HP</style> each second and gain
@@ -11477,6 +11499,7 @@ MonoBehaviour:
       be <style="Green">2 times</style> more efficient
     AbilityDescription3: <style="Green">Healing</style> is up to <style="LYellow">200%</style>
       stronger when low on <style="Green">Health
+    CharacterQuestID: 0
   - Name: Ember Generation
     Type: Special Effect
     AbilityDescription1: Gain the ability to <style="LYellow">multiply</style> earned
@@ -11488,6 +11511,7 @@ MonoBehaviour:
     AbilityDescription3: 0.1% chance of seeing a <style="Blue"><sprite name="Shiny">
       Shiny</style> Animal.<style="Blue"><sprite name="Shiny"> Shiny</style> animal
       drops are multiplied by <style="LYellow">x100
+    CharacterQuestID: 0
   emberText: {fileID: 71933622}
   titleText: {fileID: 924204468}
   typeText: {fileID: 557520744}
@@ -11537,6 +11561,64 @@ MonoBehaviour:
   PickBanButtons:
   - {fileID: 653448925}
   - {fileID: 122204533}
+  CharacterQuests:
+  - Name: Static Energy
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Lava Pool
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Immolate
+    NPC: {fileID: 585525776}
+    DialogueID: 0
+  - Name: Pirate
+    NPC: {fileID: 1588098428}
+    DialogueID: 0
+  - Name: Burst Shot
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Magical Shot
+    NPC: {fileID: 585525776}
+    DialogueID: 0
+  - Name: Critical Strike
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Snow Pool
+    NPC: {fileID: 1653547898}
+    DialogueID: 0
+  - Name: Thunder
+    NPC: {fileID: 1457361219}
+    DialogueID: 0
+  - Name: Orbits
+    NPC: {fileID: 1457361219}
+    DialogueID: 0
+  - Name: Vampire
+    NPC: {fileID: 1457361219}
+    DialogueID: 0
+  - Name: Assassin
+    NPC: {fileID: 585525776}
+    DialogueID: 0
+  - Name: Explosion
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Flower Field
+    NPC: {fileID: 1653547898}
+    DialogueID: 0
+  - Name: Multicaster
+    NPC: {fileID: 1206136743}
+    DialogueID: 0
+  - Name: Thorns
+    NPC: {fileID: 1653547898}
+    DialogueID: 0
+  - Name: Resonance
+    NPC: {fileID: 1653547898}
+    DialogueID: 0
+  - Name: Freeze
+    NPC: {fileID: 1653547898}
+    DialogueID: 0
+  - Name: Regeneration
+    NPC: {fileID: 1457361219}
+    DialogueID: 0
 --- !u!95 &520883190
 Animator:
   serializedVersion: 5
@@ -13998,6 +14080,84 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: H-<size=80%>hey... let me tell you a bit... about this skill...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>A few centuries ago... monks would concentrate their spirits...
+        to release immolating waves just like this ones
+      arguments: []
+      avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+      Name: Naal
+    - message: <size=80%>I bet that... if we maximize every possible aspect of it...
+        we could come up with something... rather interesting...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 14
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Oh I-<size=80%>I recognize this...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>When I was a kid... I read a lot on a powerfull wizard...
+        that could transform normal fireballs into more... powerful versions...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>Azureoth... that was his name I believe... he was so feared
+        that not even the king could rule him...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
+      Name: Naal
+    - message: <size=80%>It is said that... the ones who manage to handle the most
+        powerful of fires... will be visited by him...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=80%>As far as I can remember... that means being able to deal
+        an astronomous <style="LYellow">50k <style="Red">damage</style>... in a single
+        shot
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
+      Name: Naal
+    - message: <size=80%>It's a lot... I know... but it's a task that only the best
+        of the best... could accomplish...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 17
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -22883,6 +23043,119 @@ MonoBehaviour:
     Avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
     Description: <i>"When 25 Ghouls stand tall in sight, King Ghoul shall join the
       fight"</i>
+  - Title: Static Chain
+    Avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+    Description: Apply <style="LYellow">20<style="Pink"> On-Hit Effects</style> in
+      a single chain
+  - Title: The Nether Realm
+    Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+    Description: Have <style="LYellow>50 Lava Pools</style> at the same time
+  - Title: Ancient Energy
+    Avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
+    Description: Maximize all stats on your <style="LYellow>Immolate</style> ability
+  - Title: Loot them all!
+    Avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+    Description: Loot <style="LYellow">+10k embers</style> in a single round
+  - Title: 'Short Fuse '
+    Avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+    Description: Maximize <style="LYellow">Burst Interval</style> and <style="LYellow">Multicaster
+  - Title: The Sorcerer
+    Avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+    Description: 'Deal <style="LYellow">50k <style="Red">Effective Damage</style>
+      in a single hit '
+  - Title: Powering Up!
+    Avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
+    Description: Deal <style="LYellow>5x</style> your <style="Red">damage</style>
+      value with a <style="LYellow>critical shot
+  - Title: Let it Snow!
+    Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+    Description: Have <style="LYellow">50 Snow Pools</style> at the same time
+  - Title: Lightning and the Thunder
+    Avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+    Description: Reach <style="LYellow">6am</style> without <style="LYellow">Attack
+      Speed
+  - Title: A story on Vampires
+    Avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+    Description: <style="Green">Heal</style> at a rate of <style="LYellow">1000/s
+  - Title: An Assassin's Greed
+    Avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+    Description: <style="Red">Execute</style> an enemy with more <style="Green">HP</style>
+      than your <style="Green">Max HP</style>
+  - Title: Boom! Boom! Boom!
+    Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+    Description: Create a chain of <style="LYellow">5 Explosions
+  - Title: It's Spring Time
+    Avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+    Description: Have <style="LYellow">50 Flowers</style> at the same time
+  - Title: As fast as it gets!
+    Avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+    Description: Get <style="LYellow">24</style> effective <style="LYellow">Attack
+      Speed</style> with <style="LYellow">Multicaster</style>
+  - Title: War of Roses
+    Avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+    Description: Deal back more <style="Red">damage</style> than the one you received
+  - Title: A Corrupting Sound
+    Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+    Description: Shred <style="LYellow">100k<style="Grey"> armor</style> in a single
+      game with <style="LYellow">Resonance
+  - Title: Frozen to the Bone
+    Avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+    Description: Reach maximum <style="LYellow">Slow Percentage
+  - Title: High Risk High Reward
+    Avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+    Description: Get <style="LYellow>15 Augments</style> in a single round
+  - Title: The Legend of the Immortal Bird
+    Avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+    Description: Reach <style="LYellow">6am</style> without going below <style="LYellow">50%
+      <style="Green">health
+  - Title: Gotta catch'em all!
+    Avatar: {fileID: 21300000, guid: 9acfa8ff8250a9c4699d0d728422cca0, type: 3}
+    Description: Unlock <style="LYellow">10</style> <sprite name="Shiny">Shinies
+  - Title: Offensive Ki
+    Avatar: {fileID: 21300000, guid: 89833f798cae2394cab8dcfe8766157a, type: 3}
+    Description: Max Immolate with an <style="LYellow">Offensive</style> approach
+  - Title: Supportive Ki
+    Avatar: {fileID: 21300000, guid: 89833f798cae2394cab8dcfe8766157a, type: 3}
+    Description: Max Immolate with a <style="LYellow">Supportive</style> approach
+  - Title: Defensive Ki
+    Avatar: {fileID: 21300000, guid: 89833f798cae2394cab8dcfe8766157a, type: 3}
+    Description: Max Immolate with a <style="LYellow">Defensive</style> approach
+  - Title: Controlling Ki
+    Avatar: {fileID: 21300000, guid: 89833f798cae2394cab8dcfe8766157a, type: 3}
+    Description: Max Immolate with a <style="LYellow">Controlling</style> approach
+  - Title: The Swift Planet
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Use <style="LYellow">Orbital</style> and reach maximum <style="LYellow">Bullet
+      Speed
+  - Title: The Morning Star
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Use <style="LYellow">Orbital</style> to one-shot an enemy
+  - Title: The Blue Marble
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Use a build containing <style="LYellow">Orbital</style> to reach
+      <style="LYellow">6AM
+  - Title: The Red Planet
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Survive below <style="LYellow">25% <style="Green">Health</style>
+      during <style="LYellow">10 rounds
+  - Title: The Gas Giant
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Use <style="LYellow">Orbital</style> and reach <style="LYellow">5000
+      <style="Green">Max HP
+  - Title: The Ringed Planet
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Use <style="LYellow">Orbital</style> to have the maximum amount
+      of orbits by your side
+  - Title: The Sideways Planet
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Avoid getting hit for <style="LYellow">10 Rounds
+  - Title: The Ice Giant
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Freeze <style="LYellow">20</style> enemies in a second using <style="LYellow">Orbital</style>
+      and <style="LYellow">Freeze</style>
+  - Title: All sorts of Bees
+    Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+    Description: Get an army with all types of <style="LYellow">bees
   QuestPanel: {fileID: 6459220652302978433}
   QuestContainer: {fileID: 6749891280300223469}
   QuestSlot: {fileID: 1826153679}
@@ -27644,6 +27917,148 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+  - dialogues:
+    - message: Look, I'm no scientist alright! But I bet we can do some crazy stuff
+        with this little ability
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: You probably already noticed but, these static chains can be used
+        to spread a lot of effects
+      arguments: []
+      avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
+      Name: 
+    - message: I wonder what would happen once you mastered that technique, by applying
+        <style="LYellow>20 <style="Pink">On-Hit Effects</style> in a single<style="LYellow>
+        chain
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    - message: Well, guess you gotta find out!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: You know, I wonder what a marshmallow toasted on a Lava Pool would
+        taste like
+      arguments: []
+      avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
+      Name: 
+    - message: My pops once went to a vulcano to roast one, "Best meal eveeer" he
+        said!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: Now I gotta try it you see! But there are no vulcanos near the campsite...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
+      Name: 
+    - message: I bet that having like, <style="LYellow">50 Lava Pools</style> at
+        the same time would be a good approximation to what a real vulcano feels
+        like!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 13
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: I know what we need! More fireballs!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: Uhmmm... But how should we do that?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    - message: Oh! I have an idea! What if we tried to maximize the frequency of
+        the <style="LYellow">Burst Shot,</style> while getting double the fireballs
+        with <style="LYellow">Multicaster?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: We would get so many flames it would look like it's raining!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 16
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: The best defense is offense! So what we really need is to power this
+        campfire up!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: 'These <style="LYellow">Critical Strikes</style> might be the way
+        to do it! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    - message: If we deal <style="LYellow">5x</style> the base <style="Red">damage</style>
+        with a <style="LYellow">critical shot</style> we will truly see what a powered
+        up campfire is all about!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 18
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
   Name: Rowl
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -37304,6 +37719,42 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+  - dialogues:
+    - message: 'Ohhhhh I smell moneeeey!! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: I love pirates men! They would just loot every ship and village they
+        would come across. That's some real hustling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: Some of them accumulated fortunes they couldn't even spend it in their
+        lifetime! How impressive is that?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: 'If gathered up <style="LYellow">10k embers</style> in a single round
+        you could call yourself a true pirate, you know! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 15
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
   Name: Gyomyo
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -39011,7 +39462,7 @@ GameObject:
   - component: {fileID: 1653547896}
   - component: {fileID: 1653547897}
   m_Layer: 0
-  m_Name: Deer
+  m_Name: Cloris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52088,7 +52539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0008544922, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.00061035156, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -52687,7 +53138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00045776367
+      value: 0.0007019043
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y
