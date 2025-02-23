@@ -11283,7 +11283,9 @@ MonoBehaviour:
       enemies struck by <style="LYellow">Static Energy</style>
     AbilityDescription3: <style="LYellow">Static Energy's</style> <style="Red">damage</style>
       will not decay anymore
-    CharacterQuestID: 0
+    QuestID: 12
+    npc: {fileID: 1206136743}
+    DialogueID: 6
   - Name: Lava Pool
     Type: On-Land Effect
     AbilityDescription1: <style="LYellow">Lava Pools</style> burn Enemies standing
@@ -11296,7 +11298,9 @@ MonoBehaviour:
       for <style="Orange">burried</color> ones
     AbilityDescription3: Each time a <style="LYellow">Lava Pools</style> deals damage
       it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor
-    CharacterQuestID: 0
+    QuestID: 13
+    npc: {fileID: 1206136743}
+    DialogueID: 7
   - Name: Necromancer
     Type: On-Death Effect
     AbilityDescription1: <style="Blue">Ghouls</style> will spawn from dead enemies
@@ -11307,7 +11311,9 @@ MonoBehaviour:
     AbilityDescription3: Ghouls will hit <style="LYellow">+2</style> more times before
       disappearing and will apply <style="Pink">On-Death Effects</style> when doing
       so (including <style="Yellow">Necromancer</style>)
-    CharacterQuestID: 0
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   - Name: Ritual
     Type: Special Effect
     AbilityDescription1: <style="LYellow">Candles</color> will stand by your side
@@ -11317,7 +11323,9 @@ MonoBehaviour:
       times faster when the <style="Yellow">Campfire</style> gets <style="Blue">stunned
     AbilityDescription3: Every time you gain a <style="LYellow">candle</style>, gain
       an <style="LYellow">extra one</style>
-    CharacterQuestID: 0
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   - Name: Immolate
     Type: Time-Based Effect
     AbilityDescription1: Release <style="Orange">Immolating</style> waves that travel
@@ -11327,7 +11335,9 @@ MonoBehaviour:
       in half
     AbilityDescription3: Minimum <style="LYellow">interval</style> gets reduced in
       half
-    CharacterQuestID: 0
+    QuestID: 14
+    npc: {fileID: 585525776}
+    DialogueID: 3
   - Name: Pirate
     Type: On-Death Effect
     AbilityDescription1: <style="LYellow">Roundshots</style> will shoot out of dead
@@ -11338,7 +11348,9 @@ MonoBehaviour:
       nearby enemies
     AbilityDescription3: Every increase in <style="LYellow">Roundshot</style> amount
       is doubled
-    CharacterQuestID: 0
+    QuestID: 15
+    npc: {fileID: 1588098428}
+    DialogueID: 7
   - Name: Burst Shot
     Type: On-Shoot Effect
     AbilityDescription1: Shoot a <style="LYellow">burst of shots</style> everytime
@@ -11348,7 +11360,9 @@ MonoBehaviour:
     AbilityDescription3: Bursting will increase the amount of fireballs in your next
       <style="LYellow">Burst</style> by <style="LYellow">+1.</style> The amount of
       extra fireballs gained through this passive is reset at the end of each round
-    CharacterQuestID: 0
+    QuestID: 16
+    npc: {fileID: 1206136743}
+    DialogueID: 8
   - Name: Magical Shot
     Type: On-Shoot Effect
     AbilityDescription1: Shoot a <style="Blue">Magical Shot</style> everytime you
@@ -11358,7 +11372,9 @@ MonoBehaviour:
       in half
     AbilityDescription3: Shoot a <style="Pink">Prismatic Shot</style> every <style="LYellow">20</style>
       <style="Blue">Magical Shots,</style> dealing <style="Red">5x Damage
-    CharacterQuestID: 0
+    QuestID: 17
+    npc: {fileID: 585525776}
+    DialogueID: 4
   - Name: Critical Strike
     Type: On-Shoot Effect
     AbilityDescription1: Some shots will <style="Red">critically strike,</style>
@@ -11368,7 +11384,9 @@ MonoBehaviour:
     AbilityDescription3: Gain a <style="LYellow">10%</style> chance of <style="Red">Critical
       Striking</style> a <style="Red">Critical Shot,</style> applying the <style="Red">damage
       multiplier</style> again
-    CharacterQuestID: 0
+    QuestID: 18
+    npc: {fileID: 1206136743}
+    DialogueID: 9
   - Name: Snow Pool
     Type: On-Land Effect
     AbilityDescription1: <style="LBlue">Snow Pools</style> will slow enemies stepping
@@ -11378,7 +11396,9 @@ MonoBehaviour:
     AbilityDescription3: <style="LBlue">Slowed</style> enemies that step onto a <style="LBlue">Snow
       Pool</style> will also get <style="Blue>stunned</style> for <style="LYellow">2
       seconds
-    CharacterQuestID: 0
+    QuestID: 19
+    npc: {fileID: 1653547898}
+    DialogueID: 4
   - Name: Thunder
     Type: Time-Based Effect
     AbilityDescription1: <style="LYellow">Thunders</style> will spawn on a random
@@ -11388,7 +11408,9 @@ MonoBehaviour:
       Effects</style> <style="LYellow">twice
     AbilityDescription3: <style="LYellow">Thunders</color> will <style="Blue">stun</style>
       enemies for <style="LYellow">1 second
-    CharacterQuestID: 0
+    QuestID: 20
+    npc: {fileID: 1457361219}
+    DialogueID: 10
   - Name: Bee Summoner
     Type: Special Effect
     AbilityDescription1: Gain the ability summon <style="LYellow">Bees</style> that
@@ -11397,7 +11419,9 @@ MonoBehaviour:
       Assassin, Warrior, Agile, Chemical and Pollinator)
     AbilityDescription3: Every time you gain a <style="LYellow">Bee</style>, gain
       an <style="LYellow">extra one</style> of the same type
-    CharacterQuestID: 0
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   - Name: Orbits
     Type: Special Effect
     AbilityDescription1: Small <style="LYellow">orbits</style> will circle the campfire,
@@ -11406,7 +11430,9 @@ MonoBehaviour:
       as fast
     AbilityDescription3: Any increase in <style="LYellow">orbits</style> will be
       doubled
-    CharacterQuestID: 0
+    QuestID: 41
+    npc: {fileID: 1457361219}
+    DialogueID: 13
   - Name: Vampire
     Type: On-Hit Effect
     AbilityDescription1: <style="Green">Heal</style> for a percentage of the <style="Red">damage</style>
@@ -11415,7 +11441,9 @@ MonoBehaviour:
       have <style="Red">damage,</style> <style="Green">heal</style> <style="LYellow">double</style>
       the amount
     AbilityDescription3: <style="Green">Healing Percentage's</style> limit is removed
-    CharacterQuestID: 0
+    QuestID: 21
+    npc: {fileID: 1457361219}
+    DialogueID: 11
   - Name: Assassin
     Type: On-Hit Effect
     AbilityDescription1: Gain <style="Red">Armor Penetration</style> and ignore a
@@ -11425,7 +11453,9 @@ MonoBehaviour:
       <style="Green">Max HP
     AbilityDescription3: '<style="Red">Executing</style> an enemy will apply <style="Pink">On-Death
       Effects</style> thrice '
-    CharacterQuestID: 0
+    QuestID: 22
+    npc: {fileID: 585525776}
+    DialogueID: 5
   - Name: Explosion
     Type: On-Death Effect
     AbilityDescription1: Killing an enemy can generate an <style="LYellow">Explosion</style>,
@@ -11433,7 +11463,9 @@ MonoBehaviour:
     AbilityDescription2: <style="LYellow">Explosions</style> grow by <style="LYellow">50%</style>
     AbilityDescription3: Every <style="LYellow">20 Explosions</style> generate one
       that deals <style="Red">True Damage
-    CharacterQuestID: 0
+    QuestID: 23
+    npc: {fileID: 1206136743}
+    DialogueID: 10
   - Name: Flower Field
     Type: On-Land Effect
     AbilityDescription1: <style="LYellow">Flowers</style> will heal you by a percentage
@@ -11443,7 +11475,9 @@ MonoBehaviour:
       more enemies on top of them before dying
     AbilityDescription3: Dying <style="LYellow">flowers</style> will <style="Blue">stun</style>
       enemies for <style="LYellow">1 second</style>
-    CharacterQuestID: 0
+    QuestID: 24
+    npc: {fileID: 1653547898}
+    DialogueID: 5
   - Name: Multicaster
     Type: On-Shoot Effect
     AbilityDescription1: Whenever you shoot a flame there's a chance you shoot <style="LYellow">another
@@ -11452,7 +11486,9 @@ MonoBehaviour:
       the secondary fireball <style="LGrey">(Same, Random, Second Target, Mouse Position)
     AbilityDescription3: All fireballs have a <style="LYellow">10%</style> chance
       of <style="LYellow">ricocheting</style> when landing on an enemy
-    CharacterQuestID: 0
+    QuestID: 25
+    npc: {fileID: 1206136743}
+    DialogueID: 11
   - Name: Thorns
     Type: On-Hitted Effect
     AbilityDescription1: Enemies that directly hit you get <style="Red">damaged</style>
@@ -11462,7 +11498,9 @@ MonoBehaviour:
     AbilityDescription3: <style="Yellow">Thorns</style> will deal <style="Red">damaged</style>
       in <style="LYellow">area</style> instead of only <style="Red">damaging</style>
       the attacker
-    CharacterQuestID: 0
+    QuestID: 26
+    npc: {fileID: 1653547898}
+    DialogueID: 6
   - Name: Resonance
     Type: On-Hit Effect
     AbilityDescription1: Use the power of <style="LYellow">Sound</style> to shred
@@ -11471,7 +11509,9 @@ MonoBehaviour:
       based on <style="LBlue">Bullet Speed</style> and <style="LBlue">Accuracy
     AbilityDescription3: <style="Green">Heal</style> for the amount of <style="Grey">Armor
       Shredded
-    CharacterQuestID: 0
+    QuestID: 27
+    npc: {fileID: 1653547898}
+    DialogueID: 7
   - Name: Freeze
     Type: On-Hit Effect
     AbilityDescription1: <style="LYellow">Freezing</style> an enemy will <style="LBlue">slow</style>
@@ -11481,7 +11521,9 @@ MonoBehaviour:
       effect
     AbilityDescription3: <style="LBlue">Slowed</style> enemies take <style="LYellow">200%</style>
       <style="Red">damage</style> from all sources
-    CharacterQuestID: 0
+    QuestID: 28
+    npc: {fileID: 1653547898}
+    DialogueID: 8
   - Name: Gambling
     Type: Special Effect
     AbilityDescription1: Gain the ability to <style="LYellow">gamble</style> for
@@ -11490,7 +11532,9 @@ MonoBehaviour:
       gets <style="LYellow">doubled
     AbilityDescription3: <style="LYellow">Gambling Augments</style> will be able
       to pick other <style="LYellow">Gambling Augments</style>
-    CharacterQuestID: 0
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   - Name: Regeneration
     Type: Time-Based Effect
     AbilityDescription1: Heal <style="Green">missing HP</style> each second and gain
@@ -11499,7 +11543,9 @@ MonoBehaviour:
       be <style="Green">2 times</style> more efficient
     AbilityDescription3: <style="Green">Healing</style> is up to <style="LYellow">200%</style>
       stronger when low on <style="Green">Health
-    CharacterQuestID: 0
+    QuestID: 30
+    npc: {fileID: 1457361219}
+    DialogueID: 12
   - Name: Ember Generation
     Type: Special Effect
     AbilityDescription1: Gain the ability to <style="LYellow">multiply</style> earned
@@ -11511,7 +11557,9 @@ MonoBehaviour:
     AbilityDescription3: 0.1% chance of seeing a <style="Blue"><sprite name="Shiny">
       Shiny</style> Animal.<style="Blue"><sprite name="Shiny"> Shiny</style> animal
       drops are multiplied by <style="LYellow">x100
-    CharacterQuestID: 0
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   emberText: {fileID: 71933622}
   titleText: {fileID: 924204468}
   typeText: {fileID: 557520744}
@@ -11561,64 +11609,6 @@ MonoBehaviour:
   PickBanButtons:
   - {fileID: 653448925}
   - {fileID: 122204533}
-  CharacterQuests:
-  - Name: Static Energy
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Lava Pool
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Immolate
-    NPC: {fileID: 585525776}
-    DialogueID: 0
-  - Name: Pirate
-    NPC: {fileID: 1588098428}
-    DialogueID: 0
-  - Name: Burst Shot
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Magical Shot
-    NPC: {fileID: 585525776}
-    DialogueID: 0
-  - Name: Critical Strike
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Snow Pool
-    NPC: {fileID: 1653547898}
-    DialogueID: 0
-  - Name: Thunder
-    NPC: {fileID: 1457361219}
-    DialogueID: 0
-  - Name: Orbits
-    NPC: {fileID: 1457361219}
-    DialogueID: 0
-  - Name: Vampire
-    NPC: {fileID: 1457361219}
-    DialogueID: 0
-  - Name: Assassin
-    NPC: {fileID: 585525776}
-    DialogueID: 0
-  - Name: Explosion
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Flower Field
-    NPC: {fileID: 1653547898}
-    DialogueID: 0
-  - Name: Multicaster
-    NPC: {fileID: 1206136743}
-    DialogueID: 0
-  - Name: Thorns
-    NPC: {fileID: 1653547898}
-    DialogueID: 0
-  - Name: Resonance
-    NPC: {fileID: 1653547898}
-    DialogueID: 0
-  - Name: Freeze
-    NPC: {fileID: 1653547898}
-    DialogueID: 0
-  - Name: Regeneration
-    NPC: {fileID: 1457361219}
-    DialogueID: 0
 --- !u!95 &520883190
 Animator:
   serializedVersion: 5
@@ -14158,6 +14148,150 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 17
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: T-<size=80%>this reminds me of an old story...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>Do you know about... the first Dragon invasion of Animalia?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+      Name: Naal
+    - message: <size=80%>It was a time... of chaos... crops were being burnt... there
+        was no food... no water...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: ALL DUE TO THOSE DAMN DRAGONS!
+      arguments: []
+      avatar: {fileID: 21300000, guid: a5209b96d4cf21543b03459abcaef214, type: 3}
+      Name: Naal
+    - message: <size=80%>...But then... a skilled assassin started working in the
+        shadows...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>He killed thousands of dragons... and was a key component...
+        to stop the invasion...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>He would... execute enemies with more health... than it's
+        own Max HP
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>I would love to see... something like that again...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 22
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: <size=80%>amazing... you really did discover... how to unlock the
+        full potential of Ki...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>but listen... there's a bit more... to this story...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=80%>the way Ki is displayed... is highly dependable on its user...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a5209b96d4cf21543b03459abcaef214, type: 3}
+      Name: Naal
+    - message: <size=80%>a more aggressive user... will become have its Ki represented
+        by Fire...
+      arguments: []
+      avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
+      Name: Naal
+    - message: <size=80%>a user that prioritizes defense... will cast its Ki in Earth
+        form
+      arguments: []
+      avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+      Name: Naal
+    - message: <size=80%>one that uses it for healing purposes... will dominate the
+        power of Water...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>and lastly... a master that uses its Ki to control others...
+        will gain afinity with the Air element...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>mastering all of the elements... that's something only an
+        avatar could do...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 33
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 34
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 585525776}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 35
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -23094,7 +23228,7 @@ MonoBehaviour:
   - Title: War of Roses
     Avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
     Description: Deal back more <style="Red">damage</style> than the one you received
-  - Title: A Corrupting Sound
+  - Title: An Upbeat Sound
     Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
     Description: Shred <style="LYellow">100k<style="Grey"> armor</style> in a single
       game with <style="LYellow">Resonance
@@ -28054,6 +28188,71 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 18
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: BOOM! BOOM! BOOM! BOOM! BOOM!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: MORE EXPLOSIONS MORE MORE MORE!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: Let's make a real bomb man! With the power of fire everything is possible!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: If you can chain up 5 explosions I will have the necessary knowledge
+        to make this happen!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 23
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: 'Hey bro listen here! What about trying to maximize the efficacy of
+        this ability right here? '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
+      Name: 
+    - message: I'm talking not only about making every shot double, but also to have
+        as many shots per second as we can
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: It would look like a complete flamethrower don't you think?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 25
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -34124,6 +34323,327 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 1
+  - dialogues:
+    - message: Hey kid come here! Old Betsy has something to tell ya
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Do you know anything about the ancient mythology of Animalia?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: It is said that each component of nature is controled by a kind of
+        god! In the case of Thunders, that would be Zeus!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+      Name: Betsy
+    - message: Zeus is a god of justice and strikes those who defy the gods
+      arguments: []
+      avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
+      Name: Betsy
+    - message: However, he is also very haughty, deeming other elements uneccessary
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: If you could master his element of Thunder by reaching 6AM without
+        upgrading Attack Speed, I bet he would deem you worthy!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 20
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Hey kid! I didn't know young people still fancied vampires
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: Back in my day, me and my friends would gather around the campfire
+        and tell scary stories to each other all night long
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: I remember always telling this one story about a vampire that drained
+        the life of his preys, healing at a rate of <style="LYellow>1000 <style="Green>HP
+        </style>per second!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+      Name: Betsy
+    - message: A deadily and yet unkillable monster would always guarantee a good
+        scream
+      arguments: []
+      avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 21
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Oh! All this regeneration power makes me recall the old Legendary
+        Bird
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: It had golden fiery feathers and could reborn from its own ashes
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: This bird still lives on to this day, however no one has seen it for
+        centuries
+      arguments: []
+      avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
+      Name: Betsy
+    - message: But old Betsy here has an idea! What about trying to catch its attention
+        by using these powers?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: Let's say that you could reach 6AM without ever dropping below half
+        health... That would be impressive don't you think?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 30
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: So you are also a fan of astronomy eh kid?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: When I was a little lamb, I received a telescope from my parents,
+        and spent every night looking at the night sky
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: I became really knowledgeable on that topic you see! But I mostly
+        forgot about it by now...
+      arguments: []
+      avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
+      Name: Betsy
+    - message: Still, I can recall a couple stuff ok!? For instance, I'm pretty sure
+        there was a planet that looked like it had three rings around it...
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: 'Hey don''t just stand there! Go and help me remember! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: I bet that if you showed me a planet with as many orbits as possible
+        I would recall it in an instant!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 41
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: I knew it! The ringed planet was Saturn after all!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Actually... I can now recall that there were 7 more planets... but
+        what were their names again?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Hey kid, help Betsy out here! I'm going to describe each planet so
+        you can help me remember it!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: First there was the Swift Planet, that would orbit very fast around
+        the Sun...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: The Morning Star was a planet that would radiate a lot of energy,
+        so I bet it's atmosphere was unbearably hot!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: The Blue Marble was a fascinating planet in the sense that it had
+        the perfect conditions to support life...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Due to its agressive colors, the Red Planet would represent the rage
+        and will to live of the ones about to perish...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: The Gas Giant was the biggest planet I ever saw! Even if something
+        collided against it I bet it wouldn't even flinch!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: The Sideways Planet had a very weird looking orbit... almost like
+        it used it to defend from invaders...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: And lastly, the Ice Giant! I heard astronauts would freeze just be
+        approaching it!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: 'W-What? Too much information for you? '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Oh my... this generation can't even memorize 7 basic sentences...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Well ok, you see that Quest Board over there?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: I will write down everything you need to do to help Old Betsy remember
+        the names of the planets, is that better now?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 36
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 37
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 38
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 39
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 40
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 42
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 43
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -39796,6 +40316,177 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+  - dialogues:
+    - message: Oh I love snow! How did you know darling?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: Actually, when I was a teenager I spent a couple months in the highest
+        of mountains
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    - message: But people there cared more about their own survival than having a
+        good fashion sense, so I ended up leaving
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: Still, seeing snow brings some good memories
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    - message: I believe that if we had <style="LYellow">50 Snow Pools</style> at
+        the same time we could replicate what living there was like
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: Will you do that for me? Darling
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 19
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Ahhh Flowers! The best thing nature can offer!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: Can you scatter them around for me darling?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: If you could scatter 50 Flowers at the same time I believe even our
+        campfire would be pleased
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 24
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Did you know that roses are one of my favourite flowers darling?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: They are not only pretty, but know how to defend themselves! That's
+        fashion and utility!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: The thing is that, even with all these thorns protecting the rose,
+        it still ends up getting more damaged than the attacker
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: If we could somehow invert that situation we would have a true Rose
+        Warrior on our hands!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 26
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Music really is one of the best ways to express yourself, don't you
+        think so darling?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: I personally love upbeat songs! It makes me feel so energized!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: If you manage to shred 50k enemy armor in a single game I bet you
+        would have more experience to understand it
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 27
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: Oh I love cold places! I wish I had a body better suited for it
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: You see, the cunkier someone is, more the cold that it can bear
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: If we upgrade our campfire to have a lot of health I bet it could
+        even freeze without being bothered
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 28
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
   Name: Cloris
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -52539,7 +53230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00061035156, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00090026855, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -53138,7 +53829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0007019043
+      value: -0.00091552734
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

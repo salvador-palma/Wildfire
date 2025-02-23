@@ -17,12 +17,7 @@ public class Skills{
     public bool pick;
     
 }
-[System.Serializable]
-public class CharacterNPCQuest{
-    public string Name;
-    public NPC NPC;
-    public int DialogueID;
-}
+
 [System.Serializable]
 public class SerializableList<T> {
     public long embers;
@@ -36,7 +31,9 @@ public class Ability{
     [TextArea] public string AbilityDescription1;
     [TextArea] public string AbilityDescription2;
     [TextArea] public string AbilityDescription3;
-    public int CharacterQuestID;
+    public int QuestID;
+    public NPC npc;
+    public int DialogueID;
 
 }
 public class SkillTreeManager : MonoBehaviour
@@ -73,7 +70,7 @@ public class SkillTreeManager : MonoBehaviour
 
     [SerializeField] Button[] PickBanButtons;
 
-    [SerializeField] public List<CharacterNPCQuest> CharacterQuests;
+    
     private void Awake() {
         Instance = this;
         anim = GetComponent<Animator>();
