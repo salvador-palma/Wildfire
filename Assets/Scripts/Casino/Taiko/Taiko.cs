@@ -3,32 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
+public class TimingPoint{
+    public int Timing;
+    public bool Kiai;
+    public int RealtTime;
+    public TimingPoint(int timing, bool kiai, int realTime){
+        Timing = timing;
+        Kiai = kiai;
+        RealtTime = realTime;
+    }
+}
 public class Taiko : MonoBehaviour
 {
    
     private List<Drum> drums;
+    private List<TimingPoint> timingPoints;
     List<int> timestamps;
     public GameObject[] DrumPrefabs;
     public Transform drumParent;
     public RectTransform parentRTr;
     public float XOffset = -305;
-    public float mat_speed = 5f;
-    public AudioSource source;
+    public float mat_speed;
+    public EventReference track;
 
     public KeyCode red1 = KeyCode.F;  // Small Red
     public KeyCode red2 = KeyCode.H;  // Small Red
     public KeyCode blue1 = KeyCode.D; // Small Blue
     public KeyCode blue2 = KeyCode.J; // Small Blue
     
-    public RectTransform strip1;
-    public RectTransform strip2;
+
 
     public Animator turtleAnim;
+    public Animator hitFeedbackAnim;
+    public Animator Anim;
+    public EventReference drimMiss;
+    public EventReference[] drumHit;
+
+    public bool AutoBot;
+    public float delay;
+    EventInstance trackInstance;
     void Start()
     {
         TextAsset osuData = Resources.Load<TextAsset>("TaikoHard"); 
@@ -44,25 +64,63 @@ public class Taiko : MonoBehaviour
         }
         parentRTr = drumParent.GetComponent<RectTransform>();
 
-        strip1.sizeDelta = new Vector2(drums[drums.Count-1].transform.position.x - drums[0].transform.position.x + 400, strip1.sizeDelta.y);
-        strip2.sizeDelta = new Vector2(drums[drums.Count-1].transform.position.x - drums[0].transform.position.x + 400, strip1.sizeDelta.y);
-        //strip1.anchoredPosition = new Vector2((drums[drums.Count-1].transform.position.x + drums[0].transform.position.x)/2f, strip1.anchoredPosition.y);
+        Debug.Log(matUpdateSpeed);
+        Debug.Log(mat_speed);
+        matUpdateSpeed = mat_speed;
+        Debug.Log(matUpdateSpeed);
+        trackInstance = AudioManager.CreateInstance(track);
     }
     public bool hasStarted;
+    public void StartTrack(){
+        trackInstance.start();
+    }
+    int i = 0;
+    int[] fr = new int[3]{10,30,60};
+
+
+    
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.V)){
+            Application.targetFrameRate = fr[i];
+            i++;
+            if(i>=fr.Length) i=0;
+        }
         if(Input.GetKeyDown(KeyCode.Space) && !hasStarted){
             hasStarted = true;
-            source.Play();
+            Invoke("StartTrack", delay/mat_speed);
+           
+            //AudioManager.PlayOneShot(track, Vector2.zero);
         }
-        
+        float f = parentRTr.anchoredPosition.x;
         if(hasStarted){
             
             if(drums.Count <= 0){hasStarted=false; return;}
-            parentRTr.anchoredPosition= new Vector2(parentRTr.anchoredPosition.x - mat_speed*Time.deltaTime, parentRTr.anchoredPosition.y);
+
+            parentRTr.anchoredPosition= new Vector2(parentRTr.anchoredPosition.x - matUpdateSpeed*1000*Time.deltaTime, parentRTr.anchoredPosition.y);
+            //Debug.Log(matUpdateSpeed);
             CheckForInput();
             CheckForMisses();
+            CheckForTimingPoints();
         }
+    }
+    public float matUpdateSpeed;
+    private void CheckForTimingPoints()
+    {
+        if(timingPoints.Count <= 0) return;
+        
+        int timing = getTiming();
+        
+        while(timingPoints[0].Timing < timing){
+            TimingPoint tp = timingPoints[0];
+            timingPoints.RemoveAt(0);
+            Anim.SetBool("Kiai", tp.Kiai);
+            matUpdateSpeed = tp.Kiai ? kiaiSpeed : mat_speed;
+            Debug.Log(timing + " : " + tp.Timing + " Updated Speed: " + matUpdateSpeed);
+            if(timingPoints.Count <= 0) return;
+        }
+        
+        
     }
 
     private void CheckForMisses()
@@ -78,6 +136,10 @@ public class Taiko : MonoBehaviour
                 quality[3]++;
                 accuracy = (float)Math.Round((quality[0]*300f+quality[1]*100f+quality[2]*50f) / (quality.Sum()*300f) * 10000f)*0.01f;
                 AccText.text = accuracy.ToString() + "%";
+
+                ShowFeedback(3);
+
+                AudioManager.PlayOneShot(drimMiss, Vector2.zero);
             }else{break;}
         }
     }
@@ -90,6 +152,15 @@ public class Taiko : MonoBehaviour
     
     private void CheckForInput()
     {
+        if(AutoBot){
+            Drum d = ClosestType();
+            int millis = getTiming();
+            int delta = Math.Abs(d.Timing - millis);
+            if(delta < 25){
+                Hit(d.Type, millis, d);
+            }
+            return;
+        }
         bool red = Input.GetKeyDown(red1) || Input.GetKeyDown(red2);
         bool blue = Input.GetKeyDown(blue1) || Input.GetKeyDown(blue2);
 
@@ -126,6 +197,7 @@ public class Taiko : MonoBehaviour
 
     }
     int getTiming(){
+      
         return Math.Abs((int)(parentRTr.anchoredPosition.x + XOffset));
     }
     void Hit(int type, int timing, Drum closestDrum)
@@ -134,9 +206,12 @@ public class Taiko : MonoBehaviour
         int[] score = closestDrum.Score(type, timing);
         bool res = Score(score[0]);
 
-        
+        ShowFeedback(score[0]==0? 3 : score[1]);
 
         if(res){
+
+            AudioManager.PlayOneShot(drumHit[closestDrum.Type], Vector2.zero);
+
             drums.Remove(closestDrum); 
             Destroy(closestDrum.gameObject);
             turtleAnim.Play("TaikoBite");
@@ -158,6 +233,8 @@ public class Taiko : MonoBehaviour
     bool Score(int value){
         if(value==-1){return false;} //Out of Range
         if(value==0){streak = 0;}else{streak++;} //Wrong Button and In-Range
+
+        
 
         score += value * (1 + streak/25);
 
@@ -196,7 +273,9 @@ public class Taiko : MonoBehaviour
         List<Drum> drums = new List<Drum>();
         Drum LayoutDrum(int timing, int type){
             GameObject go = Instantiate(DrumPrefabs[type], drumParent);
-            float x = timing/1000f * mat_speed;
+
+            float x = GetRealTiming(timing);
+
             go.GetComponent<RectTransform>().anchoredPosition = new Vector2(x,0);
             go.name = timing + ";" + type;
             return go.GetComponent<Drum>();
@@ -204,7 +283,7 @@ public class Taiko : MonoBehaviour
         foreach(KeyValuePair<int,int> drum in map){
             Drum d = LayoutDrum(drum.Key, drum.Value);
             d.Type = drum.Value;
-            d.Timing = drum.Key;
+            d.Timing = GetRealTiming(drum.Key);
             drums.Add(d);
         }
         return drums;
@@ -212,23 +291,86 @@ public class Taiko : MonoBehaviour
     private SortedDictionary<int, int> ParseOsuData(string data)
     {
         SortedDictionary<int, int> hitObjects = new SortedDictionary<int, int>();
+
+        timingPoints = new List<TimingPoint>();
+
         string[] lines = data.Split('\n');
 
+        bool OnHitObjects = false;
+
+        
+        TimingPoint oldTD = new TimingPoint(0, false, 0);
         foreach (string line in lines)
         {
-            if (string.IsNullOrWhiteSpace(line)) continue;
+            try{
+                if(line.Contains("[HitObjects]")){
+                    OnHitObjects = true;
+                    continue;
+                }
+                if (string.IsNullOrWhiteSpace(line)) continue;
 
-            string[] parts = line.Split(',');
+                if(OnHitObjects){
+                    string[] parts = line.Split(',');
 
-            int time = int.Parse(parts[2]); // Hit time in ms
-            int hitType = int.Parse(parts[3]); // Type (normal/big)
-            int hitSound = int.Parse(parts[4]); // Sound (red/blue)
+                    int time = int.Parse(parts[2]); // Hit time in ms
+                    int hitType = int.Parse(parts[3]); // Type (normal/big)
+                    int hitSound = int.Parse(parts[4]); // Sound (red/blue)
 
-            int drumType = GetTaikoNoteType(hitType, hitSound);
-            hitObjects[time] = drumType;
+                    int drumType = GetTaikoNoteType(hitType, hitSound);
+                    hitObjects[time] = drumType;
+                }else{
+
+                    string[] parts = line.Split(',');
+
+                    // Hit time in ms
+                    
+                    int realTimming = int.Parse(parts[0]);
+                    int deltaTimming = Math.Abs(realTimming - oldTD.RealtTime);
+                    deltaTimming = (int)(deltaTimming * (oldTD.Kiai ? kiaiSpeed : mat_speed));
+
+                    int time = oldTD.Timing + deltaTimming;
+                    bool kiai = int.Parse(parts[7]) == 1; // Type (normal/big)
+                    Debug.Log(time + " " + kiai + " " + realTimming);
+                    
+                    oldTD = new TimingPoint(time, kiai, realTimming);
+                    timingPoints.Add(new TimingPoint(time, kiai, realTimming));
+                    
+                }
+                
+            }catch{
+                continue;
+            }
+            
         }
-        Debug.Log(hitObjects.Count);
+        timingPoints.ForEach(e=>Debug.Log(e.Timing + " " + e.Kiai + " " + e.RealtTime));
         return hitObjects;
+    }
+    public float kiaiSpeed;
+    public int GetRealTiming(int factualTiming){
+        int timingAcc = 0;  
+        TimingPoint oldTD = new TimingPoint(0, false, 0);
+
+        foreach(TimingPoint tp in timingPoints){
+            if(factualTiming >= tp.RealtTime){
+                int delta = tp.RealtTime - oldTD.RealtTime;
+                timingAcc += (int)(delta*(oldTD.Kiai ? kiaiSpeed : mat_speed));
+                oldTD = tp;
+                // Debug.Log("Acc: " + timingAcc);
+            }else{
+                int delta = factualTiming - oldTD.RealtTime;
+                timingAcc += (int)(delta*(oldTD.Kiai ? kiaiSpeed : mat_speed));
+                break;
+                // Debug.Log("Acc Final: " + timingAcc);
+            }
+        }
+        if(factualTiming > timingPoints.Last().RealtTime){
+            int delta = factualTiming - timingPoints.Last().RealtTime;
+            timingAcc += (int)(delta*(timingPoints.Last().Kiai ? kiaiSpeed : mat_speed));
+            // Debug.Log("Acc Comp: " + timingAcc);
+        }
+        //Debug.Log(factualTiming + " > " + timingAcc);
+        return timingAcc;
+        
     }
 
     private int GetTaikoNoteType(int hitType, int hitSound)
@@ -240,5 +382,17 @@ public class Taiko : MonoBehaviour
             case 12: return 3;
             default: return 0;
         }
+    }
+
+    public string[] feedback = new string[4]{"PERFECT", "GOOD", "OK", "MISS"};
+    public Color[] feedbackColors;
+    public TextMeshProUGUI feedbackText;
+    private void ShowFeedback(int type){
+        if(type==-1){return;}
+
+        feedbackText.color = feedbackColors[type];
+        feedbackText.text = feedback[type];
+
+        hitFeedbackAnim.SetTrigger("Hit");
     }
 }
