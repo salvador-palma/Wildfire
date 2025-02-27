@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FMOD;
 using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 
 [System.Serializable]
@@ -15,7 +17,7 @@ public class Skills{
     public int level;
     public bool ban;
     public bool pick;
-    
+    public int max_level_reached;
 }
 
 [System.Serializable]
@@ -60,6 +62,8 @@ public class SkillTreeManager : MonoBehaviour
     [SerializeField] ColorBlock SilverColor;
     [SerializeField] ColorBlock GoldColor;
     [SerializeField] ColorBlock PrismaticColor;
+    [SerializeField] ColorBlock ReachedColor;
+
 
     [Header("Black Market")]
     [SerializeField] private int BanLimit;
@@ -85,6 +89,11 @@ public class SkillTreeManager : MonoBehaviour
         Skills result = GetSkill(skill);
         return result==null ? -1 : result.level;
     }
+    public int getMaxLevelReached(string skill){
+        Skills result = GetSkill(skill);
+        result.max_level_reached = Math.Max(result.max_level_reached, result.level);
+        return result==null ? -1 : result.max_level_reached;
+    }
 
     
     public bool Upgrade(string skill_name, bool Unlock = false){
@@ -106,6 +115,8 @@ public class SkillTreeManager : MonoBehaviour
             PlayerData.embers-=price;
             changeEmberAmountUI();
             skill.level++;
+            skill.max_level_reached = Math.Max(skill.max_level_reached, skill.level);
+
             CheckForConstelationUnlock();
             WritingData();
 
@@ -175,7 +186,7 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
      public void CreateFile(){
-        string str = "{ \"embers\": 0, \"skillTreeEmbers\": 0, \"skills\": [ { \"type\": \"Assassin\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Immolate\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Critical Strike\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Pirate\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Snow Pool\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Necromancer\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Ember Generation\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Explosion\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Vampire\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Multicaster\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Static Energy\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Gambling\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Ritual\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Thunder\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Regeneration\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Magical Shot\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Lava Pool\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Burst Shot\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Bee Summoner\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Thorns\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Freeze\", \"level\": -2, \"ban\": false, \"pick\": false }, { \"type\": \"Orbits\", \"level\": -1, \"ban\": false, \"pick\": false }, { \"type\": \"Flower Field\", \"level\": -3, \"ban\": false, \"pick\": false }, { \"type\": \"Resonance\", \"level\": -2, \"ban\": false, \"pick\": false } ] }";
+        string str = "{\"embers\":0,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Immolate\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Critical Strike\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Pirate\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Snow Pool\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Necromancer\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Ember Generation\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Explosion\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Vampire\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Multicaster\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Static Energy\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Gambling\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Ritual\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Thunder\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Regeneration\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Magical Shot\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Lava Pool\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Burst Shot\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Bee Summoner\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Thorns\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Freeze\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Orbits\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Flower Field\",\"level\":-3,\"ban\":false,\"pick\":false,\"max_level_reached\":-2},{\"type\":\"Resonance\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":-2}]}";
         File.WriteAllText(Application.persistentDataPath +"/skills.json", str);
     }
 
@@ -214,52 +225,47 @@ public class SkillTreeManager : MonoBehaviour
         anim.SetBool("DisplayInfo", true);
         
         
+        
         Ability ability = Abilities.ToList().FirstOrDefault(a => a.Name == skill);
-        if(ability != null){
-            passivesText[0].SetText("<size=100%><style=\"Yellow\">- Level 1 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription1});
-            passivesText[1].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription2});
-            passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription3});
-            passivesText[0].setColor(Color.white);
-            passivesText[1].setColor(Color.white);
-            passivesText[2].setColor(Color.white);
-            switch (level+1)
-            {
-                case 0:
-                    passivesText[0].setColor(new Color(1,1,1,0.3f));
-                    passivesText[1].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{"???"});
-                    passivesText[1].setColor(new Color(1,1,1,0.3f));
-                    passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
-                    passivesText[2].setColor(new Color(1,1,1,0.3f));
-                    break;
-                case 1:
-                    passivesText[1].setColor(new Color(1,1,1,0.3f));
-                    passivesText[2].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
-                    passivesText[2].setColor(new Color(1,1,1,0.3f));
-                    break;
-                case 2:
-                    passivesText[2].setColor(new Color(1,1,1,0.3f));
-                    break;
-            }
-           
-            
+        Skills skillSk = GetSkill(skill);
+        string[] descriptions = new string[]{ability.AbilityDescription1,ability.AbilityDescription2,ability.AbilityDescription3};
+        Color active = Color.white;
+        Color disabled = new Color(1,1,1,0.3f);
 
+        if(ability != null){
+            
+            for (int i = 0; i < 3; i++)
+            {
+                passivesText[i].setColor(level >= i ? active : disabled);
+                string dp = skillSk.max_level_reached >= i - 1 ? descriptions[i] : "???";
+                passivesText[i].SetText("<size=100%><style=\"Yellow\">- Level " + (i+1) + " -</style><br><size=80%>{0}", new string[]{dp});
+            }  
+            
             titleText.SetText(ability.Name);
             typeText.SetText(ability.Type);
 
             int price = DeckBuilder.Instance.getPrice(skill, level + 1);
-            purchaseButtonText.SetText("Upgrade ({0})", new string[]{price == - 1 ? "Maxed Out" : price.ToString()});
-            purchaseButtonText.transform.parent.gameObject.SetActive(price != - 1);
-            
-            //PICK BAN DISPLAY
-            Skills s = GetSkill(skill);
 
-            PickBanButtons[0].gameObject.SetActive(!s.pick && (BanAmount != BanLimit || s.ban) && level > -1);
-            PickBanButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.ban);
-            PickBanButtons[1].gameObject.SetActive(!s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
-            PickBanButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.pick);
+            if(level >= -1){
+                purchaseButtonText.SetText("Upgrade ({0})", new string[]{price == - 1 ? "Maxed Out" : price.ToString()});
+                purchaseButtonText.transform.parent.gameObject.SetActive(price != - 1);
+                Skills s = GetSkill(skill);
+
+                PickBanButtons[0].gameObject.SetActive(!s.pick && (BanAmount != BanLimit || s.ban) && level > -1);
+                PickBanButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.ban);
+                PickBanButtons[1].gameObject.SetActive(!s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
+                PickBanButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.pick);
 
 
-            PreBanExplanation.SetText(s.ban? "This skill will not appear during the night" : s.pick? "You will start the night with this skill" : ""); 
+                PreBanExplanation.SetText(s.ban? "This skill will not appear during the night" : s.pick? "You will start the night with this skill" : "");
+            }else{
+                purchaseButtonText.transform.parent.gameObject.SetActive(false);
+                PreBanExplanation.SetText("Upgrade previous skills to unlock this one");
+                PickBanButtons[0].gameObject.SetActive(false);
+                PickBanButtons[1].gameObject.SetActive(false);
+            }
+        
+             
             
         }else{
             Debug.LogWarning("Skill Not Found: " + skill);
@@ -279,6 +285,8 @@ public class SkillTreeManager : MonoBehaviour
                 return GoldColor;
             case 2:
                 return PrismaticColor;
+            case 10:
+                return ReachedColor;
             default:
                 return UnlockedColor;
         }
@@ -292,7 +300,7 @@ public class SkillTreeManager : MonoBehaviour
         
         anim.SetBool("DisplayInfo", false);
         anim.Play("InfoPanelOf");
-
+        
         List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling"};
         List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate"};
         foreach(Skills skill in PlayerData.skills){
@@ -314,6 +322,7 @@ public class SkillTreeManager : MonoBehaviour
         PlayerData.skillTreeEmbers = 0;
         changeEmberAmountUI();
         WritingData();
+        
         treeReset?.Invoke(this, new EventArgs());
         
     }

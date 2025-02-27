@@ -2864,6 +2864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Assassin
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode:
   - {fileID: 2126742689}
@@ -6448,6 +6449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Immolate
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 962784312}
   followingNode: []
@@ -7067,6 +7069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Critical Strike
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode:
   - {fileID: 1031754548}
@@ -10469,6 +10472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Pirate
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1983941272}
   followingNode:
@@ -11297,7 +11301,7 @@ MonoBehaviour:
       increases to <style="LYellow">50%</style> and to <style="LYellow">100%</style>
       for <style="Orange">burried</color> ones
     AbilityDescription3: Each time a <style="LYellow">Lava Pools</style> deals damage
-      it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor
+      it will melt <style="LYellow">2%</style> of the enemy's <style="Grey">armor
     QuestID: 13
     npc: {fileID: 1206136743}
     DialogueID: 7
@@ -11560,6 +11564,65 @@ MonoBehaviour:
     QuestID: -1
     npc: {fileID: 0}
     DialogueID: 0
+  - Name: Whirl Pool
+    Type: On-Land Effect
+    AbilityDescription1: You can generate <style="LBlue">Whirlpools</style> that
+      pull enemies. When two <style="LYellow">Whirlpools</style> overlap, they will
+      merge, increasing in size and duration
+    AbilityDescription2: Allied objects are also affected by <style="LYellow">Whirlpools</style>
+    AbilityDescription3: <style="LYellow">Whirlpools</style> will deal <style="LYellow">10
+      <style="Red">damage</style> per second to enemies in the center. This damage
+      increases by <style="LYellow">+10</style> for each merge
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
+  - Name: Poison
+    Type: On-Hit/On-Kill Effect
+    AbilityDescription1: You have a chance to <style="Purple">poison</style> enemies,
+      dealing <style="LYellow">4% <style="Green">Max HP</style> per second until
+      the <style="Purple">poison</style> wears off
+    AbilityDescription2: Killing a <style="Purple">poisoned</style> enemy will spread
+      the effect to nearby enemies
+    AbilityDescription3: Killing an enemy with <style="Purple">poison</style> will
+      make the spread range <style="LYellow">x2</style> bigger
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
+  - Name: Laser
+    Type: Special Effect
+    AbilityDescription1: <style="LYellow">Lasers</style> only affect one enemy at
+      a time, increasing the <style="Red">damage</style> it deals the longer it stays
+      focused on that target
+    AbilityDescription2: Unlock new <style="LYellow">Targeting</style> options for
+      the <style="LYellow">Laser <style="LGrey">(Random, Closest, Most Max HP, Most
+      Armor)
+    AbilityDescription3: Each time a <style="LYellow">Laser</style> deals damage
+      it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
+  - Name: Gravitational Forces
+    Type: On-Kill Effect
+    AbilityDescription1: Killing enemies might generate gravitational forces that
+      push enemies away from the location of the killing
+    AbilityDescription2: Unlock new <style="LYellow">Directional</style> options
+      for the <style="LYellow">Gravitational Forces <style="LGrey">(In-Wards, Out-Wards,
+      Away, Towards, Disabled)
+    AbilityDescription3: Affected area gets <style="LYellow">doubled</style> in size
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
+  - Name: Totem
+    Type: On-Land Effect
+    AbilityDescription1: <style="LYellow">Totems</style> will <style="Orange">taunt</style>
+      nearby enemies, serving as a temporary decoy until they are destroyed
+    AbilityDescription2: When damaged, <style="LYellow">Totems</style> will apply
+      <style="Pink">Counter Effects</style>
+    AbilityDescription3: <style="Red">Damage</style> dealt to <style="LYellow">Totems</style>
+      is <style="Green">healed</style> back to you
+    QuestID: -1
+    npc: {fileID: 0}
+    DialogueID: 0
   emberText: {fileID: 71933622}
   titleText: {fileID: 924204468}
   typeText: {fileID: 557520744}
@@ -11599,6 +11662,14 @@ MonoBehaviour:
     m_PressedColor: {r: 0.84400004, g: 0.359544, b: 0.54075277, a: 1}
     m_SelectedColor: {r: 0.99215686, g: 0.59132546, b: 0.7411311, a: 1}
     m_DisabledColor: {r: 0.07058824, g: 0.023529414, b: 0.12941177, a: 1}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0
+  ReachedColor:
+    m_NormalColor: {r: 0.24313726, g: 0.07450981, b: 0.44313726, a: 1}
+    m_HighlightedColor: {r: 0.3372549, g: 0.101960786, b: 0.6156863, a: 1}
+    m_PressedColor: {r: 0.19215687, g: 0.05882353, b: 0.34901962, a: 1}
+    m_SelectedColor: {r: 0.43137255, g: 0.12941177, b: 0.7882353, a: 1}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   BanLimit: 0
@@ -11675,7 +11746,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520883187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -14076,16 +14147,16 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: H-<size=80%>hey... let me tell you a bit... about this skill...
+    - message: H-<size=80%>hey... can I tell you a bit... about this skill?...
       arguments: []
       avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
       Name: Naal
     - message: <size=80%>A few centuries ago... monks would concentrate their spirits...
-        to release immolating waves just like this ones
+        to release immolating waves just like these ones
       arguments: []
       avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
       Name: Naal
-    - message: <size=80%>I bet that... if we maximize every possible aspect of it...
+    - message: <size=80%>I bet that... if we maximized every possible aspect of it...
         we could come up with something... rather interesting...
       arguments: []
       avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
@@ -14111,8 +14182,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
       Name: Naal
-    - message: <size=80%>When I was a kid... I read a lot on a powerfull wizard...
-        that could transform normal fireballs into more... powerful versions...
+    - message: <size=80%>When I was a kid... I read a lot on a rogue wizard... that
+        could transform normal fireballs into more... powerful versions...
       arguments: []
       avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
       Name: Naal
@@ -14133,7 +14204,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
       Name: Naal
     - message: <size=80%>It's a lot... I know... but it's a task that only the best
-        of the best... could accomplish...
+        of the best... can accomplish...
       arguments: []
       avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
       Name: Naal
@@ -14162,8 +14233,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
       Name: Naal
-    - message: <size=80%>It was a time... of chaos... crops were being burnt... there
-        was no food... no water...
+    - message: <size=80%>It was a time... of chaos... whole habitats were getting
+        burnt... crops reduced to ashes... water evaporated to the atmosphere...
       arguments: []
       avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
       Name: Naal
@@ -14182,7 +14253,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: d6bb4ca9a394b60429c0a281e1711f89, type: 3}
       Name: Naal
     - message: <size=80%>He would... execute enemies with more health... than it's
-        own Max HP
+        own
       arguments: []
       avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
       Name: Naal
@@ -14216,12 +14287,12 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: a91959aef56ea5443bc2fc22dbc4b1e9, type: 3}
       Name: Naal
-    - message: <size=80%>the way Ki is displayed... is highly dependable on its user...
+    - message: <size=80%>the way Ki is manifested... depends a lot on its holder...
       arguments: []
       avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
       Name: Naal
-    - message: <size=80%>a more aggressive user... will become have its Ki represented
-        by Fire...
+    - message: <size=80%>a more aggressive user... will have its Ki represented by
+        Fire...
       arguments: []
       avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
       Name: Naal
@@ -18757,6 +18828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Snow Pool
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1856965797}
   followingNode: []
@@ -18921,6 +18993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Necromancer
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode: []
   nextPaths: []
@@ -20587,6 +20660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Ember Generation
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode: []
   nextPaths: []
@@ -22846,6 +22920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Explosion
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 506442301}
   followingNode:
@@ -23245,10 +23320,10 @@ MonoBehaviour:
       a single chain
   - Title: The Nether Realm
     Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
-    Description: Have <style="LYellow>50 Lava Pools</style> at the same time
-  - Title: Ancient Energy
+    Description: Have <style="LYellow">50 Lava Pools</style> at the same time
+  - Title: Spiritual Energy
     Avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
-    Description: Maximize all stats on your <style="LYellow>Immolate</style> ability
+    Description: Maximize all stats on your <style="LYellow">Immolate</style> ability
   - Title: Loot them all!
     Avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
     Description: Loot <style="LYellow">+10k embers</style> in a single round
@@ -23261,15 +23336,16 @@ MonoBehaviour:
       in a single hit '
   - Title: Powering Up!
     Avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
-    Description: Deal <style="LYellow>5x</style> your <style="Red">damage</style>
-      value with a <style="LYellow>critical shot
+    Description: Deal <style="LYellow">5x</style> your <style="Red">damage</style>
+      value with a <style="LYellow">critical shot
   - Title: Let it Snow!
     Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
-    Description: Have <style="LYellow">50 Snow Pools</style> at the same time
+    Description: Have <style="LYellow">50 <style="LBlue">Snow Pools</style> at the
+      same time
   - Title: Lightning and the Thunder
     Avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
-    Description: Reach <style="LYellow">6am</style> without <style="LYellow">Attack
-      Speed
+    Description: Reach the lowest <style="LYellow">Thunder Interval</style> possible
+      without increasing <style="LYellow">Attack Speed
   - Title: A story on Vampires
     Avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
     Description: <style="Green">Heal</style> at a rate of <style="LYellow">1000/s
@@ -23279,7 +23355,8 @@ MonoBehaviour:
       than your <style="Green">Max HP</style>
   - Title: Boom! Boom! Boom!
     Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
-    Description: Create a chain of <style="LYellow">5 Explosions
+    Description: Create a chain of <style="LYellow">5 <style="Orange">Explosions</style>
+      from a single one
   - Title: It's Spring Time
     Avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
     Description: Have <style="LYellow">50 Flowers</style> at the same time
@@ -23290,23 +23367,23 @@ MonoBehaviour:
   - Title: War of Roses
     Avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
     Description: Deal back more <style="Red">damage</style> than the one you received
-  - Title: An Upbeat Sound
+  - Title: An Upbeat Sound I
     Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
-    Description: Shred <style="LYellow">100k<style="Grey"> armor</style> in a single
-      game with <style="LYellow">Resonance
+    Description: Max out your <style="LYellow">Resonance</style> ability to discover
+      an upbeat tune
   - Title: Frozen to the Bone
     Avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
-    Description: Reach maximum <style="LYellow">Slow Percentage
+    Description: Reach maximum <style="LBlue">Slow Percentage
   - Title: High Risk High Reward
     Avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
     Description: Get <style="LYellow>15 Augments</style> in a single round
   - Title: The Legend of the Immortal Bird
     Avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
-    Description: Reach <style="LYellow">6am</style> without going below <style="LYellow">50%
+    Description: Reach <style="LYellow">6AM</style> without going below <style="LYellow">50%
       <style="Green">health
   - Title: Gotta catch'em all!
     Avatar: {fileID: 21300000, guid: 9acfa8ff8250a9c4699d0d728422cca0, type: 3}
-    Description: Unlock <style="LYellow">10</style> <sprite name="Shiny">Shinies
+    Description: Unlock <style="LYellow">10</style> <sprite name="Shiny">Shiny animals
   - Title: Offensive Ki
     Avatar: {fileID: 21300000, guid: 89833f798cae2394cab8dcfe8766157a, type: 3}
     Description: Max Immolate with an <style="LYellow">Offensive</style> approach
@@ -24802,6 +24879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Vampire
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 339577872}
   followingNode:
@@ -26006,6 +26084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Multicaster
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode:
   - {fileID: 1797198122}
@@ -26775,6 +26854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Static Energy
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1797198122}
   followingNode:
@@ -28119,14 +28199,14 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
-    - message: You probably already noticed but, these static chains can be used
-        to spread a lot of effects
+    - message: You probably already noticed but these static chains can be used to
+        spread a lot of effects
       arguments: []
       avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
       Name: 
     - message: I wonder what would happen once you mastered that technique, by applying
         <style="LYellow>20 <style="Pink">On-Hit Effects</style> in a single<style="LYellow>
-        chain
+        chain for example...
       arguments: []
       avatar: {fileID: 21300000, guid: 96a45c7200dea7d44a57bf326c0b87e2, type: 3}
       Name: 
@@ -28151,8 +28231,8 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: You know, I wonder what a marshmallow toasted on a Lava Pool would
-        taste like
+    - message: HMMM! I wonder what a marshmallow toasted on a Lava Pool would taste
+        like
       arguments: []
       avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
       Name: 
@@ -28165,9 +28245,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: a4e40e4a65e2fed4d9caa5f24521b518, type: 3}
       Name: 
-    - message: I bet that having like, <style="LYellow">50 Lava Pools</style> at
-        the same time would be a good approximation to what a real vulcano feels
-        like!
+    - message: I bet that having like, <style="LYellow">50 <style="Orange"> Lava
+        Pools</style> at the same time would be a good approximation to what a real
+        vulcano feels like!
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
@@ -28188,7 +28268,7 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: I know what we need! More fireballs!
+    - message: Oh you like fireballs!? Let's get more then!
       arguments: []
       avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
       Name: 
@@ -29400,6 +29480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Gambling
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode: []
   nextPaths: []
@@ -34381,7 +34462,7 @@ MonoBehaviour:
         m_Calls: []
     dequeueAuto: 1
   - dialogues:
-    - message: Hey kid come here! Old Betsy has something to tell ya
+    - message: Hey kid come here! Old Betsy has something to tell ya!
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
@@ -34394,16 +34475,16 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
       Name: Betsy
-    - message: Zeus is a god of justice and strikes those who defy the gods
+    - message: Zeus is a god of justice and strikes those who go against his word
       arguments: []
       avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
       Name: Betsy
-    - message: However, he is also very haughty, deeming other elements uneccessary
+    - message: He is also very stubborn and deems all other elements uneccessary
       arguments: []
       avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
       Name: Betsy
-    - message: If you could master his element of Thunder by reaching 6AM without
-        upgrading Attack Speed, I bet he would deem you worthy!
+    - message: If you could master his element of Thunder by maximizing it without
+        any other upgrade, I bet he would deem you worthy!
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
@@ -34424,7 +34505,7 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: Hey kid! I didn't know young people still fancied vampires
+    - message: I didn't know young people still fancied vampires!
       arguments: []
       avatar: {fileID: 21300000, guid: 236e45fc18fce414d82240d0a09d2de1, type: 3}
       Name: Betsy
@@ -34433,8 +34514,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
       Name: Betsy
-    - message: I remember always telling this one story about a vampire that drained
-        the life of his preys, healing any possible wound it could have!
+    - message: I remember always telling this one story about a vampire that could
+        heal any wound at light speed by draining the life of its preys
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
@@ -34469,7 +34550,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
       Name: Betsy
-    - message: This bird still lives on to this day, however no one has seen it for
+    - message: The bird still lives on to this day, however no one has seen it for
         centuries
       arguments: []
       avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
@@ -34506,7 +34587,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
     - message: When I was a little lamb, I received a telescope from my parents,
-        and spent every night looking at the night sky
+        and spent every night looking at the sky
       arguments: []
       avatar: {fileID: 21300000, guid: 1abaeffa6034fc34a948eec16cd6e707, type: 3}
       Name: Betsy
@@ -34516,7 +34597,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
       Name: Betsy
     - message: Still, I can recall a couple stuff ok!? For instance, I'm pretty sure
-        there was a planet that looked like it had three rings around it...
+        there was a planet that had three rings around it...
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
@@ -34550,8 +34631,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 1abaeffa6034fc34a948eec16cd6e707, type: 3}
       Name: Betsy
-    - message: Actually... I can now recall that there were 7 more planets... but
-        what were their names again?
+    - message: Actually... I can now recall that there were 7 more other planets...
+        but what were their names again?
       arguments: []
       avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
       Name: Betsy
@@ -34565,10 +34646,10 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
-    - message: The Morning Star was a planet that would radiate a lot of energy,
-        so I bet it's atmosphere was unbearably hot!
+    - message: Second, the Morning Star was a planet that would radiate a lot of
+        energy. Astronauts would melt even before reaching the surface!
       arguments: []
-      avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
+      avatar: {fileID: 21300000, guid: 54f254d865c29f54585ba784222cc959, type: 3}
       Name: Betsy
     - message: The Blue Marble was a fascinating planet in the sense that it had
         the perfect conditions to support life...
@@ -34576,7 +34657,8 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
       Name: Betsy
     - message: Due to its agressive colors, the Red Planet would represent the rage
-        and will to live of the ones about to perish...
+        and will to live of the ones about to perish... in the ancient mythology
+        of course...
       arguments: []
       avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
       Name: Betsy
@@ -35454,6 +35536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Ritual
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode: []
   nextPaths: []
@@ -35618,6 +35701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Thunder
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1166289506}
   followingNode:
@@ -36487,6 +36571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Regeneration
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode:
   - {fileID: 1856965797}
@@ -38300,18 +38385,18 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
       Name: Gyomyo
-    - message: I love pirates men! They would just loot every ship and village they
+    - message: I love pirates men! They used to loot every ship and village they
         would come across. That's some real hustling!
       arguments: []
       avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
       Name: Gyomyo
-    - message: Some of them accumulated fortunes they couldn't even spend it in their
-        lifetime! How impressive is that?
+    - message: Some of them accumulated fortunes so big they couldn't even be spent
+        in their lifetimes! How impressive is that?
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
-    - message: 'If gathered up <style="LYellow">10k embers</style> in a single round
-        you could call yourself a true pirate, you know! '
+    - message: 'If you gathered up <style="LYellow">10k embers</style> in a single
+        round you could call yourself a true pirate, you know! '
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
@@ -39790,6 +39875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Magical Shot
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1797198122}
   followingNode: []
@@ -40373,7 +40459,7 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
   - dialogues:
-    - message: Oh I love snow! How did you know darling?
+    - message: Oh I love snow darling!
       arguments: []
       avatar: {fileID: 21300000, guid: a4500c866e2ed6c4681a58e50b4187ad, type: 3}
       Name: Cloris
@@ -40387,12 +40473,12 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 05f44971e4b225543a0d8b5f410d2107, type: 3}
       Name: Cloris
-    - message: Still, seeing snow brings some good memories
+    - message: Still, seeing snow brings me some good memories
       arguments: []
       avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
       Name: Cloris
-    - message: I believe that if we had <style="LYellow">50 Snow Pools</style> at
-        the same time we could replicate what living there was like
+    - message: I believe that if we had <style="LYellow">50 <style="LBlue">Snow Pools</style>
+        at the same time we could replicate what living there was like
       arguments: []
       avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
       Name: Cloris
@@ -40417,18 +40503,25 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: Ahhh Flowers! The best thing nature can offer!
+    - message: Ahhh Flowers! The best thing nature can offer! Could you plant them
+        around for me darling?
       arguments: []
-      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      avatar: {fileID: 21300000, guid: f9eecd117e849cb4b8d28a3e55921317, type: 3}
       Name: Cloris
-    - message: Can you scatter them around for me darling?
+    - message: ' Oh but wait! But you need to be careful! I heard that in places
+        with a lot of flowers, some animal-eating ones might start appearing...'
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: Oh you are curious about it? Well... if you want to see them that
+        much I believe a field of <style="LYellow">50 Flowers</style> should be big
+        enough
+      arguments: []
+      avatar: {fileID: 21300000, guid: 05f44971e4b225543a0d8b5f410d2107, type: 3}
+      Name: Cloris
+    - message: If you manage to find anything come and tell me all about it!
       arguments: []
       avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
-      Name: Cloris
-    - message: If you could scatter 50 Flowers at the same time I believe even our
-        campfire would be pleased
-      arguments: []
-      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
       Name: Cloris
     afterEvent:
       m_PersistentCalls:
@@ -40486,30 +40579,22 @@ MonoBehaviour:
     - message: Music really is one of the best ways to express yourself, don't you
         think so darling?
       arguments: []
-      avatar: {fileID: 21300000, guid: a4500c866e2ed6c4681a58e50b4187ad, type: 3}
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
       Name: Cloris
-    - message: I personally love upbeat songs! It makes me feel so energized!
+    - message: I personally love upbeat songs! When I was younger I used to play
+        rythm games all night long!
       arguments: []
       avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
       Name: Cloris
-    - message: Now that I think about it... there's was one time where I stayed up
-        all night listening to the same song on repeat...
+    - message: Oh you wanna try it? Well... I can try to recreate it, but we need
+        an upbeat song first!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    - message: If you could show me a maxed out <style="LYellow">Resonance</style>
+        ability it should be enough to get me inspired! <i>fu fu
       arguments: []
       avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
-      Name: Cloris
-    - message: And when it became 6AM and the sun started rising the music got super
-        energetic!
-      arguments: []
-      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
-      Name: Cloris
-    - message: I'm almost sure that happened but I could've been going crazy from
-        listening to it so much <i>fu fu
-      arguments: []
-      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
-      Name: Cloris
-    - message: Anyways why don't you try it yourself darling?
-      arguments: []
-      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
       Name: Cloris
     afterEvent:
       m_PersistentCalls:
@@ -40528,7 +40613,8 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 0
   - dialogues:
-    - message: Oh I love cold places! But I always need to wear a lot of clothes...
+    - message: Oh I love cold places! I just hate that I always need to wear a lot
+        of clothes...
       arguments: []
       avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
       Name: Cloris
@@ -40538,7 +40624,7 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
       Name: Cloris
     - message: I remember reading about an animal that was so chunky it could even
-        freeze and survive without a scratch!
+        freeze and survive without a scratch! How amazing is that!
       arguments: []
       avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
       Name: Cloris
@@ -42438,6 +42524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Lava Pool
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1490679274}
   followingNode: []
@@ -42830,6 +42917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Burst Shot
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1110674064}
   followingNode:
@@ -43142,6 +43230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Bee Summoner
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode: []
   nextPaths: []
@@ -43899,6 +43988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Thorns
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 2126742689}
   - {fileID: 506442301}
@@ -45027,6 +45117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Freeze
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1523743652}
   followingNode:
@@ -48788,6 +48879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Orbits
   level: 0
+  max_level_reached: 0
   previousNode: []
   followingNode:
   - {fileID: 506442301}
@@ -51215,6 +51307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Flower Field
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 1031754548}
   followingNode: []
@@ -52228,6 +52321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: Resonance
   level: 0
+  max_level_reached: 0
   previousNode:
   - {fileID: 105750548}
   followingNode:
@@ -53306,7 +53400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00044250488, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.00010681152, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -53905,7 +53999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0005493164
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y
