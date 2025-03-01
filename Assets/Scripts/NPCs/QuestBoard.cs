@@ -5,16 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
-public class QuestBoard : NPC
-{
-    
-    [System.Serializable]
+[System.Serializable]
     public class Quest{
         public string Title;
         public Sprite Avatar;
         [TextArea] public string Description;
     }
+
+public class QuestBoard : NPC
+{
+    
+    
 
     [Header("Quests")]
     [SerializeField] public Quest[] Quests;
@@ -23,7 +24,12 @@ public class QuestBoard : NPC
     [SerializeField] GameObject QuestPanel;
     [SerializeField] Transform QuestContainer;
     [SerializeField] Transform QuestSlot;
-    private static QuestBoard Instance;
+    [SerializeField] Sprite avatar;
+    public static QuestBoard Instance;
+    public NPC Rowl;
+    public NPC Betsy;
+    public NPC Cloris;
+    public NPC Naal;
     
     private void Awake() {
         Instance = this;
@@ -42,6 +48,7 @@ public class QuestBoard : NPC
     }
     public void LoadQuests(){
        int[][] Quests = GameVariables.GetQuests();
+       if(QuestContainer == null){return;}
         foreach (Transform item in QuestContainer)
         {
             if(item.gameObject.activeSelf){
@@ -52,6 +59,7 @@ public class QuestBoard : NPC
         Array.ForEach(Quests[1], ID => SpawnSingularQuest(ID, false));
     }
     public static void ReloadQuests(){
+        
         Instance.LoadQuests();
     }
 
@@ -107,6 +115,23 @@ public class QuestBoard : NPC
         GameVariables.SetVariable("QuestBoard", n);
         Chat.Instance.EndChat();
         DequeueDialogue(0);
+    }
+
+    public static void PopUpQuest(int id){
+        PopUpQuest("NEW QUEST AVAILABLE", Instance.Quests[id].Title, Instance.Quests[id].Description);
+    }
+    public static void PopUpQuest(string hyperTitle, string title, string description){
+        if(GameVariables.GetVariable("QuestBookReady") == 1){
+            MetaMenuUI.Instance.UnlockableScreen(hyperTitle, title, description, Instance.avatar);
+        }else{
+            Debug.Log("Quest Panel not Available: Quest " + title + " not Poped Up");
+        }
+    }
+    public static void PopUpPlanetsQuest(){
+        PopUpQuest("7 NEW QUESTS AVAILABLE", "Solar System", "Help <sprite name=\"Betsy\"> Betsy remember all the planets");    
+    }
+    public static void PopUpImmolateQuest(){
+        PopUpQuest("3 NEW QUESTS AVAILABLE", "The Avatar", "Discover all types of <style=\"LYellow\">Ki</style>");    
     }
 
     

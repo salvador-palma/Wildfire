@@ -13,6 +13,8 @@ public static class Translator
     private static string csvName = "Translations"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
+
+    private static bool WriteMissingText = false;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -83,8 +85,10 @@ public static class Translator
             // Missing entry
             if(oldEntryIndex == -1 && englishIndex == -1) {  
                 
+                if(WriteMissingText){
+                    AddCsvEntry(oldWord);
+                }
                 
-                AddCsvEntry(oldWord);
                 return oldWord;
             }
 
@@ -113,7 +117,7 @@ public static class Translator
     private static void AddCsvEntry(string oldWord)
     {
         
-
+        if(WriteMissingText == false) return;
 
         string filePath = Path.Combine(Application.dataPath, "Resources", $"{csvName}.csv");
 

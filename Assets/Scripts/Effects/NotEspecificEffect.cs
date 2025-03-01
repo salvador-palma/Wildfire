@@ -52,14 +52,15 @@ public class FlameCircle : NotEspecificEffect
         
     }
     public void SetSpinFalse(object sender ,EventArgs e){
-        
+        Debug.Log("Spin False");
         SetSpin(false);
     }
     public void SetSpinTrue(object sender ,EventArgs e){
-        
+        Debug.Log("Spin True");
         SetSpin(true);
     }
     public void SetSpin(bool b){
+        Debug.Log("Spin Inside " + b);
         SpinnerInstance.canSpin = b;
         if(PlanetType==3){
             SpinnerInstance.GetComponent<Animator>().enabled=b;
@@ -68,7 +69,7 @@ public class FlameCircle : NotEspecificEffect
 
     }
     public void UpdateAmount(){
-        if(amount >= 4 && !Character.Instance.isACharacter()){EnemySpawner.Instance.Paused = true;}
+         
         if(PlanetType==4){
             Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter "+amount)).GetComponent<Spinner>();
             SpinnerInstance.kill();
@@ -132,36 +133,32 @@ public class FlameCircle : NotEspecificEffect
         
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("OrbitalAmount");
+            
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(41,"Betsy",14);
         }  
           
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(amount >= 4f && !Character.Instance.isACharacter()){
-            StartSelectScreen();
-            maxed=true;
-        }
-    }
+   
     public void StartSelectScreen(){
-        EnemySpawner.Instance.Paused = true;
-        planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
+        // EnemySpawner.Instance.Paused = true;
+        // planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
         
     }
     public void TransformIntoCharacter(int n){
-        SetSpin(true);
-        planetsPanel.GetComponent<Animator>().Play("ExitOptions");
-        PlanetType = n;
-        switch(n){
-            case 0: Character.Instance.SetupCharacter("OrbitalMercury"); break;
-            case 1: Character.Instance.SetupCharacter("OrbitalVenus"); break;
-            case 2: Character.Instance.SetupCharacter("OrbitalEarth"); break;
-            case 3: Character.Instance.SetupCharacter("OrbitalMars"); break;
-            case 4: Character.Instance.SetupCharacter("OrbitalJupiter"); break;
-            case 5: Character.Instance.SetupCharacter("OrbitalSaturn"); break;
-            case 6: Character.Instance.SetupCharacter("OrbitalUranus"); break;
-            case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
-        }
+        // SetSpin(true);
+        // planetsPanel.GetComponent<Animator>().Play("ExitOptions");
+        // PlanetType = n;
+        // switch(n){
+        //     case 0: Character.Instance.SetupCharacter("OrbitalMercury"); break;
+        //     case 1: Character.Instance.SetupCharacter("OrbitalVenus"); break;
+        //     case 2: Character.Instance.SetupCharacter("OrbitalEarth"); break;
+        //     case 3: Character.Instance.SetupCharacter("OrbitalMars"); break;
+        //     case 4: Character.Instance.SetupCharacter("OrbitalJupiter"); break;
+        //     case 5: Character.Instance.SetupCharacter("OrbitalSaturn"); break;
+        //     case 6: Character.Instance.SetupCharacter("OrbitalUranus"); break;
+        //     case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
+        // }
         
         
     }

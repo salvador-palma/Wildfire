@@ -163,12 +163,13 @@ public class MetaMenuUI : MonoBehaviour
     public void GoCasino(){
         SceneManager.LoadScene("Casino");
     }
-
-    public void UnlockableScreen(string title, string name, string description, int iconID){
-        UnlockableScreen(title, name, description, Unlockables[iconID]);
+    private UnityAction afterUnlock;
+    public void UnlockableScreen(string title, string name, string description, int iconID, UnityAction afterUnlock=null){
+        
+        UnlockableScreen(title, name, description, Unlockables[iconID], afterUnlock);
     }
-    public void UnlockableScreen(string title, string name, string description, Sprite icon){
-
+    public void UnlockableScreen(string title, string name, string description, Sprite icon, UnityAction afterUnlock=null){
+        this.afterUnlock = afterUnlock;
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 0);
         AudioManager.PlayOneShot(FMODEvents.Instance.UnlockedEffect, transform.position);
         UnlockableTexts[0].SetText(title);
@@ -182,6 +183,10 @@ public class MetaMenuUI : MonoBehaviour
     public void UnlockOff(){
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 1);
         UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
+        Invoke("AfterUnlock", 1f);
+    }
+    public void AfterUnlock(){
+        afterUnlock?.Invoke();
     }
 
 

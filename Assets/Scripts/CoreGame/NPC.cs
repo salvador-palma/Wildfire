@@ -87,6 +87,26 @@ public class NPC : MonoBehaviour
         return savedData.data.Any(e => e.name == Name && e.saved_dialogues.Length > 0);
     }
 
+    //MERGE BOTH FUNCTIONS INTO ONE/HALF
+    public static void QueueDialogue(string NPCName, int ID){
+        CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == NPCName);
+        if(own_dialogues == null){
+            
+            own_dialogues = new CharacterSavedDialogues{name = NPCName,saved_dialogues = new int[1]{ID}};
+            savedData.data.Add(own_dialogues);
+        }else{
+
+            if(!own_dialogues.saved_dialogues.Contains(ID)){
+                savedData.data.Find(i=> i.name == NPCName).Queue(ID);
+                
+            }
+           
+                
+        }
+        Debug.Log("Queueing");
+        WritingData();
+        
+    }
     public void QueueDialogue(int ID){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
         if(own_dialogues == null){
@@ -141,6 +161,9 @@ public class NPC : MonoBehaviour
             DefaultClickBehaviour.Invoke();
         }
     }
+    public virtual void DefaultBehaviour(){
+        DefaultClickBehaviour.Invoke();
+    }
     protected virtual bool hasPingNotification(){
         return false;
     }
@@ -181,14 +204,29 @@ public class NPC : MonoBehaviour
         GetComponent<Animator>().SetBool("NPCHovering", check);
     }
     
+
     public void UnlockQuest(int n){
+
         GameVariables.UnlockQuest(n);
+
+        PopUpQuestNotification(n);
+
         QuestBoard.ReloadQuests();
     }
     public void CompleteQuest(int n){
         GameVariables.CompleteQuest(n);
         QuestBoard.ReloadQuests();
     }
+    
+    
+    public void PopUpQuestNotification(int n){
+        int[] planetException = new int[]{36,37,38,39,40,42,43};
+        int[] immolateException = new int[]{32,33,34,35};  
+        if(!(planetException.Contains(n)||immolateException.Contains(n))){
+            QuestBoard.PopUpQuest(n);    
+        } 
+    }
+    
     
    
 }
@@ -269,24 +307,39 @@ public class GameVariables{
                 SetVariable("QuestBookReady", 0);
             }
         }
+        
 
         QuestBoard.ReloadQuests();
         
     }
-    public static void CompleteQuest(int id){
+    
+    public static bool CompleteQuest(int id){
         Debug.Log("Quest Completed: " + id);
         int[][] Quests = GetQuests();
         if(Quests[1].Contains(id)){
             Debug.Log("Quest was already Completed: " + id);
+            return false;
         }else{
             getInstance().variableList.OnGoingQuests =  Quests[0].Where(x => x != id).ToArray();
             getInstance().variableList.CompletedQuests = getInstance().variableList.CompletedQuests.Append(id).ToArray();
+
             getInstance().WritingData();
+            
         }
 
         QuestBoard.ReloadQuests();
+        return true;
 
 
+    }
+    public static bool hasQuestCompleted(int id){
+        return getInstance().variableList.CompletedQuests.Contains(id);
+    }
+    public static bool hasQuest(int id){
+        return getInstance().variableList.OnGoingQuests.Contains(id);
+    }
+    public static bool hasQuestAssigned(int id){
+        return hasQuest(id) || hasQuestCompleted(id);
     }
     public static int[][] GetQuests(){
         GameVariables gv = getInstance();

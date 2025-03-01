@@ -411,15 +411,13 @@ public class Flamey : MonoBehaviour
         if(BulletSpeed == 20f){
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BltSpeed");
+            
+            if(allEffects.Find(x => x.getText() == "Orbits") != null){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(36,"Betsy",15);
+            }
         }
     }
-    public void multBulletSpeed(float amount){
-        BulletSpeed = Math.Min(BulletSpeed * amount, 20f);
-        if(BulletSpeed == 20f){
-            Deck deck = Deck.Instance;
-            deck.removeClassFromDeck("BltSpeed");
-        }
-    }
+
     public void multAccuracy(float amount){
         accuracy = Math.Min(accuracy * amount, 100f);
         if(accuracy >= 100f){

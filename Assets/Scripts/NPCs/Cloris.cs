@@ -5,16 +5,7 @@ using UnityEngine;
 public class Cloris : NPC
 {
     
-    protected override void CharacterLoad()
-    {
-        if(GameVariables.GetVariable("ClorisWardrobe") == 0){
-            GameVariables.SetVariable("ClorisWardrobe",1);
-            CompleteQuest(6);
-            QueueDialogue(3);
-        }
-      
-
-    }
+    
     public override void ClickedCharacter(){
 
         if(GameVariables.GetVariable("ClorisPresentation")==-1){

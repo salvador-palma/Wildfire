@@ -66,6 +66,7 @@ public class Character : MonoBehaviour
     public void SetupCharacter(string abilty_name){
         SetupCharacter(characterDatas.Where(e => e.AbilityName == abilty_name).First());
     }
+    
     public void SetupCharacter(CharacterData type){
         if(type == null){
             throw new ArgumentNullException("Type cannot be null");
@@ -586,20 +587,39 @@ public class Character : MonoBehaviour
 
         return character_name==null ? characterDatas[active].Unlocked : characterDatas.First(c=>c.Name==character_name).Unlocked;
     }
-    public void Unlock(string character_name = null){
-        if(character_name==null){
-            characterDatas[active].Unlocked = true;
-        }else{
-            characterDatas.First(c=>c.Name==character_name).Unlocked = true;
-        }
-        if(GameVariables.GetVariable("ClorisWardrobe") == -1){
-            GameVariables.SetVariable("ClorisWardrobe", 0);
-            
-
-        }
+    public void Unlock(string character_name){
+        
+        if(!characterDatas.Any(c=>c.Name==character_name)){Debug.LogError("Character " + character_name + " not found"); return;}
+        
+        CharacterUnlockPopUp(characterDatas.First(c=>c.Name==character_name));
+        characterDatas.First(c=>c.Name==character_name).Unlocked = true;
+        
         WritingData();
+
+        //TEMPORARY CLORIS WARDROBE UNLOCK
+        if(GameVariables.GetVariable("ClorisWardrobe")==-1){
+            QuestBoard.Instance.Cloris.QueueDialogue(9);
+            GameVariables.SetVariable("ClorisWardrobe",1);
+        }
+
+        
     }
-    
+
+    private void CharacterUnlockPopUp(CharacterData characterData)
+    {
+        UnityAction postAction = null;
+        if(characterData.Name == "Saturn"){
+            postAction = () => QuestBoard.PopUpPlanetsQuest();
+            Debug.Log("Assigned");
+        }
+        string[] immolateCharacters = new string[]{"Fire Monk", "Water Monk", "Air Monk", "Earth Monk"};
+        if(immolateCharacters.Contains(characterData.Name) && !immolateCharacters.Any(c => characterDatas.First(d => d.Name == c).Unlocked)){
+            postAction = () => QuestBoard.PopUpImmolateQuest();
+        }
+        
+        MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction);
+    }
+
     public void SyncSkillTreeManagerToCharacterSelect(){
         int i=0;
         foreach (CharacterData character in characterDatas)

@@ -117,6 +117,10 @@ public class SkillTreeManager : MonoBehaviour
             skill.level++;
             skill.max_level_reached = Math.Max(skill.max_level_reached, skill.level);
 
+            if(skill.level==2){
+                CheckForQuestDialogue(getAbility(skill_name));
+            }
+
             CheckForConstelationUnlock();
             WritingData();
 
@@ -124,6 +128,16 @@ public class SkillTreeManager : MonoBehaviour
         }
         return false;
     }
+
+    private void CheckForQuestDialogue(Ability ability){
+        if(ability.QuestID != -1 && !GameVariables.hasQuestAssigned(ability.QuestID)){
+            NPC npc = ability.npc;
+            if(npc != null){
+                npc.StartDialogue(ability.DialogueID);
+            }
+        } 
+    }
+
     public void BanSkill(){
 
         SkillTreeButton ability = SkillTreeButton.SelectedButton;
@@ -355,7 +369,7 @@ public class SkillTreeManager : MonoBehaviour
     public void CheckForConstelationUnlock(){
         bool result = PlayerData.skills.All(e => e.level >= 0);
         int save = GameVariables.GetVariable("ConstelationCutScene");
-        if(save == -1 && result){
+        if(result){
             GameVariables.SetVariable("ConstelationCutScene", 1);
             StartSkillTreeCutscene(true);
         }

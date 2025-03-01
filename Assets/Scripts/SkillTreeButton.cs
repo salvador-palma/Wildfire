@@ -98,6 +98,7 @@ public class SkillTreeButton : MonoBehaviour
             ReloadColor();
             ReloadFunctionality();
             if(level==0){StartCoroutine("NextPathCouroutine");}
+            
         }
         SkillTreeManager.Instance.DisplaySkill(AbilityName, level);
     }

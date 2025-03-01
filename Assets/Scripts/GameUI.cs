@@ -72,6 +72,7 @@ public class GameUI : MonoBehaviour
     [Header("Character Pop Up")]
     [SerializeField] TextMeshProUGUI CharacterNameDescriptionTxt;
     [SerializeField] GameObject CharacterImage;
+    [SerializeField] GameObject CornerPopUpAnim;
     
     [Header("Spawnable UI")]
     public GameObject AbilityOptionContainer;
@@ -357,6 +358,8 @@ public class GameUI : MonoBehaviour
         EmberAmountTxt.text = n.ToString();
     }
 
+
+
     /* ===== CHARACTERS ===== */
     
     public void playCharacterTransition(){
@@ -370,7 +373,7 @@ public class GameUI : MonoBehaviour
             EnemySpawner.Instance.Paused = false;
             EnemySpawner.Instance.newRound();
         }else{
-            Character.Instance.Unlock();
+            //Character.Instance.Unlock();
             FillCharacterPopUpInfo();
             GetComponent<Animator>().Play("CharacterUnlockedPopUp");
         }
@@ -389,6 +392,26 @@ public class GameUI : MonoBehaviour
     }
     public void UpdateProfileCharacter(){
         Character.Instance.TransformVesselToCharacter(ProfileVessel);
+    }
+
+
+    public void CornerPopUp(string title, string description, Sprite icon){
+        CornerPopUpAnim.transform.GetChild(1).GetComponent<DynamicText>().SetText(title);
+        CornerPopUpAnim.transform.GetChild(2).GetComponent<DynamicText>().SetText(description);
+        CornerPopUpAnim.transform.GetChild(3).GetComponent<Image>().sprite = icon;
+        CornerPopUpAnim.GetComponent<Animator>().Play("CornerPopUp");
+
+    }
+    public void CompleteQuestIfHasAndQueueDialogue(int questID, string npcname, int dialogueID){
+        if(GameVariables.hasQuest(questID)){
+            GameVariables.CompleteQuest(questID);
+            NPC.QueueDialogue(npcname, dialogueID);
+            Quest q = QuestBoard.Instance.Quests[questID]; 
+            CornerPopUp("Quest Complete", q.Title, q.Avatar);
+        }
+
+        
+        
     }
 
 

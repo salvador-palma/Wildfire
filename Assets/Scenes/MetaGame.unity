@@ -5961,6 +5961,7 @@ RectTransform:
   - {fileID: 1529147456}
   - {fileID: 1825620072}
   - {fileID: 1508483497}
+  - {fileID: 1058451097}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11746,7 +11747,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520883187}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -16637,8 +16638,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Allows you to see what enemy will come out next so you can be prepared.
-    To use them just open the Bestiary tab in-game
+  m_text: Reach 6AM without getting below 50% Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
@@ -23432,6 +23432,11 @@ MonoBehaviour:
   QuestPanel: {fileID: 6459220652302978433}
   QuestContainer: {fileID: 6749891280300223469}
   QuestSlot: {fileID: 1826153679}
+  avatar: {fileID: 21300000, guid: 1630a39cb1bb3d6458a2dc78225ad958, type: 3}
+  Rowl: {fileID: 1206136743}
+  Betsy: {fileID: 1457361219}
+  Cloris: {fileID: 1653547898}
+  Naal: {fileID: 585525776}
 --- !u!1 &978405520
 GameObject:
   m_ObjectHideFlags: 0
@@ -25438,6 +25443,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055811247}
   m_CullTransparentMesh: 1
+--- !u!1 &1058451096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058451097}
+  m_Layer: 5
+  m_Name: Pop-Up
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1058451097
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058451096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 275411193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1066810512
 GameObject:
   m_ObjectHideFlags: 0
@@ -34539,7 +34579,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    dequeueAuto: 0
+    dequeueAuto: 1
   - dialogues:
     - message: Oh! All this regeneration power makes me recall the old Legendary
         Bird
@@ -34580,7 +34620,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    dequeueAuto: 0
+    dequeueAuto: 1
   - dialogues:
     - message: So you are also a fan of astronomy eh kid?
       arguments: []
@@ -34625,9 +34665,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    dequeueAuto: 0
+    dequeueAuto: 1
   - dialogues:
-    - message: I knew it! The ringed planet was Saturn after all!
+    - message: I got it! The ringed planet was <style="LYellow">Saturn</style> after
+        all!
       arguments: []
       avatar: {fileID: 21300000, guid: 1abaeffa6034fc34a948eec16cd6e707, type: 3}
       Name: Betsy
@@ -34641,39 +34682,40 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
       Name: Betsy
-    - message: First there was the Swift Planet, that would orbit very fast around
-        the Sun...
+    - message: First there was the <style="LYellow">Swift Planet</style>, that would
+        orbit very fast around the Sun...
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
-    - message: Second, the Morning Star was a planet that would radiate a lot of
-        energy. Astronauts would melt even before reaching the surface!
+    - message: Second, the <style="LYellow">Morning Star</style> was a planet that
+        would radiate a lot of energy. Astronauts would melt even before reaching
+        the surface!
       arguments: []
       avatar: {fileID: 21300000, guid: 54f254d865c29f54585ba784222cc959, type: 3}
       Name: Betsy
-    - message: The Blue Marble was a fascinating planet in the sense that it had
-        the perfect conditions to support life...
+    - message: The <style="LYellow">Blue Marble</style> was a fascinating planet
+        in the sense that it had the perfect conditions to support life...
       arguments: []
       avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
       Name: Betsy
-    - message: Due to its agressive colors, the Red Planet would represent the rage
-        and will to live of the ones about to perish... in the ancient mythology
-        of course...
+    - message: Due to its agressive colors, the <style="LYellow">Red Planet</style>
+        would represent the rage and will to live of the ones about to perish...
+        in the ancient mythology of course...
       arguments: []
       avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
       Name: Betsy
-    - message: The Gas Giant was the biggest planet I ever saw! Even if something
-        collided against it I bet it wouldn't even flinch!
+    - message: The <style="LYellow">Gas Giant</style> was the biggest planet I ever
+        saw! Even if something collided against it I bet it wouldn't even flinch!
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
-    - message: The Sideways Planet had a very weird looking orbit... almost like
-        it used it to defend from invaders...
+    - message: The <style="LYellow">Sideways Planet</style> had a very weird looking
+        orbit... almost like it used it to defend from invaders...
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: Betsy
-    - message: And lastly, the Ice Giant! I heard astronauts would freeze just by
-        approaching it!
+    - message: And lastly, the <style="LYellow">Ice Giant!</style> I heard astronauts
+        would freeze just by approaching it!
       arguments: []
       avatar: {fileID: 21300000, guid: 54f254d865c29f54585ba784222cc959, type: 3}
       Name: Betsy
@@ -34685,7 +34727,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
       Name: Betsy
-    - message: Well ok, you see that Quest Board over there?
+    - message: Well ok, you see that <style="LYellow">Quest Board</style> over there?
       arguments: []
       avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
       Name: Betsy
@@ -34781,7 +34823,281 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    dequeueAuto: 0
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 43
+            m_FloatArgument: 0
+            m_StringArgument: Saturn
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Oh! I remember now! The <style="LYellow">Swift Planet</style> was
+        <style="LYellow">Mercury!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    - message: It's the closest planet to the Sun so it orbits pretty fast
+      arguments: []
+      avatar: {fileID: 21300000, guid: 236e45fc18fce414d82240d0a09d2de1, type: 3}
+      Name: Betsy
+    - message: According to my calculations... <style="LYellow">exactly x1.5</style>
+        as fast
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
+      Name: Betsy
+    - message: Well tell me if you find anything else kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Mercury
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Hey kid! Just remembered what that <style="LYellow">Morning Star</style>
+        planet was all about!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: Turns out it was <style="LYellow">Venus</style> all this time!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1abaeffa6034fc34a948eec16cd6e707, type: 3}
+      Name: Betsy
+    - message: This planet has an atmosphere so hot that can penetrate through any
+        <style="Grey">Armor
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: Good thing I remembered! If you find anything else just come by kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Venus
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Turns out that the <style="LYellow">Blue Marble</style> planet was
+        actually <style="LYellow">Earth!
+      arguments: []
+      avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
+      Name: Betsy
+    - message: The <style="LYellow">Earth</style> is a fascinating planet in the
+        sense that, with the help of the <style="LYellow">Moon</style>, it achieved
+        perfect conditions for life
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1abaeffa6034fc34a948eec16cd6e707, type: 3}
+      Name: Betsy
+    - message: The <style="LYellow">Moon</style> was a body that orbited <style="LYellow">Earth</style>,
+        creating a lot of essential cycles in nature, such as tides and climate
+      arguments: []
+      avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
+      Name: Betsy
+    - message: And although there was nothing much to do there, animals from <style="LYellow">Earth</style>
+        were fascinated about <style="Pink">landing</style> on it
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: Weeeell! That's it for today! If you find anything I might start remembering
+        more stuff
+      arguments: []
+      avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Earth
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: 'Ahhhh! It was <style="LYellow">Mars!</style> The <style="LYellow">Red
+        Planet</style> was <style="LYellow">Mars!</style> '
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    - message: This planet was a symbol of war to give soldiers a last burst of strength
+        when their lifes were about to perish
+      arguments: []
+      avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
+      Name: Betsy
+    - message: Now that I think about it, it's a bit contradictory isn't it kid?
+        The closer you were to dying the stronger you became, uh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
+      Name: Betsy
+    - message: Oh well, I'm too tired to think about this now! If you catch anything
+        else just come by kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Mars
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Oh now I remember! The <style="LYellow">Gas Giant</style> was no other
+        than  <style="LYellow">Jupiter!</style>
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: It's the biggest planet the Solar System has ever seen! Even the <style="LYellow">orbiting</style>
+        bodies are enormous!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: Remembering stuff from your childhood sure is nice... one day you'll
+        understand what this old sheep is saying kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3c4e89885fa4b7142815fadc36ce474d, type: 3}
+      Name: Betsy
+    - message: Anyways, if I remember anything else I'll call you here
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jupiter
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Kid come here! I just remembered something amazing!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: The <style="LYellow">Sideways Planet</style> was called <style="LYellow">Uranus!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
+      Name: Betsy
+    - message: It had that nickname because its rotational axis was so inclined it
+        seemed as if the planet was spinning horizontally!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3c4e89885fa4b7142815fadc36ce474d, type: 3}
+      Name: Betsy
+    - message: This also affected the way bodies <style="LYellow">orbit</style> around
+        it, which makes it a bit weird when compared to other planets
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
+      Name: Betsy
+    - message: Well, that's it for now. if I remember anything else I'll make sure
+        to tell you kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Uranus
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: The <style="LYellow">Ice Giant!</style> I got it! It's <style="LYellow">Neptune!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: It's surface is so cold that it's nearly impossible to reach it's
+        surface!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: Some probes would even get stuck in place due to the cold! Almost
+        as if they got <style="Blue">stunned
+      arguments: []
+      avatar: {fileID: 21300000, guid: 54f254d865c29f54585ba784222cc959, type: 3}
+      Name: Betsy
+    - message: For now that's all I can remember kid! If something else comes to
+        mind I'll be sure to tell you
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Neptune
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -40649,6 +40965,59 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+  - dialogues:
+    - message: Wait darling! I see that you just started figuring out new styles!
+        Or "characters" as you sait it...
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: You know that I do love me some fashion! So I want to help wherever
+        I can!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: Right now you don't have a lot of styles but when they start increasing
+        you will see that it's hard to keep track of everything!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    - message: Since I'm used to this life I will give you a hand darling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: Whenever you feel inspired to change up your outfit, just come and
+        chat!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: Cloris, Assembly-CSharp
+          m_MethodName: UnlockCharacterSelect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: DefaultBehaviour
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Cloris
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -45579,7 +45948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BINOCULARS
+  m_text: THE LEGEND OF THE IMMORTAL BIRD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7590cb09aeaaf974a8cf6516a2d6b7fa, type: 2}
   m_sharedMaterial: {fileID: -1954352749917620892, guid: 7590cb09aeaaf974a8cf6516a2d6b7fa, type: 2}
@@ -46897,7 +47266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UNLOCKED
+  m_text: NEW QUEST
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7590cb09aeaaf974a8cf6516a2d6b7fa, type: 2}
   m_sharedMaterial: {fileID: -1954352749917620892, guid: 7590cb09aeaaf974a8cf6516a2d6b7fa, type: 2}
@@ -53400,7 +53769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00010681152, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00022888184, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -53999,7 +54368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.000091552734
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

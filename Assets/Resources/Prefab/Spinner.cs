@@ -11,6 +11,7 @@ public class Spinner : MonoBehaviour
     public GameObject[] Spinners;
     
     public bool canSpin;
+    public float startingScale;
     protected virtual void Start() {
         
         speed = Flamey.Instance.BulletSpeed;
@@ -24,12 +25,25 @@ public class Spinner : MonoBehaviour
         Deck.RoundOver += SpinToggle;
         Deck.RoundStart += SpinTogglefalse;
        
-        
+        startingScale = transform.GetChild(0).localScale.x;
+        float perc = 1.5f * Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002105f, 0, 1f);
+        float percTrail = .55f * Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002105f, 0, 1f);
+        foreach(Transform child in transform){
+            child.localScale = new Vector3(startingScale*(1+perc),startingScale*(1+perc),startingScale*(1+perc));
+            child.GetComponent<TrailRenderer>().startWidth = 0.25f + percTrail;
+        }
     }
 
     private void SpinTogglefalse(object sender, EventArgs e)
     {
+        float perc = 1.5f * Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002105f, 0, 1f);
+        float percTrail = .55f * Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002105f, 0, 1f);
+        foreach(Transform child in transform){
+            child.localScale = new Vector3(startingScale*(1+perc),startingScale*(1+perc),startingScale*(1+perc));
+            child.GetComponent<TrailRenderer>().startWidth = 0.25f + percTrail;
+        }
         canSpin = true;
+        
     }
 
     private void SpinToggle(object sender, EventArgs e)
