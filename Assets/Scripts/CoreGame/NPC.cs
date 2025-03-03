@@ -225,6 +225,9 @@ public class NPC : MonoBehaviour
         if(!(planetException.Contains(n)||immolateException.Contains(n))){
             QuestBoard.PopUpQuest(n);    
         } 
+        else if(n==32){
+            QuestBoard.PopUpImmolateQuest();
+        }
     }
     
     

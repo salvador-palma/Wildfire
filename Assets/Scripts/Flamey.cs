@@ -298,6 +298,12 @@ public class Flamey : MonoBehaviour
         if(onhitted){ApplyOnHitted(attacker);}
         if(Unhittable){return;}
 
+        //ACHIEVMENT/QUEST
+        EnemySpawner.Instance.RoundsWithoutDamage = 0;
+        //===================
+
+
+        //CHARACTER SPECIFIC
         if(Character.Instance.isCharacter("Burst") && BurstShot.Instance != null){
             BurstShot.Instance.Burst();
         }
@@ -307,11 +313,11 @@ public class Flamey : MonoBehaviour
                 Dmg = (int)Math.Max(Dmg*0.1f, -4.5f * (CritUnlock.Instance.mult -5) + Dmg);
             }
         }
+        //===================
+
 
         int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
         TotalDamageTaken+=(ulong)dmgeff;
-
-        
 
         float shieldDamage = Shield - dmgeff;
         

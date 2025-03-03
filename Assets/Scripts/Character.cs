@@ -612,10 +612,8 @@ public class Character : MonoBehaviour
             postAction = () => QuestBoard.PopUpPlanetsQuest();
             Debug.Log("Assigned");
         }
-        string[] immolateCharacters = new string[]{"Fire Monk", "Water Monk", "Air Monk", "Earth Monk"};
-        if(immolateCharacters.Contains(characterData.Name) && !immolateCharacters.Any(c => characterDatas.First(d => d.Name == c).Unlocked)){
-            postAction = () => QuestBoard.PopUpImmolateQuest();
-        }
+        
+        
         
         MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction);
     }

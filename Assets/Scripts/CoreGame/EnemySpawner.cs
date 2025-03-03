@@ -109,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if(skill.type=="Ember Generation" || skill.type=="Gambling"){continue;}
                 
-            DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
+            //DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
             if(skill.ban){
                 DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
             }else if(skill.pick){
@@ -134,11 +134,15 @@ public class EnemySpawner : MonoBehaviour
             
             if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
 
-                if(current_round==59){GameUI.Instance.ShowLimitRoundPanel();}
+                if(current_round==59){//6 AM
+                    GameUI.Instance.ShowLimitRoundPanel();
+                    SIXAM();
+                }
                 else{
                     isOnAugments = true;
                     Deck.Instance.StartAugments((current_round+1)%5 == 0);
                 }
+                LogNewRound();
                 Flamey.Instance.poisonsLeft = 0;
             } 
             return;
@@ -156,6 +160,14 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+
+    private void SIXAM()
+    {
+        if(FlameCircle.Instance != null){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(38,"Betsy",17); //EARTH UNLOCK
+        }
+    }
+
     public void UpdateEnemies(){
         PresentEnemies.ForEach(e => {if(e!=null && !e.Attacking){e.UpdateEnemy(); e.ApplySlowUpdate();}});
         List<Enemy> deadEnemies = PresentEnemies.Where(e => e==null || e.Health <= 0).ToList();
@@ -375,5 +387,27 @@ public class EnemySpawner : MonoBehaviour
 
 
     }
+
+
+
+    // ===== ROUNDS BASED ACHIEVEMENTS/QUESTS ===== //
+    public int RoundsWithoutDamage = 0;
+    public int RoundsBelow25PercMaxHP = 0;
+    private void LogNewRound(){
+        //MARS
+        RoundsWithoutDamage++;
+
+        if(RoundsWithoutDamage >= 30 && FlameCircle.Instance != null){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42,"Betsy",20); //URANUS UNLOCK
+        }
+
+        if(Flamey.Instance.Health <= Flamey.Instance.MaxHealth/4f){
+            RoundsBelow25PercMaxHP++;
+            if(RoundsBelow25PercMaxHP >= 10 && FlameCircle.Instance != null){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(39,"Betsy",18); //MARS UNLOCK
+            }
+        }else{RoundsBelow25PercMaxHP=0;}
+    }
+
     
 }

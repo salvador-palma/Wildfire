@@ -20,6 +20,8 @@ public class FlameCircle : NotEspecificEffect
     GameObject planetsPanelPrefab;
     GameObject planetsPanel;
     public int PlanetType = -1;
+
+    
     
     public FlameCircle(int amount, int damage){
        
@@ -62,23 +64,20 @@ public class FlameCircle : NotEspecificEffect
     public void SetSpin(bool b){
         Debug.Log("Spin Inside " + b);
         SpinnerInstance.canSpin = b;
-        if(PlanetType==3){
+        if(PlanetType==6){
             SpinnerInstance.GetComponent<Animator>().enabled=b;
 
         }
+        OrbitalHit.multiplier = 1;
 
     }
     public void UpdateAmount(){
          
-        if(PlanetType==4){
-            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Jupiter "+amount)).GetComponent<Spinner>();
-            SpinnerInstance.kill();
-            SpinnerInstance = next;
-        }else{
-            Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
-            SpinnerInstance.kill();
-            SpinnerInstance = next;
-        }
+        
+        Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
+        SpinnerInstance.kill();
+        SpinnerInstance = next;
+        
         
             
         
@@ -169,17 +168,14 @@ public class FlameCircle : NotEspecificEffect
             case 0:Spinner.multiplier *= 1.5f; break;
             case 1:break;
             case 2:Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Earth")).GetComponent<Spinner>();break;
-            case 3:SpinnerInstance.GetComponent<Animator>().enabled=true;break;
+            case 3:break;
             case 4:
                 UpdateAmount();
             break;
             case 5:
                 Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle Saturn")).GetComponent<Spinner>();break;
             case 6:
-                amount = 4;
-                UpdateAmount();
-                SpinnerInstance.canSpin=true;
-                Deck.Instance.removeClassFromDeck("OrbitalAmount");
+                SpinnerInstance.GetComponent<Animator>().enabled=true;
             break;
             case 7: Spinner.multiplier *= .25f;break;
         }

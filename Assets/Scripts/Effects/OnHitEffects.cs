@@ -153,12 +153,33 @@ public class IceOnHit : OnHitEffects
             en.SlowDown(duration/1000f, perc, "IceHit");
 
             if(en?.Health > dmg && perc>0 && en?.SlowSet > 0){
-                Debug.Log("Sound");
+                
                 AudioManager.PlayOneShot(FMODEvents.Instance.IceProc, Vector2.zero);
             }
+
+            //NEPTUNE ACHIEVMENT
+            if(perc >= .5f && FlameCircle.Instance != null ){
+                if(Timer == -1){
+                    Timer = Time.time;
+                }else if(Time.time - Timer <= 1f){
+                    frozenEnemies++;
+                   
+                    if(frozenEnemies>=20){
+                        GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(43,"Betsy",21);
+                    }
+                }else{
+                    Timer = Time.time;
+                    frozenEnemies = 0;
+                }
+            }
+
+            
             
         }
     }
+    //QUEST NEPTUNE
+    private int frozenEnemies;
+    private float Timer = -1f;
     public void Stack(IceOnHit iceOnHit){
         duration += iceOnHit.duration;
         prob += iceOnHit.prob;

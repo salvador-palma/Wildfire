@@ -14293,22 +14293,22 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
       Name: Naal
     - message: <size=80%>a more aggressive user... will have its Ki represented by
-        Fire...
+        <style="LYellow">Fire...
       arguments: []
       avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
       Name: Naal
-    - message: <size=80%>a user that prioritizes defense... will cast its Ki in Earth
+    - message: <size=80%>a user that prioritizes defense... will cast its Ki in <style="LYellow">Earth</style>
         form
       arguments: []
       avatar: {fileID: 21300000, guid: d6bb4ca9a394b60429c0a281e1711f89, type: 3}
       Name: Naal
     - message: <size=80%>one that uses it for healing purposes... will dominate the
-        power of Water...
+        power of <style="LYellow">Water...
       arguments: []
       avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
       Name: Naal
     - message: <size=80%>and lastly... a master that uses its Ki to control others...
-        will gain afinity with the Air element...
+        will gain afinity with the <style="LYellow">Air</style> element...
       arguments: []
       avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
       Name: Naal
@@ -14368,7 +14368,204 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    dequeueAuto: 0
+    dequeueAuto: 1
+  - dialogues:
+    - message: <size=80%>I feel... a strong aura coming from you...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: O-<size=80%>Oh... you figured out how to master the element of <style="LYellow">fire</style>?...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
+      Name: Naal
+    - message: <size=80%>right... just as I said... a more agressive Ki usage always
+        leads to <style="LYellow">fire...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>don't take this the wrong way... but... this one is the
+        easiest element to master...
+      arguments: []
+      avatar: {fileID: 21300000, guid: d6bb4ca9a394b60429c0a281e1711f89, type: 3}
+      Name: Naal
+    - message: <size=80%>being consumed by rage and anger... forcing violence until
+        things are the way one wants... even the weak can do that
+      arguments: []
+      avatar: {fileID: 21300000, guid: b2bae409516e9684e8fb6b900c65da53, type: 3}
+      Name: Naal
+    - message: <size=80%>the true challenge... restraint... balance... seeing the
+        viability in other options...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%>mastering <style="LYellow">fire</style>... also includes
+        mastering the one within you...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
+      Name: Naal
+    - message: We-Well! <size=80%>that's enough chatting for now... come by when
+        you have something new...
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1986da584500ad4a90b09c6aad3155e, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Fire Monk
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: O-Oh! <size=80%>you attuned yourself to <style="LYellow">water...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>many struggle with this element... healing is not just mending
+        wounds... it's about letting go...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">water</style>... doesn't resist... it flows...
+        it yields... but in that softness... there's strength!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
+      Name: Naal
+    - message: <size=80%>healing is not waiting for the pain to be gone... it's to
+        carry it and accept it... moving forward... step by step
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%>A river doesn't avoid the stones in its path... it shapes
+        them into being one with it...
+      arguments: []
+      avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
+      Name: Naal
+    - message: Well!...<size=80%> that's really all I can say... if you find something
+        else... come by...
+      arguments: []
+      avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Water Monk
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: <size=80%>I see you've found the way of the <style="LYellow">air...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">air</style> is omnipresent... it's part
+        of the environment... part of us... and at the same time... none of those...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">air</style> is not bound by anything...
+        it moves where it wills... and in doing so... it decides how everything else
+        moves too...
+      arguments: []
+      avatar: {fileID: 21300000, guid: d6bb4ca9a394b60429c0a281e1711f89, type: 3}
+      Name: Naal
+    - message: <size=80%>it's not about overpowering... it's about positioning...
+        strategy... changing how your surroundings behave... for your own benefit...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a91959aef56ea5443bc2fc22dbc4b1e9, type: 3}
+      Name: Naal
+    - message: '<size=80%>it''s definitely an interesting way of seeing life... '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%>but well... if you find anything else just come by...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Air Monk
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: <size=80%>you finally embraced the <style="LYellow">earth</style>
+        element...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>the<style="LYellow"> earth</style> doesn't rush... it doesn't
+        chase... it endures...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: '<size=80%>no matter what happens... the earth stands still... patient
+        and unphased... '
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    - message: <size=80%>this is exactly what mastering it involves... quitting your
+        desires... letting the world come to you... while you build yourself better...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%>it can be hard in the beggining... but mountains weren't
+        made in a day either...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
+      Name: Naal
+    - message: <size=80%>hardships were meant to be experienced too... and a solid
+        character will be able to do it easily...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>anyways... if you need anything else... just come by me...
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Earth Monk
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -19570,7 +19767,10 @@ MonoBehaviour:
   - Name: Mars
     AnimationBool: OrbitalMars
     AbilityName: OrbitalMars
-    AbilityDescription: Orbits will increase and decrease in radius
+    AbilityDescription: <style="LYellow">Orbital<style="Red"> damage</style></style>
+      doubles with each consecutive kill. If it hits an enemy without killing it,
+      the <style="Red">damage</style> resets. When below <style="LYellow">25% <style="Green">Max
+      HP</style></style> the damage triples instead of doubling
     BodyBack: {fileID: 21300000, guid: 6ec11c7160582e6489220d3ddb2ddfc1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -19616,8 +19816,7 @@ MonoBehaviour:
   - Name: Uranus
     AnimationBool: OrbitalUranus
     AbilityName: OrbitalUranus
-    AbilityDescription: Start the game with <style="LYellow">4 Orbits</style> that
-      deal twice the <style="Red">Damage</style>
+    AbilityDescription: Orbits will increase and decrease in radius
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: ff7ef5240a6cf504a9a68a511c62ff0a, type: 3}
@@ -23425,7 +23624,7 @@ MonoBehaviour:
   - Title: The Ice Giant
     Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
     Description: Freeze <style="LYellow">20</style> enemies in a second using <style="LYellow">Orbital</style>
-      and <style="LYellow">Freeze</style>
+      and <style="LYellow">Freeze</style> with a slow of at least <style="LYellow">50%
   - Title: All sorts of Bees
     Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
     Description: Get an army with all types of <style="LYellow">bees
@@ -53769,7 +53968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.00022888184, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.0002746582, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -54368,7 +54567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000091552734
+      value: -0.00018310547
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

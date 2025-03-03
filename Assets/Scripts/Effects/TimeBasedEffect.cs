@@ -1,5 +1,8 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -259,6 +262,7 @@ public class Immolate : TimeBasedEffect
     private GameObject spirit;
     GameObject elementsPanel; 
     bool isCharacter;
+    public Transform optionMenu;
     public Immolate(int interval, int dmg, float radius, float percRed){
         this.dmg = dmg;
         this.interval = interval;
@@ -282,6 +286,7 @@ public class Immolate : TimeBasedEffect
             
             isCharacter = Character.Instance.isCharacter("Immolate");
 
+            optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("ImmolatePowerMenu");
 
         }else{
             Instance.Stack(this, percRed);
@@ -330,7 +335,7 @@ public class Immolate : TimeBasedEffect
         radius += immolate.radius;
         RemoveUselessAugments();
     }
-
+    bool maxed;
     void RemoveUselessAugments(){
         if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2){
             interval = 16;
@@ -346,39 +351,42 @@ public class Immolate : TimeBasedEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateRadius");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
         if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f && !Character.Instance.isACharacter()){
-            StartSelectScreen();
-            maxed = true;
+            Max();
         }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f && !Character.Instance.isACharacter()){
-            StartSelectScreen();
-            maxed = true;
-        }
-    }
-    public void StartSelectScreen(){
-        EnemySpawner.Instance.Paused = true;
-        elementsPanel = GameUI.Instance.SpawnUI(elementsPanelPrefab);
-        Transform elementContainer = elementsPanel.transform.Find("Elements");
-        elementContainer.Find("Fire").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
-        elementContainer.Find("Water").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
-        elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
-        elementContainer.Find("Air").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
-    }
-    public void TransformIntoCharacter(int n){
-
-        elementsPanel.GetComponent<Animator>().Play("ExitOptions");
-        ImmolateType = n;
-        switch(n){
-            case 0: Character.Instance.SetupCharacter("ImmolateFire"); break;
-            case 1: Character.Instance.SetupCharacter("ImmolateWater"); break;
-            case 2: Character.Instance.SetupCharacter("ImmolateEarth"); break;
-            case 3: Character.Instance.SetupCharacter("ImmolateAir"); break;
+            Max();
         }
         
     }
+
+    private void Max(){
+        if(maxed){return;}
+        maxed=true;
+        
+
+        if(GameVariables.hasQuest(14)){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(14,"Naal",6);
+        }else{
+            float[] values = GetImmolateType();
+            int max = Array.IndexOf(values, values.Max());
+            switch(max){
+                case 0:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(32,"Naal",7);
+                break;
+                case 1:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(33,"Naal",8);
+                break;
+                case 2:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(34,"Naal",9);
+                break;
+                case 3:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(35,"Naal",10);
+                break;
+            }
+        }
+    }
+
+
     public void SpawnExtraAssets(int n = -1){
         if(n != -1){ImmolateType = n;}
         isCharacter=true;
@@ -410,7 +418,81 @@ public class Immolate : TimeBasedEffect
         return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
-        return null;
+        
+        return Character.Instance.isACharacter() ? null : UpdateImmolateType();
     }
+
+    public float[] GetImmolateType(){
+
+        //DAMAGE
+        string[] FireType = new string[]{"Lava Pool", "Necromancer", "Ritual", "Magical Shot", "Critical Strike", "Thunder", "Explosion", "Laser"}; //8
+        //+1 Point for Damage
+
+        //HEALING
+        string[] WaterType = new string[]{"Vampire", "Flower Field", "Resonance", "Regeneration", "Totem"}; //5
+        //+1 Point for Health
+
+        //CONTROLLING
+        string[] AirType = new string[]{"Snow Pool", "Thunder", "Freeze", "Whirl Pool", "Gravitational Forces" , "Totem"}; //6
+        //+1 Point for Accuracy
+
+        //ARMOR
+        string[] EarthType = new string[]{"Assassin", "Thorns", "Resonance", "Orbits"}; //4
+        //+1 Point for Armor
+
+        string[][] AllTypes = new string[4][]{FireType, WaterType, AirType, EarthType};
+        float[] AccumulatedPoints = new float[4];
+       
+
+        List<Effect> allEffects = Flamey.Instance.allEffects;
+        foreach(Effect effect in allEffects){
+            for(int i = 0; i < 4; i++){
+                if(AllTypes[i].Contains(effect.getText())){
+                    AccumulatedPoints[i]++;
+                }
+            }
+        }
+
+        int points = (int)AccumulatedPoints.Sum();
+
+        float damage = (Flamey.Instance.Dmg-30)/10f;
+        float health = (Flamey.Instance.MaxHealth-250)/200f;
+        float bltSpeed = (Flamey.Instance.BulletSpeed-5)/0.8f;
+        float armor = Flamey.Instance.Armor/10f;
+
+        float baseLim = damage + health + bltSpeed + armor;
+
+        float[] stats = new float[]{damage, health, bltSpeed, armor};
+        Array.ForEach(stats, e=>e = e / baseLim);
+
+        
+
+
+        for(int i = 0; i < 4; i++){
+            AccumulatedPoints[i] += stats[i];
+            AccumulatedPoints[i] = AccumulatedPoints[i] * 25f / AllTypes[i].Length;
+        }
+
+        float percLim = AccumulatedPoints.Sum();
+
+        for(int i = 0; i < 4; i++){
+            AccumulatedPoints[i] = AccumulatedPoints[i] * 100f / percLim;
+        }
+        
+        return AccumulatedPoints;
+        
+    }
+
+    private GameObject UpdateImmolateType(){
+        if(!GameVariables.hasQuestAssigned(32)){
+            return null;
+        }
+        float[] values = GetImmolateType();
+        for(int i = 0; i<4; i++){
+            optionMenu.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = Math.Round(values[i]) + "%";
+        }
+        return optionMenu.gameObject;
+    }
+
 }
 

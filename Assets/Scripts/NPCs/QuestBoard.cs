@@ -131,7 +131,7 @@ public class QuestBoard : NPC
         PopUpQuest("7 NEW QUESTS AVAILABLE", "Solar System", "Help <sprite name=\"Betsy\"> Betsy remember all the planets");    
     }
     public static void PopUpImmolateQuest(){
-        PopUpQuest("3 NEW QUESTS AVAILABLE", "The Avatar", "Discover all types of <style=\"LYellow\">Ki</style>");    
+        PopUpQuest("4 NEW QUESTS AVAILABLE", "The Avatar", "Discover all types of <style=\"LYellow\">Ki</style>");    
     }
 
     
