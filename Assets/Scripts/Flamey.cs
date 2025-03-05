@@ -645,7 +645,10 @@ public class Flamey : MonoBehaviour
         return removed;
     }
 
-
+    [HideInInspector] public float BegginingHP;
+    [HideInInspector] public float BegginingAS;
+    [HideInInspector] public float BegginingDMG;
+    [HideInInspector] public float BegginingACC;
     void CheckBlackMarketItems(){
         
         Debug.Log("CHECKING ITEMS...");
@@ -668,7 +671,10 @@ public class Flamey : MonoBehaviour
         float[] AccValues = new float[]{15f, 15f, 20f};
         for(int i = 0; i != AccItems.Length; i++){if(Item.has(AccItems[i])){accuracy+=AccValues[i];}}
 
-   
+        BegginingHP = MaxHealth;
+        BegginingAS = atkSpeed;
+        BegginingDMG = Dmg;
+        BegginingACC = accuracy;
     }
 
     

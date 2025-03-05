@@ -132,35 +132,13 @@ public class FlameCircle : NotEspecificEffect
         
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("OrbitalAmount");
-            
+        
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(41,"Betsy",14);
         }  
           
         
     }
    
-    public void StartSelectScreen(){
-        // EnemySpawner.Instance.Paused = true;
-        // planetsPanel = GameUI.Instance.SpawnUI(planetsPanelPrefab);
-        
-    }
-    public void TransformIntoCharacter(int n){
-        // SetSpin(true);
-        // planetsPanel.GetComponent<Animator>().Play("ExitOptions");
-        // PlanetType = n;
-        // switch(n){
-        //     case 0: Character.Instance.SetupCharacter("OrbitalMercury"); break;
-        //     case 1: Character.Instance.SetupCharacter("OrbitalVenus"); break;
-        //     case 2: Character.Instance.SetupCharacter("OrbitalEarth"); break;
-        //     case 3: Character.Instance.SetupCharacter("OrbitalMars"); break;
-        //     case 4: Character.Instance.SetupCharacter("OrbitalJupiter"); break;
-        //     case 5: Character.Instance.SetupCharacter("OrbitalSaturn"); break;
-        //     case 6: Character.Instance.SetupCharacter("OrbitalUranus"); break;
-        //     case 7: Character.Instance.SetupCharacter("OrbitalNeptune"); break;
-        // }
-        
-        
-    }
     public void SpawnExtraAssets(int n){
         PlanetType = n;
         Debug.Log("SpawningExtra");

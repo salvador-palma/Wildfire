@@ -434,11 +434,10 @@ public class Immolate : TimeBasedEffect
 
         //CONTROLLING
         string[] AirType = new string[]{"Snow Pool", "Thunder", "Freeze", "Whirl Pool", "Gravitational Forces" , "Totem"}; //6
-        //+1 Point for Accuracy
 
         //ARMOR
         string[] EarthType = new string[]{"Assassin", "Thorns", "Resonance", "Orbits"}; //4
-        //+1 Point for Armor
+        //+1 Point for Armor and Health
 
         string[][] AllTypes = new string[4][]{FireType, WaterType, AirType, EarthType};
         float[] AccumulatedPoints = new float[4];
@@ -453,24 +452,26 @@ public class Immolate : TimeBasedEffect
             }
         }
 
-        int points = (int)AccumulatedPoints.Sum();
+        AccumulatedPoints[0]+=2;
 
-        float damage = (Flamey.Instance.Dmg-30)/10f;
-        float health = (Flamey.Instance.MaxHealth-250)/200f;
-        float bltSpeed = (Flamey.Instance.BulletSpeed-5)/0.8f;
+        float allSkillPoints = AccumulatedPoints.Sum();
+        float perc = allSkillPoints * 0.035f;
+
+        float damage = (Flamey.Instance.Dmg-Flamey.Instance.BegginingDMG)/10f;
+        float health = (Flamey.Instance.MaxHealth-Flamey.Instance.BegginingHP)/200f;
         float armor = Flamey.Instance.Armor/10f;
 
-        float baseLim = damage + health + bltSpeed + armor;
+        float baseLim = damage + health + armor + health;
 
-        float[] stats = new float[]{damage, health, bltSpeed, armor};
+        float[] stats = new float[]{damage, health, 0, armor + health};
         Array.ForEach(stats, e=>e = e / baseLim);
 
         
-
+        int[] extraBaseStats = new int[]{3,1,0,2};
 
         for(int i = 0; i < 4; i++){
-            AccumulatedPoints[i] += stats[i];
-            AccumulatedPoints[i] = AccumulatedPoints[i] * 25f / AllTypes[i].Length;
+            AccumulatedPoints[i] += stats[i]*perc;
+            AccumulatedPoints[i] = AccumulatedPoints[i] * 25f / (AllTypes[i].Length + extraBaseStats[i]);
         }
 
         float percLim = AccumulatedPoints.Sum();
