@@ -23498,10 +23498,11 @@ MonoBehaviour:
     Description: Listen to what Cloris has to say and style the campfire
   - Title: Impressing the Investors
     Avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
-    Description: Collect 250K Embers
+    Description: Collect <style="LYellow">250K</style> Embers
   - Title: Impressing Gyomyo
     Avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
-    Description: Make a profit of +1M Embers from a single bet in Gyomyo's Casino
+    Description: Make a profit of <style="LYellow">+100k</style> Embers from a single
+      bet in Gyomyo's Casino
   - Title: Fully Upgraded
     Avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
     Description: Unlock every skill in Rowl's Skill Tree
@@ -23575,7 +23576,7 @@ MonoBehaviour:
     Description: Reach maximum <style="LBlue">Slow Percentage
   - Title: High Risk High Reward
     Avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
-    Description: Get <style="LYellow>15 Augments</style> in a single round
+    Description: Get <style="LYellow>10 Augments</style> in a single round
   - Title: The Legend of the Immortal Bird
     Avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
     Description: Reach <style="LYellow">6AM</style> without going below <style="LYellow">50%
@@ -23628,6 +23629,9 @@ MonoBehaviour:
   - Title: All sorts of Bees
     Avatar: {fileID: 21300000, guid: 4ba72ec64a7651142bc259e48dee184d, type: 3}
     Description: Get an army with all types of <style="LYellow">bees
+  - Title: Quick Money
+    Avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+    Description: Get <style="LYellow">30k</style> from a single game
   QuestPanel: {fileID: 6459220652302978433}
   QuestContainer: {fileID: 6749891280300223469}
   QuestSlot: {fileID: 1826153679}
@@ -28365,7 +28369,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1206136743}
           m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
-          m_MethodName: ShowUnlockedUpgrade
+          m_MethodName: ShowAndUnlockUpgrade
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -28421,7 +28425,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1206136743}
           m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
-          m_MethodName: ShowUnlockedUpgrade
+          m_MethodName: ShowAndUnlockUpgrade
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -28639,6 +28643,51 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+  - dialogues:
+    - message: 'Hey come here quick! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
+      Name: 
+    - message: I'm going to be completely honest... I was kind of eavesdropping your
+        conversation with <sprite name="Gyomyo"> <style="LYellow">Mr. Fish Guy</style>
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: I know it's bad but listen! Due to that I got another idea!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: Gyomyo
+    - message: Did you ever notice how the our currency is based on fire? Is that
+        really just a coincidence?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: It must be because it originated from it right? What if we tried replicating
+        that using our own campfire?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: I got the basic idea down but as always, you need to cover the rest
+        ok?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: ShowAndUnlockUpgrade
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Rowl
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -34675,6 +34724,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     dequeueAuto: 1
   - dialogues:
     - message: Oh so you actually did it! <style="LYellow">100</style> Individuals
@@ -38807,6 +38868,21 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
       Name: Gyomyo
+    - message: Oh! And before you leave, I have something else for you
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: It's true that you were able to get 250k embers just like I told you,
+        however, you need to learn how to do it quicker than that, you know?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: If you manage to get <style="LYellow>30k</style> in a <style="LYellow>single
+        night</style> then I will teach you a thing or two about money, what do you
+        say?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
     afterEvent:
       m_PersistentCalls:
         m_Calls:
@@ -38931,13 +39007,341 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+  - dialogues:
+    - message: Hey come here!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: I saw that you guys were talking about those <sprite name="Shiny">
+        Shiny animals uh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: I'm gonna be honest, those types of animals are worth a lot since
+        they are highly searched by the rich
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: Actually, there's a whole club dedicated to showing them off
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: I believe it is only after you have <style="LYellow">10</style> or
+        more <sprite name="Shiny"> Shiny animals that you can join it
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    - message: If you could do that it would be mad impressive eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 31
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Ohhh I can smell the rich in you!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: You already caught those <style="LYellow">10</style> <sprite name="Shiny">
+        Shiny animals uh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: Pretty impressive, pretty impressive! Oh, and let me tell you one
+        thing!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: Now that you can join the rich club finding shinies will only get
+        easier, so that's a good thing eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: Anyways, good luck finding them all!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sir Flareington
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: <style="LYellow">30k</style> in a single game uh? That's pretty impressive
+        I gotta say
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: Just like I promised you, I'm gonna teach you about the way of the
+        money
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9acfa8ff8250a9c4699d0d728422cca0, type: 3}
+      Name: Gyomyo
+    - message: It's actually super simple, listen up!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: Some fish will tell you "Save you money". Pfffft Boring!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: What if you doubled it? Tripled it? Ever seen a fish go from broke
+        to legend in one night?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: I have. It was me!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: 'So lesson is: Save your money, or bet it if you know you will win!'
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    - message: Now go ahead and impress me! Make use of that casino and profit <style="LYellow">100k</style>
+        embers from a single play!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: Sir Flareington
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: Sir Flareington
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Oh wait you actually did it?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: A profit of <style="LYellow">100k</style> embers from a single bet!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: I can't even imagine how much you lost up until that point! AHAHAHAH!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: But hey congratulations man! Now I have something to tell you
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    - message: I saw that the little <sprite name="Rowl"> <style="LYellow">pipsqueek</style>
+        over there was eavesdropping on us while we were talking business!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: Since he likes money and gambling so much I decided to put a surprise
+        in his precious little <style="LYellow">Skill Tree
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: Oh don't worry it's nothing bad! Come take a look!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1206136743}
+          m_TargetAssemblyTypeName: Rowl, Assembly-CSharp
+          m_MethodName: ShowAndUnlockUpgrade
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: Sir Flareington
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: StartDialogue
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 12
+            m_FloatArgument: 0
+            m_StringArgument: Sir Flareington
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: You see, it's just a new ability... a gambling ability!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: W-Wait! What's this?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+      Name: Rowl
+    - message: Calm down kid I'm just here to help you see? With this skill we can
+        gamble on the future of the campfire
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: WHA-WHAT IF WE LOOSE THE GAMBLE?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+      Name: Rowl
+    - message: Well... that's life! AHAHAH! Sometimes you are the winner, sometimes
+        others are!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: 'But when that happens, just keep your chin up and confidently make
+        your next bet! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: This is not something pops would be proud of...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
+      Name: Rowl
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: QueueDialogue
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 13
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 0
+  - dialogues:
+    - message: That <sprite name="Rowl"> <style="LYellow">kid</style> got some nerve
+        eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    - message: I made his <style="LYellow">Skill Tree</style> better and not even
+        a thank you! AHAHAHAH!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: Regardless! Got a mission for you! I need you to show me that ability
+        in action!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: If you could get like 10 augments in a single round we could show
+        everyone how strong the ability truly is!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 29
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+  - dialogues:
+    - message: Oh it's Mr. Gambling guy over here!
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: All that betting must've made you go nuts eh? AHAHAH
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: Since you showed how good that ability was I even took the iniciative
+        to create a new style for it!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: With this, the more you keep gambling the likelier you are to get
+        the results you want! Very good eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 29
+            m_FloatArgument: 0
+            m_StringArgument: Clown
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
   Name: Gyomyo
   DefaultClickBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1588098428}
         m_TargetAssemblyTypeName: Gyomyo, Assembly-CSharp
-        m_MethodName: InviteCasino
+        m_MethodName: ClickedCharacter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -53968,7 +54372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000045776367, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -54567,7 +54971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00079345703
+      value: -0.001159668
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

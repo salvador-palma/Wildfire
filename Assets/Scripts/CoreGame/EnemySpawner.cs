@@ -374,7 +374,7 @@ public class EnemySpawner : MonoBehaviour
         }else{
             DeathPerEnemy[enemy_name] = 1;
         }
-
+        bool shiny = enemy_name.Contains("Shiny");
         string og = enemy_name.Contains("Shiny") ? enemy_name.Replace("Shiny","") : enemy_name;
         if(LocalBestiary.INSTANCE.getMilestoneAmount(og) < 0){
             Debug.Log("Bestiary Doesn't have: " + og);
@@ -384,6 +384,20 @@ public class EnemySpawner : MonoBehaviour
             LocalBestiary.INSTANCE.UpdateSlots();
             Debug.Log("Slots Updated");
         }
+
+        if(shiny){
+            if(GameVariables.hasQuest(31)){
+                int shinies = 0;
+                foreach(AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals){
+                    if(a.ShinyCaptured > 0){shinies++;}
+                    
+                }
+                if(shinies>=10){
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(31, "Gyomyo", 9);
+                }
+            }
+        }
+        
 
 
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,7 +24,9 @@ public class Augment
     bool baseStat;
     bool baseCard;
     bool baseCardUpgrade;
-    public Augment(string augmentClass,string title, string desc, string ic, Tier ti, UnityAction action, bool baseStat = false, bool baseCard = false, bool baseCardUpgrade = false){
+
+    public IMMOLATE immoType;
+    public Augment(string augmentClass,string title, string desc, string ic, Tier ti, UnityAction action, bool baseStat = false, bool baseCard = false, bool baseCardUpgrade = false, IMMOLATE immoType = IMMOLATE.NONE){
         Title = title;
 
         Description = desc;
@@ -35,6 +38,7 @@ public class Augment
         this.baseStat = baseStat;
         this.baseCard = baseCard;
         this.baseCardUpgrade = baseCardUpgrade;
+        this.immoType = immoType;
     }
     public void Activate(){
         action();

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Gyomyo : NPC
 {
     
+
     protected override void CharacterLoad()
     {
         long totalInvested = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers);
@@ -93,7 +94,12 @@ public class Gyomyo : NPC
     }
     
     public void UnlockCasino(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6);
+        UnityAction post = () => UnlockQuest(45);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6, afterUnlock:post);
        
+    }
+
+    public void QueueMoneyUnlockDialogue(){
+        QuestBoard.Instance.Rowl.QueueDialogue(12);
     }
 }

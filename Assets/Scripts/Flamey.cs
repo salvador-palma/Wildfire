@@ -381,6 +381,10 @@ public class Flamey : MonoBehaviour
         if(SkillTreeState<=2){
             GameVariables.SetVariable("SkillTreeReady",SkillTreeState+1);
         }
+
+        if(GameVariables.hasQuest(45) && Embers >= 30000){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(45, "Gyomyo", 10);
+        }
         
         
         GameUI.Instance.GameOverEffect();

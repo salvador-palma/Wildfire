@@ -11,7 +11,7 @@ public class MiniGameProps{
 }
 public class Casino : MonoBehaviour
 {
-    static int offset = 0;
+    static int offset = 2;
     public List<MiniGameProps> minigames;
     public GameObject settingsPanel;
     public static string getMinigame(){

@@ -109,6 +109,7 @@ public class Betsy : NPC
     }
     public void unlockShiny(){
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "SHINY TRACKER", "You can now keep track of <sprite name=\"Shiny\"> Shiny animals that you've encountered", 5);
+        QueueDialogue("Gyomyo", 8);
     }
     public void Default(){
         DefaultClickBehaviour.Invoke();

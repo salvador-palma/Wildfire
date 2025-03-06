@@ -424,62 +424,24 @@ public class Immolate : TimeBasedEffect
 
     public float[] GetImmolateType(){
 
-        //DAMAGE
-        string[] FireType = new string[]{"Lava Pool", "Necromancer", "Ritual", "Magical Shot", "Critical Strike", "Thunder", "Explosion", "Laser"}; //8
-        //+1 Point for Damage
+        
 
-        //HEALING
-        string[] WaterType = new string[]{"Vampire", "Flower Field", "Resonance", "Regeneration", "Totem"}; //5
-        //+1 Point for Health
-
-        //CONTROLLING
-        string[] AirType = new string[]{"Snow Pool", "Thunder", "Freeze", "Whirl Pool", "Gravitational Forces" , "Totem"}; //6
-
-        //ARMOR
-        string[] EarthType = new string[]{"Assassin", "Thorns", "Resonance", "Orbits"}; //4
-        //+1 Point for Armor and Health
-
-        string[][] AllTypes = new string[4][]{FireType, WaterType, AirType, EarthType};
         float[] AccumulatedPoints = new float[4];
-       
+        AccumulatedPoints[0]+=15;
 
-        List<Effect> allEffects = Flamey.Instance.allEffects;
-        foreach(Effect effect in allEffects){
-            for(int i = 0; i < 4; i++){
-                if(AllTypes[i].Contains(effect.getText())){
-                    AccumulatedPoints[i]++;
-                }
-            }
+        List<Augment> augments = Deck.Instance.inBuildAugments;
+        foreach(Augment a in augments){
+            int v = (int)a.immoType;
+            if(v!=-1){AccumulatedPoints[v]++;}
         }
-
-        AccumulatedPoints[0]+=2;
-
-        float allSkillPoints = AccumulatedPoints.Sum();
-        float perc = allSkillPoints * 0.035f;
-
-        float damage = (Flamey.Instance.Dmg-Flamey.Instance.BegginingDMG)/10f;
-        float health = (Flamey.Instance.MaxHealth-Flamey.Instance.BegginingHP)/200f;
-        float armor = Flamey.Instance.Armor/10f;
-
-        float baseLim = damage + health + armor + health;
-
-        float[] stats = new float[]{damage, health, 0, armor + health};
-        Array.ForEach(stats, e=>e = e / baseLim);
-
+        float max = AccumulatedPoints.Sum();
         
-        int[] extraBaseStats = new int[]{3,1,0,2};
-
-        for(int i = 0; i < 4; i++){
-            AccumulatedPoints[i] += stats[i]*perc;
-            AccumulatedPoints[i] = AccumulatedPoints[i] * 25f / (AllTypes[i].Length + extraBaseStats[i]);
-        }
-
-        float percLim = AccumulatedPoints.Sum();
-
-        for(int i = 0; i < 4; i++){
-            AccumulatedPoints[i] = AccumulatedPoints[i] * 100f / percLim;
+        for(int i = 0; i < AccumulatedPoints.Length; i++){
+            AccumulatedPoints[i] =  AccumulatedPoints[i]/max *100f;
         }
         
+        
+
         return AccumulatedPoints;
         
     }
@@ -495,5 +457,8 @@ public class Immolate : TimeBasedEffect
         return optionMenu.gameObject;
     }
 
+}
+public enum IMMOLATE{
+    NONE=-1, FIRE=0, WATER=1, AIR=2, EARTH=3
 }
 

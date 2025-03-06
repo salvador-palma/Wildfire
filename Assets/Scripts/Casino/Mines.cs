@@ -164,7 +164,12 @@ public class Mines : MonoBehaviour
     }
     public void Cashout(){
         Debug.Log("Won: +" + Math.Round(bet*multiplier) + " Embers");
-        AddEmbersToSkillTree((int)Math.Round(bet*multiplier));
+        int value = (int)Math.Round(bet*multiplier);
+        AddEmbersToSkillTree(value);
+        if(GameVariables.hasQuest(8) && value>=100000){
+            //PUT HERE CASINO QUEST UNLOCKABLE //TO GYOMYO 11
+        }
+
         EndGame();
     }
 

@@ -208,18 +208,11 @@ public class MoneyMultipliers : NotEspecificEffect
     public void Stack(MoneyMultipliers moneyMultipliers){
         perRound+=moneyMultipliers.perRound;
         mult+=moneyMultipliers.mult;
-        RemoveUselessAugments();
+        
         
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(mult >= 2f && perRound >= 250 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Ember Generation");
-        }
-    }
-    private void RemoveUselessAugments(){ 
-        if(!maxed){CheckMaxed();}
-    }
+    
+    
     public bool addList()
     {
         return Instance == this;

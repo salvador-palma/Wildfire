@@ -31,6 +31,8 @@ public class Deck : MonoBehaviour
     public static event EventHandler RoundStart;
     public GameState gameState;
 
+    public List<Augment> inBuildAugments;
+
     [SerializeField] float GoldAugmentProbability = 0.1f;
     
     private void Awake(){
@@ -116,6 +118,7 @@ public class Deck : MonoBehaviour
         
 
         ActivateAugment(currentAugments[i]);
+        
         
         refreshedAugments.Clear();
         currentAugments = new Augment[]{null,null,null};
@@ -318,6 +321,10 @@ public class Deck : MonoBehaviour
             EnemySpawner.Instance.Paused = false;
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
+            if(gambleInRound >= 10 && GameVariables.hasQuest(14)){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(14,"Gyomyo", 14);
+            }
+            gambleInRound=0;
         }else{
             Debug.Log("Getting Stack");
             
@@ -325,12 +332,13 @@ public class Deck : MonoBehaviour
             GamblingStack.Remove(a);
             ActivateAugment(a);
             Debug.Log("Over Stack");
+            
         }
     }
 
-    
+    int gambleInRound = 0;
     public void Gamble(int amount, Tier tier, string original_name){
-        
+        gambleInRound+=amount;
         EnemySpawner.Instance.Paused = true;
         Augment[] result = new Augment[amount];
         for(int i = 0; i < amount; i++){

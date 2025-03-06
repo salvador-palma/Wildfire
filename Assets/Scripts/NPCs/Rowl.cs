@@ -41,6 +41,14 @@ public class Rowl : NPC
         Unlockables[unlockableID].Clicked();
     }
 
+    public void ShowAndUnlockUpgrade(int unlockableID){
+        SkillTreeManager.Instance.Upgrade(Unlockables[unlockableID].AbilityName, Unlock:true);
+        SkillTreeManager.Instance.InvokeUIReset();
+        ShowUnlockedUpgrade(unlockableID);
+    }
+
+   
+
     public void SetVariable(int value){
         GameVariables.SetVariable("SkillTreeReady", value);
     }

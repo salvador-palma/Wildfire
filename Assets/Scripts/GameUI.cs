@@ -142,6 +142,8 @@ public class GameUI : MonoBehaviour
 
     public void AddAugment(Augment a){
         if(!ownsAugment){ownsAugment = true; NoAugmentsText.SetActive(false);}
+
+        Deck.Instance.inBuildAugments.Add(a);
         GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
         
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);

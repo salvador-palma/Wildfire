@@ -351,7 +351,6 @@ public class LocalBestiary : MonoBehaviour
 
     public void UpdateBlackMarketItems(){
         RepelLimit = new string[]{"Bug Repellent", "Animal Repellent"}.Count(e=> Item.has(e));
-      
     }
     public void RepelAnimal(){
         AnimalSaveData saveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID);

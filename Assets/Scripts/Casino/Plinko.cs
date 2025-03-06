@@ -214,6 +214,11 @@ public class Plinko : MonoBehaviour
         TextOn = false;
 
         SkillTreeManager.Instance.AddEmbers(roundEmberAmount);
+
+        if(GameVariables.hasQuest(8) && roundEmberAmount>=100000){
+            //PUT HERE CASINO QUEST UNLOCKABLE //TO GYOMYO 11
+        }
+
         obj = SkillTreeManager.Instance.PlayerData.embers; 
 
         cur = obj; 
