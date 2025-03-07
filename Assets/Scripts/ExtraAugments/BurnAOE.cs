@@ -108,6 +108,14 @@ public class BurnAOE : IPoolable
 
         lavaSoundInstance = AudioManager.CreateInstance(FMODEvents.Instance.Lava);
         lavaSoundInstance.start();
+
+        int n = ObjectPooling.ActiveAmount(this) + 1;
+        
+        if(n >= 100 && GameVariables.hasQuest(13)){
+
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(13, "Rowl", 14);
+            
+        }
     }
     public override string getReference()
     {

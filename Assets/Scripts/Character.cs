@@ -394,6 +394,11 @@ public class Character : MonoBehaviour
     [SerializeField] private GameObject MainFlameVessel;
     private void SetupCharacterSelectOptions(){
         
+        foreach (Transform item in CharacterSelectContainer.transform)
+        {
+            if(item.gameObject.activeInHierarchy){Destroy(item.gameObject);}   
+        }
+
         GameObject template = CharacterSelectContainer.transform.GetChild(0).gameObject;
         foreach (CharacterData character in characterDatas)
         {
@@ -601,6 +606,8 @@ public class Character : MonoBehaviour
             QuestBoard.Instance.Cloris.QueueDialogue(9);
             GameVariables.SetVariable("ClorisWardrobe",1);
         }
+
+        SetupCharacterSelectOptions();
 
         
     }

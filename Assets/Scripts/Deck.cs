@@ -321,9 +321,10 @@ public class Deck : MonoBehaviour
             EnemySpawner.Instance.Paused = false;
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
-            if(gambleInRound >= 10 && GameVariables.hasQuest(14)){
-                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(14,"Gyomyo", 14);
+            if(gambleInRound >= 30 && GameVariables.hasQuest(29)){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(29,"Gyomyo", 14);
             }
+            Debug.Log("Gambled: " + gambleInRound);
             gambleInRound=0;
         }else{
             Debug.Log("Getting Stack");

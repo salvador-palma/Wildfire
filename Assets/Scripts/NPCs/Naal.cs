@@ -94,7 +94,7 @@ public class Naal : NPC
 
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("NaalPresentation") <= -1){
+        if(GameVariables.GetVariable("NaalPresentation") <= -1 && !hasAvailableDialogue()){
             StartDialogue(1);
             return;
         }
@@ -115,15 +115,15 @@ public class Naal : NPC
     public void UnlockCandle(){
         UnlockQuest(10);
         Rowl.QueueDialogue(4);
-        SkillTreeManager.Instance.Upgrade("Ritual", Unlock:true);
-        SkillTreeManager.Instance.InvokeUIReset();
+        //SkillTreeManager.Instance.Upgrade("Ritual", Unlock:true);
+       // SkillTreeManager.Instance.InvokeUIReset();
 
     }
     public void UnlockSkull(){
         UnlockQuest(11);
         Rowl.QueueDialogue(5);
-        SkillTreeManager.Instance.Upgrade("Necromancer", Unlock:true);
-        SkillTreeManager.Instance.InvokeUIReset();
+        //SkillTreeManager.Instance.Upgrade("Necromancer", Unlock:true);
+       // SkillTreeManager.Instance.InvokeUIReset();
     }
     //****** HAGGLE SYSTEM *******//
     int bargainingRounds = 0;

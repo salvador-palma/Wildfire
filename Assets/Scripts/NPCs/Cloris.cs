@@ -8,7 +8,7 @@ public class Cloris : NPC
     
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("ClorisPresentation")==-1){
+        if(GameVariables.GetVariable("ClorisPresentation")==-1 && !hasAvailableDialogue()){
             StartDialogue(0);
             return;
         }
@@ -25,6 +25,7 @@ public class Cloris : NPC
 
     }
     public void UnlockCharacterSelect(){
+        GameVariables.SetVariable("ClorisPresentation", 1);
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <style=\"LYellow\">style</style> your <style=\"LYellow\">campfire</style> affecting its <style=\"LYellow\">behaviour</style> and <style=\"LYellow\">environment</style>", 4);
     }
 }

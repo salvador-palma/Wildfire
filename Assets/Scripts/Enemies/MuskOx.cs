@@ -68,11 +68,11 @@ public class MuskOx : Enemy
     }
     
     
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
         if(source!= null && source.Equals("Lava Pool")){
-            base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except);
+            return base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }else{
-            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+            return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }
     }
 

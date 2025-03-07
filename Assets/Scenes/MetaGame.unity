@@ -7269,7 +7269,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 12000
   Icon: {fileID: 471380531, guid: ee93eeeba91163148994d5a23f277a2e, type: 3}
-  Description: Gain <style="LYellow">+250</style> Permanent <style="Green">Max HP</style>
+  Description: Gain <style="LYellow">+500</style> Permanent <style="Green">Max HP</style>
   presentation:
   - message: This log pack was imported straight from Log-Land! There are no better
       logs than these ones! I'm serious now!
@@ -8333,7 +8333,7 @@ MonoBehaviour:
     arguments: []
     avatar: {fileID: 21300000, guid: 7b254d1027fd35c4b8ca3257415b1031, type: 3}
     Name: Naal
-  - message: <size=80%>And there's more... legend says... <i>"When 25 Ghouls stand
+  - message: <size=80%>And there's more... legend says... <i>"When 50 Ghouls stand
       tall in sight, King Ghoul shall join the fight"</i>
     arguments: []
     avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
@@ -11363,8 +11363,8 @@ MonoBehaviour:
     AbilityDescription2: Unlock new <style="LYellow">targeting</style> options for
       your <style="LYellow">burst shots <style="LGrey">(Random, Same, Most Max HP)
     AbilityDescription3: Bursting will increase the amount of fireballs in your next
-      <style="LYellow">Burst</style> by <style="LYellow">+1.</style> The amount of
-      extra fireballs gained through this passive is reset at the end of each round
+      <style="LYellow">Burst</style> by <style="LYellow">+1 <style="Grey">(Max. 2xBurst
+      Amount).</style></style> This resets at the end of the round
     QuestID: 16
     npc: {fileID: 1206136743}
     DialogueID: 8
@@ -14042,6 +14042,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh He-<size=80%>hello... I wasn't expecting you to strike a conversation
         with me all of a sudden
@@ -14093,6 +14094,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh Y-<size=80%>you came... let me show you around...
       arguments: []
@@ -14147,6 +14149,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: H-<size=80%>hey... can I tell you a bit... about this skill?...
       arguments: []
@@ -14178,6 +14181,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Oh I-<size=80%>I recognize this...
       arguments: []
@@ -14199,8 +14203,8 @@ MonoBehaviour:
       avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
       Name: Naal
     - message: <size=80%>As far as I can remember... that means being able to deal
-        an astronomous <style="LYellow">50k <style="Red">damage</style>... in a single
-        shot
+        an astronomous <style="LYellow">50k <style="Red">damage</style></style>...
+        in a single shot
       arguments: []
       avatar: {fileID: 21300000, guid: 7f8e69e930a1ad24abaaec4f4e44d9cc, type: 3}
       Name: Naal
@@ -14225,6 +14229,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: T-<size=80%>this reminds me of an old story...
       arguments: []
@@ -14278,6 +14283,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: <size=80%>amazing... you really did discover... how to unlock the
         full potential of Ki...
@@ -14369,6 +14375,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: <size=80%>I feel... a strong aura coming from you...
       arguments: []
@@ -14424,6 +14431,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: O-Oh! <size=80%>you attuned yourself to <style="LYellow">water...
       arguments: []
@@ -14470,6 +14478,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: <size=80%>I see you've found the way of the <style="LYellow">air...
       arguments: []
@@ -14515,6 +14524,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: <size=80%>you finally embraced the <style="LYellow">earth</style>
         element...
@@ -14566,6 +14576,147 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: <size=80%>the ritual... it has been completed!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: <size=80%>I can feel it... in the air... on the ground... on my own
+        body...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: <size=80%>he will suck the life out of its enemies... just to feed
+        his own power...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">Ankh-Ra</style>... he is coming...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Ankh-Ra
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: <size=80%>Good job kid... once again you've done it...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: <size=80%>finally...<style="LYellow"> King Ghoul</style> can come
+        out of its sleep!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: <size=80%>And with him... the strongest... of the <style="LYellow">Ghouls</style>...
+        <size=110%>shall join him!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: King Ghoul
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: W-What! Y-<size=80%>you actually did it?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">50k </style><style="Red">damage </style>in
+        a single shot?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: <size=80%>impressive... very very impressive...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: <size=80%><style="LYellow">Azureoth...</style> I can feel how satisfied
+        he is...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Azureoth
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: That's it! I-<size=80%>it was exactly like that!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: <size=80%>Killing an enemy... with more <style="Green">HP</style>...
+        than your own <style="Green">Max Health</style>...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4de14a0821f21eb41b4e2968855b5482, type: 3}
+      Name: Naal
+    - message: <size=80%>other than him... I've never seen anyone do it...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b2bae409516e9684e8fb6b900c65da53, type: 3}
+      Name: Naal
+    - message: <size=80%>are you sure you are not him... the legendary Dragon Slayer...
+        <style="LYellow">Ash Pyre?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: Ash Pyre
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -17483,7 +17634,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 4000
   Icon: {fileID: 586030432, guid: 112c6f535485cfc4fbf698dc28c61384, type: 3}
-  Description: Fast-Forward at <style="LYellow">x3</style> Speed
+  Description: Fast-Forward at <style="LYellow">x4</style> Speed
   presentation:
   - message: You see, this is one of master's many failed experiments! So I'm not
       sure I can sell you this...
@@ -23458,6 +23609,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   Name: QuestBoard
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -23512,7 +23664,7 @@ MonoBehaviour:
       defend the night"</i>
   - Title: Legend of the Necromancer
     Avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
-    Description: <i>"When 25 Ghouls stand tall in sight, King Ghoul shall join the
+    Description: <i>"When 50 Ghouls stand tall in sight, King Ghoul shall join the
       fight"</i>
   - Title: Static Chain
     Avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
@@ -23520,7 +23672,7 @@ MonoBehaviour:
       a single chain
   - Title: The Nether Realm
     Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
-    Description: Have <style="LYellow">50 Lava Pools</style> at the same time
+    Description: Have <style="LYellow">100 Lava Pools</style> at the same time
   - Title: Spiritual Energy
     Avatar: {fileID: 21300000, guid: e3186a20b00b8354da8ee370946254f9, type: 3}
     Description: Maximize all stats on your <style="LYellow">Immolate</style> ability
@@ -23532,7 +23684,7 @@ MonoBehaviour:
     Description: Maximize <style="LYellow">Burst Interval</style> and <style="LYellow">Multicaster
   - Title: The Sorcerer
     Avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
-    Description: 'Deal <style="LYellow">50k <style="Red">Effective Damage</style>
+    Description: 'Deal <style="LYellow">50k <style="Red">Effective Damage</style></style>
       in a single hit '
   - Title: Powering Up!
     Avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
@@ -23540,23 +23692,24 @@ MonoBehaviour:
       value with a <style="LYellow">critical shot
   - Title: Let it Snow!
     Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
-    Description: Have <style="LYellow">50 <style="LBlue">Snow Pools</style> at the
-      same time
-  - Title: Lightning and the Thunder
+    Description: Have <style="LYellow">100 <style="LBlue">Snow Pools</style></style>
+      at the same time
+  - Title: Lightning and Thunder
     Avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
     Description: Reach the lowest <style="LYellow">Thunder Interval</style> possible
-      without increasing <style="LYellow">Attack Speed
+      without increasing <style="LYellow">Attack Speed</style> nor <style="LYellow">Bullet
+      Speed
   - Title: A story on Vampires
     Avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
     Description: <style="Green">Heal</style> at a rate of <style="LYellow">1000/s
   - Title: An Assassin's Greed
     Avatar: {fileID: 21300000, guid: 06511e409c04c784886b22bc017a0418, type: 3}
     Description: <style="Red">Execute</style> an enemy with more <style="Green">HP</style>
-      than your <style="Green">Max HP</style>
+      than your own <style="Green">Max HP</style>
   - Title: Boom! Boom! Boom!
     Avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
-    Description: Create a chain of <style="LYellow">5 <style="Orange">Explosions</style>
-      from a single one
+    Description: Manage to create <style="LYellow">10 <style="Orange">Explosions</style></style>
+      in a row
   - Title: It's Spring Time
     Avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
     Description: Have <style="LYellow">50 Flowers</style> at the same time
@@ -23567,6 +23720,7 @@ MonoBehaviour:
   - Title: War of Roses
     Avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
     Description: Deal back more <style="Red">damage</style> than the one you received
+      using <style="LYellow">Thorns
   - Title: An Upbeat Sound I
     Avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
     Description: Max out your <style="LYellow">Resonance</style> ability to discover
@@ -23576,14 +23730,14 @@ MonoBehaviour:
     Description: Reach maximum <style="LBlue">Slow Percentage
   - Title: High Risk High Reward
     Avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
-    Description: Get <style="LYellow>10 Augments</style> in a single round
+    Description: Get <style="LYellow>30 Augments</style> in a single round
   - Title: The Legend of the Immortal Bird
     Avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
     Description: Reach <style="LYellow">6AM</style> without going below <style="LYellow">50%
       <style="Green">health
   - Title: Gotta catch'em all!
     Avatar: {fileID: 21300000, guid: 9acfa8ff8250a9c4699d0d728422cca0, type: 3}
-    Description: Unlock <style="LYellow">10</style> <sprite name="Shiny">Shiny animals
+    Description: Unlock <style="LYellow">10</style> <sprite name="Shiny"> Shiny animals
   - Title: Offensive Ki
     Avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
     Description: Max Immolate with an <style="LYellow">Offensive</style> approach
@@ -28179,6 +28333,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Hey, dude! How's it hanging? Any luck with marshamllows?
       arguments: []
@@ -28222,6 +28377,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Whoa, hold up! You control <style="LYellow">Bees?!
       arguments: []
@@ -28266,6 +28422,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey there, buddy!
       arguments: []
@@ -28334,6 +28491,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey Hey Hey! Let me see what you got there!
       arguments: []
@@ -28380,6 +28538,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey man! Is that another present for me?
       arguments: []
@@ -28436,6 +28595,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Look, I'm no scientist alright! But I bet we can do some crazy stuff
         with this little ability
@@ -28473,6 +28633,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: HMMM! I wonder what a marshmallow toasted on a Lava Pool would taste
         like
@@ -28488,7 +28649,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: a4e40e4a65e2fed4d9caa5f24521b518, type: 3}
       Name: 
-    - message: I bet that having like, <style="LYellow">50 <style="Orange"> Lava
+    - message: I bet that having like, <style="LYellow">100 <style="Orange"> Lava
         Pools</style> at the same time would be a good approximation to what a real
         vulcano feels like!
       arguments: []
@@ -28510,6 +28671,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Oh you like fireballs!? Let's get more then!
       arguments: []
@@ -28545,6 +28707,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: The best defense is offense! So what we really need is to power this
         campfire up!
@@ -28578,6 +28741,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: BOOM! BOOM! BOOM! BOOM! BOOM!
       arguments: []
@@ -28591,8 +28755,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
       Name: 
-    - message: If you can chain up 5 explosions I will have the necessary knowledge
-        to make this happen!
+    - message: If you can generate <style="LYellow">10 <style="Orange">Explosions</style></style>
+        in a row we will have the necessary knowledge to make this happen!
       arguments: []
       avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
       Name: 
@@ -28612,6 +28776,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: 'Hey bro listen here! What about trying to maximize the efficacy of
         this ability right here? '
@@ -28643,34 +28808,35 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: 'Hey come here quick! '
       arguments: []
-      avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
       Name: 
     - message: I'm going to be completely honest... I was kind of eavesdropping your
         conversation with <sprite name="Gyomyo"> <style="LYellow">Mr. Fish Guy</style>
       arguments: []
-      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
       Name: 
     - message: I know it's bad but listen! Due to that I got another idea!
       arguments: []
-      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
       Name: Gyomyo
     - message: Did you ever notice how the our currency is based on fire? Is that
         really just a coincidence?
       arguments: []
-      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
       Name: 
     - message: It must be because it originated from it right? What if we tried replicating
         that using our own campfire?
       arguments: []
-      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      avatar: {fileID: 21300000, guid: 96a45c7200dea7d44a57bf326c0b87e2, type: 3}
       Name: 
     - message: I got the basic idea down but as always, you need to cover the rest
         ok?
       arguments: []
-      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      avatar: {fileID: 21300000, guid: 9949b444172e8fe469ca08484b3a3fcc, type: 3}
       Name: 
     afterEvent:
       m_PersistentCalls:
@@ -28688,6 +28854,227 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: The next step after fire really is eletricity!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: 'I don''t even know how you managed to apply <style="LYellow">20 <style="Pink">On-Hit
+        Effects</style></style> in a single <style="LYellow">static chain! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96a45c7200dea7d44a57bf326c0b87e2, type: 3}
+      Name: 
+    - message: But hey, while you were out there trying that out, I made some discoveries!
+      arguments: []
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
+      Name: 
+    - message: If we take a bit of power from every single  <style="LYellow">static
+        chain</style> that we cast, after 100 or so we could send a <style="Blue">Super
+        Charged</style> one
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: I don't even know what it does but it seems fun!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Tesla Coil
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: OHHH MY GOODNESS!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: Vulcano-Roasted Marshmallows are truly the best!!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
+      Name: 
+    - message: We could open a food stall with these bro!
+      arguments: []
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Mt. Vesuvius
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: SO FAST! IT FEELS LIKE A FLAMETHROWER!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: I don't even know how this little guy can handle shooting up so many
+        fireballs!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    - message: You know what would be great? Hear me out!
+      arguments: []
+      avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
+      Name: 
+    - message: There's a certain point at which the campfire cannot possibly get
+        faster right?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: 'What if we just ignored that <style="LYellow">limit</style>? '
+      arguments: []
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Double Faced
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Hey bro you've seen the fireball rain last night?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: It was absolutely beautiful! One of the best things I've seen ever
+        since I started camping!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2431583b65b188a40865721dd8614b54, type: 3}
+      Name: 
+    - message: The thing is... while our little campfire guy is performing it...
+        it becomes a bit vulnerable don't you think?
+      arguments: []
+      avatar: {fileID: 21300000, guid: a4e40e4a65e2fed4d9caa5f24521b518, type: 3}
+      Name: 
+    - message: We need to create a better defense! Like a <style="LYellow">retaliation</style>
+        system!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Blaze Brigade
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: WOOOOW! That was quite the powerful critical shot eh!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: Remember when I told you that the best defense is offense?
+      arguments: []
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
+      Name: 
+    - message: Well, I wasn't lying bro! Check this out!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Powered Up
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: 'Just like I said: BOOM! BOOM! BOOM!'
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    - message: By watching so many explosions up close I decided to build my own
+        <style="LYellow">Bomb!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9949b444172e8fe469ca08484b3a3fcc, type: 3}
+      Name: 
+    - message: But... eh... how do I say this? I guess it turned out to be a bit
+        frightened
+      arguments: []
+      avatar: {fileID: 21300000, guid: a4e40e4a65e2fed4d9caa5f24521b518, type: 3}
+      Name: 
+    - message: You see, the <style="LYellow">Bomb</style> I created is afraid of
+        <style="LYellow">Explosions</style>, which is ironic to say the least
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: So whenever it sees one close by it will not be able to contain its
+        emotions and it will blow up!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Bomber
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
   Name: Rowl
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -32629,7 +33016,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 30000
   Icon: {fileID: 958613058, guid: 35309ab7f0e59234d91426f58380f8a3, type: 3}
-  Description: Fast-Forward at <style="LYellow">x4</style> Speed
+  Description: Fast-Forward at <style="LYellow">x5</style> Speed
   presentation:
   - message: This hourglass makes time go EVEN faster! I thought going faster than
       it was going wasn't possible!
@@ -33452,7 +33839,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 75000
   Icon: {fileID: 167935703, guid: 307043206917b174ea1c071553157dee, type: 3}
-  Description: Gain <style="LYellow">+25</style> Permanent <style="LYellow">Attack
+  Description: Gain <style="LYellow">+50</style> Permanent <style="LYellow">Attack
     Speed</style>
   presentation:
   - message: You see, this is the world's biggest pinecone! Yep, and it's standing
@@ -34377,6 +34764,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Well, well, well! You've gone and spotted <style="LYellow">five critters</style>
         already?
@@ -34434,6 +34822,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: What did I tell ya kid? <style="LYellow"><sprite name="Naal"> Naal</style>
         showed up faster than you could ever think of!
@@ -34482,6 +34871,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: 'Well, look at you, eagle-eyed! You''ve gone and documented a <style="LYellow">100
         critters</style> each for <style="LYellow">10 different species</style>! '
@@ -34527,6 +34917,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: 'Well, I''ll be darned, you''ve really outdone yourself kid! '
       arguments: []
@@ -34584,6 +34975,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: I'll be hornswoggled! <style="LYellow">2500 record</style> of <style="LYellow">25
         different critters</style>! That must be a world record!
@@ -34616,6 +35008,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey, kid! Just curious, what's your favorite critter? Well, for me,
         it's <style="LYellow">Bees.
@@ -34657,6 +35050,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: You've gone and done it! <b><style="LYellow">The Bestiary</style></b>
         is filled to the brim!
@@ -34684,6 +35078,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Say what young man? You've found a weird looking animal?
       arguments: []
@@ -34737,6 +35132,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh so you actually did it! <style="LYellow">100</style> Individuals
         of <style="LYellow">5</style> different species uh?
@@ -34761,6 +35157,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey kid come here! Old Betsy has something to tell ya!
       arguments: []
@@ -34779,12 +35176,14 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
       Name: Betsy
-    - message: He is also very stubborn and deems all other elements uneccessary
+    - message: He is also very stubborn and deems all other elements uneccessary,
+        specially the ones regarding <style="LBlue">speed
       arguments: []
       avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
       Name: Betsy
     - message: If you could master his element of Thunder by maximizing it without
-        any other upgrade, I bet he would deem you worthy!
+        resorting to any <style="LBlue">speed</style> related <style="LYellow">basic
+        upgrades</style>, I bet he would deem you worthy!
       arguments: []
       avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
       Name: Betsy
@@ -34804,6 +35203,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: I didn't know young people still fancied vampires!
       arguments: []
@@ -34840,6 +35240,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh! All this regeneration power makes me recall the old Legendary
         Bird
@@ -34881,6 +35282,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: So you are also a fan of astronomy eh kid?
       arguments: []
@@ -34926,6 +35328,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: I got it! The ringed planet was <style="LYellow">Saturn</style> after
         all!
@@ -35096,6 +35499,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh! I remember now! The <style="LYellow">Swift Planet</style> was
         <style="LYellow">Mercury!
@@ -35131,6 +35535,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Hey kid! Just remembered what that <style="LYellow">Morning Star</style>
         planet was all about!
@@ -35166,6 +35571,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Turns out that the <style="LYellow">Blue Marble</style> planet was
         actually <style="LYellow">Earth!
@@ -35209,6 +35615,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: 'Ahhhh! It was <style="LYellow">Mars!</style> The <style="LYellow">Red
         Planet</style> was <style="LYellow">Mars!</style> '
@@ -35246,6 +35653,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh now I remember! The <style="LYellow">Gas Giant</style> was no other
         than  <style="LYellow">Jupiter!</style>
@@ -35282,6 +35690,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Kid come here! I just remembered something amazing!
       arguments: []
@@ -35322,6 +35731,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: The <style="LYellow">Ice Giant!</style> I got it! It's <style="LYellow">Neptune!
       arguments: []
@@ -35358,6 +35768,129 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh you did it kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: Spending a whole night without going below <style="LYellow">50%<style="Green">
+        Health</style></style> is indeed remarkable
+      arguments: []
+      avatar: {fileID: 21300000, guid: c0a467128e9f75b4f8ad0a717ac9da87, type: 3}
+      Name: Betsy
+    - message: Old Betsy here can be going a bit crazy but I'm pretty sure I heard
+        the screech of the Legendary <style="LYellow">Pheonix!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
+      Name: Betsy
+    - message: In moments of need, I'm sure it will come down to help you kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pheonix
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: You did great kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: Maximizing the capabilities of the <style="LYellow">Thunder</style>
+        element without resorting to <style="LBlue">speed!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c0a467128e9f75b4f8ad0a717ac9da87, type: 3}
+      Name: Betsy
+    - message: 'With this, I''m sure that <style="LYellow">Zeus</style> deems you
+        worthy kid! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
+      Name: Betsy
+    - message: And if I know one thing about him is that he fights alongside the
+        worty ones!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Zeus
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Hey kid, come close!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: Betsy was right! After all, the old vampire tale was true!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: Well, actually... there's a tiny detail old me forgot to tell...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3d6bbb70518df3148a4f340c0e3ebbbd, type: 3}
+      Name: Betsy
+    - message: HEY don't blame this old sheep here the age is getting to me do you
+        understand young man?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: Anyways... the detail that I forgot to mention was that the more this
+        <style="LYellow">vampire</style> <style="Green">healed</style>, the bigger
+        his lifespan became
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: 'With enough time this beast would basically become immortal! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 54f254d865c29f54585ba784222cc959, type: 3}
+      Name: Betsy
+    - message: Frightening right?
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Von Van Pyre
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -38795,8 +39328,21 @@ MonoBehaviour:
       Name: Gyomyo
     afterEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: 'So, got those <style="LYellow">embers</style> stacked up yet? '
       arguments: []
@@ -38815,6 +39361,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Oh you came to chat? Just go get your <style="LYellow">embers</style>
         man, I won't go anywhere you know?
@@ -38830,6 +39377,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: 'Look man, I won''t even take your <style="LYellow">embers</style>
         away, I just gotta show the investors that you aren''t a nobody, you know? '
@@ -38845,6 +39393,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: OOOHH, I can smell it! I know exactly what's hiding in that pocket
         of yours - <style="LYellow"><sprite name="Ember"> 250,000 Embers!
@@ -38910,7 +39459,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1588098428}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: CompleteQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Heyyy, wanna hit the casi... wait a second... something's <i>fishy</i>
         here... where are your <style="LYellow">embers?!
@@ -38931,6 +39493,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Heyyy, wanna hit the casi... wait a second... something's <i>fishy</i>
         here... where are your embers?!
@@ -38971,6 +39534,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: 'Ohhhhh I smell moneeeey!! '
       arguments: []
@@ -39007,6 +39571,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Hey come here!
       arguments: []
@@ -39051,6 +39616,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Ohhh I can smell the rich in you!
       arguments: []
@@ -39091,6 +39657,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: <style="LYellow">30k</style> in a single game uh? That's pretty impressive
         I gotta say
@@ -39156,6 +39723,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh wait you actually did it?
       arguments: []
@@ -39215,6 +39783,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 1
   - dialogues:
     - message: You see, it's just a new ability... a gambling ability!
       arguments: []
@@ -39263,6 +39832,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: That <sprite name="Rowl"> <style="LYellow">kid</style> got some nerve
         eh?
@@ -39279,7 +39849,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
       Name: Gyomyo
-    - message: If you could get like 10 augments in a single round we could show
+    - message: If you could get like 30 augments in a single round we could show
         everyone how strong the ability truly is!
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
@@ -39300,6 +39870,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh it's Mr. Gambling guy over here!
       arguments: []
@@ -39335,6 +39906,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   Name: Gyomyo
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -41246,6 +41818,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Ah, I'm so glad you came to chat!
       arguments: []
@@ -41293,6 +41866,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Darling, fashion isn't just about looking fabulous. It's transformative!
       arguments: []
@@ -41333,6 +41907,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: I've cracked the code darling! Remember how fashion and behaviour
         are inseperable?
@@ -41377,6 +41952,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
   - dialogues:
     - message: Oh I love snow darling!
       arguments: []
@@ -41396,8 +41972,9 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
       Name: Cloris
-    - message: I believe that if we had <style="LYellow">50 <style="LBlue">Snow Pools</style>
-        at the same time we could replicate what living there was like
+    - message: I believe that if we had <style="LYellow">100 <style="LBlue">Snow
+        Pools</style></style> at the same time we could replicate what living there
+        was like
       arguments: []
       avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
       Name: Cloris
@@ -41421,6 +41998,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Ahhh Flowers! The best thing nature can offer! Could you plant them
         around for me darling?
@@ -41458,6 +42036,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Did you know that roses are one of my favourite flowers darling?
       arguments: []
@@ -41494,6 +42073,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Music really is one of the best ways to express yourself, don't you
         think so darling?
@@ -41531,6 +42111,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Oh I love cold places! I just hate that I always need to wear a lot
         of clothes...
@@ -41568,9 +42149,9 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 0
+    dontEndAfter: 0
   - dialogues:
     - message: Wait darling! I see that you just started figuring out new styles!
-        Or "characters" as you sait it...
       arguments: []
       avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
       Name: Cloris
@@ -41621,6 +42202,153 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh! You did it darling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: The campfire got so chunky that I bet it could survive on top of the
+        coldest mountains
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    - message: Most animals cannot even reach there without completely freezing!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: 'If we use that to our advantage it will be extremely usefull don''t
+        you think darling? '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ice Cube
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh! Amazing! So much snow!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: It really does feel like the mountains I used to live in!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    - message: Don't do it like I did and forget to wrap up nicely with a warm jacket
+        before going to such a place
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: I wouldn't want you to freeze darling
+      arguments: []
+      avatar: {fileID: 21300000, guid: f9eecd117e849cb4b8d28a3e55921317, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Mt. Everest
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Waaaaah! You made a field of <style="LYellow">50 Flowers?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: Didn't you perhaps find any <style="LYellow">Carnivore Plants</style>??
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ad3497dcbce0634d98f7b84f0761a69, type: 3}
+      Name: Cloris
+    - message: As I said, sometimes they appear in big flower fields, to consume
+        animals that wander around carelessly
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: If you haven't found any up until now, maybe with this new <style="LYellow">style</style>
+        you will be able to do it!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Flora
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Yipee! It's the revenge of the roses!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: I've never seen on <style="LYellow">thorn</style> do so much damage!
+      arguments: []
+      avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
+      Name: Cloris
+    - message: But hey darling, do you know what's better than seeing a rose getting
+        its revenge?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
+      Name: Cloris
+    - message: Seeing a rose not get hit at all, of course!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: beb22690ec3bb9540844f7bf2c389145, type: 3}
+      Name: Cloris
+    - message: That's why I came up with this new style, just take a look honey!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Rose Warrior
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
   Name: Cloris
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -47734,7 +48462,7 @@ MonoBehaviour:
       m_Calls: []
   MinimumPrice: 1000
   Icon: {fileID: 1783317581, guid: 738d26357844cd447a41021556894bd9, type: 3}
-  Description: Fast-Forward at <style="LYellow">x2</style> Speed
+  Description: Fast-Forward at <style="LYellow">x3</style> Speed
   presentation:
   - message: This product is a bit weeeeird...
     arguments: []
@@ -54372,7 +55100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000045776367, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.0002746582, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -54971,7 +55699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.001159668
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

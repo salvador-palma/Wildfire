@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FMOD;
 using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
@@ -11,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 [System.Serializable]
 public class AnimalSaveData {
@@ -114,8 +116,9 @@ public class LocalBestiary : MonoBehaviour
 
         if(SceneManager.GetActiveScene().name == "Game"){
             BestiaryTabs = new string[2]{"STATS","ABILITIES"};
-            gameObject.SetActive(false);
+            
         }
+        
     }
     
     private void RetrieveReferences(){
@@ -148,14 +151,24 @@ public class LocalBestiary : MonoBehaviour
     public void UpdateSlots(){
         
         try{
+            if(Container == null){
+                Debug.LogError("HEEERE");
+            }
             foreach (Transform item in Container.transform)
             {
+                if(item == null){
+                    Debug.LogError("HEEERE :" + item.name);
+                }
+                if(item.gameObject == null){
+                    Debug.LogError("HEEERE 2 :" + item.name);
+                }
                 if(item.gameObject.activeSelf){
                     Destroy(item.gameObject);
                 }
                 
             }
         }catch(Exception e){
+            Debug.Log(e);
             Debug.Log(e.StackTrace );
         }
         
@@ -401,16 +414,29 @@ public class LocalBestiary : MonoBehaviour
     public int getMilestoneAmount(string name){
         return getMilestoneAmount(animals.FindIndex(0, animals.Count(), a=>a.name == name));
     }
+    public int getMilestoneAmountShiny(string name){
+        return getMilestoneAmountShiny(animals.FindIndex(0, animals.Count(), a=>a.name == name));
+    }
     public int getMilestoneAmount(int ID){
         AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
         if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
         return animalSaveData.DeathAmount;
     }
+    public int getMilestoneAmountShiny(int ID){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
+        return animalSaveData.ShinyCaptured;
+    }
     public void UnlockView(string name){
-        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
-        
 
+        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
         saved_milestones.AddMilestone(ID , 1);
+        WritingData();
+    }
+    public void UnlockShiny(string name){
+
+        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
+        saved_milestones.AddMilestoneShiny(ID,1);
         WritingData();
     }
     private int GetShinyProgress(int ID){

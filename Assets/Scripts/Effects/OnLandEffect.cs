@@ -66,15 +66,9 @@ public class BurnOnLand : OnLandEffect
             deck.removeClassFromDeck("LavaPoolDuration");
         }
         
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Lava");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         Flamey.Instance.SpawnObject(prefabEverlast);
     }
@@ -168,15 +162,9 @@ public class IceOnLand : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("IcePoolDuration");
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && slow >= 0.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Snow Pool");
-            maxed = true;
-        }
-    }
+   
     public bool addList(){
         return Instance == this;
     }
@@ -269,16 +257,9 @@ public class DrainOnLand : OnLandEffect
             deck.removeClassFromDeck("DrainPoolDuration");
         }
         
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .25f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Flower Field");
-            
-            maxed = true;
-        }
-    }
+   
     public bool addList(){
         return Instance == this;
     }

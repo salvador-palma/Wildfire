@@ -16,21 +16,7 @@ public class DrainAOE : IPoolable
     float lt;
     List<Enemy> colliding;
     public bool isCarnivore;
-    private void Start() {
-        colliding = new List<Enemy>();
-        lt = DrainOnLand.Instance==null? 1f : DrainOnLand.Instance.lasting;
-        perc = DrainOnLand.Instance==null? 0.01f : DrainOnLand.Instance.perc;
-        Vector2 scale = transform.localScale * (DrainOnLand.Instance==null?1f:DrainOnLand.Instance.size) * (isCarnivore? 1.5f : 1);
-        transform.localScale = scale;
-        if(isCarnivore){
-            GetComponent<SpriteRenderer>().sprite = carnivore;
-        }else{
-            GetComponent<SpriteRenderer>().sprite = flowers[UnityEngine.Random.Range(0, flowers.Length-1)];
-        }
-         if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
-        
 
-    }
     void Update()
     {
         t-=Time.deltaTime;
@@ -106,6 +92,17 @@ public class DrainAOE : IPoolable
         Color c = GetComponent<SpriteRenderer>().color;
         c.a = 1;
         GetComponent<SpriteRenderer>().color = c;
+
+
+        int n = ObjectPooling.ActiveAmount(this) + 1;
+        
+        if(n >= 50 && GameVariables.hasQuest(24)){
+
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(24, "Cloris", 12);
+            
+        }
+ 
+       
     }
     public override string getReference()
     {

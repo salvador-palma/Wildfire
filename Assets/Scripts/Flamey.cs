@@ -294,63 +294,62 @@ public class Flamey : MonoBehaviour
         return 0.8f - 0.008f * perc;
     }
     public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake=true, int idHitTxt= 2){
-        
-        if(onhitted){ApplyOnHitted(attacker);}
-        if(Unhittable){return;}
 
-        //ACHIEVMENT/QUEST
-        EnemySpawner.Instance.RoundsWithoutDamage = 0;
-        //===================
-
-
-        //CHARACTER SPECIFIC
-        if(Character.Instance.isCharacter("Burst") && BurstShot.Instance != null){
-            BurstShot.Instance.Burst();
-        }
-        
-        if(Character.Instance.isCharacter("Crit")){
-            if(UnityEngine.Random.Range(0f,1f) < CritUnlock.Instance.perc){
-                Dmg = (int)Math.Max(Dmg*0.1f, -4.5f * (CritUnlock.Instance.mult -5) + Dmg);
-            }
-        }
-        //===================
-
-
-        int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
-        TotalDamageTaken+=(ulong)dmgeff;
-
-        float shieldDamage = Shield - dmgeff;
-        
-        if(shieldDamage < 0){
-            Health += shieldDamage;
-            DamageUI.InstantiateTxtDmg(transform.position, "-"+ Math.Abs(shieldDamage), idHitTxt);
-        }
-        if(Shield > 0){
-            if(shieldDamage<0){
-                DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield), 24);
-            }else{
-                DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield - shieldDamage), 24);
+        if(!Unhittable){
+            //CHARACTER SPECIFIC
+            if(Character.Instance.isCharacter("Burst") && BurstShot.Instance != null){
+                BurstShot.Instance.Burst();
             }
             
-
-            Shield = Math.Max(shieldDamage, 0);
-        }
-        
-
-        
-        if(Health <= 0){
-            if(HealthRegen.Instance != null && Character.Instance.isCharacter("Regeneration") && HealthRegen.Instance.PassiveAvailable()){
-                HealthRegen.Instance.ReleasePheonix();
-                
-                Unhittable = true; 
-                
-            }else{
-                EndGame();
+            if(Character.Instance.isCharacter("Crit")){
+                if(UnityEngine.Random.Range(0f,1f) < CritUnlock.Instance.perc){
+                    Dmg = (int)Math.Max(Dmg*0.1f, -4.5f * (CritUnlock.Instance.mult -5) + Dmg);
+                }
             }
+            //===================
+
+            int dmgeff = (int)( MaxHealth/ (MaxHealth * (1 + Armor/100.0f * (1-armPen))) * Dmg);
+            TotalDamageTaken+=(ulong)dmgeff;
+
+            float shieldDamage = Shield - dmgeff;
+            Dmg = (int)Math.Abs(shieldDamage);
+            if(shieldDamage < 0){
+                Health += shieldDamage;
+                DamageUI.InstantiateTxtDmg(transform.position, "-"+ Math.Abs(shieldDamage), idHitTxt);
+            }
+            if(Shield > 0){
+                if(shieldDamage<0){
+                    DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield), 24);
+                }else{
+                    DamageUI.InstantiateTxtDmg(transform.position, "-"+Math.Abs(Shield - shieldDamage), 24);
+                }
+                
+
+                Shield = Math.Max(shieldDamage, 0);
+            }
+            
+            //ACHIEVMENT/QUEST
+            EnemySpawner.Instance.RoundsWithoutDamage = 0;
+            if(Health < MaxHealth/2f){
+                EnemySpawner.Instance.RoundsBelow50PercMaxHP = 0;
+            }
+            //===================
+            
+            if(Health <= 0){
+                if(HealthRegen.Instance != null && Character.Instance.isCharacter("Regeneration") && HealthRegen.Instance.PassiveAvailable()){
+                    HealthRegen.Instance.ReleasePheonix();
+                    Unhittable = true; 
+                }else{
+                    EndGame();
+                }
+            }
+
+            UpdateHealthUI();
+            
+            if(isShake){CameraShake.Shake(0.5f,0.20f);} 
         }
-        UpdateHealthUI();
+        if(onhitted){ApplyOnHitted(attacker, Dmg);}
         
-        if(isShake){CameraShake.Shake(0.5f,0.20f);} 
     }
     private void UpdateHealthUI(){
         HealthSlider.maxValue = MaxHealth;
@@ -406,6 +405,10 @@ public class Flamey : MonoBehaviour
             }
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("AtkSpeed");
+
+            if(GameVariables.hasQuest(25) && SecondShot.Instance != null && SecondShot.Instance.perc>=1f){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
+            }
         }
     }
     public void multAttackSpeed(float amount){
@@ -458,6 +461,10 @@ public class Flamey : MonoBehaviour
         if(HealthRegen.Instance != null && SkillTreeManager.Instance.getLevel("Regeneration") >= 1 && Health > 0){
             healperc *= 2;
         } 
+        if(IceOnHit.Instance != null && IceOnHit.Instance.getSlowPerc() >= .75f && GameVariables.hasQuest(28)){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(28, "Cloris", 10);
+        }
+
         Health = (int)Math.Min(Health + MaxHealth * healperc,MaxHealth);
         TotalHealed+=(ulong)(MaxHealth * healperc);
         UpdateHealthUI();
@@ -492,7 +499,27 @@ public class Flamey : MonoBehaviour
         
 
         DamageUI.InstantiateTxtDmg(transform.position, ""+ Mathf.Round(HealAmount * 10.0f) * 0.1f, 3);
+
+
+        //VON VAN PYRE QUEST
+        if(VampOnHit.Instance != null && GameVariables.hasQuest(21)){
+            if(HealingTimer == -1){
+                HealingTimer = Time.time;
+            }else if(Time.time - HealingTimer <= 1f){
+                HealedHealth+=HealAmount;
+                   
+                if(HealedHealth>=1000){
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(21,"Betsy",24);
+                }
+            }else{
+                HealingTimer = Time.time;
+                if(HealedHealth!=0){Debug.Log("Avg Healed: " + HealedHealth);}
+                HealedHealth = 0;
+            }
+        }
     }
+    private float HealingTimer = -1;
+    private float HealedHealth;
 
     public void addShield(float amount){
         Shield = Math.Min(MaxHealth * 0.3f , Shield + amount);
@@ -564,12 +591,15 @@ public class Flamey : MonoBehaviour
     }
 
 
-    public void ApplyOnHit(float d, float h, Enemy e, string except = null){
-        if(e.Health<=0){return;}
+    public int ApplyOnHit(float d, float h, Enemy e, string except = null){
+        if(e.Health<=0){return 0;}
+
+        int amountOfOnHit=0;
         foreach (OnHitEffects oh in onHitEffects){
             if(oh.getText() == except){continue;}
-            oh.ApplyEffect(d,h,e);
+            amountOfOnHit += oh.ApplyEffect(d,h,e);
         }
+        return amountOfOnHit;
     }
     public int ApplyOnShoot(List<string> except = null){
         int res = 0;
@@ -585,9 +615,9 @@ public class Flamey : MonoBehaviour
        
         foreach (OnLandEffect oh in onLandEffects){oh.ApplyEffect(pos);}
     }
-    public void ApplyOnHitted(Enemy e){
+    public void ApplyOnHitted(Enemy e, int dmg){
         if(e.Health<=0){return;}
-        foreach (OnHittedEffects oh in onHittedEffects){oh.ApplyEffect(e);}
+        foreach (OnHittedEffects oh in onHittedEffects){oh.ApplyEffect(e, dmg);}
     }
 
     public void ApplyOnKill(Vector2 pos){
@@ -656,14 +686,18 @@ public class Flamey : MonoBehaviour
     void CheckBlackMarketItems(){
         
         Debug.Log("CHECKING ITEMS...");
-        MaxHealth=250;
-        Health=250;
+        MaxHealth=500;
+        Health=500;
         string[] HealthItems = new string[]{"Soggy Logs", "Dry Logs", "High-Quality Log Pack"};
-        foreach(string HealthItem in HealthItems){if(Item.has(HealthItem)){MaxHealth+=250;Health+=250;}}
+        int[] HealthGiven = new int[]{250,250,500};
+        int j = 0;
+        foreach(string HealthItem in HealthItems){if(Item.has(HealthItem)){MaxHealth+=HealthGiven[j];Health+=HealthGiven[j];}j++;}
 
-        atkSpeed = .5f;
+        atkSpeed = .75f;
         string[] AtkSpeedItems = new string[]{"Leaf Basket", "Twig Basket", "Pine Cone Basket", "Giant Pinecone"};
-        foreach(string AtkSpeedItem in AtkSpeedItems){if(Item.has(AtkSpeedItem)){atkSpeed += 0.25f;}}
+        float[] AtkSpedGiven = new float[]{.25f,0.25f,0.25f,0.5f};
+        int c = 0;
+        foreach(string AtkSpeedItem in AtkSpeedItems){if(Item.has(AtkSpeedItem)){atkSpeed += AtkSpedGiven[c];}c++;}
 
         Dmg = 30;
         string[] DmgItems = new string[]{"Old Stolen Fuel Bucket", "Old Petrol Tank", "5L Petrol Tank", "10L Premium Gas Tank"};

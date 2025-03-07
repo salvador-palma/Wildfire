@@ -18,7 +18,7 @@ public class SecondShot : OnShootEffects{
 
 
     public static SecondShot Instance;
-    public bool maxed;
+    
     public float perc;
 
     public int currentTargetingOption;
@@ -83,18 +83,22 @@ public class SecondShot : OnShootEffects{
         secondaryTarget = Flamey.Instance.getRandomHomingEnemy();
     }
     private void RemoveUselessAugments(){
-        if(perc > 1f){
+        if(perc >= 1f){
             perc = 1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    private void CheckMaxed(){
-        if(perc >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Multicaster");
+
+        if(GameVariables.hasQuest(16) && perc>=1f && BurstShot.Instance != null && BurstShot.Instance.interval <=10){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
+
+        if(GameVariables.hasQuest(25) && perc>=1f && Flamey.Instance.atkSpeed>=12f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
+        }
+        
     }
+   
     public bool addList(){
         return Instance == this;
     }
@@ -174,6 +178,7 @@ public class BurstShot : OnShootEffects{
     }
     public void Burst(int a = -1){
         int acutal_amount = a == - 1 ? amount + ExtraBurstShots : 250;
+        Debug.Log("Burst: " + acutal_amount);
         for(int i =0; i < acutal_amount; i++){
                 Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Burst Shot", "Multicaster"});
 
@@ -194,7 +199,8 @@ public class BurstShot : OnShootEffects{
         }
 
         if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2){
-            ExtraBurstShots++;
+            
+            ExtraBurstShots = Math.Min(ExtraBurstShots+1, amount);
         }
     }
    
@@ -216,15 +222,12 @@ public class BurstShot : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstInterval");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(amount >= 20 && interval <= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Burst");
-            maxed = true;
+        if(GameVariables.hasQuest(16) && interval<=10 && SecondShot.Instance != null && SecondShot.Instance.perc >= 1f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
+       
     }
+   
     public void SpawnExtraAssets(){
         // activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BurstAmount"));
         // activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -339,15 +342,9 @@ public class KrakenSlayer : OnShootEffects{
             deck.removeClassFromDeck("BlueFlameInterval");
             
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(interval <= 0 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Magical Shot");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BlueFlameInterval"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -450,15 +447,9 @@ public class CritUnlock : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritMult");
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(perc >= .8f && mult >= 5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Crit");
-            maxed = true;
-        }
-    }
+  
     public bool addList(){
         return Instance == this;
     }

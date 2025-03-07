@@ -82,6 +82,9 @@ public class GameUI : MonoBehaviour
     public GameObject UICooldownsTemplate;
     public GameObject UIActiveCooldownsTemplate;
 
+    [Header("QuickStart")]
+    public LocalBestiary localBestiary;
+
     private void Awake() {
         Instance = this;
         FastForwardButtons[0].interactable = false;
@@ -95,6 +98,9 @@ public class GameUI : MonoBehaviour
         if(Item.has("Magical Hourglass")){TimeScaleIndex++;}
         if(Item.has("Celestial Hourglass")){TimeScaleIndex++;}
         FastForwardButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + TimeScaleValue[TimeScaleIndex];
+
+        localBestiary.Awake();
+        InteractiveCursor.ChangeCursor(0);
     }
     
 
@@ -119,6 +125,7 @@ public class GameUI : MonoBehaviour
     public void TogglePausePanel(){
         Flamey f = Flamey.Instance;
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
+
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
@@ -169,10 +176,10 @@ public class GameUI : MonoBehaviour
         Flamey f = Flamey.Instance;
         StatsTexts[0].text = "" + f.Dmg;
         StatsTexts[1].text = f.atkSpeed.ToString("F2") + "/s";
-        StatsTexts[2].text = "x"+ f.BulletSpeed;
-        StatsTexts[3].text = f.accuracy + "%";
+        StatsTexts[2].text = "x"+ f.BulletSpeed.ToString("F1");
+        StatsTexts[3].text = f.accuracy.ToString("F0") + "%";
         StatsTexts[4].text = f.Armor.ToString();
-        StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[5].text = f.Health.ToString("F0")+"/"+f.MaxHealth.ToString("F0");
         StatsTexts[6].text = f.Embers.ToString();
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;

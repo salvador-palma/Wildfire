@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public interface OnHittedEffects : Effect
 {
     public bool addList();
-    public void ApplyEffect(Enemy en = null);
+    public void ApplyEffect(Enemy en = null, int dmg = -1);
 }
 
 public class ThornsOnHitted : OnHittedEffects
@@ -43,7 +43,7 @@ public class ThornsOnHitted : OnHittedEffects
         return Instance == this;
     }
 
-    public void ApplyEffect(Enemy en = null)
+    public void ApplyEffect(Enemy en = null, int dmg = -1)
     {
         if(en==null){return;}
 
@@ -53,10 +53,10 @@ public class ThornsOnHitted : OnHittedEffects
                 Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
                 SpawnThorn(en.HitCenter.position, 2);
                 foreach(Enemy enemy in targets){
-                    enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                    enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1, source:"Thorns", extraInfo: new float[]{dmg});
                 }
             }else{
-                en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1, source:"Thorns", extraInfo: new float[]{dmg});
                 SpawnThorn(en.HitCenter.position,1);
             }
             
@@ -83,16 +83,10 @@ public class ThornsOnHitted : OnHittedEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThornsProb");
         }      
-        if(!maxed){CheckMaxed();}
+        
     }
 
-    private void CheckMaxed(){
-        if(prob >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Thorns");
-            maxed = true;
-        }
 
-    }
     public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/ThornsUnlock"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -139,7 +133,7 @@ public class ThornsOnHitted : OnHittedEffects
 
     public string getType()
     {
-        return "On-Hitted Effect";
+        return "Counter Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

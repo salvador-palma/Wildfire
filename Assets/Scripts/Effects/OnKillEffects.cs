@@ -102,16 +102,9 @@ public class Explosion : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ExplodeProb");
         } 
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Explosion");
-            maxed = true;
-        }
-    }
-
+   
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
@@ -149,8 +142,8 @@ public class Necromancer : OnKillEffects
     public float prob;
     public float dmgPerc;
     public static Necromancer Instance;
-    static GameObject Prefab;
-    static GameObject PrefabMega;
+    static IPoolable Prefab;
+    static IPoolable PrefabMega;
     public float MegaGhoulProbability;
 
     public Necromancer(float prob, float dmgPerc){
@@ -158,8 +151,8 @@ public class Necromancer : OnKillEffects
         this.dmgPerc = dmgPerc;
         if(Instance == null){
             Instance = this;
-            Prefab = Resources.Load<GameObject>("Prefab/Ghoul");
-            PrefabMega = Resources.Load<GameObject>("Prefab/MegaGhoul");
+            Prefab = Resources.Load<IPoolable>("Prefab/Ghoul");
+            PrefabMega = Resources.Load<IPoolable>("Prefab/MegaGhoul");
         }else{
             Instance.Stack(this);
         }
@@ -174,9 +167,11 @@ public class Necromancer : OnKillEffects
         
         if(Random.Range(0f,1f) < prob){
             if(MegaGhoulProbability > Random.Range(0f,1f)){
-                Flamey.Instance.SpawnObject(PrefabMega).transform.position = pos;
+                ObjectPooling.Spawn(PrefabMega, new float[]{pos.x, pos.y});
+                // Flamey.Instance.SpawnObject(PrefabMega).transform.position = pos;
             }else{
-                Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+                // Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
             }
             
         }
@@ -192,15 +187,9 @@ public class Necromancer : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("NecroProb");
         } 
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Necro");
-            maxed = true;
-        }
-    }
+    
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of summoning a <color=#FFCC7C>friendly ghoul</color>. Ghouls can attack enemies for up to <color=#FFCC7C>3 times</color> with a percentage of your <color=#FF5858>base damage.";
@@ -315,15 +304,9 @@ public class Bullets : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BulletsAmount");
         }
-        if(!maxed){CheckMaxed();}
+       
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && amount >= 6 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Pirate");
-            maxed = true;
-        }
-    }
+    
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of shooting <color=#FFCC7C>Cannon Balls</color> out of the enemy's corpse, that deal damage and apply <color=#FF99F3>On-Hit effects</color> whenever they hit another creature. If this effect procs, you will also gain <color=#FFCC7C>+10 embers</color>. <color=#AFEDFF>Cannon Balls' speed</color> scales with <color=#AFEDFF>Bullet Speed";

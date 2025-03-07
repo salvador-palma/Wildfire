@@ -26,7 +26,7 @@ public interface Effect{
 public interface OnHitEffects: Effect
 {
     public bool addList();
-    public void ApplyEffect(float dmg = 0, float health = 0, Enemy en = null);
+    public int ApplyEffect(float dmg = 0, float health = 0, Enemy en = null);
 }
 public class VampOnHit : OnHitEffects
 {
@@ -47,11 +47,13 @@ public class VampOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public int ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
             Flamey.Instance.addHealth(Math.Abs(dmg * perc * (SkillTreeManager.Instance.getLevel("Vampire") >= 1 && en.Health < Flamey.Instance.Dmg ? 2f : 1f)));
+            return 1;
         }
+        return 0;
     }
     public void OverHeal(float f){
         DamageOverhealed += f;
@@ -77,16 +79,9 @@ public class VampOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("VampPerc");
         }    
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Vampire");
-            maxed = true;
-        }
-    }
-    
+   
     public bool addList(){
         return Instance == this;
     }
@@ -126,7 +121,7 @@ public class VampOnHit : OnHitEffects
 public class IceOnHit : OnHitEffects
 
 {
-    private Color IceColor;
+   
     public static IceOnHit Instance;
     public float duration;
     public float prob;
@@ -143,13 +138,13 @@ public class IceOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public int ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
-        if(en==null || en.getSlowInfo("IceHit")[0] > 0){return;}
-        if(Flamey.Instance.MaxHealth <= 1000){return;}
+        if(en==null || en.getSlowInfo("IceHit")[0] > 0){return 0;}
+        if(Flamey.Instance.MaxHealth <= 1000){return 0;}
         if(UnityEngine.Random.Range(0f,1f) < prob){   
-            int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
-            float perc = Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002666f * fator, 0, 0.75f);
+            
+            float perc = getSlowPerc();
             en.SlowDown(duration/1000f, perc, "IceHit");
 
             if(en?.Health > dmg && perc>0 && en?.SlowSet > 0){
@@ -173,9 +168,15 @@ public class IceOnHit : OnHitEffects
                 }
             }
 
-            
+            return 1;
             
         }
+        return 0;
+    }
+    public float getSlowPerc(){
+        int fator = SkillTreeManager.Instance.getLevel("Freeze") >= 1 ? 2 : 1;
+            float perc = Mathf.Clamp((Flamey.Instance.MaxHealth-250) * 0.0002666f * fator, 0, 0.75f);
+            return perc;
     }
     //QUEST NEPTUNE
     private int frozenEnemies;
@@ -195,16 +196,9 @@ public class IceOnHit : OnHitEffects
             duration= 10000;
             deck.removeClassFromDeck("IceDuration");
         }    
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= 1f && duration >= 10000 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Freeze");
-            maxed = true;
-        }
-
-    }
+    
     public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/IceUnlock"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -296,9 +290,9 @@ public class ShredOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public int ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
-        if(en==null){return;}
+        if(en==null){return 0;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
             
@@ -333,7 +327,9 @@ public class ShredOnHit : OnHitEffects
                 
             }
             
+            return 1;
         }
+        return 0;
     }
     
     private void PlayAudio(){
@@ -420,16 +416,17 @@ public class ExecuteOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health, Enemy en)
+    public int ApplyEffect(float dmg, float health, Enemy en)
     {
         try{
 
             
-            if(en==null || en.Health<=0){return;}
+            if(en==null || en.Health<=0){return 0;}
             if(en.Health < en.MaxHealth * percToKill){
                 float f = en.Health;
                 Vector2 v = en.transform.position;
                 Vector2 pos = en.HitCenter.position;
+                int prevHealth = en.Health;
                 en.Health = 0;
                 
                 if(SkillTreeManager.Instance.getLevel("Assassin")>=2){
@@ -438,11 +435,18 @@ public class ExecuteOnHit : OnHitEffects
                 }
                 
                 ObjectPooling.Spawn(Ghost, new float[]{pos.x,pos.y});
+
+                //Debug.Log("Execute: " +  prevHealth + " Health ");
+                if(prevHealth > Flamey.Instance.MaxHealth){
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(22, "Naal", 14);
+                }
                 
+                return 1;
             }
         }catch(Exception e){
             Debug.LogError(e.Message + "; " + en);
         }
+        return 0;
         
     }
     public void Stack(ExecuteOnHit executeOnHit){
@@ -455,16 +459,9 @@ public class ExecuteOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("Execute");
         } 
-
-        if(!maxed){CheckMaxed();}
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(percToKill >= 0.5f && Flamey.Instance.ArmorPen >= .8f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Assassin");
-            maxed = true;
-        }
-    }
+    
+        
     public bool addList(){
         return Instance == this;
     }
@@ -528,9 +525,9 @@ public class StatikOnHit : OnHitEffects
             Instance.Stack(this);
         }
     }
-    public void ApplyEffect(float dmg, float health = 0, Enemy en = null)
+    public int ApplyEffect(float dmg, float health = 0, Enemy en = null)
     {
-        if(en==null){return;}
+        if(en==null){return 0;}
         
         if(UnityEngine.Random.Range(0f,1f) < prob){
 
@@ -539,12 +536,14 @@ public class StatikOnHit : OnHitEffects
                 if(procAmount > 100){
                     procAmount=0;
                     Flamey.Instance.CallCoroutine(StatikCouroutine(true,30,8f,en));
-                    return;
+                    return 1;
                 }
                 statikMeterSlider.value = procAmount;
             }
             Flamey.Instance.CallCoroutine(StatikCouroutine(false,ttl,1.75f,en));
+            return 1;
         }
+        return 0;
         
     }
     public void Stack(StatikOnHit statikOnHit){
@@ -564,15 +563,9 @@ public class StatikOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("StatikTTL");
         }      
-    if(!maxed){CheckMaxed();}
+    
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= 1f && ttl >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Statik");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         GameObject g = GameUI.Instance.SpawnUI(statikMeter);
         statikMeterSlider = g.GetComponent<Slider>();
@@ -632,12 +625,11 @@ public class StatikOnHit : OnHitEffects
         int Damage = dmg;
         bool decays = SkillTreeManager.Instance.getLevel("Static Energy") < 2;
 
-        int idp = id++;
+        int amountOfOnHit = 0;
         for(int i = 0; i<TTL-1; i++){
             
             Enemy next = PickRandomEnemy(points.Last(), radius, passed);
             passed = passed.Append(next).ToList();
-
 
             if(next != null){
                 try{
@@ -665,9 +657,9 @@ public class StatikOnHit : OnHitEffects
 
                     //DAR DAMAGE
                     if(Powered){
-                        next.Hitted(Damage, 14, ignoreArmor: true, onHit:true);
+                        amountOfOnHit += next.Hitted(Damage, 14, ignoreArmor: true, onHit:true);
                     }else{
-                        next.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , except:"Static Energy");
+                        amountOfOnHit += next.Hitted(Damage, 6, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Static Energy") >= 1 , except:"Static Energy");
                     }
 
                     //NEXT ITERATIONS
@@ -682,6 +674,13 @@ public class StatikOnHit : OnHitEffects
             }
         }     
         if(lineRenderer!=null){lineRenderer.GetComponent<IPoolable>().UnPool();}
+        
+        
+        if(amountOfOnHit >= 20){
+            if(GameVariables.hasQuest(12)){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(12, "Rowl", 13);
+            }
+        }
      
     }
 

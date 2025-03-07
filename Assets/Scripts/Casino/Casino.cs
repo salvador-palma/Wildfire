@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 public class MiniGameProps{
@@ -11,9 +12,11 @@ public class MiniGameProps{
 }
 public class Casino : MonoBehaviour
 {
-    static int offset = 2;
+    static int offset = 0;
     public List<MiniGameProps> minigames;
     public GameObject settingsPanel;
+    public static Casino Instance;
+
     public static string getMinigame(){
         DateTime d = DateTime.Today;
         switch((int)d.DayOfWeek % 3 + offset){
@@ -30,6 +33,7 @@ public class Casino : MonoBehaviour
         
     }
     private void Awake() {
+        Instance = this;
         foreach(GameObject go in minigames.Find(x => x.name == getMinigame()).prefab){
             go.SetActive(true);
         }
@@ -53,4 +57,25 @@ public class Casino : MonoBehaviour
         PlayerPrefs.SetInt("Origin", 1);
         SceneManager.LoadScene("MetaGame");
     }
+
+    [SerializeField] GameObject CornerPopUpAnim;
+    public void CornerPopUp(string title, string description, Sprite icon){
+        CornerPopUpAnim.transform.GetChild(1).GetComponent<DynamicText>().SetText(title);
+        CornerPopUpAnim.transform.GetChild(2).GetComponent<DynamicText>().SetText(description);
+        CornerPopUpAnim.transform.GetChild(3).GetComponent<Image>().sprite = icon;
+        CornerPopUpAnim.GetComponent<Animator>().Play("CornerPopUp");
+
+    }
+    public void CompleteQuestIfHasAndQueueDialogue(int questID, string npcname, int dialogueID){
+        if(GameVariables.hasQuest(questID)){
+            GameVariables.CompleteQuest(questID);
+            NPC.QueueDialogue(npcname, dialogueID);
+            Quest q = QuestBoard.Instance.Quests[questID]; 
+            CornerPopUp("Quest Complete", q.Title, q.Avatar);
+        }
+
+        
+        
+    }
+
 }

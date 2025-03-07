@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class Ghoul : MonoBehaviour
+public class Ghoul : IPoolable
 {
         
     public int remainingAttacks;
@@ -18,17 +18,7 @@ public class Ghoul : MonoBehaviour
 
     bool Spawning = true;
     SpriteRenderer sp;
-    private void Start() {
-
-
-        remainingAttacks = Necromancer.getAttackTimes();
-        dmg = Flamey.Instance.Dmg * Necromancer.Instance.dmgPerc ;
-        speed = 3.5f * ((Flamey.Instance.BulletSpeed -5)/15f) + 0.5f;
-        AtkInterval = 2 - 1.75f*((1/Flamey.Instance.atkSpeed) - 1.333f)/(-1.25f);
-        sp = GetComponentInChildren<SpriteRenderer>();
-        sp.flipX = Random.Range(0f,1f) < 0.5f;
-        if(isMega){GetComponent<Animator>().SetBool("Mega", true);}
-    }
+    
     private void Update() {
         if(Spawning){return;}
         if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
@@ -56,7 +46,7 @@ public class Ghoul : MonoBehaviour
         if(SkillTreeManager.Instance.getLevel("Necromancer")>=2){
             Flamey.Instance.ApplyOnKill(transform.position);
         }
-        Destroy(gameObject);
+        UnPool();
     }
     
     private void Attack(){
@@ -105,4 +95,36 @@ public class Ghoul : MonoBehaviour
         Spawning = false;
     }
 
+    public override string getReference()
+    {
+        return "Ghoul" + (isMega ? "Mega" : "");
+    }
+
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+    }
+    public override void Pool()
+    {
+        remainingAttacks = Necromancer.getAttackTimes();
+        dmg = Flamey.Instance.Dmg * Necromancer.Instance.dmgPerc ;
+        speed = 3.5f * ((Flamey.Instance.BulletSpeed -5)/15f) + 0.5f;
+        AtkInterval = 2 - 1.75f*((1/Flamey.Instance.atkSpeed) - 1.333f)/(-1.25f);
+        sp = GetComponentInChildren<SpriteRenderer>();
+        sp.flipX = Random.Range(0f,1f) < 0.5f;
+        if(isMega){GetComponent<Animator>().SetBool("Mega", true);}
+
+        gameObject.SetActive(true);
+        GetComponent<Animator>().Play("SpawnGhoul");
+        
+        if(GameVariables.hasQuest(11)){
+            if(ObjectPooling.ActiveAmount(this) + 1 >= 50){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(11, "Naal", 12);
+            }
+        }
+        
+        
+    }
+
+    
 }

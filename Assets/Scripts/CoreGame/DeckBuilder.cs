@@ -296,37 +296,9 @@ public class DeckBuilder : MonoBehaviour
             new Augment("Ember Generation","Robbery", "Gain +100 embers per round", "MoneyProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(100, 0))), baseCardUpgrade:true),
 
             
-            new Augment("Gambling","Not enough refreshes", "50% chance of gaining 2 random silver augments, 25% chance of gaining 1, and 25% chance of getting nothing", "GambleImprove", Tier.Silver, new UnityAction(() => {
-                float f = Random.Range(0f,1f);
-                if(f<.5f){
-                    Deck.Instance.Gamble(2, Tier.Silver, "Not enough refreshes");
-                }else if(f<.75f){
-                    Deck.Instance.Gamble(1, Tier.Silver, "Not enough refreshes");
-                }else{
-                    Deck.Instance.Gamble(0, Tier.Silver, "Not enough refreshes");
-                }
-            }), baseCardUpgrade:true),
-            new Augment("Gambling","Feelin' Blessed", "50% chance of gaining 4 random silver augments, 25% chance of getting 2, 25% chance of getting 1", "GambleImprove", Tier.Gold, new UnityAction(() => {
-                float f = Random.Range(0f,1f);
-                if(f<.5f){
-                    Deck.Instance.Gamble(4, Tier.Silver, "Feelin' Blessed");
-                }else if(f<.75f){
-                    Deck.Instance.Gamble(2, Tier.Silver, "Feelin' Blessed");
-                }else{
-                    Deck.Instance.Gamble(1, Tier.Silver, "Feelin' Blessed");
-                }
-            }), baseCardUpgrade:true),
-            new Augment("Gambling","Roll the Dice", "50% chance of gaining 4 random gold augments, 25% chance of getting 2, 25% of getting 1", "GambleImprove", Tier.Prismatic, new UnityAction(() => {
-                
-                float f = Random.Range(0f,1f);
-                if(f<.5f){
-                    Deck.Instance.Gamble(4, Tier.Gold, "Roll the Dice");
-                }else if(f<.75f){
-                    Deck.Instance.Gamble(2, Tier.Gold, "Roll the Dice");
-                }else{
-                    Deck.Instance.Gamble(1, Tier.Gold, "Roll the Dice");
-                }
-            }), baseCardUpgrade:true),
+            new Augment("Gambling","Not enough refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => Deck.Instance.Gamble(2, Tier.Silver, "Not enough refreshes")), baseCardUpgrade:true),
+            new Augment("Gambling","Feelin' Blessed", "Gain 4 random silver augments", "GambleImprove", Tier.Gold, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Silver, "Feelin' Blessed")), baseCardUpgrade:true),
+            new Augment("Gambling","Roll the Dice", "Gain 4 random gold augments", "GambleImprove", Tier.Prismatic, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Gold, "Roll the Dice")), baseCardUpgrade:true),
 
 
             

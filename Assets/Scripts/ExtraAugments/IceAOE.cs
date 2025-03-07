@@ -50,6 +50,15 @@ public class IceAOE : IPoolable
         Color c = GetComponent<SpriteRenderer>().color;
         c.a = 1;
         GetComponent<SpriteRenderer>().color = c;
+
+        int n = ObjectPooling.ActiveAmount(this) + 1;
+       
+        if(n >= 100 && GameVariables.hasQuest(19)){
+
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(19, "Cloris", 11);
+            
+        }
+
     }
     public override string getReference()
     {

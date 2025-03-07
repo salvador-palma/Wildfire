@@ -29,6 +29,7 @@ public class RunTimeDialogues{
     public UnityEvent afterEvent;
  
     public bool dequeueAuto;
+    public bool dontEndAfter;
     public RunTimeDialogues(Dialogue[] dialogues,UnityEvent afterEvent){
         this.dialogues = dialogues;
         this.afterEvent = afterEvent;
@@ -131,7 +132,7 @@ public class NPC : MonoBehaviour
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);
         if(own_dialogues != null){
            savedData.data.FirstOrDefault(e => e.name == Name).Dequeue(ID);
-           Debug.Log("Dequeing");
+           Debug.Log("Dequeing " + ID);
         }
         WritingData();
         UpdateNotification();
@@ -140,6 +141,7 @@ public class NPC : MonoBehaviour
         StartDialogue(IDs[UnityEngine.Random.Range(0, IDs.Length)]);
     }
     public void StartDialogue(int ID){
+        Debug.Log("Starting Dialogue: " + Name + " " + ID);
         RunTimeDialogues own_dialogues = runTimeDialogues[ID];
         UnityEvent afterEvent = own_dialogues.afterEvent;
 
@@ -147,7 +149,7 @@ public class NPC : MonoBehaviour
            afterEvent.AddListener(()=>DequeueDialogue(ID));
         }
         
-        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent));
+        StartCoroutine(Chat.Instance.StartDialogue(own_dialogues.dialogues, Name, afterEvent, !own_dialogues.dontEndAfter));
     }
     private void StartQueuedDialogue(){
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == Name);

@@ -7,6 +7,7 @@ using FMODUnity;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 {
@@ -156,9 +157,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         }
     }
 
-    public virtual void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
-        if(Health<=0){return;}
+    public virtual int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
+        if(Health<=0){return 0;}
 
+        //EXTRA DAMAGE DUE TO SKILLS
         if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
             Dmg *= 2;
         }
@@ -167,13 +169,36 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             float armorPen = onHit || Character.Instance.isCharacter("Assassin")? Flamey.Instance.ArmorPen : 0;
             Dmg = (int)(B + (Dmg-B)*armorPen);
         }
+        //============================
 
-        if(onHit){Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
+        //ACHIEVMENTS AND QUESTS
+        if(Dmg >= 50000){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(17, "Naal", 13); //AZUREOTH UNLOCK
+        }
+        if(CritUnlock.Instance != null){
+            if(Dmg >= Flamey.Instance.Dmg * 5f){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(18, "Rowl", 17); //POWERED UP UNLOCK
+            }
+        }
+
+        if(source=="Thorns"){
+            float DamageGiven = extraInfo[0];
+            Debug.Log("Damage Dealt: " + Dmg + " Damage Received: " + DamageGiven);
+            if(DamageGiven < Dmg){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(26, "Cloris", 13);
+            }
+        }
+
+        //============================
+
+        int amountOfOnHit = 0;
+        if(onHit){amountOfOnHit = Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);}
 
 
         Health -= Dmg;
         Flamey.Instance.TotalDamage+=(ulong)Dmg;
         PlayHitAnimation(Dmg, TextID); 
+        return amountOfOnHit;
     }
 
     public void PlayHitAnimation(int dmg, int textID){
@@ -188,7 +213,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             flame.TotalKills++;
             CameraShake.Shake(0.4f,0.05f);
             
-            EnemySpawner.AddDeath(Shiny? Name+"Shiny" : Name);
+            EnemySpawner.AddDeath(Name , Shiny);
             if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
 
             AudioManager.PlayOneShot(DeathSound,transform.position);
@@ -299,6 +324,9 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
                     SlowSet = Math.Clamp(SlowSet - SlowEffectsDuration[slow][1],0,1);
                 }
             }
+        }
+        if(SlowEffectsDuration.Keys.Count == 0 || (!SlowEffectsDuration.Keys.Any(a => a[0] > 0))){
+            SlowSet = 0;
         }
         if(SlowSet > SlowFactor){
             SlowFactor = SlowSet;

@@ -63,18 +63,9 @@ public class HealthRegen : TimeBasedEffect
     public void Stack(HealthRegen healthRegen){
         perSec += healthRegen.perSec;
         perRound += healthRegen.perRound;
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
     
-
-    private void CheckMaxed(){
-        if(perSec >= 100 && perRound >= 100 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Regeneration");
-            maxed = true;
-        }
-
-    }
     public void SpawnExtraAssets(){
         pheonix = Flamey.Instance.SpawnObject(pheonixPrefab);
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Regen"));
@@ -202,14 +193,13 @@ public class LightningEffect : TimeBasedEffect
             interval = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThunderInterval");
+            if(Flamey.Instance.atkSpeed == Flamey.Instance.BegginingAS && Flamey.Instance.BulletSpeed == 5){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(20, "Betsy", 23);
+            }
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    private void CheckMaxed(){
-        if(interval <= 1 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Thunder");
-        }
-    }
+    
     
     public string getDescription()
     {

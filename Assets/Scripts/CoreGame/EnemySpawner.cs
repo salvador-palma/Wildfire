@@ -141,8 +141,9 @@ public class EnemySpawner : MonoBehaviour
                 else{
                     isOnAugments = true;
                     Deck.Instance.StartAugments((current_round+1)%5 == 0);
+                    LogNewRound();
                 }
-                LogNewRound();
+                
                 Flamey.Instance.poisonsLeft = 0;
             } 
             return;
@@ -165,6 +166,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if(FlameCircle.Instance != null){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(38,"Betsy",17); //EARTH UNLOCK
+        }
+
+
+        if(RoundsBelow50PercMaxHP >= 59 && HealthRegen.Instance != null){
+            Debug.Log("UNLOCK PHEONIX");
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(30,"Betsy",22); //PHEONIX UNLOCK
         }
     }
 
@@ -368,30 +375,40 @@ public class EnemySpawner : MonoBehaviour
 
 
     //==== DEATH COUNTER ==== //
-    public static void AddDeath(string enemy_name){
+    public static void AddDeath(string enemy_name, bool shiny=false){
         if(DeathPerEnemy.ContainsKey(enemy_name)){
             DeathPerEnemy[enemy_name]++;
         }else{
             DeathPerEnemy[enemy_name] = 1;
         }
-        bool shiny = enemy_name.Contains("Shiny");
+        
         string og = enemy_name.Contains("Shiny") ? enemy_name.Replace("Shiny","") : enemy_name;
+
         if(LocalBestiary.INSTANCE.getMilestoneAmount(og) < 0){
             Debug.Log("Bestiary Doesn't have: " + og);
 
             LocalBestiary.INSTANCE.UnlockView(og);
+            
             Debug.Log("Unlocked: " + og);
             LocalBestiary.INSTANCE.UpdateSlots();
             Debug.Log("Slots Updated");
         }
+        if(shiny && LocalBestiary.INSTANCE.getMilestoneAmountShiny(og) < 0){
+            Debug.Log("Unlocking Shiny: " + enemy_name + " : " + shiny);
+            LocalBestiary.INSTANCE.UnlockShiny(og);
+            LocalBestiary.INSTANCE.UpdateSlots();
+        }
 
         if(shiny){
+            print("Shinies counting");
             if(GameVariables.hasQuest(31)){
+                print("Shinies counting 2");
                 int shinies = 0;
                 foreach(AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals){
-                    if(a.ShinyCaptured > 0){shinies++;}
+                    if(a.ShinyCaptured >= 0){shinies++;}
                     
                 }
+                print("Shinies: " + shinies);
                 if(shinies>=10){
                     GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(31, "Gyomyo", 9);
                 }
@@ -407,9 +424,11 @@ public class EnemySpawner : MonoBehaviour
     // ===== ROUNDS BASED ACHIEVEMENTS/QUESTS ===== //
     public int RoundsWithoutDamage = 0;
     public int RoundsBelow25PercMaxHP = 0;
+    public int RoundsBelow50PercMaxHP = 0;
     private void LogNewRound(){
         //MARS
         RoundsWithoutDamage++;
+        RoundsBelow50PercMaxHP++;
 
         if(RoundsWithoutDamage >= 30 && FlameCircle.Instance != null){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42,"Betsy",20); //URANUS UNLOCK
@@ -421,6 +440,10 @@ public class EnemySpawner : MonoBehaviour
                 GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(39,"Betsy",18); //MARS UNLOCK
             }
         }else{RoundsBelow25PercMaxHP=0;}
+
+        
+        
+        
     }
 
     

@@ -340,6 +340,7 @@ public class CandleTurrets : NotEspecificEffect
         if(amount >= 6){
             amount = 6;
             Deck.Instance.removeClassFromDeck("CandleAmount");
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(10, "Naal", 11);
         } 
         if(atkSpeed >= 3f){
             atkSpeed = 3f;
@@ -347,14 +348,7 @@ public class CandleTurrets : NotEspecificEffect
             deck.removeClassFromDeck("CandleAtkSpeed");
         } 
           
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(amount >= 6f && atkSpeed >= 3f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Ritual");
-            maxed = true;
-        }
+        
     }
     public void SpawnExtraAssets(){
         CandleCircle.transform.GetChild(6).gameObject.SetActive(true);

@@ -167,6 +167,7 @@ public class Mines : MonoBehaviour
         int value = (int)Math.Round(bet*multiplier);
         AddEmbersToSkillTree(value);
         if(GameVariables.hasQuest(8) && value>=100000){
+            Casino.Instance.CompleteQuestIfHasAndQueueDialogue(8, "Gyomyo", 11);
             //PUT HERE CASINO QUEST UNLOCKABLE //TO GYOMYO 11
         }
 

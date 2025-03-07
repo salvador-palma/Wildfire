@@ -33,6 +33,7 @@ public class ObjectPooling : MonoBehaviour
         if(args!=null){GO_poolable.GetComponent<IPoolable>().Define(args);}
         GO_poolable.GetComponent<IPoolable>().Pool();
         GO_poolable.SetActive(true);
+       
 
         return GO_poolable;  
     }
@@ -49,6 +50,11 @@ public class ObjectPooling : MonoBehaviour
             pool.Instances.Add(Instantiate(Prefab, pool.Parent));
         }
         return pool.Instances.Last();
+    }
+
+    public static int ActiveAmount(IPoolable ipoolable){
+        ObjectPool pool = Instance.Pools[ipoolable.getReference()];
+        return pool.Instances.Count(e => e.activeInHierarchy);
     }
 
 }
@@ -79,6 +85,7 @@ public abstract class IPoolable:MonoBehaviour{
     public abstract string getReference();
     public virtual void UnPool(){gameObject.SetActive(false);}
     public virtual void Pool(){}
+   
     public virtual void Define(float[] args){}
 
     
