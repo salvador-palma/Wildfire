@@ -238,6 +238,7 @@ public class Bullets : OnKillEffects
     public static Bullets Instance;
     static IPoolable Prefab;
 
+    public int EmbersInRound = 0;
     public Bullets(float prob, int dmg, int amount){
         this.prob = prob;
         this.dmg = dmg;
@@ -246,10 +247,22 @@ public class Bullets : OnKillEffects
             Instance = this;
             Prefab = Resources.Load<GameObject>("Prefab/Bullet").GetComponent<IPoolable>();
             if(SkillTreeManager.Instance.getLevel("Pirate") >= 2){ this.amount *= 2;}
+            Deck.RoundOver += ResetEmbersRound;
         }else{
             Instance.Stack(this);
         }
     }
+
+    private void ResetEmbersRound(object sender, EventArgs e)
+    {
+        if(EmbersInRound >= 5000){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(15, "Gyomyo", 15);
+        }
+        Debug.Log("Embers: " + EmbersInRound);
+        EmbersInRound = 0;
+
+    }
+
     public bool addList()
     {
         return this == Instance;
@@ -261,7 +274,8 @@ public class Bullets : OnKillEffects
         if(Random.Range(0f,1f) < prob){
             
             SpawnBullets(pos);
-            Flamey.Instance.addEmbers(10);
+            Flamey.Instance.addEmbers(20);
+
         }
     }
     private void SpawnBullets(Vector2 pos){

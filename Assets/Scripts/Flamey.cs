@@ -668,6 +668,7 @@ public class Flamey : MonoBehaviour
             n = (int)(n * MoneyMultipliers.Instance.mult);
         }
         Embers += n;
+        if(Bullets.Instance != null){Bullets.Instance.EmbersInRound += n;}
         GameUI.Instance.SetEmberAmount(Embers);
         
         

@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using FMOD;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public interface NotEspecificEffect : Effect{
     public bool addList();
@@ -399,12 +402,12 @@ public class Summoner : NotEspecificEffect
             bees = new List<Bee>();
             BeeTypes = new GameObject[]{
                 Resources.Load<GameObject>("Prefab/WorkerBee"),
-                Resources.Load<GameObject>("Prefab/PuncherBee"),
-                Resources.Load<GameObject>("Prefab/AssassinBee"),
-                Resources.Load<GameObject>("Prefab/AgileBee"),
-                Resources.Load<GameObject>("Prefab/WarriorBee"),
-                Resources.Load<GameObject>("Prefab/PollinatorBee"),
-                Resources.Load<GameObject>("Prefab/ChemicalBee"),
+                Resources.Load<GameObject>("Prefab/PuncherBee"), //
+                Resources.Load<GameObject>("Prefab/AssassinBee"), //
+                Resources.Load<GameObject>("Prefab/AgileBee"), //
+                Resources.Load<GameObject>("Prefab/WarriorBee"), //
+                Resources.Load<GameObject>("Prefab/PollinatorBee"), //
+                Resources.Load<GameObject>("Prefab/ChemicalBee"), //
             };
             for(int i =0; i!=this.amount; i++){
                  Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
@@ -437,6 +440,24 @@ public class Summoner : NotEspecificEffect
             bees.Add(b);
         }
         this.amount += amount; 
+
+        //CHECK IF HAS EVERY BEE
+        HashSet<string> allTypes = new HashSet<string>();
+        foreach(GameObject go in BeeTypes){
+            allTypes.Add(go.GetComponent<Bee>().Type);
+        }
+        foreach (Bee b in bees)
+        {
+            string t = b.Type;
+            if(allTypes.Contains(t)){
+                allTypes.Remove(t);
+            }
+        }
+        Debug.Log("Left Types: ");
+        allTypes.ToList().ForEach(E => Debug.Log(E));
+        if(allTypes.Count == 0){
+           GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(44, "Betsy", 26);
+        }
         RemoveUselessAugments();
     }
     public void ApplyEffect()
@@ -500,15 +521,9 @@ public class Summoner : NotEspecificEffect
             deck.removeClassFromDeck("SummonSpeed");
         } 
           
-        if(!maxed){CheckMaxed();}
+       
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(amount >= 14 && atkSpeed >= 4f && speed >= 4f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Bee Summoner");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/SummonAmount"));
     }

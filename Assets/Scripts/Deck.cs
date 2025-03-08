@@ -387,6 +387,7 @@ public class Deck : MonoBehaviour
     private void CheckBlackMarketItems(){
         string[] AnvilTypes = new string[]{"Wood Anvil","Stone Anvil","Bronze Anvil","Sturdy Anvil","Deluxe Anvil","Royal Anvil","Star Forger"};
         foreach(string Anvil in AnvilTypes){if(Item.has(Anvil)){GoldAugmentProbability+=0.05f;}}
+        Debug.Log("Gold Probability: " + GoldAugmentProbability);
     }
     
 

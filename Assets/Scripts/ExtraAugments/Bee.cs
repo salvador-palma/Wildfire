@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bee : MonoBehaviour
 {
+    public string Type;
     public float speed;
     public float atkSpeed;
     public float atkTimer;
@@ -14,6 +15,8 @@ public class Bee : MonoBehaviour
     SpriteRenderer sp;
     SpriteRenderer propSp;
     EventInstance eventInstance;
+
+
     public virtual void Start() {
         sp = transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
         propSp = transform.GetChild(1).GetComponentInChildren<SpriteRenderer>();

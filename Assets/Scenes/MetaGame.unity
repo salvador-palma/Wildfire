@@ -11424,9 +11424,9 @@ MonoBehaviour:
       Assassin, Warrior, Agile, Chemical and Pollinator)
     AbilityDescription3: Every time you gain a <style="LYellow">Bee</style>, gain
       an <style="LYellow">extra one</style> of the same type
-    QuestID: -1
-    npc: {fileID: 0}
-    DialogueID: 0
+    QuestID: 44
+    npc: {fileID: 1457361219}
+    DialogueID: 25
   - Name: Orbits
     Type: Special Effect
     AbilityDescription1: Small <style="LYellow">orbits</style> will circle the campfire,
@@ -11495,7 +11495,7 @@ MonoBehaviour:
     npc: {fileID: 1206136743}
     DialogueID: 11
   - Name: Thorns
-    Type: On-Hitted Effect
+    Type: Counter Effect
     AbilityDescription1: Enemies that directly hit you get <style="Red">damaged</style>
       back by a percentage of your <style="Grey">armor
     AbilityDescription2: <style="Yellow">Thorns</style> will proc <style="Pink">On-Hit
@@ -20380,6 +20380,23 @@ MonoBehaviour:
     AbilityToSkillTree: Bee Summoner
     Subtype: 
     Supratype: 
+  - Name: Clown
+    AnimationBool: Clown
+    AbilityName: Gambling
+    AbilityDescription: Every time you pick a gambling augment, a random buff/debuff
+      will be applied. <style="Grey">(Damage, Attack Speed, Bullet Speed, Enemy Spawn
+      Rate, Enemy Health, Enemy Speed, Enemy Damage)
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 0}
+    Face: {fileID: 21300000, guid: 5204c25580bfdfd4e9d5a7110ca89469, type: 3}
+    BodyBackColor: {r: 0.64705884, g: 0.09803922, b: 0.26666668, a: 1}
+    BodyFrontColor: {r: 1, g: 0.88235295, b: 0.60784316, a: 1}
+    Environment: {fileID: 2132517373535820160, guid: d3639f339486fdc488e1b1ddbf5a4707, type: 3}
+    Unlocked: 1
+    AbilityToSkillTree: Gambling
+    Subtype: 
+    Supratype: 
   CharacterSelectContainer: {fileID: 911966202}
   CharacterSubTypeContainer: {fileID: 1258750953}
   CharacterName: {fileID: 1692255832}
@@ -23678,7 +23695,7 @@ MonoBehaviour:
     Description: Maximize all stats on your <style="LYellow">Immolate</style> ability
   - Title: Loot them all!
     Avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
-    Description: Loot <style="LYellow">+10k embers</style> in a single round
+    Description: Loot <style="LYellow">+5k embers</style> in a single round
   - Title: 'Short Fuse '
     Avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
     Description: Maximize <style="LYellow">Burst Interval</style> and <style="LYellow">Multicaster
@@ -35891,6 +35908,95 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: Incredible kid! I didn't even know <style="LYellow">Bees</style> could
+        have such capabilities
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    - message: You know what? There's one last element that I forgot to mention...
+        but for that I need you to do something for me
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: 'For context, normally, different <style="LYellow">Bees</style> types
+        don''t really mix up with each other '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3c4e89885fa4b7142815fadc36ce474d, type: 3}
+      Name: Betsy
+    - message: So if you could show me an army with at least one of every single
+        <style="LYellow">Bee</style> type, then I will teach you about the ultimate
+        type of <style="LYellow">Bee</style>
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: Good luck young man! Don't disappoint me!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1457361219}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 44
+            m_FloatArgument: 0
+            m_StringArgument: Von Van Pyre
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: WOAH! I'm truly amazed kiddo!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c0a467128e9f75b4f8ad0a717ac9da87, type: 3}
+      Name: Betsy
+    - message: You actually managed to fit every single <style="LYellow">Bee</style>
+        type in one army
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1dbf51139218df44b9052f5328940e1, type: 3}
+      Name: Betsy
+    - message: 'As promised, I''m going to tell you about the ultimate <style="LYellow">Bee</style>
+        type: <style="LYellow">Fire Bee</style>'
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: This <style="LYellow">Bee</style> is usually responsible for the whole
+        hive, and manages which <style="LYellow">Bees</style> have which roles
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: It's managment is so effective that they make Hives host more <style="LYellow">Bees</style>
+        that they could previously!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: c21e1455cacfce240802ef53f1586295, type: 3}
+      Name: Betsy
+    - message: But enough talking, just go put it in practice!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 44
+            m_FloatArgument: 0
+            m_StringArgument: Fire Bee
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -39550,7 +39656,7 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
-    - message: 'If you gathered up <style="LYellow">10k embers</style> in a single
+    - message: 'If you gathered up <style="LYellow">5k embers</style> in a single
         round you could call yourself a true pirate, you know! '
       arguments: []
       avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
@@ -39885,10 +39991,15 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
-    - message: With this, the more you keep gambling the likelier you are to get
-        the results you want! Very good eh?
+    - message: With this, new consequences, both bad and good may come up, whenever
+        you gamble! Just to spice things up you know?
       arguments: []
-      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    - message: But hey don't you worry now! If something bad happens you just gotta
+        gamble again to fix it right?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
       Name: Gyomyo
     afterEvent:
       m_PersistentCalls:
@@ -39903,6 +40014,37 @@ MonoBehaviour:
             m_IntArgument: 29
             m_FloatArgument: 0
             m_StringArgument: Clown
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Arghh! You really are a treasure hunter eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: Collecting all those embers in just one round ain't an easy task
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: But now that you've proved that you are as skilled as a true pirate,
+        go ahead and just keep shooting with these <style="LYellow">penetrative roundshots
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 29
+            m_FloatArgument: 0
+            m_StringArgument: Captain Ember Teach
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
@@ -55100,7 +55242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0002746582, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00076293945, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -55699,7 +55841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000045776367
+      value: -0.00077819824
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y
