@@ -283,11 +283,15 @@ public class GameUI : MonoBehaviour
         GetComponent<Animator>().Play("GameOver");
         if(EnemySpawner.Instance.isOnAugments){Deck.Instance.VisualOutroSlots();}
         setUpFinalStats();
+        AudioManager.Instance.SetAmbienceParameter("Dead", 1f);
     }
     
     public void loadScene(string str){
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         LocalBestiary.INSTANCE.UpdateBestiaryValues();
+
+        
+
         SceneManager.LoadScene(str);
     }
 

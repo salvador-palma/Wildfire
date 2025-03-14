@@ -16,7 +16,7 @@ public class Spider : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+        VirtualPreStart(); 
         centerPoint = Flamey.Instance.transform;
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);

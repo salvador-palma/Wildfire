@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ public class SkillTreeButton : MonoBehaviour
     const string LOCKED = "LineOff";
     const string DISCOVERED = "LineDiscovered";
     const string UNLOCKING = "LineSkill";
+    const string UNLOCKINGFAST = "LineOnQuick";
 
     public static SkillTreeButton SelectedButton;
 
@@ -51,7 +54,8 @@ public class SkillTreeButton : MonoBehaviour
        
     }
     public void ping(){
-        if(hasOnePreviousSkills()){ //hasAllPreviousSkills
+        
+        if(UnlockedPreviousSkills() == 1){ //hasAllPreviousSkills
 
             if(Step()){
                 
@@ -76,8 +80,11 @@ public class SkillTreeButton : MonoBehaviour
         }
         return result;
     }
-    public bool hasOnePreviousSkills(){
-        return previousNode.Any(s=>s.getLevel() >= 0);
+    public int UnlockedPreviousSkills(){
+        return previousNode.Count(s=>s.getLevel() >= 0);
+    }
+    public bool AnyUnlockedPreviousSkills(){
+        return previousNode.Any(s=>s.getLevel() >= 0) || previousNode.Count == 0;
     }
     public void Clicked(){
         
@@ -93,7 +100,7 @@ public class SkillTreeButton : MonoBehaviour
     
     }
     public void ClickedUpgrade(){
-        if(!hasAllPreviousSkills()){return;}
+        if(!AnyUnlockedPreviousSkills()){return;}
         if(SkillTreeManager.Instance.Upgrade(AbilityName)){
             ReloadColor();
             ReloadFunctionality();
@@ -152,10 +159,37 @@ public class SkillTreeButton : MonoBehaviour
     }
     
     public IEnumerator NextPathCouroutine(){
-        foreach(Animator item in nextPaths){item.Play(UNLOCKING);}
-        yield return new WaitForSeconds(1);
-        followingNode.ForEach(skill => skill.ping());
+        IEnumerator Ping(int id, float delay){
+            yield return new WaitForSeconds(delay);
+            followingNode[id].ping();
+            
+        }
+         //Debug.Log(AbilityName +":"+max_level_reached);
+        for(int i = 0; i< nextPaths.Count; i++){
+           
+            
+            AnimatorClipInfo[] animatorinfo = nextPaths[i].GetCurrentAnimatorClipInfo(0);
+            string current_animation = animatorinfo[0].clip.name;
+            bool fastUnlock = current_animation == "LineDiscovered";
+            nextPaths[i].Play(fastUnlock ? UNLOCKINGFAST : UNLOCKING);
+            StartCoroutine(Ping(i, fastUnlock ? 0 : 1));
+            // if(!fastUnlock){
+            //     StartCoroutine()
+            //     yield return new WaitForSeconds(fastUnlock ? 0 : 1);
+            // }else
+            
+            // followingNode[i].ping();
+        }
+        return null;
+        // foreach(Animator item in nextPaths){
+
+        //     item.Play(UNLOCKING);
+
+        // }
+        // yield return new WaitForSeconds(1);
+        // followingNode.ForEach(skill => skill.ping());
     }
+    
     public int getLevel(){
         return SkillTreeManager.Instance.getLevel(AbilityName);
     }

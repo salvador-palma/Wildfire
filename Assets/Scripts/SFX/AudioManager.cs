@@ -83,12 +83,21 @@ public class AudioManager : MonoBehaviour
         PlayMusicTrack((float)level);
     }
     public static void PlayMusicTrack(float n){
+        
         Instance.SetAmbienceParameter("Level", n);
         Instance.SetAmbienceParameter("OST_Intensity", 1);
+        Debug.Log("1");
         
     }
-    public static void StopMusicTrack(){
+   
+    
+    public static void StopMusicTrack(float n){
+        if(n!=-1){
+                Instance.SetAmbienceParameter("Level", n);
+        }
+        
         Instance.SetAmbienceParameter("OST_Intensity", 0);
+        Debug.Log("0");
     }
 
     private EventInstance HealthSoundInstance;

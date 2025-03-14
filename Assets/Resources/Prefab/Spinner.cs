@@ -14,7 +14,7 @@ public class Spinner : MonoBehaviour
     public float startingScale;
     protected virtual void Start() {
         
-        speed = Flamey.Instance.BulletSpeed;
+        speed = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         if(!EnemySpawner.Instance.Paused){
             canSpin = true;
             if(FlameCircle.Instance.PlanetType==3){

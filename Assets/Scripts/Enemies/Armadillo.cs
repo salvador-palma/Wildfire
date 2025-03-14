@@ -17,6 +17,8 @@ public class Armadillo : Enemy
 
     void Start()
     {
+        VirtualPreStart();
+        
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

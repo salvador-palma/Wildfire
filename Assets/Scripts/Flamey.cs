@@ -116,7 +116,7 @@ public class Flamey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioManager.Instance.SetAmbienceParameter("Dead", 0);
         Deck.Instance.FillDeck();
         Character.Instance.SetupActiveLooks();
         
@@ -131,6 +131,8 @@ public class Flamey : MonoBehaviour
         EnemyMask = LayerMask.GetMask("Enemy");
 
         CheckBlackMarketItems();   
+
+        
     }
    
     // Update is called once per frame
@@ -285,7 +287,7 @@ public class Flamey : MonoBehaviour
     }
    
     private void updateTimerAS(float asp){
-        timerASCounter = AtkSpeedToSeconds(asp);
+        timerASCounter = AtkSpeedToSeconds(asp * Gambling.getGambleMultiplier(2));
     }
     private void updateAccuracy(float acc){
         Accuracy = PercentageToAccuracy(acc);
@@ -300,6 +302,8 @@ public class Flamey : MonoBehaviour
             if(Character.Instance.isCharacter("Burst") && BurstShot.Instance != null){
                 BurstShot.Instance.Burst();
             }
+
+            Dmg = (int)(Dmg * Gambling.getGambleMultiplier(6));
             
             if(Character.Instance.isCharacter("Crit")){
                 if(UnityEngine.Random.Range(0f,1f) < CritUnlock.Instance.perc){

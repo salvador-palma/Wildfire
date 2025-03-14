@@ -313,7 +313,8 @@ public class SkillTreeManager : MonoBehaviour
     public void resetSkillTree(){
         
         anim.SetBool("DisplayInfo", false);
-        anim.Play("InfoPanelOf");
+        
+        
         
         List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling"};
         List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate"};
@@ -369,7 +370,7 @@ public class SkillTreeManager : MonoBehaviour
     public void CheckForConstelationUnlock(){
         bool result = PlayerData.skills.All(e => e.level >= 0);
         int save = GameVariables.GetVariable("ConstelationCutScene");
-        if(result){
+        if(result && save == -1){
             GameVariables.SetVariable("ConstelationCutScene", 1);
             StartSkillTreeCutscene(true);
         }

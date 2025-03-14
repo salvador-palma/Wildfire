@@ -305,7 +305,7 @@ public class ShredOnHit : OnHitEffects
 
             float actualPercReduced = percReduced;
             if(SkillTreeManager.Instance.getLevel("Resonance") >= 1){
-                actualPercReduced += (Flamey.Instance.accuracy/100f + (Flamey.Instance.BulletSpeed-5)/15f)/10;
+                actualPercReduced += (Flamey.Instance.accuracy/100f + ((Flamey.Instance.BulletSpeed*Gambling.getGambleMultiplier(1))-5)/15f)/10;
             }
             float prevArmor = en.Armor;
             en.Armor -=  (int)(en.Armor *  actualPercReduced);

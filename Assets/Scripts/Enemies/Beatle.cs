@@ -16,7 +16,7 @@ public class Beatle : Enemy
    
 
     private void Start() {
-
+        VirtualPreStart();
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

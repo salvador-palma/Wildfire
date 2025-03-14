@@ -13,7 +13,7 @@ public class Raccoon : Enemy
     private bool gotAway;
     [field: SerializeField] public EventReference CashBackSound { get; private set; }
     private void Start() {
-
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

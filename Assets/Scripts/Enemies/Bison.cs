@@ -15,6 +15,7 @@ public class Bison : Enemy
     [field: SerializeField] public EventReference SweepSound { get; private set; }
     [field: SerializeField] public EventReference FirstHitSound { get; private set; }
     private void Start() {
+        VirtualPreStart();    
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

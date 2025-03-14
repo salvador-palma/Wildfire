@@ -104,6 +104,9 @@ public class EnemySpawner : MonoBehaviour
         if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
             Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
         }
+        if(SkillTreeManager.Instance.getLevel("Gambling") >= 0 && Gambling.Instance==null){
+            Flamey.Instance.addNotEspecificEffect(new Gambling());
+        }
 
         foreach (Skills skill in SkillTreeManager.Instance.PlayerData.skills)
         {
@@ -153,7 +156,7 @@ public class EnemySpawner : MonoBehaviour
             TimerEnemySpawnCounter-= Time.deltaTime;
         }else{
 
-            TimerEnemySpawnCounter = TimerEnemySpawn;
+            TimerEnemySpawnCounter = TimerEnemySpawn * (1/Gambling.getGambleMultiplier(3));
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;
             if(EnemyAmount <= 0){
@@ -331,10 +334,10 @@ public class EnemySpawner : MonoBehaviour
         MoneyMultipliers.Instance = null;
         CandleTurrets.Instance = null;
         Summoner.Instance = null;
+        Gambling.Instance = null;
 
         ThornsOnHitted.Instance = null;
 
-        
         Explosion.Instance = null;
         Necromancer.Instance= null;
         Bullets.Instance = null;
@@ -358,7 +361,7 @@ public class EnemySpawner : MonoBehaviour
         LightningEffect.Instance = null;
         Immolate.Instance = null;
         
-
+        
 
     }
 

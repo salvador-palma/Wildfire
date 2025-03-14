@@ -8,6 +8,7 @@ public class Skunk : Enemy
     public float StunDuration;
     private void Start() {
 
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

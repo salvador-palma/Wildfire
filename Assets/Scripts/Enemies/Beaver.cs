@@ -11,7 +11,7 @@ public class Beaver : Enemy
     public bool Stealing;
     private bool gotAway;
     private void Start() {
-
+        VirtualPreStart();
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

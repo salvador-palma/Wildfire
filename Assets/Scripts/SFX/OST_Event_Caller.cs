@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class OST_Event_Caller : MonoBehaviour
 {
-    public void StopMusicTrack(){
-        AudioManager.StopMusicTrack();
+    public void StopMusicTrack(float n){
+        AudioManager.StopMusicTrack(n);
     }
+    
     public void StartMusicTrack(float n){
         AudioManager.PlayMusicTrack(n);
     }

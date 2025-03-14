@@ -10,28 +10,41 @@ using Image = UnityEngine.UI.Image;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+[Serializable]
+public enum OSTType
+{
+    DEFAULT, CYBER, EERIE, ADVENTURE, SPACE, CASINO
+}
 public class Character : MonoBehaviour
 {
     [Serializable]
     public class CharacterData{
         public string Name;
         public string AnimationBool;
+
+        [Header("Abilities")]
         public string AbilityName;
         [TextArea] public string AbilityDescription;
+
+        [Header("Appearance")]
         public Sprite BodyBack;
         public Sprite BodyFront;
         public Sprite Prop;
         public Sprite Face;
         public Color BodyBackColor;
         public Color BodyFrontColor;
+        [Header("Environment")]
         public GameObject Environment;
+        [SerializeField] public OSTType EnvironmentMusic;
         public bool Unlocked;
         public string AbilityToSkillTree;
+        [Header("Hierarchy")]
         public string Subtype;
         public string Supratype;
         
           
     }
+    
     
     public static Character Instance { get; private set; }
     public bool InMenu;
@@ -100,6 +113,12 @@ public class Character : MonoBehaviour
         SetupSkin(characterDatas[active]);
         SetupEnvironment(characterDatas[active]);
         SetupBehaviour();
+        SetupMusic(characterDatas[active].EnvironmentMusic);
+    }
+
+    private void SetupMusic(OSTType music)
+    {
+        AudioManager.Instance.SetAmbienceParameter("Arena", (int)music);
     }
 
     public string getDescription(string ability_name = null){
@@ -376,6 +395,12 @@ public class Character : MonoBehaviour
                     DeckBuilder.Instance.getAugmentByName("Magical Shot").Activate();
                 }
                 KrakenSlayer.Instance.SpawnExtraAssets();
+                break;
+            case "Gambling":
+                if(Gambling.Instance == null && SkillTreeManager.Instance.getLevel("Gambling") >= 0){
+                    Flamey.Instance.addNotEspecificEffect(new Gambling());
+                }
+                Gambling.Instance.SpawnExtraAssets();
                 break;
             default:
                 Debug.Log("No Character Found: " + characterDatas[active].AbilityName);break;

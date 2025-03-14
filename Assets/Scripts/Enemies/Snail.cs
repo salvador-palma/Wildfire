@@ -11,6 +11,7 @@ public class Snail : Enemy
 
     
     private void Start() {
+        VirtualPreStart(); 
         base.flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         Speed = maxSpeed;

@@ -10,7 +10,7 @@ public class Bullet : IPoolable
     float multiplier = 10f;
     int ttl = 1;
     int dmg;
-    float maxDistance = 10f;
+    float maxDistance = 20f;
     Vector2 SpawnPos;
     Rigidbody2D rb;
    
@@ -48,7 +48,7 @@ public class Bullet : IPoolable
             ttl=1;
         }
         
-        speed = Flamey.Instance.BulletSpeed;
+        speed = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         rb = GetComponent<Rigidbody2D>();
         dmg = Bullets.Instance.dmg;
     }

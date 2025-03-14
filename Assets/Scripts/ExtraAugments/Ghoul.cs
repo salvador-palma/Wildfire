@@ -108,8 +108,8 @@ public class Ghoul : IPoolable
     {
         remainingAttacks = Necromancer.getAttackTimes();
         dmg = Flamey.Instance.Dmg * Necromancer.Instance.dmgPerc ;
-        speed = 3.5f * ((Flamey.Instance.BulletSpeed -5)/15f) + 0.5f;
-        AtkInterval = 2 - 1.75f*((1/Flamey.Instance.atkSpeed) - 1.333f)/(-1.25f);
+        speed = 3.5f * (((Flamey.Instance.BulletSpeed* Gambling.getGambleMultiplier(1)) -5)/15f) + 0.5f;
+        AtkInterval = 2 - 1.75f*((1/(Flamey.Instance.atkSpeed* Gambling.getGambleMultiplier(2))) - 1.333f)/(-1.25f);
         sp = GetComponentInChildren<SpriteRenderer>();
         sp.flipX = Random.Range(0f,1f) < 0.5f;
         if(isMega){GetComponent<Animator>().SetBool("Mega", true);}

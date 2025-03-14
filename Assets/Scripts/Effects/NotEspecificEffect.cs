@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public interface NotEspecificEffect : Effect{
     public bool addList();
@@ -52,20 +53,20 @@ public class FlameCircle : NotEspecificEffect
 
     public void ApplyEffect()
     {
-        SpinnerInstance.speed = Flamey.Instance.BulletSpeed;
+        SpinnerInstance.speed = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         
         
     }
     public void SetSpinFalse(object sender ,EventArgs e){
-        Debug.Log("Spin False");
+        
         SetSpin(false);
     }
     public void SetSpinTrue(object sender ,EventArgs e){
-        Debug.Log("Spin True");
+        
         SetSpin(true);
     }
     public void SetSpin(bool b){
-        Debug.Log("Spin Inside " + b);
+        
         SpinnerInstance.canSpin = b;
         if(PlanetType==6){
             SpinnerInstance.GetComponent<Animator>().enabled=b;
@@ -544,5 +545,147 @@ public class Summoner : NotEspecificEffect
 
     public GameObject getAbilityOptionMenu(){
         return null;
+    }
+}
+
+
+public class Gambling : NotEspecificEffect{
+    public static Gambling Instance;
+
+    public bool WithLuck = false;
+    public int LuckType = -1;
+    //LUCK TYPES
+    //0 - Damage
+    //1 - Blt Sped
+    //2 - Atk Spd
+    //3 - En Spawn
+    //4 - En Health
+    //5 - En Speed
+    //6 - En Dmg
+    public float[,] LuckMultipliers = new float[,]{
+        {0.5f, 2f},
+        {0.5f, 2f},
+        {0.5f, 2f},
+        {2f, 0.5f},
+        {2f, 0.5f},
+        {2f, 0.5f},
+        {2f, 0.5f}
+    };
+    public string[] LucksTypesText = new string[]{
+        "Damage",
+        "Bullet Speed",
+        "Attack Speed",
+        "Enemy Spawn Rate",
+        "Enemy Health",
+        "Enemy Speed",
+        "Enemy Damage"
+    };
+    public float LuckCombo;
+    bool Gambled;
+
+    Animator RoulleteAnim;
+    GameObject LuckMeter;
+    Slider LuckMeterSlider;
+    DynamicText BuffType;
+    DynamicText BuffTitle;
+    int RoundsWithoutPick;
+    public Gambling(){
+        if(Instance == null){
+            Instance = this;
+            Deck.RoundStart += ReduceGambling;
+            RoulleteAnim = GameObject.Find("RouletteWheel")?.transform.parent.parent.GetComponent<Animator>();
+            LuckMeter = Resources.Load<GameObject>("Prefab/AbilityCharacter/Luck Meter UI");
+            return;
+        }
+    }
+
+    private void ReduceGambling(object sender, EventArgs e)
+    {
+        if(!Character.Instance.isCharacter("Gambling")){return;}
+        if(RoundsWithoutPick == 5){
+            //EXPIRE BUFF
+            
+            BuffTitle.SetText("WARNING");
+            BuffType.SetText("Previous Effect Expired");
+            LuckType = -1;
+            LuckMeterSlider.GetComponent<Animator>().Play(!WithLuck ? "Buff" : "Debuff");
+            Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", -1);
+        }
+        if(!Gambled){LuckCombo = Math.Clamp(LuckCombo - 0.1f, 0.25f, 0.75f); LuckMeterSlider.value = LuckCombo; RoundsWithoutPick++;}
+        Gambled = false;
+        Debug.Log("Luck: " + LuckCombo);
+    }
+
+    public static float getGambleMultiplier(int type){
+        if(Instance==null || Instance.LuckType != type){return 1;}
+        
+        return Instance.LuckMultipliers[type, Instance.WithLuck ? 1 : 0];
+    }
+    
+    public bool addList()
+    {
+        return Instance == this;
+    }
+
+    public void ApplyEffect()
+    {
+        return;
+    }
+
+    
+    public void SpinTheWheel(){
+        if(!Character.Instance.isCharacter("Gambling")){return;}
+        if(RoulleteAnim==null){RoulleteAnim = GameObject.Find("RouletteWheel")?.transform.parent.parent.GetComponent<Animator>();}
+        RoulleteAnim.Play("SpinTheWheel");
+        RoundsWithoutPick=0;
+        Gambled = true;
+        LuckCombo = Math.Clamp(LuckCombo + 0.05f, 0.25f, 0.75f);
+        LuckMeterSlider.value = LuckCombo;
+        LuckType = Random.Range(0,7);
+        
+        WithLuck = Random.Range(0f, 1f) < LuckCombo;
+
+        //Debug.Log((WithLuck ? "Buff " : "Debuff ") + LucksTypesText[LuckType] + " x" + LuckMultipliers[LuckType, WithLuck ? 1 : 0].ToString());
+        BuffTitle.SetText(WithLuck ? "BUFF" : "DEBUFF");
+        BuffType.SetText(LucksTypesText[LuckType] + " x{0}", new string[]{LuckMultipliers[LuckType, WithLuck ? 1 : 0].ToString()});
+        LuckMeterSlider.GetComponent<Animator>().Play(WithLuck ? "Buff" : "Debuff");
+
+        Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", WithLuck ? 1 : -1);
+    }
+
+   
+
+    public string getDescription()
+    { 
+        return "You can gamble for augments in the augment picking phase";
+    }
+    public string[] getCaps()
+    {
+        return new string[]{"No upgradable stats"};
+    }
+
+    public string getIcon()
+    {
+        return "GambleImprove";
+    }
+
+    public string getText()
+    {
+        return "Gambling";
+    }
+
+    public string getType()
+    {
+        return "Special Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
+
+    public void SpawnExtraAssets(){
+        GameObject g = GameUI.Instance.SpawnUI(LuckMeter);
+        LuckMeterSlider = g.GetComponent<Slider>();
+        BuffType = LuckMeterSlider.transform.Find("BuffPanel").Find("Description").GetComponent<DynamicText>();
+        BuffTitle = LuckMeterSlider.transform.Find("BuffPanel").Find("Type").GetComponent<DynamicText>();
     }
 }

@@ -12,7 +12,7 @@ public class Squirrel : Enemy
     public bool placedBomb;
     public float deltaBomb;
     protected virtual void Start() {
-
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

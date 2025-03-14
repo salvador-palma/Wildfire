@@ -25,7 +25,7 @@ public class Worm : Enemy
     EventInstance DigSoundInstance;
     void Start()
     {
-
+        VirtualPreStart(); 
 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
@@ -124,11 +124,19 @@ public class Worm : Enemy
     }
     public override void Die(bool onKill = true)
     {
+        // if(isUnderground){
+        //     DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //     DigSoundInstance.release();
+        // }
+        base.Die(onKill);
+    }
+    public void OnDestroy()
+    {
         if(isUnderground){
             DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             DigSoundInstance.release();
         }
-        base.Die(onKill);
+        
     }
 
     public override bool canTarget()

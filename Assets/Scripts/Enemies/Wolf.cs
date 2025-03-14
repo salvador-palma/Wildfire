@@ -28,6 +28,7 @@ public class Wolf : Enemy
         }
     }
     private void Start() {
+        VirtualPreStart(); 
         AlphaRatio = AlphaToDefaultRatio[0]/(AlphaToDefaultRatio[1]*1.0f);
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);

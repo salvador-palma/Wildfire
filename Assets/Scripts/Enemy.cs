@@ -53,8 +53,14 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             slowfactor = Math.Clamp(value,0f,.99f);
         }
     }
-
-    
+    protected void VirtualPreStart(){
+        if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
+            EnemySpawner.Instance.PresentEnemies.Add(this);
+        }
+        Health = (int)(Health * Gambling.getGambleMultiplier(4));
+        Speed = Speed * Gambling.getGambleMultiplier(5);
+       
+    }
     public virtual void UpdateEnemy()  {
         Move();
         
@@ -159,6 +165,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
         if(Health<=0){return 0;}
+        
+        Dmg = (int)(Dmg * Gambling.getGambleMultiplier(0));
 
         //EXTRA DAMAGE DUE TO SKILLS
         if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){

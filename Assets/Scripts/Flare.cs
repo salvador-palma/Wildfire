@@ -25,7 +25,7 @@ public class Flare : IPoolable
         SpotColor.a = 0;
     }
     private void SetupStats(){
-        speedAscend = Flamey.Instance.BulletSpeed;
+        speedAscend = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         speedDescend = 1.5f * speedAscend;
        
     }

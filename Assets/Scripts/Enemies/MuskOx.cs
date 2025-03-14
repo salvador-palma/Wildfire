@@ -11,7 +11,7 @@ public class MuskOx : Enemy
     public float HealRadius= 2.7f;
     void Start()
     {
-        
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

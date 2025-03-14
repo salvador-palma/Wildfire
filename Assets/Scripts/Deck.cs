@@ -318,27 +318,35 @@ public class Deck : MonoBehaviour
     public IEnumerator ExtraOutroSlotsAfter(){
         yield return new WaitForSeconds(2);
         if(GamblingStack.Count() == 0){
+            
+
             EnemySpawner.Instance.Paused = false;
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
             if(gambleInRound >= 30 && GameVariables.hasQuest(29)){
                 GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(29,"Gyomyo", 14);
             }
-            Debug.Log("Gambled: " + gambleInRound);
+            //Debug.Log("Gambled: " + gambleInRound);
+            
             gambleInRound=0;
         }else{
-            Debug.Log("Getting Stack");
+            
             
             Augment a = GamblingStack.First();
             GamblingStack.Remove(a);
             ActivateAugment(a);
-            Debug.Log("Over Stack");
+            
             
         }
     }
 
     int gambleInRound = 0;
     public void Gamble(int amount, Tier tier, string original_name){
+
+        if(gambleInRound==0 && Gambling.Instance != null){
+            Gambling.Instance.SpinTheWheel();
+        }
+
         gambleInRound+=amount;
         EnemySpawner.Instance.Paused = true;
         Augment[] result = new Augment[amount];

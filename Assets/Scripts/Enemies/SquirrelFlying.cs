@@ -21,7 +21,7 @@ public class SquirrelFlying : Squirrel
     EventInstance FlySoundInstance;
 
     override protected void Start() {
-
+        VirtualPreStart(); 
         base.Start();
 
         Vector3 vectorAB = transform.position - Flamey.Instance.transform.position;

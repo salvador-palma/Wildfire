@@ -8,6 +8,7 @@ public class Turtle : Enemy
     
     
     private void Start() {
+        VirtualPreStart(); 
         flame = Flamey.Instance;
         
         Speed =  Distribuitons.RandomTruncatedGaussian(0.01f,Speed,0.03f);

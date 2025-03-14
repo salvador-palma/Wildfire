@@ -258,7 +258,7 @@ public class Bullets : OnKillEffects
         if(EmbersInRound >= 5000){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(15, "Gyomyo", 15);
         }
-        Debug.Log("Embers: " + EmbersInRound);
+        //Debug.Log("Embers: " + EmbersInRound);
         EmbersInRound = 0;
 
     }

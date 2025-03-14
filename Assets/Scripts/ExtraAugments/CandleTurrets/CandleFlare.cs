@@ -10,7 +10,7 @@ public class CandleFlare : Flare
         Damage = CandleTurrets.Instance.dmg;
         DmgTextID = 11;
         SpotColor.a = 0;
-        speedAscend = Flamey.Instance.BulletSpeed;
+        speedAscend = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1); 
         speedDescend = 1.5f * speedAscend;
     }
     public void setPosition(Vector2 pos){
@@ -69,7 +69,7 @@ public class CandleFlare : Flare
         Damage = CandleTurrets.Instance.dmg;
         DmgTextID = 11;
         SpotColor.a = 0;
-        speedAscend = Flamey.Instance.BulletSpeed;
+        speedAscend = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         speedDescend = 1.5f * speedAscend;
     }
 

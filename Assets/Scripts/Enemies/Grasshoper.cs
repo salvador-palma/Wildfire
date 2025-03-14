@@ -19,7 +19,7 @@ public class Grasshoper : Enemy
     void Start()
     {
         
- 
+        VirtualPreStart(); 
         timer = jumpTimer;
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);

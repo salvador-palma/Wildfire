@@ -222,8 +222,8 @@ public class Taiko : MonoBehaviour
             AccText.text = accuracy.ToString() + "%";
         }
     } 
-    int score;
-    int streak = 0;
+    public int score;
+    public int streak;
     float accuracy;
     int[] quality = new int[4];
     public TextMeshProUGUI ScoreTxt;

@@ -11,6 +11,7 @@ public class Bunny : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        VirtualPreStart(); 
         timer = jumpTimer;
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);

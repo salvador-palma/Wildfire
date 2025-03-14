@@ -11,6 +11,7 @@ public class Snake : Enemy
         GetComponent<Animator>().SetBool("isPoisonous", isPoisonous);
     }
     private void Start() {
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

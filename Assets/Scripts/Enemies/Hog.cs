@@ -13,6 +13,7 @@ public class Hog : Enemy
 
     private void Start() {
 
+        VirtualPreStart(); 
         
         base.flame = Flamey.Instance;
         
