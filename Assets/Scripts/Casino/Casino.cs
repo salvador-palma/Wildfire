@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class MiniGameProps{
     public string name;
     public GameObject[] prefab;
+    public Button selectButton;
+    public bool withSoundTrack;
 }
 public class Casino : MonoBehaviour
 {
@@ -16,28 +18,42 @@ public class Casino : MonoBehaviour
     public List<MiniGameProps> minigames;
     public GameObject settingsPanel;
     public static Casino Instance;
+    public Animator SelectPanel;
+    public string CurrentMinigame;
 
-    public static string getMinigame(){
-        DateTime d = DateTime.Today;
-        switch((int)d.DayOfWeek % 3 + offset){
-            case 0: return "Drop the Acorn";
-            case 1: return "Water the Flower";
-            case 2: 
-            default:
-            return "Frog Jump";
-        }
-    }
-    public static int getMinigameID(){
-        DateTime d = DateTime.Today;
-        return ((int)d.DayOfWeek % 3 ) + offset;
+    // public static string getMinigame(){
+    //     DateTime d = DateTime.Today;
+    //     switch((int)d.DayOfWeek % 3 + offset){
+    //         case 0: return "Drop the Acorn";
+    //         case 1: return "Water the Flower";
+    //         case 2: 
+    //         default:
+    //         return "Frog Jump";
+    //     }
+    // }
+    // public static int getMinigameID(){
+    //     DateTime d = DateTime.Today;
+    //     return ((int)d.DayOfWeek % 3 ) + offset;
         
-    }
+    // }
     private void Awake() {
         Instance = this;
-        foreach(GameObject go in minigames.Find(x => x.name == getMinigame()).prefab){
-            go.SetActive(true);
+        foreach(MiniGameProps props in minigames){
+            if(props.name == "Techno Turtle" && !GameVariables.hasQuestCompleted(46)){
+                props.selectButton.transform.parent.parent.gameObject.SetActive(false);
+            }
+            props.selectButton.onClick.RemoveAllListeners();
+            props.selectButton.onClick.AddListener(()=> LoadMiniGame(props.name));
         }
         
+    }
+    private void LoadMiniGame(string minigame){
+        CurrentMinigame = minigame;
+        SelectPanel.Play("PickedMiniGameCasino");
+        GetComponent<Animator>().Play("CurtainsOn");
+        foreach(GameObject go in minigames.Find(x => x.name == minigame).prefab){
+            go.SetActive(true);
+        }
     }
     void Update()
     {
@@ -76,6 +92,13 @@ public class Casino : MonoBehaviour
 
         
         
+    }
+
+    public void StartCasinoMusic(){
+        if(minigames.Find(x => x.name == CurrentMinigame).withSoundTrack){
+            GetComponent<OST_Event_Caller>().StartMusicTrack(3);
+        }
+       
     }
 
 }

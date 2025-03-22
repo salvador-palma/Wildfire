@@ -10,7 +10,7 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "Translations"; 
+    private static string csvName = "Translations2"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
@@ -88,6 +88,7 @@ public static class Translator
                 if(WriteMissingText){
                     AddCsvEntry(oldWord);
                 }
+                Debug.Log("No Translation: " + oldWord);
                 
                 return oldWord;
             }

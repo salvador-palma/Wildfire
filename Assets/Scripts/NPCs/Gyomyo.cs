@@ -64,7 +64,7 @@ public class Gyomyo : NPC
         }
 
         if(GameVariables.GetVariable("CasinoReady") >= 1 && totalInvested >= 250000){
-            InviteCasino(Casino.getMinigame());
+            InviteCasino();
 
             return;
         }
@@ -73,11 +73,11 @@ public class Gyomyo : NPC
         
         
     }
-    public void InviteCasino(string MiniGameName){
-        string invitation = "Wanna hit the Casino? '{0}' is today's game!";
+    public void InviteCasino(){
+        string invitation = "How's it going? Wanna come down to the casino?";
         Chat.Instance.StartChat();
         Chat.Instance.ChatSingular(invitation,
-                        Chat.Instance.AvatarBank[1], new string[]{MiniGameName}, name:"Gyomyo",
+                        Chat.Instance.AvatarBank[1], name:"Gyomyo",
                         optionTxt:new string[2]{"No", "Yes"},
                         optionAction:new UnityAction[2]{
                             new UnityAction(()=>{Chat.Instance.EndChat();}),
@@ -96,6 +96,7 @@ public class Gyomyo : NPC
     public void UnlockCasino(){
         UnityAction post = () => UnlockQuest(45);
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6, afterUnlock:post);
+        QuestBoard.Instance.Cloris.QueueDialogue(17); 
        
     }
 

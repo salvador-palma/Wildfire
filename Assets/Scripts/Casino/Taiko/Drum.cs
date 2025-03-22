@@ -9,12 +9,13 @@ public class Drum : MonoBehaviour
 {
     public int Timing;
     public int Type;
-    int[] limits = new int[]{64,97,127};
+    int[] limits = new int[]{30,55,70};
     float[] mult = new float[] { 1f, .33f, 0.16f };
     
-
+    bool hitted;
     public int[] Score(int hitType, int timing){
-        
+        if(hitted){return new int[]{-1,-1};}
+
         int baseScore = Correct(hitType);
         
         int diff = Math.Abs(Timing - timing);
@@ -22,6 +23,7 @@ public class Drum : MonoBehaviour
         
         for(int i = 0; i < limits.Length; i++){
             if(diff < limits[i]){
+                hitted= true;
                 return new int[]{(int)(baseScore * mult[i]), i};
             }
         }
@@ -41,6 +43,6 @@ public class Drum : MonoBehaviour
         return 0;
     }
     public bool Missed(int timing){
-        return Timing + 140 < timing;
+        return Timing + 110 < timing;
     }
 }

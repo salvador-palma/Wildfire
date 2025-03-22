@@ -50,6 +50,7 @@ public class Chat : MonoBehaviour
         
         Name.text = name;
         Message.SetText("");
+        Profile.color = avatar!= null? Color.white : Color.clear;
         Profile.sprite = avatar;
 
         Array.ForEach(Options, e => e.gameObject.SetActive(false));

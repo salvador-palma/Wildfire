@@ -28,4 +28,19 @@ public class Cloris : NPC
         GameVariables.SetVariable("ClorisPresentation", 1);
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <style=\"LYellow\">style</style> your <style=\"LYellow\">campfire</style> affecting its <style=\"LYellow\">behaviour</style> and <style=\"LYellow\">environment</style>", 4);
     }
+
+    public void ShredDialogueCheckForCasino(){
+        if(GameVariables.GetVariable("CasinoReady")==1){
+            StartDialogue(16);
+        }else{
+            StartDialogue(15);
+        }
+    }
+
+    public void SkipCasinoUnlockQuest(){
+        GameVariables.UnlockQuest(46);
+        GameVariables.CompleteQuest(46);
+    }
+
+    
 }

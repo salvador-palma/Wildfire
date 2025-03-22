@@ -354,15 +354,12 @@ public class ShredOnHit : OnHitEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ShredPerc");
         }      
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(percReduced >= 0.5f && prob >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Shred");
-            maxed = true;
+        if(percReduced >= 0.5f && prob >= 1f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(27, "Cloris", 14);
+
         }
     }
+    
 
     public void SpawnExtraAssets(){
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ShredUnlock"));

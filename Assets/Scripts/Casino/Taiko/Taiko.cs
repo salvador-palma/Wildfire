@@ -9,6 +9,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class TimingPoint{
     public int Timing;
@@ -49,25 +50,32 @@ public class Taiko : MonoBehaviour
     public bool AutoBot;
     public float delay;
     EventInstance trackInstance;
-    void Start()
+    int NoteAmount;
+    void SetUpGame(string mapPath)
     {
-        TextAsset osuData = Resources.Load<TextAsset>("TaikoHard"); 
+        score= 0;
+        streak = 0;
+        quality = new int[4];
+        SoulGauge.value = 0;
+        SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
+        ScoreTxt.text = "";
+        StreakTxt.text = "";
+
+        TextAsset osuData = Resources.Load<TextAsset>(mapPath); 
         if (osuData != null)
         {
             SortedDictionary<int, int> hitMap = ParseOsuData(osuData.text);
             timestamps = hitMap.Keys.ToList();
+            NoteAmount = hitMap.Count;
             drums = LayoutDrums(hitMap);
         }
         else
         {
-            Debug.LogError("Osu data file not found in Resources!");
+            Debug.LogError($"Osu data file {mapPath} not found in Resources!");
         }
         parentRTr = drumParent.GetComponent<RectTransform>();
-
-        Debug.Log(matUpdateSpeed);
-        Debug.Log(mat_speed);
+        parentRTr.anchoredPosition = new Vector2(0,0);
         matUpdateSpeed = mat_speed;
-        Debug.Log(matUpdateSpeed);
         trackInstance = AudioManager.CreateInstance(track);
     }
     public bool hasStarted;
@@ -86,13 +94,8 @@ public class Taiko : MonoBehaviour
             i++;
             if(i>=fr.Length) i=0;
         }
-        if(Input.GetKeyDown(KeyCode.Space) && !hasStarted){
-            hasStarted = true;
-            Invoke("StartTrack", delay/mat_speed);
-           
-            //AudioManager.PlayOneShot(track, Vector2.zero);
-        }
-        float f = parentRTr.anchoredPosition.x;
+       
+        
         if(hasStarted){
             
             if(drums.Count <= 0){hasStarted=false; return;}
@@ -102,8 +105,15 @@ public class Taiko : MonoBehaviour
             CheckForInput();
             CheckForMisses();
             CheckForTimingPoints();
+
+            if(drums.Count <= 0){
+                hasStarted=false;
+                
+                Invoke("End",  5f);
+            }
         }
     }
+
     public float matUpdateSpeed;
     private void CheckForTimingPoints()
     {
@@ -116,13 +126,13 @@ public class Taiko : MonoBehaviour
             timingPoints.RemoveAt(0);
             Anim.SetBool("Kiai", tp.Kiai);
             matUpdateSpeed = tp.Kiai ? kiaiSpeed : mat_speed;
-            Debug.Log(timing + " : " + tp.Timing + " Updated Speed: " + matUpdateSpeed);
+            //Debug.Log(timing + " : " + tp.Timing + " Updated Speed: " + matUpdateSpeed);
             if(timingPoints.Count <= 0) return;
         }
         
         
     }
-
+    public GameObject SoulGaugeMaxObj;
     private void CheckForMisses()
     {
         int timing = getTiming();
@@ -132,10 +142,18 @@ public class Taiko : MonoBehaviour
                 drums.Remove(d);
                 Destroy(d.gameObject);
                 streak = 0;
-                StreakTxt.text = streak.ToString();
+                StreakTxt.text = "";
                 quality[3]++;
-                accuracy = (float)Math.Round((quality[0]*300f+quality[1]*100f+quality[2]*50f) / (quality.Sum()*300f) * 10000f)*0.01f;
-                AccText.text = accuracy.ToString() + "%";
+                
+                float FillingPerGood = 1f / NoteAmount;
+                float FillingPerOk = FillingPerGood * 0.5f;
+                float CurrentFilling = quality[0] * FillingPerGood + (quality[1]- quality[3]) * FillingPerOk;
+                SoulGauge.value = CurrentFilling * 1.15f;
+
+                SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
+                
+                
+                //AccText.text = accuracy.ToString() + "%";
 
                 ShowFeedback(3);
 
@@ -204,9 +222,9 @@ public class Taiko : MonoBehaviour
     {
         
         int[] score = closestDrum.Score(type, timing);
-        bool res = Score(score[0]);
+        bool res = Score(score);
 
-        ShowFeedback(score[0]==0? 3 : score[1]);
+        ShowFeedback(score[0]==0 ? 3 : score[1]);
 
         if(res){
 
@@ -217,29 +235,37 @@ public class Taiko : MonoBehaviour
             turtleAnim.Play("TaikoBite");
             
             quality[score[1]]++;
-            accuracy = (float)Math.Round((quality[0]*300f+quality[1]*100f+quality[2]*50f) / (quality.Sum()*300f) * 10000f)*0.01f;
+            
+            float FillingPerGood = 1f / NoteAmount;
+            float FillingPerOk = FillingPerGood * 0.5f;
+            float CurrentFilling = quality[0] * FillingPerGood + (quality[1]- quality[3]) * FillingPerOk;
+            SoulGauge.value = CurrentFilling * 1.15f;
 
-            AccText.text = accuracy.ToString() + "%";
+            SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
         }
     } 
     public int score;
     public int streak;
-    float accuracy;
     int[] quality = new int[4];
     public TextMeshProUGUI ScoreTxt;
     public TextMeshProUGUI StreakTxt;
-    public TextMeshProUGUI AccText;
+    public Slider SoulGauge;
 
-    bool Score(int value){
-        if(value==-1){return false;} //Out of Range
-        if(value==0){streak = 0;}else{streak++;} //Wrong Button and In-Range
+    bool Score(int[] value){
+        if(value[1]==-1){return false;} //Out of Range
+        if(value[0]==0){
+            streak = 0;
+        }else{
+            streak = value[0]==2 ? 0 : streak + 1;
+            score += value[0] * (1 + streak/25);
+        } //Wrong Button and In-Range
 
         
 
-        score += value * (1 + streak/25);
+        
 
         ScoreTxt.text = score.ToString();
-        StreakTxt.text = streak.ToString();
+        StreakTxt.text = streak >= 10 ? "x" + streak.ToString() : "";
         return streak != 0;
     }
     Drum ClosestType(){
@@ -342,7 +368,7 @@ public class Taiko : MonoBehaviour
             }
             
         }
-        timingPoints.ForEach(e=>Debug.Log(e.Timing + " " + e.Kiai + " " + e.RealtTime));
+        
         return hitObjects;
     }
     public float kiaiSpeed;
@@ -394,5 +420,75 @@ public class Taiko : MonoBehaviour
         feedbackText.text = feedback[type];
 
         hitFeedbackAnim.SetTrigger("Hit");
+    }
+
+    public int Difficulty;
+    string[] maps = new string[]{"Kantan", "Futsuu", "Muzukashii", "Oni"};
+    
+
+    public void setDifficulty(int n){
+        Difficulty = n;
+    }
+    public void Play()
+    {
+        Anim.GetComponent<Animator>().Play("TaikoIntro");
+
+        SetUpGame(maps[Difficulty]);
+        hasStarted = true;
+        Invoke("StartTrack", delay/mat_speed);
+    }
+    public void BackToMenu()
+    {
+        Anim.GetComponent<Animator>().Play("TaikoReIntro");
+
+
+    }
+
+    public void End(){
+        Debug.Log("ENDING");
+        trackInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        trackInstance.release();
+        Anim.GetComponent<Animator>().Play("TaikoEnd");
+        SetUpEndGameStats();
+    }
+
+    [Header("End Game Stats")]
+    public DynamicText perfectsTxt;
+    public DynamicText goodsTxt;
+    public DynamicText oksTxt;
+    public DynamicText missesTxt;
+    public DynamicText scoreTxt;
+    public DynamicText ClearTxt;
+    public GameObject highScoreTxt;
+    private void SetUpEndGameStats()
+    {
+        bool passed = true;
+        if(quality[0] == NoteAmount){
+            ClearTxt.SetText("FULL PERFECTION");
+        }else if(streak == NoteAmount){
+            ClearTxt.SetText("FULL COMBO");
+        }else if(SoulGauge.value >= .5f){
+            ClearTxt.SetText("CLEARED");
+        }else{
+            passed=false;
+            ClearTxt.SetText("FAILED");
+        }
+        if(passed){
+            Casino.Instance.CompleteQuestIfHasAndQueueDialogue(47, "Cloris", 18);
+        }
+
+        perfectsTxt.SetText("PERFECT<br><size=80%>{0}", new string[]{quality[0].ToString()});
+        goodsTxt.SetText("GOOD<br><size=80%>{0}", new string[]{quality[1].ToString()});
+        oksTxt.SetText("BAD<br><size=80%>{0}", new string[]{quality[2].ToString()});
+        missesTxt.SetText("MISS<br><size=80%>{0}", new string[]{quality[3].ToString()});
+        scoreTxt.SetText("SCORE<br><size=80%>{0}", new string[]{score.ToString()});
+
+        
+        if(GameVariables.GetVariable(maps[Difficulty]) < score){
+            highScoreTxt.SetActive(true);
+            GameVariables.SetVariable(maps[Difficulty], score);
+        }else{
+            highScoreTxt.SetActive(false);
+        }
     }
 }

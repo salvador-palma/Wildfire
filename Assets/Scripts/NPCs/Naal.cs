@@ -158,7 +158,7 @@ public class Naal : NPC
 
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("But... heeeeeeyyy! You don't have enough embers for this!", getSprite("Confused"),"Jhat"),
-                    new Dialogue("You gotta at least have close to {0} embers if you even want to try and haggle for it!", getSprite("CrossedMad"),"Jhat", new string[]{initialOffer.ToString()}),   
+                    new Dialogue("You gotta at least have close to {0} embers if you even want to try and haggle for it!", getSprite("CrossedMad"),"Jhat", new string[]{((int)((item.MinimumPrice + initialOffer)*0.35f)).ToString()}),   
                 },
                 after:ev2, endAfter:false));
              });
@@ -173,6 +173,9 @@ public class Naal : NPC
     }
 
     private int DealType(int value){
+        if(value > SkillTreeManager.Instance.PlayerData.embers){
+            return -1;
+        }
         int diff = initialOffer - ItemAtHand.MinimumPrice;
         int priceDelta = (int) (diff / (2f + 3f*(Mood/100f)));
         if(value < ItemAtHand.MinimumPrice + priceDelta){
@@ -351,13 +354,24 @@ public class Naal : NPC
         }
         return 0;
     }
-
+    
     private void Deal(int value, bool playerAccepted=false)
     {
         UnityEvent ev1 = new UnityEvent();
         ev1.AddListener(()=>CloseDeal(value));
 
         switch(DealType(value)){
+            case -1:    
+                WriteMood(Mood - 5);
+                StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
+                new Dialogue("Uff... we finally got to an agreement!" , getSprite("Showing2"),"Jhat"),
+                new Dialogue("Now give me thos- hey! Wait a minute!", getSprite("WaitMad"),"Jhat"),
+                new Dialogue("You don't even have the embers to take this deal!", getSprite("Mad"),"Jhat"),
+                new Dialogue("Why would you lie to me?", getSprite("WaitMad"),"Jhat"),
+                new Dialogue("Come back once you have enough embers to cover your words", getSprite("Bored"),"Jhat"),
+                },
+                endAfter:true));
+                break;
             case 0:
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                 new Dialogue("Uff... finally! Let me say that I won't be so friendly in the next negotiations ok?" , getSprite("Bored"),"Jhat"),
@@ -763,10 +777,23 @@ public class Naal : NPC
         }
         //BAD CHARISMA TRY
     }
-
+    [Header("BargainUI")]
+    public DynamicText CounterOfferTxt;
+    public DynamicText PreviousOfferTxt;
     public void Bargain(bool on)
     {
+        if(on){
+            CounterOfferTxt.SetText("Counter offer to <sprite name=\"Ember\"> {0}", new string[]{lastNPCOffer.ToString()});
+
+            if(lastPlayerOffer==-1){
+                 PreviousOfferTxt.SetText("You have <sprite name=\"Ember\"> {0} in total", new string[]{SkillTreeManager.Instance.PlayerData.embers.ToString()});
+            }else{
+                PreviousOfferTxt.SetText("Your previous offer was <sprite name=\"Ember\"> {0} out ouf <sprite name=\"Ember\"> {1}", new string[]{lastPlayerOffer.ToString(), SkillTreeManager.Instance.PlayerData.embers.ToString()});
+            }
+            
+        }
         counterOfferPanel.SetActive(on);
+        
     }
 
     private void QuitStore(){

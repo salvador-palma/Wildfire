@@ -1985,6 +1985,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1640098536}
+  - {fileID: 1123849998}
   - {fileID: 508869119}
   - {fileID: 1974277495}
   - {fileID: 822598675}
@@ -6483,6 +6484,7 @@ RectTransform:
   - {fileID: 1825620072}
   - {fileID: 1508483497}
   - {fileID: 1058451097}
+  - {fileID: 790409605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11865,7 +11867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.48, y: -9.3}
+  m_AnchoredPosition: {x: 16.48, y: 5.0749826}
   m_SizeDelta: {x: 209.78, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508869120
@@ -16121,6 +16123,8 @@ MonoBehaviour:
   ItemGrid: {fileID: 1646651146}
   Betsy: {fileID: 1457361219}
   Rowl: {fileID: 1206136743}
+  CounterOfferTxt: {fileID: 1640098539}
+  PreviousOfferTxt: {fileID: 1123849995}
 --- !u!1 &585714128
 GameObject:
   m_ObjectHideFlags: 0
@@ -19124,6 +19128,140 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &790409604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790409605}
+  - component: {fileID: 790409607}
+  - component: {fileID: 790409606}
+  m_Layer: 5
+  m_Name: TESTE (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &790409605
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790409604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 275411193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2933, y: -704.05}
+  m_SizeDelta: {x: 1371.66, y: 652.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &790409606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790409604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u5605\u5605\u5605\u5605\u5605\u5605\u5572\u5497\u5605\u5605\u5605\u5497\u5605\u5605\u5605\u55BA\u4F62\u54CB\u5605\u5605\u5605\u5605\u5572\u5605\u5605\u5605"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &790409607
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790409604}
+  m_CullTransparentMesh: 1
 --- !u!1 &802574693
 GameObject:
   m_ObjectHideFlags: 0
@@ -20176,7 +20314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 144.3, y: -9.72}
+  m_AnchoredPosition: {x: 144.3, y: 4.6549816}
   m_SizeDelta: {x: 33.43, y: 33.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822598676
@@ -25573,6 +25711,13 @@ MonoBehaviour:
   - Title: Quick Money
     Avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
     Description: Get <style="LYellow">30k</style> from a single game
+  - Title: An Upbeat Sound II
+    Avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
+    Description: Find an appropriate place to play <style="LYellow">Cloris' rythm
+      minigame
+  - Title: An Upbeat Sound III
+    Avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
+    Description: Clear the <style="LBlue">Techno Turtle</style> minigame in any difficulty
   QuestPanel: {fileID: 6459220652302978433}
   QuestContainer: {fileID: 6749891280300223469}
   QuestSlot: {fileID: 1826153679}
@@ -28812,6 +28957,157 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118140957}
   m_CullTransparentMesh: 1
+--- !u!1 &1123849994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123849998}
+  - component: {fileID: 1123849997}
+  - component: {fileID: 1123849996}
+  - component: {fileID: 1123849995}
+  m_Layer: 0
+  m_Name: PreviousOffer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1123849995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123849994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
+--- !u!114 &1123849996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123849994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Your previous offer was <sprite name="Ember"> 1990 out ouf <sprite name="Ember">
+    50406
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 3539992575
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.8235294}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 10.67
+  m_fontSizeBase: 10.67
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1123849997
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123849994}
+  m_CullTransparentMesh: 1
+--- !u!224 &1123849998
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123849994}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999521, y: 0.9999521, z: 0.9999521}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 55511525}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 16.479998, y: -47.125015}
+  m_SizeDelta: {x: 138.18, y: 65.46}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1135710415
 GameObject:
   m_ObjectHideFlags: 0
@@ -43603,8 +43899,9 @@ GameObject:
   - component: {fileID: 1640098536}
   - component: {fileID: 1640098538}
   - component: {fileID: 1640098537}
+  - component: {fileID: 1640098539}
   m_Layer: 0
-  m_Name: Name
+  m_Name: CounterOffer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43626,7 +43923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.479998, y: 0.0000038146973}
+  m_AnchoredPosition: {x: 16.479998, y: 13.9}
   m_SizeDelta: {x: 138.18, y: 65.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1640098537
@@ -43649,10 +43946,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Counter Offer
+  m_text: 'Counter offer to <sprite name="Ember"> 1990 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -43682,7 +43979,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -43726,6 +44023,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640098535}
   m_CullTransparentMesh: 1
+--- !u!114 &1640098539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640098535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldPhrase: 
+  oldArgs: []
+  isChat: 0
 --- !u!1 &1646651145
 GameObject:
   m_ObjectHideFlags: 0
@@ -44849,8 +45161,8 @@ MonoBehaviour:
       arguments: []
       avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
       Name: Cloris
-    - message: If you could show me a maxed out <style="LYellow">Resonance</style>
-        ability it should be enough to get me inspired! <i>fu fu
+    - message: If you could show me a maxed out that <style="LYellow">Resonance</style>
+        ability in-game, it should be enough to get me inspired! <i>fu fu
       arguments: []
       avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
       Name: Cloris
@@ -45104,6 +45416,218 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Rose Warrior
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: I got it darling! I got inspired by your music!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: Actually, I even went out of my way to make a <style="LYellow">rythm
+        minigame</style> similar to the ones I used to play as a child!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: Cloris, Assembly-CSharp
+          m_MethodName: ShredDialogueCheckForCasino
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 1
+  - dialogues:
+    - message: There's just a slight problem... I don't really have a place to connect
+        this game to...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: If only there was an appropriate place for little silly games like
+        the one I made...
+      arguments: []
+      avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
+      Name: Cloris
+    - message: 'Oh well! Maybe in the future we will be able to discover something
+        darling! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 46
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: And I was here thinking, where should I connect this game to?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: And I actually had the amazing idea to put it where the other silly
+        little minigames like this are
+      arguments: []
+      avatar: {fileID: 21300000, guid: e777985ad0599f640af28eda338b5f88, type: 3}
+      Name: Cloris
+    - message: Yes! That's right darling! I've put the game I've made in the <style="LYellow">Casino</style>!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    - message: Go check it out! It's under the name of <style="LBlue">Techno Turtle!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    - message: Oh! And before you leave, if you can show me how good your rythm is
+        then I can make a new style all about it!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9a0badd9487246c41923ce8c173d7098, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: Cloris, Assembly-CSharp
+          m_MethodName: SkipCasinoUnlockQuest
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 47
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: That's it! Remember how I was looking for a place to connect my <style="LYellow">rythm
+        game?
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: I think there's not a more appropriate space to do that other than
+        the <style="LYellow">Casino!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    - message: I've asked <sprite name="Gyomyo"><style="LYellow">Mr. Gyomyo</style>
+        to feature the game there!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: Go take a look! It should be under the name <style="LBlue">Techno
+        Turtle</style>!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
+      Name: Cloris
+    - message: Oh! But before you go! I wanna challenge you darling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 27c84aeed32f6e64996c55df0e182d83, type: 3}
+      Name: Cloris
+    - message: If you manage to show me how good your rythm is, then I will present
+        you with a brand new <style="LYellow">style!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: UnlockQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 47
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1653547898}
+          m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+          m_MethodName: CompleteQuest
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 46
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh my! Such rythm! Wonderful!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: This was truly what I was looking for, darling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    - message: Whenever I listen to music, I feel like in my own world, protected
+        from anything outside of it!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: It almost feels like gaining wearing a big chunky, but fashionable
+        armor!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1d04e58801411d248a876d1289b60bfd, type: 3}
+      Name: Cloris
+    - message: And just as I promised you, I'm going to reward you with a new <style="LYellow">style</style>
+        for your collection!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 27c84aeed32f6e64996c55df0e182d83, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 852633094}
+          m_TargetAssemblyTypeName: Character, Assembly-CSharp
+          m_MethodName: Unlock
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 47
+            m_FloatArgument: 0
+            m_StringArgument: Echo
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
@@ -53229,7 +53753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -111.2, y: -9.72}
+  m_AnchoredPosition: {x: -111.2, y: 4.6549816}
   m_SizeDelta: {x: 33.43, y: 33.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974277496
