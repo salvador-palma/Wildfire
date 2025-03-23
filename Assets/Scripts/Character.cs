@@ -69,6 +69,7 @@ public class Character : MonoBehaviour
             }
         }
         SkillTreeManager.Instance.treeReset += resetCharacter;
+        UpdateCharacterInfo(characterDatas[currentDisplayedCharacter]);
         
     }
 
@@ -544,6 +545,7 @@ public class Character : MonoBehaviour
 
     }
     private void UpdateCharacterInfo(CharacterData data){
+        Debug.Log("Update Character Info");
         if(data.Unlocked){
             CharacterName.SetText(data.Name);
             SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>{0}", new string[]{data.AbilityDescription});

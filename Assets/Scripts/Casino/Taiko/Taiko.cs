@@ -356,7 +356,7 @@ public class Taiko : MonoBehaviour
 
                     int time = oldTD.Timing + deltaTimming;
                     bool kiai = int.Parse(parts[7]) == 1; // Type (normal/big)
-                    Debug.Log(time + " " + kiai + " " + realTimming);
+                    
                     
                     oldTD = new TimingPoint(time, kiai, realTimming);
                     timingPoints.Add(new TimingPoint(time, kiai, realTimming));
@@ -412,12 +412,12 @@ public class Taiko : MonoBehaviour
 
     public string[] feedback = new string[4]{"PERFECT", "GOOD", "OK", "MISS"};
     public Color[] feedbackColors;
-    public TextMeshProUGUI feedbackText;
+    public DynamicText feedbackText;
     private void ShowFeedback(int type){
         if(type==-1){return;}
 
-        feedbackText.color = feedbackColors[type];
-        feedbackText.text = feedback[type];
+        feedbackText.setColor(feedbackColors[type]);
+        feedbackText.SetText(feedback[type]);
 
         hitFeedbackAnim.SetTrigger("Hit");
     }

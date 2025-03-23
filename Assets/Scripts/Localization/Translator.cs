@@ -14,20 +14,21 @@ public static class Translator
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
-    private static bool WriteMissingText = false;
+    private static bool WriteMissingText = true;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
     }
     public static void AddIfNotExists(string word){
         if(translations == null) LoadCSV(csvName);
-        if(translations["English"].Contains(word)) return;
+        if(translations["English"].Contains(word.Trim())) return;
         AddCsvEntry(word);
     }
 
     private static void LoadCSV(string filename) 
     {
         currentLanguage = PlayerPrefs.GetString("Language", "English");
+        Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
         TextAsset csvFile = Resources.Load<TextAsset>(filename);
         if(csvFile == null)
@@ -42,7 +43,7 @@ public static class Translator
         string[] arr = firstLine.Split(';');
         foreach (string s in arr)
         {
-            translations.Add(s, new List<string>());
+            translations.Add(s.Trim(), new List<string>());
             //Debug.Log($"Adicionado {s} como lingua do dicionario.");
         }
 
@@ -54,7 +55,7 @@ public static class Translator
             int lang = 0;
             foreach (string str in translations.Keys)
             {
-                translations[str].Add(parts[lang++]);
+                translations[str].Add(parts[lang++].Trim());
             }
 
 
@@ -66,6 +67,7 @@ public static class Translator
     {
         lastLanguage = currentLanguage;
         currentLanguage = newLanguage;
+        Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         PlayerPrefs.SetString("Language", currentLanguage);
         dropdownValueChange?.Invoke(null, new EventArgs());   
     }
@@ -74,6 +76,7 @@ public static class Translator
     {
         //Debug.Log($"Traduzir {oldWord} para {currentLanguage}");
         try{
+            oldWord = oldWord.Trim();
             if(translations == null) LoadCSV(csvName);
 
             if(System.Text.RegularExpressions.Regex.IsMatch(oldWord, @"^[\d.,]+$")){return oldWord;}

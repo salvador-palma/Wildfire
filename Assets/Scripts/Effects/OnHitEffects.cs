@@ -308,7 +308,8 @@ public class ShredOnHit : OnHitEffects
                 actualPercReduced += (Flamey.Instance.accuracy/100f + ((Flamey.Instance.BulletSpeed*Gambling.getGambleMultiplier(1))-5)/15f)/10;
             }
             float prevArmor = en.Armor;
-            en.Armor -=  (int)(en.Armor *  actualPercReduced);
+            en.Armor = Math.Max(0, (int)(en.Armor *  actualPercReduced) - 1);
+         
 
             if(Character.Instance.isCharacter("Shred")){
                 DamageArmor += prevArmor - en.Armor;

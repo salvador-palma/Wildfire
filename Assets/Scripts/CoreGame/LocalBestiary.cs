@@ -101,15 +101,21 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] int RepelLimit;
     [SerializeField] int RepelAmount;
 
+    private bool InstanceInitialized;
+
     public void Awake(){
-        
+        if(InstanceInitialized){return;}
+        InstanceInitialized=true;
         INSTANCE = this;
+
         
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
 
+        RightButton.onClick.RemoveAllListeners();
         RightButton.onClick.AddListener(()=>ChangeTab(1));
+        LeftButton.onClick.RemoveAllListeners();
         LeftButton.onClick.AddListener(()=>ChangeTab(-1));
 
         claimRewardButton.onClick.AddListener(()=>ClaimRewards(lastID));
@@ -248,14 +254,19 @@ public class LocalBestiary : MonoBehaviour
         }
     }
     private void ChangeTab(int direction){
+        
         if(lastID==-1){return;}
         int currentIndex = Array.IndexOf(BestiaryTabs, BestiaryDisplayTab);
+        
         BestiaryPanels[currentIndex].SetActive(false);
         currentIndex+= direction;
         if(currentIndex<0){currentIndex=BestiaryTabs.Length -1;}
         if(currentIndex>=BestiaryTabs.Length){currentIndex=0;}
+        
         BestiaryPanels[currentIndex].SetActive(true);
+        
         BestiaryDisplayTab = BestiaryTabs[currentIndex];
+        
         tabTitle.SetText(BestiaryDisplayTab);
         UpdateCurrentTab(lastID);
 

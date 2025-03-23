@@ -12,20 +12,27 @@ using UnityEngine.UIElements;
 public class DynamicText : MonoBehaviour
 {
 
-    [HideInInspector] public string oldPhrase;
+    public string oldPhrase;
     [HideInInspector] public string[] oldArgs;
     public bool isChat;
     private string Scene;
+    private bool hasAssignedEvent; 
     void Awake(){
-        Translator.dropdownValueChange += TranslateComponent;  
+         if(!hasAssignedEvent){
+            hasAssignedEvent = true;
+            Translator.dropdownValueChange += TranslateComponent;  
+         }
         Scene = SceneManager.GetActiveScene().name;    
+        
     }
+    public bool DebugIT;
 
 
     // String deverá seguir o formato translateText("Estou a dever {0} pau à {1}", String[] = {"500", "Betclic"})
 
     public void TranslateComponent(object sender, EventArgs e) 
     {
+        if(DebugIT) Debug.Log("TranslateComponent: " + oldPhrase);
         try{
             if (onCouroutine && isChat){
                 cond.value = 1;
@@ -60,6 +67,10 @@ public class DynamicText : MonoBehaviour
     }
     public void SetText(string text, string[] args = null)
     {
+        if(!hasAssignedEvent){
+            Translator.dropdownValueChange += TranslateComponent;  
+            hasAssignedEvent = true;
+        }
         string translatedText = text=="" ? "" :Translator.getTranslation(text);
         oldPhrase = translatedText;
         
