@@ -15476,7 +15476,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1457361219}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Betsy, Assembly-CSharp
           m_MethodName: SetBinocularLevel
           m_Mode: 3
@@ -15865,7 +15865,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -15912,7 +15912,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -15958,7 +15958,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16010,7 +16010,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16046,7 +16046,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16078,7 +16078,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16114,7 +16114,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16150,7 +16150,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 852633094}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Character, Assembly-CSharp
           m_MethodName: Unlock
           m_Mode: 5
@@ -16164,114 +16164,11 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
-  - dialogues:
-    - message: Oh H-<size=80%>Hey there...
-      arguments: []
-      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
-      Name: Naal
-    - message: <size=80%>I wasn't expecting... a sudden conversation...
-      arguments: []
-      avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
-      Name: Naal
-    - message: <size=80%>I've noticed... you are new here... welcome...
-      arguments: []
-      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
-      Name: Naal
-    - message: <size=80%>If you need anything... I can show you my... uh... business...
-      arguments: []
-      avatar: {fileID: 21300000, guid: c1986da584500ad4a90b09c6aad3155e, type: 3}
-      Name: Naal
-    - message: <size=80%>bascially... I can find you items... that will help you...
-        on your journey...
-      arguments: []
-      avatar: {fileID: 21300000, guid: a91959aef56ea5443bc2fc22dbc4b1e9, type: 3}
-      Name: Naal
-    - message: Oh wait! Are we talking about that illegal blackmarket we are running
-        in the tent?
-      arguments: []
-      avatar: {fileID: 21300000, guid: fea64f9f06789bd47945d3b6fff6189b, type: 3}
-      Name: Jhat
-    - message: ...
-      arguments: []
-      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
-      Name: Naal
-    - message: GO BACK INSIDE <sprite name="Jhat"> <style="LYellow">JHAT!
-      arguments: []
-      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
-      Name: Naal
-    - message: ...
-      arguments: []
-      avatar: {fileID: 21300000, guid: a302a23c017d7d44a97989fbef28517c, type: 3}
-      Name: Jhat
-    - message: <style="Grey"><i>Jhat leaves...
-      arguments: []
-      avatar: {fileID: 0}
-      Name: ' '
-    - message: 'A-<size=80%>Anyways... don''t listen to him... '
-      arguments: []
-      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
-      Name: Naal
-    - message: <size=80%>It's a pleasure to have you here...
-      arguments: []
-      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
-      Name: Naal
-    afterEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    dequeueAuto: 0
-    dontEndAfter: 0
-  - dialogues:
-    - message: Oh H-<size=80%>hello... new guy...
-      arguments: []
-      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
-      Name: Naal
-    - message: <size=80%>I'm not a good... talker... just to give a heads up...
-      arguments: []
-      avatar: {fileID: 21300000, guid: f1097b29c34a4d1489e5483de0f1ef61, type: 3}
-      Name: Naal
-    - message: B-<size=80%>but welcome... anyways...
-      arguments: []
-      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
-      Name: Naal
-    - message: <size=80%>If you need anything... I can help yo-
-      arguments: []
-      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
-      Name: Naal
-    - message: If you need anything we got you back!
-      arguments: []
-      avatar: {fileID: 21300000, guid: d8d89aad94225c34e933cfe6905dbd24, type: 3}
-      Name: Jhat
-    - message: Jhat! I T-<size=90%>I told you not to come out of the tent!
-      arguments: []
-      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
-      Name: Naal
-    - message: Oh! But since the new guy is only staying in for the Demo I though
-        it would be better for me to show myself!
-      arguments: []
-      avatar: {fileID: 21300000, guid: 3856ed5d5a2922b45b603a9a452fa31c, type: 3}
-      Name: Jhat
-    - message: ...
-      arguments: []
-      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
-      Name: Naal
-    - message: ...
-      arguments: []
-      avatar: {fileID: 21300000, guid: 659b9b5d99753c04a91c77f02385b039, type: 3}
-      Name: Jhat
-    - message: Anyways... I'll be heading back
-      arguments: []
-      avatar: {fileID: 21300000, guid: e12ce64734d32ec43a36ddb55092656d, type: 3}
-      Name: Jhat
-    afterEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    dequeueAuto: 0
-    dontEndAfter: 0
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 275411189}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MetaMenuUI, Assembly-CSharp
         m_MethodName: MarketMenuToggle
         m_Mode: 1
@@ -16283,6 +16180,82 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  Mood: 50
+  ItemAtHand: {fileID: 0}
+  initialOffer: 0
+  lastPlayerOffer: 0
+  lastNPCOffer2: 0
+  PriceAtHand: 0
+  JhatSprites:
+  - name: DownBlush
+    sprite: {fileID: 21300000, guid: 777741b6555575c4b8a3d41534fd9ed4, type: 3}
+  - name: CrossedBlush
+    sprite: {fileID: 21300000, guid: 2745cf19552a9d14192897da96be1936, type: 3}
+  - name: CrossedMad
+    sprite: {fileID: 21300000, guid: 3beb981552a3a944fa34ad074f14eb29, type: 3}
+  - name: CrossedSad
+    sprite: {fileID: 21300000, guid: a63b2d55eda354742b5a2d503f4ef5bb, type: 3}
+  - name: Disappointed
+    sprite: {fileID: 21300000, guid: 2e1b11ca33f418e46a4673d29632cbdb, type: 3}
+  - name: Disbelief
+    sprite: {fileID: 21300000, guid: c10a497904870da4c928adb5fb62e70e, type: 3}
+  - name: Fine
+    sprite: {fileID: 21300000, guid: 0c7628a86b561b44fa8f63fa134cfa0f, type: 3}
+  - name: FineOnMe
+    sprite: {fileID: 21300000, guid: d8d89aad94225c34e933cfe6905dbd24, type: 3}
+  - name: Nervous
+    sprite: {fileID: 21300000, guid: 43ec11712ac252040a204a07a96833d9, type: 3}
+  - name: Sweat
+    sprite: {fileID: 21300000, guid: e12ce64734d32ec43a36ddb55092656d, type: 3}
+  - name: Confused
+    sprite: {fileID: 21300000, guid: 787b11b909ed3c94286c9b844097af6f, type: 3}
+  - name: Showing
+    sprite: {fileID: 21300000, guid: 40199a89f44aa8740b7b9deb5818c1fb, type: 3}
+  - name: Showing2
+    sprite: {fileID: 21300000, guid: a63bd25cb45bace45a3fa7058871dcc5, type: 3}
+  - name: Unamused
+    sprite: {fileID: 21300000, guid: fdcf5f8f617fa814f8d92f1e5494ca29, type: 3}
+  - name: Shrug
+    sprite: {fileID: 21300000, guid: c2d36faaab90dea41b0823f0e099e376, type: 3}
+  - name: ShrugBored
+    sprite: {fileID: 21300000, guid: a276158500f9e744ca3593ddf8e35f64, type: 3}
+  - name: ShrugSad
+    sprite: {fileID: 21300000, guid: e9b3cdb6793e7444db416fd792ec1a26, type: 3}
+  - name: ShrugHappy
+    sprite: {fileID: 21300000, guid: fea64f9f06789bd47945d3b6fff6189b, type: 3}
+  - name: Stand2
+    sprite: {fileID: 21300000, guid: 3cd500adeb3f33e49950193b17f42596, type: 3}
+  - name: Stand
+    sprite: {fileID: 21300000, guid: b0efd2df8cda0fc46b0059a87d9fe2d3, type: 3}
+  - name: Mad
+    sprite: {fileID: 21300000, guid: fb77e57fc9d5d9f44943c557e8eaedc5, type: 3}
+  - name: Bored
+    sprite: {fileID: 21300000, guid: 60cdecfd84a8d5a48b15e4a4c402c81d, type: 3}
+  - name: Scared
+    sprite: {fileID: 21300000, guid: 659b9b5d99753c04a91c77f02385b039, type: 3}
+  - name: Tearing
+    sprite: {fileID: 21300000, guid: a302a23c017d7d44a97989fbef28517c, type: 3}
+  - name: Scratch
+    sprite: {fileID: 21300000, guid: 471b8dd22d0cf14459c994712b734852, type: 3}
+  - name: ScratchSweat
+    sprite: {fileID: 21300000, guid: 826615ef6fd04894d92cd204abd3a956, type: 3}
+  - name: ScratchHumble
+    sprite: {fileID: 21300000, guid: 6d42a33ef756e8047a9f6fe4d38dcb33, type: 3}
+  - name: Pondering
+    sprite: {fileID: 21300000, guid: 6dee4e25a3067c04d80ec4c4c9d5b884, type: 3}
+  - name: Wait
+    sprite: {fileID: 21300000, guid: 3856ed5d5a2922b45b603a9a452fa31c, type: 3}
+  - name: WaitMad
+    sprite: {fileID: 21300000, guid: 83262318773eb794da29af71a3c6fa5e, type: 3}
+  - name: Shock
+    sprite: {fileID: 21300000, guid: fe2efb6431c60da40818ed1365d00c0b, type: 3}
+  counterOfferPanel: {fileID: 0}
+  counterOfferInput: {fileID: 0}
+  ItemGrid: {fileID: 0}
+  Betsy: {fileID: 0}
+  Rowl: {fileID: 0}
+  CounterOfferTxt: {fileID: 0}
+  PreviousOfferTxt: {fileID: 0}
 --- !u!1 &585714128
 GameObject:
   m_ObjectHideFlags: 0
