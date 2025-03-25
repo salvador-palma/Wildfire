@@ -16164,6 +16164,109 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: Oh H-<size=80%>Hey there...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>I wasn't expecting... a sudden conversation...
+      arguments: []
+      avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
+      Name: Naal
+    - message: <size=80%>I've noticed... you are new here... welcome...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>If you need anything... I can show you my... uh... business...
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1986da584500ad4a90b09c6aad3155e, type: 3}
+      Name: Naal
+    - message: <size=80%>bascially... I can find you items... that will help you...
+        on your journey...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a91959aef56ea5443bc2fc22dbc4b1e9, type: 3}
+      Name: Naal
+    - message: Oh wait! Are we talking about that illegal blackmarket we are running
+        in the tent?
+      arguments: []
+      avatar: {fileID: 21300000, guid: fea64f9f06789bd47945d3b6fff6189b, type: 3}
+      Name: Jhat
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: GO BACK INSIDE <sprite name="Jhat"> <style="LYellow">JHAT!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a302a23c017d7d44a97989fbef28517c, type: 3}
+      Name: Jhat
+    - message: <style="Grey"><i>Jhat leaves...
+      arguments: []
+      avatar: {fileID: 0}
+      Name: ' '
+    - message: 'A-<size=80%>Anyways... don''t listen to him... '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=80%>It's a pleasure to have you here...
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh H-<size=80%>hello... new guy...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>I'm not a good... talker... just to give a heads up...
+      arguments: []
+      avatar: {fileID: 21300000, guid: f1097b29c34a4d1489e5483de0f1ef61, type: 3}
+      Name: Naal
+    - message: B-<size=80%>but welcome... anyways...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>If you need anything... I can help yo-
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    - message: If you need anything we got you back!
+      arguments: []
+      avatar: {fileID: 21300000, guid: d8d89aad94225c34e933cfe6905dbd24, type: 3}
+      Name: Jhat
+    - message: Jhat! I T-<size=90%>I told you not to come out of the tent!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: Oh! But since the new guy is only staying in for the Demo I though
+        it would be better for me to show myself!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3856ed5d5a2922b45b603a9a452fa31c, type: 3}
+      Name: Jhat
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 659b9b5d99753c04a91c77f02385b039, type: 3}
+      Name: Jhat
+    - message: Anyways... I'll be heading back
+      arguments: []
+      avatar: {fileID: 21300000, guid: e12ce64734d32ec43a36ddb55092656d, type: 3}
+      Name: Jhat
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -16180,82 +16283,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Mood: 50
-  ItemAtHand: {fileID: 0}
-  initialOffer: 0
-  lastPlayerOffer: 0
-  lastNPCOffer2: 0
-  PriceAtHand: 0
-  JhatSprites:
-  - name: DownBlush
-    sprite: {fileID: 21300000, guid: 777741b6555575c4b8a3d41534fd9ed4, type: 3}
-  - name: CrossedBlush
-    sprite: {fileID: 21300000, guid: 2745cf19552a9d14192897da96be1936, type: 3}
-  - name: CrossedMad
-    sprite: {fileID: 21300000, guid: 3beb981552a3a944fa34ad074f14eb29, type: 3}
-  - name: CrossedSad
-    sprite: {fileID: 21300000, guid: a63b2d55eda354742b5a2d503f4ef5bb, type: 3}
-  - name: Disappointed
-    sprite: {fileID: 21300000, guid: 2e1b11ca33f418e46a4673d29632cbdb, type: 3}
-  - name: Disbelief
-    sprite: {fileID: 21300000, guid: c10a497904870da4c928adb5fb62e70e, type: 3}
-  - name: Fine
-    sprite: {fileID: 21300000, guid: 0c7628a86b561b44fa8f63fa134cfa0f, type: 3}
-  - name: FineOnMe
-    sprite: {fileID: 21300000, guid: d8d89aad94225c34e933cfe6905dbd24, type: 3}
-  - name: Nervous
-    sprite: {fileID: 21300000, guid: 43ec11712ac252040a204a07a96833d9, type: 3}
-  - name: Sweat
-    sprite: {fileID: 21300000, guid: e12ce64734d32ec43a36ddb55092656d, type: 3}
-  - name: Confused
-    sprite: {fileID: 21300000, guid: 787b11b909ed3c94286c9b844097af6f, type: 3}
-  - name: Showing
-    sprite: {fileID: 21300000, guid: 40199a89f44aa8740b7b9deb5818c1fb, type: 3}
-  - name: Showing2
-    sprite: {fileID: 21300000, guid: a63bd25cb45bace45a3fa7058871dcc5, type: 3}
-  - name: Unamused
-    sprite: {fileID: 21300000, guid: fdcf5f8f617fa814f8d92f1e5494ca29, type: 3}
-  - name: Shrug
-    sprite: {fileID: 21300000, guid: c2d36faaab90dea41b0823f0e099e376, type: 3}
-  - name: ShrugBored
-    sprite: {fileID: 21300000, guid: a276158500f9e744ca3593ddf8e35f64, type: 3}
-  - name: ShrugSad
-    sprite: {fileID: 21300000, guid: e9b3cdb6793e7444db416fd792ec1a26, type: 3}
-  - name: ShrugHappy
-    sprite: {fileID: 21300000, guid: fea64f9f06789bd47945d3b6fff6189b, type: 3}
-  - name: Stand2
-    sprite: {fileID: 21300000, guid: 3cd500adeb3f33e49950193b17f42596, type: 3}
-  - name: Stand
-    sprite: {fileID: 21300000, guid: b0efd2df8cda0fc46b0059a87d9fe2d3, type: 3}
-  - name: Mad
-    sprite: {fileID: 21300000, guid: fb77e57fc9d5d9f44943c557e8eaedc5, type: 3}
-  - name: Bored
-    sprite: {fileID: 21300000, guid: 60cdecfd84a8d5a48b15e4a4c402c81d, type: 3}
-  - name: Scared
-    sprite: {fileID: 21300000, guid: 659b9b5d99753c04a91c77f02385b039, type: 3}
-  - name: Tearing
-    sprite: {fileID: 21300000, guid: a302a23c017d7d44a97989fbef28517c, type: 3}
-  - name: Scratch
-    sprite: {fileID: 21300000, guid: 471b8dd22d0cf14459c994712b734852, type: 3}
-  - name: ScratchSweat
-    sprite: {fileID: 21300000, guid: 826615ef6fd04894d92cd204abd3a956, type: 3}
-  - name: ScratchHumble
-    sprite: {fileID: 21300000, guid: 6d42a33ef756e8047a9f6fe4d38dcb33, type: 3}
-  - name: Pondering
-    sprite: {fileID: 21300000, guid: 6dee4e25a3067c04d80ec4c4c9d5b884, type: 3}
-  - name: Wait
-    sprite: {fileID: 21300000, guid: 3856ed5d5a2922b45b603a9a452fa31c, type: 3}
-  - name: WaitMad
-    sprite: {fileID: 21300000, guid: 83262318773eb794da29af71a3c6fa5e, type: 3}
-  - name: Shock
-    sprite: {fileID: 21300000, guid: fe2efb6431c60da40818ed1365d00c0b, type: 3}
-  counterOfferPanel: {fileID: 55511524}
-  counterOfferInput: {fileID: 508869118}
-  ItemGrid: {fileID: 1646651146}
-  Betsy: {fileID: 1457361219}
-  Rowl: {fileID: 1206136743}
-  CounterOfferTxt: {fileID: 1640098539}
-  PreviousOfferTxt: {fileID: 1123849995}
 --- !u!1 &585714128
 GameObject:
   m_ObjectHideFlags: 0
@@ -31793,6 +31820,100 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: NEW FRIEND UNLOCKED!!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+      Name: 
+    - message: What's up dude? You are new here right?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: Do you like camping? Do you like campfires?? Do you like... Marshmallows???
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: A-AH! I knew it! Everyone likes marshmallows!
+      arguments: []
+      avatar: {fileID: 21300000, guid: f3c218539b42e3d438b5717e9fa39f4d, type: 3}
+      Name: 
+    - message: That means we got a lot in common then! We should hang around more
+        often!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: IT'S THE NEW GUY!!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+      Name: 
+    - message: C'mon new guy, tell me some new guy stuff!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 868dc5669e3c61340bf4be390c76eaa7, type: 3}
+      Name: 
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 33d4bf22e3212c54f88eaa4adc7c0896, type: 3}
+      Name: 
+    - message: Oh, you are more of a listener I see! No problem I'll start then!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: My name is <sprite name="Rowl"> <style="LYellow">Rowl,</style> I'm
+        the one responsible for taking care of this little campfire over here!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 96b19428b53a4de428b9c62400fcf718, type: 3}
+      Name: 
+    - message: Setting up the strongest campfire possible is no easy task! So I'll
+        accept any help you may want to offer!
+      arguments: []
+      avatar: {fileID: 21300000, guid: d60c93ce12ad26f45a27f9c9cd27bf74, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: OH MY GOD A NEW FRIEND!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 618c7279d6e268c46a028e7af4aa0b64, type: 3}
+      Name: 
+    - message: Tell me you like playing around campfires as well dude!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: 
+    - message: 'Oh you do! Awesome! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9949b444172e8fe469ca08484b3a3fcc, type: 3}
+      Name: 
+    - message: If that's the case, do you see this little campfire over here?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 77be5e8bc33f8784a920c7d344e77ed2, type: 3}
+      Name: 
+    - message: I'm responsible for making it survive through the night!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 614a8f186f32c1c47aa60cb4c2a844f8, type: 3}
+      Name: 
+    - message: You may think it's easy but for some reason wild animals hate it,
+        so it's not an easy task!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 42914027de37e764b97b352b7f40fbdc, type: 3}
+      Name: 
+    - message: If you can lend me a paw over here I would be grateful bro!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 9949b444172e8fe469ca08484b3a3fcc, type: 3}
+      Name: 
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
   Name: Rowl
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -31809,12 +31930,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Unlockables:
-  - {fileID: 1802963738}
-  - {fileID: 1489617351}
-  - {fileID: 845677575}
-  - {fileID: 894935209}
-  - {fileID: 1252497142}
 --- !u!1 &1206219846
 GameObject:
   m_ObjectHideFlags: 0
@@ -38764,6 +38879,108 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: Hey! Calm down kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    - message: I know you just arrived but you need to take things slowly!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: Or else, you will scare off the wildlife! And old <sprite name="Betsy">
+        <style="LYellow">Betsy</style> here doesn't want that!
+      arguments: []
+      avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
+      Name: Betsy
+    - message: I'm actually a super expert when it comes to animals, do you understand?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: So if you have any questions you can just consult me anytime!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 236e45fc18fce414d82240d0a09d2de1, type: 3}
+      Name: Betsy
+    - message: I'm actually almost finished writing this book about all the species
+        you can find around here... It should be done in 2 days!
+      arguments: []
+      avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
+      Name: Betsy
+    - message: Oh! You are leaving tomorrow? Well then nothing I can do kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: What do you need?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 6d7d90c8ed99967438cfd35ac41c5da2, type: 3}
+      Name: Betsy
+    - message: If you are not here to talk about animals then why bother?
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: You see, I need to collect as much information as possible about the
+        local wildlife
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: I'm actually making a sort of encyclopedia about that! It should be
+        done in 2 days!
+      arguments: []
+      avatar: {fileID: 21300000, guid: bcce79ca2d0006f4fbde86b030dd80b9, type: 3}
+      Name: Betsy
+    - message: Oh! You will have departed by then?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 5801913c35b651a4293b9bb87b27c61d, type: 3}
+      Name: Betsy
+    - message: Well, there's nothing I can do about that kid!
+      arguments: []
+      avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Yes?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3c4e89885fa4b7142815fadc36ce474d, type: 3}
+      Name: Betsy
+    - message: Oh, self-introductions, right
+      arguments: []
+      avatar: {fileID: 21300000, guid: c0a467128e9f75b4f8ad0a717ac9da87, type: 3}
+      Name: Betsy
+    - message: Well this sheep's name is <sprite name="Betsy"> <style="LYellow">Betsy,</style>
+        and she is responsible for taking note of all the wildlife around this campsite
+      arguments: []
+      avatar: {fileID: 21300000, guid: 4b19c324af7cb3c4bb305a24f1c7a585, type: 3}
+      Name: Betsy
+    - message: One thing I've noticed is that these wild animals seem to despise
+        fire completely!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8a19f9edb9ff85f4b93ea8e1a58e81b4, type: 3}
+      Name: Betsy
+    - message: I'm serious kid! When I was taking a night stroll I saw it with my
+        own eyes!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ac4b5b5ebaccd5d4393293986e3adc11, type: 3}
+      Name: Betsy
+    - message: Mehh, if you don't believe just go look for yourself when night comes!
+        Tsk!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
   Name: Betsy
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -38780,8 +38997,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Rowl: {fileID: 1206136743}
-  Naal: {fileID: 585525776}
 --- !u!1 &1460474669
 GameObject:
   m_ObjectHideFlags: 0
@@ -43276,6 +43491,83 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: 'Ayyyyy! What''s up future partner? '
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: I can see it in your face! You are a truly born business man as well!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: How about we turn this wonderful campsite into a business eh?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    - message: 'Ayyyy! You don''t need to discard my ideas so quickly! '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: But it's okay I will convince you one day!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Ayyyy! I came to me because you wanna get rich right?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: Oh! Just making small talk?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+      Name: Gyomyo
+    - message: Well that's not a very efficient use of my time so I will make it
+        quick AHAHAHA!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: I'm <sprite name="Gyomyo"> <style="LYellow">Gyomyo</style>, business
+        man <sprite name="Gyomyo"> <style="LYellow">Gyomyo</style>!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
+      Name: Gyomyo
+    - message: I see that you are only planning on staying for one night ay?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: What? Don't tell me you don't have money for more? AHAHAHAH
+      arguments: []
+      avatar: {fileID: 21300000, guid: 8f941f13073e6dc44ba2a4b413e5afb1, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Ayyyy! What's up partner?
+      arguments: []
+      avatar: {fileID: 21300000, guid: b0ca10e64544dae4e9ae4075b68ec7a9, type: 3}
+      Name: Gyomyo
+    - message: I heard you are only planning to stay for one night ay?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ffbeb4238c2a0d4da367a5be5b158e9, type: 3}
+      Name: Gyomyo
+    - message: You should definitely stay for a bit more! We could even run a business
+        or two together what do you say?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7e7acea0574df594d8034dd9f651915f, type: 3}
+      Name: Gyomyo
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
   Name: Gyomyo
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -46039,6 +46331,90 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     dequeueAuto: 1
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh Heyyy Darling!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: I saw that you are new here! Want me to show you around?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 7ae0b475fc43afd4a93a358438410f67, type: 3}
+      Name: Cloris
+    - message: Oh! You are only staying for one night?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ad3497dcbce0634d98f7b84f0761a69, type: 3}
+      Name: Cloris
+    - message: '"DEMO Version" you say... I''ve no clue what that means'
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: Well if you need anything just come by, ok honey?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh hello there!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: So you are our new guest right?! Did somebody showed you around yet?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 073c9bf2b4329a945a0e5e01afd41112, type: 3}
+      Name: Cloris
+    - message: Oh! You will leave tomorrow? Why darling?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ad3497dcbce0634d98f7b84f0761a69, type: 3}
+      Name: Cloris
+    - message: Oh, "Demo Version"... what is that?
+      arguments: []
+      avatar: {fileID: 21300000, guid: 132b36b6ac20e6a49ac68abb5ca53438, type: 3}
+      Name: Cloris
+    - message: What! You can only play around for 1 night!? That's ridiculous!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 05f44971e4b225543a0d8b5f410d2107, type: 3}
+      Name: Cloris
+    - message: Don't worry, I'm going to put on my <style="Pink">wishlist</style>
+        that I want to spend more time with you!
+      arguments: []
+      avatar: {fileID: 21300000, guid: a4500c866e2ed6c4681a58e50b4187ad, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Hey honey!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 233f586546f7fb447a63e24006c2246d, type: 3}
+      Name: Cloris
+    - message: You are the new guy right? Well my name is <sprite name="Cloris"><style="LYellow">
+        Cloris</style> and it's a plea-
+      arguments: []
+      avatar: {fileID: 21300000, guid: ed7ef6e18f84da1419453c0ad0a97a12, type: 3}
+      Name: Cloris
+    - message: WHAT! You will be leaving tomorrow already?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 05f44971e4b225543a0d8b5f410d2107, type: 3}
+      Name: Cloris
+    - message: That's a shame darling... I thought we were going to be besties...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3ad3497dcbce0634d98f7b84f0761a69, type: 3}
+      Name: Cloris
+    - message: Oh Well, may the destiny connect our paths!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
     dontEndAfter: 0
   Name: Cloris
   DefaultClickBehaviour:

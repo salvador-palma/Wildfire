@@ -11,50 +11,11 @@ public class Rowl : NPC
         |    2 - Ready
     */
     
-    protected override void CharacterLoad()
-    {
-        switch(GameVariables.GetVariable("SkillTreeReady")){
-            case 1:QueueDialogue(1);
-            break;
-            case 3:QueueDialogue(3);
-            break;
-        }
-
-    }
+    
     public override void ClickedCharacter(){
-
-        if(GameVariables.GetVariable("SkillTreeReady") <= 0 && !hasAvailableDialogue()){
-            StartDialogue(0);
-            return;
-        }
+        StartDialogue(new int[]{19,20,21});
         
-        base.ClickedCharacter();
     }
 
-    public void UnlockSkillTree(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "ROWL'S SKILL TREE", "You can now <style=\"LYellow\">unlock</style> and <style=\"LYellow\">upgrade</style> new abilities for your <style=\"LYellow\">campfire</style>", 3);
-       
-    }
-    [SerializeField] SkillTreeButton[] Unlockables;
-    public void ShowUnlockedUpgrade(int unlockableID){
-        MetaMenuUI.Instance.SkillTreeMenuToggle();
-        Unlockables[unlockableID].Clicked();
-    }
-
-    public void ShowAndUnlockUpgrade(int unlockableID){
-        SkillTreeManager.Instance.Upgrade(Unlockables[unlockableID].AbilityName, Unlock:true);
-        SkillTreeManager.Instance.InvokeUIReset();
-        ShowUnlockedUpgrade(unlockableID);
-    }
-
-   
-
-    public void SetVariable(int value){
-        GameVariables.SetVariable("SkillTreeReady", value);
-    }
-
-    public void giveEmbers(int n){
-        SkillTreeManager.Instance.changeEmberAmountUI(n);
-        SkillTreeManager.AddEmbersToJSON(n);
-    }
+    
 }

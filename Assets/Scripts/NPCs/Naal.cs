@@ -66,12 +66,7 @@ public class Naal : NPC
 
     protected override void CharacterLoad()
     {
-        ReadMood();
-        if(Mood==-1){WriteMood(50);}
-        switch(GameVariables.GetVariable("BlackMarketReady")){
-            case -1:gameObject.SetActive(false);break;
-            case 0:QueueDialogue(0);GameVariables.SetVariable("BlackMarketReady", 1); break;
-        }
+        
 
         foreach (Transform t in ItemGrid){
             t.GetComponent<Item>().ItemStart();
@@ -93,13 +88,8 @@ public class Naal : NPC
     }
 
     public override void ClickedCharacter(){
-
-        if(GameVariables.GetVariable("NaalPresentation") <= -1 && !hasAvailableDialogue()){
-            StartDialogue(1);
-            return;
-        }
+        StartDialogue(new int[]{15,16});
         
-        base.ClickedCharacter();
     }
 
     [SerializeField] NPC Betsy;

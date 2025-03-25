@@ -77,6 +77,7 @@ public class Item : MonoBehaviour
     }
 
     static public int getLevel(string name){
+        
         return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value;
     }
     static public bool has(string name){
@@ -94,7 +95,7 @@ public class Item : MonoBehaviour
             NoButton.onClick.RemoveAllListeners(); NoButton.onClick.AddListener(()=>Display(false));
 
             Button YesButton = DisplayPanel.Find("Bargain").GetComponent<Button>();
-            YesButton.onClick.RemoveAllListeners(); YesButton.onClick.AddListener(()=>{naal.BargainItem(this);Display(false);});
+            //YesButton.onClick.RemoveAllListeners(); YesButton.onClick.AddListener(()=>{naal.BargainItem(this);Display(false);});
             
         }
         DisplayPanel.gameObject.SetActive(!DisplayPanel.gameObject.activeInHierarchy);
