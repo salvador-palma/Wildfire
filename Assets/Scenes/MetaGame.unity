@@ -3544,7 +3544,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 344850275}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -6032,7 +6032,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1383794139}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -13494,7 +13494,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 115045828}
   initial: 1
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -15464,7 +15464,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Naal, Assembly-CSharp
           m_MethodName: GiveBetsyBinocles
           m_Mode: 1
@@ -15528,7 +15528,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Naal, Assembly-CSharp
           m_MethodName: UnlockBlackMarket
           m_Mode: 1
@@ -15583,7 +15583,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Naal, Assembly-CSharp
           m_MethodName: IntroduceMarketDone
           m_Mode: 1
@@ -15615,7 +15615,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15663,7 +15663,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15717,7 +15717,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15773,7 +15773,7 @@ MonoBehaviour:
     afterEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15785,7 +15785,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15797,7 +15797,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -15809,7 +15809,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 585525776}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: UnlockQuest
           m_Mode: 3
@@ -16164,6 +16164,109 @@ MonoBehaviour:
           m_CallState: 2
     dequeueAuto: 1
     dontEndAfter: 0
+  - dialogues:
+    - message: Oh H-<size=80%>Hey there...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>I wasn't expecting... a sudden conversation...
+      arguments: []
+      avatar: {fileID: 21300000, guid: efd6356b4e1e6124a9bb1d95e9786fd9, type: 3}
+      Name: Naal
+    - message: <size=80%>I've noticed... you are new here... welcome...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>If you need anything... I can show you my... uh... business...
+      arguments: []
+      avatar: {fileID: 21300000, guid: c1986da584500ad4a90b09c6aad3155e, type: 3}
+      Name: Naal
+    - message: <size=80%>bascially... I can find you items... that will help you...
+        on your journey...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a91959aef56ea5443bc2fc22dbc4b1e9, type: 3}
+      Name: Naal
+    - message: Oh wait! Are we talking about that illegal blackmarket we are running
+        in the tent?
+      arguments: []
+      avatar: {fileID: 21300000, guid: fea64f9f06789bd47945d3b6fff6189b, type: 3}
+      Name: Jhat
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 2ec12a9eff758924781578cec7bb1143, type: 3}
+      Name: Naal
+    - message: GO BACK INSIDE <sprite name="Jhat"> <style="LYellow">JHAT!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: a302a23c017d7d44a97989fbef28517c, type: 3}
+      Name: Jhat
+    - message: <style="Grey"><i>Jhat leaves...
+      arguments: []
+      avatar: {fileID: 0}
+      Name: ' '
+    - message: 'A-<size=80%>Anyways... don''t listen to him... '
+      arguments: []
+      avatar: {fileID: 21300000, guid: 07fb40da731f3274bbd4d36b1497dcef, type: 3}
+      Name: Naal
+    - message: <size=80%>It's a pleasure to have you here...
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Oh H-<size=80%>hello... new guy...
+      arguments: []
+      avatar: {fileID: 21300000, guid: b86d3d339541ef244bcb8f91a159a20e, type: 3}
+      Name: Naal
+    - message: <size=80%>I'm not a good... talker... just to give a heads up...
+      arguments: []
+      avatar: {fileID: 21300000, guid: f1097b29c34a4d1489e5483de0f1ef61, type: 3}
+      Name: Naal
+    - message: B-<size=80%>but welcome... anyways...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 71902197105debc4a926a38176b9cd62, type: 3}
+      Name: Naal
+    - message: <size=80%>If you need anything... I can help yo-
+      arguments: []
+      avatar: {fileID: 21300000, guid: d3c8dcc0375b3494d96174fe45d2f2be, type: 3}
+      Name: Naal
+    - message: If you need anything we got you back!
+      arguments: []
+      avatar: {fileID: 21300000, guid: d8d89aad94225c34e933cfe6905dbd24, type: 3}
+      Name: Jhat
+    - message: Jhat! I T-<size=90%>I told you not to come out of the tent!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: Oh! But since the new guy is only staying in for the Demo I though
+        it would be better for me to show myself!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 3856ed5d5a2922b45b603a9a452fa31c, type: 3}
+      Name: Jhat
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 50b5bbcbeb9ab0142a0411cd3762c29d, type: 3}
+      Name: Naal
+    - message: ...
+      arguments: []
+      avatar: {fileID: 21300000, guid: 659b9b5d99753c04a91c77f02385b039, type: 3}
+      Name: Jhat
+    - message: Anyways... I'll be heading back
+      arguments: []
+      avatar: {fileID: 21300000, guid: e12ce64734d32ec43a36ddb55092656d, type: 3}
+      Name: Jhat
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    dequeueAuto: 0
+    dontEndAfter: 0
   Name: Naal
   DefaultClickBehaviour:
     m_PersistentCalls:
@@ -16249,13 +16352,13 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 83262318773eb794da29af71a3c6fa5e, type: 3}
   - name: Shock
     sprite: {fileID: 21300000, guid: fe2efb6431c60da40818ed1365d00c0b, type: 3}
-  counterOfferPanel: {fileID: 0}
-  counterOfferInput: {fileID: 0}
-  ItemGrid: {fileID: 0}
-  Betsy: {fileID: 0}
-  Rowl: {fileID: 0}
-  CounterOfferTxt: {fileID: 0}
-  PreviousOfferTxt: {fileID: 0}
+  counterOfferPanel: {fileID: 55511524}
+  counterOfferInput: {fileID: 508869118}
+  ItemGrid: {fileID: 1646651146}
+  Betsy: {fileID: 1457361219}
+  Rowl: {fileID: 1206136743}
+  CounterOfferTxt: {fileID: 1640098539}
+  PreviousOfferTxt: {fileID: 1123849995}
 --- !u!1 &585714128
 GameObject:
   m_ObjectHideFlags: 0
@@ -16550,7 +16653,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1635129172}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -19487,7 +19590,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1415299700}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -20182,7 +20285,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1226332039}
   initial: 1
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -23661,7 +23764,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1439011627}
   initial: 1
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -23983,7 +24086,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 597613101}
   initial: 1
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -25730,6 +25833,46 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    dequeueAuto: 0
+    dontEndAfter: 0
+  - dialogues:
+    - message: Hey carefull with your hands young man!
+      arguments: []
+      avatar: {fileID: 21300000, guid: e49de5277b6454f4bad372eabd11e6a0, type: 3}
+      Name: Betsy
+    - message: Old <sprite name="Betsy"> <style="LYellow">Betsy</style> here has
+        spent the whole morning hanging that up
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: HEY WHAT'S THIS HERE?!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 1de4b107e8b0f504181f5d8e108a4db7, type: 3}
+      Name: Rowl
+    - message: Oh my- You two kids, step back!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 16edf09aa4aaf57478549c05fad7e861, type: 3}
+      Name: Betsy
+    - message: fufufu! Sounds like someone had too many marshmallows today!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 58613b31611d25340a498178ca8cb236, type: 3}
+      Name: Cloris
+    - message: This is just a to do list for our campsite. With this we will be able
+        to order what needs to be done more efficiently!
+      arguments: []
+      avatar: {fileID: 21300000, guid: ad188917db6f6c44ba1d9f1a4abd753f, type: 3}
+      Name: Betsy
+    - message: Oh coool! So what do I do?
+      arguments: []
+      avatar: {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
+      Name: Rowl
+    - message: You just stay by the fire as always! Don't let it extinguish!
+      arguments: []
+      avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
+      Name: Betsy
+    afterEvent:
+      m_PersistentCalls:
+        m_Calls: []
     dequeueAuto: 0
     dontEndAfter: 0
   Name: QuestBoard
@@ -32172,7 +32315,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 1066810515}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -35196,7 +35339,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 2085849086}
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -36866,7 +37009,7 @@ MonoBehaviour:
   Name: Stone Anvil
   Unlocks: []
   initial: 0
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -50265,7 +50408,7 @@ MonoBehaviour:
   Name: Essence Gauge
   Unlocks: []
   initial: 1
-  level: 0
+  level: -1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -52788,7 +52931,7 @@ MonoBehaviour:
   Unlocks:
   - {fileID: 802574696}
   initial: 1
-  level: 0
+  level: 1
   AfterUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -59802,6 +59945,10 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2093992373583206888, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2877581471432342505, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -59809,6 +59956,10 @@ PrefabInstance:
     - target: {fileID: 3034635106213127998, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202095533911416240, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3216489211636604958, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_fontStyle

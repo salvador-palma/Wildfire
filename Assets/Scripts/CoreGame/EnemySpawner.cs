@@ -131,7 +131,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() {
         
-        if(GameEnd){return;}
+        if(GameEnd || Tutorial.inTutorial){return;}
         UpdateEnemies();
         if(!isOn){
             

@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
     [SerializeField] public Item[] Unlocks;
     [SerializeField] bool initial;
     
-    [HideInInspector] public int level;
+    public int level;
 
     [SerializeField] UnityEvent AfterUnlock;
 
@@ -41,11 +41,11 @@ public class Item : MonoBehaviour
         if(Items == null){Items = new Dictionary<Item, int>();}
         Transform parent = transform.parent;
         
-        level = GameVariables.GetVariable(Name + " Item");
-        if(level == -1){
-            level = initial ? 0 : level;
-            GameVariables.SetVariable(Name + " Item" , level);
-        }
+        // level = GameVariables.GetVariable(Name + " Item");
+        // if(level == -1){
+        //     level = initial ? 0 : level;
+        //     GameVariables.SetVariable(Name + " Item" , level);
+        // }
         Items[this] = level;
         
         if(level!= 0 || itemCount >= 6){

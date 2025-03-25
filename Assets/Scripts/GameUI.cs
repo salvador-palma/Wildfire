@@ -288,6 +288,12 @@ public class GameUI : MonoBehaviour
         if(EnemySpawner.Instance.isOnAugments){Deck.Instance.VisualOutroSlots();}
         setUpFinalStats();
         AudioManager.Instance.SetAmbienceParameter("Dead", 1f);
+        
+        Invoke("EndDialogue", 2f);
+    }
+    public Tutorial tutorial;
+    public void EndDialogue(){
+        tutorial.StartEndDialogue();
     }
     public void PlayButtonSound(int n){
         AudioManager.Instance.PlayButtonSound(n);

@@ -81,7 +81,7 @@ public class Chat : MonoBehaviour
     public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null, bool endAfter = true){
 
         
-        Debug.Log("Starting a Dialogue");
+        
         if(ChatPanel.GetCurrentAnimatorClipInfo(0).Length <= 0  || ChatPanel.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Static"){
             StartChat();
         }
@@ -101,7 +101,7 @@ public class Chat : MonoBehaviour
         if(endAfter){
             EndChat();
         }
-        Debug.Log("Ending a Dialogue");
+        
         if(after != null){
             after.Invoke();
         }

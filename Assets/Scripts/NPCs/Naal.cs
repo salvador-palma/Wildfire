@@ -70,6 +70,10 @@ public class Naal : NPC
 
         foreach (Transform t in ItemGrid){
             t.GetComponent<Item>().ItemStart();
+            Translator.AddIfNotExists(t.GetComponent<Item>().Name);
+            Translator.AddIfNotExists(t.GetComponent<Item>().Description);
+            t.GetComponent<Item>().presentation.ToList().ForEach(d => Translator.AddIfNotExists(d.message));
+    
         }
     }
     public void ReadMood(){

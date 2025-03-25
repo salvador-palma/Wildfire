@@ -36,13 +36,14 @@ public class QuestBoard : NPC
     }
     protected override void CharacterLoad()
     { 
-        int n = GameVariables.GetVariable("QuestBookReady");
-
-        gameObject.SetActive(n != -1);
-        if(n==0){QueueDialogue(0);GameVariables.SetVariable("QuestBookReady", 1);}
+        
+        
         LoadQuests();
     }
-
+    public override void ClickedCharacter(){
+        StartDialogue(new int[]{1});
+        
+    }
     public void ToggleQuestsPanel(){
         MetaMenuUI.Instance.ToggleMenu(QuestPanel);
         //QuestPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(QuestPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);

@@ -143,7 +143,7 @@ public class Flamey : MonoBehaviour
             timerAS = 0;
         }
         if(GameEnd || Health <= 0){return;}
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape) && !Tutorial.inTutorial){
             GameUI.Instance.TogglePausePanel();
         }
         
