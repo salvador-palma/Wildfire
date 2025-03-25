@@ -83,6 +83,7 @@ public class Character : MonoBehaviour
     
     public void SetupCharacter(CharacterData type){
         if(type == null){
+            Debug.Log("ERRORE NULL");
             throw new ArgumentNullException("Type cannot be null");
         }
         if(active != 0){
@@ -545,7 +546,7 @@ public class Character : MonoBehaviour
 
     }
     private void UpdateCharacterInfo(CharacterData data){
-        Debug.Log("Update Character Info");
+        
         if(data.Unlocked){
             CharacterName.SetText(data.Name);
             SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>{0}", new string[]{data.AbilityDescription});
@@ -582,13 +583,14 @@ public class Character : MonoBehaviour
             TransformVesselToCharacter(CharacterSelectContainer.transform.GetChild(offset+1).gameObject, characterDatas[currentDisplayedCharacter].AbilityName);
             CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition = new Vector2(344.5f + (-155.10608f) * offset, CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition.y); 
             UpdateCharacterInfo(characterDatas[currentDisplayedCharacter]);
-            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            //CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
 
 
         }else{
             PlayerPrefs.SetInt("Character", active);
-            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(4000, 0);
+            //CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(4000, 0);
         }
+        MetaMenuUI.Instance.ToggleMenu(CharacterSelectPanel);
     }
     public void WritingData(){
         SerialList<CharacterUnlockedData> unlockList = new SerialList<CharacterUnlockedData>(){list=new List<CharacterUnlockedData>()};

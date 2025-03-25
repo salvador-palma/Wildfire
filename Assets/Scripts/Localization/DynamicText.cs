@@ -12,8 +12,10 @@ using UnityEngine.UIElements;
 public class DynamicText : MonoBehaviour
 {
 
-    public string oldPhrase;
-    [HideInInspector] public string[] oldArgs;
+    //public string oldPhrase;
+    private string OGText;
+    private string[] OGArgs;
+    //[HideInInspector] public string[] oldArgs;
     public bool isChat;
     private string Scene;
     private bool hasAssignedEvent; 
@@ -32,12 +34,12 @@ public class DynamicText : MonoBehaviour
 
     public void TranslateComponent(object sender, EventArgs e) 
     {
-        if(DebugIT) Debug.Log("TranslateComponent: " + oldPhrase);
+        //if(DebugIT) Debug.Log("TranslateComponent: " + oldPhrase);
         try{
             if (onCouroutine && isChat){
                 cond.value = 1;
             }else{
-                SetText(oldPhrase,oldArgs);
+                SetText(OGText,OGArgs);
             }
         }catch{
             if(Scene != SceneManager.GetActiveScene().name){
@@ -51,16 +53,20 @@ public class DynamicText : MonoBehaviour
     public void SetTextDirect(string text){
         GetComponent<TextMeshProUGUI>().text = text;
     }
+
+    //text translated, args not translated
     private string FitArgs(string text, string[] args = null){
         string fittedText = text;
         if(args != null){
-            oldArgs = new string[args.Length];
+            OGArgs = args;
             // Inserir argumentos
+            string[] translatedArgs = new string[args.Length];
             for(int i = 0; i < args.Length; i++)
             {
-                if (int.TryParse(args[i], out _)) oldArgs[i] = args[i]; // Se for número não busca tradução
-                else oldArgs[i] = args[i]=="" ? "" : Translator.getTranslation(args[i]); 
-                fittedText = fittedText.Replace("{"+i+"}", oldArgs[i]);
+                if (int.TryParse(args[i], out _)) translatedArgs[i] = args[i]; // Se for número não busca tradução
+                else translatedArgs[i] = args[i]=="" ? "" : Translator.getTranslation(args[i]); 
+
+                fittedText = fittedText.Replace("{"+i+"}", translatedArgs[i]);
             }
         }
         return fittedText;
@@ -72,8 +78,8 @@ public class DynamicText : MonoBehaviour
             hasAssignedEvent = true;
         }
         string translatedText = text=="" ? "" :Translator.getTranslation(text);
-        oldPhrase = translatedText;
-        
+        OGText = text;
+
         translatedText = FitArgs(translatedText, args);
         GetComponent<TextMeshProUGUI>().text = translatedText;
     }
@@ -90,11 +96,11 @@ public class DynamicText : MonoBehaviour
         string formatting_buffer = "";
         cond = condition;
         condition.value=0;
-        oldPhrase = msg;
+        OGText = msg;
         string translatedText = Translator.getTranslation(msg); //Texto traduzido nao formatado
         //oldPhrase = translatedText; //OldPhrase traduzida
         translatedText = FitArgs(translatedText, arguments); //Texto tradizido formatado / OldArgs traduzidos
-        oldArgs = arguments;
+        OGArgs = arguments;
         TextMeshProUGUI tmp = GetComponent<TextMeshProUGUI>();
         
         foreach(char c in translatedText){
@@ -130,7 +136,7 @@ public class DynamicText : MonoBehaviour
                 }
             }
         }
-        SetText(oldPhrase,oldArgs);
+        SetText(OGText,OGArgs);
         if(optionTxt != null){
             for(int i =0; i < optionTxt.Length; i++){
                 Options[i].gameObject.SetActive(true);
@@ -140,6 +146,13 @@ public class DynamicText : MonoBehaviour
         condition.value=1;
         onCouroutine = false;
         yield break;
+    }
+
+
+    void OnDestroy()
+    {
+        
+        Translator.dropdownValueChange -= TranslateComponent;
     }
     
 }

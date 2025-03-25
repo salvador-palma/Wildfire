@@ -14,6 +14,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Gyomyo { get; private set; }
     [field: SerializeField] public EventReference Jhat { get; private set; }
     [field: SerializeField] public EventReference Naal { get; private set; }
+    [field: SerializeField] public EventReference Betsy { get; private set; }
 
     [field:Header("Ambience SFX")]
     [field: SerializeField] public EventReference Campsite { get; private set; }
@@ -88,6 +89,8 @@ public class FMODEvents : MonoBehaviour
                 return Instance.Jhat;
             case "Naal":
                 return Instance.Naal;
+            case "Betsy":
+                return Instance.Betsy;
             default:
                 return new EventReference();
         }

@@ -44,7 +44,8 @@ public class QuestBoard : NPC
     }
 
     public void ToggleQuestsPanel(){
-        QuestPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(QuestPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        MetaMenuUI.Instance.ToggleMenu(QuestPanel);
+        //QuestPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(QuestPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
     }
     public void LoadQuests(){
        int[][] Quests = GameVariables.GetQuests();

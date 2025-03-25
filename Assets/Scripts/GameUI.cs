@@ -125,6 +125,7 @@ public class GameUI : MonoBehaviour
     public void TogglePausePanel(){
         Flamey f = Flamey.Instance;
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", PausePanel.activeInHierarchy ? 0 : 1);
 
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
@@ -144,6 +145,7 @@ public class GameUI : MonoBehaviour
             ButtonTabs[index].color = ActiveTab;
             MenuTabs[index].SetActive(true);
             current_Tab = index;
+            if(current_Tab == 1){Canvas.ForceUpdateCanvases();}
         }
     }
 
@@ -249,6 +251,7 @@ public class GameUI : MonoBehaviour
         if(optionMenu==null){return;}
 
         optionMenu.SetActive(true);
+        
 
     }
 
@@ -273,8 +276,9 @@ public class GameUI : MonoBehaviour
     }
 
     public void GameOverEffect(){
+         AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         int n = EnemySpawner.Instance.current_round; 
-        RoundsLastedText.text = "YOU'VE SURVIVED UNTIL " + n/10 +"h"+ ((n%10)*6).ToString("00")  + " ";
+        RoundsLastedText.GetComponent<DynamicText>().SetText("YOU'VE SURVIVED UNTIL {0}h{1}", new string[]{(n/10).ToString(), ((n%10)*6).ToString("00")});
         foreach (Transform item in  Flamey.Instance.transform)
         {
             item.GetComponent<SpriteRenderer>().sortingOrder += 2;
@@ -285,13 +289,15 @@ public class GameUI : MonoBehaviour
         setUpFinalStats();
         AudioManager.Instance.SetAmbienceParameter("Dead", 1f);
     }
-    
+    public void PlayButtonSound(int n){
+        AudioManager.Instance.PlayButtonSound(n);
+    }
     public void loadScene(string str){
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         LocalBestiary.INSTANCE.UpdateBestiaryValues();
 
         
-
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         SceneManager.LoadScene(str);
     }
 
@@ -405,6 +411,7 @@ public class GameUI : MonoBehaviour
     }
     public void UpdateProfileCharacter(){
         Character.Instance.TransformVesselToCharacter(ProfileVessel);
+        Debug.Log("UPDATED PROFILE CHARACTERS");
     }
 
 

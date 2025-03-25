@@ -124,6 +124,7 @@ public class LocalBestiary : MonoBehaviour
             BestiaryTabs = new string[2]{"STATS","ABILITIES"};
             
         }
+        tabTitle.SetText(BestiaryDisplayTab);
         
     }
     
@@ -157,17 +158,10 @@ public class LocalBestiary : MonoBehaviour
     public void UpdateSlots(){
         
         try{
-            if(Container == null){
-                Debug.LogError("HEEERE");
-            }
+            
             foreach (Transform item in Container.transform)
             {
-                if(item == null){
-                    Debug.LogError("HEEERE :" + item.name);
-                }
-                if(item.gameObject == null){
-                    Debug.LogError("HEEERE 2 :" + item.name);
-                }
+                
                 if(item.gameObject.activeSelf){
                     Destroy(item.gameObject);
                 }

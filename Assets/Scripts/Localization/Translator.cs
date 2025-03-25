@@ -71,41 +71,37 @@ public static class Translator
         PlayerPrefs.SetString("Language", currentLanguage);
         dropdownValueChange?.Invoke(null, new EventArgs());   
     }
-
+    //OLD WORD ALWAYS IN ENGLISH
     public static string getTranslation(string oldWord)
     {
         //Debug.Log($"Traduzir {oldWord} para {currentLanguage}");
         try{
+            if(oldWord == null) return oldWord;
             oldWord = oldWord.Trim();
             if(translations == null) LoadCSV(csvName);
 
             if(System.Text.RegularExpressions.Regex.IsMatch(oldWord, @"^[\d.,]+$")){return oldWord;}
 
-            int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
+            // int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
             int englishIndex = translations["English"].IndexOf(oldWord); // Se nao houver tradução a oldword estara com o valor default em ingles, este indice exite, se nao existe e preciso criar entrada
 
             // Debug.Log(translations[currentLanguage][oldEntryIndex]);
             // Missing entry
-            if(oldEntryIndex == -1 && englishIndex == -1) {  
-                
+            if(englishIndex == -1) {  
                 if(WriteMissingText){
                     AddCsvEntry(oldWord);
                 }
                 Debug.Log("No Translation: " + oldWord);
-                
                 return oldWord;
             }
 
             // Missing translation
-            if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing") // Se a entrada existe em ingles, a old word esta em ingles 
-            || oldEntryIndex != -1 && translations[currentLanguage][oldEntryIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
-                if(oldEntryIndex != -1) return translations["English"][oldEntryIndex];
-                if(englishIndex != -1) return translations["English"][englishIndex];
+            if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
+                return translations["English"][englishIndex];
             }
 
             string translatedText = "";
             if(englishIndex != -1) translatedText = translations[currentLanguage][englishIndex];
-            if(oldEntryIndex != -1) translatedText = translations[currentLanguage][oldEntryIndex];
              return translatedText;
             //Debug.Log($"Traduzir {oldWord} para {translatedText}");
         }catch(Exception e){

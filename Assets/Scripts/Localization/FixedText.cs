@@ -7,6 +7,7 @@ public class FixedText : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private string Scene;
+    private string OGText;
     void Awake()
     {
         
@@ -20,11 +21,11 @@ public class FixedText : MonoBehaviour
 
     void Start()
     {
-        string text = GetComponent<TextMeshProUGUI>().text;
+        OGText = GetComponent<TextMeshProUGUI>().text;
 
-        if (string.IsNullOrEmpty(text)) { return; }
+        if (string.IsNullOrEmpty(OGText)) { return; }
 
-        string translatedText = Translator.getTranslation(text);
+        string translatedText = Translator.getTranslation(OGText);
         GetComponent<TextMeshProUGUI>().text = translatedText;
     }
 
@@ -36,11 +37,11 @@ public class FixedText : MonoBehaviour
     private void TranslateComponent(object sender, EventArgs e) 
     {
         try{
-            string text = GetComponent<TextMeshProUGUI>().text;
+            //string text = GetComponent<TextMeshProUGUI>().text;
 
-            if (string.IsNullOrEmpty(text)) { return; }
+            //if (string.IsNullOrEmpty(text)) { return; }
 
-            string translatedText = Translator.getTranslation(text);
+            string translatedText = Translator.getTranslation(OGText);
             GetComponent<TextMeshProUGUI>().text = translatedText;
 
         }catch{
@@ -49,6 +50,12 @@ public class FixedText : MonoBehaviour
             }
         }
         
+    }
+
+    void OnDestroy()
+    {
+        
+        Translator.dropdownValueChange -= TranslateComponent;
     }
 
     [ContextMenu("Call Extra Function")]

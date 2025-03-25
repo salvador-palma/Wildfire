@@ -348,10 +348,11 @@ public class SkillTreeManager : MonoBehaviour
     }
     public void toggleSkillTree(GameObject SkillTreePanel){
 
-        Vector2 newPos = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
-        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
-        SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = newPos;
-
+        // Vector2 newPos = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        // AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
+        // SkillTreePanel.GetComponent<RectTransform>().anchoredPosition = newPos;
+        MetaMenuUI.Instance.ToggleMenu(SkillTreePanel);
+        Vector2 newPos = new Vector2(SkillTreePanel.GetComponent<RectTransform>().anchoredPosition.x, 0);
         if(newPos.x <= 0){
             UpdateBlackMarketItems();
         }

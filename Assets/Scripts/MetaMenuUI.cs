@@ -52,7 +52,9 @@ public class MetaMenuUI : MonoBehaviour
 
     }
     public void StartGame(){
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         SceneManager.LoadScene("Game");
+
     }
     public void PlayOutro(){
         GetComponent<Animator>().Play("Outro");
@@ -69,12 +71,18 @@ public class MetaMenuUI : MonoBehaviour
         Character.Instance.toggleCharacterPanel(CharacterSelectPanel);
         
     }
+
     public void SettingsMenuToggle(){
         ToggleMenu(SettingsSelectPanel);   
     }
+    public int SoundLayers = 0;
     public bool ToggleMenu(GameObject panel){
         Vector2 newPos = new Vector2(panel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
-        AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
+        
+        SoundLayers += newPos.x <= 0? 1 : -1;
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", SoundLayers > 0 ? 0 : 1);
+        AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
+        
         panel.GetComponent<RectTransform>().anchoredPosition = newPos;
         return newPos.x <= 0;
     }

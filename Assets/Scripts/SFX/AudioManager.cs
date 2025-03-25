@@ -7,7 +7,13 @@ using FMOD.Studio;
 
 using System.Dynamic;
 using System;
-
+using UnityEngine.UI;
+[System.Serializable]
+public enum ButtonSFX{
+    Click,
+    Slide,
+    Tick
+}
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set;}
@@ -64,6 +70,24 @@ public class AudioManager : MonoBehaviour
         Instance.PlayOneShotSelf(sound, worldPos);
     }
 
+    public void PlayButtonSound(int type){
+        switch(type){
+            case 0:
+                PlayOneShot(FMODEvents.Instance.ButtonClick, Vector2.zero);
+                break;
+            case 1:
+                PlayOneShot(FMODEvents.Instance.PaperSlide, Vector2.zero);
+                break;
+            case 2:
+                PlayOneShot(FMODEvents.Instance.MoneyTick, Vector2.zero);
+                break;
+            case 3:
+                PlayOneShot(FMODEvents.Instance.BubblePop, Vector2.zero);
+                break;
+        }
+        
+    }
+
     
     public static EventInstance CreateInstance(EventReference eventReference){
         EventInstance eventInstance= RuntimeManager.CreateInstance(eventReference);
@@ -86,7 +110,7 @@ public class AudioManager : MonoBehaviour
         
         Instance.SetAmbienceParameter("Level", n);
         Instance.SetAmbienceParameter("OST_Intensity", 1);
-        Debug.Log("1");
+        
         
     }
    
@@ -97,7 +121,7 @@ public class AudioManager : MonoBehaviour
         }
         
         Instance.SetAmbienceParameter("OST_Intensity", 0);
-        Debug.Log("0");
+       
     }
 
     private EventInstance HealthSoundInstance;

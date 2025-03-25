@@ -119,6 +119,7 @@ public class Flamey : MonoBehaviour
         AudioManager.Instance.SetAmbienceParameter("Dead", 0);
         Deck.Instance.FillDeck();
         Character.Instance.SetupActiveLooks();
+        GameUI.Instance.UpdateProfileCharacter();
         
 
         target(getHoming());
