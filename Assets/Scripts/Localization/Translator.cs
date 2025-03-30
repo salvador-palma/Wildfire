@@ -10,11 +10,12 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "Translations2"; 
+    private static string csvName = "TranslationsFull+Demo"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
     private static bool WriteMissingText = true;
+    private static bool WarnMissingText = true;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -97,7 +98,8 @@ public static class Translator
 
             // Missing translation
             if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
-                return translations["English"][englishIndex];
+                //return translations["English"][englishIndex];
+                return WarnMissingText ? "<size=115%><color=red>MISSING TRANSLATION WARN THE DEV</color></size>":translations["English"][englishIndex];
             }
 
             string translatedText = "";

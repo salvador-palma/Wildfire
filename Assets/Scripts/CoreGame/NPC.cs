@@ -179,8 +179,8 @@ public class NPC : MonoBehaviour
 
     /* ===== I/O FUNCTIONS ===== */
     private static void ReadBestiaryData(){
-        if(File.Exists(Application.persistentDataPath +"/npcs.json")){
-            string json = File.ReadAllText(Application.persistentDataPath +"/npcs.json");
+        if(File.Exists(Application.persistentDataPath +SkillTreeManager.NPCPATH)){
+            string json = File.ReadAllText(Application.persistentDataPath +SkillTreeManager.NPCPATH);
             savedData = JsonUtility.FromJson<NPCSaveData>(json);
            
         }else{
@@ -194,7 +194,7 @@ public class NPC : MonoBehaviour
         Debug.Log("Saving NPC Data");
         string json = JsonUtility.ToJson(savedData);
         Debug.Log(json);
-        File.WriteAllText(Application.persistentDataPath + "/npcs.json", json);
+        File.WriteAllText(Application.persistentDataPath + SkillTreeManager.NPCPATH, json);
     }
 
     public void SetHovered(bool check) {
@@ -260,8 +260,8 @@ public class GameVariables{
     }
     
     private void ReadData(){
-        if(File.Exists(Application.persistentDataPath +"/variables.json")){
-            string json = File.ReadAllText(Application.persistentDataPath +"/variables.json");
+        if(File.Exists(Application.persistentDataPath +SkillTreeManager.VariablesPATH)){
+            string json = File.ReadAllText(Application.persistentDataPath +SkillTreeManager.VariablesPATH);
             variableList = JsonUtility.FromJson<VariableList>(json);
            
         }else{
@@ -272,7 +272,7 @@ public class GameVariables{
 
     public void WritingData(){
         string json = JsonUtility.ToJson(variableList);
-        File.WriteAllText(Application.persistentDataPath + "/variables.json", json);
+        File.WriteAllText(Application.persistentDataPath + SkillTreeManager.VariablesPATH, json);
     }
     
     public static void SetVariable(string name, int value){

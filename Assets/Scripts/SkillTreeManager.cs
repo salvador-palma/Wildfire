@@ -74,6 +74,12 @@ public class SkillTreeManager : MonoBehaviour
 
     [SerializeField] Button[] PickBanButtons;
 
+
+    public static string CharacterPATH = "/charactersDEMO.json";
+    public static string SkillsPATH = "/skillsDEMO.json";
+    public static string BestiaryPATH = "/bestiaryDEMO.json";
+    public static string VariablesPATH = "/variablesDEMO.json";
+    public static string NPCPATH = "/npcsDEMO.json";
     
     private void Awake() {
         Instance = this;
@@ -184,14 +190,14 @@ public class SkillTreeManager : MonoBehaviour
         
         
         string json = JsonUtility.ToJson(PlayerData);
-        File.WriteAllText(Application.persistentDataPath + "/skills.json", json);
+        File.WriteAllText(Application.persistentDataPath + SkillTreeManager.SkillsPATH, json);
         Debug.Log("Finished Writing Skill Tree...");
     }
     
     public void ReadData(){
         
-        if(File.Exists(Application.persistentDataPath +"/skills.json")){
-            string json = File.ReadAllText(Application.persistentDataPath +"/skills.json");
+        if(File.Exists(Application.persistentDataPath +SkillTreeManager.SkillsPATH)){
+            string json = File.ReadAllText(Application.persistentDataPath +SkillTreeManager.SkillsPATH);
             PlayerData = JsonUtility.FromJson<SerializableList<Skills>>(json);
             Debug.Log("Finished Reading Skill Tree...");
         }else{
@@ -201,18 +207,18 @@ public class SkillTreeManager : MonoBehaviour
     }
      public void CreateFile(){
         string str = "{\"embers\":2329,\"skillTreeEmbers\":0,\"skills\":[{\"type\":\"Assassin\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Immolate\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Critical Strike\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Pirate\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Snow Pool\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Necromancer\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Ember Generation\",\"level\":-1,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Explosion\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Vampire\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Multicaster\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Static Energy\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Gambling\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Ritual\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Thunder\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Regeneration\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Magical Shot\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Lava Pool\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Burst Shot\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Bee Summoner\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Thorns\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Freeze\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Orbits\",\"level\":2,\"ban\":false,\"pick\":false,\"max_level_reached\":2},{\"type\":\"Flower Field\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":1},{\"type\":\"Resonance\",\"level\":-2,\"ban\":false,\"pick\":false,\"max_level_reached\":2}]}";
-        File.WriteAllText(Application.persistentDataPath +"/skills.json", str);
+        File.WriteAllText(Application.persistentDataPath +SkillTreeManager.SkillsPATH, str);
     }
 
     public static void AddEmbersToJSON(int n){
         Debug.Log("Adding " + n + " embers to JSON");
-        if(File.Exists(Application.persistentDataPath +"/skills.json")){
-            string jsonR = File.ReadAllText(Application.persistentDataPath +"/skills.json");
+        if(File.Exists(Application.persistentDataPath +SkillTreeManager.SkillsPATH)){
+            string jsonR = File.ReadAllText(Application.persistentDataPath +SkillTreeManager.SkillsPATH);
             SerializableList<Skills> p  = JsonUtility.FromJson<SerializableList<Skills>>(jsonR);
             p.embers += n;
             
             string jsonW = JsonUtility.ToJson(p);
-            File.WriteAllText(Application.persistentDataPath + "/skills.json", jsonW);
+            File.WriteAllText(Application.persistentDataPath + SkillTreeManager.SkillsPATH, jsonW);
         }
     }
     public void AddEmbers(long n){

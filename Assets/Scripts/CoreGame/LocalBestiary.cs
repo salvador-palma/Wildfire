@@ -269,8 +269,8 @@ public class LocalBestiary : MonoBehaviour
 
     /* ===== I/O FUNCTIONS ===== */
     private void ReadBestiaryData(){
-        if(File.Exists(Application.persistentDataPath +"/bestiary.json")){
-            string json = File.ReadAllText(Application.persistentDataPath +"/bestiary.json");
+        if(File.Exists(Application.persistentDataPath +SkillTreeManager.BestiaryPATH)){
+            string json = File.ReadAllText(Application.persistentDataPath +SkillTreeManager.BestiaryPATH);
             saved_milestones = JsonUtility.FromJson<BestiarySaveData>(json);
         }else{
             CreateBeastiaryFile();
@@ -283,11 +283,11 @@ public class LocalBestiary : MonoBehaviour
         {
             createdSaveData.animals.Add(new AnimalSaveData(i, -1));
         }
-        File.WriteAllText(Application.persistentDataPath +"/bestiary.json", JsonUtility.ToJson(createdSaveData));
+        File.WriteAllText(Application.persistentDataPath +SkillTreeManager.BestiaryPATH, JsonUtility.ToJson(createdSaveData));
     }
     public void WritingData(){
         string json = JsonUtility.ToJson(saved_milestones);
-        File.WriteAllText(Application.persistentDataPath + "/bestiary.json", json);
+        File.WriteAllText(Application.persistentDataPath + SkillTreeManager.BestiaryPATH, json);
     }
 
     /* ===== UI FUNCTIONS ===== */
