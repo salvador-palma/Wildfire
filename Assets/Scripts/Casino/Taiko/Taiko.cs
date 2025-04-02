@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TimingPoint{
     public int Timing;
@@ -47,10 +48,26 @@ public class Taiko : MonoBehaviour
     public EventReference drimMiss;
     public EventReference[] drumHit;
 
+    public UnityEngine.UI.Image[] TaikoDrumHitFeedback;
+    public UnityEngine.UI.Image[] TaikoDrumHitFeedbackMobile;
+
     public bool AutoBot;
     public float delay;
     EventInstance trackInstance;
     int NoteAmount;
+
+    public GameObject[] AndroidExtras;
+    public GameObject[] PCExtras;
+
+    void Start()
+    {
+        foreach(GameObject go in AndroidExtras){
+            go.SetActive(MenuUI.device == "Mobile");
+        }
+        foreach(GameObject go in PCExtras){
+            go.SetActive(MenuUI.device == "PC");
+        }
+    }
     void SetUpGame(string mapPath)
     {
         score= 0;
@@ -77,6 +94,10 @@ public class Taiko : MonoBehaviour
         parentRTr.anchoredPosition = new Vector2(0,0);
         matUpdateSpeed = mat_speed;
         trackInstance = AudioManager.CreateInstance(track);
+
+
+
+        
     }
     public bool hasStarted;
     public void StartTrack(){
@@ -96,9 +117,16 @@ public class Taiko : MonoBehaviour
         }
        
         
+
+
+
+
         if(hasStarted){
             
-            if(drums.Count <= 0){hasStarted=false; return;}
+
+            
+
+            if(drums.Count <= 0){hasStarted=false; Invoke("End",  5f); return;}
 
             parentRTr.anchoredPosition= new Vector2(parentRTr.anchoredPosition.x - matUpdateSpeed*1000*Time.deltaTime, parentRTr.anchoredPosition.y);
             //Debug.Log(matUpdateSpeed);
@@ -147,8 +175,8 @@ public class Taiko : MonoBehaviour
                 
                 float FillingPerGood = 1f / NoteAmount;
                 float FillingPerOk = FillingPerGood * 0.5f;
-                float CurrentFilling = quality[0] * FillingPerGood + (quality[1]- quality[3]) * FillingPerOk;
-                SoulGauge.value = CurrentFilling * 1.15f;
+                float CurrentFilling = (quality[0] - quality[3]) * FillingPerGood + (quality[1]- quality[2]) * FillingPerOk;
+                SoulGauge.value = CurrentFilling;
 
                 SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
                 
@@ -167,7 +195,57 @@ public class Taiko : MonoBehaviour
     bool waitingRed = false;
     bool waitingBlue = false;
     float waitTimer;
-    
+    public IEnumerator Feedback(UnityEngine.UI.Image img){
+        img.enabled = true;
+        yield return new WaitForSeconds(0.02f);
+        img.enabled = false;
+    }
+    public void Hit(int type)
+    {
+        //ONLY CALLED ON MOBILE
+        if(drums.Count <= 0){return;}
+        bool red = type == 0 ||  type == 1;
+        bool blue = type == 2 || type == 3;
+        StartCoroutine(Feedback(TaikoDrumHitFeedback[type]));
+        StartCoroutine(Feedback(TaikoDrumHitFeedbackMobile[type]));
+
+        int timing = getTiming();
+        Drum target = ClosestType();
+
+        if(red && waitingRed && Time.deltaTime - waitTimer <= doubleClickBuffer){
+            waitingRed = false;
+            Hit(2, timing, target);
+
+        }else if(red){
+            waitTimer = Time.time;
+            if(target.Type==2){
+                waitingRed = true;
+            }else{
+                waitingRed = false;
+                Hit(0, timing, target);
+            }
+        }
+
+        if(blue && waitingBlue && Time.deltaTime - waitTimer <= doubleClickBuffer){
+            waitingBlue = false;
+            Hit(3, timing, target);
+
+        }else if(blue){
+            waitTimer = Time.time;
+            if(target.Type==3){
+                waitingBlue = true;
+            }else{
+                waitingBlue = false;
+                Hit(1, timing, target);
+            }
+        }
+
+        if(drums.Count <= 0){
+                hasStarted=false;
+                
+                Invoke("End",  5f);
+            }
+    }
     private void CheckForInput()
     {
         if(AutoBot){
@@ -179,8 +257,21 @@ public class Taiko : MonoBehaviour
             }
             return;
         }
-        bool red = Input.GetKeyDown(red1) || Input.GetKeyDown(red2);
-        bool blue = Input.GetKeyDown(blue1) || Input.GetKeyDown(blue2);
+        
+        bool red1 = Input.GetKeyDown(this.red1);
+        bool red2 = Input.GetKeyDown(this.red2);
+        bool blue1 = Input.GetKeyDown(this.blue1);
+        bool blue2 = Input.GetKeyDown(this.blue2);
+
+        if(red1){ StartCoroutine(Feedback(TaikoDrumHitFeedback[0]));}
+        if(red2){ StartCoroutine(Feedback(TaikoDrumHitFeedback[1]));}
+        if(blue1){ StartCoroutine(Feedback(TaikoDrumHitFeedback[2]));}
+        if(blue2){ StartCoroutine(Feedback(TaikoDrumHitFeedback[3]));}
+        
+       
+        
+        bool red = red1 || red2;
+        bool blue = blue1 || blue2;
 
         int timing = getTiming();
         Drum target = ClosestType();
@@ -238,8 +329,8 @@ public class Taiko : MonoBehaviour
             
             float FillingPerGood = 1f / NoteAmount;
             float FillingPerOk = FillingPerGood * 0.5f;
-            float CurrentFilling = quality[0] * FillingPerGood + (quality[1]- quality[3]) * FillingPerOk;
-            SoulGauge.value = CurrentFilling * 1.15f;
+            float CurrentFilling = (quality[0] - quality[3]) * FillingPerGood + (quality[1]- quality[2]) * FillingPerOk;
+            SoulGauge.value = CurrentFilling * 1f;
 
             SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
         }
@@ -249,7 +340,7 @@ public class Taiko : MonoBehaviour
     int[] quality = new int[4];
     public TextMeshProUGUI ScoreTxt;
     public TextMeshProUGUI StreakTxt;
-    public Slider SoulGauge;
+    public UnityEngine.UI.Slider SoulGauge;
 
     bool Score(int[] value){
         if(value[1]==-1){return false;} //Out of Range

@@ -2740,8 +2740,8 @@ MonoBehaviour:
   m_text: 'Win a game where you have bet 1M EmbersWin a game where you have bet 1M
     EmbersWin a game where you have '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9912,7 +9912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1fd2f1e591ef3a44e9fde09da23a890e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9eecd117e849cb4b8d28a3e55921317, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11056,7 +11056,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -11099,9 +11099,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 463790223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &471253415
 GameObject:
   m_ObjectHideFlags: 0
@@ -25919,6 +25921,7 @@ MonoBehaviour:
   QuestContainer: {fileID: 6749891280300223469}
   QuestSlot: {fileID: 1826153679}
   avatar: {fileID: 21300000, guid: 1630a39cb1bb3d6458a2dc78225ad958, type: 3}
+  QuestTitle: {fileID: 463790227}
   Rowl: {fileID: 1206136743}
   Betsy: {fileID: 1457361219}
   Cloris: {fileID: 1653547898}
@@ -49512,6 +49515,7 @@ GameObject:
   - component: {fileID: 1826153679}
   - component: {fileID: 1826153681}
   - component: {fileID: 1826153680}
+  - component: {fileID: 1826153682}
   m_Layer: 5
   m_Name: QuestSlot
   m_TagString: Untagged
@@ -49579,6 +49583,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826153678}
   m_CullTransparentMesh: 1
+--- !u!114 &1826153682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826153678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &1827512957
 GameObject:
   m_ObjectHideFlags: 0
@@ -56202,8 +56220,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Going for the Jackpot
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -59694,7 +59712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0006866455, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -60517,7 +60535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00035095215
+      value: -0.000579834
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

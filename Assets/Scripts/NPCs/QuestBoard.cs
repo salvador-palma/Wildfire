@@ -26,6 +26,7 @@ public class QuestBoard : NPC
     [SerializeField] Transform QuestSlot;
     [SerializeField] Sprite avatar;
     public static QuestBoard Instance;
+    public DynamicText QuestTitle;
     public NPC Rowl;
     public NPC Betsy;
     public NPC Cloris;
@@ -44,6 +45,15 @@ public class QuestBoard : NPC
     }
 
     public void ToggleQuestsPanel(){
+        string title = "";
+        switch (GameVariables.GetVariable("QuestBoard"))
+        {
+            case 0: title = "TO DO LIST"; break;
+            case 1: title = "QUESTS & REQUESTS"; break; //The Grand Compendium of Noble Tasks Bestowed Upon the Worthy
+            case 2: title = "THE GRAND COMPENDIUM OF NOBLE TASKS BESTOWED UPON THE WORTHY"; break;
+            case -1: title = "Quests"; break;
+        }
+        QuestTitle.SetText(title);
         MetaMenuUI.Instance.ToggleMenu(QuestPanel);
         //QuestPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(QuestPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
     }

@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    string version = "V1.4";
+    static string version = "V1.4";
+    public static string device = "PC"; //Mobile, PC, Web
     private void Awake() {
         if(PlayerPrefs.GetInt(version,0)==0){
             PlayerPrefs.DeleteAll();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UI;
 
 public class FrogJump : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class FrogJump : MonoBehaviour
     public GameObject SpikePrefab;
     public GameObject SpikeRedPrefab;
     public Transform PlatformParent;
+
+    public Button Left;
+    public Button Right;
     public float MinimumPercentageDistanceReduced = 0.2f;
     
     public float LimitToTP = 9f;
@@ -48,6 +52,13 @@ public class FrogJump : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         SpawnPlatforms();
         SetupGameData();
+
+        
+    }
+    int buttonMove = 0;
+    public void Move(int dir)
+    {
+        buttonMove += dir;
     }
     bool started = false;
 
@@ -108,7 +119,7 @@ public class FrogJump : MonoBehaviour
 
             return;
         }
-        mov = Input.GetAxis("Horizontal") * sideSpeed;
+        mov = (Input.GetAxis("Horizontal") + buttonMove) * sideSpeed;
         CheckPlatforms();
 
         MinimumPercentageDistanceReduced = Math.Clamp(transform.position.y * 0.001f + 0.2f,0.2f,1);
