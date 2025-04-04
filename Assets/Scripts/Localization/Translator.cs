@@ -10,11 +10,12 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "TranslationsFull+Demo"; 
+    private static string csvName = "DEMO"; 
+    //private static string csvName = "TranslationsFull+Demo"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
-    private static bool WriteMissingText = true;
+    private static bool WriteMissingText = false;
     private static bool WarnMissingText = true;
     
     public static int getCurrentLanguageID(){
