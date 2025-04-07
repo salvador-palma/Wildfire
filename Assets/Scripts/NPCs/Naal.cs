@@ -66,6 +66,7 @@ public class Naal : NPC
 
     protected override void CharacterLoad()
     {
+        Item.itemCount = 0;
         ReadMood();
         if(Mood==-1){WriteMood(50);}
         switch(GameVariables.GetVariable("BlackMarketReady")){
@@ -283,7 +284,7 @@ public class Naal : NPC
 
             //SURPRSIED GOOD
             Debug.Log("Unexpected Good Offer!");
-            WriteMood(Mood + 10);
+            WriteMood(Mood + 15);
             Deal(counterOffer);
             return 0;
         }
@@ -294,7 +295,7 @@ public class Naal : NPC
             //LOOSE 10 TO 20 MOOD
            
             WriteMood(Mood - Random.Range(10,20));
-            makeOffer(0, counterOffer);
+            makeOffer(0, lastNPCOffer);
 
         }else if(counterOffer < ItemAtHand.MinimumPrice + priceDelta){
             //LOW OFFER
@@ -414,7 +415,9 @@ public class Naal : NPC
 
     private void makeOffer(int type, int value, int subtype=0){
         
+        Debug.Log("Normalizing value: " + value + " : " + type);
         value = Norm(value, lastNPCOffer);
+        Debug.Log("Normalizing value pos: " + value + " : " + type);
         if(value == lastPlayerOffer){
 
             UnityEvent ev1 = new UnityEvent();

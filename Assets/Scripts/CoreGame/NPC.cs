@@ -64,7 +64,14 @@ public class NPC : MonoBehaviour
     
     public UnityEvent DefaultClickBehaviour;
 
+    public string[] IdleAnimations;
+
     private void Start() {
+        if(IdleAnimations.Length > 0){
+            int i = UnityEngine.Random.Range(0, IdleAnimations.Length);
+            Debug.Log($"Playing Idle Animation {Name}: {IdleAnimations[i]}");
+            GetComponent<Animator>().Play(IdleAnimations[i]);
+        }
         if(!hasRead){
             ReadBestiaryData();
         }

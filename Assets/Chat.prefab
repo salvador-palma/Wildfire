@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &485107057363980865
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,8 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &2877581471432342505
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +741,7 @@ GameObject:
   - component: {fileID: 7001662325690879694}
   - component: {fileID: 4353084680807350652}
   - component: {fileID: 3034635106213127998}
+  - component: {fileID: 5292800457202823334}
   m_Layer: 0
   m_Name: Name
   m_TagString: Untagged
@@ -864,6 +865,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5292800457202823334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3499160602140724158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &5030279524136855806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,8 +1116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &5590531933342757423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,8 +1340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &6506634087290487833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,13 +1541,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChatPanel: {fileID: 7314885210520685492}
   Profile: {fileID: 6666001315236517700}
-  Message: {fileID: 6588912352263716263}
+  Message: {fileID: 0}
   Options:
   - {fileID: 1965992779485269595}
   - {fileID: 1874337553708468279}
   - {fileID: 2832432317384199521}
   - {fileID: 6207845652714213986}
-  Name: {fileID: 3034635106213127998}
+  Name: {fileID: 5292800457202823334}
   MoodSlider: {fileID: 1544754991160409545}
   AvatarBank:
   - {fileID: 21300000, guid: f8492251d4ccdd948850803620a5b775, type: 3}
@@ -1930,8 +1945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &7879409779484698900
 GameObject:
   m_ObjectHideFlags: 0

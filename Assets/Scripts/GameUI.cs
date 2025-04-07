@@ -19,7 +19,7 @@ public class GameUI : MonoBehaviour
 
     [Header("FastForward")]
     [SerializeField]Button[] FastForwardButtons;
-    private float[] TimeScaleTime = new float[]{2,2.75f,3.5f,4f};
+    private float[] TimeScaleTime = new float[]{2.5f,3f,3.5f,4f}; //2.5f, 3f, 3.5f, 4f
     private int[] TimeScaleValue = new int[]{2,3,4,5};
     private int TimeScaleIndex;
     [Header("Menu")]

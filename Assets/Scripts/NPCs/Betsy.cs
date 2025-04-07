@@ -51,9 +51,9 @@ public class Betsy : NPC
             case 0:
             
                 if(B.get_Amount_Of_Enemies_With_Milestones_Above(B.milestones[0]) >= 5 &&  GameVariables.GetVariable("BlackMarketReady") < 0){
-                    GameVariables.SetVariable("BlackMarketReady",0);
+                    
                     CompleteQuest(1);
-                    QueueDialogue(9);
+                    QueueDialogue(9); //call nall
                 }
                 break;
             case 1:
@@ -81,6 +81,9 @@ public class Betsy : NPC
         }
 
         
+    }
+    public void CallNaal(){
+        GameVariables.SetVariable("BlackMarketReady",0);
     }
 
     public void SetBinocularLevel(int n){

@@ -17,7 +17,7 @@ public class Chat : MonoBehaviour
     [SerializeField] Image Profile;
     [SerializeField] DynamicText Message;
     [SerializeField] Button[] Options;
-    [SerializeField] TextMeshProUGUI Name;
+    [SerializeField] DynamicText Name;
     
     [SerializeField] public Slider MoodSlider;
 
@@ -48,7 +48,7 @@ public class Chat : MonoBehaviour
     }
     public void ChatSingular(string msg,Sprite avatar, string[] arguments = null, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
         
-        Name.text = name;
+        Name.SetText(name);
         Message.SetText("");
         Profile.color = avatar!= null? Color.white : Color.clear;
         Profile.sprite = avatar;
@@ -85,7 +85,8 @@ public class Chat : MonoBehaviour
         if(ChatPanel.GetCurrentAnimatorClipInfo(0).Length <= 0  || ChatPanel.GetCurrentAnimatorClipInfo(0)[0].clip.name != "Static"){
             StartChat();
         }
-        Name.text = defaultName;
+        
+        Name.SetText(defaultName);
         Message.SetText("");
         int i = 0;
         foreach (Dialogue d in dialogue)

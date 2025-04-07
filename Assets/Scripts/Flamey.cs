@@ -705,7 +705,7 @@ public class Flamey : MonoBehaviour
         int c = 0;
         foreach(string AtkSpeedItem in AtkSpeedItems){if(Item.has(AtkSpeedItem)){atkSpeed += AtkSpedGiven[c];}c++;}
 
-        Dmg = 30;
+        Dmg = 50; //50 - 60 70 80 100
         string[] DmgItems = new string[]{"Old Stolen Fuel Bucket", "Old Petrol Tank", "5L Petrol Tank", "10L Premium Gas Tank"};
         int[] DmgValues = new int[]{10,10,20,30};
         for(int i = 0; i != DmgItems.Length; i++){if(Item.has(DmgItems[i])){Dmg+=DmgValues[i];}}

@@ -33,8 +33,8 @@ public class Item : MonoBehaviour
     [Header("References")]
     public Transform DisplayPanel;
     public Naal naal;
-    static int itemCount = 0;
-    public void ItemStart() {
+    public static int itemCount = 0;
+    public void  ItemStart() {
 
         
 
@@ -69,6 +69,10 @@ public class Item : MonoBehaviour
     public void Unlock(){
         
         level = 1;
+        Items[this] = level;
+        if(Name == "Essence Gauge"){
+            Chat.Instance.MoodSlider.gameObject.SetActive(true);
+        }
         GameVariables.SetVariable(Name + " Item" , level);
         foreach (Item item in Unlocks)
         {
