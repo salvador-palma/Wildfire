@@ -7527,6 +7527,7 @@ GameObject:
   - component: {fileID: 1142748590}
   - component: {fileID: 1142748592}
   - component: {fileID: 1142748591}
+  - component: {fileID: 1142748593}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7573,10 +7574,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PLAY
+  m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7606,7 +7607,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7650,6 +7651,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142748589}
   m_CullTransparentMesh: 1
+--- !u!114 &1142748593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142748589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1200514250
 GameObject:
   m_ObjectHideFlags: 0
@@ -13002,7 +13015,7 @@ GameObject:
   - component: {fileID: 1738974240}
   - component: {fileID: 1738974241}
   m_Layer: 0
-  m_Name: BodyFront
+  m_Name: BodyFront1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13553,7 +13566,7 @@ GameObject:
   - component: {fileID: 1865952480}
   - component: {fileID: 1865952481}
   m_Layer: 0
-  m_Name: BodyBack
+  m_Name: BodyBack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14244,7 +14257,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2126383430}
   - component: {fileID: 2126383433}
-  - component: {fileID: 2126383432}
   m_Layer: 0
   m_Name: Flamey
   m_TagString: Untagged
@@ -14272,27 +14284,6 @@ Transform:
   - {fileID: 1426826149}
   m_Father: {fileID: 546954737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2126383432
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126383429}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5296111561c1d3d409b6a4e1f4667459, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &2126383433
 SpriteRenderer:
   m_ObjectHideFlags: 0

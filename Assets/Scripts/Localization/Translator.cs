@@ -17,6 +17,8 @@ public static class Translator
 
     private static bool WriteMissingText = false;
     private static bool WarnMissingText = true;
+    private static bool SavePreferences = false;
+    private static string DefaultLanguageBuild = "简体中文";
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -29,7 +31,7 @@ public static class Translator
 
     private static void LoadCSV(string filename) 
     {
-        currentLanguage = PlayerPrefs.GetString("Language", "English");
+        currentLanguage = SavePreferences ? PlayerPrefs.GetString("Language", "English") : DefaultLanguageBuild;
         Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
         TextAsset csvFile = Resources.Load<TextAsset>(filename);
