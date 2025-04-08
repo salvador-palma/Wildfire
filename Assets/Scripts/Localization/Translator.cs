@@ -17,8 +17,9 @@ public static class Translator
 
     private static bool WriteMissingText = false;
     private static bool WarnMissingText = true;
-    private static bool SavePreferences = false;
+    private static bool SavePreferences = true;
     private static string DefaultLanguageBuild = "简体中文";
+    private static bool DebugLineForLineReading = false;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -54,11 +55,13 @@ public static class Translator
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
+            if(DebugLineForLineReading){Debug.Log(line);}
             if(line[0] == '#') continue;
             string[] parts = line.Split(';');
             int lang = 0;
             foreach (string str in translations.Keys)
             {
+
                 translations[str].Add(parts[lang++].Trim());
             }
 

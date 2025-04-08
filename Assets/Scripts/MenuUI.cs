@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    string version = "V1.4";
+    string version = "V1.5-DEMO";
     private void Awake() {
         if(PlayerPrefs.GetInt(version,0)==0){
             PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt(version,1);
             string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+            PlayerPrefs.DeleteAll();
             foreach (string filePath in filePaths){
                 try{
                     Debug.Log("Deleting: " + filePath);

@@ -67,7 +67,7 @@ public class Tutorial : MonoBehaviour
     }
 
     public void OpenSteamPage(){
-        Application.OpenURL("https://store.steampowered.com/app/1356670/FireAtCampsite/");
+        Application.OpenURL("https://store.steampowered.com/app/3651490/Fire_at_Campsite/");
     }
     public Button RestartButton;
     public Button QuitButton;
