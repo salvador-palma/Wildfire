@@ -20,6 +20,8 @@ public static class Translator
     private static bool SavePreferences = true;
     private static string DefaultLanguageBuild = "简体中文";
     private static bool DebugLineForLineReading = false;
+
+    private static bool TranslatorsVersion = true;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -29,13 +31,35 @@ public static class Translator
         if(translations["English"].Contains(word.Trim())) return;
         AddCsvEntry(word);
     }
-
+    private static void CopyToPersistentDataPath(){
+        string persistentPath = Path.Combine(Application.persistentDataPath, csvName+".csv");
+        TextAsset csvFile = Resources.Load<TextAsset>(csvName);
+        if(csvFile == null)
+        {
+            Debug.LogError($"CSV file {csvName} not found");
+            return;
+        }
+        File.WriteAllText(persistentPath, csvFile.text);
+        Debug.Log("File copied from Resources to persistentDataPath.");
+    }
     private static void LoadCSV(string filename) 
     {
         currentLanguage = SavePreferences ? PlayerPrefs.GetString("Language", "English") : DefaultLanguageBuild;
         Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
-        TextAsset csvFile = Resources.Load<TextAsset>(filename);
+        TextAsset csvFile = null;
+        if(TranslatorsVersion){
+            string filePath = Path.Combine(Application.persistentDataPath, csvName+".csv");
+            if(!File.Exists(filePath))
+            {
+                CopyToPersistentDataPath();
+            }
+            string csvContent = File.ReadAllText(filePath);
+            csvFile = new TextAsset(csvContent);
+        }else{
+            csvFile = Resources.Load<TextAsset>(filename);
+        }
+        
         if(csvFile == null)
         {
             Debug.LogError($"CSV file {filename} not found");
