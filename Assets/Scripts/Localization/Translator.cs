@@ -10,11 +10,17 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "DemoReadyCSV"; 
+    private static string csvName = "TranslationsFull+Demo"; // "TranslationsFull+Demo" for demo version
+    //private static string csvName = "TranslationsFull+Demo"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
-    private static bool WriteMissingText = true;
+    private static bool WriteMissingText = false;
+    private static bool WarnMissingText = true;
+    private static bool SavePreferences = true;
+    private static string DefaultLanguageBuild = "简体中文";
+    private static bool DebugLineForLineReading = false;
+    private static bool TranslatorsVersion = false;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
@@ -24,13 +30,35 @@ public static class Translator
         if(translations["English"].Contains(word.Trim())) return;
         AddCsvEntry(word);
     }
-
+    private static void CopyToPersistentDataPath(){
+        string persistentPath = Path.Combine(Application.persistentDataPath, csvName+".csv");
+        TextAsset csvFile = Resources.Load<TextAsset>(csvName);
+        if(csvFile == null)
+        {
+            Debug.LogError($"CSV file {csvName} not found");
+            return;
+        }
+        File.WriteAllText(persistentPath, csvFile.text);
+        Debug.Log("File copied from Resources to persistentDataPath.");
+    }
     private static void LoadCSV(string filename) 
     {
-        currentLanguage = PlayerPrefs.GetString("Language", "English");
+        currentLanguage = SavePreferences ? PlayerPrefs.GetString("Language", "English") : DefaultLanguageBuild;
         Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
-        TextAsset csvFile = Resources.Load<TextAsset>(filename);
+        TextAsset csvFile = null;
+        if(TranslatorsVersion){
+            string filePath = Path.Combine(Application.persistentDataPath, csvName+".csv");
+            if(!File.Exists(filePath))
+            {
+                CopyToPersistentDataPath();
+            }
+            string csvContent = File.ReadAllText(filePath);
+            csvFile = new TextAsset(csvContent);
+        }else{
+            csvFile = Resources.Load<TextAsset>(filename);
+        }
+        
         if(csvFile == null)
         {
             Debug.LogError($"CSV file {filename} not found");
@@ -50,11 +78,13 @@ public static class Translator
         while (reader.Peek() > -1)
         {
             string line = reader.ReadLine();
+            if(DebugLineForLineReading){Debug.Log(line);}
             if(line[0] == '#') continue;
             string[] parts = line.Split(';');
             int lang = 0;
             foreach (string str in translations.Keys)
             {
+
                 translations[str].Add(parts[lang++].Trim());
             }
 
@@ -97,7 +127,8 @@ public static class Translator
 
             // Missing translation
             if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
-                return translations["English"][englishIndex];
+                //return translations["English"][englishIndex];
+                return WarnMissingText ? "<size=115%><color=red>MISSING TRANSLATION WARN THE DEV</color></size>":translations["English"][englishIndex];
             }
 
             string translatedText = "";
