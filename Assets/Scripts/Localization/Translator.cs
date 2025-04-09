@@ -10,7 +10,7 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "TranslationsFull+Demo"; // "TranslationsFull+Demo" for demo version
+    private static string csvName = "Updated"; // "TranslationsFull+Demo" for demo version
     //private static string csvName = "TranslationsFull+Demo"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
