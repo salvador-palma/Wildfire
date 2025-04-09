@@ -21,7 +21,7 @@ public static class Translator
     private static string DefaultLanguageBuild = "简体中文";
     private static bool DebugLineForLineReading = false;
 
-    private static bool TranslatorsVersion = true;
+    private static bool TranslatorsVersion = false;
     
     public static int getCurrentLanguageID(){
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
