@@ -16,11 +16,17 @@ public class Tutorial : MonoBehaviour
     public GameObject EnemyPanel;
     public GameObject Catterpillar;
     public static int timesPlayed = 0;
+
+    public static List<int> dialoguesRan;
     void Awake()
     {
         timesPlayed++;
         if(!TutorialGiven){
             inTutorial = true;
+        }
+
+        if(dialoguesRan == null){
+            dialoguesRan = new List<int>();
         }
         
     }
@@ -38,13 +44,20 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(Chat.Instance.StartDialogue(TutorialDialogue[0].dialogues, endAfter:!TutorialDialogue[0].dontEndAfter, after:TutorialDialogue[0].afterEvent));
     }
     public void ShowEffectMenu(bool on){
-        
-        GameUI.Instance.TogglePausePanel();
-        GameUI.Instance.changeTab(1);
-        GameUI.Instance.DisplayEffectInfo(Flamey.Instance.allEffects[0]);
+        if(on){
+            GameUI.Instance.TogglePausePanel();
+            GameUI.Instance.changeTab(1);
+            GameUI.Instance.DisplayEffectInfo(Flamey.Instance.allEffects[0]);
+            
+            EnemyPanel.SetActive(false);
+            Destroy(Catterpillar);
+        }else{
+            GameUI.Instance.changeTab(0);
+            GameUI.Instance.TogglePausePanel();
+            
+        }
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", on ? 0f : .2f);
-        EnemyPanel.SetActive(false);
-        Destroy(Catterpillar);
+        
     }
 
     public void ShowFlamey(){
@@ -71,7 +84,7 @@ public class Tutorial : MonoBehaviour
     }
     public Button RestartButton;
     public Button QuitButton;
-
+    int maxLoop = 1000;
     public void StartEndDialogue(){
         if(timesPlayed >= 3){
             Destroy(RestartButton.gameObject);
@@ -83,7 +96,13 @@ public class Tutorial : MonoBehaviour
             StartCoroutine(Chat.Instance.StartDialogue(TerminateDialogue[n].dialogues,endAfter:true, after:e));
         }else{
             
+            int i = 0;
             int n = Random.Range(0, EndDialogue.Length);
+            while(dialoguesRan.Contains(n) && i < maxLoop){
+                n = Random.Range(0, EndDialogue.Length);
+                i++;
+            }
+            dialoguesRan.Add(n);
             StartCoroutine(Chat.Instance.StartDialogue(EndDialogue[n].dialogues,endAfter:true));
         }
             

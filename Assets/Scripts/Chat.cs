@@ -105,7 +105,7 @@ public class Chat : MonoBehaviour
         if(after != null){
             after.Invoke();
         }
-        Debug.Log("End Dialogue");
+        
     }
 }
 
