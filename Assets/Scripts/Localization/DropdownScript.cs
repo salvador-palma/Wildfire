@@ -80,6 +80,7 @@ public class DropdownScript : MonoBehaviour
 
         foreach (Resolution res in resolutions)
         {
+            if(options.Contains(res.width + "x" + res.height)) continue;
             options.Add(res.width + "x" + res.height );
         }
 

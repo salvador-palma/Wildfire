@@ -150,7 +150,7 @@ public static class Translator
         
         if(WriteMissingText == false) return;
 
-        string filePath = Path.Combine(Application.dataPath, "Resources", $"{csvName}.csv");
+        string filePath = Path.Combine(Application.persistentDataPath, "Resources", $"{csvName}.csv");
 
         try
         {
