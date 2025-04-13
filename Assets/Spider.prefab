@@ -50,8 +50,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -100,21 +98,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
+  Name: 
   Damage: 0
   AttackDelay: 5000
+  extraAtkSpeedDelay: 0
   AttackRange: 1.55
   Speed: 0.05
   Health: 5000
   MaxHealth: 0
   Armor: 50000000
   ArmorPen: 0
+  WeigthClass: 0
   EmberDropRange: {x: 0, y: 0}
   Attacking: 0
   HitCenter: {fileID: 7139036714782092187}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  slowfactor: 0
+  poisonLeft: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Walk
+  SlowSet: 0
   centerPoint: {fileID: 0}
-  initialRadiusX: 8
-  initialRadiusY: 4.5
-  shrinkRate: 0.05
   direction: 1
-  rest: 0
+  angleStep: 6.2831855

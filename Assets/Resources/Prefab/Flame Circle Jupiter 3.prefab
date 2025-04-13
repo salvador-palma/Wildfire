@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1510743925898774788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.08880142, w: 0.99604934}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.96}
   m_LocalScale: {x: 8.562721, y: 8.562721, z: 8.562721}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -108,6 +108,7 @@ MonoBehaviour:
   - {fileID: 1510743925898774788}
   - {fileID: 2330845518204565445, guid: 0b3fd5aef4455194bb7026334a8e0bdd, type: 3}
   canSpin: 0
+  startingScale: 0
 --- !u!95 &2367513631010071337
 Animator:
   serializedVersion: 5
@@ -404,6 +405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fae3f47c6703134ba2a180e39ae6e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HitSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &5227748780361137623
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +687,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fae3f47c6703134ba2a180e39ae6e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HitSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &8101850153424309320
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,3 +969,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fae3f47c6703134ba2a180e39ae6e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HitSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

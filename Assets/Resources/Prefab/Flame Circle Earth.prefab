@@ -248,6 +248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781edaba3b48290438d68187a726795a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HitSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!50 &8701461479178372222
 Rigidbody2D:
   serializedVersion: 4
@@ -301,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 6905970741243081385}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0.9999992, w: -0.0012650843}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.96}
   m_LocalScale: {x: 0.2660024, y: 0.2660024, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -324,6 +331,7 @@ MonoBehaviour:
   speed: 0
   Spinners: []
   canSpin: 1
+  startingScale: 0
 --- !u!1 &8420836878470740724
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class Deck : MonoBehaviour
     
 
     public void PickedAugment(int i){
-        if(currentAugments[i]==null){return;}
+        if(currentAugments[i]==null || Tutorial.inTutorial){return;}
         SlotsParent.GetComponent<Animator>().Play("OutroSlots");
 
         currPhase++;
@@ -123,10 +123,18 @@ public class Deck : MonoBehaviour
         refreshedAugments.Clear();
         currentAugments = new Augment[]{null,null,null};
         
+        if(Tutorial.TutorialGiven==2 && currentTier == Tier.Prismatic){
+            Tutorial.inTutorial = true;
+            tutorial.StartTutorialEffect();
+            Tutorial.TutorialGiven+=1;
+        }
+
         if(!EnemySpawner.Instance.Paused){
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
         }
+
+        
         
 
     }
@@ -156,15 +164,22 @@ public class Deck : MonoBehaviour
             RefreshButtons[i].interactable = true;
         }
     }
-
+    public Tutorial tutorial;
     private List<Augment> FilterAugments(bool isPrismaticRound, bool OnlyUnlockables){
 
         if(isPrismaticRound || OnlyUnlockables){
+            
             currentTier = Tier.Prismatic;
             ChangeColors(tierSprites[4],tierSprites[5]);
-            return OnlyUnlockables ? augments.FindAll( a => a.isUnlockableMidGame()) : augments.FindAll( a => a.tier == Tier.Prismatic);
+            return OnlyUnlockables || Tutorial.TutorialGiven==2 ? augments.FindAll( a => a.isUnlockableMidGame()) : augments.FindAll( a => a.tier == Tier.Prismatic);
         }
-        if(PhaseTiers[currPhase]){
+        if(PhaseTiers[currPhase] || Tutorial.TutorialGiven==1){
+            if(Tutorial.TutorialGiven==1){
+                Tutorial.inTutorial = true;
+                tutorial.StartTutorialAugment();
+                Tutorial.TutorialGiven+=1;
+            }
+            
             currentTier = Tier.Gold;
             ChangeColors(tierSprites[2],tierSprites[3]);
             return augments.FindAll( a => a.tier == Tier.Gold);

@@ -197,6 +197,9 @@ public class MetaMenuUI : MonoBehaviour
         afterUnlock?.Invoke();
     }
 
+    public void QuitGame(){
+        Application.Quit();
+    }
 
     
 

@@ -121,17 +121,17 @@ public class DynamicText : MonoBehaviour
                     case '.':
                     case '!':
                     case '?':
-                        yield return new WaitForSeconds(0.2f);
+                        yield return new WaitForSeconds(0.2f * Time.timeScale);
                         break;
                     case ',':
-                        yield return new WaitForSeconds(0.1f);
+                        yield return new WaitForSeconds(0.1f * Time.timeScale);
                         break;
                     case ' ':
-                        yield return new WaitForSeconds(0.04f);
+                        yield return new WaitForSeconds(0.04f * Time.timeScale);
                         break;
                     default:
                         AudioManager.PlayOneShot(sound, Vector2.zero);
-                        yield return new WaitForSeconds(0.01f);//0.01f
+                        yield return new WaitForSeconds(0.01f * Time.timeScale);//0.01f
                         break;
                 }
             }

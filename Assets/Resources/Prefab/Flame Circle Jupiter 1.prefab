@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2026176428380441255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.9850408, w: 0.1723214}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.96}
   m_LocalScale: {x: 0.33904934, y: 0.33904934, z: 0.84974}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 5071763888348970798, guid: 6c13accc9d265bd41962d3d13cdb99bc, type: 3}
   - {fileID: 2026176428380441255}
   canSpin: 1
+  startingScale: 0
 --- !u!1 &6258762512785460901
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,3 +527,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fae3f47c6703134ba2a180e39ae6e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HitSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
