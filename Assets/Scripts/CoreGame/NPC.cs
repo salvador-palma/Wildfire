@@ -5,6 +5,9 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
+
 
 //string msg,Sprite avatar, string[] optionTxt = null, UnityAction[] optionAction = null
 [System.Serializable]
@@ -72,6 +75,7 @@ public class NPC : MonoBehaviour
             Debug.Log($"Playing Idle Animation {Name}: {IdleAnimations[i]}");
             GetComponent<Animator>().Play(IdleAnimations[i]);
         }
+        SpriteScale = GetComponent<RectTransform>().sizeDelta.x;
         if(!hasRead){
             ReadBestiaryData();
         }
@@ -184,6 +188,8 @@ public class NPC : MonoBehaviour
         GameVariables.SetVariable(name, value); 
     }
 
+    
+
     /* ===== I/O FUNCTIONS ===== */
     private static void ReadBestiaryData(){
         if(File.Exists(Application.persistentDataPath +"/npcs.json")){
@@ -204,13 +210,41 @@ public class NPC : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/npcs.json", json);
     }
 
+    float SpriteScale;
+    IEnumerator ScaleCoroutine;
     public void SetHovered(bool check) {
         if(check){
+            
             AudioManager.PlayOneShot(FMODEvents.Instance.BubblePop , transform.position);
         }
         
         InteractiveCursor.ChangeCursor(check? 1 : 0);
-        GetComponent<Animator>().SetBool("NPCHovering", check);
+        if(ScaleCoroutine != null){
+            StopCoroutine(ScaleCoroutine);
+        }
+        ScaleCoroutine = SetHoveredCoroutine(check);
+        StartCoroutine(ScaleCoroutine);
+        //GetComponent<Animator>().SetBool("NPCHovering", check);
+    }
+    public IEnumerator SetHoveredCoroutine(bool check){
+        if(check){
+            
+            while(GetComponent<RectTransform>().sizeDelta.x < SpriteScale*1.1f){
+                GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x * 1.01f,GetComponent<RectTransform>().sizeDelta.y* 1.01f);
+                yield return null;
+            }
+            GetComponent<RectTransform>().sizeDelta = new Vector2(SpriteScale*1.1f,SpriteScale*1.1f);
+        }else{
+            
+            while(GetComponent<RectTransform>().sizeDelta.x > SpriteScale){
+                GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x * .99f,GetComponent<RectTransform>().sizeDelta.y * .99f);
+                yield return null;
+            }
+            GetComponent<RectTransform>().sizeDelta = new Vector2(SpriteScale,SpriteScale);
+        }
+        
+        
+        
     }
     
 
