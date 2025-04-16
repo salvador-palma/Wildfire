@@ -111,7 +111,7 @@ public class Tutorial : MonoBehaviour
     }
     public Button RestartButton;
     public Button QuitButton;
-    int maxLoop = 1000;
+    int maxLoop = 100;
     public void StartEndDialogue(){
         
             int i = 0;

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine.Video;
 using Unity.VisualScripting;
+using Steamworks;
 
 public static class Translator
 {
@@ -20,6 +21,7 @@ public static class Translator
     private static bool SavePreferences = true;
     private static string DefaultLanguageBuild = "简体中文";
     private static bool DebugLineForLineReading = false;
+    public static bool SteamVersion = true;
 
     private static bool TranslatorsVersion = false;
     
@@ -44,7 +46,34 @@ public static class Translator
     }
     private static void LoadCSV(string filename) 
     {
-        currentLanguage = SavePreferences ? PlayerPrefs.GetString("Language", "English") : DefaultLanguageBuild;
+
+        
+        if (SteamVersion && SteamManager.Initialized)
+        {
+            //string steamLanguage = SteamApps.GetCurrentGameLanguage();
+            string uiLang = SteamUtils.GetSteamUILanguage();
+            switch(uiLang){
+                case "schinese":
+                    currentLanguage = "简体中文";
+                    break;
+                case "tchinese":
+                    currentLanguage = "繁體中文";
+                    break;
+                case "portuguese":
+                    currentLanguage = "Português";
+                    break;
+                case "russian":
+                    currentLanguage = "Русский";
+                    break;
+                default:
+                    currentLanguage = "English";
+                    break;
+            }
+            Debug.Log("Steam Language Formated: " + currentLanguage);
+            
+        }
+        
+        currentLanguage = PlayerPrefs.GetString("Language", currentLanguage);
         Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
         TextAsset csvFile = null;
