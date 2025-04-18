@@ -96,7 +96,10 @@ public class Gyomyo : NPC
     public void UnlockCasino(){
         UnityAction post = () => UnlockQuest(45);
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6, afterUnlock:post);
-        QuestBoard.Instance.Cloris.QueueDialogue(17); 
+        if(GameVariables.hasQuest(46)){
+            QuestBoard.Instance.Cloris.QueueDialogue(17); 
+        }
+        
        
     }
 

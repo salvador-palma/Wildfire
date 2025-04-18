@@ -148,7 +148,7 @@ public class FrogJump : MonoBehaviour
     private void GameOver()
     {
         embersgained = 0;
-        score = 0;
+        
         flycatched = 0;
 
         started = false;
@@ -159,6 +159,7 @@ public class FrogJump : MonoBehaviour
         anim.Update(0f);
         FrogCanvas.GetComponent<Animator>().Play("GameOver");
         GameVariables.SetVariable("FrogJumpHighscore", score > GameVariables.GetVariable("FrogJumpHighscore") ? score : GameVariables.GetVariable("FrogJumpHighscore"));
+        score = 0;
         SkillTreeManager.Instance.AddEmbers(embersgained);
 
         EmberText.SetTextDirect("<sprite name=\"Ember\"> " + SkillTreeManager.Instance.PlayerData.embers);
