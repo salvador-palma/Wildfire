@@ -212,13 +212,14 @@ public class NPC : MonoBehaviour
 
     float SpriteScale;
     IEnumerator ScaleCoroutine;
+    protected int HoverCursorType = 1;
     public void SetHovered(bool check) {
         if(check){
             
             AudioManager.PlayOneShot(FMODEvents.Instance.BubblePop , transform.position);
         }
         
-        InteractiveCursor.ChangeCursor(check? 1 : 0);
+        InteractiveCursor.ChangeCursor(check? HoverCursorType : 0);
         if(ScaleCoroutine != null){
             StopCoroutine(ScaleCoroutine);
         }
@@ -227,20 +228,25 @@ public class NPC : MonoBehaviour
         //GetComponent<Animator>().SetBool("NPCHovering", check);
     }
     public IEnumerator SetHoveredCoroutine(bool check){
+        RectTransform rt = transform.Find("Notification").GetComponent<RectTransform>();
         if(check){
             
             while(GetComponent<RectTransform>().sizeDelta.x < SpriteScale*1.1f){
                 GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x * 1.01f,GetComponent<RectTransform>().sizeDelta.y* 1.01f);
+                rt.localScale = new Vector2(rt.localScale.x*1.01f,rt.localScale.y*1.01f);
                 yield return null;
             }
             GetComponent<RectTransform>().sizeDelta = new Vector2(SpriteScale*1.1f,SpriteScale*1.1f);
+            rt.localScale = new Vector2(1.1f,1.1f);
         }else{
             
             while(GetComponent<RectTransform>().sizeDelta.x > SpriteScale){
                 GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x * .99f,GetComponent<RectTransform>().sizeDelta.y * .99f);
+                rt.localScale = new Vector2(rt.localScale.x*.99f,rt.localScale.y*.99f);
                 yield return null;
             }
             GetComponent<RectTransform>().sizeDelta = new Vector2(SpriteScale,SpriteScale);
+            rt.localScale = new Vector2(1,1);
         }
         
         

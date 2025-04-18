@@ -198,7 +198,9 @@ public class MetaMenuUI : MonoBehaviour
     }
 
 
-    
+    public void QuitGame(){
+        Application.Quit();
+    }   
 
 }
 

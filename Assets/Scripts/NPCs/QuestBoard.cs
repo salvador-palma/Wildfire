@@ -34,6 +34,7 @@ public class QuestBoard : NPC
     
     private void Awake() {
         Instance = this;
+        HoverCursorType = 2;
     }
     protected override void CharacterLoad()
     { 

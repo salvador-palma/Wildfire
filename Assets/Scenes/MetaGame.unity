@@ -13120,8 +13120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MouseTex:
-  - {fileID: 2800000, guid: 99017394b81e6d5428a7a073453f9c5b, type: 3}
+  - {fileID: 2800000, guid: 1ed7e834de132194c810b1bd125c88a9, type: 3}
   - {fileID: 2800000, guid: 868c2d3c26ddd7f4db543afd0cd7b199, type: 3}
+  - {fileID: 2800000, guid: 2851ab2507c08484482e70f040c4646a, type: 3}
 --- !u!114 &519420036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15925,6 +15926,7 @@ GameObject:
   - component: {fileID: 585525774}
   - component: {fileID: 585525773}
   - component: {fileID: 585525772}
+  - component: {fileID: 585525777}
   m_Layer: 0
   m_Name: Naal
   m_TagString: Untagged
@@ -16048,7 +16050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -16934,6 +16936,41 @@ MonoBehaviour:
   Rowl: {fileID: 1206136743}
   CounterOfferTxt: {fileID: 1640098539}
   PreviousOfferTxt: {fileID: 1123849995}
+--- !u!70 &585525777
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585525770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.793653, y: 9.48417}
+  m_Size: {x: 64.58231, y: 140.45567}
+  m_Direction: 0
 --- !u!1 &585714128
 GameObject:
   m_ObjectHideFlags: 0
@@ -26703,6 +26740,7 @@ GameObject:
   - component: {fileID: 976945069}
   - component: {fileID: 976945067}
   - component: {fileID: 976945065}
+  - component: {fileID: 976945070}
   m_Layer: 0
   m_Name: QuestBoard
   m_TagString: Untagged
@@ -26763,7 +26801,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 976945069}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: SetHovered
           m_Mode: 6
@@ -26779,7 +26817,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 976945069}
           m_TargetAssemblyTypeName: NPC, Assembly-CSharp
           m_MethodName: SetHovered
           m_Mode: 6
@@ -26805,7 +26843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -27113,6 +27151,41 @@ MonoBehaviour:
   Betsy: {fileID: 1457361219}
   Cloris: {fileID: 1653547898}
   Naal: {fileID: 585525776}
+--- !u!70 &976945070
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976945063}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4759931, y: 0}
+  m_Size: {x: 56.074608, y: 56.074608}
+  m_Direction: 0
 --- !u!1 &978405520
 GameObject:
   m_ObjectHideFlags: 0
@@ -61296,6 +61369,14 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2093992373583206888, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093992373583206888, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2877581471432342505, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -61303,6 +61384,10 @@ PrefabInstance:
     - target: {fileID: 3034635106213127998, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202095533911416240, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3216489211636604958, guid: e709d32aebc2aac4fbbc1528b28e2508, type: 3}
       propertyPath: m_fontStyle
