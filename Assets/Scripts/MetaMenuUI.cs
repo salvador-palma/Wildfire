@@ -184,13 +184,13 @@ public class MetaMenuUI : MonoBehaviour
         UnlockableTexts[1].SetText(name);
         UnlockableTexts[2].SetText(description);
         UnlockableIcon.sprite = icon;
-        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");
+        UnlockableIcon.transform.parent.parent.GetComponent<Animator>().Play("UnlockableOn");
 
     }
     
     public void UnlockOff(){
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 1);
-        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
+        UnlockableIcon.transform.parent.parent.GetComponent<Animator>().Play("UnlockableOff");
         Invoke("AfterUnlock", 1f);
     }
     public void AfterUnlock(){

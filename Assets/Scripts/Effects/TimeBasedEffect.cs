@@ -341,9 +341,10 @@ public class Immolate : TimeBasedEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateRadius");
         }
-        if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f && !Character.Instance.isACharacter()){
+
+        if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f ){
             Max();
-        }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f && !Character.Instance.isACharacter()){
+        }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f){
             Max();
         }
         
@@ -409,7 +410,7 @@ public class Immolate : TimeBasedEffect
     }
     public GameObject getAbilityOptionMenu(){
         
-        return Character.Instance.isACharacter() ? null : UpdateImmolateType();
+        return UpdateImmolateType();
     }
 
     public float[] GetImmolateType(){

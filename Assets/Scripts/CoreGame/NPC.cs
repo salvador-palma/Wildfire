@@ -348,12 +348,15 @@ public class GameVariables{
     public static void UnlockQuest(int id){
         Debug.Log("Quest Started: " + id);
         int[] OnGoing = getInstance().variableList.OnGoingQuests;
+        
         if(OnGoing.Contains(id)){
             Debug.Log("Quest was already Active: " + id);
         }else if(!getInstance().variableList.CompletedQuests.Contains(id)){
             getInstance().variableList.OnGoingQuests = OnGoing.Append(id).ToArray();
             getInstance().WritingData();
         }
+
+
         if(GetVariable("QuestBookReady") == -1){
             if(getInstance().variableList.OnGoingQuests.Length + getInstance().variableList.CompletedQuests.Length >= 2){
                 SetVariable("QuestBookReady", 0);

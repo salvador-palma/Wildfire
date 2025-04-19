@@ -382,6 +382,7 @@ public class Naal : NPC
                 after:ev1, endAfter:false));
             break;
             case 1:
+                WriteMood(Mood + 5);
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("Glad to negotiate with you! {0} embers seems like a fair value", getSprite("Fine"),"Jhat", new string[]{value.ToString()}),
                     new Dialogue("Are you interested in anything else perhaps?", getSprite("Confused"),"Jhat"),
@@ -389,6 +390,7 @@ public class Naal : NPC
                 after:ev1, endAfter:false));
             break;
             case 2:
+                WriteMood(Mood + 15);
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=115%>Sweet!<size=100%> You surely got a nice deal!", getSprite("Stand"),"Jhat"),
                     new Dialogue("{0} embers right? Here you go!", getSprite("Showing"),"Jhat", new string[]{value.ToString()}),

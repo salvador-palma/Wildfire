@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
 
-    public static Dictionary<Item, int> Items;
+    public static Dictionary<string, int> Items;
 
     [SerializeField] public string Name;
     [SerializeField] public Item[] Unlocks;
@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
 
         
 
-        if(Items == null){Items = new Dictionary<Item, int>();}
+        if(Items == null){Items = new Dictionary<string, int>();}
         Transform parent = transform.parent;
         
         level = GameVariables.GetVariable(Name + " Item");
@@ -46,7 +46,7 @@ public class Item : MonoBehaviour
             level = initial ? 0 : level;
             GameVariables.SetVariable(Name + " Item" , level);
         }
-        Items[this] = level;
+        Items[Name] = level;
         
         if(level!= 0 || itemCount >= 6){
             gameObject.SetActive(false);
@@ -69,7 +69,7 @@ public class Item : MonoBehaviour
     public void Unlock(){
         
         level = 1;
-        Items[this] = level;
+        Items[Name] = level;
         if(Name == "Essence Gauge"){
             Chat.Instance.MoodSlider.gameObject.SetActive(true);
         }
@@ -81,10 +81,10 @@ public class Item : MonoBehaviour
     }
 
     static public int getLevel(string name){
-        return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value;
+        return Items.ContainsKey(name) ? Items[name] : -1;
     }
     static public bool has(string name){
-        return Items.Where(k => k.Key.Name == name).FirstOrDefault().Value > 0;
+        return Items.ContainsKey(name) && Items[name] > 0;
     }
 
     public void Display(bool on){

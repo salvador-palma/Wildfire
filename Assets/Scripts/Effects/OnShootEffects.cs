@@ -84,7 +84,7 @@ public class SecondShot : OnShootEffects{
     }
     private void RemoveUselessAugments(){
         if(perc >= 1f){
-            perc = 1f;
+            perc = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
         }
@@ -93,7 +93,8 @@ public class SecondShot : OnShootEffects{
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
 
-        if(GameVariables.hasQuest(25) && perc>=1f && Flamey.Instance.atkSpeed>=12f){
+        
+        if(GameVariables.hasQuest(25) && perc>=1 && Flamey.Instance.atkSpeed>=12f){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
         }
         

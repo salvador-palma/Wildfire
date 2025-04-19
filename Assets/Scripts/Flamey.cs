@@ -259,10 +259,12 @@ public class Flamey : MonoBehaviour
         try{
 
             GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
-            while(!g.GetComponent<Enemy>().canTarget()){
+            int n = 0;
+            while(!g.GetComponent<Enemy>().canTarget() && n < 100){
                 g = go[UnityEngine.Random.Range(0, go.Length)];
+                n++;
             }
-            return g.GetComponent<Enemy>().HitCenter.position;
+            return n >= 100 ? UnityEngine.Vector2.zero : g.GetComponent<Enemy>().HitCenter.position;
         }catch{
             Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
         }
@@ -411,9 +413,10 @@ public class Flamey : MonoBehaviour
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("AtkSpeed");
 
-            if(GameVariables.hasQuest(25) && SecondShot.Instance != null && SecondShot.Instance.perc>=1f){
+            if(GameVariables.hasQuest(25) && SecondShot.Instance != null && SecondShot.Instance.perc>=1){
                 GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
             }
+
         }
     }
     public void multAttackSpeed(float amount){
@@ -421,7 +424,13 @@ public class Flamey : MonoBehaviour
         if(atkSpeed == 12f){
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("AtkSpeed");
+
+            if(GameVariables.hasQuest(25) && SecondShot.Instance != null && SecondShot.Instance.perc>=1){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
+            }
         }
+
+        
     }
 
     public void addBulletSpeed(float amount){
