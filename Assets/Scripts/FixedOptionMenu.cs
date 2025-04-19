@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +9,7 @@ public class FixedOptionMenu : MonoBehaviour
 {
     [SerializeField] string AbilityName;
     [SerializeField] string[] Options;
-    [SerializeField] TextMeshProUGUI UpdatableText;
+    [SerializeField] DynamicText UpdatableText;
     [SerializeField] int currentID;
     
     [SerializeField] Button Left;
@@ -20,16 +21,28 @@ public class FixedOptionMenu : MonoBehaviour
         
         switch(AbilityName){
             case "Burst Shot":
-                UpdatableText.text = Options[BurstShot.Instance.currentTargetingOption];
+                UpdatableText.SetText(Options[BurstShot.Instance.currentTargetingOption]);
             break;
             case "Multicaster":
-                UpdatableText.text = Options[SecondShot.Instance.currentTargetingOption];
+                UpdatableText.SetText(Options[SecondShot.Instance.currentTargetingOption]);
             break;
         
         }
+        Refresh();
+       
+        
         
     }
-  
+
+    
+
+    public void Refresh()
+    { 
+        Canvas.ForceUpdateCanvases();
+        GetComponentInChildren<HorizontalLayoutGroup>().enabled = false;
+        GetComponentInChildren<HorizontalLayoutGroup>().enabled = true;
+    }
+
     private void Move(int dir){
         currentID += dir;
         if(currentID >= Options.Length){
@@ -37,7 +50,8 @@ public class FixedOptionMenu : MonoBehaviour
         }else if(currentID < 0){
             currentID = Options.Length - 1;
         }
-        UpdatableText.text = Options[currentID];
+        UpdatableText.SetText(Options[currentID]);
+        Refresh();
         ExtraBehaviour();
     }
     private void ExtraBehaviour(){
@@ -53,4 +67,5 @@ public class FixedOptionMenu : MonoBehaviour
         
         }
     }
+    
 }

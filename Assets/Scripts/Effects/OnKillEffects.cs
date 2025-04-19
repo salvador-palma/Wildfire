@@ -22,7 +22,7 @@ public class Explosion : OnKillEffects
     public int dmg;
     public static Explosion Instance;
     
-    public static GameObject Prefab;
+    public static IPoolable Prefab;
     float radiusExplosion;
     
     private int ExplosionsUntilTrueDamage=20;
@@ -35,10 +35,10 @@ public class Explosion : OnKillEffects
         if(Instance == null){
             Instance = this;
             if(SkillTreeManager.Instance.getLevel("Explosion")>=1){
-                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeathGiant");
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeathGiant").GetComponent<IPoolable>();
                 radiusExplosion = 1.8f;
             }else{
-                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath");
+                Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath").GetComponent<IPoolable>();
                 radiusExplosion = 1.2f;
             }
             if(SkillTreeManager.Instance.getLevel("Explosion")>=2){
@@ -59,8 +59,10 @@ public class Explosion : OnKillEffects
         if(Random.Range(0f,1f) < prob){
             
 
-            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
-            Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, Flamey.EnemyMask);
+            ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+            AudioManager.PlayOneShot(FMODEvents.Instance.Explosion, Vector2.zero);
+
             foreach(Collider2D col in targets){
                 col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:ExplosionsDone>=ExplosionsUntilTrueDamage, onHit:false);
             }
@@ -82,8 +84,9 @@ public class Explosion : OnKillEffects
         }
     }
     public void ExplodeCampfire(Vector2 pos){
-        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, FlareManager.EnemyMask);
-        Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radiusExplosion, Flamey.EnemyMask);
+        ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+
         foreach(Collider2D col in targets){
             col.GetComponent<Enemy>().Hitted(dmg, 1, ignoreArmor:false, onHit:false);
         }
@@ -99,23 +102,16 @@ public class Explosion : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ExplodeProb");
         } 
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Explosion");
-            maxed = true;
-        }
-    }
-
+   
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-         return string.Format("Chance: {0}% (Max. 50%) <br>Damage: +{1}", Mathf.Round(prob * 100), dmg);
+         return new string[]{"Chance: {0}% (Max. 50%) <br>Damage: +{1}", Mathf.Round(prob * 100).ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -130,7 +126,7 @@ public class Explosion : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -146,8 +142,8 @@ public class Necromancer : OnKillEffects
     public float prob;
     public float dmgPerc;
     public static Necromancer Instance;
-    static GameObject Prefab;
-    static GameObject PrefabMega;
+    static IPoolable Prefab;
+    static IPoolable PrefabMega;
     public float MegaGhoulProbability;
 
     public Necromancer(float prob, float dmgPerc){
@@ -155,8 +151,8 @@ public class Necromancer : OnKillEffects
         this.dmgPerc = dmgPerc;
         if(Instance == null){
             Instance = this;
-            Prefab = Resources.Load<GameObject>("Prefab/Ghoul");
-            PrefabMega = Resources.Load<GameObject>("Prefab/MegaGhoul");
+            Prefab = Resources.Load<IPoolable>("Prefab/Ghoul");
+            PrefabMega = Resources.Load<IPoolable>("Prefab/MegaGhoul");
         }else{
             Instance.Stack(this);
         }
@@ -171,9 +167,11 @@ public class Necromancer : OnKillEffects
         
         if(Random.Range(0f,1f) < prob){
             if(MegaGhoulProbability > Random.Range(0f,1f)){
-                Flamey.Instance.SpawnObject(PrefabMega).transform.position = pos;
+                ObjectPooling.Spawn(PrefabMega, new float[]{pos.x, pos.y});
+                // Flamey.Instance.SpawnObject(PrefabMega).transform.position = pos;
             }else{
-                Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+                // Flamey.Instance.SpawnObject(Prefab).transform.position = pos;
             }
             
         }
@@ -189,22 +187,16 @@ public class Necromancer : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("NecroProb");
         } 
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Necro");
-            maxed = true;
-        }
-    }
+    
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of summoning a <color=#FFCC7C>friendly ghoul</color>. Ghouls can attack enemies for up to <color=#FFCC7C>3 times</color> with a percentage of your <color=#FF5858>base damage.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100), Mathf.Round(dmgPerc * 100));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Base Damage Ratio: {1}%", Mathf.Round(prob * 100).ToString(), Mathf.Round(dmgPerc * 100).ToString()};
     }
 
     public static int getAttackTimes(){
@@ -227,7 +219,7 @@ public class Necromancer : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -244,20 +236,33 @@ public class Bullets : OnKillEffects
     public int dmg;
     public int amount;
     public static Bullets Instance;
-    static GameObject Prefab;
+    static IPoolable Prefab;
 
+    public int EmbersInRound = 0;
     public Bullets(float prob, int dmg, int amount){
         this.prob = prob;
         this.dmg = dmg;
         this.amount = amount;
         if(Instance == null){
             Instance = this;
-            Prefab = Resources.Load<GameObject>("Prefab/Bullet");
+            Prefab = Resources.Load<GameObject>("Prefab/Bullet").GetComponent<IPoolable>();
             if(SkillTreeManager.Instance.getLevel("Pirate") >= 2){ this.amount *= 2;}
+            Deck.RoundOver += ResetEmbersRound;
         }else{
             Instance.Stack(this);
         }
     }
+
+    private void ResetEmbersRound(object sender, EventArgs e)
+    {
+        if(EmbersInRound >= 5000){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(15, "Gyomyo", 15);
+        }
+        //Debug.Log("Embers: " + EmbersInRound);
+        EmbersInRound = 0;
+
+    }
+
     public bool addList()
     {
         return this == Instance;
@@ -269,10 +274,12 @@ public class Bullets : OnKillEffects
         if(Random.Range(0f,1f) < prob){
             
             SpawnBullets(pos);
-            Flamey.Instance.addEmbers(10);
+            Flamey.Instance.addEmbers(20);
+
         }
     }
     private void SpawnBullets(Vector2 pos){
+        AudioManager.PlayOneShot(FMODEvents.Instance.RoundShot, Vector2.zero);
         float randomRotation = Random.Range(0,360);
         
         if(SkillTreeManager.Instance.getLevel("Pirate") >= 1){
@@ -282,17 +289,12 @@ public class Bullets : OnKillEffects
                 if(e!=null){
                     randomRotation = Vector2.SignedAngle( Vector2.up, (Vector2)e.HitCenter.position - pos);
                 }
-
-                GameObject go = Flamey.Instance.SpawnObject(Prefab);
-                go.transform.position = pos;
-                go.transform.rotation = Quaternion.Euler(0,0,randomRotation);
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, randomRotation});
             }          
             
         }else{
             for(int i =0; i != amount; i++){
-                GameObject go = Flamey.Instance.SpawnObject(Prefab);
-                go.transform.position = pos;
-                go.transform.rotation = Quaternion.Euler(0,0,i*(360/amount) + randomRotation);
+                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, i*(360/amount) + randomRotation});
             }
         }
        
@@ -316,22 +318,16 @@ public class Bullets : OnKillEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BulletsAmount");
         }
-        if(!maxed){CheckMaxed();}
+       
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && amount >= 6 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Pirate");
-            maxed = true;
-        }
-    }
+    
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of shooting <color=#FFCC7C>Cannon Balls</color> out of the enemy's corpse, that deal damage and apply <color=#FF99F3>On-Hit effects</color> whenever they hit another creature. If this effect procs, you will also gain <color=#FFCC7C>+10 embers</color>. <color=#AFEDFF>Cannon Balls' speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f), amount, dmg);
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f).ToString(), amount.ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -346,7 +342,7 @@ public class Bullets : OnKillEffects
 
     public string getType()
     {
-        return "On-Kill Effect";
+        return "On-Death Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

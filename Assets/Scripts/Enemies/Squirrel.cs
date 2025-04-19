@@ -12,7 +12,7 @@ public class Squirrel : Enemy
     public bool placedBomb;
     public float deltaBomb;
     protected virtual void Start() {
-
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -57,7 +57,8 @@ public class Squirrel : Enemy
     }
 
     protected void Explode(){
-        Instantiate(EnemySpawner.Instance.ExplosionPrefab).transform.position = BombPrefab.transform.position;
+        ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{BombPrefab.transform.position.x, BombPrefab.transform.position.y});
+        AudioManager.PlayOneShot(AttackSound,transform.position);
         flame.Hitted(Damage, ArmorPen, this);
     }
     public override void Die(bool onKill = true){
@@ -66,6 +67,7 @@ public class Squirrel : Enemy
         }
         base.Die();
     }
+    protected override void ReturnWalk(){}
 
 
     

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Beatle : Enemy
 {
     public GameObject Ball;
@@ -11,8 +12,11 @@ public class Beatle : Enemy
     public bool hidden;
     public float ballHitRange;
 
-    private void Start() {
+    [field: SerializeField] public EventReference ThrowSound { get; private set; }
+   
 
+    private void Start() {
+        VirtualPreStart();
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -49,17 +53,13 @@ public class Beatle : Enemy
        Ball.GetComponent<Animator>().Play("Shoot");
        Ball.transform.parent = null;
        hidden = true;
+        AudioManager.PlayOneShot(ThrowSound,transform.position);
        if(Flamey.Instance.current_homing == this){ Flamey.Instance.current_homing  = null; untarget();}
        
     }
-   
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            GetComponent<Animator>().Play("Hide");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
+    
+    protected override void ReturnWalk(){}
+    
     public override bool canTarget()
     {
         return !hidden;
@@ -75,6 +75,7 @@ public class Beatle : Enemy
             Destroy(Ball);
             Damage = (int)(Ball.transform.localScale.x/0.6f * Damage);
             base.Attack();
+           
 
             Die();
         }
@@ -101,6 +102,8 @@ public class Beatle : Enemy
         if(Ball!=null){Destroy(Ball);}
         base.Die(onKill);
     }
+
+    
 
 
     

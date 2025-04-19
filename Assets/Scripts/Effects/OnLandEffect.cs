@@ -14,7 +14,7 @@ public interface OnLandEffect: Effect
 public class BurnOnLand : OnLandEffect
 {
     public static BurnOnLand Instance;
-    public GameObject prefab;
+    public IPoolable prefab;
     public GameObject prefabEverlast;
     public float size;
     public int damage;
@@ -29,7 +29,7 @@ public class BurnOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/BurnAOE");
+            prefab = Resources.Load<GameObject>("Prefab/BurnAOE").GetComponent<IPoolable>();
             prefabEverlast = Resources.Load<GameObject>("Prefab/AbilityCharacter/BurnAOE Everlasting");
 
         }else{
@@ -39,8 +39,7 @@ public class BurnOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
         }
     }
     public void Stack(BurnOnLand burnOnLand){
@@ -67,15 +66,9 @@ public class BurnOnLand : OnLandEffect
             deck.removeClassFromDeck("LavaPoolDuration");
         }
         
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Lava");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         Flamey.Instance.SpawnObject(prefabEverlast);
     }
@@ -98,9 +91,9 @@ public class BurnOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of spawning a <color=#FFCC7C>Lava Pool</color>. The <color=#FFCC7C>Lava Pool</color> deals damage per second to enemies <color=#FFCC7C>stepping</color> on it, ignoring <color=#919191>Armor</color> completely.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Damage: {3}/s", Mathf.Round(prob*100f), size*10, lasting , damage);
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Damage: {3}/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , damage.ToString()};
     }
 
     public string getIcon()
@@ -116,7 +109,7 @@ public class BurnOnLand : OnLandEffect
 public class IceOnLand : OnLandEffect
 {
     public static IceOnLand Instance;
-    public GameObject prefab;
+    public IPoolable prefab;
     public float size;
     public float slow;
     public float timegap;
@@ -130,7 +123,7 @@ public class IceOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/IceAOE");
+            prefab = Resources.Load<GameObject>("Prefab/IceAOE").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
@@ -138,8 +131,7 @@ public class IceOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            GameObject go = Flamey.Instance.SpawnObject(prefab);
-            go.transform.position = pos;
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
         }
     }
     public void Stack(IceOnLand iceOnLand){
@@ -170,15 +162,9 @@ public class IceOnLand : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("IcePoolDuration");
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .5f && size >= 2.5f && slow >= 0.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Snow Pool");
-            maxed = true;
-        }
-    }
+   
     public bool addList(){
         return Instance == this;
     }
@@ -197,9 +183,9 @@ public class IceOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of spawning an <color=#FFCC7C>Ice Pool</color>. <color=#FFCC7C>Ice Pools</color> <color=#AFEDFF>slow</color> down enemies <color=#FFCC7C>stepping</color> on it for " + Mathf.Round(slow*100) + "%. <color=#FFCC7C>Ice Pools'</color> <color=#AFEDFF>slow</color> does not stack with other <color=#FFCC7C>Ice Pools.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Slow: {3}% (Max. 50%)", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(slow*100));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Pool Size: {1} units (Max. 25 units)<br>Pool Duration: {2}s (Max. 10s)<br>Slow: {3}% (Max. 50%)", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(slow*100).ToString()};
     }
 
     public string getIcon()
@@ -214,8 +200,8 @@ public class IceOnLand : OnLandEffect
 public class DrainOnLand : OnLandEffect
 {
     public static DrainOnLand Instance;
-    public GameObject prefab;
-    public GameObject prefabCarnivore;
+    public IPoolable prefab;
+    public IPoolable prefabCarnivore;
     public float size;
     public float perc;
     public float timegap;
@@ -230,8 +216,8 @@ public class DrainOnLand : OnLandEffect
        
         if(Instance == null){
             Instance = this;
-            prefab = Resources.Load<GameObject>("Prefab/DrainAOE");
-            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore");
+            prefab = Resources.Load<GameObject>("Prefab/DrainAOE").GetComponent<IPoolable>();
+            prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
         }
@@ -240,11 +226,9 @@ public class DrainOnLand : OnLandEffect
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
             if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < carnivoreChance){
-                GameObject go = Flamey.Instance.SpawnObject(prefabCarnivore);
-                go.transform.position = pos;
+                ObjectPooling.Spawn(prefabCarnivore, new float[]{pos.x, pos.y});
             }else{
-                GameObject go = Flamey.Instance.SpawnObject(prefab);
-                go.transform.position = pos;
+                ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
             }
             
         }
@@ -273,16 +257,9 @@ public class DrainOnLand : OnLandEffect
             deck.removeClassFromDeck("DrainPoolDuration");
         }
         
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(prob >= .25f && size >= 2.5f && lasting >= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Flower Field");
-            
-            maxed = true;
-        }
-    }
+   
     public bool addList(){
         return Instance == this;
     }
@@ -301,9 +278,9 @@ public class DrainOnLand : OnLandEffect
     {
         return "Whenever a shot lands, there's a chance of sprouting a <color=#FFCC7C>Flower</color>. Everytime an enemy <color=#FFCC7C>steps</color> on a <color=#FFCC7C>flower</color>, you heal part of their <color=#0CD405>Max HP";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f), size*10, lasting , Mathf.Round(perc*100f));
+        return new string[]{"Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(perc*100f).ToString()};
     }
 
     public string getIcon()

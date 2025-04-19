@@ -8,6 +8,7 @@ public class Skunk : Enemy
     public float StunDuration;
     private void Start() {
 
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -35,13 +36,7 @@ public class Skunk : Enemy
 
 
     
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            GetComponent<Animator>().Play("Stun");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
+
 
 
     

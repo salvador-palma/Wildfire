@@ -1,5 +1,8 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,18 +63,9 @@ public class HealthRegen : TimeBasedEffect
     public void Stack(HealthRegen healthRegen){
         perSec += healthRegen.perSec;
         perRound += healthRegen.perRound;
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
     
-
-    private void CheckMaxed(){
-        if(perSec >= 100 && perRound >= 100 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Regeneration");
-            maxed = true;
-        }
-
-    }
     public void SpawnExtraAssets(){
         pheonix = Flamey.Instance.SpawnObject(pheonixPrefab);
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Regen"));
@@ -108,9 +102,9 @@ public class HealthRegen : TimeBasedEffect
     {
         return "You can regenerate <color=#0CD405>health</color> per second and gain <color=#0CD405>Max HP</color> at the end of each round";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Regen/s: {0}/s <br>Max HP/round: {1}/round", Mathf.Round(perSec * 100.0f) * 0.01f, Mathf.Round(perRound * 100.0f) * 0.01f);
+        return new string[]{"Regen/s: {0}/s <br>Max HP/round: {1}/round", (Mathf.Round(perSec * 100.0f) * 0.01f).ToString(), (Mathf.Round(perRound * 100.0f) * 0.01f).ToString()};
     }
 
     public string getIcon()
@@ -125,7 +119,7 @@ public class HealthRegen : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -136,7 +130,7 @@ public class LightningEffect : TimeBasedEffect
 
 {
     public static LightningEffect Instance;
-    public static GameObject lightning;
+    public static IPoolable lightning;
     public int interval;
     int current_interval;
     public int dmg;
@@ -148,7 +142,7 @@ public class LightningEffect : TimeBasedEffect
         if(Instance == null){
             Instance = this;
             cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/ThunderUnlock"));
-            lightning = Resources.Load<GameObject>("Prefab/Lightning");
+            lightning = Resources.Load<GameObject>("Prefab/Lightning").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this, percRed);
         }
@@ -165,12 +159,13 @@ public class LightningEffect : TimeBasedEffect
         if(current_interval <=0 ){
             current_interval = interval;
             int amount = 2;
+            AudioManager.PlayOneShot(FMODEvents.Instance.Thunder, Vector2.zero);
             if(Character.Instance.isCharacter("Thunder")){amount*=2;}
             for(int i = 0; i < amount; i++)
             {
                 Vector2 v = Flamey.Instance.getRandomHomingPosition();
-                GameObject go =  Flamey.Instance.SpawnObject(lightning);
-                go.transform.position = new Vector2(v.x, v.y + 10.91f);
+                ObjectPooling.Spawn(lightning, new float[]{v.x, v.y + 10.91f});
+                
             }
             
 
@@ -198,22 +193,21 @@ public class LightningEffect : TimeBasedEffect
             interval = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThunderInterval");
+            if(Flamey.Instance.atkSpeed == Flamey.Instance.BegginingAS && Flamey.Instance.BulletSpeed == 5){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(20, "Betsy", 23);
+            }
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    private void CheckMaxed(){
-        if(interval <= 1 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Thunder");
-        }
-    }
+    
     
     public string getDescription()
     {
         return "Each few amount of seconds, <color=#FFCC7C>3 thunders</color> will spawn at a convenient location dealing <color=#FF5858>damage</color> to enemies struck by it. This ability applies <color=#FF99F3>On-Land Effects";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Interval: {0}s (Min 0.25s)<br>Damage: +{1}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, dmg);
+        return new string[]{"Interval: {0}s (Min 0.25s)<br>Damage: +{1}", (Mathf.Round((float)interval/4 * 100.0f) * 0.01f).ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -228,7 +222,7 @@ public class LightningEffect : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -258,6 +252,7 @@ public class Immolate : TimeBasedEffect
     private GameObject spirit;
     GameObject elementsPanel; 
     bool isCharacter;
+    public Transform optionMenu;
     public Immolate(int interval, int dmg, float radius, float percRed){
         this.dmg = dmg;
         this.interval = interval;
@@ -281,6 +276,7 @@ public class Immolate : TimeBasedEffect
             
             isCharacter = Character.Instance.isCharacter("Immolate");
 
+            optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("ImmolatePowerMenu");
 
         }else{
             Instance.Stack(this, percRed);
@@ -310,6 +306,7 @@ public class Immolate : TimeBasedEffect
         cooldownImage.fillAmount = 1 - ((float)current_interval)/interval;
     }
     public void ShootImmolate(){
+        AudioManager.PlayOneShot(FMODEvents.Instance.Immolate, Vector2.zero);
         Flamey.Instance.SpawnObject(ImmolateType == -1 ? ring : ImmolateRings[ImmolateType]);    
     }
     public void ApplyRound(){}
@@ -328,7 +325,7 @@ public class Immolate : TimeBasedEffect
         radius += immolate.radius;
         RemoveUselessAugments();
     }
-
+    bool maxed;
     void RemoveUselessAugments(){
         if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2){
             interval = 16;
@@ -344,39 +341,43 @@ public class Immolate : TimeBasedEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ImmolateRadius");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f && !Character.Instance.isACharacter()){
-            StartSelectScreen();
-            maxed = true;
-        }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f && !Character.Instance.isACharacter()){
-            StartSelectScreen();
-            maxed = true;
-        }
-    }
-    public void StartSelectScreen(){
-        EnemySpawner.Instance.Paused = true;
-        elementsPanel = GameUI.Instance.SpawnUI(elementsPanelPrefab);
-        Transform elementContainer = elementsPanel.transform.Find("Elements");
-        elementContainer.Find("Fire").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(0));
-        elementContainer.Find("Water").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(1));
-        elementContainer.Find("Earth").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(2));
-        elementContainer.Find("Air").GetComponent<Button>().onClick.AddListener(()=>TransformIntoCharacter(3));
-    }
-    public void TransformIntoCharacter(int n){
 
-        elementsPanel.GetComponent<Animator>().Play("ExitOptions");
-        ImmolateType = n;
-        switch(n){
-            case 0: Character.Instance.SetupCharacter("ImmolateFire"); break;
-            case 1: Character.Instance.SetupCharacter("ImmolateWater"); break;
-            case 2: Character.Instance.SetupCharacter("ImmolateEarth"); break;
-            case 3: Character.Instance.SetupCharacter("ImmolateAir"); break;
+        if(interval <= 8 && SkillTreeManager.Instance.getLevel("Immolate") >= 2 && radius >= 2f ){
+            Max();
+        }else if(interval <= 16 && SkillTreeManager.Instance.getLevel("Immolate") < 2 && radius >= 2f){
+            Max();
         }
         
     }
+
+    private void Max(){
+        if(maxed){return;}
+        maxed=true;
+        
+
+        if(GameVariables.hasQuest(14)){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(14,"Naal",6);
+        }else{
+            float[] values = GetImmolateType();
+            int max = Array.IndexOf(values, values.Max());
+            switch(max){
+                case 0:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(32,"Naal",7);
+                break;
+                case 1:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(33,"Naal",8);
+                break;
+                case 2:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(34,"Naal",9);
+                break;
+                case 3:
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(35,"Naal",10);
+                break;
+            }
+        }
+    }
+
+
     public void SpawnExtraAssets(int n = -1){
         if(n != -1){ImmolateType = n;}
         isCharacter=true;
@@ -388,9 +389,9 @@ public class Immolate : TimeBasedEffect
     {
         return "Each few amount of seconds, you will release a <color=#FFCC7C>wave of energy</color> that travels through the campsite dealing <color=#FF5858>damage</color> to enemies caught by it and ignoring <color=#919191>Armor</color> completely";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Interval: {0}s (Min. 2s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", Mathf.Round((float)interval/4 * 100.0f) * 0.01f, Mathf.Round(radius*100), dmg);
+        return new string[]{"Interval: {0}s (Min. 2s)<br>Travel Radius: {1} units (Max 200 units)<br>Damage: +{2}", (Mathf.Round((float)interval/4 * 100.0f) * 0.01f).ToString(), Mathf.Round(radius*100).ToString(), dmg.ToString()};
     }
 
     public string getIcon()
@@ -405,10 +406,50 @@ public class Immolate : TimeBasedEffect
 
     public string getType()
     {
-        return "Time-based Effect";
+        return "Time-Based Effect";
     }
     public GameObject getAbilityOptionMenu(){
-        return null;
+        
+        return UpdateImmolateType();
     }
+
+    public float[] GetImmolateType(){
+
+        
+
+        float[] AccumulatedPoints = new float[4];
+        AccumulatedPoints[0]+=15;
+
+        List<Augment> augments = Deck.Instance.inBuildAugments;
+        foreach(Augment a in augments){
+            int v = (int)a.immoType;
+            if(v!=-1){AccumulatedPoints[v]++;}
+        }
+        float max = AccumulatedPoints.Sum();
+        
+        for(int i = 0; i < AccumulatedPoints.Length; i++){
+            AccumulatedPoints[i] =  AccumulatedPoints[i]/max *100f;
+        }
+        
+        
+
+        return AccumulatedPoints;
+        
+    }
+
+    private GameObject UpdateImmolateType(){
+        if(!GameVariables.hasQuestAssigned(32)){
+            return null;
+        }
+        float[] values = GetImmolateType();
+        for(int i = 0; i<4; i++){
+            optionMenu.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = Math.Round(values[i]) + "%";
+        }
+        return optionMenu.gameObject;
+    }
+
+}
+public enum IMMOLATE{
+    NONE=-1, FIRE=0, WATER=1, AIR=2, EARTH=3
 }
 

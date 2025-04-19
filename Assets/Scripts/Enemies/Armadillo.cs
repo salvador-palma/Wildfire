@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class Armadillo : Enemy
@@ -9,13 +11,21 @@ public class Armadillo : Enemy
     public float rollingSpeedMultiplier;
     public int hitsUntilUnroll;
     public int ArmorNotRolling;
+    [field: SerializeField] public EventReference PopOutSound { get; private set; }
+    [field: SerializeField] public EventReference DigSound { get; private set; }
+    EventInstance DigSoundInstance;
 
     void Start()
     {
+        VirtualPreStart();
+        
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
+        
+        DigSoundInstance = AudioManager.CreateInstance(DigSound);
+        DigSoundInstance.start();
         
         Speed = Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
@@ -44,20 +54,30 @@ public class Armadillo : Enemy
         }
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
 
         if(hitsUntilUnroll > 0 && source!= null && source.Equals("Lava Pool")){
 
             Dmg = SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10;
         }
-        base.Hitted(Dmg, TextID, ignoreArmor, hitsUntilUnroll <= 0 ? onHit : false, except);
+        int n = base.Hitted(Dmg, TextID, ignoreArmor, hitsUntilUnroll <= 0 ? onHit : false, except, source, extraInfo);
         if(onHit && hitsUntilUnroll > 0){
             hitsUntilUnroll--;
         }
+        return n;
         
+    }
+    public override void KnockBack(Vector2 origin, bool retracting, float power){
+        if(hitsUntilUnroll <= 0){
+            base.KnockBack(origin, retracting, power);
+        }
     }
 
     public void UnRoll(){
+        DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DigSoundInstance.release();
+        AudioManager.PlayOneShot(PopOutSound,transform.position);
+
         GetComponent<Animator>().SetTrigger("Unroll");
         Armor = ArmorNotRolling;
     }

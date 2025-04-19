@@ -20,6 +20,7 @@ public class Frog : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        VirtualPreStart(); 
         timer = jumpTimer;
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
@@ -93,6 +94,10 @@ public class Frog : Enemy
     public override void Stun(float f, string source = null){
         if(source != null && source == "IceLand" && jumping){return;}
         base.Stun(f);
+    }
+    protected override void ReturnWalk(){
+        hasReachedRange = false;
+        base.ReturnWalk();
     }
 
     public override void Attack(){

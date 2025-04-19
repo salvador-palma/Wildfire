@@ -89,7 +89,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,13 +144,39 @@ MonoBehaviour:
   MaxHealth: 200
   Armor: 0
   ArmorPen: 0
+  WeigthClass: 1
   EmberDropRange: {x: 4, y: 8}
   Attacking: 0
   HitCenter: {fileID: 4783272093550992552}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1010124529
+      Data2: 1238923007
+      Data3: -1014038085
+      Data4: 1476812143
+    Path: event:/Enemies/Wave - 1/WormAttack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 7908490
+      Data2: 1093378137
+      Data3: 991989898
+      Data4: -1911328274
+    Path: event:/Enemies/Wave - 2/BunnyJump
   slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Jump
+  SlowSet: 0
   jumping: 0
   jumpTimer: 2.5
 --- !u!95 &197817752707662347

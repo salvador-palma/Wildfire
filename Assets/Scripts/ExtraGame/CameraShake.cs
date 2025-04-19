@@ -7,11 +7,12 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private Transform _camera;
     
     static CameraShake INSTANCE;
+    public static float Intensity = 1f;
     private void Start() {
         INSTANCE = this;
     }
     public static void Shake(float duration, float strenght){
-        INSTANCE.ShakeInstance(duration, strenght);
+        INSTANCE.ShakeInstance(duration, strenght * Intensity);
     }
     public void ShakeInstance(float duration, float strenght){
         _camera.DOComplete();

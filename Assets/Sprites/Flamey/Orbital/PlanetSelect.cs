@@ -5,6 +5,6 @@ using UnityEngine;
 public class PlanetSelect : MonoBehaviour
 {
     public void clickedPlanet(int n){
-        FlameCircle.Instance.TransformIntoCharacter(n);
+        //FlameCircle.Instance.TransformIntoCharacter(n);
     }
 }

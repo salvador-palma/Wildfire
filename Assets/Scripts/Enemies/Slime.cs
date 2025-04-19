@@ -10,6 +10,7 @@ public class Slime : Enemy
     [SerializeField] private Vector2[] spawnTinyPos;
     [SerializeField] private float maxSpeed;
     private void Start() {
+        VirtualPreStart(); 
         flame = Flamey.Instance;
         maxSpeed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         Speed = 0.00001f;

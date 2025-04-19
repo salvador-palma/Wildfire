@@ -80,8 +80,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -173,12 +171,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -226,23 +222,67 @@ MonoBehaviour:
   Name: Bison
   Damage: 50
   AttackDelay: 6
+  extraAtkSpeedDelay: 0
   AttackRange: 1.75
   Speed: 0.75
   Health: 5000
   MaxHealth: 0
   Armor: 200
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 12, y: 20}
   Attacking: 0
   HitCenter: {fileID: 1201471100915407414}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1279178375
+      Data2: 1102804321
+      Data3: -152924248
+      Data4: -1448038744
+    Path: event:/Enemies/Wave - 4/Punch
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -749705189
+      Data2: 1239339461
+      Data3: -1763333752
+      Data4: -516292172
+    Path: event:/Enemies/Wave - 3/HeavySteps
+  slowfactor: 0
+  AttackAnimationName: Attack
+  WalkAnimationName: Run
+  SlowSet: 0
   maxCharge: 10
   chargeAmount: 0
   dmgPerCharge: 50
   running: 0
+  <SweepSound>k__BackingField:
+    Guid:
+      Data1: 1484180762
+      Data2: 1211947420
+      Data3: 1613239724
+      Data4: -1078592464
+    Path: event:/Enemies/Wave - 4/DirtSlide
+  <FirstHitSound>k__BackingField:
+    Guid:
+      Data1: -1368718033
+      Data2: 1145478184
+      Data3: -1443228540
+      Data4: -1076745068
+    Path: event:/Enemies/Wave - 1/BeatleDie
 --- !u!95 &1167436198336403731
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -256,7 +296,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -270,7 +309,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088343331207743589}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -294,8 +332,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.23820615, y: -1.1943861}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,6 +343,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 2.391265, y: 0.7697213}
   m_EdgeRadius: 0
 --- !u!1 &3733414987066331365
@@ -357,8 +395,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -443,8 +479,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -515,7 +549,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2604636548564631417
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -529,7 +563,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

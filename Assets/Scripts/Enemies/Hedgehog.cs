@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Hedgehog : Enemy
 {
 
     public bool Covered;
     public int ArmorCovered;
+    [field: SerializeField] public EventReference RollSound { get; private set; }
   
     // Start is called before the first frame update
     void Start()
     {
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -39,19 +42,20 @@ public class Hedgehog : Enemy
     }
     public void Cover(){
         Covered = true;
+        AudioManager.PlayOneShot(RollSound,transform.position);
         Armor = ArmorCovered;
     }
     public int TitForTat = 10;
     int TitCounter = 0;
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
 
 
-
+        int n = 0;
         if(IceOnHit.Instance != null && SkillTreeManager.Instance.getLevel("Freeze") >= 2 && getSlowInfo("IceHit")[0] > 0){
             Dmg *= 2;
         }
         if(onHit && !Covered){
-            Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);
+            n = Flamey.Instance.ApplyOnHit(Dmg, Health, this, except);
         }
         
 
@@ -61,7 +65,26 @@ public class Hedgehog : Enemy
             Dmg = (int)(B + (Dmg-B)*armorPen);
         }
 
-        
+        //============================
+
+        //ACHIEVMENTS AND QUESTS
+        if(Dmg >= 50000){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(17, "Naal", 13); //AZUREOTH UNLOCK
+        }
+        if(CritUnlock.Instance != null){
+            if(Dmg >= Flamey.Instance.Dmg * 5f){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(18, "Rowl", 17); //POWERED UP UNLOCK
+            }
+        }
+
+        if(source=="Thorns"){
+            float DamageGiven = extraInfo[0];
+            if(DamageGiven < Dmg){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(26, "Cloris", 13);
+            }
+        }
+
+        //============================
 
         if(Covered && onHit){
             if(TitCounter > 0){
@@ -76,7 +99,10 @@ public class Hedgehog : Enemy
         Health -= Dmg;
         Flamey.Instance.TotalDamage+=(ulong)Dmg;
         PlayHitAnimation(Dmg, TextID); 
+        return n;
     }
+
+    protected override void ReturnWalk(){}
 
 
     

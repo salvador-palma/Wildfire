@@ -3,22 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceAOE : MonoBehaviour
+public class IceAOE : IPoolable
 {
     public float Slow;
 
     public float LastingTime;
     float lt;
 
-    private void Start() {
-        
-        lt = IceOnLand.Instance.lasting;
-        Slow = IceOnLand.Instance.slow;
-        Vector2 scale = transform.localScale * IceOnLand.Instance.size;
-        transform.localScale = scale;
-         if(EnemySpawner.Instance.isOnAugments){Destroy(gameObject);}
-
-    }
+    
     void Update()
     {
         lt-=Time.deltaTime;
@@ -46,5 +38,34 @@ public class IceAOE : MonoBehaviour
         }
     }
 
-    
+    public override void Pool()
+    {
+        
+        lt = IceOnLand.Instance.lasting;
+        Slow = IceOnLand.Instance.slow;
+        Vector2 scale = new Vector2(0.2232152f,0.2232152f) * IceOnLand.Instance.size;
+        transform.localScale = scale;
+        if(EnemySpawner.Instance.isOnAugments){UnPool();}
+
+        Color c = GetComponent<SpriteRenderer>().color;
+        c.a = 1;
+        GetComponent<SpriteRenderer>().color = c;
+
+        int n = ObjectPooling.ActiveAmount(this) + 1;
+       
+        if(n >= 100 && GameVariables.hasQuest(19)){
+
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(19, "Cloris", 11);
+            
+        }
+
+    }
+    public override string getReference()
+    {
+        return "Ice Pool";
+    }
+    public override void Define(float[] args)
+    {
+        transform.position = new Vector2(args[0], args[1]);
+    }
 }

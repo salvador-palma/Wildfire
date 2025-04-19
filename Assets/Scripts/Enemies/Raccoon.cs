@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class Raccoon : Enemy
@@ -10,8 +11,9 @@ public class Raccoon : Enemy
     public int StealAmount;
     public bool Stealing;
     private bool gotAway;
+    [field: SerializeField] public EventReference CashBackSound { get; private set; }
     private void Start() {
-
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -46,14 +48,18 @@ public class Raccoon : Enemy
     {
         Stealing = true;
         StealAmount = Flamey.Instance.removeEmbers(StealObjective);
+        AudioManager.PlayOneShot(AttackSound,transform.position);
         TurnBack();
     }
     private void TurnBack(){
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
-
+    protected override void ReturnWalk(){}
     public override void Die(bool onKill = true){
-        if(!gotAway){ Flamey.Instance.addEmbers(StealAmount);}
+        if(!gotAway){ 
+            Flamey.Instance.addEmbers(StealAmount);
+            AudioManager.PlayOneShot(CashBackSound,transform.position);
+        }
        
         base.Die();
     }

@@ -1,15 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Flare : MonoBehaviour
+public class Flare : IPoolable
 {
-    
-
 
     public int goingDownPhase;
     
@@ -22,26 +15,20 @@ public class Flare : MonoBehaviour
     public int Damage;
     public float destY;
     [SerializeField] public Color SpotColor;
+    [SerializeField] public GameObject FlareSpotPrefab;
 
     
     public int DmgTextID;
-
-    public void VirtualStart(){
-        Reset();
-        SetupTarget();
-        SetupStats();  
-    }
     
     private void SetupTarget(){
         transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), 0);
         SpotColor.a = 0;
     }
     private void SetupStats(){
-        speedAscend = Flamey.Instance.BulletSpeed;
+        speedAscend = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         speedDescend = 1.5f * speedAscend;
        
     }
-    [SerializeField] GameObject VisualDebug;
     private void Update() {
         
         if(goingDownPhase == 1){
@@ -70,8 +57,10 @@ public class Flare : MonoBehaviour
         
     }
     virtual public void DestroyGameObject(){
-        FlareManager.DestroyFlare(gameObject);
-        if(FlareSpot!=null){Destroy(FlareSpot);}
+        UnPool();
+        if(FlareSpot!=null){FlareSpot.GetComponent<IPoolable>().UnPool();FlareSpot = null;}
+
+
     }
    
     virtual public void GetTarget(){
@@ -98,36 +87,37 @@ public class Flare : MonoBehaviour
         destY = dest.y;
     }
     virtual protected void SummonFlareSpot(Vector2 vec){
-        FlareSpot = Instantiate(Flamey.Instance.FlareSpotPrefab);
-        
-        FlareSpot.transform.position = vec;
-        FlareSpot.GetComponent<SpriteRenderer>().enabled=true;
+        FlareSpot = ObjectPooling.Spawn(FlareSpotPrefab.GetComponent<IPoolable>(), new float[]{vec.x, vec.y});
     }
 
     virtual protected void HitGround(Vector2 vec){
-
-        if(SecondShot.Instance != null && SkillTreeManager.Instance.getLevel("Multicaster") >= 2 && UnityEngine.Random.Range(0f, 1f) < 0.1f){
-           Debug.Log("Rebound");
-           Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
-           f.transform.position = vec;
-           f.setTarget(Flamey.Instance.getRandomHomingPosition());
-           
-
-        }
-
         Flamey.Instance.ApplyOnLand(vec);
 
-        Destroy(FlareSpot);
         
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, FlareManager.EnemyMask);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(vec, 0.5f, Flamey.EnemyMask);
         if(colliders.Length > 0){
-            GameObject g = Instantiate(EnemySpawner.Instance.ExplosionPrefab);
-            g.transform.position = vec;
+
+            ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{vec.x, vec.y});
+    
+            if(SecondShot.Instance != null && SkillTreeManager.Instance.getLevel("Multicaster") >= 2 && UnityEngine.Random.Range(0f, 1f) < 0.1f){
+           
+                Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
+                f.transform.position = vec;
+                f.setTarget(Flamey.Instance.getRandomHomingPosition());
+                
+
+            }
+
         }
         
         foreach(Collider2D col in colliders){
-            col.GetComponent<Enemy>().Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+            if(col.tag=="Nature"){
+                col.GetComponent<Nature>().Destroy();
+            }else{
+                col.GetComponent<Enemy>().Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+            }
+            
         }
     }
     private void FlareSpotUpdate(){
@@ -143,17 +133,58 @@ public class Flare : MonoBehaviour
     public void Reset(){
         goingDownPhase=0;
         target=Vector2.zero;
-        if(FlareSpot!=null){
-            Destroy(FlareSpot.gameObject);
-            FlareSpot = null;
-        }
+        
         
         destY = 0;
     }
-    
-    
 
+    public override string getReference()
+    {
+        return "Flare";
+    }
 
+    public override void Pool()
+    {
+        transform.localRotation = new Quaternion(0f,0f,180f,0f);
+        Reset();
+        SetupTarget();
+        SetupStats();
+    }
 
+    public override void Define(float[] args)
+    {
+        FlareType flareData = Flamey.Instance.FlareTypes[(int)args[0]];
+        GetComponent<SpriteRenderer>().color = flareData.FlareColor;
+       
+        DmgTextID = flareData.DmgTextID;
+        SpotColor = flareData.FlareColor;
+        Damage = (int)GetDmgByType((int)args[0]);
+        ParticleSystem.MainModule main = GetComponentInChildren<ParticleSystem>().main;
+        main.startColor = new ParticleSystem.MinMaxGradient(flareData.ParticleColors[0], flareData.ParticleColors[1]);
+    }
 
+    public static float GetDmgByType(int type){
+        Flamey f = Flamey.Instance;
+        switch(type){
+            case 0: return f.Dmg;
+            case 1: return f.Dmg * CritUnlock.Instance.mult;
+            case 2: return f.Dmg * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
+            case 3: return f.Dmg + KrakenSlayer.Instance.extraDmg;
+            case 4: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult;
+            case 5: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
+            case 6: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5;
+            case 7: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult;
+            case 8: return (f.Dmg + KrakenSlayer.Instance.extraDmg) * 5 * CritUnlock.Instance.mult * CritUnlock.Instance.mult;
+            default: return f.Dmg;
+        }
+    }
+
+}
+
+[System.Serializable]
+public class FlareType {
+    public int DmgTextID;
+    public Color FlareColor;
+    public Color SpotColor;
+    public Color[] ParticleColors;
 }

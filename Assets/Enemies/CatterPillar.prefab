@@ -151,7 +151,30 @@ MonoBehaviour:
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -1616057566
+      Data2: 1129247387
+      Data3: -824363641
+      Data4: -664606741
+    Path: event:/Enemies/Wave - 1/SnailDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1010124529
+      Data2: 1238923007
+      Data3: -1014038085
+      Data4: 1476812143
+    Path: event:/Enemies/Wave - 1/WormAttack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 704065730
+      Data2: 1221620695
+      Data3: -1503322448
+      Data4: -895136693
+    Path: event:/Enemies/Wave - 1/WormWalk
   slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: IdleAnim
 --- !u!212 &3905129715520958857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,7 +195,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

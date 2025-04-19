@@ -6506,7 +6506,7 @@ MonoBehaviour:
   width: 960
   height: 540
   onAwake: 1
-  onUpdate: 0
+  onUpdate: 1
 --- !u!1 &811510753
 GameObject:
   m_ObjectHideFlags: 0
@@ -7527,6 +7527,7 @@ GameObject:
   - component: {fileID: 1142748590}
   - component: {fileID: 1142748592}
   - component: {fileID: 1142748591}
+  - component: {fileID: 1142748593}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7575,8 +7576,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
-  m_sharedMaterial: {fileID: 4663238875276231498, guid: 731bf2fc5cf8a2a4f9a61ee1f3590bca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7606,7 +7607,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7650,6 +7651,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142748589}
   m_CullTransparentMesh: 1
+--- !u!114 &1142748593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142748589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24f7b9e2eb08234ead3a0a9b77c2aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1200514250
 GameObject:
   m_ObjectHideFlags: 0

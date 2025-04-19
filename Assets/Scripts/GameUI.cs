@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class GameUI : MonoBehaviour
 
     [Header("FastForward")]
     [SerializeField]Button[] FastForwardButtons;
+    private float[] TimeScaleTime = new float[]{2.5f,3f,3.5f,4f}; //2.5f, 3f, 3.5f, 4f
+    private int[] TimeScaleValue = new int[]{2,3,4,5};
+    private int TimeScaleIndex;
     [Header("Menu")]
     [SerializeField] Color ActiveTab;
     [SerializeField] Color InactiveTab;
@@ -45,7 +49,7 @@ public class GameUI : MonoBehaviour
     Effect latestInfoEffect;
     [SerializeField] GameObject EffectContainer;
     [SerializeField] GameObject EffectTemplate;
-    [SerializeField] TextMeshProUGUI[] EffectTexts;
+    [SerializeField] DynamicText[] EffectTexts;
     [SerializeField] GameObject PassiveContainer;
 
 
@@ -68,6 +72,7 @@ public class GameUI : MonoBehaviour
     [Header("Character Pop Up")]
     [SerializeField] TextMeshProUGUI CharacterNameDescriptionTxt;
     [SerializeField] GameObject CharacterImage;
+    [SerializeField] GameObject CornerPopUpAnim;
     
     [Header("Spawnable UI")]
     public GameObject AbilityOptionContainer;
@@ -77,6 +82,9 @@ public class GameUI : MonoBehaviour
     public GameObject UICooldownsTemplate;
     public GameObject UIActiveCooldownsTemplate;
 
+    [Header("QuickStart")]
+    public LocalBestiary localBestiary;
+
     private void Awake() {
         Instance = this;
         FastForwardButtons[0].interactable = false;
@@ -85,6 +93,14 @@ public class GameUI : MonoBehaviour
         if(GameVariables.GetVariable("BestiaryReady") <= 0){MenuTabs[2].SetActive(false);ButtonTabs[2].gameObject.SetActive(false);}
         if(!Character.Instance.HasAtLeastOneCharacter()){MenuTabs[3].SetActive(false);ButtonTabs[3].gameObject.SetActive(false);}
         if(!SkillTreeManager.Instance.HasAtLeastOneSkill()){MenuTabs[1].SetActive(false);ButtonTabs[1].gameObject.SetActive(false);}
+
+        if(Item.has("Hourglass")){TimeScaleIndex++;}
+        if(Item.has("Magical Hourglass")){TimeScaleIndex++;}
+        if(Item.has("Celestial Hourglass")){TimeScaleIndex++;}
+        FastForwardButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + TimeScaleValue[TimeScaleIndex];
+
+        localBestiary.Awake();
+        InteractiveCursor.ChangeCursor(0);
     }
     
 
@@ -109,6 +125,8 @@ public class GameUI : MonoBehaviour
     public void TogglePausePanel(){
         Flamey f = Flamey.Instance;
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", PausePanel.activeInHierarchy ? 0 : 1);
+
         StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
@@ -127,16 +145,19 @@ public class GameUI : MonoBehaviour
             ButtonTabs[index].color = ActiveTab;
             MenuTabs[index].SetActive(true);
             current_Tab = index;
+            if(current_Tab == 1){Canvas.ForceUpdateCanvases();}
         }
     }
 
     public void AddAugment(Augment a){
         if(!ownsAugment){ownsAugment = true; NoAugmentsText.SetActive(false);}
+
+        Deck.Instance.inBuildAugments.Add(a);
         GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
         
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
-        go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
+        go.transform.GetChild(1).GetComponent<DynamicText>().SetText(a.Title);
+        go.transform.GetChild(2).GetComponent<DynamicText>().SetText(a.getDescription());
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -147,8 +168,8 @@ public class GameUI : MonoBehaviour
         Augment a = DeckBuilder.Instance.getAugmentByName(serA.title);
 
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
-        go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = a.Title;
-        go.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = a.getDescription();
+        go.transform.GetChild(1).GetComponent<DynamicText>().SetText(a.Title);
+        go.transform.GetChild(2).GetComponent<DynamicText>().SetText(a.getDescription());
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
     }
@@ -157,10 +178,10 @@ public class GameUI : MonoBehaviour
         Flamey f = Flamey.Instance;
         StatsTexts[0].text = "" + f.Dmg;
         StatsTexts[1].text = f.atkSpeed.ToString("F2") + "/s";
-        StatsTexts[2].text = "x"+ f.BulletSpeed;
-        StatsTexts[3].text = f.accuracy + "%";
+        StatsTexts[2].text = "x"+ f.BulletSpeed.ToString("F1");
+        StatsTexts[3].text = f.accuracy.ToString("F0") + "%";
         StatsTexts[4].text = f.Armor.ToString();
-        StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[5].text = f.Health.ToString("F0")+"/"+f.MaxHealth.ToString("F0");
         StatsTexts[6].text = f.Embers.ToString();
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
@@ -194,40 +215,43 @@ public class GameUI : MonoBehaviour
         Ability ability = SkillTreeManager.Instance.getAbility(e.getText());
         int level = SkillTreeManager.Instance.getLevel(ability.Name);
 
-        EffectTexts[3].text = "<size=100%><color=#FFFF00>- Level 1 -</color><br><size=80%>" + ability.AbilityDescription1;
-        EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>" + ability.AbilityDescription2;
-        EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>" + ability.AbilityDescription3;
-        EffectTexts[3].color = Color.white;
-        EffectTexts[4].color = Color.white;
-        EffectTexts[5].color = Color.white;
+
+        EffectTexts[3].SetText("<size=100%><style=\"Yellow\">- Level 1 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription1});
+        EffectTexts[4].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription2});
+        EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{ability.AbilityDescription3});
+        EffectTexts[3].setColor(Color.white);
+        EffectTexts[4].setColor(Color.white);
+        EffectTexts[5].setColor(Color.white);
         switch (level+1)
         {    
             case 0:
-                EffectTexts[3].color = new Color(1,1,1,0.3f);
-                EffectTexts[4].text = "<size=100%><color=#FFFF00>- Level 2 -</color><br><size=80%>???";
-                EffectTexts[4].color = new Color(1,1,1,0.3f);
-                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[3].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[4].SetText("<size=100%><style=\"Yellow\">- Level 2 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[4].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
             case 1:
-                EffectTexts[4].color = new Color(1,1,1,0.3f);
-                EffectTexts[5].text = "<size=100%><color=#FFFF00>- Level 3 -</color><br><size=80%>???";
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[4].setColor(new Color(1,1,1,0.3f));
+                EffectTexts[5].SetText("<size=100%><style=\"Yellow\">- Level 3 -</style><br><size=80%>{0}", new string[]{"???"});
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
             case 2:
-                EffectTexts[5].color = new Color(1,1,1,0.3f);
+                EffectTexts[5].setColor(new Color(1,1,1,0.3f));
             break;
         }
 
         latestInfoEffect = e;
-        EffectTexts[0].text = e.getText();
-        EffectTexts[1].text = e.getType();
-        EffectTexts[2].text = e.getCaps();
+        EffectTexts[0].SetText(e.getText());
+        EffectTexts[1].SetText(e.getType());
+        string[] caps = e.getCaps();
+        EffectTexts[2].SetText(caps[0], caps.Skip(1).ToArray());
 
         GameObject optionMenu = e.getAbilityOptionMenu();
         if(optionMenu==null){return;}
 
         optionMenu.SetActive(true);
+        
 
     }
 
@@ -240,7 +264,9 @@ public class GameUI : MonoBehaviour
         if(Time.timeScale == 1f){
             FastForwardButtons[0].interactable = true;
             FastForwardButtons[1].interactable = false;
-            SpeedUp(3.5f);
+            FastForwardButtons[1].GetComponent<Animator>().Play("FastForwardDetail");
+            
+            SpeedUp(TimeScaleTime[TimeScaleIndex]);
 
         }else{
             FastForwardButtons[0].interactable = false;
@@ -250,8 +276,9 @@ public class GameUI : MonoBehaviour
     }
 
     public void GameOverEffect(){
+         AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         int n = EnemySpawner.Instance.current_round; 
-        RoundsLastedText.text = "YOU'VE SURVIVED UNTIL " + n/10 +"h"+ ((n%10)*6).ToString("00")  + " ";
+        RoundsLastedText.GetComponent<DynamicText>().SetText("YOU'VE SURVIVED UNTIL {0}h{1}", new string[]{(n/10).ToString(), ((n%10)*6).ToString("00")});
         foreach (Transform item in  Flamey.Instance.transform)
         {
             item.GetComponent<SpriteRenderer>().sortingOrder += 2;
@@ -260,11 +287,17 @@ public class GameUI : MonoBehaviour
         GetComponent<Animator>().Play("GameOver");
         if(EnemySpawner.Instance.isOnAugments){Deck.Instance.VisualOutroSlots();}
         setUpFinalStats();
+        AudioManager.Instance.SetAmbienceParameter("Dead", 1f);
     }
-    
+    public void PlayButtonSound(int n){
+        AudioManager.Instance.PlayButtonSound(n);
+    }
     public void loadScene(string str){
         SkillTreeManager.AddEmbersToJSON(Flamey.Instance.Embers);
         LocalBestiary.INSTANCE.UpdateBestiaryValues();
+
+        
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         SceneManager.LoadScene(str);
     }
 
@@ -332,7 +365,7 @@ public class GameUI : MonoBehaviour
         }
     }
     private void setFinalStatTemplate(SimpleStat simpleStat, GameObject template){
-        template.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = simpleStat.Title;
+        template.transform.GetChild(0).GetComponent<DynamicText>().SetText(simpleStat.Title);
         template.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = simpleStat.value + "";
     }
 
@@ -343,6 +376,8 @@ public class GameUI : MonoBehaviour
     public void SetEmberAmount(int n){
         EmberAmountTxt.text = n.ToString();
     }
+
+
 
     /* ===== CHARACTERS ===== */
     
@@ -357,7 +392,7 @@ public class GameUI : MonoBehaviour
             EnemySpawner.Instance.Paused = false;
             EnemySpawner.Instance.newRound();
         }else{
-            Character.Instance.Unlock();
+            //Character.Instance.Unlock();
             FillCharacterPopUpInfo();
             GetComponent<Animator>().Play("CharacterUnlockedPopUp");
         }
@@ -376,6 +411,27 @@ public class GameUI : MonoBehaviour
     }
     public void UpdateProfileCharacter(){
         Character.Instance.TransformVesselToCharacter(ProfileVessel);
+        Debug.Log("UPDATED PROFILE CHARACTERS");
+    }
+
+
+    public void CornerPopUp(string title, string description, Sprite icon){
+        CornerPopUpAnim.transform.GetChild(1).GetComponent<DynamicText>().SetText(title);
+        CornerPopUpAnim.transform.GetChild(2).GetComponent<DynamicText>().SetText(description);
+        CornerPopUpAnim.transform.GetChild(3).GetComponent<Image>().sprite = icon;
+        CornerPopUpAnim.GetComponent<Animator>().Play("CornerPopUp");
+
+    }
+    public void CompleteQuestIfHasAndQueueDialogue(int questID, string npcname, int dialogueID){
+        if(GameVariables.hasQuest(questID)){
+            GameVariables.CompleteQuest(questID);
+            NPC.QueueDialogue(npcname, dialogueID);
+            Quest q = QuestBoard.Instance.Quests[questID]; 
+            CornerPopUp("Quest Complete", q.Title, q.Avatar);
+        }
+
+        
+        
     }
 
 

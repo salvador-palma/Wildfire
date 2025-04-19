@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class BeePollinator : Bee
 {
-    public GameObject FlowerPrefab;
+    public IPoolable FlowerPrefab;
     protected override void Attack()
     {
         
         atkTimer = 1/atkSpeed;
         if(target==null){return;}
-        GameObject go = Flamey.Instance.SpawnObject(FlowerPrefab);
-        go.transform.position = target.HitCenter.position;
+        Vector2 pos = target.HitCenter.position;
+        ObjectPooling.Spawn(FlowerPrefab, new float[]{pos.x, pos.y});
+
     }
     public override void UpdateStats(){
         Summoner s = Summoner.Instance;

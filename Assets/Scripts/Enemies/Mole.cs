@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
+using FMOD.Studio;
 public class Mole : Enemy
 {
     
@@ -15,15 +17,22 @@ public class Mole : Enemy
 
     public float initialDistance;
     public  Vector3 initialPos;
+
+    [field: SerializeField] public EventReference PopOutSound { get; private set; }
+    [field: SerializeField] public EventReference DigSound { get; private set; }
+    EventInstance DigSoundInstance;
     void Start()
     {
 
-
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
         
+        DigSoundInstance = AudioManager.CreateInstance(DigSound);
+        DigSoundInstance.start();
+
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
             int x = EnemySpawner.Instance.current_round;
@@ -73,6 +82,11 @@ public class Mole : Enemy
     }
 
     IEnumerator DigUp(){
+        
+        DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DigSoundInstance.release();
+        AudioManager.PlayOneShot(PopOutSound,transform.position);
+
         isUnderground = false;
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");
@@ -101,13 +115,30 @@ public class Mole : Enemy
     {
         return !isUnderground && !diggingUp;
     }
+    public override void Die(bool onKill = true)
+    {
+        // if(isUnderground){
+        //     DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //     DigSoundInstance.release();
+        // }
+        base.Die(onKill);
+    }
+     public void OnDestroy()
+    {
+        if(isUnderground){
+            DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            DigSoundInstance.release();
+        }
+        
+    }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
     {
         
         if(!isUnderground || (SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 && source != null && source.Equals("Lava Pool"))){ 
-            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+            return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }
+        return 0;
     }
 
     

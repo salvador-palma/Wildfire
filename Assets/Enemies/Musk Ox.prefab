@@ -35,7 +35,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1004960080812640583
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -49,7 +49,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -105,8 +104,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -150,7 +147,6 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2194063558625991907}
   m_Enabled: 0
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -174,8 +170,7 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.0000009536743}
   m_Size: {x: 10, y: 10.000001}
   m_Direction: 1
@@ -228,8 +223,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -314,8 +307,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -407,12 +398,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -460,22 +449,52 @@ MonoBehaviour:
   Name: Musk Ox
   Damage: 0
   AttackDelay: 5
+  extraAtkSpeedDelay: 0
   AttackRange: 3
   Speed: 0.1
   Health: 3000
   MaxHealth: 0
   Armor: 1000
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 15, y: 25}
   Attacking: 0
   HitCenter: {fileID: 2615351986129088215}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1363840712
+      Data2: 1326616951
+      Data3: -1184638557
+      Data4: -940724450
+    Path: event:/Enemies/Wave - 5/RoarOx
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -749705189
+      Data2: 1239339461
+      Data3: -1763333752
+      Data4: -516292172
+    Path: event:/Enemies/Wave - 3/HeavySteps
+  slowfactor: 0
+  AttackAnimationName: Howl
+  WalkAnimationName: Walk
+  SlowSet: 0
   ArmorPerGrowl: 100
   TimesHealed: 0
   HealRadius: 2.7
 --- !u!95 &2404344236080118394
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -489,7 +508,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -503,7 +521,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8567985466176223585}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -527,8 +544,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.23377192, y: -1.242269}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -539,6 +555,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 2.598838, y: 0.7589235}
   m_EdgeRadius: 0
 --- !u!1 &8775407294052233020

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using FMODUnity;
 public class Hog : Enemy
 {
     public int chargeAmount;
 
-   
+    [field: SerializeField] public EventReference SweepSound { get; private set; }
+    [field: SerializeField] public EventReference FirstHitSound { get; private set; }
 
     private void Start() {
 
+        VirtualPreStart(); 
         
         base.flame = Flamey.Instance;
         
@@ -39,39 +42,37 @@ public class Hog : Enemy
 
     public void decreaseCharge(){
         chargeAmount--;
+        
         if(chargeAmount <0){
             GetComponent<Animator>().Play("Run");
+        }else{
+            AudioManager.PlayOneShot(SweepSound, transform.position);
         }
     }
 
     bool AttackedAlready = false;
     public override void Attack(){
         if(AttackedAlready){
+            AudioManager.PlayOneShot(AttackSound, transform.position);
             flame.Hitted(Damage/2, ArmorPen, this);
         }else{
+            AudioManager.PlayOneShot(FirstHitSound, transform.position);
             AttackedAlready = true;
             flame.Hitted(Damage, ArmorPen, this);
         }
        
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null){
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
         if(source!= null && source.Equals("Lava Pool")){
-            base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except);
+            return base.Hitted(SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 ? Dmg/2 : Dmg/10, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }else{
-            base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+            return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }
     }
 
 
    
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            GetComponent<Animator>().Play("Attack");
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
     public override void CheckFlip()
     {
         base.CheckFlip();

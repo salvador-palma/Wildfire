@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -141,12 +139,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -180,7 +176,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5885165917283190385
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -194,7 +190,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -216,25 +211,69 @@ MonoBehaviour:
   Name: Mole
   Damage: 20
   AttackDelay: 4
+  extraAtkSpeedDelay: 0
   AttackRange: 1
   Speed: 0.1
   Health: 400
   MaxHealth: 0
   Armor: 0
   ArmorPen: 0.8
+  WeigthClass: 1
   EmberDropRange: {x: 4, y: 8}
   Attacking: 0
   HitCenter: {fileID: 2066276292404073573}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: -1029785834
+      Data2: 1174152287
+      Data3: 2061423494
+      Data4: 460118222
+    Path: event:/Enemies/Wave - 1/SnailAttack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 618882203
+      Data2: 1228908735
+      Data3: -1420612433
+      Data4: -292585290
+    Path: event:/Enemies/Wave - 1/SpiderWalk
+  slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Walk
+  SlowSet: 0
   DigUpDistance: 0.5
   diggingUp: 0
   isUnderground: 1
   diggingDelay: 1
-  undergroundSpeedMult: 2.5
+  undergroundSpeedMult: 10
   lineRenderer: {fileID: 0}
   TrailPrefab: {fileID: 3059875542050724770, guid: bb69cff4bcb1c0a478d81cf212cd41e5, type: 3}
   initialDistance: 2.5
   initialPos: {x: 0, y: 0, z: 0}
+  <PopOutSound>k__BackingField:
+    Guid:
+      Data1: 992771918
+      Data2: 1266396134
+      Data3: 1355387546
+      Data4: 911041638
+    Path: event:/Enemies/Wave - 1/WormPopOut
+  <DigSound>k__BackingField:
+    Guid:
+      Data1: 578967634
+      Data2: 1223244131
+      Data3: -1546541935
+      Data4: -519614854
+    Path: event:/Enemies/Wave - 1/WormDig
 --- !u!61 &1085475022832053077
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -243,7 +282,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068600217791102665}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -267,8 +305,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.08669591, y: -0.5984262}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,6 +316,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.2670257, y: 0.6574764}
   m_EdgeRadius: 0
 --- !u!1 &2955091528527001843
@@ -316,7 +354,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2042039202079190284
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -330,7 +368,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -385,8 +422,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

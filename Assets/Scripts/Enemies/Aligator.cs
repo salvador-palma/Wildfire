@@ -9,6 +9,8 @@ public class Aligator : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        VirtualPreStart();
+        
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }

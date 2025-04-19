@@ -233,7 +233,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -288,13 +288,39 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 20
   ArmorPen: 0.75
+  WeigthClass: 2
   EmberDropRange: {x: 13, y: 20}
   Attacking: 0
   HitCenter: {fileID: 8831113287775803521}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: -1900550248
+      Data2: 1275493499
+      Data3: -1891019339
+      Data4: -1827391502
+    Path: event:/Enemies/Wave - 5/Bark
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -1312040467
+      Data2: 1324190427
+      Data3: 835325357
+      Data4: 1300813993
+    Path: event:/Enemies/Wave - 2/FasterLightSteps
   slowfactor: 0
+  AttackAnimationName: StrayAttack
+  WalkAnimationName: StrayRun
+  SlowSet: 0
   isStray: 1
   isAlpha: 0
   RunningSpeed: 1
@@ -302,6 +328,13 @@ MonoBehaviour:
   howling: 0
   AlphaToDefaultRatio: {x: 1, y: 4}
   AlphaRatio: 0
+  <HowlSound>k__BackingField:
+    Guid:
+      Data1: 1242709534
+      Data2: 1230194654
+      Data3: -653451126
+      Data4: 1024998865
+    Path: event:/Enemies/Wave - 5/Howl
 --- !u!95 &623935789474519998
 Animator:
   serializedVersion: 5

@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FrozenTex:
+        m_Texture: {fileID: 2800000, guid: fda1c1d3054089546ad375528411a9df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 74a7261fa1c75084c937dde2502acb51, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -54,6 +58,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _Frozen: 0
     - _Fuzzy_1: 0
     - _Fuzzy_2: 0
     - _Fuzzy_3: 0
@@ -61,6 +66,7 @@ Material:
     - _Fuzzy_5: 0
     - _Fuzzy_6: 0.05
     - _Place_5: 0
+    - _Poison: 0
     - _Range_1: 0.06
     - _Range_2: 0.09
     - _Range_3: 0.06

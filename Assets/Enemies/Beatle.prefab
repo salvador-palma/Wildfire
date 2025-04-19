@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -167,8 +165,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -206,7 +202,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6059576547169864040
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,7 +216,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -283,12 +278,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -336,6 +329,7 @@ MonoBehaviour:
   Name: Beatle
   Damage: 30
   AttackDelay: 0
+  extraAtkSpeedDelay: 0
   AttackRange: 3
   Speed: 0.1
   Health: 100
@@ -346,12 +340,45 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 8501714780596481470}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -1368718033
+      Data2: 1145478184
+      Data3: -1443228540
+      Data4: -1076745068
+    Path: event:/Enemies/Wave - 1/BeatleDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1279178375
+      Data2: 1102804321
+      Data3: -152924248
+      Data4: -1448038744
+    Path: event:/Enemies/Wave - 4/Punch
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 618882203
+      Data2: 1228908735
+      Data3: -1420612433
+      Data4: -292585290
+    Path: event:/Enemies/Wave - 1/SpiderWalk
+  slowfactor: 0
+  AttackAnimationName: Hide
+  WalkAnimationName: Run
   Ball: {fileID: 5759655815504393736}
   growthRate: 0.01
   BallFinit: {fileID: 2956369913626913988}
   BallReleaseSpeed: 0.4
   hidden: 0
   ballHitRange: 1.55
+  <ThrowSound>k__BackingField:
+    Guid:
+      Data1: 2102155335
+      Data2: 1315330698
+      Data3: 1077226123
+      Data4: 680461761
+    Path: event:/Enemies/Wave - 1/BeatleLaunch
 --- !u!61 &1075714508873386839
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -360,7 +387,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5868289912624929837}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -384,8 +410,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.0075823963, y: -0.21054071}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,11 +421,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.0690422, y: 0.6040484}
   m_EdgeRadius: 0
 --- !u!95 &3421996173819174020
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -414,7 +440,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -455,7 +480,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6039416600987918220
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -469,7 +494,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -524,8 +548,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -610,8 +632,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -11,7 +11,7 @@ public class Beaver : Enemy
     public bool Stealing;
     private bool gotAway;
     private void Start() {
-
+        VirtualPreStart();
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -48,6 +48,8 @@ public class Beaver : Enemy
             Flamey.Instance.MaxHealth -= StealAmount;
             Flamey.Instance.Health = Math.Min(Flamey.Instance.MaxHealth,Flamey.Instance.Health);
         }
+
+        AudioManager.PlayOneShot(AttackSound, transform.position);
         Stealing = true;
 
         
@@ -56,6 +58,7 @@ public class Beaver : Enemy
     private void TurnBack(){
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
+    protected override void ReturnWalk(){}
 
     public override void Die(bool onKill = true){
         if(!gotAway && Stealing){ Flamey.Instance.addHealth((int)(StealAmount*0.95f), 0f);}

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using FMODUnity;
 
 public class Wolf : Enemy
 {
@@ -17,6 +18,7 @@ public class Wolf : Enemy
     
     public Vector2Int AlphaToDefaultRatio; // 1,4
     public float AlphaRatio;
+    [field: SerializeField] public EventReference HowlSound { get; private set; }
     private void Awake() {
         if(isStray){
             GetComponent<Animator>().SetBool("isAlpha", true);
@@ -26,6 +28,7 @@ public class Wolf : Enemy
         }
     }
     private void Start() {
+        VirtualPreStart(); 
         AlphaRatio = AlphaToDefaultRatio[0]/(AlphaToDefaultRatio[1]*1.0f);
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
@@ -57,8 +60,8 @@ public class Wolf : Enemy
     }
     public void Howl(){
         
-        
-        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HowlRadius, FlareManager.EnemyMask);
+        AudioManager.PlayOneShot(HowlSound,transform.position);
+        Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HowlRadius, Flamey.EnemyMask);
 
         foreach(Collider2D col in AnimalAround){
             Enemy e = col.GetComponent<Enemy>();          
@@ -132,17 +135,17 @@ public class Wolf : Enemy
         base.Die(onKill);
     }
     override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            if(isStray){
-                GetComponent<Animator>().Play("StrayAttack");
-            }else if(isAlpha){
-                GetComponent<Animator>().Play("AlphaAttack");
+        if(!isStray){
+            if(isAlpha){
+                AttackAnimationName = "AlphaAttack";
+                WalkAnimationName = "AlphaRun";
             }else{
-                GetComponent<Animator>().Play("DefaultAttack");
+                AttackAnimationName = "DefaultAttack";
+                WalkAnimationName = "DefaultRun";
             }
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
         }
+        
+        return base.PlayAttackAnimation(delay);
     }
     
 

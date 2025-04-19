@@ -55,12 +55,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +92,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &906950301697203662
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +106,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -130,16 +127,46 @@ MonoBehaviour:
   Name: Skunk
   Damage: 1
   AttackDelay: 4
+  extraAtkSpeedDelay: 0
   AttackRange: 1.5
   Speed: 0.5
   Health: 750
   MaxHealth: 0
   Armor: 20
   ArmorPen: 0
+  WeigthClass: 2
   EmberDropRange: {x: 8, y: 14}
   Attacking: 0
   HitCenter: {fileID: 460543888474705580}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -933430240
+      Data2: 1243263678
+      Data3: -313727597
+      Data4: -816790301
+    Path: event:/Enemies/Wave - 2/BunnyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1186775037
+      Data2: 1301739505
+      Data3: -917553779
+      Data4: 1764581174
+    Path: event:/Enemies/Wave - 4/Fart
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -1312040467
+      Data2: 1324190427
+      Data3: 835325357
+      Data4: 1300813993
+    Path: event:/Enemies/Wave - 2/FasterLightSteps
+  slowfactor: 0
+  AttackAnimationName: Stun
+  WalkAnimationName: Walk
+  SlowSet: 0
   StunDuration: 0.5
 --- !u!61 &1335549605667769080
 BoxCollider2D:
@@ -149,7 +176,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334783470923775344}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -173,8 +199,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: -0.13447571, y: -0.8705404}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,6 +210,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 2.1420465, y: 0.6282833}
   m_EdgeRadius: 0
 --- !u!1 &937702961785621313
@@ -222,7 +248,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6416247183135540466
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -236,7 +262,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -291,8 +316,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -377,8 +400,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -5,17 +5,10 @@ using UnityEngine;
 public class Cloris : NPC
 {
     
-    protected override void CharacterLoad()
-    {
-        if(GameVariables.GetVariable("ClorisWardrobe") == 0){
-            GameVariables.SetVariable("ClorisWardrobe",1);
-            QueueDialogue(3);
-        }
-
-    }
+    
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("ClorisPresentation")==-1){
+        if(GameVariables.GetVariable("ClorisPresentation")==-1 && !hasAvailableDialogue()){
             StartDialogue(0);
             return;
         }
@@ -32,6 +25,22 @@ public class Cloris : NPC
 
     }
     public void UnlockCharacterSelect(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <color=#FFCC7C>style</color> your <color=#FFCC7C>campfire</color> affecting its <color=#FFCC7C>behaviour</color> and <color=#FFCC7C>environment</color>", 4);
+        GameVariables.SetVariable("ClorisPresentation", 1);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <style=\"LYellow\">style</style> your <style=\"LYellow\">campfire</style> affecting its <style=\"LYellow\">behaviour</style> and <style=\"LYellow\">environment</style>", 4);
     }
+
+    public void ShredDialogueCheckForCasino(){
+        if(GameVariables.GetVariable("CasinoReady")==1){
+            StartDialogue(16);
+        }else{
+            StartDialogue(15);
+        }
+    }
+
+    public void SkipCasinoUnlockQuest(){
+        GameVariables.UnlockQuest(46);
+        GameVariables.CompleteQuest(46);
+    }
+
+    
 }

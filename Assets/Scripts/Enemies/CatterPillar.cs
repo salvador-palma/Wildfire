@@ -6,6 +6,7 @@ public class CatterPillar : Enemy
 {
     
     private void Start() {
+        VirtualPreStart(); 
         flame = Flamey.Instance;
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed, 0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
@@ -29,6 +30,7 @@ public class CatterPillar : Enemy
         }
         
     }
+    
     
     
 }

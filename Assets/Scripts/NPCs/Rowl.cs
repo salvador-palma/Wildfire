@@ -32,7 +32,7 @@ public class Rowl : NPC
     }
 
     public void UnlockSkillTree(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "ROWL'S SKILL TREE", "You can now <color=#FFCC7C>unlock</color> and <color=#FFCC7C>upgrade</color> new abilities for your <color=#FFCC7C>campfire</color>", 3);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "ROWL'S SKILL TREE", "You can now <style=\"LYellow\">unlock</style> and <style=\"LYellow\">upgrade</style> new abilities for your <style=\"LYellow\">campfire</style>", 3);
        
     }
     [SerializeField] SkillTreeButton[] Unlockables;
@@ -40,6 +40,14 @@ public class Rowl : NPC
         MetaMenuUI.Instance.SkillTreeMenuToggle();
         Unlockables[unlockableID].Clicked();
     }
+
+    public void ShowAndUnlockUpgrade(int unlockableID){
+        SkillTreeManager.Instance.Upgrade(Unlockables[unlockableID].AbilityName, Unlock:true);
+        SkillTreeManager.Instance.InvokeUIReset();
+        ShowUnlockedUpgrade(unlockableID);
+    }
+
+   
 
     public void SetVariable(int value){
         GameVariables.SetVariable("SkillTreeReady", value);

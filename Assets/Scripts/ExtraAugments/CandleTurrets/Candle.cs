@@ -6,10 +6,8 @@ public class Candle : MonoBehaviour
 {
     
     float atkSpeedTimer;
-    [SerializeField] private GameObject candleFlare;
-    void UpdateStats(){
-
-    }
+    [SerializeField] private IPoolable candleFlare;
+    
 
     private void Update() {
         if(Flamey.Instance.current_homing == null){return;}
@@ -20,7 +18,8 @@ public class Candle : MonoBehaviour
                 atkSpeedTimer /= 6;
             }
             
-            Instantiate(candleFlare).GetComponent<CandleFlare>().setPosition(transform.position);
+            ObjectPooling.Spawn(candleFlare, new float[]{transform.position.x, transform.position.y});
+            //Instantiate(candleFlare).GetComponent<CandleFlare>().setPosition(transform.position);
 
         }else{
             atkSpeedTimer-=Time.deltaTime;

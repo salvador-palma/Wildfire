@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Linq;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Mines : MonoBehaviour
@@ -17,17 +19,19 @@ public class Mines : MonoBehaviour
     [SerializeField] TextMeshProUGUI CashOutTxt;
     [SerializeField] TextMeshProUGUI TotalEmberAmount;
     [SerializeField] TextMeshProUGUI GainEmberAmount;
+    [SerializeField] DynamicText TotalRunEmberAmount;
 
     [Header("Values")]
-    [SerializeField] private int bet;
+    [SerializeField] private long bet;
     [SerializeField] private int mineAmount;
     [SerializeField] private int[] mines;
     [SerializeField] private int clearedSlots;
     [SerializeField] private float multiplier;
     [SerializeField] private bool inGame;
+    [SerializeField] private long TotalRun;
     private void Start() {
         WageAmountText.text = "1000";
-
+        TotalRunEmberAmount.SetText("");
         TotalEmberAmount.text = SkillTreeManager.Instance.PlayerData.embers.ToString();
         WageAmountText.onValueChanged.AddListener(OnValueChanged);
     }
@@ -71,19 +75,27 @@ public class Mines : MonoBehaviour
         bet = int.Parse(WageAmountText.text);
         AddEmbersToSkillTree(-1 * bet);
         clearedSlots = 0;
-        mines = new int[mineAmount];
+       
         multiplier=0;
-        MultiplierTxt.text = "x1";
+        MultiplierTxt.text = "";
         CashOutTxt.text = bet.ToString();
+        
 
-        for (int i = 0; i < mineAmount; i++)
+        mines = Enumerable.Range(0, 25).ToArray();
+        
+        // Shuffle the numbers randomly
+        System.Random random = new System.Random();
+        for (int i = mines.Length - 1; i > 0; i--)
         {
-            int newValue = UnityEngine.Random.Range(0, 25);
-            while(mines.Contains(newValue)){
-                newValue = UnityEngine.Random.Range(0, 25);
-            }
-            mines[i] = newValue;
+            int j = random.Next(i + 1);
+            // Swap elements at index i and j
+            int temp = mines[i];
+            mines[i] = mines[j];
+            mines[j] = temp;
         }
+
+        // Return the first 'amount' numbers
+        mines = mines.Take(mineAmount).ToArray();
 
     }
 
@@ -92,7 +104,7 @@ public class Mines : MonoBehaviour
         foreach (Transform pot in grid)
         {
             pot.GetComponent<Animator>().SetTrigger("Down");
-            
+            pot.GetComponent<Button>().interactable = true;
             
             
         }
@@ -117,19 +129,31 @@ public class Mines : MonoBehaviour
 
     public void Clicked(int ID){
         grid.GetChild(ID).GetComponent<Animator>().ResetTrigger("Down");
+        grid.GetChild(ID).GetComponent<Button>().interactable = false;
         if(!inGame){return;}
         if(mines.Contains(ID)){
             grid.GetChild(ID).GetComponent<Animator>().Play("EaterPopUp");
-            Debug.Log("Lost: -" + bet + " Embers");
+            WageAmountText.text = Math.Min( int.Parse(WageAmountText.text), SkillTreeManager.Instance.PlayerData.embers).ToString();
             EndGame();
+            AudioManager.PlayOneShot(FMODEvents.Instance.FlowerWrong, transform.position);
         }else{
             grid.GetChild(ID).GetComponent<Animator>().Play("FlowerPopUp");
             InGamePanel.GetComponent<Animator>().SetTrigger("Right");
+
+            PlaySoundProgress();
             IncrementClearSlots();
         }
     }
 
-
+    private void PlaySoundProgress(){
+        
+        var instance = RuntimeManager.CreateInstance(FMODEvents.Instance.FlowerProgress);
+        
+        instance.setParameterByName("CorrectGuesses", Math.Clamp(clearedSlots/25f,0f,1f));
+        instance.start();
+        instance.release();
+        
+    }
     private void IncrementClearSlots()
     {
         clearedSlots++;
@@ -140,16 +164,27 @@ public class Mines : MonoBehaviour
     }
     public void Cashout(){
         Debug.Log("Won: +" + Math.Round(bet*multiplier) + " Embers");
-        AddEmbersToSkillTree((int)Math.Round(bet*multiplier));
+        int value = (int)Math.Round(bet*multiplier);
+        AddEmbersToSkillTree(value);
+        if(GameVariables.hasQuest(8) && value>=100000){
+            Casino.Instance.CompleteQuestIfHasAndQueueDialogue(8, "Gyomyo", 11);
+            //PUT HERE CASINO QUEST UNLOCKABLE //TO GYOMYO 11
+        }
+
         EndGame();
     }
 
     private void EndGame(){
         UpdateSetupUI(false);
+        foreach (Transform pot in grid)
+        {
+
+            pot.GetComponent<Button>().interactable = false;
+        }
         inGame = false;
     }
 
-    public void AddEmbersToSkillTree(int n){
+    public void AddEmbersToSkillTree(long n){
         GainEmberAmount.text = (n < 0 ? "" : "+") + n.ToString();
         if(n>0){
             GainEmberAmount.color = new Color(1, .67f, 0);
@@ -157,8 +192,10 @@ public class Mines : MonoBehaviour
             GainEmberAmount.color = new Color(.89f, .36f, .3f);
         }
         SkillTreeManager.Instance.AddEmbers(n);
+       
         GetComponent<Animator>().Play("GainEmbers");
-        
+        TotalRun += n;
+
     }   
     public void UpdateEmberAmount(){
 
@@ -168,11 +205,20 @@ public class Mines : MonoBehaviour
         speed = Math.Max(10, (int)(Math.Abs(cur-obj)/100f));
         dir = cur < obj ? 1 : -1;
         TextOn= true;
+
+        if(TotalRun<0){
+            TotalRunEmberAmount.SetText("You've lost {0} Embers in total", new string[]{TotalRun.ToString()});
+        }else if(TotalRun>0){
+            TotalRunEmberAmount.SetText("You've gained +{0} Embers in total", new string[]{TotalRun.ToString()});
+        }else{
+            TotalRunEmberAmount.SetText("");
+        }
+        
         
     }
 
-    public int cur;
-    public int obj;
+    public long cur;
+    public long obj;
     public float interval = .0001f;
     public float intervalTimer = .0001f;
     public int speed = 10;
@@ -184,6 +230,7 @@ public class Mines : MonoBehaviour
                 intervalTimer = interval;
                 cur+=dir*speed;
                 TotalEmberAmount.text = cur.ToString();
+                AudioManager.PlayOneShot(FMODEvents.Instance.MoneyTick,transform.position);
             }else{
                 intervalTimer-=Time.deltaTime;
             }

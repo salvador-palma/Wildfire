@@ -11,6 +11,7 @@ public class Snake : Enemy
         GetComponent<Animator>().SetBool("isPoisonous", isPoisonous);
     }
     private void Start() {
+        VirtualPreStart(); 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -30,6 +31,7 @@ public class Snake : Enemy
     public override void Attack(){
         if(isPoisonous){
             flame.Poison(poisonTicks);
+            AudioManager.PlayOneShot(AttackSound, transform.position);
         }else{
             base.Attack();
         }
@@ -46,17 +48,6 @@ public class Snake : Enemy
     }
 
     
-    override protected IEnumerator PlayAttackAnimation(float delay){
-        while(Health>0){
-            if(isPoisonous){
-                GetComponent<Animator>().Play("EnemyAttackPoison");
-            }else{
-                GetComponent<Animator>().Play("EnemyAttack");
-            }
-            yield return new WaitForSeconds(delay);
-            yield return new WaitForSeconds(extraAtkSpeedDelay);
-        }
-    }
 
     
 }

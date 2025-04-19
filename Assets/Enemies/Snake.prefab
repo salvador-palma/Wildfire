@@ -55,12 +55,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,16 +106,46 @@ MonoBehaviour:
   Name: Snake
   Damage: 75
   AttackDelay: 1.5
+  extraAtkSpeedDelay: 0
   AttackRange: 1.55
   Speed: 0.6
   Health: 500
   MaxHealth: 500
   Armor: 15
   ArmorPen: 0.75
+  WeigthClass: 1
   EmberDropRange: {x: 11, y: 17}
   Attacking: 0
   HitCenter: {fileID: 1506912118527113692}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -1616057566
+      Data2: 1129247387
+      Data3: -824363641
+      Data4: -664606741
+    Path: event:/Enemies/Wave - 1/SnailDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 219428574
+      Data2: 1235000691
+      Data3: -1107100799
+      Data4: -340033276
+    Path: event:/Enemies/Wave - 3/HissAttaack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 704065730
+      Data2: 1221620695
+      Data3: -1503322448
+      Data4: -895136693
+    Path: event:/Enemies/Wave - 1/WormWalk
+  slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Run
+  SlowSet: 0
   isPoisonous: 0
   poisonTicks: 10
 --- !u!61 &6210020571764387631
@@ -128,7 +156,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625248559142276452}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -152,8 +179,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.11557251, y: -0.3962337}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,11 +190,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.9144098, y: 0.42731434}
   m_EdgeRadius: 0
 --- !u!95 &8235698115763876165
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,7 +209,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -223,7 +249,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4288281986112280625
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,7 +263,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -292,8 +317,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -409,8 +432,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

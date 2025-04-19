@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
+using FMOD.Studio;
 public class SquirrelFlying : Squirrel
 {
     [Range(0f,1f)] public float arenaLand;
@@ -10,14 +12,24 @@ public class SquirrelFlying : Squirrel
     public float flyingSpeedRatio;
 
     public Vector2 LandDest;
-    public float cos;
-    override protected void Start() {
 
+
+    public float cos;
+
+    [field: SerializeField] public EventReference FlySound { get; private set; }
+    [field: SerializeField] public EventReference LandSound { get; private set; }
+    EventInstance FlySoundInstance;
+
+    override protected void Start() {
+        VirtualPreStart(); 
         base.Start();
 
         Vector3 vectorAB = transform.position - Flamey.Instance.transform.position;
         cos = Math.Abs(Vector3.Dot(Vector3.right, vectorAB.normalized));
 
+
+        FlySoundInstance = AudioManager.CreateInstance(FlySound);
+        FlySoundInstance.start();
 
         LandDest =  Flamey.Instance.transform.position;
         LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
@@ -41,14 +53,19 @@ public class SquirrelFlying : Squirrel
         }
         
     }
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
     {
-        if(!(flying && source != null && source.Equals("Lava Pool"))){
-            base.Hitted(Dmg, TextID, ignoreArmor, onHit);   
+        if(!flying){
+            return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);   
         }
+        return 0;
     }
     public override bool canTarget(){return !flying;}
     private void Land(){
+        FlySoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FlySoundInstance.release();
+        AudioManager.PlayOneShot(LandSound,transform.position);
+
         flying = false;
         GetComponent<Animator>().SetTrigger("InGround");
     }

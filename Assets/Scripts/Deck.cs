@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Deck : MonoBehaviour
 {
     public static Deck Instance {get; set;}
-    [SerializeField] List<Augment> augments;
+    [SerializeField] public List<Augment> augments;
     [SerializeField] GameObject[] Slots;
     [SerializeField] GameObject SlotsParent;
     private Augment[] currentAugments;
@@ -31,6 +31,9 @@ public class Deck : MonoBehaviour
     public static event EventHandler RoundStart;
     public GameState gameState;
 
+    public List<Augment> inBuildAugments;
+
+    [SerializeField] float GoldAugmentProbability = 0.1f;
     
     private void Awake(){
        
@@ -55,6 +58,7 @@ public class Deck : MonoBehaviour
         refreshedAugments = new List<Augment>();
         PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
 
+        CheckBlackMarketItems();
 
     }
 
@@ -96,9 +100,9 @@ public class Deck : MonoBehaviour
     }
     public void ChangeSingular(Augment augment, GameObject slot, int i, bool forGamble = false){
 
-        slot.transform.Find("Title").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.Title;
+        slot.transform.Find("Title").GetComponent<DynamicText>().SetText(augment == null ? "" : augment.Title);
         slot.transform.Find("Icon").GetComponent<Image>().sprite = augment == null ? null : augment.icon;
-        slot.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = augment == null ? "" : augment.getDescription();
+        slot.transform.Find("Description").GetComponent<DynamicText>().SetText(augment == null ? "" : augment.getDescription());
         if(!forGamble){currentAugments[i] = augment;}
         
     }
@@ -114,6 +118,7 @@ public class Deck : MonoBehaviour
         
 
         ActivateAugment(currentAugments[i]);
+        
         
         refreshedAugments.Clear();
         currentAugments = new Augment[]{null,null,null};
@@ -139,6 +144,7 @@ public class Deck : MonoBehaviour
 
         filteredAugments = FilterAugments(isPrismaticRound, OnlyUnlockables);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
+        AudioManager.PlayOneShot(isPrismaticRound ? FMODEvents.Instance.PrismaticAugment : FMODEvents.Instance.DefaultAugment, transform.position);
         if(isPrismaticRound){GameUI.Instance.FillAll();}
         ChangeSlots();
         EnableRefreshes(!OnlyUnlockables);
@@ -230,7 +236,7 @@ public class Deck : MonoBehaviour
     }
 
     public void resetPhaseAugmentTier(){
-        PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, 0.33f));
+        PhaseTiers = Distribuitons.sillyGoose(4, Distribuitons.RandomBinomial(4, GoldAugmentProbability));
         currPhase = 0;
     }
     public void AddAugmentClass(List<string> str){
@@ -285,17 +291,14 @@ public class Deck : MonoBehaviour
     }
     private void ClearRemainderObjects(object sender, EventArgs e)
     {
-        int i = 0;
-        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Flare")){
-            if(!g.activeInHierarchy && g.GetComponent<Flare>().FlareSpot != null){
-                Destroy(g.GetComponent<Flare>().FlareSpot);
-                Debug.Log("Destroyed " + i);
-                i++;
-            }
-             
-        }
+        
         foreach(GameObject g in GameObject.FindGameObjectsWithTag("Prop")){
-            Destroy(g);
+            IPoolable p = g.GetComponent<IPoolable>();
+            if(p!=null){
+                p.UnPool();
+            }else{
+                Destroy(g);
+            }
              
         }
     }
@@ -315,22 +318,36 @@ public class Deck : MonoBehaviour
     public IEnumerator ExtraOutroSlotsAfter(){
         yield return new WaitForSeconds(2);
         if(GamblingStack.Count() == 0){
+            
+
             EnemySpawner.Instance.Paused = false;
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
+            if(gambleInRound >= 30 && GameVariables.hasQuest(29)){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(29,"Gyomyo", 14);
+            }
+            //Debug.Log("Gambled: " + gambleInRound);
+            
+            gambleInRound=0;
         }else{
-            Debug.Log("Getting Stack");
+            
             
             Augment a = GamblingStack.First();
             GamblingStack.Remove(a);
             ActivateAugment(a);
-            Debug.Log("Over Stack");
+            
+            
         }
     }
 
-    
+    int gambleInRound = 0;
     public void Gamble(int amount, Tier tier, string original_name){
-        
+
+        if(gambleInRound==0 && Gambling.Instance != null){
+            Gambling.Instance.SpinTheWheel();
+        }
+
+        gambleInRound+=amount;
         EnemySpawner.Instance.Paused = true;
         Augment[] result = new Augment[amount];
         for(int i = 0; i < amount; i++){
@@ -372,6 +389,13 @@ public class Deck : MonoBehaviour
             vessel.GetComponent<Image>().sprite = back;
             vessel.transform.Find("Shadow").GetComponent<Image>().sprite = sprite;
         }
+    }
+
+
+    private void CheckBlackMarketItems(){
+        string[] AnvilTypes = new string[]{"Wood Anvil","Stone Anvil","Bronze Anvil","Sturdy Anvil","Deluxe Anvil","Royal Anvil","Star Forger"};
+        foreach(string Anvil in AnvilTypes){if(Item.has(Anvil)){GoldAugmentProbability+=0.05f;}}
+        Debug.Log("Gold Probability: " + GoldAugmentProbability);
     }
     
 

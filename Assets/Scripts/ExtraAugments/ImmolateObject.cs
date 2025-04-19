@@ -36,6 +36,7 @@ public class ImmolateObject : MonoBehaviour
         Destroy(gameObject);
     }
     public void ImmolateEnemy(int type, Enemy e){
+        if(!e.canTarget()){return;}
         switch(type){
             case -1: 
                 e.Hitted(dmg, 0, ignoreArmor:false, onHit:false);
@@ -52,7 +53,9 @@ public class ImmolateObject : MonoBehaviour
                 e.Hitted(dmg, 22, ignoreArmor:false, onHit:false);
                 break;
             case 3: //AIR
-                e.Stun(0.5f);
+                //e.Stun(0.5f);
+                
+                e.KnockBack(Flamey.Instance.transform.position, false, .75f);
                 e.Hitted(dmg, 23, ignoreArmor:false, onHit:false);
                 break;
         }

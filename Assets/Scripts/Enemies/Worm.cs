@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class Worm : Enemy
@@ -17,14 +19,21 @@ public class Worm : Enemy
     public float initialDistance;
     public  Vector3 initialPos;
     Transform pathEnd;
+
+    [field: SerializeField] public EventReference PopOutSound { get; private set; }
+    [field: SerializeField] public EventReference DigSound { get; private set; }
+    EventInstance DigSoundInstance;
     void Start()
     {
-
+        VirtualPreStart(); 
 
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         base.flame = Flamey.Instance;
+
+        DigSoundInstance = AudioManager.CreateInstance(DigSound);
+        DigSoundInstance.start();
         
         Speed =  Distribuitons.RandomTruncatedGaussian(0.02f,Speed,0.075f);
         if(EnemySpawner.Instance.current_round >= 60){
@@ -84,10 +93,15 @@ public class Worm : Enemy
     }
 
     IEnumerator DigUp(){
+        DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DigSoundInstance.release();
+        AudioManager.PlayOneShot(PopOutSound,transform.position);
+
         isUnderground = false;
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");
         SpawnHole();
+        
         yield return new WaitForSeconds(diggingDelay);
         diggingUp= false;
         lineRenderer.GetComponent<Animator>().Play("TrailOff");
@@ -108,19 +122,36 @@ public class Worm : Enemy
         if(isUnderground){return;}
         base.OnMouseDown();
     }
+    public override void Die(bool onKill = true)
+    {
+        // if(isUnderground){
+        //     DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //     DigSoundInstance.release();
+        // }
+        base.Die(onKill);
+    }
+    public void OnDestroy()
+    {
+        if(isUnderground){
+            DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            DigSoundInstance.release();
+        }
+        
+    }
 
     public override bool canTarget()
     {
         return !isUnderground && !diggingUp;
     }
 
-    public override void Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null)
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
     {
         if(!isUnderground)
-        { base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);}
+        { return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);}
         else if(isUnderground && SkillTreeManager.Instance.getLevel("Lava Pool") >= 1 && source != null && source.Equals("Lava Pool")){
-        base.Hitted(Dmg, TextID, ignoreArmor, onHit, except);
+         return base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
         }
+        return 0;
     }
 
     public override void CheckFlip()

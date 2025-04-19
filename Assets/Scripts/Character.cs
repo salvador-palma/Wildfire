@@ -10,28 +10,41 @@ using Image = UnityEngine.UI.Image;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+[Serializable]
+public enum OSTType
+{
+    DEFAULT, CYBER, EERIE, ADVENTURE, SPACE, CASINO
+}
 public class Character : MonoBehaviour
 {
     [Serializable]
     public class CharacterData{
         public string Name;
         public string AnimationBool;
+
+        [Header("Abilities")]
         public string AbilityName;
         [TextArea] public string AbilityDescription;
+
+        [Header("Appearance")]
         public Sprite BodyBack;
         public Sprite BodyFront;
         public Sprite Prop;
         public Sprite Face;
         public Color BodyBackColor;
         public Color BodyFrontColor;
+        [Header("Environment")]
         public GameObject Environment;
+        [SerializeField] public OSTType EnvironmentMusic;
         public bool Unlocked;
         public string AbilityToSkillTree;
+        [Header("Hierarchy")]
         public string Subtype;
         public string Supratype;
         
           
     }
+    
     
     public static Character Instance { get; private set; }
     public bool InMenu;
@@ -44,6 +57,7 @@ public class Character : MonoBehaviour
     private void Awake() {
         if(Instance==null){
             Instance = this;
+            
         }
         
         ReadData();
@@ -55,6 +69,7 @@ public class Character : MonoBehaviour
             }
         }
         SkillTreeManager.Instance.treeReset += resetCharacter;
+        UpdateCharacterInfo(characterDatas[currentDisplayedCharacter]);
         
     }
 
@@ -62,11 +77,13 @@ public class Character : MonoBehaviour
     // *********************************************************************************************** //
     // *************************************** IN-GAME SECTION *************************************** //
     // *********************************************************************************************** //
-    public void SetupCharacter(string abilty_name, UnityAction ExtraSetup = null){
-        SetupCharacter(characterDatas.Where(e => e.AbilityName == abilty_name).First(), ExtraSetup);
+    public void SetupCharacter(string abilty_name){
+        SetupCharacter(characterDatas.Where(e => e.AbilityName == abilty_name).First());
     }
-    public void SetupCharacter(CharacterData type, UnityAction ExtraSetup = null){
+    
+    public void SetupCharacter(CharacterData type){
         if(type == null){
+            Debug.Log("ERRORE NULL");
             throw new ArgumentNullException("Type cannot be null");
         }
         if(active != 0){
@@ -80,8 +97,6 @@ public class Character : MonoBehaviour
         GameUI.Instance.UpdateProfileCharacter();
         if(EnemySpawner.Instance.current_round <= 0){
             SetupActiveLooks();
-            if(ExtraSetup != null){ExtraSetup();}
-            
         }else{
             EnemySpawner.Instance.Paused = true;
             GameUI.Instance.playCharacterTransition();
@@ -100,6 +115,12 @@ public class Character : MonoBehaviour
         SetupSkin(characterDatas[active]);
         SetupEnvironment(characterDatas[active]);
         SetupBehaviour();
+        SetupMusic(characterDatas[active].EnvironmentMusic);
+    }
+
+    private void SetupMusic(OSTType music)
+    {
+        AudioManager.Instance.SetAmbienceParameter("Arena", (int)music);
     }
 
     public string getDescription(string ability_name = null){
@@ -377,6 +398,12 @@ public class Character : MonoBehaviour
                 }
                 KrakenSlayer.Instance.SpawnExtraAssets();
                 break;
+            case "Gambling":
+                if(Gambling.Instance == null && SkillTreeManager.Instance.getLevel("Gambling") >= 0){
+                    Flamey.Instance.addNotEspecificEffect(new Gambling());
+                }
+                Gambling.Instance.SpawnExtraAssets();
+                break;
             default:
                 Debug.Log("No Character Found: " + characterDatas[active].AbilityName);break;
             
@@ -388,12 +415,17 @@ public class Character : MonoBehaviour
     [Header("Character Select UI")]
     public GameObject CharacterSelectContainer;
     public GameObject CharacterSubTypeContainer;
-    public TextMeshProUGUI CharacterName;
-    public TextMeshProUGUI SkillDescription;
+    public DynamicText CharacterName;
+    public DynamicText SkillDescription;
     [SerializeField] private int currentDisplayedCharacter = 0;
     [SerializeField] private GameObject MainFlameVessel;
     private void SetupCharacterSelectOptions(){
         
+        foreach (Transform item in CharacterSelectContainer.transform)
+        {
+            if(item.gameObject.activeInHierarchy){Destroy(item.gameObject);}   
+        }
+
         GameObject template = CharacterSelectContainer.transform.GetChild(0).gameObject;
         foreach (CharacterData character in characterDatas)
         {
@@ -514,12 +546,13 @@ public class Character : MonoBehaviour
 
     }
     private void UpdateCharacterInfo(CharacterData data){
+        
         if(data.Unlocked){
-            CharacterName.text = data.Name;
-            SkillDescription.text = "<size=100%><color=#FFFF00>- Ability -</color><size=80%><br>" + data.AbilityDescription;
+            CharacterName.SetText(data.Name);
+            SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>{0}", new string[]{data.AbilityDescription});
         }else{
-            CharacterName.text = "???";
-            SkillDescription.text = "<size=100%><color=#FFFF00>- Ability -</color><size=80%><br>???";
+            CharacterName.SetText("???");
+            SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>???");
         }
         
     }
@@ -550,13 +583,14 @@ public class Character : MonoBehaviour
             TransformVesselToCharacter(CharacterSelectContainer.transform.GetChild(offset+1).gameObject, characterDatas[currentDisplayedCharacter].AbilityName);
             CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition = new Vector2(344.5f + (-155.10608f) * offset, CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition.y); 
             UpdateCharacterInfo(characterDatas[currentDisplayedCharacter]);
-            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            //CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
 
 
         }else{
             PlayerPrefs.SetInt("Character", active);
-            CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(4000, 0);
+            //CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(4000, 0);
         }
+        MetaMenuUI.Instance.ToggleMenu(CharacterSelectPanel);
     }
     public void WritingData(){
         SerialList<CharacterUnlockedData> unlockList = new SerialList<CharacterUnlockedData>(){list=new List<CharacterUnlockedData>()};
@@ -579,7 +613,7 @@ public class Character : MonoBehaviour
         }
     }
     private void CreateFile(){
-        string str = "{\"active\":0,\"list\":[{\"Name\":\"Flame\",\"Unlocked\":true},{\"Name\":\"Double Faced\",\"Unlocked\":false},{\"Name\":\"Rose Warrior\",\"Unlocked\":false},{\"Name\":\"Sir Flareington\",\"Unlocked\":false},{\"Name\":\"Fire Bee\",\"Unlocked\":false},{\"Name\":\"Von Van Pyre\",\"Unlocked\":false},{\"Name\":\"Ice Cube\",\"Unlocked\":false},{\"Name\":\"Echo\",\"Unlocked\":false},{\"Name\":\"Ash Pyre\",\"Unlocked\":false},{\"Name\":\"Tesla Coil\",\"Unlocked\":false},{\"Name\":\"Bomber\",\"Unlocked\":false},{\"Name\":\"King Ghoul\",\"Unlocked\":false},{\"Name\":\"Captain Ember Teach\",\"Unlocked\":false},{\"Name\":\"Mt. Vesuvius\",\"Unlocked\":false},{\"Name\":\"Mt. Everest\",\"Unlocked\":false},{\"Name\":\"Flora\",\"Unlocked\":false},{\"Name\":\"Blaze Brigade\",\"Unlocked\":false},{\"Name\":\"Powered Up\",\"Unlocked\":false},{\"Name\":\"Ankh-Ra\",\"Unlocked\":false},{\"Name\":\"Pheonix\",\"Unlocked\":false},{\"Name\":\"Monk\",\"Unlocked\":false},{\"Name\":\"Fire Monk\",\"Unlocked\":false},{\"Name\":\"Water Monk\",\"Unlocked\":false},{\"Name\":\"Air Monk\",\"Unlocked\":false},{\"Name\":\"Earth Monk\",\"Unlocked\":false},{\"Name\":\"Azureoth\",\"Unlocked\":false},{\"Name\":\"Orbital\",\"Unlocked\":false},{\"Name\":\"Mercury\",\"Unlocked\":false},{\"Name\":\"Venus\",\"Unlocked\":false},{\"Name\":\"Earth\",\"Unlocked\":false},{\"Name\":\"Mars\",\"Unlocked\":false},{\"Name\":\"Jupiter\",\"Unlocked\":false},{\"Name\":\"Saturn\",\"Unlocked\":false},{\"Name\":\"Uranus\",\"Unlocked\":false},{\"Name\":\"Neptune\",\"Unlocked\":false},{\"Name\":\"Zeus\",\"Unlocked\":false}]}";
+        string str = "{\"active\":0,\"list\":[{\"Name\":\"Flame\",\"Unlocked\":true},{\"Name\":\"Double Faced\",\"Unlocked\":false},{\"Name\":\"Rose Warrior\",\"Unlocked\":false},{\"Name\":\"Sir Flareington\",\"Unlocked\":false},{\"Name\":\"Fire Bee\",\"Unlocked\":false},{\"Name\":\"Von Van Pyre\",\"Unlocked\":false},{\"Name\":\"Ice Cube\",\"Unlocked\":false},{\"Name\":\"Echo\",\"Unlocked\":false},{\"Name\":\"Ash Pyre\",\"Unlocked\":false},{\"Name\":\"Tesla Coil\",\"Unlocked\":false},{\"Name\":\"Bomber\",\"Unlocked\":false},{\"Name\":\"King Ghoul\",\"Unlocked\":false},{\"Name\":\"Captain Ember Teach\",\"Unlocked\":false},{\"Name\":\"Mt. Vesuvius\",\"Unlocked\":false},{\"Name\":\"Mt. Everest\",\"Unlocked\":false},{\"Name\":\"Flora\",\"Unlocked\":false},{\"Name\":\"Blaze Brigade\",\"Unlocked\":false},{\"Name\":\"Powered Up\",\"Unlocked\":false},{\"Name\":\"Ankh-Ra\",\"Unlocked\":false},{\"Name\":\"Pheonix\",\"Unlocked\":false},{\"Name\":\"Monk\",\"Unlocked\":false},{\"Name\":\"Fire Monk\",\"Unlocked\":false},{\"Name\":\"Water Monk\",\"Unlocked\":false},{\"Name\":\"Air Monk\",\"Unlocked\":false},{\"Name\":\"Earth Monk\",\"Unlocked\":false},{\"Name\":\"Azureoth\",\"Unlocked\":false},{\"Name\":\"Orbital\",\"Unlocked\":false},{\"Name\":\"Mercury\",\"Unlocked\":false},{\"Name\":\"Venus\",\"Unlocked\":false},{\"Name\":\"Earth\",\"Unlocked\":false},{\"Name\":\"Mars\",\"Unlocked\":false},{\"Name\":\"Jupiter\",\"Unlocked\":false},{\"Name\":\"Saturn\",\"Unlocked\":false},{\"Name\":\"Uranus\",\"Unlocked\":false},{\"Name\":\"Neptune\",\"Unlocked\":false},{\"Name\":\"Zeus\",\"Unlocked\":false},{\"Name\":\"Clown\",\"Unlocked\":false}]}";
         File.WriteAllText(Application.persistentDataPath +"/characters.json", str);        
     }
     
@@ -587,20 +621,39 @@ public class Character : MonoBehaviour
 
         return character_name==null ? characterDatas[active].Unlocked : characterDatas.First(c=>c.Name==character_name).Unlocked;
     }
-    public void Unlock(string character_name = null){
-        if(character_name==null){
-            characterDatas[active].Unlocked = true;
-        }else{
-            characterDatas.First(c=>c.Name==character_name).Unlocked = true;
-        }
-        if(GameVariables.GetVariable("ClorisWardrobe") == -1){
-            GameVariables.SetVariable("ClorisWardrobe", 0);
-            
-
-        }
+    public void Unlock(string character_name){
+        
+        if(!characterDatas.Any(c=>c.Name==character_name)){Debug.LogError("Character " + character_name + " not found"); return;}
+        
+        CharacterUnlockPopUp(characterDatas.First(c=>c.Name==character_name));
+        characterDatas.First(c=>c.Name==character_name).Unlocked = true;
+        
         WritingData();
+
+        //TEMPORARY CLORIS WARDROBE UNLOCK
+        if(GameVariables.GetVariable("ClorisWardrobe")==-1){
+            QuestBoard.Instance.Cloris.QueueDialogue(9);
+            GameVariables.SetVariable("ClorisWardrobe",1);
+        }
+
+        SetupCharacterSelectOptions();
+
+        
     }
-    
+
+    private void CharacterUnlockPopUp(CharacterData characterData)
+    {
+        UnityAction postAction = null;
+        if(characterData.Name == "Saturn"){
+            postAction = () => QuestBoard.PopUpPlanetsQuest();
+            Debug.Log("Assigned");
+        }
+        
+        
+        
+        MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction);
+    }
+
     public void SyncSkillTreeManagerToCharacterSelect(){
         int i=0;
         foreach (CharacterData character in characterDatas)
@@ -609,7 +662,7 @@ public class Character : MonoBehaviour
             if(character.AbilityToSkillTree==""){i++; continue;}
             if(SkillTreeManager.Instance.getLevel(character.AbilityToSkillTree)<0 && character.Unlocked){
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(true);
-                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").Find("Text").GetComponentInChildren<TextMeshProUGUI>().text = "Requires "+character.AbilityToSkillTree;
+                CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").Find("Text").GetComponentInChildren<DynamicText>().SetText("Requires {0}", new string[]{character.AbilityToSkillTree});
             }else{
                 CharacterSelectContainer.transform.GetChild(i+1).Find("Warning").gameObject.SetActive(false);
             }

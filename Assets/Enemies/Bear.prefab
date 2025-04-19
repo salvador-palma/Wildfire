@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -166,8 +164,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -258,12 +254,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -297,7 +291,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6394718655316393987
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -311,7 +305,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -333,18 +326,55 @@ MonoBehaviour:
   Name: Bear
   Damage: 100
   AttackDelay: 4
+  extraAtkSpeedDelay: 0
   AttackRange: 1.55
   Speed: 0.1
   Health: 5000
   MaxHealth: 5000
   Armor: 50
   ArmorPen: 0
+  WeigthClass: 3
   EmberDropRange: {x: 10, y: 15}
   Attacking: 0
   HitCenter: {fileID: 7760232499678238036}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: 273725323
+      Data2: 1293862752
+      Data3: -1770882425
+      Data4: 1810473218
+    Path: event:/Enemies/Wave - 3/HeavyDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1279178375
+      Data2: 1102804321
+      Data3: -152924248
+      Data4: -1448038744
+    Path: event:/Enemies/Wave - 4/Punch
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: -749705189
+      Data2: 1239339461
+      Data3: -1763333752
+      Data4: -516292172
+    Path: event:/Enemies/Wave - 3/HeavySteps
+  slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Walk
+  SlowSet: 0
   BearState: 0
   HealIncrement: 2500
+  <HoneySound>k__BackingField:
+    Guid:
+      Data1: 628708514
+      Data2: 1137972474
+      Data3: -331637589
+      Data4: 227427782
+    Path: event:/Enemies/Wave - 5/Honey
 --- !u!61 &4682848287145517872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -353,7 +383,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6574339739038551635}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -377,8 +406,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.16181827, y: -0.88249886}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,6 +417,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.7066059, y: 0.74932903}
   m_EdgeRadius: 0
 --- !u!1 &7405240458347192254
@@ -426,7 +455,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3649573971927122613
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -440,7 +469,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

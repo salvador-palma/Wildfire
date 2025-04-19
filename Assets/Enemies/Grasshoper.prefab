@@ -49,8 +49,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -141,12 +139,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,8 +190,9 @@ MonoBehaviour:
   Name: Grasshoper
   Damage: 20
   AttackDelay: 3
+  extraAtkSpeedDelay: 0
   AttackRange: 1
-  Speed: 0.3
+  Speed: 1.75
   Health: 100
   MaxHealth: 0
   Armor: 100
@@ -204,14 +201,39 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 3390616376177793989}
   inEffect: 0
-  centerPoint: {fileID: 0}
-  initialRadiusX: 9.39
-  initialRadiusY: 5.07
-  shrinkLimits: {x: 0.15, y: 0.2}
+  Stunned: 0
+  Shiny: 0
+  hitByShred: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -1368718033
+      Data2: 1145478184
+      Data3: -1443228540
+      Data4: -1076745068
+    Path: event:/Enemies/Wave - 1/BeatleDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1010124529
+      Data2: 1238923007
+      Data3: -1014038085
+      Data4: 1476812143
+    Path: event:/Enemies/Wave - 1/WormAttack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 253588601
+      Data2: 1145670827
+      Data3: 103909516
+      Data4: -1592733616
+    Path: event:/Enemies/Wave - 2/GrasshopperJump
+  slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Jump
+  SlowSet: 0
   direction: 1
   jumping: 0
   jumpTimer: 1
   MaxSpeed: 0
+  angleStep: 0.39
 --- !u!61 &7441892780136714138
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -220,7 +242,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974366352946084130}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -244,8 +265,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.2057023, y: -0.6602868}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,11 +276,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.2246342, y: 0.46117952}
   m_EdgeRadius: 0
 --- !u!95 &6137509204733114956
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -274,7 +295,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -315,7 +335,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2924439730258692311
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -329,7 +349,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -415,8 +434,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

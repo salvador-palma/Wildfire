@@ -2,29 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 public class Spider : Enemy
 {
     public Transform centerPoint;
-    public float initialRadiusX = 9.39f;
-    public float initialRadiusY = 5.07f;
 
-    public Vector2 shrinkLimits;
-    private float shrinkRate;
-
-    private float radiusX;
-    private float radiusY;
-    private float angle = 0f;
 
     public int direction = 1;
-    public bool rest;
-    public float MaxSpeed;
+   
+    
     // Start is called before the first frame update
     void Start()
     {
-        radiusX = initialRadiusX;
-        radiusY = initialRadiusY;
+        VirtualPreStart(); 
         centerPoint = Flamey.Instance.transform;
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
@@ -37,37 +29,47 @@ public class Spider : Enemy
             Speed *= (float) (Math.Pow(x, 2)/4000f) + 1f;
             Damage = (int)(Damage * (float) (Math.Pow(x, 2)/5000f) + 1f);
         }
-        MaxSpeed = Speed;
+        
         
         MaxHealth = Health;
 
         direction = Random.Range(0f, 1f) < 0.5f ? 1 : -1;
-        Vector3 relativePosition = transform.position - centerPoint.position;
-        angle = Mathf.Atan2(relativePosition.y, relativePosition.x);
-
-        shrinkRate = Random.Range(shrinkLimits[0], shrinkLimits[1]);
+        
     }
 
     // Update is called once per frame
     
     
+    [Range(0, (float)Math.PI*2)]
+    public float angleStep = 30f;
     float prevX;
     public override void Move(){
 
 
         if(Stunned){return;}
-        float x = centerPoint.position.x + Mathf.Cos(angle) * radiusX;
-        float y = centerPoint.position.y + Mathf.Sin(angle) * radiusY;
+
+        Vector2 hk = flame.transform.position;
+        Vector2 cv = HitCenter.position;
+
+        double g = Math.Atan2(cv.y - hk.y, cv.x - hk.x);
+        g = g < 0 ? g+2*Math.PI : g;
+        g += angleStep * direction;
+        int w = Math.PI/2 < g && g < 2*Math.PI - Math.PI/2 ? -1 : 1;
+
+        double r = Math.Sqrt(  Math.Pow(cv.x - hk.x, 2)/4f  + Math.Pow(cv.y - hk.y, 2));
+        double a = Math.Sqrt(4*r*r);
+        double b = r;
+
+        float nx = (float)(w*a*b/Math.Sqrt(b*b + a*a*Math.Pow(Math.Tan(g),2)));
+        float ny = (float)(nx*Math.Tan(g));
+
+        Vector2 dest = new Vector2(nx, ny);
 
         prevX = transform.position.x;
+        transform.position = Vector2.MoveTowards(transform.position, dest, Speed * (1-SlowFactor) * Time.deltaTime);
 
-        transform.position = new Vector3(x, y, transform.position.z);
 
 
-        angle += Speed * (1-SlowFactor) * direction * Time.deltaTime;
-        radiusX -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
-        radiusY -= (Speed/MaxSpeed) * shrinkRate * Time.deltaTime;
-        
         CheckFlip();
     }
 

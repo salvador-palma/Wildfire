@@ -35,7 +35,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8896245750480530923
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -49,7 +49,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -142,12 +141,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 95ceadf88f6e75342aee56ef10fbd058, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -195,6 +192,7 @@ MonoBehaviour:
   Name: Worm
   Damage: 15
   AttackDelay: 4
+  extraAtkSpeedDelay: 0
   AttackRange: 1
   Speed: 0.1
   Health: 75
@@ -205,15 +203,55 @@ MonoBehaviour:
   Attacking: 0
   HitCenter: {fileID: 1461669790290469661}
   inEffect: 0
+  Stunned: 0
+  Shiny: 0
+  <DeathSound>k__BackingField:
+    Guid:
+      Data1: -1616057566
+      Data2: 1129247387
+      Data3: -824363641
+      Data4: -664606741
+    Path: event:/Enemies/Wave - 1/SnailDie
+  <AttackSound>k__BackingField:
+    Guid:
+      Data1: 1010124529
+      Data2: 1238923007
+      Data3: -1014038085
+      Data4: 1476812143
+    Path: event:/Enemies/Wave - 1/WormAttack
+  <MovingSound>k__BackingField:
+    Guid:
+      Data1: 704065730
+      Data2: 1221620695
+      Data3: -1503322448
+      Data4: -895136693
+    Path: event:/Enemies/Wave - 1/WormWalk
+  slowfactor: 0
+  AttackAnimationName: EnemyAttack
+  WalkAnimationName: Walk
   DigUpDistance: 0.5
   diggingUp: 0
   isUnderground: 1
   diggingDelay: 2
-  undergroundSpeedMult: 2
+  undergroundSpeedMult: 10
   lineRenderer: {fileID: 2649043298861357707, guid: 453fcd68adda0b44bb47c14c7665708a, type: 3}
   TrailPrefab: {fileID: 6929577486150094573, guid: 453fcd68adda0b44bb47c14c7665708a, type: 3}
   initialDistance: 2.5
   initialPos: {x: 0, y: 0, z: 0}
+  <PopOutSound>k__BackingField:
+    Guid:
+      Data1: 992771918
+      Data2: 1266396134
+      Data3: 1355387546
+      Data4: 911041638
+    Path: event:/Enemies/Wave - 1/WormPopOut
+  <DigSound>k__BackingField:
+    Guid:
+      Data1: 578967634
+      Data2: 1223244131
+      Data3: -1546541935
+      Data4: -519614854
+    Path: event:/Enemies/Wave - 1/WormDig
 --- !u!61 &1832540349793850430
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,7 +260,6 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3152486904866567057}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -246,8 +283,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.026714265, y: -1.9673263}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,11 +294,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 1.7366439, y: 0.34056926}
   m_EdgeRadius: 0
 --- !u!95 &1537417323498773873
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -276,7 +313,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -362,8 +398,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -448,8 +482,6 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

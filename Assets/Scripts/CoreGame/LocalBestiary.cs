@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FMOD;
 using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
@@ -11,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 [System.Serializable]
 public class AnimalSaveData {
@@ -18,7 +20,8 @@ public class AnimalSaveData {
     public int DeathAmount;
     public int RetrievedRewards;
     public int ShinyCaptured;
-    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;ShinyCaptured=-1;}
+    public bool Repeled;
+    public AnimalSaveData(int ID, int DeathAmount){this.AnimalID =ID; this.DeathAmount = DeathAmount;ShinyCaptured=-1;Repeled=false;}
 }
 [System.Serializable]
 public class BestiarySaveData{
@@ -33,7 +36,6 @@ public class AnimalRunTimeData{
     public string name;    
     public Enemy enemy;
     public int Wave;
-    [TextAreaAttribute]public string description;
     public AnimalAbility[] abilities;
     public Material ShinyMaterial;
     public Vector2 IconSize; //left top
@@ -51,28 +53,32 @@ public class LocalBestiary : MonoBehaviour
     public static LocalBestiary INSTANCE;
     public static int AvailableClaims;
     string[] BestiaryTabs = new string[3]{"STATS","ABILITIES", "MILESTONES"};
-    public int[] milestones = new int[5]{100, 500, 1500, 5000, 15000};
+    public int[] milestones = new int[5]{100, 500, 2500, 10000, 50000};
     private int[] milestone_rewards = new int[5]{500, 1000, 2500, 7500, 20000};
     
     string BestiaryDisplayTab = "STATS"; //STATS, ABILITIES, MILESTONES
     public event EventHandler ClaimRewardEvent;
     private int lastID = -1;
+    [Header("Animals")]
     [SerializeField] List<AnimalRunTimeData> animals;
 
     [SerializeField] GameObject[] BestiaryPanels;
+
+    [Header("Milestones")]
     [SerializeField] Sprite[] Stars;
     [SerializeField] Color[] StarsColor;
-    [SerializeField] BestiarySaveData saved_milestones;
+    [SerializeField] public BestiarySaveData saved_milestones;
 
     //GENERAL
-    TextMeshProUGUI title;
+    DynamicText title;
     Image AnimalImage;
 
 
     //TABS
+    [Header("Tab References")]
     [SerializeField] Button RightButton;
     [SerializeField] Button LeftButton;
-    [SerializeField] TextMeshProUGUI tabTitle;
+    [SerializeField] DynamicText tabTitle;
     //STATS
     TextMeshProUGUI[] statLabels = new TextMeshProUGUI[8];
     //ABILITIES
@@ -84,28 +90,42 @@ public class LocalBestiary : MonoBehaviour
     Button claimRewardButton;
 
     //GRID RELATED
+    [Header("Grid References")]
     [SerializeField] GameObject SlotTemplate;
     [SerializeField] GameObject Container;
 
     [SerializeField] Transform InfoPanel;
 
+    [Header("Ban")]
+  
+    [SerializeField] int RepelLimit;
+    [SerializeField] int RepelAmount;
+
+    private bool InstanceInitialized;
+
     public void Awake(){
+        if(InstanceInitialized){return;}
+        InstanceInitialized=true;
         INSTANCE = this;
-        if(SceneManager.GetActiveScene().name == "Game"){
-            gameObject.SetActive(false);
-        }
+
+        
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
 
+        RightButton.onClick.RemoveAllListeners();
         RightButton.onClick.AddListener(()=>ChangeTab(1));
+        LeftButton.onClick.RemoveAllListeners();
         LeftButton.onClick.AddListener(()=>ChangeTab(-1));
 
         claimRewardButton.onClick.AddListener(()=>ClaimRewards(lastID));
 
         if(SceneManager.GetActiveScene().name == "Game"){
             BestiaryTabs = new string[2]{"STATS","ABILITIES"};
+            
         }
+        tabTitle.SetText(BestiaryDisplayTab);
+        
     }
     
     private void RetrieveReferences(){
@@ -121,7 +141,7 @@ public class LocalBestiary : MonoBehaviour
         statLabels[7] = BestiaryPanels[0].transform.Find("InputWave").GetComponentInChildren<TextMeshProUGUI>();
 
         //PROFILE
-        title = InfoPanel.Find("Title").GetComponent<TextMeshProUGUI>();
+        title = InfoPanel.Find("Title").GetComponent<DynamicText>();
         AnimalImage = InfoPanel.Find("BestiaryInfoImage").GetChild(1).GetComponent<Image>();
 
         //MILESTONES
@@ -135,6 +155,25 @@ public class LocalBestiary : MonoBehaviour
     }
 
     /* ===== BESTIARY SLOTS ===== */
+    public void UpdateSlots(){
+        
+        try{
+            
+            foreach (Transform item in Container.transform)
+            {
+                
+                if(item.gameObject.activeSelf){
+                    Destroy(item.gameObject);
+                }
+                
+            }
+        }catch(Exception e){
+            Debug.Log(e);
+            Debug.Log(e.StackTrace );
+        }
+        
+        InitSlots();
+    }
     private void InitSlots(){
         AvailableClaims=0;
         int i = 0;
@@ -148,8 +187,17 @@ public class LocalBestiary : MonoBehaviour
         GameObject newSlot = Instantiate(SlotTemplate,Container.transform);
         Transform newSlotImage = newSlot.transform.Find("Animal");
         RectTransform RT = newSlotImage.GetComponent<RectTransform>();
+
+        bool hasRepel = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == index).Repeled;
+        newSlot.transform.Find("Banned").gameObject.SetActive(hasRepel);
+        RepelAmount += hasRepel ? 1 : 0;
+
         ResizeImage();
         checkMilestoneProgress();
+
+
+        
+
         newSlot.SetActive(true);
 
         void ResizeImage(){
@@ -200,15 +248,20 @@ public class LocalBestiary : MonoBehaviour
         }
     }
     private void ChangeTab(int direction){
+        
         if(lastID==-1){return;}
         int currentIndex = Array.IndexOf(BestiaryTabs, BestiaryDisplayTab);
+        
         BestiaryPanels[currentIndex].SetActive(false);
         currentIndex+= direction;
         if(currentIndex<0){currentIndex=BestiaryTabs.Length -1;}
         if(currentIndex>=BestiaryTabs.Length){currentIndex=0;}
+        
         BestiaryPanels[currentIndex].SetActive(true);
+        
         BestiaryDisplayTab = BestiaryTabs[currentIndex];
-        tabTitle.text = BestiaryDisplayTab;
+        
+        tabTitle.SetText(BestiaryDisplayTab);
         UpdateCurrentTab(lastID);
 
     }
@@ -246,13 +299,23 @@ public class LocalBestiary : MonoBehaviour
 
         AnimalImage.sprite = animal.enemy.GetComponent<SpriteRenderer>().sprite;
         AnimalImage.material = null;
-        title.text = animal.name;
+        title.SetText(animal.name);
         RectTransform TRR = AnimalImage.GetComponent<RectTransform>();
         TRR.anchoredPosition = animal.IconPos;
         TRR.sizeDelta = animal.IconSize;
 
         int shiny_lvl = GetShinyProgress(ID);
         InfoPanel.Find("BestiaryInfoImage").GetChild(0).gameObject.SetActive(shiny_lvl >=0);
+
+        Transform Repel = InfoPanel.Find("BestiaryInfoImage").Find("Repel");
+        bool repeled = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID).Repeled;
+        if(RepelLimit > 0 && (RepelLimit != RepelAmount || repeled)){
+            Repel?.gameObject.SetActive(true);
+            Repel?.transform.GetChild(0).gameObject.SetActive(repeled);
+        }else{
+            Repel?.gameObject.SetActive(false);
+        }
+        
         
     }
     private void DisplayStats(int ID, TextMeshProUGUI[] labels){
@@ -294,13 +357,32 @@ public class LocalBestiary : MonoBehaviour
         {
             if(i <= abilities.Length - 1){
                 abilitiesContainer[i].GetComponentsInChildren<Image>()[1].sprite = abilities[i].icon;
-                abilitiesContainer[i].GetComponentInChildren<TextMeshProUGUI>().text = abilities[i].description;
+                abilitiesContainer[i].GetComponentInChildren<DynamicText>().SetText(abilities[i].description);
                 abilitiesContainer[i].SetActive(true);
             }else{
                 abilitiesContainer[i].SetActive(false);
             }
             
         }
+    }
+
+
+    public void UpdateBlackMarketItems(){
+        RepelLimit = new string[]{"Bug Repellent", "Animal Repellent"}.Count(e=> Item.has(e));
+    }
+    public void RepelAnimal(){
+        AnimalSaveData saveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == lastID);
+        if(saveData.Repeled){
+            saveData.Repeled = false;
+            RepelAmount--;
+            Container.transform.GetChild(lastID+1).Find("Banned").gameObject.SetActive(false);
+        }else if(RepelAmount < RepelLimit && !saveData.Repeled){
+            saveData.Repeled = true;
+            RepelAmount++;
+            Container.transform.GetChild(lastID+1).Find("Banned").gameObject.SetActive(true);
+        }
+        DisplayProfile(lastID);
+        WritingData();
     }
 
     public void ToggleShinyView(){
@@ -334,6 +416,34 @@ public class LocalBestiary : MonoBehaviour
         }
         return i;
     }
+    public int getMilestoneAmount(string name){
+        return getMilestoneAmount(animals.FindIndex(0, animals.Count(), a=>a.name == name));
+    }
+    public int getMilestoneAmountShiny(string name){
+        return getMilestoneAmountShiny(animals.FindIndex(0, animals.Count(), a=>a.name == name));
+    }
+    public int getMilestoneAmount(int ID){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
+        return animalSaveData.DeathAmount;
+    }
+    public int getMilestoneAmountShiny(int ID){
+        AnimalSaveData animalSaveData = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID);
+        if(animalSaveData==null || animalSaveData.DeathAmount == -1){return -1;}
+        return animalSaveData.ShinyCaptured;
+    }
+    public void UnlockView(string name){
+
+        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
+        saved_milestones.AddMilestone(ID , 1);
+        WritingData();
+    }
+    public void UnlockShiny(string name){
+
+        int ID = animals.FindIndex(0, animals.Count(), a=>a.name == name);
+        saved_milestones.AddMilestoneShiny(ID,1);
+        WritingData();
+    }
     private int GetShinyProgress(int ID){
         return saved_milestones.animals.SingleOrDefault(a => a.AnimalID == ID).ShinyCaptured;
     }
@@ -344,7 +454,6 @@ public class LocalBestiary : MonoBehaviour
         for (int i = claimed_rewards; i < rewards_capable_to_claim; i++)
         {
            total_rewards_in_embers += milestone_rewards[i];
-          
         }
         AvailableClaims--;
         saved_milestones.animals[AnimalToClaimID].RetrievedRewards = rewards_capable_to_claim;
@@ -357,16 +466,24 @@ public class LocalBestiary : MonoBehaviour
         ClaimRewardEvent?.Invoke(this, new EventArgs());
     }
     /* ===== API ===== */
-    public Enemy[] getRandomEnemyCombination(int phase, int amount){
+    public Enemy[] getRandomEnemyCombination(int phase, int amount, bool exclude_banned=false){
         AnimalRunTimeData[] result = new AnimalRunTimeData[amount];
+
         List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
+        List<AnimalRunTimeData> notRepeled = phaseAnimals.Where(e => !saved_milestones.animals[getEnemyID(e.enemy)].Repeled).ToList();
+
+        
 
         for (int i = 0; i < result.Length; i++)
         {
             AnimalRunTimeData picked;
             do{
+                if(notRepeled.Count() <= i){
+                    picked = notRepeled.Last();
+                    break;
+                }
+                picked = notRepeled[UnityEngine.Random.Range(0, notRepeled.Count())];
                 
-                picked = phaseAnimals[UnityEngine.Random.Range(0, phaseAnimals.Count())];
             }while(result.Contains(picked));
             result[i] = picked;
         }

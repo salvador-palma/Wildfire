@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using FMODUnity;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,37 +16,51 @@ using UnityEngine.UI;
 public class MetaMenuUI : MonoBehaviour
 {
     //Deug
+    [SerializeField] private GameObject MarketPanel;
+    [SerializeField] private Naal naal;
     [SerializeField] private GameObject BestiaryPanel;
     [SerializeField] private GameObject SkillTreePanel;
     [SerializeField] private GameObject CharacterSelectPanel;
+    [SerializeField] private GameObject SettingsSelectPanel;
     [SerializeField] public GameObject SkillTree;
     static public MetaMenuUI Instance;
     
 
-    [Header("Chat")]
-    [SerializeField] Animator ChatPanel;
-    [SerializeField] Image Profile;
-    [SerializeField] TextMeshProUGUI Message;
-    [SerializeField] Button[] Options;
-    [SerializeField] TextMeshProUGUI Name;
-
-    [Header("Chat DataBase")]
-    [SerializeField] Sprite[] AvatarBank;
-
     [Header("Unlockable")]
-    [SerializeField] TextMeshProUGUI[] UnlockableTexts;
+    [SerializeField] DynamicText[] UnlockableTexts;
     [SerializeField] Image UnlockableIcon;
     [SerializeField] Sprite[] Unlockables;
+
+
+    public event System.EventHandler NightFall;
+
+
     private void Awake() {
         Instance = this;
+        
         QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = -1;
+
+        int origin = PlayerPrefs.GetInt("Origin", -1);
+        if(origin == -1){
+            GetComponent<Animator>().Play("Intro");
+        }else{
+            PlayerPrefs.DeleteKey("Origin");
+            GetComponent<Animator>().Play("CurtainsOff");
+        }
+        
+
     }
     public void StartGame(){
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         SceneManager.LoadScene("Game");
+
     }
     public void PlayOutro(){
         GetComponent<Animator>().Play("Outro");
+    }
+    public void NatureToNightTransition(){
+        NightFall?.Invoke(this, new EventArgs());
     }
     
     public void SkillTreeMenuToggle(){
@@ -56,8 +72,31 @@ public class MetaMenuUI : MonoBehaviour
         
     }
 
+    public void SettingsMenuToggle(){
+        ToggleMenu(SettingsSelectPanel);   
+    }
+    public int SoundLayers = 0;
+    public bool ToggleMenu(GameObject panel){
+        Vector2 newPos = new Vector2(panel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        
+        SoundLayers += newPos.x <= 0? 1 : -1;
+        AudioManager.Instance.SetAmbienceParameter("OST_Volume", SoundLayers > 0 ? 0 : 1);
+        AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
+        
+        panel.GetComponent<RectTransform>().anchoredPosition = newPos;
+        return newPos.x <= 0;
+    }
+
     public void BestiaryMenuToggle(){
-        BestiaryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(BestiaryPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
+        bool state = ToggleMenu(BestiaryPanel);
+        if(state){LocalBestiary.INSTANCE.UpdateBlackMarketItems();}
+    }
+    public void MarketMenuToggle(){
+        ToggleMenu(MarketPanel);
+        if(GameVariables.GetVariable("JhatIntroduction") != 1){
+            naal.StartDialogue(2);
+        }
+
     }
  
     public void UpgradeButton(){
@@ -66,24 +105,25 @@ public class MetaMenuUI : MonoBehaviour
         
     }
     private IEnumerator currentCouroutine;
+    public Vector2 IdealPos;
     public void moveSkillTree(Transform buttonTr){
+        
+        
+        
         if(currentCouroutine!=null){StopCoroutine (currentCouroutine);}
         currentCouroutine = SmoothLerp (buttonTr);
         StartCoroutine (currentCouroutine);
     }
     
-    private IEnumerator SmoothLerp (Transform tr)
-    {
-        Vector3 Target = new Vector3(-3f,0,0);
-        
-        Transform button = tr.Find("Icon");
-        Vector2 direction = Target - button.position;
-        
-        
-        
+    private IEnumerator SmoothLerp (Transform buttonTr)
+    {        
         float elapsed = 0;
-        while(elapsed<2f && Vector3.Distance( button.position, Target) > .1f){
-            SkillTree.transform.position = (Vector2)SkillTree.transform.position + direction * Time.deltaTime;
+        RectTransform rt = SkillTree.GetComponent<RectTransform>(); 
+
+        while(elapsed<2f && Vector3.Distance( buttonTr.position, IdealPos) > .1f){
+
+            Vector2 dir = IdealPos - (Vector2)buttonTr.position;
+            rt.position = (Vector2)rt.position + dir * Time.deltaTime * 2f;
             elapsed+=Time.deltaTime;
             yield return null;
         }
@@ -100,6 +140,10 @@ public class MetaMenuUI : MonoBehaviour
 
             SkillTree.transform.localScale = new Vector2(v,v);
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            SettingsMenuToggle();
+        }
     }
 
     public bool SaveStateEnabled = true;
@@ -107,125 +151,56 @@ public class MetaMenuUI : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
         if(File.Exists(Application.persistentDataPath +"/gameState.json") && SaveStateEnabled){
             
-            StartChat();
-            ChatSingular("Do you wish to continue your previous unfinished run?",
-                            AvatarBank[0], "Rowl",
-                            new string[2]{"Yes", "No"},
-                            new UnityAction[2]{
-                                new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 1); EndChat(); PlayOutro();}),
-                                new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 0); GameState.Delete(); EndChat(); PlayOutro();})
+            Chat.Instance.StartChat();
+            Chat.Instance.ChatSingular("Do you wish to continue your previous unfinished run?",
+                            Chat.Instance.AvatarBank[0], name:"Rowl",
+                            optionTxt:new string[2]{"Yes", "No"},
+                            optionAction:new UnityAction[2]{
+                                new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 1); Chat.Instance.EndChat(); PlayOutro();}),
+                                new UnityAction(()=>{PlayerPrefs.SetInt("PlayerLoad", 0); GameState.Delete(); Chat.Instance.EndChat(); PlayOutro();})
                             });
         }else{
+            
             PlayOutro();
         }
     }
 
     
-    public void StartChat(){
+    
+
+    public void GoCasino(){
+        SceneManager.LoadScene("Casino");
+    }
+    private UnityAction afterUnlock;
+    public void UnlockableScreen(string title, string name, string description, int iconID, UnityAction afterUnlock=null){
         
-        ChatPanel.gameObject.SetActive(true);
-        ChatPanel.GetComponent<Animator>().Play("Intro");
+        UnlockableScreen(title, name, description, Unlockables[iconID], afterUnlock);
     }
-    public void EndChat(){
-        ChatPanel.GetComponent<Animator>().Play("Outro");
-        Message.text = "";
-        Array.ForEach(Options, e => e.gameObject.SetActive(false));
-    }
-    public void DeactivateChat(){
-        ChatPanel.gameObject.SetActive(false);
-    }
-    private void ChatSingular(string msg,Sprite avatar, string name = null, string[] optionTxt = null, UnityAction[] optionAction = null){
-        
-        Name.text = name;
-        Message.text = "";
-        Profile.sprite = avatar;
-
-        if(optionTxt!=null){
-            for(int i =0; i < optionTxt.Length; i++){
-                Options[i].GetComponentInChildren<TextMeshProUGUI>().text = optionTxt[i];
-                Options[i].onClick.RemoveAllListeners();
-                Options[i].onClick.AddListener(optionAction[i]);
-            }
-        }
-        
-        StartCoroutine(ShowTextTimed(msg, optionTxt!=null));
-    }
-    public IEnumerator ShowTextTimed(string msg, bool withOptions){
-        string formatting_buffer = "";
-        foreach(char c in msg){
-            if(triggerNext>0){
-                Message.text = msg;
-                break;
-            }
-            if(c=='<' || formatting_buffer != ""){
-                formatting_buffer += c;
-                if(c=='>'){
-                    Message.text += formatting_buffer;
-                    formatting_buffer = "";
-                }
-                
-            }else{  
-                Message.text += c;
-                switch(c){
-                    case '.':
-                    case '!':
-                    case '?':
-                        yield return new WaitForSeconds(0.1f);
-                        break;
-                    case ',':
-                        yield return new WaitForSeconds(0.05f);
-                        break;
-                    case ' ':
-                        yield return new WaitForSeconds(0.02f);
-                        break;
-                    default:
-                        yield return new WaitForSeconds(0.01f);
-                        break;
-                }
-            }
-        }
-        
-        Array.ForEach(Options, e => e.gameObject.SetActive(withOptions));
-        triggerNext=1;
-        yield break;
-    }
-
-
-    int triggerNext;
-    public void ClickedChatPanel(){
-        triggerNext++;
-    }
-    public IEnumerator StartDialogue(Dialogue[] dialogue, string defaultName= null, UnityEvent after = null){
-        StartChat();
-        Name.text = defaultName;
-        Message.text = "";
-        foreach (Dialogue d in dialogue)
-        {   
-            ChatSingular(d.message, d.avatar, d.Name == null || d.Name == "" ? defaultName : d.Name);
-            yield return new WaitUntil(() => triggerNext >= 2);
-            ChatPanel.GetComponent<Animator>().SetTrigger("Switch");
-
-            triggerNext = 0;
-        }
-        EndChat();
-        if(after != null){
-            after.Invoke();
-        }
-    }
-
-
-
-    public void UnlockableScreen(string title, string name, string description, int iconID){
-        UnlockableTexts[0].text = title;
-        UnlockableTexts[1].text = name;
+    public void UnlockableScreen(string title, string name, string description, Sprite icon, UnityAction afterUnlock=null){
+        this.afterUnlock = afterUnlock;
+        AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 0);
+        AudioManager.PlayOneShot(FMODEvents.Instance.UnlockedEffect, transform.position);
+        UnlockableTexts[0].SetText(title);
+        UnlockableTexts[1].SetText(name);
         UnlockableTexts[2].SetText(description);
-        UnlockableIcon.sprite = Unlockables[iconID];
-        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOn");
+        UnlockableIcon.sprite = icon;
+        UnlockableIcon.transform.parent.parent.GetComponent<Animator>().Play("UnlockableOn");
 
     }
+    
     public void UnlockOff(){
-        UnlockableIcon.transform.parent.GetComponent<Animator>().Play("UnlockableOff");
+        AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 1);
+        UnlockableIcon.transform.parent.parent.GetComponent<Animator>().Play("UnlockableOff");
+        Invoke("AfterUnlock", 1f);
     }
+    public void AfterUnlock(){
+        afterUnlock?.Invoke();
+    }
+
+
+    public void QuitGame(){
+        Application.Quit();
+    }   
 
 }
 

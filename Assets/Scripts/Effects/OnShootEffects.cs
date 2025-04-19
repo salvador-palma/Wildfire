@@ -18,7 +18,7 @@ public class SecondShot : OnShootEffects{
 
 
     public static SecondShot Instance;
-    public bool maxed;
+    
     public float perc;
 
     public int currentTargetingOption;
@@ -83,18 +83,23 @@ public class SecondShot : OnShootEffects{
         secondaryTarget = Flamey.Instance.getRandomHomingEnemy();
     }
     private void RemoveUselessAugments(){
-        if(perc > 1f){
-            perc = 1f;
+        if(perc >= 1f){
+            perc = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    private void CheckMaxed(){
-        if(perc >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Multicaster");
+
+        if(GameVariables.hasQuest(16) && perc>=1f && BurstShot.Instance != null && BurstShot.Instance.interval <=10){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
+
+        
+        if(GameVariables.hasQuest(25) && perc>=1 && Flamey.Instance.atkSpeed>=12f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
+        }
+        
     }
+   
     public bool addList(){
         return Instance == this;
     }
@@ -113,9 +118,9 @@ public class SecondShot : OnShootEffects{
     {
         return "Whenever you fire a shot, there's a chance to fire an <color=#FFCC7C>extra one</color>. Extra shots will <color=#FF5858>not</color> count towards <color=#FFFF00>Multicaster</color> or <color=#FFFF00>Burst Shot Effects</color>";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%)<br>", Mathf.Round(perc*100));
+        return new string[]{"Chance: {0}% (Max. 100%)<br>", Mathf.Round(perc*100).ToString()};
     }
     public string getIcon()
     {
@@ -139,6 +144,7 @@ public class BurstShot : OnShootEffects{
     
     public int currentTargetingOption;
 
+    private int ExtraBurstShots = 0;
     public GameObject optionMenu;
     public BurstShot(int interval, int amount){
         this.interval = interval;
@@ -152,6 +158,12 @@ public class BurstShot : OnShootEffects{
         }else{
             Instance.Stack(this);
         }
+        Deck.RoundOver += ResetExtraShots;
+    }
+
+    private void ResetExtraShots(object sender, EventArgs e)
+    {
+        ExtraBurstShots = 0;
     }
 
     public int ApplyEffect()
@@ -166,7 +178,8 @@ public class BurstShot : OnShootEffects{
         return 0;
     }
     public void Burst(int a = -1){
-        int acutal_amount = a == - 1 ? amount : 250;
+        int acutal_amount = a == - 1 ? amount + ExtraBurstShots : 250;
+        Debug.Log("Burst: " + acutal_amount);
         for(int i =0; i < acutal_amount; i++){
                 Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Burst Shot", "Multicaster"});
 
@@ -184,6 +197,11 @@ public class BurstShot : OnShootEffects{
                         break;
                 }
                 
+        }
+
+        if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2){
+            
+            ExtraBurstShots = Math.Min(ExtraBurstShots+1, amount);
         }
     }
    
@@ -205,26 +223,23 @@ public class BurstShot : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstInterval");
         }
-        if(!maxed){CheckMaxed();}
-    }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(amount >= 20 && interval <= 10 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Burst");
-            maxed = true;
+        if(GameVariables.hasQuest(16) && interval<=10 && SecondShot.Instance != null && SecondShot.Instance.perc >= 1f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
+       
     }
+   
     public void SpawnExtraAssets(){
-        activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BurstAmount"));
-        activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
-        Deck.RoundOver += UpdateActive;
-        activeCooldownImage.onClick.AddListener(() => {
-            Burst(250);
-            activeCooldownImage.interactable = false;
-            activeRoundsLeft = 0;
-            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
+        // activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BurstAmount"));
+        // activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+        // Deck.RoundOver += UpdateActive;
+        // activeCooldownImage.onClick.AddListener(() => {
+        //     Burst(250);
+        //     activeCooldownImage.interactable = false;
+        //     activeRoundsLeft = 0;
+        //     activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
 
-        });
+        // });
     }
     
     private void UpdateActive(object sender, EventArgs e){
@@ -256,9 +271,9 @@ public class BurstShot : OnShootEffects{
     {
         return "Shoot extra <color=#FFCC7C>Burst Shots</color> everytime you shoot a certain amount of flames. <color=#FFCC7C>Extra shots</color> will <color=#FF5858>not</color> count towards <color=#FFFF00>Multicaster</color> or <color=#FFFF00>Burst Shot Effects</color>";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Burst Shots: {0} Flames (Max. 20)<br>Burst Interval: {1} Flames (Min. 10)", amount, interval);
+        return new string[]{"Burst Shots: {0} Flames (Max. 20)<br>Burst Interval: {1} Flames (Min. 10)", amount.ToString(), interval.ToString()};
     }
     public string getIcon()
     {
@@ -298,7 +313,7 @@ public class KrakenSlayer : OnShootEffects{
     public int ApplyEffect()
     {
         if(purpleON){return 6;}
-        curr--;
+        
 
         if(curr <= 0){
             curr = interval;
@@ -310,6 +325,8 @@ public class KrakenSlayer : OnShootEffects{
                 }
             }
             return 3;
+        }else{
+            curr--;
         }
         return 0;
     }
@@ -326,15 +343,9 @@ public class KrakenSlayer : OnShootEffects{
             deck.removeClassFromDeck("BlueFlameInterval");
             
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(interval <= 0 && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Magical Shot");
-            maxed = true;
-        }
-    }
+    
     public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BlueFlameInterval"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -342,7 +353,7 @@ public class KrakenSlayer : OnShootEffects{
         activeCooldownImage.onClick.AddListener(() => {
             purpleON = true;
             Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",true);
-            
+            AudioManager.PlayOneShot(FMODEvents.Instance.EvilLaugh, Vector2.zero);
             Flamey.Instance.callFunctionAfter(() =>{ purpleON = false; Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",false);}, 5f);
             activeCooldownImage.interactable = false;
             activeRoundsLeft = 0;
@@ -380,9 +391,9 @@ public class KrakenSlayer : OnShootEffects{
     {
         return "Shoot a powerful <color=#53D1FF>Blue Flame</color> that deals <color=#FF5858>Extra Damage</color> everytime you shoot a certain amount of flames.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Extra Damage: +{0} Damage <br>Blue Flame Interval: {1} Flames (Min. 0)", extraDmg, interval);
+        return new string[]{"Extra Damage: +{0} Damage <br>Blue Flame Interval: {1} Flames (Min. 0)", extraDmg.ToString(), interval.ToString()};
     }
     public string getIcon()
     {
@@ -437,15 +448,9 @@ public class CritUnlock : OnShootEffects{
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritMult");
         }
-        if(!maxed){CheckMaxed();}
+        
     }
-    public bool maxed;
-    private void CheckMaxed(){
-        if(perc >= .8f && mult >= 5f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Crit");
-            maxed = true;
-        }
-    }
+  
     public bool addList(){
         return Instance == this;
     }
@@ -454,13 +459,13 @@ public class CritUnlock : OnShootEffects{
     {
         return "Your shots have a chance of <color=#FF5858>critically striking</color>, multiplying your <color=#FF5858>damage</color> by a certain amount.";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
         
-        if(SkillTreeManager.Instance.getLevel("Critical Strike") >= 1){
-            return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
+        if(SkillTreeManager.Instance.getLevel("Critical Strike") < 1){
+            return new string[]{"Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString()};
         }
-        return string.Format("Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. Infinite)", Mathf.Round(perc*100f), Mathf.Round(mult * 100f) * 0.01f);
+        return new string[]{"Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. Infinite)", Mathf.Round(perc*100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString()};
     }
 
     public string getIcon()

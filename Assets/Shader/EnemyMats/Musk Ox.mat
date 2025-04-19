@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _FrozenTex:
+        m_Texture: {fileID: 2800000, guid: fda1c1d3054089546ad375528411a9df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 5e53dfed1db3f5f4097ddcd1946c2bd9, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -41,12 +45,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Frozen: 0
     - _Fuzzy_1: 0
     - _Fuzzy_2: 0
     - _Fuzzy_3: 0
     - _Fuzzy_4: 0
     - _Fuzzy_5: 0
     - _Fuzzy_6: 0
+    - _Poison: 0
     - _Range_1: 0.03
     - _Range_2: 0.06
     - _Range_3: 0.03

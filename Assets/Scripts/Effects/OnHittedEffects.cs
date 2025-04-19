@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public interface OnHittedEffects : Effect
 {
     public bool addList();
-    public void ApplyEffect(Enemy en = null);
+    public void ApplyEffect(Enemy en = null, int dmg = -1);
 }
 
 public class ThornsOnHitted : OnHittedEffects
@@ -23,14 +23,18 @@ public class ThornsOnHitted : OnHittedEffects
     private int activeRoundsLeft;
     private int activeRoundsCooldown = 1;
 
+    private IPoolable ThornsPrefab;
+
     public ThornsOnHitted(float prob, float perc){
         
         this.prob = prob;
         this.perc = perc;
         if(Instance == null){
             Instance = this;
+            ThornsPrefab = Resources.Load<GameObject>("Prefab/Thorn").GetComponent<IPoolable>();
         }else{
             Instance.Stack(this);
+            
         }
     }
 
@@ -39,23 +43,32 @@ public class ThornsOnHitted : OnHittedEffects
         return Instance == this;
     }
 
-    public void ApplyEffect(Enemy en = null)
+    public void ApplyEffect(Enemy en = null, int dmg = -1)
     {
         if(en==null){return;}
 
         if(Random.Range(0f,1f) < prob){
             if(Flamey.Instance.Armor == 0){return;}
             if(SkillTreeManager.Instance.getLevel("Thorns")>=2){
-                Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, FlareManager.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                Enemy[] targets = Physics2D.OverlapCircleAll(en.HitCenter.position, 0.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+                SpawnThorn(en.HitCenter.position, 2);
                 foreach(Enemy enemy in targets){
-                    enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                    enemy.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1, source:"Thorns", extraInfo: new float[]{dmg});
                 }
             }else{
-                en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1);
+                en.Hitted((int)(Flamey.Instance.Armor * perc), 10, ignoreArmor: false, onHit: SkillTreeManager.Instance.getLevel("Thorns")>=1, source:"Thorns", extraInfo: new float[]{dmg});
+                SpawnThorn(en.HitCenter.position,1);
             }
             
         }
 
+    }
+    private void SpawnThorn(Vector2 pos, int type){
+        if((int)(Flamey.Instance.Armor * perc)>0){
+            AudioManager.PlayOneShot(FMODEvents.Instance.ThornsSlash, Vector2.zero);
+            ObjectPooling.Spawn(ThornsPrefab, new float[]{pos.x, pos.y - .4f, type});
+        }
+        
     }
     public void Stack(ThornsOnHitted thornsOnHitted){
         
@@ -70,16 +83,10 @@ public class ThornsOnHitted : OnHittedEffects
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("ThornsProb");
         }      
-        if(!maxed){CheckMaxed();}
+        
     }
 
-    private void CheckMaxed(){
-        if(prob >= 1f && !Character.Instance.isACharacter()){
-            Character.Instance.SetupCharacter("Thorns");
-            maxed = true;
-        }
 
-    }
     public void SpawnExtraAssets(){
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/ThornsUnlock"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
@@ -109,9 +116,9 @@ public class ThornsOnHitted : OnHittedEffects
     {
         return "Everytime you get hit by an enemy you have a chance of returning a percentage of your <color=#919191>Armor</color> as <color=#FF5858>damage</color> back and applying <color=#FF99F3>On-Hit Effects";
     }
-    public string getCaps()
+    public string[] getCaps()
     {
-        return string.Format("Chance: {0}% (Max. 100%) <br>Armor to Damage Percentage: {1}%", Mathf.Round(prob*100f), Mathf.Round(perc*100f));
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Armor to Damage Percentage: {1}%", Mathf.Round(prob*100f).ToString(), Mathf.Round(perc*100f).ToString()};
     }
 
     public string getIcon()
@@ -126,7 +133,7 @@ public class ThornsOnHitted : OnHittedEffects
 
     public string getType()
     {
-        return "On-Hitted Effect";
+        return "Counter Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
