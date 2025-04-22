@@ -225,7 +225,7 @@ public class DrainOnLand : OnLandEffect
     public void ApplyEffect(Vector2 pos)
     {
         if(UnityEngine.Random.Range(0f,1f) < prob){
-            if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < carnivoreChance){
+            if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < 0.1f){
                 ObjectPooling.Spawn(prefabCarnivore, new float[]{pos.x, pos.y});
             }else{
                 ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
@@ -280,7 +280,7 @@ public class DrainOnLand : OnLandEffect
     }
     public string[] getCaps()
     {
-        return new string[]{"Chance: {0}% (Max. 50%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(perc*100f).ToString()};
+        return new string[]{"Chance: {0}% (Max. 25%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(perc*100f).ToString()};
     }
 
     public string getIcon()

@@ -212,7 +212,7 @@ public class DeckBuilder : MonoBehaviour
             }), baseCard: true, immoType:IMMOLATE.EARTH), 
 
             new Augment("OrbitalAmount","Tame the Flames", "Gain +1 Flame in your Orbital Field", "OrbitalAmount", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(1, 0))), immoType:IMMOLATE.EARTH),
-            new Augment("OrbitalDmg","Tiny Flames Win", "Your Orbital Flames deal +10 damage", "OrbitalDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 20))), immoType:IMMOLATE.FIRE),
+            new Augment("OrbitalDmg","Tiny Flames Win", "Your Orbital Flames deal +10 damage", "OrbitalDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 10))), immoType:IMMOLATE.FIRE),
             new Augment("OrbitalDmg","Reliable Damage", "Your Orbital Flames deal +25 damage", "OrbitalDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 25))), immoType:IMMOLATE.FIRE),
             new Augment("OrbitalDmg","Saturn", "Your Orbital Flames deal +50 damage", "OrbitalDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new FlameCircle(0, 50))), immoType:IMMOLATE.FIRE),
 

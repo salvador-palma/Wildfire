@@ -331,7 +331,7 @@ public class Character : MonoBehaviour
                 if(DrainOnLand.Instance == null && SkillTreeManager.Instance.getLevel("Flower Field") >= 0){
                     DeckBuilder.Instance.getAugmentByName("Flower Field").Activate();
                 }
-                DrainOnLand.Instance.carnivoreChance = 0.25f;
+               
                 break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Burst":

@@ -106,7 +106,7 @@ public class DrainAOE : IPoolable
     }
     public override string getReference()
     {
-        return "Flower";
+        return !isCarnivore ? "Flower" : "Carnivore";
     }
     public override void Define(float[] args)
     {

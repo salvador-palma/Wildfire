@@ -69,7 +69,7 @@ public class VampOnHit : OnHitEffects
         RemoveUselessAugments();
     }
     private void RemoveUselessAugments(){
-        if(prob >= 1f){
+        if(prob >= 1){
             prob = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("VampProb");
@@ -188,7 +188,7 @@ public class IceOnHit : OnHitEffects
     }
     private void RemoveUselessAugments(){
         Deck deck = Deck.Instance;
-        if(prob >= 1f){
+        if(prob >= 1){
             prob = 1;
             deck.removeClassFromDeck("IceProb");
         }

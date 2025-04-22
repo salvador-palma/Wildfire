@@ -45,6 +45,8 @@ public class Casino : MonoBehaviour
             props.selectButton.onClick.RemoveAllListeners();
             props.selectButton.onClick.AddListener(()=> LoadMiniGame(props.name));
         }
+
+        InteractiveCursor.ChangeCursor(0);
         
     }
     private void LoadMiniGame(string minigame){
@@ -61,7 +63,7 @@ public class Casino : MonoBehaviour
             ToggleSettings();
         }
     }
-    void ToggleSettings(){
+    public void ToggleSettings(){
         Vector2 newPos = new Vector2(settingsPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", newPos.x <= 0? 0 : 1);
         settingsPanel.GetComponent<RectTransform>().anchoredPosition = newPos;

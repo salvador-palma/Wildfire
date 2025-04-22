@@ -176,6 +176,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             float B = Dmg/(1+(Armor/100f));
             float armorPen = onHit || Character.Instance.isCharacter("Assassin")? Flamey.Instance.ArmorPen : 0;
             Dmg = (int)(B + (Dmg-B)*armorPen);
+            Dmg = Math.Max(Dmg, 1);
         }
         //============================
 

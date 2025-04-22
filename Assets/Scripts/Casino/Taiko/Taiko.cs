@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class TimingPoint{
     public int Timing;
@@ -67,6 +68,10 @@ public class Taiko : MonoBehaviour
         foreach(GameObject go in PCExtras){
             go.SetActive(MenuUI.device == "PC");
         }
+
+        UpdateDifficultyButtonImage();
+        UpdatePreviousScore();
+        UpdateRecords();
     }
     void SetUpGame(string mapPath)
     {
@@ -110,20 +115,11 @@ public class Taiko : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.V)){
-            Application.targetFrameRate = fr[i];
-            i++;
-            if(i>=fr.Length) i=0;
-        }
-       
         
 
 
 
-
         if(hasStarted){
-            
-
             
 
             if(drums.Count <= 0){hasStarted=false; Invoke("End",  5f); return;}
@@ -340,6 +336,7 @@ public class Taiko : MonoBehaviour
     int[] quality = new int[4];
     public TextMeshProUGUI ScoreTxt;
     public TextMeshProUGUI StreakTxt;
+    public DynamicText PreviousHighScoreTxt;
     public UnityEngine.UI.Slider SoulGauge;
 
     bool Score(int[] value){
@@ -504,6 +501,19 @@ public class Taiko : MonoBehaviour
     public string[] feedback = new string[4]{"PERFECT", "GOOD", "OK", "MISS"};
     public Color[] feedbackColors;
     public DynamicText feedbackText;
+
+    public Image[] DifficultyButtons;
+    public Color SelectedColor;
+    public Color NormalColor;
+    private void UpdateDifficultyButtonImage(){
+        for(int i = 0; i < DifficultyButtons.Length; i++){
+            if(i == Difficulty){
+                DifficultyButtons[i].color = SelectedColor;
+            }else{
+                DifficultyButtons[i].color = NormalColor;
+            }
+        }
+    }
     private void ShowFeedback(int type){
         if(type==-1){return;}
 
@@ -519,6 +529,48 @@ public class Taiko : MonoBehaviour
 
     public void setDifficulty(int n){
         Difficulty = n;
+        UpdateDifficultyButtonImage();
+        if(GameVariables.GetVariable(maps[Difficulty]) > 0){
+            PreviousHighScoreTxt.SetText("SCORE<br><size=80%>{0}", new string[]{GameVariables.GetVariable(maps[Difficulty]).ToString()});
+        }else{
+            PreviousHighScoreTxt.SetTextDirect("");
+        }
+        
+    }
+    public void InterruptPlay(){
+        if(!hasStarted) return;
+        if(trackInstance.isValid()){
+            trackInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            trackInstance.release();
+        }
+
+        hasStarted = false;
+        drums.Clear();
+        timingPoints.Clear();
+        foreach(Transform d in drumParent){
+            
+            Destroy(d.gameObject);
+        }
+        drumParent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
+        Anim.GetComponent<Animator>().Play("TaikoInterrupt");
+        ScoreTxt.SetText("");
+        StreakTxt.SetText("");
+        
+    }
+    private void UpdatePreviousScore(){
+        if(GameVariables.GetVariable(maps[Difficulty]) > 0){
+            PreviousHighScoreTxt.SetText("SCORE<br><size=80%>{0}", new string[]{GameVariables.GetVariable(maps[Difficulty]).ToString()});
+        }else{
+            PreviousHighScoreTxt.SetTextDirect("");
+        }
+    }
+    public Color[] RecordColors;
+    private void UpdateRecords(){
+        for(int i = 0; i < 4; i++){
+            int record = GameVariables.GetVariable(maps[i] + "Record");
+            DifficultyButtons[i].transform.Find("Record").GetComponent<Image>().enabled = record != -1;
+            DifficultyButtons[i].transform.Find("Record").GetComponent<Image>().color = RecordColors[Math.Max(record,0)];
+        }
     }
     public void Play()
     {
@@ -531,7 +583,11 @@ public class Taiko : MonoBehaviour
     public void BackToMenu()
     {
         Anim.GetComponent<Animator>().Play("TaikoReIntro");
-
+        ScoreTxt.SetText("");
+        StreakTxt.SetText("");
+        UpdateDifficultyButtonImage();
+        UpdatePreviousScore();
+        UpdateRecords();
 
     }
 
@@ -541,7 +597,8 @@ public class Taiko : MonoBehaviour
         trackInstance.release();
         Anim.GetComponent<Animator>().Play("TaikoEnd");
         SetUpEndGameStats();
-    }
+    
+    }  
 
     [Header("End Game Stats")]
     public DynamicText perfectsTxt;
@@ -556,10 +613,13 @@ public class Taiko : MonoBehaviour
         bool passed = true;
         if(quality[0] == NoteAmount){
             ClearTxt.SetText("FULL PERFECTION");
+            GameVariables.SetVariable(maps[Difficulty]+"Record", 2);
         }else if(streak == NoteAmount){
             ClearTxt.SetText("FULL COMBO");
+            GameVariables.SetVariable(maps[Difficulty]+"Record", 1);
         }else if(SoulGauge.value >= .5f){
             ClearTxt.SetText("CLEARED");
+             GameVariables.SetVariable(maps[Difficulty]+"Record", 0);
         }else{
             passed=false;
             ClearTxt.SetText("FAILED");
@@ -581,5 +641,6 @@ public class Taiko : MonoBehaviour
         }else{
             highScoreTxt.SetActive(false);
         }
+        
     }
 }

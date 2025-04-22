@@ -46,11 +46,13 @@ public class CandleFlare : Flare
         }
         
         foreach(Enemy e in colliders){
-            if(e == null) continue;
-            if(Character.Instance.isCharacter("Ritual") && e.Health < CandleTurrets.Instance.dmg){
+            if(e == null || e.Health <= 0) continue;
+            
+            e.Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
+
+            if(Character.Instance.isCharacter("Ritual") && (e==null || e.Health <= 0)){
                 CandleTurrets.Instance.AddDamageTick();
             }
-            e.Hitted(Damage, DmgTextID, ignoreArmor:false, onHit: true);
         }
     }
 

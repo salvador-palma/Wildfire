@@ -40,8 +40,7 @@ public class FlameCircle : NotEspecificEffect
             GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+this.amount));
             planetsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/PlanetSelectionPanel");
             SpinnerInstance = g.GetComponent<Spinner>();
-            Deck.RoundOver += SetSpinFalse;
-            Deck.RoundStart += SetSpinTrue;
+
             if(SkillTreeManager.Instance.getLevel("Orbits")>=1){
                 Spinner.multiplier*=2f;
             }
@@ -57,24 +56,7 @@ public class FlameCircle : NotEspecificEffect
         
         
     }
-    public void SetSpinFalse(object sender ,EventArgs e){
-        
-        SetSpin(false);
-    }
-    public void SetSpinTrue(object sender ,EventArgs e){
-        
-        SetSpin(true);
-    }
-    public void SetSpin(bool b){
-        
-        SpinnerInstance.canSpin = b;
-        if(PlanetType==6){
-            SpinnerInstance.GetComponent<Animator>().enabled=b;
-
-        }
-        OrbitalHit.multiplier = 1;
-
-    }
+  
     public void UpdateAmount(){
          
         
@@ -598,22 +580,30 @@ public class Gambling : NotEspecificEffect{
             return;
         }
     }
-
-    private void ReduceGambling(object sender, EventArgs e)
+    public void ResetInstance(){
+        Instance = null;
+        Deck.RoundStart -= ReduceGambling;
+    }
+    public void ReduceGambling(object sender, EventArgs e)
     {
-        if(!Character.Instance.isCharacter("Gambling")){return;}
-        if(RoundsWithoutPick == 5){
-            //EXPIRE BUFF
-            
-            BuffTitle.SetText("WARNING");
-            BuffType.SetText("Previous Effect Expired");
-            LuckType = -1;
-            LuckMeterSlider.GetComponent<Animator>().Play(!WithLuck ? "Buff" : "Debuff");
-            Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", -1);
+        try{
+            if(Character.Instance==null || !Character.Instance.isCharacter("Gambling")){return;}
+            if(RoundsWithoutPick == 5){
+                //EXPIRE BUFF
+                
+                BuffTitle.SetText("WARNING");
+                BuffType.SetText("Previous Effect Expired");
+                LuckType = -1;
+                LuckMeterSlider.GetComponent<Animator>().Play(!WithLuck ? "Buff" : "Debuff");
+                Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", -1);
+            }
+            if(!Gambled){LuckCombo = Math.Clamp(LuckCombo - 0.1f, 0.25f, 0.75f); LuckMeterSlider.value = LuckCombo; RoundsWithoutPick++;}
+            Gambled = false;
+            Debug.Log("Luck: " + LuckCombo);
+        }catch{
+            Debug.Log("Error ReduceGambling: " + e.ToString());
         }
-        if(!Gambled){LuckCombo = Math.Clamp(LuckCombo - 0.1f, 0.25f, 0.75f); LuckMeterSlider.value = LuckCombo; RoundsWithoutPick++;}
-        Gambled = false;
-        Debug.Log("Luck: " + LuckCombo);
+        
     }
 
     public static float getGambleMultiplier(int type){

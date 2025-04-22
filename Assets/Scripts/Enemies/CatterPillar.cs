@@ -14,7 +14,7 @@ public class CatterPillar : Enemy
             Health = (int)(Health * (float) (Math.Pow(x, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
             Speed *= (float) (Math.Pow(x, 2)/4000f) + 1f;
-            Damage = (int)(Damage * (float) (Math.Pow(x, 2)/5000f) + 1f);
+            Damage = (int)(Damage * (float) (Math.Pow(x, 2)/2500f) + 1f);
         }
         MaxHealth = Health;
     }

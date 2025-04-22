@@ -25,25 +25,25 @@ public class VolumeSlider : MonoBehaviour
             switch (volumeType){
             case VolumeType.MASTER:  
                 AudioManager.Instance.masterBus.getVolume(out res);
-                slider.value = res;
+                slider.value = PlayerPrefs.GetFloat($"Volume{(int)volumeType}", res);
             break;
             case VolumeType.MUSIC:
                 AudioManager.Instance.musicBus.getVolume(out res);
-                slider.value = res;
+                slider.value = PlayerPrefs.GetFloat($"Volume{(int)volumeType}", res);
             break;
             case VolumeType.SFX:
                 AudioManager.Instance.sfxBus.getVolume(out res);
-                slider.value = res;
+                slider.value = PlayerPrefs.GetFloat($"Volume{(int)volumeType}", res);
             break;
             case VolumeType.MENU:
                 AudioManager.Instance.menuBus.getVolume(out res);
-                slider.value = res;
+                slider.value = PlayerPrefs.GetFloat($"Volume{(int)volumeType}", res);
             break;
             
         }
         }else{
             if(VariableSlider == "CameraShake"){
-                slider.value = CameraShake.Intensity;
+                slider.value = PlayerPrefs.GetFloat(VariableSlider, CameraShake.Intensity);
                 
             }
         }
@@ -67,7 +67,9 @@ public class VolumeSlider : MonoBehaviour
                 break;
                 
             }
+            PlayerPrefs.SetFloat($"Volume{(int)volumeType}", value);
         }else{
+            PlayerPrefs.SetFloat(VariableSlider, value);
             if(VariableSlider == "CameraShake"){
                 CameraShake.Intensity = value;
             }

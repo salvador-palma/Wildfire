@@ -595,9 +595,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &266422387
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,8 +717,12 @@ MonoBehaviour:
       Data3: 2023249340
       Data4: -1381133437
     Path: event:/Casino/TaikoMegaSnare
+  TaikoDrumHitFeedback: []
+  TaikoDrumHitFeedbackMobile: []
   AutoBot: 0
   delay: 0.3
+  AndroidExtras: []
+  PCExtras: []
   hasStarted: 0
   matUpdateSpeed: 0
   SoulGaugeMaxObj: {fileID: 426364312}
@@ -727,6 +730,7 @@ MonoBehaviour:
   streak: 0
   ScoreTxt: {fileID: 1863735590}
   StreakTxt: {fileID: 1832815985}
+  PreviousHighScoreTxt: {fileID: 0}
   SoulGauge: {fileID: 1743238129}
   kiaiSpeed: 0.75
   feedback:
@@ -739,7 +743,10 @@ MonoBehaviour:
   - {r: 0.9058824, g: 0.9960785, b: 0, a: 1}
   - {r: 0.9960785, g: 0.45882356, b: 0, a: 1}
   - {r: 0.9960785, g: 0, b: 0.19607845, a: 1}
-  feedbackText: {fileID: 8378237082642182867}
+  feedbackText: {fileID: 0}
+  DifficultyButtons: []
+  SelectedColor: {r: 0, g: 0, b: 0, a: 0}
+  NormalColor: {r: 0, g: 0, b: 0, a: 0}
   Difficulty: 0
   perfectsTxt: {fileID: 1331550959}
   goodsTxt: {fileID: 972419011}
@@ -894,7 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.039215688, g: 0.07058824, b: 0.18431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1369,7 +1376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.039215688, g: 0.07058824, b: 0.18431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2304,9 +2311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &972419007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,9 +2460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &1002974095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.039215688, g: 0.07058824, b: 0.18431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2775,7 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.039215688, g: 0.07058824, b: 0.18431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3406,9 +3411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &1243581450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,9 +3747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &1392742992
 GameObject:
   m_ObjectHideFlags: 0
@@ -4821,9 +4824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oldPhrase: 
-  oldArgs: []
   isChat: 0
+  DebugIT: 0
 --- !u!1 &1936638741
 GameObject:
   m_ObjectHideFlags: 0

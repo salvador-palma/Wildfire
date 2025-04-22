@@ -265,9 +265,13 @@ public class SkillTreeManager : MonoBehaviour
                 purchaseButtonText.transform.parent.gameObject.SetActive(price != - 1);
                 Skills s = GetSkill(skill);
 
+                
+
+                    
                 PickBanButtons[0].gameObject.SetActive(!s.pick && (BanAmount != BanLimit || s.ban) && level > -1);
                 PickBanButtons[0].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.ban);
-                PickBanButtons[1].gameObject.SetActive(!s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
+
+                PickBanButtons[1].gameObject.SetActive(skill != "Gambling" && skill != "Ember Generation" && !s.ban && (PrePickLimit != PrePickAmount || s.pick) && level > -1);
                 PickBanButtons[1].transform.GetChild(0).GetChild(0).gameObject.SetActive(s.pick);
 
 
@@ -275,6 +279,7 @@ public class SkillTreeManager : MonoBehaviour
             }else{
                 purchaseButtonText.transform.parent.gameObject.SetActive(false);
                 PreBanExplanation.SetText("Upgrade previous skills to unlock this one");
+
                 PickBanButtons[0].gameObject.SetActive(false);
                 PickBanButtons[1].gameObject.SetActive(false);
             }

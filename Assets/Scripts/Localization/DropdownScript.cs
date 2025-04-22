@@ -52,6 +52,8 @@ public class DropdownScript : MonoBehaviour
     // GRAPHICS SETTINGS
     void SetWindowMode(int index)
     {
+        PlayerPrefs.SetInt("WindowMode", index);
+        Debug.Log("WindowMode: " + index);
         switch (index)
         {
             case 0: Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen; break;
@@ -61,13 +63,20 @@ public class DropdownScript : MonoBehaviour
     }
     void SetResolution(int index)
     {
+        PlayerPrefs.SetInt("Resolution", index);
         Resolution selectedRes = resolutions[index];
+        Debug.Log("Resolution: " + selectedRes.width + "x" + selectedRes.height);
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreenMode);
     }
 
     void SetFPSCap(int index)
     {
+        PlayerPrefs.SetInt("FPSCap", index);
+        
+
         string selectedOption = fpsCapDropdown.options[index].text;
+         Debug.Log("FPSCap: " + selectedOption);
+
         Application.targetFrameRate = selectedOption == "Unlimited" ? -1 : int.Parse(selectedOption);
     }
 
@@ -75,6 +84,7 @@ public class DropdownScript : MonoBehaviour
     {
         resolutions = Screen.resolutions;
         resolutions = resolutions.ToList().Distinct().ToArray();
+        List<Resolution> resList = new List<Resolution>();
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
 
@@ -82,10 +92,16 @@ public class DropdownScript : MonoBehaviour
         {
             if(options.Contains(res.width + "x" + res.height)) continue;
             options.Add(res.width + "x" + res.height );
+            resList.Add(res);
         }
+        resolutions = resList.ToArray();
 
+        int savedRes = PlayerPrefs.GetInt("Resolution", GetCurrentResolutionIndex());
+        savedRes = resolutions.Length > savedRes ? savedRes : GetCurrentResolutionIndex();
+        Debug.Log("Resolution: " + savedRes);
+        SetResolution(savedRes);
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = GetCurrentResolutionIndex();
+        resolutionDropdown.value = options.IndexOf(resolutions[savedRes].width + "x" + resolutions[savedRes].height);
         resolutionDropdown.RefreshShownValue();
     }
 
@@ -93,7 +109,10 @@ public class DropdownScript : MonoBehaviour
     {
         windowModeDropdown.ClearOptions();
         windowModeDropdown.AddOptions(new List<string> { "Fullscreen", "Windowed", "Borderless" });
-        windowModeDropdown.value = (int)Screen.fullScreenMode;
+        int savedMode = PlayerPrefs.GetInt("WindowMode", 0);
+        Debug.Log("WindowMode: " + savedMode);
+        SetWindowMode(savedMode);
+        windowModeDropdown.value = savedMode;
         windowModeDropdown.RefreshShownValue();
     }
 
@@ -102,7 +121,14 @@ public class DropdownScript : MonoBehaviour
         fpsCapDropdown.ClearOptions();
         List<string> options = new List<string> { "30", "60", "120", "144", "165", "240", "Unlimited" };
         fpsCapDropdown.AddOptions(options);
-        fpsCapDropdown.value = options.IndexOf(Application.targetFrameRate == -1 ? "Unlimited" : Application.targetFrameRate.ToString());
+
+
+        int fpsSaved = PlayerPrefs.GetInt("FPSCap", 6);
+        fpsSaved = fpsSaved <= -1 ? 6 : fpsSaved; 
+        Debug.Log("FPSCap: " + fpsSaved);
+        
+        fpsCapDropdown.value = fpsSaved;
+        SetFPSCap(fpsSaved);
         fpsCapDropdown.RefreshShownValue();
     }
 

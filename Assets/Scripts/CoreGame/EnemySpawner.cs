@@ -330,10 +330,20 @@ public class EnemySpawner : MonoBehaviour
     private float getSpawnAmount(int round){return 5*(round%10)+25*(round/10)+5;}
     
     private void resetInstances(){
+
+        // if(FlameCircle.Instance != null){
+        //     FlameCircle.Instance.ResetInstance();
+        // }
+
         FlameCircle.Instance = null;
+        
         MoneyMultipliers.Instance = null;
         CandleTurrets.Instance = null;
         Summoner.Instance = null;
+        
+        if(Gambling.Instance != null){
+            Gambling.Instance.ResetInstance();
+        }
         Gambling.Instance = null;
 
         ThornsOnHitted.Instance = null;

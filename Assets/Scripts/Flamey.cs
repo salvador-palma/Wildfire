@@ -151,7 +151,7 @@ public class Flamey : MonoBehaviour
         
 
         if(current_homing == null){
-            Console.Log("Searching enemies...");
+            
             target(getHoming());
             if(current_homing == null){return;}
             

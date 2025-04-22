@@ -26,7 +26,7 @@ public class Bison : Enemy
             Health = (int)(Health * (float) (Math.Pow(x-45, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
             Speed *= (float) (Math.Pow(x-45, 2)/4000f) + 1f;
-            Damage = (int)(Damage * (float) (Math.Pow(x-45, 2)/5000f) + 1f);
+            Damage = (int)(Damage * (float) (Math.Pow(x-45, 2)/2500f) + 1f);
         }
         MaxHealth = Health;
 

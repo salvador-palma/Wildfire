@@ -69,8 +69,8 @@ public class SecondShot : OnShootEffects{
                     f.setTarget(worldPosition);
                     break;
             }
-        }catch{
-            Debug.LogWarning("Prevented error: Multicaster");
+        }catch(Exception e){
+            Debug.LogWarning("Prevented error: Multicaster: " + e.StackTrace);
         }
     }
 

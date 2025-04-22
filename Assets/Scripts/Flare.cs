@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Flare : IPoolable
@@ -158,7 +160,16 @@ public class Flare : IPoolable
        
         DmgTextID = flareData.DmgTextID;
         SpotColor = flareData.FlareColor;
+
         Damage = (int)GetDmgByType((int)args[0]);
+
+        int[] critVals = new int[]{1,2,4,5,7,8};
+        if(critVals.ToList().Contains((int)args[0])){
+           if(Damage >= Flamey.Instance.Dmg * 5f){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(18, "Rowl", 17); //POWERED UP UNLOCK
+            }
+        }
+
         ParticleSystem.MainModule main = GetComponentInChildren<ParticleSystem>().main;
         main.startColor = new ParticleSystem.MinMaxGradient(flareData.ParticleColors[0], flareData.ParticleColors[1]);
     }

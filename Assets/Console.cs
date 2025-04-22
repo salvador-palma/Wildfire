@@ -15,7 +15,7 @@ public class Console : MonoBehaviour
     }
 
     public static void Log(string str){
-        // Instance.LogPrivate(str);
+        //Instance.LogPrivate(str);
     }
 
     protected void LogPrivate(string str){

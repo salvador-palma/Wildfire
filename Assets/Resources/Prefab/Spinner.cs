@@ -17,7 +17,7 @@ public class Spinner : MonoBehaviour
         speed = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
         if(!EnemySpawner.Instance.Paused){
             canSpin = true;
-            if(FlameCircle.Instance.PlanetType==3){
+            if(FlameCircle.Instance.PlanetType==6){
                 GetComponent<Animator>().enabled=true;
             }
         
@@ -38,6 +38,7 @@ public class Spinner : MonoBehaviour
     }
     void OnDestroy()
     {
+        Debug.Log("Destroying spinner");
         Deck.RoundOver -= SpinToggle;
         Deck.RoundStart -= SpinTogglefalse;
     }
@@ -57,6 +58,12 @@ public class Spinner : MonoBehaviour
         if(MaxHPFactor >= 1f){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(40,"Betsy",19); //JUPITER UNLOCK
         }
+
+         
+        if(FlameCircle.Instance.PlanetType==6){
+            GetComponent<Animator>().enabled=false;
+        }
+        OrbitalHit.multiplier = 1;
 
 
         canSpin = true;

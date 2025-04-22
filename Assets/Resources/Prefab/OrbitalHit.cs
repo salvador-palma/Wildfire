@@ -19,7 +19,7 @@ public class OrbitalHit : MonoBehaviour
                     case 3: //MARS
                         DealDamage(e);
                         if(e.Health<=0){
-                            multiplier*= Flamey.Instance.Health <= Flamey.Instance.MaxHealth/4f ? 3 : 2;
+                            multiplier+= Flamey.Instance.Health <= Flamey.Instance.MaxHealth/4f ? 2 : 1;
                         }else{
                             multiplier = 1;
                         }
