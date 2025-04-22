@@ -61,17 +61,22 @@ public class Spinner : MonoBehaviour
 
          
         if(FlameCircle.Instance.PlanetType==6){
-            GetComponent<Animator>().enabled=false;
+            GetComponent<Animator>().enabled=true;
         }
         OrbitalHit.multiplier = 1;
 
 
         canSpin = true;
+        //Debug.Log("SpinToggleFalse");
         
     }
 
     private void SpinToggle(object sender, EventArgs e)
     {
+        //Debug.Log("SpinToggle");
+        if(FlameCircle.Instance.PlanetType==6){
+            GetComponent<Animator>().enabled=false;
+        }
         canSpin = false;
     }
 
