@@ -346,14 +346,20 @@ public class EnemySpawner : MonoBehaviour
         }
         Gambling.Instance = null;
 
-        ThornsOnHitted.Instance = null;
+        if(ThornsOnHitted.Instance != null){
+            ThornsOnHitted.Instance.ResetInstance();
+        }
+        //ThornsOnHitted.Instance = null;
 
         Explosion.Instance = null;
         Necromancer.Instance= null;
         Bullets.Instance = null;
 
         VampOnHit.Instance = null;
-        IceOnHit.Instance = null;
+        if(IceOnHit.Instance != null){
+            IceOnHit.Instance.ResetInstance();
+        }
+        //IceOnHit.Instance = null;
         ShredOnHit.Instance = null;
         ExecuteOnHit.Instance = null;
         StatikOnHit.Instance = null;
@@ -364,10 +370,17 @@ public class EnemySpawner : MonoBehaviour
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
-        KrakenSlayer.Instance = null;
+        if(KrakenSlayer.Instance != null){
+            KrakenSlayer.Instance.ResetInstance();
+        }
+        //KrakenSlayer.Instance = null;
         CritUnlock.Instance = null;
 
-        HealthRegen.Instance = null;
+
+        if(HealthRegen.Instance != null){
+            HealthRegen.Instance.ResetInstance();
+        }
+        // HealthRegen.Instance = null;
         LightningEffect.Instance = null;
         Immolate.Instance = null;
         

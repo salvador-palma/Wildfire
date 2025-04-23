@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
-  Name: Grasshoper
+  Name: Grasshopper
   Damage: 20
   AttackDelay: 3
   extraAtkSpeedDelay: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 100
   ArmorPen: 0
+  WeigthClass: 0
   EmberDropRange: {x: 4, y: 8}
   Attacking: 0
   HitCenter: {fileID: 3390616376177793989}
@@ -226,6 +227,7 @@ MonoBehaviour:
       Data4: -1592733616
     Path: event:/Enemies/Wave - 2/GrasshopperJump
   slowfactor: 0
+  poisonLeft: 0
   AttackAnimationName: EnemyAttack
   WalkAnimationName: Jump
   SlowSet: 0

@@ -127,7 +127,7 @@ public class GameUI : MonoBehaviour
         PausePanel.SetActive(!PausePanel.activeInHierarchy);
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", PausePanel.activeInHierarchy ? 0 : 1);
 
-        StatsTexts[5].text = f.Health+"/"+f.MaxHealth;
+        StatsTexts[5].text = f.Health.ToString("F0")+"/"+f.MaxHealth.ToString("F0");
         healthSlider.maxValue = f.MaxHealth;
         healthSlider.value = f.Health;
     }

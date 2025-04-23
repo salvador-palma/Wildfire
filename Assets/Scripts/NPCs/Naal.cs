@@ -108,7 +108,7 @@ public class Naal : NPC
 
     
     public void UnlockBlackMarket(){
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "NAAL'S BLACK MARKET", "You can now access the <style=\"LYellow\">Black Market</style> to buy especial uprades", 3);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "NAAL'S BLACK MARKET", "You can now access the <style=\"LYellow\">Black Market</style> to buy special upgrades", 3);
         GameVariables.SetVariable("NaalPresentation", 1);
     }
     
@@ -193,10 +193,10 @@ public class Naal : NPC
             ev2.AddListener(()=>ShowOffer("Then again, what about {0} embers for this?", new string[]{lastNPCOffer.ToString()}));
 
             StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
-                new Dialogue("Are you serious...? You offer is {0}?", getSprite("Mad"),"Jhat", new string[]{counterOffer.ToString()}),
+                new Dialogue("Are you serious...? Your offer is {0}?", getSprite("Mad"),"Jhat", new string[]{counterOffer.ToString()}),
                 new Dialogue("Am I supposed to give you the item AND {0}?", getSprite("Unamused"),"Jhat", new string[]{(counterOffer*(-1)).ToString()}),
-                new Dialogue("Or were you just trying to find a whole in the dev's code?", getSprite("CrossedSad"),"Jhat"),
-                new Dialogue("Let's keep ourselfs on the normal path please", getSprite("CrossedMad"),"Jhat"),
+                new Dialogue("Or were you just trying to find a hole in the dev's code?", getSprite("CrossedSad"),"Jhat"),
+                new Dialogue("Let's keep ourselves on the normal path please", getSprite("CrossedMad"),"Jhat"),
               
             },
             after:ev2, endAfter:false));
@@ -237,7 +237,7 @@ public class Naal : NPC
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("Dear lord! Stop messing around please!", getSprite("WaitMad"),"Jhat"),
                     new Dialogue("You just said you were able to pay {0} and now you are asking for that?", getSprite("Unamused"),"Jhat", new string[]{lastPlayerOffer.ToString()}),
-                    new Dialogue("We can both play this game! Since you aren't being considerate, I will mirror your behaviour!", getSprite("CrossedMad"),"Jhat"),
+                    new Dialogue("We can both play this game! Since you aren't being considerate, I will mirror your behavior!", getSprite("CrossedMad"),"Jhat"),
                 },
                 after:ev2, endAfter:false));
                 lastNPCOffer = increasedValue;
@@ -271,7 +271,7 @@ public class Naal : NPC
             //OFFER BARELY MOVED
             WriteMood(Mood - 5);
             UnityEvent ev2 = new UnityEvent();
-            ev2.AddListener(()=>ShowOffer("Let's try once more, what do you think of {0} embers for this?", new string[]{lastNPCOffer.ToString()}));
+            ev2.AddListener(()=>ShowOffer("Let's try once more. What do you think of {0} embers for this?", new string[]{lastNPCOffer.ToString()}));
 
             StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                 new Dialogue("Hmmm... You aren't really giving me anything to work with", getSprite("Sweat"),"Jhat"),
@@ -443,7 +443,7 @@ public class Naal : NPC
 
                     StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                         new Dialogue("<size=115%>WHA-<size=100%>I'm sorry, but... don't you think that's a bit too low of an offer?", getSprite("Nervous"),"Jhat"),
-                        new Dialogue("I thought you would be a bit less cheap! I don't think I need that behaviour in my shop!", getSprite("Mad"),"Jhat"),
+                        new Dialogue("I thought you would be a bit less cheap! I don't think I need that behavior in my shop!", getSprite("Mad"),"Jhat"),
                         new Dialogue("I'm gonna give you some time for you to think about the kind of offer you just made me...", getSprite("WaitMad"),"Jhat"),
                     },
                     after:ev1, endAfter:true));
@@ -494,7 +494,7 @@ public class Naal : NPC
                     case 2:
                         StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                             new Dialogue("I see... your offer is still not up to this store's standards!", getSprite("ShrugSad"),"Jhat"),
-                            new Dialogue("I'll give in a little bit but you have to come forward with a better offer aswell understand?", getSprite("Stand2"),"Jhat")
+                            new Dialogue("I'll give in a little bit but you have to come forward with a better offer as well understand?", getSprite("Stand2"),"Jhat")
                         },
                         after:ev4, endAfter:false));
                         break;
@@ -508,7 +508,7 @@ public class Naal : NPC
                         break;
                     case 4:
                         StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
-                            new Dialogue("It's not the lowest offer I've heard... that's really the only thing I can say about that!", getSprite("Showing2"),"Jhat"),
+                            new Dialogue("It's not the lowest offer I've heard... That's really the only thing I can say about that!", getSprite("Showing2"),"Jhat"),
                             new Dialogue("Unfortunately, {0} embers is still not a price I can settle with!", getSprite("Shrug"),"Jhat", new string[]{lastPlayerOffer.ToString()}),
                             new Dialogue("I'm going to slowly lower my offer but you need to lower your expectations a bit! Hmpf!", getSprite("Sweat"),"Jhat")
                         },
@@ -625,7 +625,7 @@ public class Naal : NPC
 
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("Woah! We just started bargaining! Are you really going leaving it already?", getSprite("Showing2"),"Jhat"),
-                    new Dialogue("That's no fun, Hmpf! Look, I can lower the price a bit more ok?", getSprite("Scratch"),"Jhat"),
+                    new Dialogue("That's no fun, hmpf! Look, I can lower the price a bit more ok?", getSprite("Scratch"),"Jhat"),
                 },
                 after:ev1, endAfter:false));
             }else{
@@ -645,11 +645,11 @@ public class Naal : NPC
 
     string[] Actions = new string[]{"*You compliment the Store*", "*You compliment Jhat's outfit*", "*You ask Jhat about himself*", "*You ask Jhat about its day*", "*You give Jhat puppy eyes*"};
     string[][] Responses = new string[][]{
-        new string[]{"Oh here we go, typical haggling conversation...", "Complimenting the store? Hmpf! Could've at least complimented me...", "Thanks, thanks, but let's not waste our time here ok?", "Oh! You like what I did here? I've been trying a couple things you know how it is...", "OH YOU LIKE IT? I knew it was cool! Master kept doubting me, Hmpf!"},
+        new string[]{"Oh here we go, typical haggling conversation...", "Complimenting the store? Hmpf! Could've at least complimented me...", "Thanks, thanks, but let's not waste our time here ok?", "Oh! You like what I did here? I've been trying a couple things you know how it is...", "OH YOU LIKE IT? I knew it was cool! Master kept doubting me, hmpf!"},
         new string[]{"Not this again...", "Complimenting the robe? Hmpf! Could've at least complimented me...", "Right, I know it fits me well but let's not waste our time here", "I also think it's a pretty nice robe! It used to belong to master when he was younger", "RIGHT? This robe is awesome! Master keeps telling me not to touch it so don't snitch on me!"},
         new string[]{"Why are you going off-track? Hmpf!", "I don't have a lot to say right now! Hmpf!", "Could be better, so let's not waste our time here ok?", "Oh! I don't really have much to tell but I appreciate you asking that!", "All my life has been business and bargaining so I can't really tell you much... But hey, I appreciate the consideration!"},
         new string[]{"Are you actually asking me that right now?", "Let's not do this please", "Might get better if you accept the deal once and for all", "Its better now that I have you here bargaining with me! Isn't this fun?", "I just woke up and stayed here waiting for you to come... The answer is quite basic but I appreciate the consideration!"},
-        new string[]{"What th- I feel SO uncomfortable right now...", "Ok can you stop with that? Puppy eyes? Really?", "I wasn't built for this type of interaction... literally...", "I don't... I don't know what this is supposed to be... but it looks funny! Hmpf Hmpf!", "That's a funny look you got there! Hmpf Hmpf!"},};
+        new string[]{"What th- I feel SO uncomfortable right now...", "Ok can you stop with that? Puppy eyes? Really?", "I wasn't built for this type of interaction... literally...", "I don't... I don't know what this is supposed to be... but it looks funny! Hmpf hmpf!", "That's a funny look you got there! Hmpf hmpf!"},};
     private void Persuade(int last)
     {
         charismaTries++;
@@ -675,8 +675,8 @@ public class Naal : NPC
                     new Dialogue("<size=80%><i><color=#CCCCCC>{0}", null,"", new string[]{Actions[ActionTaken]}),
                     new Dialogue(Responses[ActionTaken][2+charismaType], getSprite("Nervous"),"Jhat"),
                     new Dialogue("Don't you think I'm already aware of these lower effort tricks?", getSprite("Mad"),"Jhat"),
-                    new Dialogue("Persuading me isn't gonna lead you no where", getSprite("ShrugBored"),"Jhat"),  
-                    new Dialogue("Focus on the business not on the business man", getSprite("Unamused"),"Jhat"),  
+                    new Dialogue("Persuading me isn't gonna lead you nowhere", getSprite("ShrugBored"),"Jhat"),  
+                    new Dialogue("Focus on the business not on the businessman", getSprite("Unamused"),"Jhat"),  
                 },
                 after:ev2, endAfter:false));
 
@@ -687,8 +687,8 @@ public class Naal : NPC
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=80%><i><color=#CCCCCC>{0}", null,"", new string[]{Actions[ActionTaken]}),
                     new Dialogue(Responses[ActionTaken][2+charismaType], getSprite("Unamused"),"Jhat"),
-                    new Dialogue("I know I look just like a kid, but I can see trough your tactics", getSprite("Bored"),"Jhat"),
-                    new Dialogue("Persuading you opponent is a good move but not when he is aware of it! Hmpf!", getSprite("ShrugBored"),"Jhat"),  
+                    new Dialogue("I know I look just like a kid, but I can see through your tactics", getSprite("Bored"),"Jhat"),
+                    new Dialogue("Persuading your opponent is a good move but not when he is aware of it! Hmpf!", getSprite("ShrugBored"),"Jhat"),  
                     new Dialogue("Now let's get back to business!", getSprite("Unamused"),"Jhat"),  
                 },
                 after:ev2, endAfter:false));
@@ -769,7 +769,7 @@ public class Naal : NPC
                 }
                 WriteMood(Mood+10);
                 lastNPCOffer = lastPlayerOffer + (int)(3*(lastNPCOffer-lastPlayerOffer)/4f);
-                ev2.AddListener(()=>ShowOffer("I'll lower the price to {0} deal?", new string[]{lastNPCOffer.ToString()}));
+                ev2.AddListener(()=>ShowOffer("I'll lower the price to {0}, deal?", new string[]{lastNPCOffer.ToString()}));
                 StartCoroutine(Chat.Instance.StartDialogue(new Dialogue[]{
                     new Dialogue("<size=80%><i><color=#CCCCCC>{0}", null,"", new string[]{Actions[ActionTaken]}),
                     new Dialogue(Responses[ActionTaken][2+charismaType], getSprite("Stand"),"Jhat"),
@@ -793,7 +793,7 @@ public class Naal : NPC
             if(lastPlayerOffer==-1){
                  PreviousOfferTxt.SetText("You have <sprite name=\"Ember\"> {0} in total", new string[]{SkillTreeManager.Instance.PlayerData.embers.ToString()});
             }else{
-                PreviousOfferTxt.SetText("Your previous offer was <sprite name=\"Ember\"> {0} out ouf <sprite name=\"Ember\"> {1}", new string[]{lastPlayerOffer.ToString(), SkillTreeManager.Instance.PlayerData.embers.ToString()});
+                PreviousOfferTxt.SetText("Your previous offer was <sprite name=\"Ember\"> {0} out of <sprite name=\"Ember\"> {1}", new string[]{lastPlayerOffer.ToString(), SkillTreeManager.Instance.PlayerData.embers.ToString()});
             }
             
         }

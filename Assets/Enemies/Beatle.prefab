@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flame: {fileID: 0}
-  Name: Beatle
+  Name: Beetle
   Damage: 30
   AttackDelay: 0
   extraAtkSpeedDelay: 0
@@ -336,12 +336,14 @@ MonoBehaviour:
   MaxHealth: 0
   Armor: 50
   ArmorPen: 0
+  WeigthClass: 0
   EmberDropRange: {x: 3, y: 6}
   Attacking: 0
   HitCenter: {fileID: 8501714780596481470}
   inEffect: 0
   Stunned: 0
   Shiny: 0
+  hitByShred: 0
   <DeathSound>k__BackingField:
     Guid:
       Data1: -1368718033
@@ -364,8 +366,10 @@ MonoBehaviour:
       Data4: -292585290
     Path: event:/Enemies/Wave - 1/SpiderWalk
   slowfactor: 0
+  poisonLeft: 0
   AttackAnimationName: Hide
   WalkAnimationName: Run
+  SlowSet: 0
   Ball: {fileID: 5759655815504393736}
   growthRate: 0.01
   BallFinit: {fileID: 2956369913626913988}

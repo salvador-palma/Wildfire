@@ -364,6 +364,10 @@ public class KrakenSlayer : OnShootEffects{
     public void TurnPurple(){
         purpleON = false;
     }
+    public void ResetInstance(){
+        Instance = null;
+        Deck.RoundOver -= UpdateActive;
+    }
     private void UpdateActive(object sender, EventArgs e){
         if(activeRoundsLeft<activeRoundsCooldown){
             activeRoundsLeft++;

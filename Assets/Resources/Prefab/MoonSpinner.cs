@@ -25,6 +25,11 @@ public class MoonSpinner : Spinner
     {
         canSpin = true;
     }
-
+    void OnDestroy()
+    {
+        Debug.Log("Destroying spinner");
+        Deck.RoundOver -= StopMoving;
+        Deck.RoundStart -= StartMoving;
+    }
     
 }

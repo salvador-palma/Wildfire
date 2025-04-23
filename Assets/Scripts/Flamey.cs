@@ -670,9 +670,9 @@ public class Flamey : MonoBehaviour
         {
             new SimpleStat("Enemies killed", TotalKills),
             new SimpleStat("Fireballs shot", TotalShots),
-            new SimpleStat("Damage given", (int)TotalDamage),
+            new SimpleStat("Damage dealt", (int)TotalDamage),
             new SimpleStat("Damage taken", (int)TotalDamageTaken),
-            new SimpleStat("Healed health", (int)TotalHealed)
+            new SimpleStat("Health healed", (int)TotalHealed)
 
         };
     }

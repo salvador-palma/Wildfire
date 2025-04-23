@@ -83,7 +83,7 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"MulticasterProb"});            
             }), baseCard: true),   
 
-            new Augment("MulticasterProb","The more the better", "When you fire a shot, gain a 5% chance to fire an extra shot", "MulticasterProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.05f)))), 
+            new Augment("MulticasterProb","The More the Better", "When you fire a shot, gain a 5% chance to fire an extra shot", "MulticasterProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.05f)))), 
             new Augment("MulticasterProb","Double Trouble", "When you fire a shot, gain a 15% chance to fire an extra shot", "MulticasterProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.15f)))),
             new Augment("MulticasterProb","Casting Cascade", "When you fire a shot, gain a 35% chance to fire an extra shot", "MulticasterProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnShootEffect(new SecondShot(0.35f)))),
 
@@ -147,7 +147,7 @@ public class DeckBuilder : MonoBehaviour
 
 
             
-            new Augment("Resonance" ,"Resonance", "Unlock the ability to shred enemy armor through Sound", "ShredUnlock", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Resonance" ,"Resonance", "Unlock the ability to shred enemy armor through sound", "ShredUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Resonance");
                 Flamey.Instance.addOnHitEffect(new ShredOnHit(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ShredProb","ShredPerc"});            
@@ -200,7 +200,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("BlueFlameInterval","Propane Combustion", "You will need 3 shots less to proc Blue Flame", "BlueFlameInterval", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(3, 0)))),
             new Augment("BlueFlameInterval","Never ending Blue", "You will need 7 shots less to proc Blue Flame", "BlueFlameInterval", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(7, 0)))),
             new Augment("BlueFlameDmg","Propane Leakage", "Your Blue Flame deals +25 extra damage", "BlueFlameDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 25))), immoType:IMMOLATE.FIRE),
-            new Augment("BlueFlameDmg","Powerfull Blue", "Your Blue Flame deals +50 extra damage", "BlueFlameDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))), immoType:IMMOLATE.FIRE),
+            new Augment("BlueFlameDmg","Powerful Blue", "Your Blue Flame deals +50 extra damage", "BlueFlameDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 50))), immoType:IMMOLATE.FIRE),
             new Augment("BlueFlameDmg","Blue Inferno", "Your Blue Flame deals +100 extra damage", "BlueFlameDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnShootEffect(new KrakenSlayer(0, 100))), immoType:IMMOLATE.FIRE),
 
             
@@ -230,8 +230,8 @@ public class DeckBuilder : MonoBehaviour
             new Augment("LavaPoolProb","The Apocalypse", "Gain +25% probability of spawning a Lava Pool when your shot lands", "LavaPoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0.25f,0))), immoType:IMMOLATE.FIRE),
             new Augment("LavaPoolSize","Heat Area", "Your Lava Pool grows by +2.5 units", "LavaPoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.25f,0,0,0))), immoType:IMMOLATE.FIRE),
             new Augment("LavaPoolSize","Lava Lakes", "Your Lava Pool grows by +5 units", "LavaPoolSize", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0.5f,0,0,0))), immoType:IMMOLATE.FIRE),
-            new Augment("LavaPoolSize","Inside the volcano", "Your Lava Pool grows by +10 units", "LavaPoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0))), immoType:IMMOLATE.FIRE),
-            new Augment("LavaPoolDuration","Sear the ground", "Your Lava Pool lasts for +0.75 seconds", "LavaPoolDuration", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.75f))), immoType:IMMOLATE.FIRE),
+            new Augment("LavaPoolSize","Inside the Volcano", "Your Lava Pool grows by +10 units", "LavaPoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(1f,0,0,0))), immoType:IMMOLATE.FIRE),
+            new Augment("LavaPoolDuration","Sear the Ground", "Your Lava Pool lasts for +0.75 seconds", "LavaPoolDuration", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,0.75f))), immoType:IMMOLATE.FIRE),
             new Augment("LavaPoolDuration","Eternally Hot", "Your Lava Pool lasts for +1.5 seconds", "LavaPoolDuration", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,1.5f))), immoType:IMMOLATE.FIRE),
             new Augment("LavaPoolDuration","Unsettling Magma", "Your Lava Pool lasts for +3 seconds", "LavaPoolDuration", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new BurnOnLand(0,0,0,3f))), immoType:IMMOLATE.FIRE),
             
@@ -248,7 +248,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("StatikDmg","Shock Dart", "Your Static Energy deals +10 extra damage", "StatikDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,10,0))), immoType:IMMOLATE.FIRE),
             new Augment("StatikDmg","Shocking Advancement", "Your Static Energy deals +20 extra damage", "StatikDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,20,0))), immoType:IMMOLATE.FIRE),
             new Augment("StatikDmg","Thor", "Your Static Energy deals +50 extra damage", "StatikDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,50,0))), immoType:IMMOLATE.FIRE),
-            new Augment("StatikTTL","Conductive materials", "Your Static Energy will be able to cross through 1 more enemy", "StatikTTL", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1)))),
+            new Augment("StatikTTL","Conductive Materials", "Your Static Energy will be able to cross through 1 more enemy", "StatikTTL", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,1)))),
             new Augment("StatikTTL","Feel the Flow", "Your Static Energy will be able to cross through 2 more enemies", "StatikTTL", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,2)))),
             new Augment("StatikTTL","Amping Up!", "Your Static Energy will be able to cross through 5 more enemies", "StatikTTL", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHitEffect(new StatikOnHit(0,0,5)))),
             
@@ -262,9 +262,9 @@ public class DeckBuilder : MonoBehaviour
             new Augment("IcePoolSlow","Glacial Grip", "Your Snow Pool will slow down enemies for 10% more", "IcePoolSlow", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.1f,0,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolSlow","Frozen Stasis", "Your Snow Pool will slow down enemies for 20% more", "IcePoolSlow", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0.2f,0,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolProb","Cold Steps", "Gain +5% probability of spawning an Snow Pool when your shot lands", "IcePoolProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.05f,0))), immoType:IMMOLATE.AIR),
-            new Augment("IcePoolProb","Ice here, Ice there", "Gain +10% probability of spawning an Snow Pool when your shot lands", "IcePoolProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.1f,0))), immoType:IMMOLATE.AIR),
+            new Augment("IcePoolProb","Ice Here, Ice There", "Gain +10% probability of spawning an Snow Pool when your shot lands", "IcePoolProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.1f,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolProb","The North Pole", "Gain +25% probability of spawning an Snow Pool when your shot lands", "IcePoolProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0.25f,0))), immoType:IMMOLATE.AIR),
-            new Augment("IcePoolSize","Cold breeze", "Your Snow Pool grows by +2.5 units", "IcePoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.25f,0,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("IcePoolSize","Cold Breeze", "Your Snow Pool grows by +2.5 units", "IcePoolSize", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.25f,0,0,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolSize","Frozen Lakes", "Your Snow Pool grows by +5 units", "IcePoolSize", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0.5f,0,0,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolSize","Inside the Iceberg", "Your Snow Pool grows by +10 units", "IcePoolSize", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(1f,0,0,0))), immoType:IMMOLATE.AIR),
             new Augment("IcePoolDuration","Cooling Down", "Your Snow Pool lasts for +0.75 seconds", "IcePoolDuration", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new IceOnLand(0,0,0,0.75f))), immoType:IMMOLATE.AIR),
@@ -273,22 +273,22 @@ public class DeckBuilder : MonoBehaviour
             
 
 
-            new Augment("Thorns" ,"Thorns", "Unlock the ability to deal damage back when hitted", "ThornsUnlock", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Thorns" ,"Thorns", "Unlock the ability to deal damage back when hit", "ThornsUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Thorns");
                 Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0.1f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"ThornsPerc","ThornsProb"});            
             }), baseCard: true, immoType:IMMOLATE.EARTH),  
             new Augment("ThornsPerc","Innocent Spikes", "Your Thorn effect will reflect +10% of your Armor", "ThornsPerc", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .1f))), immoType:IMMOLATE.EARTH),
             new Augment("ThornsPerc","Spiky Vengeance", "Your Thorn effect will reflect +20% of your Armor", "ThornsPerc", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .2f))), immoType:IMMOLATE.EARTH),
-            new Augment("ThornsPerc","PufferFish", "Your Thorn effect will reflect +50% of your Armor", "ThornsPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .5f))), immoType:IMMOLATE.EARTH),
+            new Augment("ThornsPerc","Puffer Fish", "Your Thorn effect will reflect +50% of your Armor", "ThornsPerc", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(0, .5f))), immoType:IMMOLATE.EARTH),
             new Augment("ThornsProb","Prickly Fire", "Gain +5% chance to proc your Thorns effect", "ThornsProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.05f, 0))), immoType:IMMOLATE.EARTH),
-            new Augment("ThornsProb","Thorns everywhere!", "Gain +10% chance to proc your Thorns effect", "ThornsProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.1f, 0))), immoType:IMMOLATE.EARTH),
+            new Augment("ThornsProb","Thorns Everywhere!", "Gain +10% chance to proc your Thorns effect", "ThornsProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.1f, 0))), immoType:IMMOLATE.EARTH),
             new Augment("ThornsProb","Cactus on Fire", "Gain +25% chance to proc your Thorns effect", "ThornsProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new ThornsOnHitted(.25f, 0))), immoType:IMMOLATE.EARTH),
             
 
             
 
-            new Augment("Ember Generation","Little by little", "Your ember multiplier will improve by +10%", "MoneyMult", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, .1f))), baseCardUpgrade:true),
+            new Augment("Ember Generation","Little by Little", "Your ember multiplier will improve by +10%", "MoneyMult", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, .1f))), baseCardUpgrade:true),
             new Augment("Ember Generation","Stock Trading", "Your ember multiplier will improve by +25%", "MoneyMult", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, .25f))), baseCardUpgrade:true),
             new Augment("Ember Generation","Capitalist Adventure", "Your ember multiplier will improve by +50%", "MoneyMult", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, .5f))), baseCardUpgrade:true),
             new Augment("Ember Generation","Savings Account", "Gain +25 embers per round", "MoneyProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(25, 0))), baseCardUpgrade:true),
@@ -296,7 +296,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("Ember Generation","Robbery", "Gain +100 embers per round", "MoneyProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(100, 0))), baseCardUpgrade:true),
 
             
-            new Augment("Gambling","Not enough refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => Deck.Instance.Gamble(2, Tier.Silver, "Not enough refreshes")), baseCardUpgrade:true),
+            new Augment("Gambling","Not Enough Refreshes", "Gain 2 random silver augments", "GambleImprove", Tier.Silver, new UnityAction(() => Deck.Instance.Gamble(2, Tier.Silver, "Not Enough Refreshes")), baseCardUpgrade:true),
             new Augment("Gambling","Feelin' Blessed", "Gain 4 random silver augments", "GambleImprove", Tier.Gold, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Silver, "Feelin' Blessed")), baseCardUpgrade:true),
             new Augment("Gambling","Roll the Dice", "Gain 4 random gold augments", "GambleImprove", Tier.Prismatic, new UnityAction(() => Deck.Instance.Gamble(4, Tier.Gold, "Roll the Dice")), baseCardUpgrade:true),
 
@@ -357,7 +357,7 @@ public class DeckBuilder : MonoBehaviour
             }), baseCard: true),  
             new Augment("BulletsProb","Pirate Wannabe", "Gain +5% chance to release roundshots whenever you kill an enemy", "BulletsProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.05f,0,0)))), 
             new Augment("BulletsProb","Yes, Captain!", "Gain +10% chance to release roundshots whenever you kill an enemy", "BulletsProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.1f,0,0)))), 
-            new Augment("BulletsProb","Shoot it, Loot it", "Gain +25% chance to release roundshots whenever you kill an enemy", "BulletsProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.25f,0,0)))), 
+            new Augment("BulletsProb","Shoot It, Loot It", "Gain +25% chance to release roundshots whenever you kill an enemy", "BulletsProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(.25f,0,0)))), 
             new Augment("BulletsDmg","Round Shot", "Roundshots will deal +15 damage", "BulletsDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,15,0))), immoType:IMMOLATE.FIRE), 
             new Augment("BulletsDmg","Arggh!", "Roundshots will deal +30 damage", "BulletsDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,30,0))), immoType:IMMOLATE.FIRE),  
             new Augment("BulletsDmg","Fire of Thieves", "Roundshots will deal +75 damage", "BulletsDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Bullets(0,75,0))), immoType:IMMOLATE.FIRE),   
@@ -450,7 +450,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("SummonAtkSpeed","Bee Swarm", "Bees will increase their attack speed by +80", "SummonAtkSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0.80f, 0, 0))), immoType:IMMOLATE.FIRE), 
             new Augment("SummonDmg","Baby Bee", "Bees will deal +10 damage", "SummonDmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(10, 0, 0, 0)))),
             new Augment("SummonDmg","Bee Stronger", "Bees will deal +25 damage", "SummonDmg", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(25, 0, 0, 0)))),
-            new Augment("SummonDmg","Queen-like Power", "Bees will deal +50 damage", "SummonDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(50, 0, 0, 0)))),  
+            new Augment("SummonDmg","Queen-Like Power", "Bees will deal +50 damage", "SummonDmg", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(50, 0, 0, 0)))),  
             new Augment("SummonSpeed","Speeding Up", "Increase Bee speed by +0.25", "SummonSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, 0.25f, 0)))),  
             new Augment("SummonSpeed","Agility", "Increase Bee speed by +0.5", "SummonSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, .5f, 0)))),
             new Augment("SummonSpeed","Bee Acrobatic League", "Increase Bee speed by +1", "SummonSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Summoner(0, 0, 1f, 0)))),
