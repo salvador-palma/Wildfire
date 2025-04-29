@@ -74,9 +74,10 @@ public static class Translator
             translations.Add(s.Trim(), new List<string>());
             //Debug.Log($"Adicionado {s} como lingua do dicionario.");
         }
-
+        int maxSize = 0;
         while (reader.Peek() > -1)
         {
+            
             string line = reader.ReadLine();
             if(DebugLineForLineReading){Debug.Log(line);}
             if(line[0] == '#') continue;
@@ -86,11 +87,14 @@ public static class Translator
             {
 
                 translations[str].Add(parts[lang++].Trim());
+                maxSize = Mathf.Max(maxSize, parts[lang-1].Length);
+
             }
 
 
         }
         Debug.LogError("FINISHED READING: " + translations["English"].Count + " words");
+        Debug.LogError("MAX SIZE: " + maxSize  + " length");
     }
 
     public static void changeLanguage(string newLanguage)
@@ -106,7 +110,13 @@ public static class Translator
     {
         //Debug.Log($"Traduzir {oldWord} para {currentLanguage}");
         try{
+
             if(oldWord == null) return oldWord;
+            if(oldWord.Length > 1000)
+            {
+                Debug.LogError("Word too long: " + oldWord);
+                return "Error 12";
+            }
             oldWord = oldWord.Trim();
             if(translations == null) LoadCSV(csvName);
 
@@ -114,9 +124,11 @@ public static class Translator
 
             // int oldEntryIndex = translations[lastLanguage].IndexOf(oldWord); // Buscar o indice na lista da ultima lingua (se não existir criar entrada, se existir ver se a tradução existe)
             int englishIndex = translations["English"].IndexOf(oldWord); // Se nao houver tradução a oldword estara com o valor default em ingles, este indice exite, se nao existe e preciso criar entrada
-
+            
+            
             // Debug.Log(translations[currentLanguage][oldEntryIndex]);
             // Missing entry
+
             if(englishIndex == -1) {  
                 if(WriteMissingText){
                     AddCsvEntry(oldWord);
@@ -124,6 +136,7 @@ public static class Translator
                 Debug.Log("No Translation: " + oldWord);
                 return oldWord;
             }
+            
 
             // Missing translation
             if(englishIndex != -1 && translations[currentLanguage][englishIndex].Contains("<Missing")) { //Se a entrada existe na current, a old word esta em numa non default language e nao da para pesquisar o seu index em ingles tem que ser usado este 
