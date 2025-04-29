@@ -13,8 +13,9 @@ public class Gyomyo : NPC
     protected override void CharacterLoad()
     {
         long totalInvested = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers);
+        long NetWorth = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers);
 
-        if(totalInvested < 100000 && GameVariables.GetVariable("CasinoReady") == -1){
+        if(NetWorth < 100000 && GameVariables.GetVariable("CasinoReady") == -1){
 
             gameObject.SetActive(false);
 

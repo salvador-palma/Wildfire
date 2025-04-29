@@ -8,15 +8,18 @@ public class Cloris : NPC
     
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("ClorisPresentation")==-1 && !hasAvailableDialogue()){
-            StartDialogue(0);
-            return;
+        if(!hasAvailableDialogue()){
+            if(GameVariables.GetVariable("ClorisPresentation")==-1){
+                StartDialogue(0);
+                return;
+            }
+
+            if(!Character.Instance.HasAtLeastOneCharacter()){ 
+                StartDialogue(Random.Range(0f,1f)<.5f?1:2);
+                return;
+            }
         }
-        if(!Character.Instance.HasAtLeastOneCharacter()){
-            
-            StartDialogue(Random.Range(0f,1f)<.5f?1:2);
-            return;
-        }
+        
         
         base.ClickedCharacter();
     }

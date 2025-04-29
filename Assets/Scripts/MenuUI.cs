@@ -14,16 +14,16 @@ public class MenuUI : MonoBehaviour
         if(PlayerPrefs.GetInt(version,0)==0){
             PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt(version,1);
-            string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
-            foreach (string filePath in filePaths){
-                try{
-                    Debug.Log("Deleting: " + filePath);
-                    File.Delete(filePath);
-                }catch{
-                    Debug.Log("Error Deleting File: "+filePath);
-                }
+            // string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+            // foreach (string filePath in filePaths){
+            //     try{
+            //         Debug.Log("Deleting: " + filePath);
+            //         File.Delete(filePath);
+            //     }catch{
+            //         Debug.Log("Error Deleting File: "+filePath);
+            //     }
                 
-            }
+            // }
                 
         }
     }

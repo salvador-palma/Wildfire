@@ -39,8 +39,7 @@ public class FixedOptionMenu : MonoBehaviour
     public void Refresh()
     { 
         Canvas.ForceUpdateCanvases();
-        GetComponentInChildren<HorizontalLayoutGroup>().enabled = false;
-        GetComponentInChildren<HorizontalLayoutGroup>().enabled = true;
+        
     }
 
     private void Move(int dir){

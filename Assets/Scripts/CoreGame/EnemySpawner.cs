@@ -420,6 +420,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("Slots Updated");
         }
         if(shiny && LocalBestiary.INSTANCE.getMilestoneAmountShiny(og) < 0){
+
             Debug.Log("Unlocking Shiny: " + enemy_name + " : " + shiny);
             LocalBestiary.INSTANCE.UnlockShiny(og);
             LocalBestiary.INSTANCE.UpdateSlots();
@@ -427,14 +428,20 @@ public class EnemySpawner : MonoBehaviour
 
         if(shiny){
             print("Shinies counting");
+            
+
+            int shinies = 0;
+            foreach(AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals){
+                if(a.ShinyCaptured >= 0){shinies++;}  
+            }
+            print("Shinies: " + shinies);
+
+            if(shinies == 1 && GameVariables.GetVariable("ShinyTalk") == -1){
+                NPC.QueueDialogue("Betsy", 8);
+                GameVariables.SetVariable("ShinyTalk",0);
+            }
             if(GameVariables.hasQuest(31)){
-                print("Shinies counting 2");
-                int shinies = 0;
-                foreach(AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals){
-                    if(a.ShinyCaptured >= 0){shinies++;}
-                    
-                }
-                print("Shinies: " + shinies);
+                
                 if(shinies>=10){
                     GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(31, "Gyomyo", 9);
                 }

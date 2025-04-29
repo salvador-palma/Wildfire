@@ -236,8 +236,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     protected virtual int calculateEmbers(){
         if(Shiny){
-            // return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * MoneyMultipliers.Instance.ShinyMultiplier); 
-            return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
+            return (int)(UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]) * EnemySpawner.Instance.ShinyMultiplier); 
+           // return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 
 
         }
         return UnityEngine.Random.Range(EmberDropRange[0], EmberDropRange[1]); 

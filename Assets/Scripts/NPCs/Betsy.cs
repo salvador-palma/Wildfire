@@ -34,6 +34,11 @@ public class Betsy : NPC
             GameVariables.SetVariable("BeeQuest", 1); 
             QueueDialogue(6);
         }
+        //DOUBLE CHECK FLAG
+        if(GameVariables.GetVariable("BeeQuest") == 2 && GameVariables.hasQuest(5)){
+            GameVariables.CompleteQuest(5);
+        }
+        //=====
         if(GameVariables.GetVariable("BeeQuest") == 1 && B.get_Amount_Of_Enemies_With_Milestones_Above(0) == B.get_Amount_Of_Enemies_With_Milestones_Above(-1)){
             GameVariables.SetVariable("BeeQuest", 2); 
             QueueDialogue(7);
@@ -79,6 +84,8 @@ public class Betsy : NPC
             QueueDialogue(8);
             GameVariables.SetVariable("ShinyTalk",1);
         }
+
+       
 
         
     }

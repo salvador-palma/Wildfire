@@ -3725,7 +3725,6 @@ GameObject:
   - component: {fileID: 148103822}
   - component: {fileID: 148103821}
   - component: {fileID: 148103820}
-  - component: {fileID: 148103819}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -3749,23 +3748,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35.33258, y: -10.62525}
-  m_SizeDelta: {x: 99.76, y: 30}
+  m_AnchoredPosition: {x: 35.32904, y: -10.62525}
+  m_SizeDelta: {x: 99.75, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &148103819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148103817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &148103820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3800,8 +3785,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Targeting:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5208,8 +5193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50032, y: -10.62525}
-  m_SizeDelta: {x: 130.74, y: 30}
+  m_AnchoredPosition: {x: 157.77, y: -10.62525}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194714197
 MonoBehaviour:
@@ -5259,10 +5244,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mais Saudavel
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9417,8 +9402,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9674,8 +9659,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Whenever you strike an enemy, gain a small chance to apply Burn effect '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13450,8 +13435,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Augments
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14001,7 +13986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80.43027, y: -10.62525}
+  m_AnchoredPosition: {x: 80.42319, y: -10.62525}
   m_SizeDelta: {x: 9.05, y: 15.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667489831
@@ -14786,8 +14771,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Augment History
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15875,8 +15860,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bestiary
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18220,7 +18205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 894978562}
-  - component: {fileID: 894978563}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
@@ -18251,32 +18235,6 @@ RectTransform:
   m_AnchoredPosition: {x: -55.4, y: 12.36}
   m_SizeDelta: {x: 213.7171, y: 21.2505}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &894978563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894978561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 6.4
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &901719604
 GameObject:
   m_ObjectHideFlags: 0
@@ -18662,7 +18620,6 @@ GameObject:
   - component: {fileID: 920100808}
   - component: {fileID: 920100807}
   - component: {fileID: 920100806}
-  - component: {fileID: 920100809}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -18686,8 +18643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35.33258, y: -10.62525}
-  m_SizeDelta: {x: 99.76, y: 30}
+  m_AnchoredPosition: {x: 35.32904, y: -10.62525}
+  m_SizeDelta: {x: 99.75, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920100806
 MonoBehaviour:
@@ -18723,8 +18680,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Targeting:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18798,20 +18755,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920100804}
   m_CullTransparentMesh: 1
---- !u!114 &920100809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920100804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!1 &920765750
 GameObject:
   m_ObjectHideFlags: 0
@@ -29797,7 +29740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.57039, y: -10.62525}
+  m_AnchoredPosition: {x: 234.7, y: -10.62525}
   m_SizeDelta: {x: 9.05, y: 15.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1250883343
@@ -30430,8 +30373,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -30690,7 +30633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80.43027, y: -10.62525}
+  m_AnchoredPosition: {x: 80.42319, y: -10.62525}
   m_SizeDelta: {x: 9.05, y: 15.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1283761596
@@ -31344,8 +31287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 136.50032, y: -10.62525}
-  m_SizeDelta: {x: 130.74, y: 30}
+  m_AnchoredPosition: {x: 157.77, y: -10.62525}
+  m_SizeDelta: {x: 130.58, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313814936
 MonoBehaviour:
@@ -31397,8 +31340,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mais Saudavel
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31746,8 +31689,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 193/1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31979,7 +31922,7 @@ MonoBehaviour:
   - Name: Ash Pyre
     AnimationBool: Assassin
     AbilityName: Assassin
-    AbilityDescription: <style="Red">Armor Penetration</style> benefits all <style="Red">Damage</style>
+    AbilityDescription: <style="Red">Armor Penetration</style> benefits all <style="Red">damage</style>
       sources
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -32044,7 +31987,7 @@ MonoBehaviour:
   - Name: Earth
     AnimationBool: OrbitalEarth
     AbilityName: OrbitalEarth
-    AbilityDescription: The Moon will orbit around you, dealing <style="Red">4xDmg</style>
+    AbilityDescription: The Moon will orbit around you, dealing <style="Red">4x damage</style>
       and applying <style="Pink">On-Land Effects</style> when colliding with an enemy
     BodyBack: {fileID: 21300000, guid: 2ff95046897ea5049973ce2f633cf265, type: 3}
     BodyFront: {fileID: 0}
@@ -32129,7 +32072,7 @@ MonoBehaviour:
   - Name: Neptune
     AnimationBool: OrbitalNeptune
     AbilityName: OrbitalNeptune
-    AbilityDescription: Orbits spin <style="LYellow">4x Slower</style> but <style="Blue">Stun</style>
+    AbilityDescription: Orbits spin <style="LYellow">4x Slower</style> but <style="Blue">stun</style>
       enemies for <style="LYellow">2 seconds</style> upon collision
     BodyBack: {fileID: 21300000, guid: 0c64956ce8835f740831049f1db173aa, type: 3}
     BodyFront: {fileID: 0}
@@ -32143,10 +32086,10 @@ MonoBehaviour:
     AbilityToSkillTree: Orbits
     Subtype: Orbital
     Supratype: 
-  - Name: Pheonix
+  - Name: Phoenix
     AnimationBool: Regen
     AbilityName: Regeneration
-    AbilityDescription: When you die, reborn at <style="Green">full HP</style> and
+    AbilityDescription: When you die, rebirth at <style="Green">full HP</style> and
       kill every enemy on screen <style="LGrey">(5 Round Cooldown)
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -32164,8 +32107,8 @@ MonoBehaviour:
     AnimationBool: Crit
     AbilityName: Crit
     AbilityDescription: Critically Defend based on your <style="LYellow">Crit Chance</style>
-      and <style="LYellow">Multiplier,</style> reducing incoming <style="Red">damage</style>
-      up to <style="LYellow">90%
+      and <style="LYellow">Multiplier</style>, reducing incoming <style="Red">damage</style>
+      by up to <style="LYellow">90%</style>
     BodyBack: {fileID: 21300000, guid: 679939325e8bdee408651eb7872b4d30, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -32249,7 +32192,7 @@ MonoBehaviour:
   - Name: Blaze Brigade
     AnimationBool: Burst
     AbilityName: Burst
-    AbilityDescription: <style="Yellow>Burst</style> every time you get hit
+    AbilityDescription: <style="Yellow">Burst</style> every time you get hit
     BodyBack: {fileID: 21300000, guid: b90f329d505d5d34a92c6a822994eee3, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -32299,7 +32242,7 @@ MonoBehaviour:
     AnimationBool: Flower
     AbilityName: Flower Field
     AbilityDescription: <style="LYellow">10%</style> Chance of spawning <style="LYellow">Carnivore
-      Plants</style> that deal <style="Red">Damage</style> to the enemies instead
+      Plants</style> that deal <style="Red">damage</style> to the enemies instead
       of healing you
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -32334,10 +32277,10 @@ MonoBehaviour:
     AnimationBool: Statik
     AbilityName: Statik
     AbilityDescription: Gain <style="LYellow">1 Energy Point</style> each time you
-      release <style="Yellow">Static Energy</style>, at 100 points release a <style="Blue">Super
+      release <style="Yellow">Static Energy</style>. At 100 points release a <style="Blue">Super
       Charge. Super Charges</style> have increased range, duration, deal <style="Red">True
       Damage</style> and are able to apply <style="Pink">On-Hit Effects <style="LGrey">(including
-      Static Energy)
+      Static Energy)</style>
     BodyBack: {fileID: 21300000, guid: 1ecc71e4b6e116642bc01dfa7ef05880, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -32354,7 +32297,7 @@ MonoBehaviour:
     AnimationBool: Blue
     AbilityName: Magical Shot
     AbilityDescription: <style="Yellow">Active:</style> Turn <style="Pink">Purple</style>
-      during 5 seconds <style="LGrey">(1 Round Cooldown)
+      for 5 seconds <style="LGrey">(1 Round Cooldown)</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -32370,7 +32313,7 @@ MonoBehaviour:
   - Name: Zeus
     AnimationBool: Thunder
     AbilityName: Thunder
-    AbilityDescription: Cast <style="LYellow">double</style> the <style="LYellow">Thunders</style>
+    AbilityDescription: Cast <style="LYellow">double</style> the <style="LYellow">Thunderbolts</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: c665cb1953416c64f83fe2e2da93a14c, type: 3}
@@ -32386,7 +32329,7 @@ MonoBehaviour:
   - Name: Mt. Vesuvius
     AnimationBool: Lava
     AbilityName: Lava
-    AbilityDescription: A Permanent <style="Yellow">Lava Pool</style> will sit by
+    AbilityDescription: A permanent <style="Yellow">Lava Pool</style> will sit by
       Mt. Vesuvius
     BodyBack: {fileID: 21300000, guid: d8b444b3850195047830fb643c86c232, type: 3}
     BodyFront: {fileID: 0}
@@ -32470,8 +32413,8 @@ MonoBehaviour:
   - Name: Earth Monk
     AnimationBool: ImmolateEarth
     AbilityName: ImmolateEarth
-    AbilityDescription: Everytime <style="Yellow">Immolate</style> hits an enemy
-      gain <style="Grey">+1 Shield</style> for a max of 0.3 of your <style="Green">Max
+    AbilityDescription: Every time <style="Yellow">Immolate</style> hits an enemy
+      gain <style="Grey">+1 Shield</style> up to a max of 0.3 of your <style="Green">Max
       HP</style>
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -32505,7 +32448,7 @@ MonoBehaviour:
     AnimationBool: Necro
     AbilityName: Necro
     AbilityDescription: <style="LYellow">5%</style> Chance of spawning a <style="Blue">Mega
-      Ghoul</style> that deals <style="Red">Damage</style> in Area
+      Ghoul</style> that deals <style="Red">damage</style> in an Area
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 0}
@@ -32539,7 +32482,7 @@ MonoBehaviour:
     AnimationBool: Bee
     AbilityName: Bee Summoner
     AbilityDescription: Gain <style="LYellow">+1 Worker Bee</style> every <style="LYellow">5
-      Rounds <style="LGrey">(without limit)
+      Rounds </style>without limit
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: aaba9973b4cab8f45bb1fac810bcf374, type: 3}
@@ -32558,7 +32501,7 @@ MonoBehaviour:
     AbilityDescription: Every time you pick a <style="LYellow">gambling augment</style>,
       a random <style="Orange">buff/debuff</style> will be applied for <style="LYellow">5
       rounds</style> or until another gamble is done. Gain <style="LYellow">+5<style="Green">
-      Luck </style></style>for every gamble and loose<style="LYellow"> -10</style>
+      Luck </style></style>every time you gamble and lose<style="LYellow"> -10</style>
       every time you don't
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
@@ -33924,8 +33867,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0H30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -36341,8 +36284,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Characters
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -37076,8 +37019,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -37190,7 +37133,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -249.26, y: -168}
-  m_SizeDelta: {x: 88.92, y: 24.8508}
+  m_SizeDelta: {x: 88.83, y: 24.8508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600419684
 MonoBehaviour:
@@ -38827,8 +38770,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -38976,8 +38919,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Effects
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -40145,8 +40088,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Mythical Critical
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -46075,7 +46018,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782736553}
-  - component: {fileID: 1782736554}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
@@ -46106,32 +46048,6 @@ RectTransform:
   m_AnchoredPosition: {x: -55.4, y: 12.36}
   m_SizeDelta: {x: 213.7171, y: 21.2505}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1782736554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782736552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 6.4
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &1787097570
 GameObject:
   m_ObjectHideFlags: 0
@@ -46487,8 +46403,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -48993,7 +48909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.57039, y: -10.62525}
+  m_AnchoredPosition: {x: 234.7, y: -10.62525}
   m_SizeDelta: {x: 9.05, y: 15.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936057739
@@ -50079,8 +49995,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 44.46, y: -12.6062}
-  m_SizeDelta: {x: 58.92, y: 25.2124}
+  m_AnchoredPosition: {x: 44.415, y: -12.6062}
+  m_SizeDelta: {x: 58.83, y: 25.2124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1978038874
 MonoBehaviour:
@@ -50104,8 +50020,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: END NIGHT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -50425,7 +50341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.63998, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.64001, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -53172,8 +53088,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 75
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -53464,8 +53380,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12/s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -55244,8 +55160,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1250
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -55982,8 +55898,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 250
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -56535,8 +56451,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 20
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -57253,8 +57169,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 75%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
-  m_sharedMaterial: {fileID: 8273918405167671912, guid: cfd9d454e146e864d8c77b73eec6ec22, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
+  m_sharedMaterial: {fileID: -7137018341838871406, guid: 24a9e6437ea01634997e96958785d09a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
