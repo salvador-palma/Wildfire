@@ -33,11 +33,16 @@ public class DropdownScript : MonoBehaviour
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
 
 
-        PopulateResolutionDropdown();
-        PopulateWindowModeDropdown();
+        if(MenuUI.device != "Mobile"){
+            PopulateResolutionDropdown();
+            PopulateWindowModeDropdown();
+            resolutionDropdown.onValueChanged.AddListener(SetResolution);
+            windowModeDropdown.onValueChanged.AddListener(SetWindowMode);
+        }
+        
+        
         PopulateFPSCapDropdown();
-        resolutionDropdown.onValueChanged.AddListener(SetResolution);
-        windowModeDropdown.onValueChanged.AddListener(SetWindowMode);
+        
         fpsCapDropdown.onValueChanged.AddListener(SetFPSCap);
     }
 
