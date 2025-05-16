@@ -33,7 +33,7 @@ public class SkillTreeButton : MonoBehaviour
 
     private void virtualStart(object sender, EventArgs e){virtualStart();}
     public void virtualStart(){
-        
+
        
         if(!gameObject.activeInHierarchy){return;}
         GetComponent<Button>().onClick.RemoveAllListeners();

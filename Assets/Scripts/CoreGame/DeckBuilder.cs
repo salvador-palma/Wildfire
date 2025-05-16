@@ -30,9 +30,9 @@ public class DeckBuilder : MonoBehaviour
         if(level > 2){return -1;}
 
         List<string> firstLayer = new List<string>(){"Assassin","Orbits", "Critical Strike", "Regeneration", "Multicaster"};
-        List<string> secondLayer = new List<string>(){"Vampire","Pirate", "Thorns", "Resonance", "Burst Shot", "Freeze", "Magical Shot"};
-        List<string> thirdLayer = new List<string>(){"Flower Field","Explosion", "Immolate", "Lava Pool", "Snow Pool", "Static Energy", "Thunder"};
-        List<string> fourthLayer = new List<string>(){"Necromancer","Ritual", "Bee Summoner", "Ember Generation", "Gambling"};
+        List<string> secondLayer = new List<string>(){"Vampire","Pirate", "Thorns", "Resonance", "Burst Shot", "Freeze", "Magical Shot", "Smog"};
+        List<string> thirdLayer = new List<string>(){"Flower Field","Explosion", "Immolate", "Lava Pool", "Snow Pool", "Static Energy", "Thunder", "Earthquake", "Totem", "Laser Beam"};
+        List<string> fourthLayer = new List<string>(){"Necromancer","Ritual", "Bee Summoner", "Ember Generation", "Gambling", "Gravity", "Whirlpool"};
 
 
         if(firstLayer.Contains(skill)){
