@@ -5,7 +5,7 @@ using System;
 using Unity.VisualScripting;
 
 
-public class DrainAOE : IPoolable
+public class DrainAOE : IAlliedObject
 {
     [SerializeField] Sprite[] flowers;
     [SerializeField] Sprite carnivore;

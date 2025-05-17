@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceAOE : IPoolable
+public class IceAOE : IAlliedObject
 {
     public float Slow;
 

@@ -291,8 +291,21 @@ public class Deck : MonoBehaviour
     }
     private void ClearRemainderObjects(object sender, EventArgs e)
     {
-        
-        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Prop")){
+
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Prop"))
+        {
+            IPoolable p = g.GetComponent<IPoolable>();
+            if (p != null)
+            {
+                p.UnPool();
+            }
+            else
+            {
+                Destroy(g);
+            }
+
+        }
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("AlliedObjects")){
             IPoolable p = g.GetComponent<IPoolable>();
             if(p!=null){
                 p.UnPool();

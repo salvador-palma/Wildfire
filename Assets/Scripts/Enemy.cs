@@ -23,7 +23,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public int Armor;
     public float ArmorPen;
     public int WeigthClass;
-    static float[] WeightMultipliers = new float[]{2f,1.25f, .9f, 0.35f};
+    static float[] WeightMultipliers = new float[]{2f,1.25f, .75f, .2f};
     public Vector2Int EmberDropRange;
     public bool Attacking;
    
@@ -99,11 +99,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void KnockBackCenter(){
         StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
     }
-    public virtual void KnockBack(Vector2 origin, bool retracting, float power){
-        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass]));
+    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f){
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time));
     }
-    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power){
-        float timer = .5f;
+    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f){
+  
 
         Vector2 diff = (Vector2)HitCenter.position - origin;
         diff.Normalize();
@@ -128,7 +128,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
     public void ApplyPoison(){
         if(poisonLeft > 0){
-            Hitted((int)(MaxHealth*Flamey.PoisonDrainPerc), 14, ignoreArmor:true, onHit:false, source:"Poison");
+            float perc = Smog.Instance != null && SkillTreeManager.Instance.getLevel("Smog") >= 1 ? 2 : 1;
+            Hitted((int)(MaxHealth*Flamey.PoisonDrainPerc*perc), 14, ignoreArmor:true, onHit:false, source:"Poison");
             poisonLeft--;
             if(poisonLeft <= 0){
                 GetComponent<SpriteRenderer>().material.SetInt("_Poison", 0);

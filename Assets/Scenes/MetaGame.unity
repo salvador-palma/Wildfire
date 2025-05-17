@@ -13975,20 +13975,19 @@ MonoBehaviour:
     AbilityDescription2: Allied objects are also affected by <style="LYellow">Whirlpools</style>
     AbilityDescription3: <style="LYellow">Whirlpools</style> will deal <style="LYellow">10</style>
       <style="Red">damage</style> per second to enemies in the center. This damage
-      increases by <style="LYellow">+10</style> for each merge
+      increases by <style="LYellow">+1</style> per merge
     QuestID: -1
     npc: {fileID: 0}
     DialogueID: 0
   - Name: Smog
-    Type: On-Hit/On-Kill Effect
-    AbilityDescription1: You have a chance to <style="Purple">poison</style> enemies
-      <style="Pink">On-Hit</style>, dealing <style="LYellow">4% <style="Green">Max
-      HP</style></style> per second until the <style="Purple">poison</style> wears
-      off
-    AbilityDescription2: Killing a <style="Purple">poisoned</style> enemy will refresh
-      and spread the effect to nearby enemies
-    AbilityDescription3: Killing an enemy with <style="Purple">poison</style> will
-      make the spread range <style="LYellow">x2</style> bigger
+    Type: On-Kill Effect
+    AbilityDescription1: Killing an enemy can generate <style="LYellow">Smog</style>
+      that <style="Purple">poisons</style> nearby enemies, dealing <style="LYellow">4%
+      <style="Green">Max HP</style></style> per second until the <style="Purple">poison</style>
+      wears off
+    AbilityDescription2: Spreading area limit increased to <style="LYellow">100</style>
+    AbilityDescription3: "<style=\"Purple\">Poison</style> damage increases to <style=\"LYellow\">8%
+      <style=\"Green\">Max HP</style></style> per second\r"
     QuestID: -1
     npc: {fileID: 0}
     DialogueID: 0
@@ -14162,7 +14161,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520883187}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -24019,8 +24018,8 @@ MonoBehaviour:
     Subtype: 
     Supratype: 
   - Name: Dr. Miasma
-    AnimationBool: Smog
-    AbilityName: Poison Cloud
+    AnimationBool: Poison
+    AbilityName: Smog
     AbilityDescription: When you get hit, dodge the attack with a <style="LYellow">Smog
       Cloud</style>, making you untargetable for <style="LYellow">5</style> seconds
       and <style="Purple">poisoning</style> nearby enemies <style="Grey">(10 second
@@ -24034,7 +24033,7 @@ MonoBehaviour:
     Environment: {fileID: 6897591518191540117, guid: 19c78518b612d4c4ca7ed0b99a510968, type: 3}
     EnvironmentMusic: 0
     Unlocked: 1
-    AbilityToSkillTree: Poison Cloud
+    AbilityToSkillTree: Smog
     Subtype: 
     Supratype: 
   - Name: Mecha
@@ -24068,14 +24067,13 @@ MonoBehaviour:
     Environment: {fileID: 827525329596228896, guid: 64839746fc86b064cba3ba50d4095eda, type: 3}
     EnvironmentMusic: 2
     Unlocked: 1
-    AbilityToSkillTree: Shock Wave
+    AbilityToSkillTree: Earthquake
     Subtype: 
     Supratype: 
   - Name: Keiki Ahi
     AnimationBool: Totem
     AbilityName: Totem
-    AbilityDescription: The campfire gains free will and runs away from the nearest
-      enemy
+    AbilityDescription: You now have free will
     BodyBack: {fileID: 21300000, guid: 61675be723d3dd8488aa7ebb39a73ed1, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 21300000, guid: 6ad6948a8fe3aa54aa7001337c60a480, type: 3}
@@ -76376,7 +76374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00030517578, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000045776367, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -77207,7 +77205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00010681152
+      value: -0.00061035156
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

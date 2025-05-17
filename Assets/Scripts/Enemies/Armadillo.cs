@@ -67,7 +67,7 @@ public class Armadillo : Enemy
         return n;
         
     }
-    public override void KnockBack(Vector2 origin, bool retracting, float power){
+    public override void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f){
         if(hitsUntilUnroll <= 0){
             base.KnockBack(origin, retracting, power);
         }

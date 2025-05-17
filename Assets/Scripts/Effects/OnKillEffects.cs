@@ -126,7 +126,7 @@ public class Explosion : OnKillEffects
 
     public string getType()
     {
-        return "On-Death Effect";
+        return "On-Kill Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -219,7 +219,7 @@ public class Necromancer : OnKillEffects
 
     public string getType()
     {
-        return "On-Death Effect";
+        return "On-Kill Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;
@@ -229,9 +229,9 @@ public class Necromancer : OnKillEffects
 
 public class Bullets : OnKillEffects
 {
-    
 
-    
+
+
     public float prob;
     public int dmg;
     public int amount;
@@ -239,23 +239,28 @@ public class Bullets : OnKillEffects
     static IPoolable Prefab;
 
     public int EmbersInRound = 0;
-    public Bullets(float prob, int dmg, int amount){
+    public Bullets(float prob, int dmg, int amount)
+    {
         this.prob = prob;
         this.dmg = dmg;
         this.amount = amount;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             Prefab = Resources.Load<GameObject>("Prefab/Bullet").GetComponent<IPoolable>();
-            if(SkillTreeManager.Instance.getLevel("Pirate") >= 2){ this.amount *= 2;}
+            if (SkillTreeManager.Instance.getLevel("Pirate") >= 2) { this.amount *= 2; }
             Deck.RoundOver += ResetEmbersRound;
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
 
     private void ResetEmbersRound(object sender, EventArgs e)
     {
-        if(EmbersInRound >= 5000){
+        if (EmbersInRound >= 5000)
+        {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(15, "Gyomyo", 15);
         }
         //Debug.Log("Embers: " + EmbersInRound);
@@ -270,64 +275,76 @@ public class Bullets : OnKillEffects
 
     public void ApplyEffect(Vector2 pos)
     {
-        
-        if(Random.Range(0f,1f) < prob){
-            
+
+        if (Random.Range(0f, 1f) < prob)
+        {
+
             SpawnBullets(pos);
             Flamey.Instance.addEmbers(20);
 
         }
     }
-    private void SpawnBullets(Vector2 pos){
+    private void SpawnBullets(Vector2 pos)
+    {
         AudioManager.PlayOneShot(FMODEvents.Instance.RoundShot, Vector2.zero);
-        float randomRotation = Random.Range(0,360);
-        
-        if(SkillTreeManager.Instance.getLevel("Pirate") >= 1){
+        float randomRotation = Random.Range(0, 360);
 
-            for(int i = 0; i != amount; i++){
+        if (SkillTreeManager.Instance.getLevel("Pirate") >= 1)
+        {
+
+            for (int i = 0; i != amount; i++)
+            {
                 Enemy e = Enemy.getClosestEnemy(pos, i);
-                if(e!=null){
-                    randomRotation = Vector2.SignedAngle( Vector2.up, (Vector2)e.HitCenter.position - pos);
+                if (e != null)
+                {
+                    randomRotation = Vector2.SignedAngle(Vector2.up, (Vector2)e.HitCenter.position - pos);
                 }
-                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, randomRotation});
-            }          
-            
-        }else{
-            for(int i =0; i != amount; i++){
-                ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, i*(360/amount) + randomRotation});
+                ObjectPooling.Spawn(Prefab, new float[] { pos.x, pos.y, randomRotation });
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i != amount; i++)
+            {
+                ObjectPooling.Spawn(Prefab, new float[] { pos.x, pos.y, i * (360 / amount) + randomRotation });
             }
         }
-       
-        
+
+
 
     }
-    public void Stack(Bullets necromancer){
+    public void Stack(Bullets necromancer)
+    {
         prob += necromancer.prob;
         dmg += necromancer.dmg;
         amount += necromancer.amount * (SkillTreeManager.Instance.getLevel("Pirate") >= 2 ? 2 : 1);
         RemoveUselessAugments();
     }
-    private void RemoveUselessAugments(){
-        if(prob >= .5f){
+    private void RemoveUselessAugments()
+    {
+        if (prob >= .5f)
+        {
             prob = .5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BulletsProb");
-        } 
-        if(amount >= 6){
+        }
+        if (amount >= 6)
+        {
             amount = 6;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BulletsAmount");
         }
-       
+
     }
-    
+
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of shooting <color=#FFCC7C>Cannon Balls</color> out of the enemy's corpse, that deal damage and apply <color=#FF99F3>On-Hit effects</color> whenever they hit another creature. If this effect procs, you will also gain <color=#FFCC7C>+10 embers</color>. <color=#AFEDFF>Cannon Balls' speed</color> scales with <color=#AFEDFF>Bullet Speed";
     }
     public string[] getCaps()
     {
-        return new string[]{"Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob*100f).ToString(), amount.ToString(), dmg.ToString()};
+        return new string[] { "Chance: {0}% (Max. 50%) <br>Amount of Cannon Balls: {1} (Max. 6)<br>Damage: +{2}", Mathf.Round(prob * 100f).ToString(), amount.ToString(), dmg.ToString() };
     }
 
     public string getIcon()
@@ -342,7 +359,159 @@ public class Bullets : OnKillEffects
 
     public string getType()
     {
-        return "On-Death Effect";
+        return "On-Kill Effect";
+    }
+    public GameObject getAbilityOptionMenu()
+    {
+        return null;
+    }
+}
+
+public class Smog : OnKillEffects
+{
+    public float prob;
+    public float area;
+    public int ticks;
+    public static Smog Instance;
+    
+    public static IPoolable Prefab;
+    public static IPoolable DrMiasmaSmog;
+    
+    //private Image cooldownImage;
+    private float CooldownTimer =10f;
+    private Image cooldownImage;
+    public Smog(float prob, float area, int ticks){
+        this.prob = prob;
+        this.area = area;
+        this.ticks = ticks;
+        if (Instance == null)
+        {
+            Instance = this;
+            Prefab = Resources.Load<GameObject>("Prefab/SmogOnDeath").GetComponent<IPoolable>();
+            DrMiasmaSmog = Resources.Load<GameObject>("Prefab/SmogDrMiasma").GetComponent<IPoolable>();
+            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/PoisonSpread"));
+            cooldownImage.fillAmount = 1f;
+        }
+        else
+        {
+            Instance.Stack(this);
+
+            
+        }
+    }
+    public bool addList()
+    {
+        return this == Instance;
+    }
+
+    public void ApplyEffect(Vector2 pos)
+    {
+        
+        if(Random.Range(0f,1f) < prob){
+
+            float scale = area * 2f / 100f;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 2f*scale, Flamey.EnemyMask);
+            ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, scale});
+            
+
+            foreach(Collider2D col in targets){
+                col.GetComponent<Enemy>().Poison(ticks);
+            }            
+            
+        }
+    }
+    
+    public void Stack(Smog vampOnDeath){
+        prob += vampOnDeath.prob;
+        area += vampOnDeath.area;
+        ticks += vampOnDeath.ticks;
+        RemoveUselessAugments();
+    }
+    bool OnDrMiasma = false;
+    public void ActivateDrMiasma()
+    {
+        if (cooldownImage.fillAmount >= 1f && !OnDrMiasma)
+        {
+            OnDrMiasma = true;
+            cooldownImage.fillAmount = 0f;
+
+            ObjectPooling.Spawn(Prefab, new float[] { 0, 0, 1 });
+            Flamey.Instance.StartCoroutine(DrMiasma());
+
+            Vector2 pos = Vector2.zero;
+            float scale = area * 2f / 100f;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 2f * scale, Flamey.EnemyMask);
+
+            ObjectPooling.Spawn(DrMiasmaSmog, new float[] { pos.x, pos.y, scale });
+            foreach (Collider2D col in targets)
+            {
+                col.GetComponent<Enemy>().Poison(ticks);
+            }
+        }
+
+    }
+    private IEnumerator DrMiasma()
+    {
+        Flamey.Instance.Unhittable = true;
+        yield return new WaitForSeconds(5f);
+        Flamey.Instance.Unhittable = false;
+
+        while(cooldownImage.fillAmount < 1f){
+            cooldownImage.fillAmount += 0.25f * (1f / CooldownTimer);
+            yield return new WaitForSeconds(0.25f);
+        }
+        OnDrMiasma = false;
+    }
+    private void RemoveUselessAugments()
+    {
+        if (prob >= 1f)
+        {
+            prob = 1f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("SmogProb");
+        }
+        if ((area >= 100f && SkillTreeManager.Instance.getLevel("Smog") >= 1) || (area >= 50f && SkillTreeManager.Instance.getLevel("Smog") < 1))
+        {
+            area = SkillTreeManager.Instance.getLevel("Smog") >= 1 ? 100f : 50f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("SmogArea");
+        }
+        if (ticks >= 25)
+        {
+            ticks = 25;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("SmogTicks");
+        }
+
+    }
+   
+    public string getDescription()
+    {
+        return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
+    }
+    public string[] getCaps()
+    {
+        if (SkillTreeManager.Instance.getLevel("Smog") >= 1) {
+
+            return new string[] { "Chance: {0}% (Max. 100%) <br>Area: +{1} (Max. 100) <br>Poison Ticks: +{2} (Max. 25)", Mathf.Round(prob * 100).ToString(), Mathf.Round(area).ToString(), ticks.ToString() };
+        } else {
+            return new string[] { "Chance: {0}% (Max. 100%) <br>Area: +{1} (Max. 50) <br>Poison Ticks: +{2} (Max. 25)" , Mathf.Round(prob * 100).ToString(), Mathf.Round(area).ToString(), ticks.ToString() };
+        }
+    }
+
+    public string getIcon()
+    {
+        return "PoisonUnlock";
+    }
+
+    public string getText()
+    {
+        return "Smog";
+    }
+
+    public string getType()
+    {
+        return "On-Kill Effect";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

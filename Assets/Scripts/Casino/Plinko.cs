@@ -177,6 +177,7 @@ public class Plinko : MonoBehaviour
     void SpawnWave(){
         roundEmberAmount = 0;
         Array.ForEach(GameObject.FindGameObjectsWithTag("Prop"), e => Destroy(e.gameObject));
+         Array.ForEach(GameObject.FindGameObjectsWithTag("AlliedObjects"), e => Destroy(e.gameObject));
 
         AddEmbersToSkillTree(-1*AcornAmount*int.Parse(AcornValueTxt.text));
 

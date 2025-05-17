@@ -306,6 +306,10 @@ public class Flamey : MonoBehaviour
                 BurstShot.Instance.Burst();
             }
 
+            if(Character.Instance.isCharacter("Smog") && Smog.Instance != null){
+                Smog.Instance.ActivateDrMiasma();
+            }
+
             Dmg = (int)(Dmg * Gambling.getGambleMultiplier(6));
             
             if(Character.Instance.isCharacter("Crit")){

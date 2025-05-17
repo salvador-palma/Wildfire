@@ -208,59 +208,73 @@ public class DrainOnLand : OnLandEffect
     public float prob;
     public float lasting;
     public float carnivoreChance;
-    public DrainOnLand(float size, float perc, float prob, float lasting){
+    public DrainOnLand(float size, float perc, float prob, float lasting)
+    {
         this.prob = prob;
         this.size = size;
         this.perc = perc;
         this.lasting = lasting;
-       
-        if(Instance == null){
+
+        if (Instance == null)
+        {
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/DrainAOE").GetComponent<IPoolable>();
             prefabCarnivore = Resources.Load<GameObject>("Prefab/DrainAOECarnivore").GetComponent<IPoolable>();
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
     public void ApplyEffect(Vector2 pos)
     {
-        if(UnityEngine.Random.Range(0f,1f) < prob){
-            if(Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f,1f) < 0.1f){
-                ObjectPooling.Spawn(prefabCarnivore, new float[]{pos.x, pos.y});
-            }else{
-                ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
+        if (UnityEngine.Random.Range(0f, 1f) < prob)
+        {
+            if (Character.Instance.isCharacter("Flower Field") && UnityEngine.Random.Range(0f, 1f) < 0.1f)
+            {
+                ObjectPooling.Spawn(prefabCarnivore, new float[] { pos.x, pos.y });
             }
-            
+            else
+            {
+                ObjectPooling.Spawn(prefab, new float[] { pos.x, pos.y });
+            }
+
         }
     }
-    public void Stack(DrainOnLand burnOnLand){
+    public void Stack(DrainOnLand burnOnLand)
+    {
         size += burnOnLand.size;
         prob += burnOnLand.prob;
         perc += burnOnLand.perc;
         lasting += burnOnLand.lasting;
         RemoveUselessAugments();
     }
-    private void RemoveUselessAugments(){
-        if(prob >= .25f){
+    private void RemoveUselessAugments()
+    {
+        if (prob >= .25f)
+        {
             prob = .25f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolProb");
         }
-        if(size >= 2.5f){
+        if (size >= 2.5f)
+        {
             size = 2.5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolSize");
         }
-        if(lasting >= 10){
+        if (lasting >= 10)
+        {
             lasting = 10;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("DrainPoolDuration");
         }
-        
-        
+
+
     }
-   
-    public bool addList(){
+
+    public bool addList()
+    {
         return Instance == this;
     }
 
@@ -280,12 +294,95 @@ public class DrainOnLand : OnLandEffect
     }
     public string[] getCaps()
     {
-        return new string[]{"Chance: {0}% (Max. 25%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob*100f).ToString(), (size*10).ToString(), lasting.ToString() , Mathf.Round(perc*100f).ToString()};
+        return new string[] { "Chance: {0}% (Max. 25%) <br>Flower Size: {1} units (Max. 25 units)<br>Flower Lifespan: {2}s (Max. 10s)<br>Enemy Max HP drained: {3}%/s", Mathf.Round(prob * 100f).ToString(), (size * 10).ToString(), lasting.ToString(), Mathf.Round(perc * 100f).ToString() };
     }
 
     public string getIcon()
     {
         return "DrainPoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu()
+    {
+        return null;
+    }
+}
+
+public class Whirpool : OnLandEffect
+{
+    public static Whirpool Instance;
+    public IPoolable prefab;
+
+    public float force;
+    public float prob;
+    public float duration;
+
+    public Whirpool(float force, float prob){
+        this.prob = prob;
+        this.force = force;
+        
+       
+        if(Instance == null){
+            Instance = this;
+            prefab = Resources.Load<GameObject>("Prefab/Whirlpool").GetComponent<IPoolable>();
+        }else{
+            Instance.Stack(this);
+        }
+    }
+    public void ApplyEffect(Vector2 pos)
+    {
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
+        }
+    }
+    public void Stack(Whirpool burnOnLand){
+        force += burnOnLand.force;
+        prob += burnOnLand.prob;
+        duration += burnOnLand.duration;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments(){
+        if(prob >= .25f){
+            prob = .25f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("WhirlpoolProb");
+        }
+        
+        if (force >= 3){
+            force = 3;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("WhirlpoolForce");
+        }
+
+        
+        
+    }
+   
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Whirlpool";
+    }
+
+    public string getType()
+    {
+        return "On-Land Effect";
+    }
+
+    public string getDescription()
+    {
+        return "Whenever a shot lands, there's a chance of sprouting a <color=#FFCC7C>Flower</color>. Everytime an enemy <color=#FFCC7C>steps</color> on a <color=#FFCC7C>flower</color>, you heal part of their <color=#0CD405>Max HP";
+    }
+    public string[] getCaps()
+    {
+        return new string[]{"Chance: {0}% (Max. 25%) <br>Pull Force: {1}N (Max. 300 N)", Mathf.Round(prob*100f).ToString(), Mathf.Round(force*100f).ToString()};
+    }
+
+    public string getIcon()
+    {
+        return "WhirlpoolUnlock";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

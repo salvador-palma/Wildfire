@@ -367,6 +367,7 @@ public class EnemySpawner : MonoBehaviour
         BurnOnLand.Instance = null;
         IceOnLand.Instance = null;
         DrainOnLand.Instance = null;
+        Whirpool.Instance = null;
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
