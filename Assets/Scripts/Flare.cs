@@ -23,7 +23,7 @@ public class Flare : IPoolable
     public int DmgTextID;
     
     private void SetupTarget(){
-        transform.position = new Vector2(UnityEngine.Random.Range(-0.4f,0.4f), 0);
+        transform.position = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
         SpotColor.a = 0;
     }
     private void SetupStats(){
@@ -155,6 +155,7 @@ public class Flare : IPoolable
 
     public override void Define(float[] args)
     {
+        transform.position = new Vector2(args[1], args[2]);
         FlareType flareData = Flamey.Instance.FlareTypes[(int)args[0]];
         GetComponent<SpriteRenderer>().color = flareData.FlareColor;
        

@@ -27,7 +27,7 @@ public class Scorpion : Enemy
 
     public override void Attack(){
         if(isPoisonous){
-            flame.Poison(poisonTicks);
+            AttackTarget.Poison(poisonTicks);
         }
         base.Attack();
         

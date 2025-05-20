@@ -52,7 +52,7 @@ public class Frog : Enemy
                     GetComponent<Animator>().SetTrigger("CloseMouth");
                 }
             }else{
-                Tongue.SetPosition(0, Vector2.MoveTowards(Tongue.GetPosition(0), Vector3.zero, TongueSpeed * Time.deltaTime));
+                Tongue.SetPosition(0, Vector2.MoveTowards(Tongue.GetPosition(0), AttackTarget.getPosition(), TongueSpeed * Time.deltaTime));
                 if(Tongue.GetPosition(0).magnitude < TongueRange ){
                     base.Attack();
                     retracting=true;
@@ -63,7 +63,7 @@ public class Frog : Enemy
             if(hasReachedRange){return;}
             if(jumping){
                 Move();
-                if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+                if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
                     Attacking = true;
                     hasReachedRange = true;
                     GetComponent<Animator>().SetTrigger("InRange");

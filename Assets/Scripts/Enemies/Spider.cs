@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Spider : Enemy
 {
-    public Transform centerPoint;
+    
 
 
     public int direction = 1;
@@ -17,7 +17,7 @@ public class Spider : Enemy
     void Start()
     {
         VirtualPreStart(); 
-        centerPoint = Flamey.Instance.transform;
+        
         if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
@@ -48,7 +48,7 @@ public class Spider : Enemy
 
         if(Stunned){return;}
 
-        Vector2 hk = flame.transform.position;
+        Vector2 hk = AttackTarget.getPosition();
         Vector2 cv = HitCenter.position;
 
         double g = Math.Atan2(cv.y - hk.y, cv.x - hk.x);

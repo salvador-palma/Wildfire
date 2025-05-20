@@ -391,6 +391,12 @@ public class Character : MonoBehaviour
                 }
                 HealthRegen.Instance.SpawnExtraAssets();
                 break;
+            case "Laser Beam":
+                if(Laser.Instance == null && SkillTreeManager.Instance.getLevel("Laser Beam") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Laser Beam").Activate();
+                }
+                
+                break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Magical Shot":
                 if(KrakenSlayer.Instance == null && SkillTreeManager.Instance.getLevel("Magical Shot") >= 0){

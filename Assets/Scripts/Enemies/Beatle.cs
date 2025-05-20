@@ -40,7 +40,7 @@ public class Beatle : Enemy
         }else{
             growBall();
             Move();
-            if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+            if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
                 Attacking = true;
                 Ball.GetComponent<Animator>().Play("Stop");
                 GetComponent<Animator>().SetTrigger("InRange");
@@ -69,8 +69,8 @@ public class Beatle : Enemy
         Ball.transform.localScale = Vector2.MoveTowards(Ball.transform.localScale, BallFinit.localScale, growthRate * Time.deltaTime);
     }
     public void moveBall(){
-        Ball.transform.position = Vector2.MoveTowards(Ball.transform.position, flame.transform.position, BallReleaseSpeed * Time.deltaTime);
-        if(Vector2.Distance(flame.transform.position, Ball.transform.position) < ballHitRange){
+        Ball.transform.position = Vector2.MoveTowards(Ball.transform.position, AttackTarget.getPosition(), BallReleaseSpeed * Time.deltaTime);
+        if(Vector2.Distance(AttackTarget.getPosition(), Ball.transform.position) < ballHitRange){
             Attacking = true;
             Destroy(Ball);
             Damage = (int)(Ball.transform.localScale.x/0.6f * Damage);

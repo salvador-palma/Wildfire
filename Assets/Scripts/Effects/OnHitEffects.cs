@@ -438,7 +438,6 @@ public class ExecuteOnHit : OnHitEffects
                 
                 ObjectPooling.Spawn(Ghost, new float[]{pos.x,pos.y});
 
-                //Debug.Log("Execute: " +  prevHealth + " Health ");
                 if(prevHealth > Flamey.Instance.MaxHealth){
                     GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(22, "Naal", 14);
                 }

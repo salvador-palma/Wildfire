@@ -43,7 +43,7 @@ public class Moose : Enemy
         if(howling){return;}
        
         Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
            Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
            GetComponent<Animator>().SetBool("InRangeBool", true);

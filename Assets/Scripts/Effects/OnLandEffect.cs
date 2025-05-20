@@ -316,48 +316,58 @@ public class Whirpool : OnLandEffect
     public float prob;
     public float duration;
 
-    public Whirpool(float force, float prob){
+    public Whirpool(float force, float prob)
+    {
         this.prob = prob;
         this.force = force;
-        
-       
-        if(Instance == null){
+
+
+        if (Instance == null)
+        {
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/Whirlpool").GetComponent<IPoolable>();
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
     public void ApplyEffect(Vector2 pos)
     {
-        if(UnityEngine.Random.Range(0f,1f) < prob){
-            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y});
+        if (UnityEngine.Random.Range(0f, 1f) < prob)
+        {
+            ObjectPooling.Spawn(prefab, new float[] { pos.x, pos.y });
         }
     }
-    public void Stack(Whirpool burnOnLand){
+    public void Stack(Whirpool burnOnLand)
+    {
         force += burnOnLand.force;
         prob += burnOnLand.prob;
         duration += burnOnLand.duration;
         RemoveUselessAugments();
     }
-    private void RemoveUselessAugments(){
-        if(prob >= .25f){
+    private void RemoveUselessAugments()
+    {
+        if (prob >= .25f)
+        {
             prob = .25f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("WhirlpoolProb");
         }
-        
-        if (force >= 3){
+
+        if (force >= 3)
+        {
             force = 3;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("WhirlpoolForce");
         }
 
-        
-        
+
+
     }
-   
-    public bool addList(){
+
+    public bool addList()
+    {
         return Instance == this;
     }
 
@@ -377,12 +387,106 @@ public class Whirpool : OnLandEffect
     }
     public string[] getCaps()
     {
-        return new string[]{"Chance: {0}% (Max. 25%) <br>Pull Force: {1}N (Max. 300 N)", Mathf.Round(prob*100f).ToString(), Mathf.Round(force*100f).ToString()};
+        return new string[] { "Chance: {0}% (Max. 25%) <br>Pull Force: {1}N (Max. 300 N)", Mathf.Round(prob * 100f).ToString(), Mathf.Round(force * 100f).ToString() };
     }
 
     public string getIcon()
     {
         return "WhirlpoolUnlock";
+    }
+    public GameObject getAbilityOptionMenu()
+    {
+        return null;
+    }
+}
+
+public class Totem : OnLandEffect
+{
+    public static Totem Instance;
+    public IPoolable prefab;
+
+    public float prob;
+    public float Health;
+    public float radius;
+    
+
+    public Totem(float prob, float radius, float Health)
+    {
+        this.prob = prob;
+        this.radius = radius;
+        this.Health = Health;
+
+        if (Instance == null)
+        {
+            Instance = this;
+            prefab = Resources.Load<GameObject>("Prefab/Totem").GetComponent<IPoolable>();
+        }
+        else
+        {
+            Instance.Stack(this);
+        }
+    }
+    public void ApplyEffect(Vector2 pos)
+    {
+        if(UnityEngine.Random.Range(0f,1f) < prob){
+            ObjectPooling.Spawn(prefab, new float[]{pos.x, pos.y, radius, Health});
+        }
+    }
+    public void Stack(Totem totem){
+        radius += totem.radius;
+        prob += totem.prob;
+        Health += totem.Health;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments()
+    {
+        if (radius >= 1)
+        {
+            radius = 1;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("TotemRadius");
+        }
+        if (prob >= .1f)
+        {
+            prob = .1f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("TotemProb");
+        }
+        if (Health >= 500)
+        {
+            Health = 500;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("TotemHealth");
+        }
+
+    }
+   
+    public bool addList(){
+        return Instance == this;
+    }
+
+    public string getText()
+    {
+        return "Totem";
+    }
+
+    public string getType()
+    {
+        return "On-Land Effect";
+    }
+
+    public string getDescription()
+    {
+        return "Whenever a shot lands, there's a chance of sprouting a <color=#FFCC7C>Flower</color>. Everytime an enemy <color=#FFCC7C>steps</color> on a <color=#FFCC7C>flower</color>, you heal part of their <color=#0CD405>Max HP";
+    }
+    public string[] getCaps()
+    {
+        return new string[]{"Chance: {0}% (Max. 10%) <br>Size: {1} Units (Max. 100 Units)<br>Health: {2} HP (Max. 500 HP)", Mathf.Round(prob*100f).ToString(), Mathf.Round(radius*100f).ToString(), Mathf.Round(Health).ToString()};
+    }
+
+    public string getIcon()
+    {
+        return "TotemUnlock";
     }
     public GameObject getAbilityOptionMenu(){
         return null;

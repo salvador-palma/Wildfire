@@ -31,7 +31,8 @@ public class Aligator : Enemy
     // Update is called once per frame
     public override void Attack()
     {
-        Flamey.Instance.Stun(StunTime);
+         if (AttackTarget.isOriginal())
+        { Flamey.Instance.Stun(StunTime); }
         base.Attack();
     }
 

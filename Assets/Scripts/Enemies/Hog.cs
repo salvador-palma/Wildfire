@@ -54,11 +54,11 @@ public class Hog : Enemy
     public override void Attack(){
         if(AttackedAlready){
             AudioManager.PlayOneShot(AttackSound, transform.position);
-            flame.Hitted(Damage/2, ArmorPen, this);
+            AttackTarget.Hitted(Damage/2, ArmorPen, this);
         }else{
             AudioManager.PlayOneShot(FirstHitSound, transform.position);
             AttackedAlready = true;
-            flame.Hitted(Damage, ArmorPen, this);
+            AttackTarget.Hitted(Damage, ArmorPen, this);
         }
        
     }

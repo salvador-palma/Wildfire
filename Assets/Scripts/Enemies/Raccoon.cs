@@ -32,7 +32,7 @@ public class Raccoon : Enemy
     public override void UpdateEnemy()  {
         
         Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !Stealing){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !Stealing){
            GetComponent<Animator>().SetTrigger("InRange");
         }
         if((Math.Abs(transform.position.x) > 10f || Math.Abs(transform.position.y) > 6f) && Stealing){
@@ -42,12 +42,13 @@ public class Raccoon : Enemy
     }
     public override void Move(){
         if(Stunned){return;}
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed* (1-SlowFactor) * Time.deltaTime * (Stealing? -1f : 1));
+        transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed* (1-SlowFactor) * Time.deltaTime * (Stealing? -1f : 1));
     }
     public override void Attack()
     {
         Stealing = true;
-        StealAmount = Flamey.Instance.removeEmbers(StealObjective);
+
+        StealAmount = AttackTarget.isOriginal()? Flamey.Instance.removeEmbers(StealObjective) : 0;
         AudioManager.PlayOneShot(AttackSound,transform.position);
         TurnBack();
     }

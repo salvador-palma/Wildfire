@@ -30,7 +30,7 @@ public class Squirrel : Enemy
     }
     public override void UpdateEnemy()  {
         Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange && !placedBomb){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !placedBomb){
             Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
         }
@@ -41,14 +41,22 @@ public class Squirrel : Enemy
     }
     public override void Move(){
         if(Stunned){return;}
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed* (1-SlowFactor)  * Time.deltaTime * (placedBomb? -1f : 1));
+        if (placedBomb)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Flamey.Instance.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime * -1f);
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime);
+        }
+        
     }
     public override void Attack()
     {
         placedBomb = true;
         BombPrefab = Instantiate(BombPrefab);
-        Vector3 direction = (HitCenter.position - Flamey.Instance.transform.position).normalized;
-        BombPrefab.transform.position = Flamey.Instance.transform.position + direction * deltaBomb;
+        Vector3 direction = (HitCenter.position - (Vector3)AttackTarget.getPosition()).normalized;
+        BombPrefab.transform.position = (Vector3)AttackTarget.getPosition() + direction * deltaBomb;
         TurnBack();
          Attacking = false;
     }
@@ -59,7 +67,7 @@ public class Squirrel : Enemy
     protected void Explode(){
         ObjectPooling.Spawn(EnemySpawner.Instance.ExplosionPrefab, new float[]{BombPrefab.transform.position.x, BombPrefab.transform.position.y});
         AudioManager.PlayOneShot(AttackSound,transform.position);
-        flame.Hitted(Damage, ArmorPen, this);
+        AttackTarget.Hitted(Damage, ArmorPen, this);
     }
     public override void Die(bool onKill = true){
         if(placedBomb){

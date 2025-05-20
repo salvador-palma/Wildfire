@@ -34,7 +34,7 @@ public class Hedgehog : Enemy
     public override void UpdateEnemy()
     {
         Move();
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
            Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
            Cover();

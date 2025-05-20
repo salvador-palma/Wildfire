@@ -46,7 +46,7 @@ public class Worm : Enemy
         MaxHealth = Health;
 
         pathEnd = transform.Find("PathEnd").transform;
-        initialDistance = Vector2.Distance(flame.transform.position, HitCenter.position);
+        initialDistance = Vector2.Distance(AttackTarget.getPosition(), HitCenter.position);
 
 
         initialPos = pathEnd.position;
@@ -66,7 +66,7 @@ public class Worm : Enemy
         if(!diggingUp){
             base.UpdateEnemy();
         }
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
             StartCoroutine(DigUp());
         }
         if(isUnderground){
@@ -84,10 +84,10 @@ public class Worm : Enemy
         if(Stunned){return;}
         if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
             if(getSlowInfo("IceLand")[0] <= 0){
-                transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
+                transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
             }
         }else{
-            transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
+            transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
         }
         
     }

@@ -495,7 +495,33 @@ public class DeckBuilder : MonoBehaviour
             new Augment("SmogArea","Quarantine", "Smog gains +5 area of spread", "PoisonTicks", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Smog(0, 5, 0))), immoType:IMMOLATE.AIR),
             new Augment("SmogArea","Tainted Touch", "Smog gains +10 area of spread", "PoisonTicks", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Smog(0, 10, 0))), immoType:IMMOLATE.AIR),
             new Augment("SmogArea","The Plague", "Smog gains +25 area of spread", "PoisonTicks", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Smog(0, 25, 0))), immoType:IMMOLATE.AIR),
-            
+
+            new Augment("Laser Beam" ,"Laser Beam", "Develop Laser Beams that will melt enemies", "LaserUnlock", Tier.Prismatic, new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("Laser Beam");
+                Flamey.Instance.addNotEspecificEffect(new Laser(1, 1.05f));
+                Deck.Instance.AddAugmentClass(new List<string>{"LaserRatio","LaserAmount"});
+            }), baseCard: true, immoType:IMMOLATE.FIRE),
+
+            new Augment("LaserAmount","Viper's Den", "Gain +1 Laser Beam", "LaserAmount", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(1, 0))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","Persistent Virus", "Laser damage increases by +2.5% per hit", "LaserSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.025f))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","No Antidote", "Laser damage increases by +5% per hit", "LaserSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.05f))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","Kiss of Death", "Laser damage increases by +10% per hit", "LaserSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.10f))), immoType:IMMOLATE.FIRE),
+
+            new Augment("Totem" ,"Totem", "Summon Totems that taunt nearby enemies", "TotemUnlock", Tier.Prismatic, new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("Totem");
+                Flamey.Instance.addOnLandEffect(new Totem(0.01f, 0.3f, 10));
+                Deck.Instance.AddAugmentClass(new List<string>{"TotemHealth","TotemRadius", "TotemProb"});
+            }), baseCard: true, immoType:IMMOLATE.AIR),
+
+            new Augment("TotemProb","Viper's Den", "Gain +1% chance of summoning a Totem", "TotemProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.01f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemProb","Persistent Virus", "Gain +2% chance of summoning a Totem", "TotemProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.02f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemProb","No Antidote", "Gain +5% chance of summoning a Totem", "TotemProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.05f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","Viper's Den", "Totems grow by +5 units in size", "TotemRadius", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.05f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","Persistent Virus", "Totems grow by +10 units in size", "TotemRadius", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.1f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","No Antidote", "Totems grow by +20 units in size", "TotemRadius", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.2f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","Viper's Den", "Totems gain +10 HP", "TotemHealth", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,10))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","Persistent Virus", "Totems gain +25 HP", "TotemHealth", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,25))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","No Antidote", "Totems gain +100 HP", "TotemHealth", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,100))), immoType:IMMOLATE.AIR),
         };
 
        

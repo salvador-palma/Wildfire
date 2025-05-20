@@ -37,7 +37,10 @@ public class FlameCircle : NotEspecificEffect
             Instance = this;
             Spinner.multiplier=9f;
             if(SkillTreeManager.Instance.getLevel("Orbits")>=2){this.amount=2;}
-            GameObject g = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+this.amount));
+            GameObject prefab = Resources.Load<GameObject>("Prefab/Flame Circle " + this.amount);
+            GameObject g = Flamey.Instance.SpawnObject(prefab);
+            g.transform.parent = Flamey.Instance.transform.parent.GetChild(0);
+            g.transform.localPosition = prefab.transform.localPosition;
             planetsPanelPrefab = Resources.Load<GameObject>("Prefab/AbilityCharacter/PlanetSelectionPanel");
             SpinnerInstance = g.GetComponent<Spinner>();
 
@@ -61,6 +64,8 @@ public class FlameCircle : NotEspecificEffect
          
         
         Spinner next = Flamey.Instance.SpawnObject(Resources.Load<GameObject>("Prefab/Flame Circle "+amount)).GetComponent<Spinner>();
+        next.transform.parent = Flamey.Instance.transform.parent.GetChild(0);
+        next.transform.localPosition = SpinnerInstance.transform.localPosition;
         SpinnerInstance.kill();
         SpinnerInstance = next;
         
@@ -531,7 +536,8 @@ public class Summoner : NotEspecificEffect
 }
 
 
-public class Gambling : NotEspecificEffect{
+public class Gambling : NotEspecificEffect
+{
     public static Gambling Instance;
 
     public bool WithLuck = false;
@@ -571,8 +577,10 @@ public class Gambling : NotEspecificEffect{
     DynamicText BuffType;
     DynamicText BuffTitle;
     int RoundsWithoutPick;
-    public Gambling(){
-        if(Instance == null){
+    public Gambling()
+    {
+        if (Instance == null)
+        {
             Instance = this;
             Deck.RoundStart += ReduceGambling;
             RoulleteAnim = GameObject.Find("RouletteWheel")?.transform.parent.parent.GetComponent<Animator>();
@@ -580,38 +588,44 @@ public class Gambling : NotEspecificEffect{
             return;
         }
     }
-    public void ResetInstance(){
+    public void ResetInstance()
+    {
         Instance = null;
         Deck.RoundStart -= ReduceGambling;
     }
     public void ReduceGambling(object sender, EventArgs e)
     {
-        try{
-            if(Character.Instance==null || !Character.Instance.isCharacter("Gambling")){return;}
-            if(RoundsWithoutPick == 5){
+        try
+        {
+            if (Character.Instance == null || !Character.Instance.isCharacter("Gambling")) { return; }
+            if (RoundsWithoutPick == 5)
+            {
                 //EXPIRE BUFF
-                
+
                 BuffTitle.SetText("WARNING");
                 BuffType.SetText("Previous Effect Expired");
                 LuckType = -1;
                 LuckMeterSlider.GetComponent<Animator>().Play(!WithLuck ? "Buff" : "Debuff");
                 Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", -1);
             }
-            if(!Gambled){LuckCombo = Math.Clamp(LuckCombo - 0.1f, 0.25f, 0.75f); LuckMeterSlider.value = LuckCombo; RoundsWithoutPick++;}
+            if (!Gambled) { LuckCombo = Math.Clamp(LuckCombo - 0.1f, 0.25f, 0.75f); LuckMeterSlider.value = LuckCombo; RoundsWithoutPick++; }
             Gambled = false;
             Debug.Log("Luck: " + LuckCombo);
-        }catch{
+        }
+        catch
+        {
             Debug.Log("Error ReduceGambling: " + e.ToString());
         }
-        
+
     }
 
-    public static float getGambleMultiplier(int type){
-        if(Instance==null || Instance.LuckType != type){return 1;}
-        
+    public static float getGambleMultiplier(int type)
+    {
+        if (Instance == null || Instance.LuckType != type) { return 1; }
+
         return Instance.LuckMultipliers[type, Instance.WithLuck ? 1 : 0];
     }
-    
+
     public bool addList()
     {
         return Instance == this;
@@ -622,36 +636,37 @@ public class Gambling : NotEspecificEffect{
         return;
     }
 
-    
-    public void SpinTheWheel(){
-        if(!Character.Instance.isCharacter("Gambling")){return;}
-        if(RoulleteAnim==null){RoulleteAnim = GameObject.Find("RouletteWheel")?.transform.parent.parent.GetComponent<Animator>();}
+
+    public void SpinTheWheel()
+    {
+        if (!Character.Instance.isCharacter("Gambling")) { return; }
+        if (RoulleteAnim == null) { RoulleteAnim = GameObject.Find("RouletteWheel")?.transform.parent.parent.GetComponent<Animator>(); }
         RoulleteAnim.Play("SpinTheWheel");
-        RoundsWithoutPick=0;
+        RoundsWithoutPick = 0;
         Gambled = true;
         LuckCombo = Math.Clamp(LuckCombo + 0.05f, 0.25f, 0.75f);
         LuckMeterSlider.value = LuckCombo;
-        LuckType = Random.Range(0,7);
-        
+        LuckType = Random.Range(0, 7);
+
         WithLuck = Random.Range(0f, 1f) < LuckCombo;
 
         //Debug.Log((WithLuck ? "Buff " : "Debuff ") + LucksTypesText[LuckType] + " x" + LuckMultipliers[LuckType, WithLuck ? 1 : 0].ToString());
         BuffTitle.SetText(WithLuck ? "BUFF" : "DEBUFF");
-        BuffType.SetText(LucksTypesText[LuckType] + " x{0}", new string[]{LuckMultipliers[LuckType, WithLuck ? 1 : 0].ToString()});
+        BuffType.SetText(LucksTypesText[LuckType] + " x{0}", new string[] { LuckMultipliers[LuckType, WithLuck ? 1 : 0].ToString() });
         LuckMeterSlider.GetComponent<Animator>().Play(WithLuck ? "Buff" : "Debuff");
 
         Flamey.Instance?.GetComponent<Animator>().SetInteger("ClownType", WithLuck ? 1 : -1);
     }
 
-   
+
 
     public string getDescription()
-    { 
+    {
         return "You can gamble for augments in the augment picking phase";
     }
     public string[] getCaps()
     {
-        return new string[]{"No upgradable stats"};
+        return new string[] { "No upgradable stats" };
     }
 
     public string getIcon()
@@ -668,14 +683,141 @@ public class Gambling : NotEspecificEffect{
     {
         return "Special Effect";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
         return null;
     }
 
-    public void SpawnExtraAssets(){
+    public void SpawnExtraAssets()
+    {
         GameObject g = GameUI.Instance.SpawnUI(LuckMeter);
         LuckMeterSlider = g.GetComponent<Slider>();
         BuffType = LuckMeterSlider.transform.Find("BuffPanel").Find("Description").GetComponent<DynamicText>();
         BuffTitle = LuckMeterSlider.transform.Find("BuffPanel").Find("Type").GetComponent<DynamicText>();
+    }
+}
+
+public class Laser : NotEspecificEffect
+{
+
+    public int amount;
+    public float increasePerSecond;
+    public static Laser Instance;
+    public List<LaserBeam> lasers;
+
+    GameObject LaserPrefab;
+
+    public int currentTargetingOption;
+   
+    public GameObject optionMenu;
+    
+    
+    public Laser(int amount, float increasePerSecond)
+    {
+
+        this.amount = amount;
+        this.increasePerSecond = increasePerSecond;
+        if (Instance == null)
+        {
+            Instance = this;
+            lasers = new List<LaserBeam>();
+            LaserPrefab = Resources.Load<GameObject>("Prefab/LaserPrefab");
+            optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("Laser").gameObject;
+            UpdateAmount();
+
+        }
+        else
+        {
+            Instance.Stack(this);
+        }
+    }
+    public List<Enemy> CurrentTargets()
+    {
+        List<Enemy> targets = new List<Enemy>();
+        foreach (LaserBeam g in lasers)
+        {
+            if (g.target != null)
+            {
+                targets.Add(g.target);
+            }
+        }
+        return targets;
+    }
+    public void ApplyEffect()
+    {
+        foreach(LaserBeam g in lasers){
+            g.dmgIncrease = increasePerSecond;
+        }
+        // SpinnerInstance.speed = Flamey.Instance.BulletSpeed * Gambling.getGambleMultiplier(1);
+
+
+    }
+  
+    public void UpdateAmount(){
+
+        while (lasers.Count < amount)
+        {
+            GameObject g = Flamey.Instance.SpawnObject(LaserPrefab);
+            g.transform.parent = Flamey.Instance.transform.parent.GetChild(0);
+            g.transform.localPosition = new Vector3(0, -0.277f, 0);
+            
+            lasers.Add(g.GetComponent<LaserBeam>());
+            g.GetComponent<LaserBeam>().dmgIncrease = increasePerSecond;
+        }
+    }
+    public bool addList()
+    {
+        return Instance == this;
+    }
+
+    public string getDescription()
+    {
+        return "Flames orbit around you in a circle. Colliding with an enemy deals damage and applies <color=#FF99F3>On-Hit Effects</color>. <color=#AFEDFF>Angular speed</color> scales with <color=#AFEDFF>Bullet Speed";
+    }
+    public string[] getCaps()
+    {
+        return new string[]{"Laser Beams: {0} (Max. 6)<br>Damage Scaling: {1}% (Max. x2)", amount.ToString(), (Math.Round(increasePerSecond*10000f)/100f).ToString()};
+    }
+
+    public string getIcon()
+    {
+        return "LaserUnlock";
+    }
+
+    public string getText()
+    {
+        return "Laser Beam";
+    }
+
+    public string getType()
+    {
+        return "Special Effect";
+    }
+
+    public void Stack(Laser laser){
+        amount += laser.amount;
+        increasePerSecond += laser.increasePerSecond;
+        UpdateAmount();
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments()
+    {
+        if (amount == 6)
+        {
+            amount = 6;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("LaserAmount");
+        }  
+        if(increasePerSecond >= 2f){
+            increasePerSecond = 2f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("LaserRatio");
+        }  
+          
+        
+    }
+
+    public GameObject getAbilityOptionMenu(){
+        return SkillTreeManager.Instance.getLevel("Laser Beam") >= 1 ? optionMenu:null;
     }
 }

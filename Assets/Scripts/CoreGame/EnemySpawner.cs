@@ -328,35 +328,40 @@ public class EnemySpawner : MonoBehaviour
     /* ===== ROUND SETTINGS ===== */
     private float getRoundTime(int round){return Math.Min(5 + 1.2f * round, 40);}
     private float getSpawnAmount(int round){return 5*(round%10)+25*(round/10)+5;}
-    
-    private void resetInstances(){
+
+    private void resetInstances()
+    {
 
         // if(FlameCircle.Instance != null){
         //     FlameCircle.Instance.ResetInstance();
         // }
 
         FlameCircle.Instance = null;
-        
+
         MoneyMultipliers.Instance = null;
         CandleTurrets.Instance = null;
         Summoner.Instance = null;
-        
-        if(Gambling.Instance != null){
+
+        if (Gambling.Instance != null)
+        {
             Gambling.Instance.ResetInstance();
         }
         Gambling.Instance = null;
 
-        if(ThornsOnHitted.Instance != null){
+        if (ThornsOnHitted.Instance != null)
+        {
             ThornsOnHitted.Instance.ResetInstance();
         }
         //ThornsOnHitted.Instance = null;
 
         Explosion.Instance = null;
-        Necromancer.Instance= null;
+        Necromancer.Instance = null;
         Bullets.Instance = null;
+        Smog.Instance = null;
 
         VampOnHit.Instance = null;
-        if(IceOnHit.Instance != null){
+        if (IceOnHit.Instance != null)
+        {
             IceOnHit.Instance.ResetInstance();
         }
         //IceOnHit.Instance = null;
@@ -371,19 +376,22 @@ public class EnemySpawner : MonoBehaviour
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
-        if(KrakenSlayer.Instance != null){
+        if (KrakenSlayer.Instance != null)
+        {
             KrakenSlayer.Instance.ResetInstance();
         }
         //KrakenSlayer.Instance = null;
         CritUnlock.Instance = null;
 
 
-        if(HealthRegen.Instance != null){
+        if (HealthRegen.Instance != null)
+        {
             HealthRegen.Instance.ResetInstance();
         }
         // HealthRegen.Instance = null;
         LightningEffect.Instance = null;
         Immolate.Instance = null;
+        Laser.Instance = null;
         
         
 

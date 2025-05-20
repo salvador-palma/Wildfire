@@ -13995,12 +13995,12 @@ MonoBehaviour:
     Type: Special Effect
     AbilityDescription1: <style="LYellow">Lasers</style> target one enemy at a time,
       increasing the <style="Red">damage</style> it deals the longer it stays on
-      it
+      it. <style="LYellow">Base Damage</style> is distributed by all the <style="Yellow">Lasers</style>
+      you own
     AbilityDescription2: Unlock new <style="LYellow">Targeting</style> options for
-      <style="LYellow">Laser Beams <style="Grey">(Random, Closest, Most Max HP, Most
-      Armor)
-    AbilityDescription3: Each time a <style="LYellow">Laser Beam</style> deals damage,
-      it will melt <style="LYellow">5%</style> of the enemy's <style="Grey">armor
+      <style="LYellow">Laser Beams <style="Grey">(Random, Closest, Most Max HP, Furthest)
+    AbilityDescription3: Every other hit by <style="LYellow">Laser Beam</style> will
+      activate <style="Pink">On-Kill Effects</style>
     QuestID: -1
     npc: {fileID: 0}
     DialogueID: 0
@@ -24039,8 +24039,8 @@ MonoBehaviour:
   - Name: Mecha
     AnimationBool: Mecha
     AbilityName: Laser Beam
-    AbilityDescription: <style="LYellow">Lasers</style> will pierce through their
-      target, affecting everything behind it
+    AbilityDescription: <style="LYellow">Lasers</style> will affect all enemies until
+      they reach their target
     BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
     BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
     Prop: {fileID: 21300000, guid: c5d09960742dbf44987f2e8f9a161f95, type: 3}
@@ -76374,7 +76374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000045776367, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.000045776367, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -77205,7 +77205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00061035156
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -18,13 +18,17 @@ public class FixedOptionMenu : MonoBehaviour
     void Start(){
         Left.onClick.AddListener(() => Move(-1));
         Right.onClick.AddListener(() => Move(1));
-        
-        switch(AbilityName){
+
+        switch (AbilityName)
+        {
             case "Burst Shot":
                 UpdatableText.SetText(Options[BurstShot.Instance.currentTargetingOption]);
-            break;
+                break;
             case "Multicaster":
                 UpdatableText.SetText(Options[SecondShot.Instance.currentTargetingOption]);
+                break;
+            case "Laser":
+                UpdatableText.SetText(Options[Laser.Instance.currentTargetingOption]);
             break;
         
         }
@@ -54,14 +58,19 @@ public class FixedOptionMenu : MonoBehaviour
         ExtraBehaviour();
     }
     private void ExtraBehaviour(){
-        switch(AbilityName){
+        switch (AbilityName)
+        {
             case "Burst Shot":
                 BurstShot.Instance.currentTargetingOption = currentID;
                 PlayerPrefs.GetInt("BurstShotTargetingOption", currentID);
-            break;
+                break;
             case "Multicaster":
                 SecondShot.Instance.currentTargetingOption = currentID;
                 PlayerPrefs.GetInt("MulticasterTargetingOption", currentID);
+                break;
+            case "Laser":
+                Laser.Instance.currentTargetingOption = currentID;
+                PlayerPrefs.GetInt("LaserTargetingOption", currentID);
             break;
         
         }

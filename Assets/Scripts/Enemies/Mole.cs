@@ -42,7 +42,7 @@ public class Mole : Enemy
             Damage = (int)(Damage * (float) (Math.Pow(x-10, 2)/2500f) + 1f);
         }
         MaxHealth = Health;
-        initialDistance = Vector2.Distance(flame.transform.position, HitCenter.position);
+        initialDistance = Vector2.Distance(AttackTarget.getPosition(), HitCenter.position);
 
 
         initialPos = HitCenter.position;
@@ -62,7 +62,7 @@ public class Mole : Enemy
         if(!diggingUp){
             base.UpdateEnemy();
         }
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
             StartCoroutine(DigUp());
         }
         if(isUnderground){
@@ -78,7 +78,7 @@ public class Mole : Enemy
     public override void Move()
     {
         if(Stunned){return;}
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
+        transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
     }
 
     IEnumerator DigUp(){

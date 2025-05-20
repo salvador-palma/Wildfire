@@ -12,6 +12,25 @@ using Debug = UnityEngine.Debug;
 public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 {
     public Flamey flame;
+    [SerializeField] public Hittable attack_target;
+    public Hittable AttackTarget
+    {
+        get
+        {
+            if (attack_target == null)
+            {
+                attack_target = Flamey.Instance;
+            }
+            return attack_target;
+        }
+        set
+        {
+            
+            attack_target = value;
+            
+            
+        }
+    }
     public string Name;
     public int Damage;
     public float AttackDelay;
@@ -53,18 +72,22 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             slowfactor = Math.Clamp(value,0f,.99f);
         }
     }
-    protected void VirtualPreStart(){
-        if(!EnemySpawner.Instance.PresentEnemies.Contains(this)){
+    protected void VirtualPreStart()
+    {
+        if (!EnemySpawner.Instance.PresentEnemies.Contains(this))
+        {
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
         Health = (int)(Health * Gambling.getGambleMultiplier(4));
         Speed = Speed * Gambling.getGambleMultiplier(5);
+        AttackTarget = Flamey.Instance;
        
     }
     public virtual void UpdateEnemy()  {
+
         Move();
         
-        if(Vector2.Distance(flame.transform.position, HitCenter.position) < AttackRange ){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
            Attacking = true;
            
            GetComponent<Animator>().SetTrigger("InRange");
@@ -78,15 +101,20 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     protected virtual IEnumerator PlayAttackAnimation(float delay){
         bool breaking = false;
         while(Health>0 && !breaking){
-            if(Vector2.Distance(flame.transform.position, HitCenter.position) > AttackRange ){
+            if (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) > AttackRange)
+            {
                 ReturnWalk();
                 breaking = true;
-            }else{
+            }
+            else
+            {
                 GetComponent<Animator>().Play(AttackAnimationName);
 
                 float startTime = Time.time;
-                yield return new WaitUntil(() =>  Time.time - startTime >= delay || Vector2.Distance(flame.transform.position, HitCenter.position) > AttackRange );
+                yield return new WaitUntil(() => Time.time - startTime >= delay || Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) > AttackRange);
+
                 yield return new WaitForSeconds(extraAtkSpeedDelay);
+                
             }
         }
     }
@@ -139,10 +167,17 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Move(){
         if(Stunned){return;}
-        transform.position = Vector2.MoveTowards(transform.position, flame.transform.position, Speed * (1-SlowFactor) * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime);
+    }
+    public virtual void Taunt(Hittable target){
+        if(!attack_target.Equals(Flamey.Instance) || !canTarget()){
+            return;
+        }
+        AttackTarget = target;
     }
 
-    public void StartAnimations(int ID){
+    public void StartAnimations(int ID)
+    {
 
         GetComponent<Animator>().SetInteger("EnemyID", ID);
     }
@@ -250,7 +285,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Attack(){
         AudioManager.PlayOneShot(AttackSound,transform.position);
-        flame.Hitted(Damage, ArmorPen, this);
+        AttackTarget.Hitted(Damage, ArmorPen, this);
     }
     
     public void PlayMovingSound()
@@ -363,10 +398,18 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         return selected.First().HitCenter.position;
         
     }
-    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor){
+    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor, List<Enemy> except = null){
         List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
         if(selected.Count == 0){return null;}
         selected.Sort(sortingFactor);
+
+        Enemy selectedEnemy = selected.First();
+        while (except != null && except.Contains(selectedEnemy))
+        {
+            selected.Remove(selectedEnemy);
+            if(selected.Count == 0){return null;}
+            selectedEnemy = selected.First();
+        }
         return selected.First();
         
     }

@@ -27,10 +27,13 @@ public class Skunk : Enemy
         //StartAnimations(6);
     }
 
-    
-   
-    public override void Attack(){
-        Flamey.Instance.Stun(StunDuration);
+
+
+    public override void Attack() {
+        if (AttackTarget.isOriginal())
+        { Flamey.Instance.Stun(StunDuration); }
+            
+        
         base.Attack();
     }
 
