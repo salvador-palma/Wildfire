@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -22,6 +23,7 @@ public class TotemToken : IPoolable, Hittable
     public float Health;
     public Transform HitPoint;
     public float radius;
+    public int stacks;
 
     public override string getReference()
     {
@@ -37,7 +39,9 @@ public class TotemToken : IPoolable, Hittable
 
     public void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake = true, int idHitTxt = 2)
     {
-        DamageUI.InstantiateTxtDmg(transform.position, "-" + Math.Abs(Dmg), 24);
+        if (onhitted && SkillTreeManager.Instance.getLevel("Totem") >= 1) { Flamey.Instance.ApplyOnHitted(attacker, this, Dmg); }
+        if(SkillTreeManager.Instance.getLevel("Totem") >= 2){ Flamey.Instance.addHealth(Dmg); }
+        DamageUI.InstantiateTxtDmg(transform.position, "-" + Math.Abs(Dmg), 26);
         Health -= Dmg;
         if (Health <= 0)
         {
@@ -78,23 +82,28 @@ public class TotemToken : IPoolable, Hittable
         foreach (Enemy item in EnemySpawner.Instance.PresentEnemies)
         {
             if(item == null) { continue; }
-            if (item.attack_target.isEqual(gameObject))
+           
+            if (item.attack_target==null || item.attack_target.isEqual(gameObject))
             {
-               
+
                 item.AttackTarget = Flamey.Instance;
             }
         }
-        
+        stacks = 0;
         base.UnPool();
     }
     public void Taunt()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(HitPoint.position, radius, Flamey.EnemyMask);
+        Collider2D[] targets = Physics2D.OverlapCircleAll(HitPoint.position, radius);
         foreach (Collider2D target in targets)
         {
             if (target.GetComponent<Enemy>() != null)
             {
                 target.GetComponent<Enemy>().Taunt(this);
+            }
+            if(target.GetComponent<TotemToken>() != null && target != gameObject)
+            {
+                target.GetComponent<TotemToken>().Stack(this);
             }
         }
 
@@ -114,9 +123,34 @@ public class TotemToken : IPoolable, Hittable
     {
         transform.position = new Vector2(args[0], args[1]);
         radius = args[2] * 2;
+
         Vector3 scale = new Vector3(args[2], args[2], args[2]);
         transform.localScale = scale;
+
         Health = args[3];
+    }
+    public void Stack(TotemToken totem)
+    {
+        if (Health <= 0 || totem == this) { return; }
+        
+
+        bool thisBetter = totem.stacks <= stacks;
+        if (!thisBetter)
+        {
+            totem.Stack(this);
+            return;
+        }
+        stacks++;
+        Health += Totem.Instance.Health;
+
+        float size = Totem.Instance.radius;
+        float multFactor = 1f + Math.Clamp(stacks * 0.05f, 0f, 0.5f);
+        radius = size * multFactor * 2f; 
+
+        Vector2 scale = new Vector2(size*multFactor, size*multFactor);
+        transform.localScale = scale;
+
+        totem.UnPool();
     }
 
     public bool isEqual(GameObject other)

@@ -38,6 +38,9 @@ public class SquirrelFlying : Squirrel
 
     }
     public override void UpdateEnemy()  {
+        LandDest =  Flamey.Instance.transform.position;
+        LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
+        LandDest.y += (transform.position.y - Flamey.Instance.transform.position.y) * arenaLand;
         base.UpdateEnemy();
         if( flying && Vector2.Distance(LandDest, HitCenter.position) < 0.3f ){
             Land();
@@ -46,10 +49,20 @@ public class SquirrelFlying : Squirrel
 
     public override void Move(){
         if(Stunned){return;}
-        if(!flying){
-            transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (placedBomb? -1f : 1));
-        }else{
-            transform.position = Vector2.MoveTowards(transform.position, LandDest, Speed * (1-SlowFactor) * flyingSpeedRatio * Time.deltaTime);
+        if (!flying)
+        {
+            if (placedBomb)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, Flamey.Instance.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime * -1f);
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime);
+            }
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, LandDest, Speed * (1 - SlowFactor) * flyingSpeedRatio * Time.deltaTime);
         }
         
     }

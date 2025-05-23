@@ -373,14 +373,15 @@ public class Smog : OnKillEffects
     public float area;
     public int ticks;
     public static Smog Instance;
-    
+
     public static IPoolable Prefab;
     public static IPoolable DrMiasmaSmog;
-    
+
     //private Image cooldownImage;
-    private float CooldownTimer =10f;
+    private float CooldownTimer = 10f;
     private Image cooldownImage;
-    public Smog(float prob, float area, int ticks){
+    public Smog(float prob, float area, int ticks)
+    {
         this.prob = prob;
         this.area = area;
         this.ticks = ticks;
@@ -396,7 +397,7 @@ public class Smog : OnKillEffects
         {
             Instance.Stack(this);
 
-            
+
         }
     }
     public bool addList()
@@ -406,22 +407,25 @@ public class Smog : OnKillEffects
 
     public void ApplyEffect(Vector2 pos)
     {
-        
-        if(Random.Range(0f,1f) < prob){
+
+        if (Random.Range(0f, 1f) < prob)
+        {
 
             float scale = area * 2f / 100f;
-            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 2f*scale, Flamey.EnemyMask);
-            ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y, scale});
-            
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, 2f * scale, Flamey.EnemyMask);
+            ObjectPooling.Spawn(Prefab, new float[] { pos.x, pos.y, scale });
 
-            foreach(Collider2D col in targets){
+
+            foreach (Collider2D col in targets)
+            {
                 col.GetComponent<Enemy>().Poison(ticks);
-            }            
-            
+            }
+
         }
     }
-    
-    public void Stack(Smog vampOnDeath){
+
+    public void Stack(Smog vampOnDeath)
+    {
         prob += vampOnDeath.prob;
         area += vampOnDeath.area;
         ticks += vampOnDeath.ticks;
@@ -456,7 +460,8 @@ public class Smog : OnKillEffects
         yield return new WaitForSeconds(5f);
         Flamey.Instance.Unhittable = false;
 
-        while(cooldownImage.fillAmount < 1f){
+        while (cooldownImage.fillAmount < 1f)
+        {
             cooldownImage.fillAmount += 0.25f * (1f / CooldownTimer);
             yield return new WaitForSeconds(0.25f);
         }
@@ -484,18 +489,21 @@ public class Smog : OnKillEffects
         }
 
     }
-   
+
     public string getDescription()
     {
         return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
     }
     public string[] getCaps()
     {
-        if (SkillTreeManager.Instance.getLevel("Smog") >= 1) {
+        if (SkillTreeManager.Instance.getLevel("Smog") >= 1)
+        {
 
             return new string[] { "Chance: {0}% (Max. 100%) <br>Area: +{1} (Max. 100) <br>Poison Ticks: +{2} (Max. 25)", Mathf.Round(prob * 100).ToString(), Mathf.Round(area).ToString(), ticks.ToString() };
-        } else {
-            return new string[] { "Chance: {0}% (Max. 100%) <br>Area: +{1} (Max. 50) <br>Poison Ticks: +{2} (Max. 25)" , Mathf.Round(prob * 100).ToString(), Mathf.Round(area).ToString(), ticks.ToString() };
+        }
+        else
+        {
+            return new string[] { "Chance: {0}% (Max. 100%) <br>Area: +{1} (Max. 50) <br>Poison Ticks: +{2} (Max. 25)", Mathf.Round(prob * 100).ToString(), Mathf.Round(area).ToString(), ticks.ToString() };
         }
     }
 
@@ -513,7 +521,138 @@ public class Smog : OnKillEffects
     {
         return "On-Kill Effect";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
         return null;
+    }
+}
+
+public class Gravity : OnKillEffects
+{
+    public float prob;
+    public float force;
+    public static Gravity Instance;
+    
+    public static IPoolable Prefab;
+    float radius = 1f;
+    
+    public int currentTargetingOption = 0;
+    public GameObject optionMenu;
+    
+    public Gravity(float prob, float force)
+    {
+        this.prob = prob;
+        this.force = force;
+        if (Instance == null)
+        {
+            Prefab = Resources.Load<GameObject>("Prefab/BlackHole").GetComponent<IPoolable>();
+            Instance = this;
+            if (SkillTreeManager.Instance.getLevel("Gravity") >= 1)
+            {
+
+                radius = 2f;
+            }
+            else
+            {
+                // Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath").GetComponent<IPoolable>();
+                radius = 1f;
+            }
+            currentTargetingOption = Math.Max(0, PlayerPrefs.GetInt("BlackHoleTargetingOption", -1));
+            optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("Blackhole").gameObject;
+
+        }
+        else
+        {
+            Instance.Stack(this);
+        }
+    }
+    public bool addList()
+    {
+        return this == Instance;
+    }
+
+    public void ApplyEffect(Vector2 pos)
+    {
+        void applyKB(Enemy en)
+        {
+            switch (currentTargetingOption)
+            {
+                case 0:
+                    en.KnockBack(pos, retracting:false, force);
+                    break;
+                case 1:
+                    en.KnockBack(pos, retracting:true, force, stopOnOrigin:true);
+                    break;
+                case 2:
+                    en.KnockBack(Flamey.Instance.getPosition(), retracting:false, force);
+                    break;
+                case 3:
+                    en.KnockBack(Flamey.Instance.getPosition(), retracting:true, force, stopOnOrigin:true);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if(Random.Range(0f,1f) < prob){
+            
+
+            Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radius, Flamey.EnemyMask);
+            ObjectPooling.Spawn(Prefab, new float[]{pos.x, pos.y});
+            // AudioManager.PlayOneShot(FMODEvents.Instance.Explosion, Vector2.zero);
+
+            foreach(Collider2D col in targets){
+                applyKB(col.GetComponent<Enemy>());
+            }
+            
+        }
+    }
+
+    public void Stack(Gravity gravity){
+        prob += gravity.prob;
+        force += gravity.force;
+        RemoveUselessAugments();
+    }
+    private void RemoveUselessAugments()
+    {
+        if (prob >= .5f)
+        {
+            prob = .5f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("GravityProb");
+        } 
+        if (force >= 3f)
+        {
+            force = 3f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("GravityForce");
+        }
+        
+    }
+   
+    public string getDescription()
+    {
+        return "Everytime you kill an enemy, there's a chance of generating a <color=#FFCC7C>massive explosion</color> that <color=#FF5858>damages</color> nearby enemies";
+    }
+    public string[] getCaps()
+    {
+         return new string[]{"Chance: {0}% (Max. 50%) <br>Force: {1}N (max. 300N)", Mathf.Round(prob * 100).ToString(), Mathf.Round(force * 100f).ToString()};
+    }
+
+    public string getIcon()
+    {
+        return "ExplodeUnlock";
+    }
+
+    public string getText()
+    {
+        return "Explosion";
+    }
+
+    public string getType()
+    {
+        return "On-Kill Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return SkillTreeManager.Instance.getLevel("Gravity") >= 2 ? optionMenu : null;
     }
 }

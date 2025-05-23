@@ -466,25 +466,33 @@ public class LocalBestiary : MonoBehaviour
         ClaimRewardEvent?.Invoke(this, new EventArgs());
     }
     /* ===== API ===== */
-    public Enemy[] getRandomEnemyCombination(int phase, int amount, bool exclude_banned=false){
+    public Enemy[] getRandomEnemyCombination(int phase, int amount, bool exclude_banned=false, bool exclude_elliptical=false){
+        int[] elliptical = new int[] { 3, 5 };
+
         AnimalRunTimeData[] result = new AnimalRunTimeData[amount];
 
         List<AnimalRunTimeData> phaseAnimals = animals.Where(a => a.Wave == phase).ToList();
         List<AnimalRunTimeData> notRepeled = phaseAnimals.Where(e => !saved_milestones.animals[getEnemyID(e.enemy)].Repeled).ToList();
 
+        if(exclude_elliptical){
+           notRepeled = notRepeled.Where(e => !elliptical.Contains(getEnemyID(e.enemy))).ToList();
+        }
         
+
 
         for (int i = 0; i < result.Length; i++)
         {
             AnimalRunTimeData picked;
-            do{
-                if(notRepeled.Count() <= i){
+            do
+            {
+                if (notRepeled.Count() <= i)
+                {
                     picked = notRepeled.Last();
                     break;
                 }
                 picked = notRepeled[UnityEngine.Random.Range(0, notRepeled.Count())];
-                
-            }while(result.Contains(picked));
+
+            } while (result.Contains(picked));
             result[i] = picked;
         }
         Array.Sort(result, (a,b) => animals.IndexOf(a) - animals.IndexOf(b));

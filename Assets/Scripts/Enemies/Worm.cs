@@ -62,11 +62,20 @@ public class Worm : Enemy
 
     // Update is called once per frame
     override public void UpdateEnemy() {
-           
-        if(!diggingUp){
-            base.UpdateEnemy();
+
+        if (!diggingUp)
+        {
+            //base.UpdateEnemy();
+            Move();
+        
+            if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !isUnderground && !diggingUp){
+                Attacking = true;
+                
+                GetComponent<Animator>().SetTrigger("InRange");
+                StartCoroutine(PlayAttackAnimation(AttackDelay));
+            }
         }
-        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground && !diggingUp){
             StartCoroutine(DigUp());
         }
         if(isUnderground){
@@ -97,13 +106,14 @@ public class Worm : Enemy
         DigSoundInstance.release();
         AudioManager.PlayOneShot(PopOutSound,transform.position);
 
-        isUnderground = false;
+        
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");
         SpawnHole();
         
         yield return new WaitForSeconds(diggingDelay);
         diggingUp= false;
+        isUnderground = false;
         lineRenderer.GetComponent<Animator>().Play("TrailOff");
         
 

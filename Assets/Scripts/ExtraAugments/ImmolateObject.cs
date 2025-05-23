@@ -11,10 +11,12 @@ public class ImmolateObject : MonoBehaviour
     void Start()
     {
         dmg = Immolate.Instance.dmg;
-        float x = Immolate.Instance.radius/2f;
-        float y = Immolate.Instance.radius/2f;
-        speed = x*2/3f;
-        objective = new Vector2(x,y);
+        float x = Immolate.Instance.radius / 2f;
+        float y = Immolate.Instance.radius / 2f;
+        speed = x * 2 / 3f;
+        objective = new Vector2(x, y);
+
+        transform.position = Flamey.Instance.getPosition();
         
     }
 

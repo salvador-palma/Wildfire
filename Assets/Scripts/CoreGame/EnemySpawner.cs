@@ -392,8 +392,6 @@ public class EnemySpawner : MonoBehaviour
         LightningEffect.Instance = null;
         Immolate.Instance = null;
         Laser.Instance = null;
-        
-        
 
     }
 
@@ -401,7 +399,7 @@ public class EnemySpawner : MonoBehaviour
         List<Enemy> result = new List<Enemy>();
         for (int i = 0; i < 6; i++)
         {
-            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3, exclude_banned:true));
+            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3, exclude_banned:true, exclude_elliptical:Character.Instance.isCharacter("Totem")));
         }
 
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());

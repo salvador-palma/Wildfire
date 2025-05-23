@@ -230,8 +230,8 @@ public class Flamey : MonoBehaviour, Hittable
             
         }
     }
-    public float maxDistanceX = 5f;
-    public float maxDistanceY = 3f;
+    public float maxDistanceX = 6.5f;
+    public float maxDistanceY = 3.5f;
     float TotemWalkSpeed = 0.5f;
 
     private void WalkAway()
@@ -447,7 +447,7 @@ public class Flamey : MonoBehaviour, Hittable
 
             if (isShake) { CameraShake.Shake(0.5f, 0.20f); }
         }
-        if (onhitted) { ApplyOnHitted(attacker, Dmg); }
+        if (onhitted) { ApplyOnHitted(attacker, this, Dmg); }
 
     }
     private void UpdateHealthUI()
@@ -783,10 +783,10 @@ public class Flamey : MonoBehaviour, Hittable
 
         foreach (OnLandEffect oh in onLandEffects) { oh.ApplyEffect(pos); }
     }
-    public void ApplyOnHitted(Enemy e, int dmg)
+    public void ApplyOnHitted(Enemy e, Hittable h, int dmg)
     {
         if (e.Health <= 0) { return; }
-        foreach (OnHittedEffects oh in onHittedEffects) { oh.ApplyEffect(e, dmg); }
+        foreach (OnHittedEffects oh in onHittedEffects) { oh.ApplyEffect(e, h, dmg); }
     }
 
     public void ApplyOnKill(Vector2 pos)

@@ -14010,7 +14010,7 @@ MonoBehaviour:
       Forces</style> that push enemies away from the location of the killing
     AbilityDescription2: Unlock new <style="LYellow">Directional</style> options
       for the <style="LYellow">Gravitational Forces <style="Grey">(In-Wards, Out-Wards,
-      Away, Towards, Disabled)
+      Disabled)
     AbilityDescription3: Affected area gets <style="LYellow">doubled</style> in size
     QuestID: -1
     npc: {fileID: 0}
@@ -14018,7 +14018,11 @@ MonoBehaviour:
   - Name: Totem
     Type: On-Land Effect
     AbilityDescription1: <style="LYellow">Totems</style> will <style="Orange">taunt</style>
-      nearby enemies, serving as a temporary decoys until they are destroyed
+      nearby enemies, serving as a temporary decoys until they are destroyed and
+      loosing <style="Green">2 HP</style> per second. <style="LYellow">Totems</style>
+      will merge with other nearby <style="LYellow">totems</style>, stacking <style="Green">health</style>
+      and growing in size. <style="Purple">Poison</style> kill <style="LYellow">Totems</style>
+      instantly
     AbilityDescription2: When damaged, <style="LYellow">Totems</style> will apply
       <style="Pink">Counter Effects</style>
     AbilityDescription3: <style="Red">Damage</style> dealt to <style="LYellow">Totems</style>
@@ -24100,7 +24104,7 @@ MonoBehaviour:
     Face: {fileID: 0}
     BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
     BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
-    Environment: {fileID: 8673573008095219107, guid: 6cfeb074ca3cfa64596a9e3dcf51a5a0, type: 3}
+    Environment: {fileID: 7997866884975536055, guid: c4043f32ecafa524d83e90dbadf3e9ce, type: 3}
     EnvironmentMusic: 4
     Unlocked: 1
     AbilityToSkillTree: Gravity
@@ -76374,7 +76378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000045776367, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00076293945, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -77205,7 +77209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000015258789
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

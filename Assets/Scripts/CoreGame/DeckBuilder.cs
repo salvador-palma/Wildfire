@@ -513,15 +513,41 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"TotemHealth","TotemRadius", "TotemProb"});
             }), baseCard: true, immoType:IMMOLATE.AIR),
 
-            new Augment("TotemProb","Viper's Den", "Gain +1% chance of summoning a Totem", "TotemProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.01f,0,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemProb","Persistent Virus", "Gain +2% chance of summoning a Totem", "TotemProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.02f,0,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemProb","No Antidote", "Gain +5% chance of summoning a Totem", "TotemProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.05f,0,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemRadius","Viper's Den", "Totems grow by +5 units in size", "TotemRadius", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.05f,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemRadius","Persistent Virus", "Totems grow by +10 units in size", "TotemRadius", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.1f,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemRadius","No Antidote", "Totems grow by +20 units in size", "TotemRadius", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.2f,0))), immoType:IMMOLATE.AIR),
-            new Augment("TotemHealth","Viper's Den", "Totems gain +10 HP", "TotemHealth", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,10))), immoType:IMMOLATE.AIR),
-            new Augment("TotemHealth","Persistent Virus", "Totems gain +25 HP", "TotemHealth", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,25))), immoType:IMMOLATE.AIR),
-            new Augment("TotemHealth","No Antidote", "Totems gain +100 HP", "TotemHealth", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,100))), immoType:IMMOLATE.AIR),
+            new Augment("TotemProb","Fertile Grounds", "Gain +1% chance of summoning a Totem", "TotemProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.01f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemProb","Chants of Ku", "Gain +2% chance of summoning a Totem", "TotemProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.02f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemProb","Haʻa Invocation", "Gain +5% chance of summoning a Totem", "TotemProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0.05f,0,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","Little Watcher", "Totems grow by +5 units in size", "TotemRadius", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.05f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","Monolith", "Totems grow by +10 units in size", "TotemRadius", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.1f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemRadius","Call of the Lua", "Totems grow by +20 units in size", "TotemRadius", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0.2f,0))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","Sacred Wood", "Totems gain +10 HP", "TotemHealth", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,10))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","Carved from Koa", "Totems gain +25 HP", "TotemHealth", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,25))), immoType:IMMOLATE.AIR),
+            new Augment("TotemHealth","Heart of Lehua", "Totems gain +100 HP", "TotemHealth", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,100))), immoType:IMMOLATE.AIR),
+
+            new Augment("Earthquake" ,"Earthquake", "Summon Totems that taunt nearby enemies", "Gravity", Tier.Prismatic, new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("Earthquake");
+                Flamey.Instance.addOnHittedEffect(new Earthquake(0.1f, 0.5f));
+                Deck.Instance.AddAugmentClass(new List<string>{"EarthquakeForce","EarthquakeProb"});
+            }), baseCard: true, immoType:IMMOLATE.AIR),
+
+            new Augment("EarthquakeProb","Unsteady Ground", "Gain +5% chance of countering with an Earthquake", "GravityProbability", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0.05f,0))), immoType:IMMOLATE.AIR),
+            new Augment("EarthquakeProb","Seismic Pulse", "Gain +10% chance of countering with an Earthquake", "GravityProbability", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0.1f,0))), immoType:IMMOLATE.AIR),
+            new Augment("EarthquakeProb","Tectonic Boom", "Gain +25% chance of countering with an Earthquake", "GravityProbability", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0.25f,0))), immoType:IMMOLATE.AIR),
+            new Augment("EarthquakeForce","Kicking Dust", "Earthquake gains +25N of force", "GravityForce", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0,0.25f))), immoType:IMMOLATE.AIR),
+            new Augment("EarthquakeForce","Monolith", "Earthquake gains +50N of force", "GravityForce", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0,.5f))), immoType:IMMOLATE.AIR),
+            new Augment("EarthquakeForce","9.0 Magnitude", "Earthquake gains +100N of force", "GravityForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0, 1))), immoType:IMMOLATE.AIR),
+            
+            new Augment("Gravity" ,"Gravity", "Summon Totems that taunt nearby enemies", "BlackHoleUnlock", Tier.Prismatic, new UnityAction(()=> {
+                Deck.Instance.removeClassFromDeck("Gravity");
+                Flamey.Instance.addOnKillEffect(new Gravity(0.05f, 0.1f));
+                Deck.Instance.AddAugmentClass(new List<string>{"GravityProb","GravityForce"});
+            }), baseCard: true, immoType:IMMOLATE.AIR),
+
+            new Augment("GravityProb","Unsteady Ground", "Gain +5% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.05f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityProb","Seismic Pulse", "Gain +10% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.1f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityProb","Tectonic Boom", "Gain +25% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.25f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","Kicking Dust", "Gravity gains +5N of Force", "BlackHoleForce", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.05f))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","Monolith", "Gravity gains +10N of Force", "BlackHoleForce", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.1f))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","9.0 Magnitude", "Gravity gains +25N of Force", "BlackHoleForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.25f))), immoType:IMMOLATE.AIR),
         };
 
        

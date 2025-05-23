@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Loading;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 public interface OnHittedEffects : Effect
 {
     public bool addList();
-    public void ApplyEffect(Enemy en = null, int dmg = -1);
+    public void ApplyEffect(Enemy en = null, Hittable hitted = null, int dmg = -1);
 }
 
 public class ThornsOnHitted : OnHittedEffects
@@ -43,7 +44,7 @@ public class ThornsOnHitted : OnHittedEffects
         return Instance == this;
     }
 
-    public void ApplyEffect(Enemy en = null, int dmg = -1)
+    public void ApplyEffect(Enemy en = null, Hittable hitted = null, int dmg = -1)
     {
         if(en==null){return;}
 
@@ -133,6 +134,143 @@ public class ThornsOnHitted : OnHittedEffects
     public string getText()
     {
         return "Thorns";
+    }
+
+    public string getType()
+    {
+        return "Counter Effect";
+    }
+    public GameObject getAbilityOptionMenu(){
+        return null;
+    }
+}
+
+
+public class Earthquake : OnHittedEffects
+{
+    public static Earthquake Instance;
+
+    public float prob;
+    public float force;
+
+    private IPoolable EarthquakePrefab;
+
+    public Earthquake(float prob, float force){
+        
+        this.prob = prob;
+        this.force = force;
+        if(Instance == null){
+            Instance = this;
+            EarthquakePrefab = Resources.Load<GameObject>("Prefab/Earthquake").GetComponent<IPoolable>();
+        }else{
+            Instance.Stack(this);
+            
+        }
+    }
+
+    public bool addList()
+    {
+        return Instance == this;
+    }
+    
+    public void ApplyEffect(Enemy en = null, Hittable hitted = null, int dmg = -1)
+    {
+        
+        if (en == null) { return; }
+
+        if (Random.Range(0f, 1f) < prob)
+        {
+
+
+            if (Character.Instance.isCharacter("Earthquake"))
+            {
+                Flamey.Instance.GetComponent<Animator>().Play("GolemHit");
+                SpawnEarthquake(hitted.getPosition(), en, hitted);
+
+            }
+            else
+            {
+                SpawnEarthquake(hitted.getPosition(), en, hitted);
+            }
+           
+            
+        }
+
+    }
+    private void SpawnEarthquake(Vector2 pos, Enemy en, Hittable hittable)
+    {
+
+        void applyKB(Enemy en)
+        {
+            en.KnockBack(hittable.getPosition(), retracting: false, force);
+            if (SkillTreeManager.Instance.getLevel("Earthquake") >= 1)
+            {
+                en.Stun(2.5f);
+            }
+        }
+        ObjectPooling.Spawn(EarthquakePrefab, new float[] { pos.x, pos.y });
+        
+        Enemy[] targets = Physics2D.OverlapCircleAll(hittable.getPosition(), 2.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+        bool level2 = SkillTreeManager.Instance.getLevel("Earthquake") >= 2;
+            foreach (Enemy enemy in targets)
+            {
+                if(enemy==null){ continue; }
+                if (!level2)
+                {
+                    if (enemy == en)
+                    {
+                        applyKB(enemy);
+                    }
+                }
+                else
+                {
+                    applyKB(enemy);
+                }
+                
+            }
+        
+        
+    }
+    public void Stack(Earthquake thornsOnHitted){
+        
+        prob += thornsOnHitted.prob;
+        force += thornsOnHitted.force;
+        RemoveUselessAugments();
+    }
+    public bool maxed;
+    private void RemoveUselessAugments()
+    {
+        if (prob >= 1f)
+        {
+            prob = 1f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("EarthquakeProb");
+        }      
+        if(force >= 5f){
+            force = 5f;
+            Deck deck = Deck.Instance;
+            deck.removeClassFromDeck("EarthquakeForce");
+        }    
+        
+    }
+
+    public string getDescription()
+    {
+        return "Everytime you get hit by an enemy you have a chance of returning a percentage of your <color=#919191>Armor</color> as <color=#FF5858>damage</color> back and applying <color=#FF99F3>On-Hit Effects";
+    }
+    public string[] getCaps()
+    {
+        return new string[]{"Chance: {0}% (Max. 100%) <br>Force: {1}N (max. 500N)", Mathf.Round(prob*100f).ToString(), Mathf.Round(force * 100f).ToString()};
+    }
+
+    public string getIcon()
+    {
+        return "Gravity";
+    }
+
+    public string getText()
+    {
+        return "Earthquake";
     }
 
     public string getType()

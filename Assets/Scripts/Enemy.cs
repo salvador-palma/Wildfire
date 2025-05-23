@@ -127,10 +127,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void KnockBackCenter(){
         StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
     }
-    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f){
-        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time));
+    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f, bool stopOnOrigin = false){
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time, stopOnOrigin));
     }
-    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f){
+    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f, bool stopOnOrigin = false){
   
 
         Vector2 diff = (Vector2)HitCenter.position - origin;
@@ -140,6 +140,10 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         while(timer > 0){
             timer -= Time.deltaTime;
             transform.position = (Vector2)transform.position + diff * Time.deltaTime * power;
+            if (Math.Abs(HitCenter.position.x) > 9.25f || Math.Abs(HitCenter.position.y) > 5.4f || (stopOnOrigin && Vector2.Distance(HitCenter.position, origin) < 0.05f))
+            {
+                timer = 0;
+            }
             yield return null;
 
         }
@@ -228,7 +232,6 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
         if(source=="Thorns"){
             float DamageGiven = extraInfo[0];
-            Debug.Log("Damage Dealt: " + Dmg + " Damage Received: " + DamageGiven);
             if(DamageGiven < Dmg){
                 GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(26, "Cloris", 13);
             }

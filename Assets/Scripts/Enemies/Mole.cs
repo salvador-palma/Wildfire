@@ -60,9 +60,16 @@ public class Mole : Enemy
     override public void UpdateEnemy() {
            
         if(!diggingUp){
-            base.UpdateEnemy();
+            Move();
+        
+            if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !isUnderground && !diggingUp){
+                Attacking = true;
+                
+                GetComponent<Animator>().SetTrigger("InRange");
+                StartCoroutine(PlayAttackAnimation(AttackDelay));
+            }
         }
-        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground){
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < initialDistance * DigUpDistance && isUnderground  && !diggingUp){
             StartCoroutine(DigUp());
         }
         if(isUnderground){
@@ -81,19 +88,22 @@ public class Mole : Enemy
         transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (isUnderground ? undergroundSpeedMult : 1f));
     }
 
-    IEnumerator DigUp(){
-        
+    IEnumerator DigUp()
+    {
+
         DigSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         DigSoundInstance.release();
-        AudioManager.PlayOneShot(PopOutSound,transform.position);
+        AudioManager.PlayOneShot(PopOutSound, transform.position);
 
-        isUnderground = false;
+
         diggingUp = true;
         GetComponent<Animator>().Play("DigOut");
         SpawnHole();
         yield return new WaitForSeconds(diggingDelay);
-        diggingUp= false;
+
         lineRenderer.GetComponent<Animator>().Play("TrailOff");
+        diggingUp = false;
+        isUnderground = false;
         
 
         

@@ -32,7 +32,7 @@ public class Snake : Enemy
         if(isPoisonous){
             AttackTarget.Poison(poisonTicks);
             AudioManager.PlayOneShot(AttackSound, transform.position);
-            Flamey.Instance.ApplyOnHitted(this, 0);
+            Flamey.Instance.ApplyOnHitted(this, AttackTarget, 0);
         }else{
             base.Attack();
         }

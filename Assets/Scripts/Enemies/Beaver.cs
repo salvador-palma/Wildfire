@@ -37,9 +37,17 @@ public class Beaver : Enemy
             Destroy(gameObject);
         }
     }
-    public override void Move(){
-        if(Stunned){return;}
-        transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime * (Stealing? -1f : 1));
+    public override void Move()
+    {
+        if (Stunned) { return; }
+        if (Stealing)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Flamey.Instance.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime * -1f);
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed* (1-SlowFactor)  * Time.deltaTime);
+        }
     }
     public override void Attack()
     {

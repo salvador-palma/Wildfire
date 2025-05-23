@@ -29,6 +29,9 @@ public class FixedOptionMenu : MonoBehaviour
                 break;
             case "Laser":
                 UpdatableText.SetText(Options[Laser.Instance.currentTargetingOption]);
+                break;
+            case "BlackHole":
+                UpdatableText.SetText(Options[Gravity.Instance.currentTargetingOption]);
             break;
         
         }
@@ -63,6 +66,10 @@ public class FixedOptionMenu : MonoBehaviour
             case "Burst Shot":
                 BurstShot.Instance.currentTargetingOption = currentID;
                 PlayerPrefs.GetInt("BurstShotTargetingOption", currentID);
+                break;
+            case "BlackHole":
+                Gravity.Instance.currentTargetingOption = currentID;
+                PlayerPrefs.GetInt("BlackHoleTargetingOption", currentID);
                 break;
             case "Multicaster":
                 SecondShot.Instance.currentTargetingOption = currentID;
