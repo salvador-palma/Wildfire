@@ -187,7 +187,7 @@ public class LocalBestiary : MonoBehaviour
         GameObject newSlot = Instantiate(SlotTemplate,Container.transform);
         Transform newSlotImage = newSlot.transform.Find("Animal");
         RectTransform RT = newSlotImage.GetComponent<RectTransform>();
-
+        //Debug.Log("Bestiary Counter: " + saved_milestones.animals.Count() + " : " + index);
         bool hasRepel = saved_milestones.animals.SingleOrDefault(a => a.AnimalID == index).Repeled;
         newSlot.transform.Find("Banned").gameObject.SetActive(hasRepel);
         RepelAmount += hasRepel ? 1 : 0;

@@ -327,7 +327,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         AudioManager.PlayOneShot(AttackSound,transform.position);
     }
     
-    public void target(){
+    public virtual void target(){
         transform.GetChild(0).gameObject.SetActive(true);
     }
     public void untarget(){
