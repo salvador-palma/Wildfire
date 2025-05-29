@@ -112,9 +112,10 @@ public class Worm : Enemy
         SpawnHole();
         
         yield return new WaitForSeconds(diggingDelay);
-        diggingUp= false;
-        isUnderground = false;
         lineRenderer.GetComponent<Animator>().Play("TrailOff");
+        diggingUp = false;
+        isUnderground = false;
+        
         
 
         

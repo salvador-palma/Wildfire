@@ -395,7 +395,32 @@ public class Character : MonoBehaviour
                 if(Laser.Instance == null && SkillTreeManager.Instance.getLevel("Laser Beam") >= 0){
                     DeckBuilder.Instance.getAugmentByName("Laser Beam").Activate();
                 }
-                
+                break;
+            case "Gravity":
+                if(Gravity.Instance == null && SkillTreeManager.Instance.getLevel("Gravity") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Gravity").Activate();
+                }
+                Gravity.Instance.SpawnExtraAssets();
+                break;
+            case "Whirlpool":
+                if(Whirpool.Instance == null && SkillTreeManager.Instance.getLevel("Whirlpool") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Whirlpool").Activate();
+                }
+                break;
+            case "Totem":
+                if(Totem.Instance == null && SkillTreeManager.Instance.getLevel("Totem") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Totem").Activate();
+                }
+                break;
+            case "Smog":
+                if(Smog.Instance == null && SkillTreeManager.Instance.getLevel("Smog") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Smog").Activate();
+                }
+                break;
+            case "Earthquake":
+                if(Earthquake.Instance == null && SkillTreeManager.Instance.getLevel("Earthquake") >= 0){
+                    DeckBuilder.Instance.getAugmentByName("Earthquake").Activate();
+                }
                 break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Magical Shot":

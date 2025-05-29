@@ -127,17 +127,34 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void KnockBackCenter(){
         StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
     }
-    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f, bool stopOnOrigin = false){
-        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time, stopOnOrigin));
+    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f){
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time, stopOnOrigin, angleMissStep));
     }
-    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f, bool stopOnOrigin = false){
-  
+    public static Vector2 RotateNormalizedVector(Vector2 normalizedVec, float angleDegrees)
+    {
+        float radians = angleDegrees * Mathf.Deg2Rad;
+
+        float cos = Mathf.Cos(radians);
+        float sin = Mathf.Sin(radians);
+
+        // Rotate the vector
+        float x = normalizedVec.x * cos - normalizedVec.y * sin;
+        float y = normalizedVec.x * sin + normalizedVec.y * cos;
+
+        Vector2 rotated = new Vector2(x, y).normalized; // .normalized is optional since length is preserved
+        return rotated;
+    }
+    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f)
+    {
+
 
         Vector2 diff = (Vector2)HitCenter.position - origin;
         diff.Normalize();
         diff *= retracting ? -1 : 1;
+        diff = RotateNormalizedVector(diff, angleMissStep);
 
-        while(timer > 0){
+        while (timer > 0)
+        {
             timer -= Time.deltaTime;
             transform.position = (Vector2)transform.position + diff * Time.deltaTime * power;
             if (Math.Abs(HitCenter.position.x) > 9.25f || Math.Abs(HitCenter.position.y) > 5.4f || (stopOnOrigin && Vector2.Distance(HitCenter.position, origin) < 0.05f))
@@ -147,7 +164,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             yield return null;
 
         }
-       
+
     }
 
     public void Poison(int tick)
@@ -174,7 +191,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime);
     }
     public virtual void Taunt(Hittable target){
-        if(!attack_target.Equals(Flamey.Instance) || !canTarget()){
+        if(!AttackTarget.Equals(Flamey.Instance) || !canTarget()){
             return;
         }
         AttackTarget = target;
@@ -205,6 +222,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null){
         if(Health<=0){return 0;}
+        if(attack_target==null){ return 0; }
         
         Dmg = (int)(Dmg * Gambling.getGambleMultiplier(0));
 
@@ -256,17 +274,26 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     public virtual void Die(bool onKill = true){
         if(this==null){return;}
-        try{
+        try
+        {
             Flamey.Instance.addEmbers(calculateEmbers());
             flame.TotalKills++;
-            CameraShake.Shake(0.4f,0.05f);
-            
-            EnemySpawner.AddDeath(Name , Shiny);
-            if(onKill){Flamey.Instance.ApplyOnKill(HitCenter.position);}
+            CameraShake.Shake(0.4f, 0.05f);
 
-            AudioManager.PlayOneShot(DeathSound,transform.position);
-        }catch{
-           // Debug.Log("Error at: Enemy.Die()");
+            EnemySpawner.AddDeath(Name, Shiny);
+            if (onKill) { Flamey.Instance.ApplyOnKill(HitCenter.position); }
+
+            AudioManager.PlayOneShot(DeathSound, transform.position);
+
+            if (Character.Instance.isCharacter("Gravity") && Gravity.Instance != null)
+            {
+
+                Gravity.Instance.AddMass(MaxHealth, Vector2.Distance(Flamey.Instance.getPosition(), HitCenter.transform.position));
+            }
+        }
+        catch
+        {
+            // Debug.Log("Error at: Enemy.Die()");
         }
         
         Destroy(gameObject);

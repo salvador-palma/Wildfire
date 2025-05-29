@@ -37,58 +37,85 @@ public class Frog : Enemy
         }
         MaxHealth = Health;
     }
-   
+
+    public override void Taunt(Hittable target)
+    {
+        if (!shooting && !retracting)
+        {
+            base.Taunt(target);
+        }
+        
+    }
     // Update is called once per frame
     override public void UpdateEnemy()
     {
-        if(shooting){
-            if(retracting){
+        if (shooting)
+        {
+            if (retracting)
+            {
                 Tongue.SetPosition(0, Vector2.MoveTowards(Tongue.GetPosition(0), Tongue.GetPosition(1), TongueSpeed * Time.deltaTime));
-                if(Vector2.Distance(Tongue.GetPosition(1), Tongue.GetPosition(0)) < 0.1f ){
+                if (Vector2.Distance(Tongue.GetPosition(1), Tongue.GetPosition(0)) < 0.1f)
+                {
                     Tongue.gameObject.SetActive(false);
                     TongueTip.gameObject.SetActive(false);
-                    retracting=false;
-                    shooting=false;
+                    retracting = false;
+                    shooting = false;
                     GetComponent<Animator>().SetTrigger("CloseMouth");
                 }
-            }else{
+            }
+            else
+            {
                 Tongue.SetPosition(0, Vector2.MoveTowards(Tongue.GetPosition(0), AttackTarget.getPosition(), TongueSpeed * Time.deltaTime));
-                if(Tongue.GetPosition(0).magnitude < TongueRange ){
+                if (Tongue.GetPosition(0).magnitude < TongueRange || Vector2.Distance(Tongue.GetPosition(0), AttackTarget.getPosition()) < 0.05f)
+                {
                     base.Attack();
-                    retracting=true;
+                    retracting = true;
                 }
-            } 
+            }
             TongueTip.position = Tongue.GetPosition(0);
-        }else{
-            if(hasReachedRange){return;}
-            if(jumping){
+        }
+        else
+        {
+            if (hasReachedRange) { return; }
+            if (jumping)
+            {
                 Move();
-                if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange ){
+                if (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange)
+                {
                     Attacking = true;
                     hasReachedRange = true;
                     GetComponent<Animator>().SetTrigger("InRange");
                     StartCoroutine(PlayAttackAnimation(AttackDelay));
                 }
-            }else{
-                if(timer > 0){
-                    timer-=Time.deltaTime;
-                }else{
-                    if(IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1){
-                        if(getSlowInfo("IceLand")[0] <= 0){
+            }
+            else
+            {
+                if (timer > 0)
+                {
+                    timer -= Time.deltaTime;
+                }
+                else
+                {
+                    if (IceOnLand.Instance != null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 1)
+                    {
+                        if (getSlowInfo("IceLand")[0] <= 0)
+                        {
                             timer = jumpTimer;
                             jumping = true;
                             GetComponent<Animator>().Play("Jump");
                         }
-                    }else{
+                    }
+                    else
+                    {
                         timer = jumpTimer;
                         jumping = true;
                         GetComponent<Animator>().Play("Jump");
                     }
-                    
+
                 }
             }
         }
-        
+
     }
 
     public override void Stun(float f, string source = null){
@@ -107,8 +134,8 @@ public class Frog : Enemy
         TongueTip.position = MouthPos.position;
         Tongue.gameObject.SetActive(true);
         TongueTip.gameObject.SetActive(true);
-        Vector3 direction = (MouthPos.position - Vector3.zero).normalized;
-        tongueDesiredPos = Vector3.zero + direction * TongueRange;
+        Vector3 direction = (MouthPos.position - (Vector3)AttackTarget.getPosition()).normalized;
+        tongueDesiredPos = (Vector3)AttackTarget.getPosition() + direction * TongueRange;
         
         shooting = true;
     }

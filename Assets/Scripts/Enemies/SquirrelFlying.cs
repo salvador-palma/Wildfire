@@ -31,16 +31,16 @@ public class SquirrelFlying : Squirrel
         FlySoundInstance = AudioManager.CreateInstance(FlySound);
         FlySoundInstance.start();
 
-        LandDest =  Flamey.Instance.transform.position;
-        LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
-        LandDest.y += (transform.position.y - Flamey.Instance.transform.position.y) * arenaLand;
+        LandDest =  Vector2.zero;
+        LandDest.x += (transform.position.x - Vector2.zero.x) * arenaLand;
+        LandDest.y += (transform.position.y - Vector2.zero.y) * arenaLand;
         transform.position=  new Vector2(transform.position.x, transform.position.y + (float)(startingHeight * Math.Pow(cos,3)));
 
     }
     public override void UpdateEnemy()  {
-        LandDest =  Flamey.Instance.transform.position;
-        LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
-        LandDest.y += (transform.position.y - Flamey.Instance.transform.position.y) * arenaLand;
+        // LandDest =  Flamey.Instance.transform.position;
+        // LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
+        // LandDest.y += (transform.position.y - Flamey.Instance.transform.position.y) * arenaLand;
         base.UpdateEnemy();
         if( flying && Vector2.Distance(LandDest, HitCenter.position) < 0.3f ){
             Land();

@@ -51,12 +51,16 @@ public class Bison : Enemy
 
     bool AttackedAlready = false;
     public override void Attack(){
-        if(AttackedAlready){
-            AttackTarget.Hitted(Damage/2, ArmorPen, this);
-        }else{
+        if(AttackTarget==null){ return; }
+        if (AttackedAlready)
+        {
+            AttackTarget.Hitted(Damage / 2, ArmorPen, this);
+        }
+        else
+        {
             AttackedAlready = true;
             AudioManager.PlayOneShot(FirstHitSound, transform.position);
-            AttackTarget.Hitted(Damage + (chargeAmount*dmgPerCharge), 1, this);
+            AttackTarget.Hitted(Damage + (chargeAmount * dmgPerCharge), 1, this);
         }
        
     }

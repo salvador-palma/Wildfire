@@ -154,17 +154,28 @@ public class Earthquake : OnHittedEffects
     public float force;
 
     private IPoolable EarthquakePrefab;
+    private IPoolable MegaEarthquakePrefab;
+    
+    private float CooldownTimer = 10f;
+    private Image cooldownImage;
 
-    public Earthquake(float prob, float force){
-        
+    public Earthquake(float prob, float force)
+    {
+
         this.prob = prob;
         this.force = force;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             EarthquakePrefab = Resources.Load<GameObject>("Prefab/Earthquake").GetComponent<IPoolable>();
-        }else{
+            MegaEarthquakePrefab = Resources.Load<GameObject>("Prefab/EarthquakeMalph").GetComponent<IPoolable>();
+            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Gravity"));
+            cooldownImage.fillAmount = 1f;
+        }
+        else
+        {
             Instance.Stack(this);
-            
+
         }
     }
 
@@ -184,7 +195,7 @@ public class Earthquake : OnHittedEffects
 
             if (Character.Instance.isCharacter("Earthquake"))
             {
-                Flamey.Instance.GetComponent<Animator>().Play("GolemHit");
+                if (hitted.Equals(Flamey.Instance)) { Flamey.Instance.GetComponent<Animator>().Play("GolemHit"); }
                 SpawnEarthquake(hitted.getPosition(), en, hitted);
 
             }
@@ -197,9 +208,9 @@ public class Earthquake : OnHittedEffects
         }
 
     }
-    private void SpawnEarthquake(Vector2 pos, Enemy en, Hittable hittable)
+    
+    private void SpawnEarthquake(Vector2 pos, Enemy en, Hittable hittable, float radius = 2.5f)
     {
-
         void applyKB(Enemy en)
         {
             en.KnockBack(hittable.getPosition(), retracting: false, force);
@@ -208,28 +219,29 @@ public class Earthquake : OnHittedEffects
                 en.Stun(2.5f);
             }
         }
+
         ObjectPooling.Spawn(EarthquakePrefab, new float[] { pos.x, pos.y });
-        
-        Enemy[] targets = Physics2D.OverlapCircleAll(hittable.getPosition(), 2.5f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+
+        Enemy[] targets = Physics2D.OverlapCircleAll(hittable.getPosition(), radius, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
         bool level2 = SkillTreeManager.Instance.getLevel("Earthquake") >= 2;
-            foreach (Enemy enemy in targets)
+        foreach (Enemy enemy in targets)
+        {
+            if (enemy == null || !enemy.canTarget()) { continue; }
+            if (!level2)
             {
-                if(enemy==null){ continue; }
-                if (!level2)
-                {
-                    if (enemy == en)
-                    {
-                        applyKB(enemy);
-                    }
-                }
-                else
+                if (enemy == en)
                 {
                     applyKB(enemy);
                 }
-                
             }
-        
-        
+            else
+            {
+                applyKB(enemy);
+            }
+
+        }
+
+
     }
     public void Stack(Earthquake thornsOnHitted){
         
@@ -252,6 +264,62 @@ public class Earthquake : OnHittedEffects
             deck.removeClassFromDeck("EarthquakeForce");
         }    
         
+    }
+
+    public bool OnAbilityCD = false;
+    public void ActivateMegaEarthquake(Enemy en)
+    {
+        if (cooldownImage.fillAmount >= 1f && !OnAbilityCD)
+        {
+            OnAbilityCD = true;
+            cooldownImage.fillAmount = 0f;
+            Flamey.Instance.GetComponent<Animator>().Play("GolemHit");
+
+            Vector2 pos = Flamey.Instance.getPosition();
+            void applyKB(Enemy en)
+            {
+                en.KnockBack(pos, retracting: false, force);
+                if (SkillTreeManager.Instance.getLevel("Earthquake") >= 1)
+                {
+                    en.Stun(2.5f);
+                }
+            }
+
+
+            ObjectPooling.Spawn(MegaEarthquakePrefab, new float[] { pos.x, pos.y });
+
+            Enemy[] targets = Physics2D.OverlapCircleAll(pos, 4f, Flamey.EnemyMask).Select(e => e.GetComponent<Enemy>()).ToArray();
+
+            bool level2 = SkillTreeManager.Instance.getLevel("Earthquake") >= 2;
+            foreach (Enemy enemy in targets)
+            {
+                if (enemy == null || !enemy.canTarget()) { continue; }
+                if (!level2)
+                {
+                    if (enemy == en)
+                    {
+                        applyKB(enemy);
+                    }
+                }
+                else
+                {
+                    applyKB(enemy);
+                }
+
+            }
+            
+            Flamey.Instance.StartCoroutine(WaitAbilityCD());
+        }
+
+    }
+    private IEnumerator WaitAbilityCD()
+    {
+        while (cooldownImage.fillAmount < 1f)
+        {
+            cooldownImage.fillAmount += 0.25f * (1f / CooldownTimer);
+            yield return new WaitForSeconds(0.25f);
+        }
+        OnAbilityCD = false;
     }
 
     public string getDescription()

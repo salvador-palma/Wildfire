@@ -53,7 +53,7 @@ public class Moose : Enemy
     public override void Attack()
     {
         
-
+        
         Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, HealRadius, Flamey.EnemyMask);
 
         foreach(Collider2D col in AnimalAround){

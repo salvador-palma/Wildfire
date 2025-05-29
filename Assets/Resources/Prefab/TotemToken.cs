@@ -17,7 +17,7 @@ public interface Hittable
     public bool isEqual(GameObject other);
     public bool isOriginal();
 }
-public class TotemToken : IPoolable, Hittable
+public class TotemToken : IAlliedObject, Hittable
 {
     public Sprite[] sprites;
     public float Health;
@@ -86,7 +86,7 @@ public class TotemToken : IPoolable, Hittable
             if (item.attack_target==null || item.attack_target.isEqual(gameObject))
             {
 
-                item.AttackTarget = Flamey.Instance;
+                item.AttackTarget = null;
             }
         }
         stacks = 0;

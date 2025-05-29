@@ -86,28 +86,34 @@ public class Grasshoper : Enemy
     public override void Move(){
 
         if(Stunned){return;}
+        if (AttackTarget.Equals(Flamey.Instance))
+        {
+            Vector2 hk = AttackTarget.getPosition();
+            Vector2 cv = HitCenter.position;
 
-        Vector2 hk = AttackTarget.getPosition();
-        Vector2 cv = HitCenter.position;
+            double g = Math.Atan2(cv.y - hk.y, cv.x - hk.x);
+            g = g < 0 ? g + 2 * Math.PI : g;
+            g += angleStep * direction;
+            int w = Math.PI / 2 < g && g < 2 * Math.PI - Math.PI / 2 ? -1 : 1;
 
-        double g = Math.Atan2(cv.y - hk.y, cv.x - hk.x);
-        g = g < 0 ? g+2*Math.PI : g;
-        g += angleStep * direction;
-        int w = Math.PI/2 < g && g < 2*Math.PI - Math.PI/2 ? -1 : 1;
+            double r = Math.Sqrt(Math.Pow(cv.x - hk.x, 2) / 4f + Math.Pow(cv.y - hk.y, 2));
+            double a = Math.Sqrt(4 * r * r);
+            double b = r;
 
-        double r = Math.Sqrt(  Math.Pow(cv.x - hk.x, 2)/4f  + Math.Pow(cv.y - hk.y, 2));
-        double a = Math.Sqrt(4*r*r);
-        double b = r;
+            float nx = (float)(w * a * b / Math.Sqrt(b * b + a * a * Math.Pow(Math.Tan(g), 2)));
+            float ny = (float)(nx * Math.Tan(g));
 
-        float nx = (float)(w*a*b/Math.Sqrt(b*b + a*a*Math.Pow(Math.Tan(g),2)));
-        float ny = (float)(nx*Math.Tan(g));
+            Vector2 dest = new Vector2(nx, ny);
 
-        Vector2 dest = new Vector2(nx, ny);
+            prevX = transform.position.x;
+            transform.position = Vector2.MoveTowards(transform.position, dest, Speed * (1 - SlowFactor) * Time.deltaTime);
 
-        prevX = transform.position.x;
-        transform.position = Vector2.MoveTowards(transform.position, dest, Speed * (1-SlowFactor) * Time.deltaTime);
-        
-        CheckFlip();
+            CheckFlip();
+        }
+        else
+        {
+            base.Move();
+        }
     }
 
     public override void CheckFlip(){

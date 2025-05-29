@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
@@ -538,6 +540,15 @@ public class Gravity : OnKillEffects
     
     public int currentTargetingOption = 0;
     public GameObject optionMenu;
+
+
+
+    //CHARACTER
+    public GameObject matterMeter;
+    public Slider matterSlider;
+    public float Matter;
+    public bool ActiveHole = true;
+    public GameObject BHEffects;
     
     public Gravity(float prob, float force)
     {
@@ -546,7 +557,9 @@ public class Gravity : OnKillEffects
         if (Instance == null)
         {
             Prefab = Resources.Load<GameObject>("Prefab/BlackHole").GetComponent<IPoolable>();
+            matterMeter = Resources.Load<GameObject>("Prefab/AbilityCharacter/BlackHole Matter UI");
             Instance = this;
+            
             if (SkillTreeManager.Instance.getLevel("Gravity") >= 1)
             {
 
@@ -628,6 +641,76 @@ public class Gravity : OnKillEffects
         }
         
     }
+
+    public void SpawnExtraAssets()
+    {
+        GameObject g = GameUI.Instance.SpawnUI(matterMeter);
+        matterSlider = g.GetComponent<Slider>();
+        Matter = Flamey.Instance.MaxHealth;
+         BHEffects = GameObject.Find("BlackHoleEffects").gameObject;
+        UpdateMassUI();
+    }
+
+    public float ReduceMass(int Dmg)
+    {
+        if (ActiveHole)
+        {
+            float rest = Math.Max(0, Dmg - Matter);
+            Matter = Math.Max(Matter - Dmg, 0);
+            if (Matter <= 0)
+            {
+                TransformChar(false);
+            }
+            return rest;
+        }
+        else
+        {
+            return Dmg;
+        }
+        
+    }
+    public void UpdateMassUI()
+    {
+        matterSlider.maxValue = Flamey.Instance.MaxHealth;
+        matterSlider.value = Matter;
+    }
+    public void AddMass(float Health, float Distance)
+    {
+        //[0] - [1]
+        float yLim = 4.5f;
+        float xLim = 8.7f;
+
+        float maxDist = (float)Math.Sqrt(xLim * xLim + yLim * yLim);
+        float multiplier = (float)(Math.Pow(Distance - maxDist, 2) / Math.Pow(maxDist, 2)) * 0.2f;
+
+        Health = Health * multiplier;
+        Matter = Math.Min(Flamey.Instance.MaxHealth, Matter + Health);
+        if (Matter >= Flamey.Instance.MaxHealth)
+        {
+            TransformChar(true);
+        }
+        UpdateMassUI();
+    }
+    public void Decay()
+    {
+        if (ActiveHole)
+        {
+            Matter -= Matter * 0.01f;
+            Matter = Math.Max(Matter - Flamey.Instance.MaxHealth * 0.01f, 0);
+            EnemySpawner.Instance.PresentEnemies.ForEach(e => { if (e!=null && e.canTarget()) { e.KnockBack(Flamey.Instance.getPosition(), retracting: true, 0.2f, time: 1f, angleMissStep: -65); } });
+            UpdateMassUI();
+            if (Matter <= 0)
+            {
+                TransformChar(false);
+            }
+        }
+    }
+    public void TransformChar(bool Up)
+    {
+        ActiveHole = Up;
+        Flamey.Instance.GetComponent<Animator>().SetBool("Coreless", !Up);
+        BHEffects.SetActive(Up);
+    }
    
     public string getDescription()
     {
@@ -640,12 +723,12 @@ public class Gravity : OnKillEffects
 
     public string getIcon()
     {
-        return "ExplodeUnlock";
+        return "BlackHoleUnlock";
     }
 
     public string getText()
     {
-        return "Explosion";
+        return "Gravity";
     }
 
     public string getType()

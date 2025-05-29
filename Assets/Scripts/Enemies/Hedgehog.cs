@@ -91,6 +91,7 @@ public class Hedgehog : Enemy
                 TitCounter--;
             }else{
                 TitCounter = TitForTat;
+               
                  Attack();
             }
         }

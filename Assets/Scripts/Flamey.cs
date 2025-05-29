@@ -153,7 +153,7 @@ public class Flamey : MonoBehaviour, Hittable
             GameUI.Instance.TogglePausePanel();
         }
 
-
+        
 
 
         if (current_homing == null)
@@ -207,7 +207,6 @@ public class Flamey : MonoBehaviour, Hittable
             }
 
         }
-
         secondTimer -= Time.deltaTime;
         if (secondTimer <= 0)
         {
@@ -218,17 +217,36 @@ public class Flamey : MonoBehaviour, Hittable
                 tickNumber = 0;
                 EnemySpawner.Instance.ApplyPoisonEnemies();
                 if (poisonsLeft > 0) { ApplyPoison(); }
+
+                if (Character.Instance.isCharacter("Gravity") && Gravity.Instance != null)
+                {
+                    Gravity.Instance.Decay();
+
+
+                }
+                else if (Character.Instance.isCharacter("Earthquake") && Earthquake.Instance != null && !Earthquake.Instance.OnAbilityCD)
+                {
+                    foreach (Enemy en in EnemySpawner.Instance.PresentEnemies)
+                    {
+                        if (en == null) { continue; }
+                        if (Vector2.Distance(en.HitCenter.position, getPosition()) < 4f)
+                        {
+                            Earthquake.Instance.ActivateMegaEarthquake(en);
+                            break;
+                        }
+                    }
+                }
             }
 
             ApplyTimed();
         }
 
-        if(Character.Instance.isCharacter("Totem"))
+
+        if (Character.Instance.isCharacter("Totem"))
         {
             WalkAway();
-            
-            
         }
+        
     }
     public float maxDistanceX = 6.5f;
     public float maxDistanceY = 3.5f;
@@ -374,7 +392,8 @@ public class Flamey : MonoBehaviour, Hittable
     {
 
         if (!Unhittable)
-        {
+        {   
+            // if(Vector2.Distance(getPosition(), attacker.HitCenter.position) > attacker.AttackRange){ return; }
             //CHARACTER SPECIFIC
             if (Character.Instance.isCharacter("Burst") && BurstShot.Instance != null)
             {
@@ -384,7 +403,10 @@ public class Flamey : MonoBehaviour, Hittable
             if (Character.Instance.isCharacter("Smog") && Smog.Instance != null)
             {
                 Smog.Instance.ActivateDrMiasma();
+                return;
             }
+
+            
 
             Dmg = (int)(Dmg * Gambling.getGambleMultiplier(6));
 
@@ -402,6 +424,13 @@ public class Flamey : MonoBehaviour, Hittable
 
             float shieldDamage = Shield - dmgeff;
             Dmg = (int)Math.Abs(shieldDamage);
+
+            if (Character.Instance.isCharacter("Gravity") && Gravity.Instance != null)
+            {
+                Dmg = (int)Gravity.Instance.ReduceMass(Dmg);
+                if(Dmg <= 0){ return; }
+            }
+
             if (shieldDamage < 0)
             {
                 Health += shieldDamage;
