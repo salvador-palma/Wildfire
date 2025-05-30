@@ -190,8 +190,29 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(Stunned){return;}
         transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime);
     }
-    public virtual void Taunt(Hittable target){
-        if(!AttackTarget.Equals(Flamey.Instance) || !canTarget()){
+    float spiralRatio = 2f;
+    public virtual void MoveSpiral(float angle = 0, bool reverse = false)
+    {
+        if (Stunned) { return; }
+
+        Vector2 diff = (Vector2)HitCenter.position - AttackTarget.getPosition();
+        diff.Normalize();
+        diff.y *= spiralRatio;
+        diff.Normalize();
+
+        diff = RotateNormalizedVector(diff, reverse ? 90 - angle : 270 + angle);
+        //Math.Abs(HitCenter.position.x) > 9.25f || Math.Abs(HitCenter.position.y) > 5.4f 
+
+        Vector2 next = (Vector2)transform.position + diff * Time.deltaTime * Speed * (1 - SlowFactor);
+        next.y = Math.Clamp(next.y, -4.9f, 4.9f);
+        next.x = Math.Clamp(next.x, -9.25f, 9.25f);
+        transform.position = next;
+        //transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime);
+    }
+    public virtual void Taunt(Hittable target)
+    {
+        if (!AttackTarget.Equals(Flamey.Instance) || !canTarget())
+        {
             return;
         }
         AttackTarget = target;

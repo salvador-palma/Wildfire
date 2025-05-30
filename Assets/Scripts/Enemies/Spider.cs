@@ -40,44 +40,18 @@ public class Spider : Enemy
     // Update is called once per frame
     
     
-    [Range(0, (float)Math.PI*2)]
+    [Range(-90, 90)]
     public float angleStep = 30f;
     float prevX;
     public override void Move(){
 
 
         if(Stunned){return;}
-        if (AttackTarget.Equals(Flamey.Instance))
-        {
-            Vector2 hk = AttackTarget.getPosition();
-            Vector2 cv = HitCenter.position;
-
-            double g = Math.Atan2(cv.y - hk.y, cv.x - hk.x);
-            g = g < 0 ? g + 2 * Math.PI : g;
-            g += angleStep * direction;
-            int w = Math.PI / 2 < g && g < 2 * Math.PI - Math.PI / 2 ? -1 : 1;
-
-            double r = Math.Sqrt(Math.Pow(cv.x - hk.x, 2) / 4f + Math.Pow(cv.y - hk.y, 2));
-            double a = Math.Sqrt(4 * r * r);
-            double b = r;
-
-            float nx = (float)(w * a * b / Math.Sqrt(b * b + a * a * Math.Pow(Math.Tan(g), 2)));
-            float ny = (float)(nx * Math.Tan(g));
-
-            Vector2 dest = new Vector2(nx, ny);
-
-            prevX = transform.position.x;
-            transform.position = Vector2.MoveTowards(transform.position, dest, Speed * (1 - SlowFactor) * Time.deltaTime);
-        }
-        else
-        {
-            base.Move();
-        }
+        MoveSpiral(angleStep, reverse:direction == 1);
         
-
-
-
         CheckFlip();
+        prevX = transform.position.x;
+        
     }
 
     public override void CheckFlip(){

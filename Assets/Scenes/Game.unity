@@ -56874,19 +56874,6 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 9f74cb916ae343b45aa2d863740d7543, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 50.7}
-  - name: Duck
-    enemy: {fileID: 9171094712062108793, guid: 10772993b48e3b5498d19190c2213286, type: 3}
-    Wave: 1
-    abilities:
-    - icon: {fileID: 0}
-      description: <size=100%><style="Yellow">- Royal Family -</style><br><size=80%>When
-        hitting this enemy, the damage will be absorbed and kill one of the <style="LYellow">3
-        Baby Ducks</style> that follow it. Once all babies have been defeated, the
-        parent will become enraged, gaining <style="LBlue">x2 Speed</style> and <style="Red">x2
-        Damage</style>
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
-    IconSize: {x: 148.45, y: 148.45}
-    IconPos: {x: 0, y: 4.1}
   - name: Caterpillar
     enemy: {fileID: 3905129715520958871, guid: 58c6691817784a94dba3270c12045bee, type: 3}
     Wave: 1
@@ -56921,7 +56908,7 @@ MonoBehaviour:
     IconPos: {x: 0, y: 4.1}
   - name: Spider
     enemy: {fileID: 4844135821487391850, guid: 2f9b71635d5bb6a43b5e8280f581ac42, type: 3}
-    Wave: 2
+    Wave: 1
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This
@@ -56956,6 +56943,18 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4452a647442cb8b4582b496b787c5d2a, type: 2}
     IconSize: {x: 199.83, y: 189.71}
     IconPos: {x: -6.3, y: 12.2}
+  - name: Duck
+    enemy: {fileID: 9171094712062108793, guid: 10772993b48e3b5498d19190c2213286, type: 3}
+    Wave: 2
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Family -</style><br><size=80%><style="LYellow">3
+        Baby Ducks</style> will follow this animal. If all babies get killed, the
+        parent will become enraged, gaining <style="LBlue">x3 Speed</style> and <style="Red">x2
+        Damage</style>
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Snail
     enemy: {fileID: 1852813269696119805, guid: 31e8864fb8182ef43bec84cf3a44ddeb, type: 3}
     Wave: 2
