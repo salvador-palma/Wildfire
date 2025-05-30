@@ -56883,7 +56883,7 @@ MonoBehaviour:
     IconPos: {x: -3.9, y: 61.4}
   - name: Worm
     enemy: {fileID: 2243928030448316220, guid: f86a3a1578543284aa5973cb5d89297f, type: 3}
-    Wave: 2
+    Wave: 1
     abilities:
     - icon: {fileID: 21300000, guid: 9a41f862fc4fdec41b8f6f025d69641c, type: 3}
       description: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Start
@@ -56895,7 +56895,7 @@ MonoBehaviour:
     IconPos: {x: 0.0000042915, y: 58.8}
   - name: Dragonfly
     enemy: {fileID: 5886600340124561951, guid: 65bdf0a188f97314480e5d47665e514d, type: 3}
-    Wave: 2
+    Wave: 1
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Zig Zag -</style><br><size=80%>This
@@ -56919,7 +56919,7 @@ MonoBehaviour:
     IconPos: {x: -8.3, y: 21.6}
   - name: Beetle
     enemy: {fileID: 7486879263624235867, guid: 937c2c6f8385930429db3ef659897091, type: 3}
-    Wave: 2
+    Wave: 1
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Dung Roller -</style><br><size=80%>This
@@ -56996,6 +56996,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 185.86, y: 176.44}
     IconPos: {x: -5.5, y: 2.16}
+  - name: Turkey
+    enemy: {fileID: 2590023467205984069, guid: 76941c6b5cd42314bba16611db39f567, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Taunt -</style><br><size=80%>This
+        animal <style="Blue">taunts</style> the campfire, forcing it to change target
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Hedgehog
     enemy: {fileID: 5813437837199226000, guid: 26ff5fc6f58c63e46a34b963fba143df, type: 3}
     Wave: 3
@@ -57032,7 +57042,7 @@ MonoBehaviour:
     IconSize: {x: 300.32, y: 285.12}
     IconPos: {x: 4.4, y: 17.3}
   - name: Scorpion
-    enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
+    enemy: {fileID: 8189277284385583550, guid: 85087f5941c5f4a4e83cb7420bc31394, type: 3}
     Wave: 3
     abilities: []
     ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
@@ -57094,6 +57104,18 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 4.7066e-11}
+  - name: Venomous Scorpion
+    enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
+    Wave: 4
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks
+        apply <style="Purple">10 Poison Ticks.</style> Each <style="Purple">Poison
+        Tick</style> deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison
+        Ticks</style> are stackable and are cleared once the round ends
+    ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
+    IconSize: {x: 192, y: 182.27}
+    IconPos: {x: -5.7, y: 15.8}
   - name: Hog
     enemy: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
     Wave: 4
@@ -57143,6 +57165,17 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 7ac0110e026313f4390cb7e88ed0ca8f, type: 2}
     IconSize: {x: 161.82, y: 153.63}
     IconPos: {x: -3.9, y: 4.7066e-11}
+  - name: Snapping Turtle
+    enemy: {fileID: 5447401493071969222, guid: 69a1ff4f494f3a5429e788684a57dcdd, type: 3}
+    Wave: 5
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks
+        <style="Blue">stun</style> the campfire for 2 seconds. <style="Blue">Stun</style>
+        effects override each other instead of stacking
+    ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
+    IconSize: {x: 300.32, y: 285.12}
+    IconPos: {x: 4.4, y: 17.3}
   - name: Bear
     enemy: {fileID: 4544615441581723125, guid: ba9e790fe95de3743a10cc26240acd59, type: 3}
     Wave: 5
@@ -57162,7 +57195,7 @@ MonoBehaviour:
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks
-        apply <style="Purple">8 Poison Ticks.</style> Each <style="Purple">Poison
+        apply <style="Purple">32 Poison Ticks.</style> Each <style="Purple">Poison
         Tick</style> deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison
         Ticks</style> are stackable and are cleared once the round ends
     ShinyMaterial: {fileID: 2100000, guid: 22efa679a12eb5c4c9a9f8de280399a6, type: 2}
@@ -57184,7 +57217,7 @@ MonoBehaviour:
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks
-        <style="Blue">stun</style> the campfire for 0.75 seconds. <style="Blue">Stun</style>
+        <style="Blue">stun</style> the campfire for 2 seconds. <style="Blue">Stun</style>
         effects override each other instead of stacking
     ShinyMaterial: {fileID: 2100000, guid: db8441eadb6c88d4da9eb1041471e703, type: 2}
     IconSize: {x: 177.17, y: 168.2}

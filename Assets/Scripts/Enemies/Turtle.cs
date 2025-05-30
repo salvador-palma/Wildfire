@@ -23,18 +23,6 @@ public class Turtle : Enemy
         MaxHealth = Health;
 
     }
-
-    int frer;
-    [ContextMenu("Freeze")]
-    void ExtraFunction()
-    {
-        frer = frer == 0 ? 1 : 0;
-        GetComponent<SpriteRenderer>().material.SetFloat("_Frozen",frer);
-        
-    }
-   
-    
-
     
     
 }
