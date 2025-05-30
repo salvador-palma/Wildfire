@@ -86,17 +86,10 @@ public class Grasshoper : Enemy
     public override void Move(){
 
         if(Stunned){return;}
-        if (AttackTarget.Equals(Flamey.Instance))
-        {
-            MoveSpiral(angleStep, direction == 1);
+         MoveSpiral(angleStep, direction == 1);
 
             CheckFlip();
             prevX = transform.position.x;
-        }
-        else
-        {
-            base.Move();
-        }
     }
 
     public override void CheckFlip(){
