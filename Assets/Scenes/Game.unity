@@ -51566,7 +51566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.64001, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.63998, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -56903,7 +56903,7 @@ MonoBehaviour:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Hover -</style><br><size=80%>This
         animal can <style="Orange">hover</style>
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    ShinyMaterial: {fileID: 2100000, guid: d985f0354e7a5384498b28705100b1cf, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
   - name: Spider
@@ -56943,6 +56943,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4452a647442cb8b4582b496b787c5d2a, type: 2}
     IconSize: {x: 199.83, y: 189.71}
     IconPos: {x: -6.3, y: 12.2}
+  - name: Mantis
+    enemy: {fileID: 7946333540854765475, guid: e8d38e302ced26a49b397e74e9412348, type: 3}
+    Wave: 2
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Double Hit -</style><br><size=80%>Hits
+        two times when attacking
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Duck
     enemy: {fileID: 9171094712062108793, guid: 10772993b48e3b5498d19190c2213286, type: 3}
     Wave: 2
@@ -56952,7 +56962,7 @@ MonoBehaviour:
         Baby Ducks</style> will follow this animal. If all babies get killed, the
         parent will become enraged, gaining <style="LBlue">x3 Speed</style> and <style="Red">x2
         Damage</style>
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    ShinyMaterial: {fileID: 2100000, guid: 35352ba4bb13501439f9913cefb7bf93, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
   - name: Snail
@@ -56962,6 +56972,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 706713ec878d2c8479261fdc2a3f3ac8, type: 2}
     IconSize: {x: 203.11, y: 192.82}
     IconPos: {x: 1.7, y: 53}
+  - name: Bunny
+    enemy: {fileID: 1783731420939666997, guid: 10cc14674d0b6d24c908226a35e20643, type: 3}
+    Wave: 2
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
+        hops around instead of having a consistent movement speed
+    ShinyMaterial: {fileID: 2100000, guid: 848f7b49151fbb94589b3b6475dbf0b5, type: 2}
+    IconSize: {x: 150.75, y: 143.12}
+    IconPos: {x: 4.5, y: -7.7}
   - name: Mole
     enemy: {fileID: 6721927114820824289, guid: b48228c738c1e774bbc301b8b4b7ce2b, type: 3}
     Wave: 2
@@ -56974,16 +56994,22 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 813d31e6cff7cbe45a3558f1fd118747, type: 2}
     IconSize: {x: 148.92, y: 141.38}
     IconPos: {x: -0.73, y: -9.7}
-  - name: Bunny
-    enemy: {fileID: 1783731420939666997, guid: 10cc14674d0b6d24c908226a35e20643, type: 3}
+  - name: Crab
+    enemy: {fileID: 1846646309311347333, guid: 26a83b752585df24db4759a164aac091, type: 3}
     Wave: 2
     abilities:
     - icon: {fileID: 0}
-      description: <size=100%><style="Yellow">- Hop -</style><br><size=80%>This animal
-        hops around instead of having a consistent movement speed
-    ShinyMaterial: {fileID: 2100000, guid: 848f7b49151fbb94589b3b6475dbf0b5, type: 2}
-    IconSize: {x: 150.75, y: 143.12}
-    IconPos: {x: 4.5, y: -7.7}
+      description: <size=100%><style="Yellow">- Burrow -</style><br><size=80%>Hides
+        in a hole after getting hit <style="LYellow">3 times.</style> While <style="Orange">burried,</style>
+        becomes <style="Blue">untargetable</style> and <style="Blue">immune</style>
+        to most sources of damage. Crabs will leave the hole after <style="LYellow">5
+        seconds</style>
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Zig Zag -</style><br><size=80%>This
+        animal takes an inconsistent path towards the campfire instead of going straight
+    ShinyMaterial: {fileID: 2100000, guid: 1de9f394e9d276f46a82872a8f54294e, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Squirrel
     enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
     Wave: 2
@@ -57003,7 +57029,7 @@ MonoBehaviour:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Taunt -</style><br><size=80%>This
         animal <style="Blue">taunts</style> the campfire, forcing it to change target
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    ShinyMaterial: {fileID: 2100000, guid: 168538fba2f38f64cbed0d165e9340b4, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
   - name: Hedgehog
@@ -57022,6 +57048,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: b128667e0b5872f4188cdbde9f69114d, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 0.00000047684, y: 5.245}
+  - name: Mountain Goat
+    enemy: {fileID: 832044867567855643, guid: 4285c2466e736f547b4b422f15f10d2a, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Charge -</style><br><size=80%>Charges
+        through the campfire, hitting only once and then leaving the campsite
+    ShinyMaterial: {fileID: 2100000, guid: c4f0aa02ff2f25c4981d598b852122d7, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Raccoon
     enemy: {fileID: 4160200665350817852, guid: f2b3de56f11c62841a7595a6a00d68d6, type: 3}
     Wave: 3
@@ -57041,13 +57077,39 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
     IconSize: {x: 300.32, y: 285.12}
     IconPos: {x: 4.4, y: 17.3}
+  - name: Sloth
+    enemy: {fileID: 7406880590167432671, guid: a4408739a956e7f4f8514771eecd7fa9, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Animal Catapult -</style><br><size=80%>This
+        animal does not directly attack the campfire, instead, it picks up the closest
+        enemy and throws it against it. If there are no more animals in need of the
+        Sloth's help, it leaves
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Scorpion
     enemy: {fileID: 8189277284385583550, guid: 85087f5941c5f4a4e83cb7420bc31394, type: 3}
     Wave: 3
     abilities: []
-    ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
+    ShinyMaterial: {fileID: 2100000, guid: 597b4f80605c40b4aaf173cd7cd6ea68, type: 2}
     IconSize: {x: 192, y: 182.27}
     IconPos: {x: -5.7, y: 15.8}
+  - name: Otter
+    enemy: {fileID: 801957955753750543, guid: c2d22c2704e7b3a4d99c8352c3f4463c, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
+        increased <style="LYellow">range</style> and is able to damage you from afar
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Water Sprout -</style><br><size=80%><style="Orange">Sprout</style>
+        water whenever it gets <style="Pink">hit</style> while being targeted. Fireballs
+        that touch water are extinguished immediately
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Armadillo
     enemy: {fileID: 4317406584369839249, guid: b5aaec1beb537104aa96f34019d52471, type: 3}
     Wave: 4
@@ -57116,6 +57178,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 199da4cd60cca1344877c9caf537744d, type: 2}
     IconSize: {x: 192, y: 182.27}
     IconPos: {x: -5.7, y: 15.8}
+  - name: Coyote
+    enemy: {fileID: 7897977805123542144, guid: b537df746e0193147b8c5530e01bc25a, type: 3}
+    Wave: 4
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Short Fuse -</style><br><size=80%>Gains
+        <style="LBlue">x2.5 Speed</style> whenever it's being targeted
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Hog
     enemy: {fileID: 4309817539199371492, guid: 3285083c6b59b56429af856934985871, type: 3}
     Wave: 4
@@ -57127,6 +57199,28 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 7a256037dd6480249b45f439df1369d6, type: 2}
     IconSize: {x: 79.62, y: 75.59}
     IconPos: {x: -3.9, y: 4.7066e-11}
+  - name: Gila Monster
+    enemy: {fileID: 3983636998232680623, guid: af60eea5818c065489ea00ad909b0dad, type: 3}
+    Wave: 5
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Zig Zag -</style><br><size=80%>This
+        animal takes an inconsistent path towards the campfire instead of going straight
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Poison -</style><br><size=80%>Attacks
+        apply <style="Purple">16 Poison Ticks.</style> Each <style="Purple">Poison
+        Tick</style> deals 1:50 of <style="Green">current Health.</style> <style="Purple">Poison
+        Ticks</style> are stackable and are cleared once the round ends
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
+  - name: Snake
+    enemy: {fileID: 6809423876992207642, guid: 7ca601f6ec0e7234b88ff71efbb924bd, type: 3}
+    Wave: 5
+    abilities: []
+    ShinyMaterial: {fileID: 2100000, guid: 57faef2aa412e68489ce420135cf7aa2, type: 2}
+    IconSize: {x: 192.35, y: 182.61}
+    IconPos: {x: -2.3, y: 5.245}
   - name: Frog
     enemy: {fileID: 9092957358169502411, guid: 422a418c11319fc42ae10b374eecf739, type: 3}
     Wave: 5
@@ -57140,13 +57234,6 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 9918386288a1f8945b43ed034ae14237, type: 2}
     IconSize: {x: 55.74, y: 52.92}
     IconPos: {x: 2.3, y: 1.9}
-  - name: Snake
-    enemy: {fileID: 6809423876992207642, guid: 7ca601f6ec0e7234b88ff71efbb924bd, type: 3}
-    Wave: 5
-    abilities: []
-    ShinyMaterial: {fileID: 2100000, guid: 57faef2aa412e68489ce420135cf7aa2, type: 2}
-    IconSize: {x: 192.35, y: 182.61}
-    IconPos: {x: -2.3, y: 5.245}
   - name: Wolf
     enemy: {fileID: 4792462256598324463, guid: 1f67f19206edff64e9426a95f5f167b6, type: 3}
     Wave: 5
@@ -57165,6 +57252,21 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 7ac0110e026313f4390cb7e88ed0ca8f, type: 2}
     IconSize: {x: 161.82, y: 153.63}
     IconPos: {x: -3.9, y: 4.7066e-11}
+  - name: Mountain Lion
+    enemy: {fileID: 7891282516008525580, guid: b80b8f357a7846047acb0fe49e296be2, type: 3}
+    Wave: 5
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Surround -</style><br><size=80%>This
+        animal can move around the campfire, enclosing it, instead of taking a straight
+        path
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Hunter -</style><br><size=80%>This
+        animal <style="Orange">surrounds</style> the campfire waiting for an opportunity
+        to strike and return to safety
+    ShinyMaterial: {fileID: 2100000, guid: a36576a7de55f764195a72e571559358, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Snapping Turtle
     enemy: {fileID: 5447401493071969222, guid: 69a1ff4f494f3a5429e788684a57dcdd, type: 3}
     Wave: 5
@@ -57173,7 +57275,7 @@ MonoBehaviour:
       description: <size=100%><style="Yellow">- Stunning Bite -</style><br><size=80%>Attacks
         <style="Blue">stun</style> the campfire for 2 seconds. <style="Blue">Stun</style>
         effects override each other instead of stacking
-    ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
+    ShinyMaterial: {fileID: 2100000, guid: 873a3e13aab5e474b930036e20fe9e60, type: 2}
     IconSize: {x: 300.32, y: 285.12}
     IconPos: {x: 4.4, y: 17.3}
   - name: Bear

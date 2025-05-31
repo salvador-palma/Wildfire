@@ -81,9 +81,12 @@ public class Crab : Enemy{
         GetComponent<Animator>().Play("Bury");
 
         yield return new WaitForSeconds(5f);
-
-        GetComponent<Animator>().Play("Unbury");
-        burried = false;
+        if (this != null)
+        {
+            GetComponent<Animator>().Play("Unbury");
+            burried = false;
+        }
+        
 
     }
     public int onHitToBurry = 3;

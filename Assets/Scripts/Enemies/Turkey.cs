@@ -36,6 +36,7 @@ public class Turkey : Enemy
     }
     public void TauntCampfire()
     {
+        if(Flamey.Instance.current_homing != null){ Flamey.Instance.current_homing.untarget(); }
         Flamey.Instance.current_homing = this;
         target();
         taunting = false;

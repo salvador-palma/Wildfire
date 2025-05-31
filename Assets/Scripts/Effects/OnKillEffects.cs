@@ -434,7 +434,7 @@ public class Smog : OnKillEffects
         RemoveUselessAugments();
     }
     bool OnDrMiasma = false;
-    public void ActivateDrMiasma()
+    public bool ActivateDrMiasma()
     {
         if (cooldownImage.fillAmount >= 1f && !OnDrMiasma)
         {
@@ -453,6 +453,11 @@ public class Smog : OnKillEffects
             {
                 col.GetComponent<Enemy>().Poison(ticks);
             }
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
     }

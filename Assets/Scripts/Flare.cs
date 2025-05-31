@@ -21,9 +21,16 @@ public class Flare : IPoolable
 
     
     public int DmgTextID;
-    
-    private void SetupTarget(){
-        transform.position = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.4f,0.4f), transform.position.y);
+    public LayerMask BlockerMask;
+    public void Start()
+    {
+        BlockerMask = LayerMask.GetMask("Blocker");
+    }
+    private void SetupTarget()
+    {
+       
+
+        transform.position = new Vector2(transform.position.x + UnityEngine.Random.Range(-0.4f, 0.4f), transform.position.y);
         SpotColor.a = 0;
     }
     private void SetupStats(){
@@ -31,32 +38,57 @@ public class Flare : IPoolable
         speedDescend = 1.5f * speedAscend;
        
     }
-    private void Update() {
-        
-        if(goingDownPhase == 1){
+    float lastY;
+    private void Blocked()
+    {
+        DestroyGameObject();
+    }
+    private void Update()
+    {
 
+        if (goingDownPhase == 1)
+        {
+
+            lastY = transform.position.y;
             transform.position = new Vector2(transform.position.x, transform.position.y - speedDescend * Time.deltaTime);
+
             
+            RaycastHit2D[] hit = Physics2D.LinecastAll(new Vector2(transform.position.x, lastY), transform.position, BlockerMask);
+
+            if (hit.Any(h => !h.collider.isTrigger && h.collider.GetComponent<Blocker>().Block(FlareSpot.transform.position)))
+            {
+                Blocked();
+                return;
+            }
+
             FlareSpotUpdate();
 
-            if(transform.position.y < destY){
-                
+            if (transform.position.y < destY)
+            {
+
                 goingDownPhase++;
-                HitGround(FlareSpot.transform.position);   
-                DestroyGameObject(); 
+                HitGround(FlareSpot.transform.position);
+                DestroyGameObject();
             }
-            
-        }else if(goingDownPhase==0){
+
+        }
+        else if (goingDownPhase == 0)
+        {
             transform.position = new Vector2(transform.position.x, transform.position.y + speedAscend * Time.deltaTime);
-            if(transform.position.y > YLimit){
+
+
+            if (transform.position.y > YLimit)
+            {
                 goingDownPhase++;
                 goDown();
             }
-        }else{
-           DestroyGameObject();
+        }
+        else
+        {
+            DestroyGameObject();
 
         }
-        
+
     }
     virtual public void DestroyGameObject(){
         UnPool();

@@ -53,6 +53,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public bool Stunned;
     public bool Shiny;
 
+    bool being_carried;
+
 
     //FORCED CODE
     [HideInInspector] public bool hitByShred;
@@ -127,8 +129,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void KnockBackCenter(){
         StartCoroutine(KnockBackCouroutine(Vector2.zero, false, 5f));
     }
-    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f){
-        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time, stopOnOrigin, angleMissStep));
+    public virtual void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f, float stopOnOriginMargin=0.05f){
+        StartCoroutine(KnockBackCouroutine(origin, retracting, power * WeightMultipliers[WeigthClass], time, stopOnOrigin, angleMissStep, stopOnOriginMargin));
     }
     public static Vector2 RotateNormalizedVector(Vector2 normalizedVec, float angleDegrees)
     {
@@ -144,7 +146,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Vector2 rotated = new Vector2(x, y).normalized; // .normalized is optional since length is preserved
         return rotated;
     }
-    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f)
+    protected virtual IEnumerator KnockBackCouroutine(Vector2 origin, bool retracting, float power, float timer = 0.5f, bool stopOnOrigin = false, float angleMissStep = 0f, float stopOnOriginMargin=0.05f)
     {
 
 
@@ -157,7 +159,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         {
             timer -= Time.deltaTime;
             transform.position = (Vector2)transform.position + diff * Time.deltaTime * power;
-            if (Math.Abs(HitCenter.position.x) > 9.25f || Math.Abs(HitCenter.position.y) > 5.4f || (stopOnOrigin && Vector2.Distance(HitCenter.position, origin) < 0.05f))
+            if (Math.Abs(HitCenter.position.x) > 9.25f || Math.Abs(HitCenter.position.y) > 5.4f || (stopOnOrigin && Vector2.Distance(HitCenter.position, origin) < stopOnOriginMargin))
             {
                 timer = 0;
             }
@@ -351,7 +353,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public virtual void target(){
         transform.GetChild(0).gameObject.SetActive(true);
     }
-    public void untarget(){
+    public virtual void untarget(){
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
@@ -449,9 +451,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         return selected.First().HitCenter.position;
         
     }
-    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor, List<Enemy> except = null){
+    public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor, List<Enemy> except = null, Predicate<Enemy> filter = null){
         List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
-        if(selected.Count == 0){return null;}
+        selected = selected.Where(e => filter(e)).ToList();
+
+        if (selected.Count == 0) { return null; }
         selected.Sort(sortingFactor);
 
         Enemy selectedEnemy = selected.First();

@@ -402,8 +402,7 @@ public class Flamey : MonoBehaviour, Hittable
 
             if (Character.Instance.isCharacter("Smog") && Smog.Instance != null)
             {
-                Smog.Instance.ActivateDrMiasma();
-                return;
+                if(Smog.Instance.ActivateDrMiasma()){ return; }
             }
 
             
