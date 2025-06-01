@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,11 @@ public class BabyDuck : Enemy
         }
 
 
+    }
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
+    {
+
+        return base.Hitted(Math.Max(1,Dmg), TextID, true, onHit, except, source, extraInfo);
     }
     public override void UpdateEnemy()
     {

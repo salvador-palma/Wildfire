@@ -51566,7 +51566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.63998, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.64001, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -57010,6 +57010,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 1de9f394e9d276f46a82872a8f54294e, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
+  - name: Opossum
+    enemy: {fileID: 2136041336350490041, guid: 6350dbdbcde7a604f826601ea8a0d57a, type: 3}
+    Wave: 2
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Family -</style><br><size=80%>When
+        it dies, leave <style="LYellow">Baby Opossums</style> to take revenge
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Squirrel
     enemy: {fileID: 4811267436284259516, guid: a233d037f7a08454893296ac1372486f, type: 3}
     Wave: 2
@@ -57022,6 +57032,21 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 185.86, y: 176.44}
     IconPos: {x: -5.5, y: 2.16}
+  - name: Owl
+    enemy: {fileID: 6733337533772569703, guid: d7bd9a7d5998fcf468890629580633fd, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Carriage -</style><br><size=80%>This
+        animal carries another species, dropping it off near the campfire
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Flying -</style><br><size=80%>Starts
+        the round by <style="Orange">flying</style> from trees, landing somewhere
+        in the middle of the campsite. While flying, it is <style="Blue">untargetable</style>
+        and <style="Blue">immune</style>
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Turkey
     enemy: {fileID: 2590023467205984069, guid: 76941c6b5cd42314bba16611db39f567, type: 3}
     Wave: 3
@@ -57077,6 +57102,17 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 70c649ee067582e4699cfc7c9256f969, type: 2}
     IconSize: {x: 300.32, y: 285.12}
     IconPos: {x: 4.4, y: 17.3}
+  - name: Goose
+    enemy: {fileID: 8224810989578856652, guid: ca5daa427c64b0f4b93743e4da41f83f, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Panic -</style><br><size=80%>When
+        a goose dies, surrounding geese will panic and rush to the campfire, gaining
+        <style="LBlue">x2 Speed</style>
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Sloth
     enemy: {fileID: 7406880590167432671, guid: a4408739a956e7f4f8514771eecd7fa9, type: 3}
     Wave: 3
@@ -57096,9 +57132,19 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 597b4f80605c40b4aaf173cd7cd6ea68, type: 2}
     IconSize: {x: 192, y: 182.27}
     IconPos: {x: -5.7, y: 15.8}
+  - name: Porcupine
+    enemy: {fileID: 3073487272052368355, guid: 297632b39fc3c094db96dc01cd9f4d06, type: 3}
+    Wave: 3
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
+        increased <style="LYellow">range</style> and is able to damage you from afar
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Otter
     enemy: {fileID: 801957955753750543, guid: c2d22c2704e7b3a4d99c8352c3f4463c, type: 3}
-    Wave: 3
+    Wave: 4
     abilities:
     - icon: {fileID: 0}
       description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
@@ -57346,6 +57392,19 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 114274f6779d32d4db01cb5f78760549, type: 2}
     IconSize: {x: 134.89, y: 134.89}
     IconPos: {x: 0, y: 0}
+  - name: Polar Bear
+    enemy: {fileID: 3378561704260163415, guid: 2d2309a231c795b41972ea2611723c52, type: 3}
+    Wave: 6
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Unstopable -</style><br><size=80%>This
+        species is immune to all sorts of <style="LYellow">Crowd Control
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
+        increased <style="LYellow">range</style> and is able to damage you from afar
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Musk Ox
     enemy: {fileID: 6824811008063488913, guid: 3afb3ca05a191d54d98e21f2f0c92ebe, type: 3}
     Wave: 6

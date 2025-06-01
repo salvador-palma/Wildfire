@@ -41,8 +41,18 @@ public class SquirrelFlying : Squirrel
         // LandDest =  Flamey.Instance.transform.position;
         // LandDest.x += (transform.position.x - Flamey.Instance.transform.position.x) * arenaLand;
         // LandDest.y += (transform.position.y - Flamey.Instance.transform.position.y) * arenaLand;
-        base.UpdateEnemy();
-        if( flying && Vector2.Distance(LandDest, HitCenter.position) < 0.3f ){
+        Move();
+        if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !placedBomb && !flying){
+            Attacking = true;
+           GetComponent<Animator>().SetTrigger("InRange");
+        }
+        if((Math.Abs(transform.position.x) > 10f || Math.Abs(transform.position.y) > 6f) && placedBomb){
+            Explode();
+            Destroy(gameObject);
+        }
+        
+        if (flying && Vector2.Distance(LandDest, transform.position) < 0.3f)
+        {
             Land();
         }
     }
