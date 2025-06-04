@@ -17276,6 +17276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d353af6255e8d34c9629891ddc98a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOn: 1
   isOnAugments: 0
   current_round: 0
   ExplosionPrefab: {fileID: 2759718005379229377, guid: e68e2d8982bd03447b90319865eb4f0f, type: 3}
@@ -57172,6 +57173,18 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 27b71070d57df0d43b217ee22094dbd0, type: 2}
     IconSize: {x: 193.98, y: 184.16}
     IconPos: {x: -3.9, y: 4.7066e-11}
+  - name: Vulture
+    enemy: {fileID: 8471628064822564788, guid: f295d6f11a2dd3248984fa548c601582, type: 3}
+    Wave: 4
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Necrophagous -</style><br><size=80%>Consume
+        the body of an enemy after it dies. In doing so, gain its <style="LBlue">Speed,
+        <style="Red">Damage, <style="Green">Health, <style="Grey">Armor,</style></style></style></style>
+        and <style="LYellow">Attack Speed</style> stats
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Skunk
     enemy: {fileID: 534645426103554320, guid: f8709f5ff08527b4da5ab3a0a256202f, type: 3}
     Wave: 4

@@ -313,6 +313,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
                 Gravity.Instance.AddMass(MaxHealth, Vector2.Distance(Flamey.Instance.getPosition(), HitCenter.transform.position));
             }
+
+            Vulture.CallVultures(this, 1);
         }
         catch
         {

@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     float height;
     float width;
     
-    bool isOn = true;
+    public bool isOn = true;
     [HideInInspector] public bool isOnAugments = false;
 
     
