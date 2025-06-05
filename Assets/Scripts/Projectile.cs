@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Projectile : MonoBehaviour
     public bool LookAtTarget;
     public int Damage;
     public float armPen;
+    public Action afterHit;
 
     void Update()
     {
@@ -28,6 +30,7 @@ public class Projectile : MonoBehaviour
 
         if (Vector2.Distance(AttackTarget.getPosition(), transform.position) < range)
         {
+            if(afterHit!=null){ afterHit(); }
             AttackTarget.Hitted(Damage, armPen, null, false);
             Destroy(gameObject);
         }

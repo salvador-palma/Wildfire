@@ -88,7 +88,7 @@ public class Vulture : Enemy
 
         }
         CheckFlip();
-        
+
 
     }
     public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
@@ -109,9 +109,9 @@ public class Vulture : Enemy
         }
         else
         {
-             GetComponent<Animator>().Play("Eat");
+            GetComponent<Animator>().Play("Eat");
         }
-       
+
     }
     public void FinishEating()
     {
@@ -139,7 +139,7 @@ public class Vulture : Enemy
         // }
         // else
         // {
-            picks = flyingVultures.OrderBy(_ => UnityEngine.Random.Range(0f, 1f)).Take(N).ToArray();
+        picks = flyingVultures.OrderBy(_ => UnityEngine.Random.Range(0f, 1f)).Take(N).ToArray();
         // }
 
         Array.ForEach(picks, v => v.CallToBody(en));
@@ -166,7 +166,7 @@ public class Vulture : Enemy
         corpse.transform.position = en.HitCenter.position;
 
         called = true;
-        
+
         Speed = en.Speed;
         Damage += en.Damage;
         AttackDelay = en.AttackDelay;
@@ -178,11 +178,18 @@ public class Vulture : Enemy
         LandDest = en.HitCenter.position;
     }
     float prevX;
-    public override void CheckFlip(){
-        
-            GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
+    public override void CheckFlip()
+    {
 
-            transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
-        
+        GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
+
+        transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = prevX < transform.position.x;
+
+    }
+
+    public override void Die(bool onKill = true)
+    {
+        if(corpse!=null){Destroy(corpse);}
+        base.Die(onKill);
     }
 }

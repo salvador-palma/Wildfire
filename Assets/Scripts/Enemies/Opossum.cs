@@ -33,6 +33,7 @@ public class Opossum : Enemy
         {
             GameObject g = Instantiate(babyOpossum);
             g.transform.position = spawnPos[i].position;
+            g.GetComponent<Enemy>().CheckFlip();
         }
         base.Die(onKill);
     }

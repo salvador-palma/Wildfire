@@ -32,18 +32,18 @@ public class Goose : Enemy
 
     public void Activate()
     {
-        Debug.Log("Activating");
+        
         if (active) { return; }
         active = true;
         GetComponent<Animator>().Play("Run");
-        Speed *= 2f;
+        Speed *= 3f;
 
     }
     public float radius;
     public override void Die(bool onKill = true)
     {
         Collider2D[] AnimalAround = Physics2D.OverlapCircleAll(HitCenter.position, radius, Flamey.EnemyMask);
-        Debug.Log("Activating: " + AnimalAround.Length);
+        
         foreach (Collider2D col in AnimalAround)
         {
             Enemy e = col.GetComponent<Enemy>();

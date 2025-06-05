@@ -60,7 +60,7 @@ public class Squirrel : Enemy
         TurnBack();
          Attacking = false;
     }
-    private void TurnBack(){
+    protected void TurnBack(){
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
 
