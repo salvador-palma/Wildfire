@@ -479,3 +479,41 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
 }
+
+public abstract class Boss : Enemy
+{
+    public int Phase = -1;
+    protected virtual void Start()
+    {
+        VirtualPreStart();
+        if (!EnemySpawner.Instance.PresentEnemies.Contains(this))
+        {
+            EnemySpawner.Instance.PresentEnemies.Add(this);
+        }
+        base.flame = Flamey.Instance;
+
+        Speed = Distribuitons.RandomTruncatedGaussian(0.02f, Speed, 0.075f);
+        if (EnemySpawner.Instance.current_round >= 60)
+        {
+            int x = EnemySpawner.Instance.current_round;
+            Health = (int)(Health * (float)(Math.Pow(x - 30, 2) / 350) + 1f);
+            Armor = (int)(Armor * (x - 45f) / 15f);
+            Speed *= (float)(Math.Pow(x - 30, 2) / 4000f) + 1f;
+            Damage = (int)(Damage * (float)(Math.Pow(x - 30, 2) / 2500f) + 1f);
+        }
+        MaxHealth = Health;
+
+        GameUI.Instance.SetBoss(this);
+    }
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
+    {
+        int n = base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
+        GameUI.Instance.UpdateBossHP(MaxHealth, Health);
+        return n;
+    }
+    public override void Die(bool onKill = true)
+    {
+        GameUI.Instance.RemoveBoss();
+        base.Die(onKill);
+    }
+}

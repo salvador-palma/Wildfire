@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
     };
 
     public Enemy[] PickedEnemies;
+    public Boss[] PickedBosses;
     public List<Enemy> PresentEnemies;
 
     public bool Paused;
@@ -85,7 +86,8 @@ public class EnemySpawner : MonoBehaviour
         Flamey.Instance.GameEnd = false;    
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){ 
             Deck.Instance.LoadGame(false);
-            PickedEnemies = pickEnemies(current_round);
+            PickedEnemies = pickEnemies();
+            PickedBosses = pickBosses();
             GameEnd = false;
             InitDefaultEffects();
             
@@ -128,38 +130,62 @@ public class EnemySpawner : MonoBehaviour
         double y = 0.52f * height * Math.Sin(angle);
         return new Vector2((float)x,(float)y);
     }
+    public Vector2 getPointAngle(double angle, float radius = 0.52f){
+        angle = Math.PI * (float)angle/180f;
+        double x = radius * width * Math.Cos(angle);
+        double y = radius * height * Math.Sin(angle);
+        return new Vector2((float)x,(float)y);
+    }
 
-    private void Update() {
-        
-        if(GameEnd){return;}
+    private void Update()
+    {
+
+        if (GameEnd) { return; }
         UpdateEnemies();
-        if(!isOn){
-            
-            if(GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments){
+        if (!isOn)
+        {
 
-                if(current_round==59){//6 AM
+            if (GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments)
+            {
+
+                if (current_round == 59)
+                {//6 AM
                     GameUI.Instance.ShowLimitRoundPanel();
                     SIXAM();
                 }
-                else{
+                else
+                {
                     isOnAugments = true;
-                    Deck.Instance.StartAugments((current_round+1)%5 == 0);
+                    Deck.Instance.StartAugments((current_round + 1) % 5 == 0);
                     LogNewRound();
                 }
-                
+
                 Flamey.Instance.poisonsLeft = 0;
-            } 
+            }
+            return;
+        }
+        if (new int[] { 20, 40, 60 }.Contains(current_round))
+        {
+            int id = current_round / 20 - 1;
+            Boss spawnable = PickedBosses[id];
+            Instantiate(spawnable);
+
+            isOn = false;
             return;
         }
 
-        if(TimerEnemySpawnCounter > 0){
-            TimerEnemySpawnCounter-= Time.deltaTime;
-        }else{
+        if (TimerEnemySpawnCounter > 0)
+        {
+            TimerEnemySpawnCounter -= Time.deltaTime;
+        }
+        else
+        {
 
-            TimerEnemySpawnCounter = TimerEnemySpawn * (1/Gambling.getGambleMultiplier(3));
+            TimerEnemySpawnCounter = TimerEnemySpawn * (1 / Gambling.getGambleMultiplier(3));
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;
-            if(EnemyAmount <= 0){
+            if (EnemyAmount <= 0)
+            {
                 isOn = false;
             }
         }
@@ -395,7 +421,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    private Enemy[] pickEnemies(int round){
+    private Enemy[] pickEnemies(){
         List<Enemy> result = new List<Enemy>();
         for (int i = 0; i < 6; i++)
         {
@@ -405,56 +431,80 @@ public class EnemySpawner : MonoBehaviour
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
     }
+    
+    private Boss[] pickBosses(){
+        List<Boss> result = new List<Boss>();
+        
+        List<BossRunTimeData> possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.BEGGINER).ToList();
+        result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
+        possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.ADVANCED).ToList();
+        result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
+        possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.MASTER).ToList();
+        result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
+        
+        return result.ToArray();
+    }
 
 
     //==== DEATH COUNTER ==== //
-    public static void AddDeath(string enemy_name, bool shiny=false){
-        if(DeathPerEnemy.ContainsKey(enemy_name)){
+    public static void AddDeath(string enemy_name, bool shiny = false)
+    {
+        if (DeathPerEnemy.ContainsKey(enemy_name))
+        {
             DeathPerEnemy[enemy_name]++;
-        }else{
+        }
+        else
+        {
             DeathPerEnemy[enemy_name] = 1;
         }
-        
-        string og = enemy_name.Contains("Shiny") ? enemy_name.Replace("Shiny","") : enemy_name;
 
-        if(LocalBestiary.INSTANCE.getMilestoneAmount(og) < 0){
+        string og = enemy_name.Contains("Shiny") ? enemy_name.Replace("Shiny", "") : enemy_name;
+
+        if (LocalBestiary.INSTANCE.getMilestoneAmount(og) < 0)
+        {
             Debug.Log("Bestiary Doesn't have: " + og);
 
             LocalBestiary.INSTANCE.UnlockView(og);
-            
+
             Debug.Log("Unlocked: " + og);
             LocalBestiary.INSTANCE.UpdateSlots();
             Debug.Log("Slots Updated");
         }
-        if(shiny && LocalBestiary.INSTANCE.getMilestoneAmountShiny(og) < 0){
+        if (shiny && LocalBestiary.INSTANCE.getMilestoneAmountShiny(og) < 0)
+        {
 
             Debug.Log("Unlocking Shiny: " + enemy_name + " : " + shiny);
             LocalBestiary.INSTANCE.UnlockShiny(og);
             LocalBestiary.INSTANCE.UpdateSlots();
         }
 
-        if(shiny){
+        if (shiny)
+        {
             print("Shinies counting");
-            
+
 
             int shinies = 0;
-            foreach(AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals){
-                if(a.ShinyCaptured >= 0){shinies++;}  
+            foreach (AnimalSaveData a in LocalBestiary.INSTANCE.saved_milestones.animals)
+            {
+                if (a.ShinyCaptured >= 0) { shinies++; }
             }
             print("Shinies: " + shinies);
 
-            if(shinies == 1 && GameVariables.GetVariable("ShinyTalk") == -1){
+            if (shinies == 1 && GameVariables.GetVariable("ShinyTalk") == -1)
+            {
                 NPC.QueueDialogue("Betsy", 8);
-                GameVariables.SetVariable("ShinyTalk",0);
+                GameVariables.SetVariable("ShinyTalk", 0);
             }
-            if(GameVariables.hasQuest(31)){
-                
-                if(shinies>=10){
+            if (GameVariables.hasQuest(31))
+            {
+
+                if (shinies >= 10)
+                {
                     GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(31, "Gyomyo", 9);
                 }
             }
         }
-        
+
 
 
     }

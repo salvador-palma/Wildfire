@@ -32,8 +32,9 @@ public class BestiarySaveData{
 }
 
 [System.Serializable]
-public class AnimalRunTimeData{
-    public string name;    
+public class AnimalRunTimeData
+{
+    public string name;
     public Enemy enemy;
     public int Wave;
     public AnimalAbility[] abilities;
@@ -42,11 +43,19 @@ public class AnimalRunTimeData{
     public Vector2 IconPos; //right bottom
 }
 [System.Serializable]
+public class BossRunTimeData{   
+    public Boss boss;
+    public BossPhase wave;
+}
+[System.Serializable]
 public class AnimalAbility{
     public Sprite icon;
     [TextAreaAttribute]public string description;
 }
-
+public enum BossPhase
+{
+    BEGGINER, ADVANCED, MASTER
+}
 public class LocalBestiary : MonoBehaviour
 {
     
@@ -63,6 +72,9 @@ public class LocalBestiary : MonoBehaviour
     [SerializeField] List<AnimalRunTimeData> animals;
 
     [SerializeField] GameObject[] BestiaryPanels;
+
+    [Header("Bosses")]
+    [SerializeField] public List<BossRunTimeData> Bosses;
 
     [Header("Milestones")]
     [SerializeField] Sprite[] Stars;

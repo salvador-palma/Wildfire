@@ -11,7 +11,7 @@ public class Ant : Enemy
     {
         VirtualPreStart();
         flame = Flamey.Instance;
-        
+
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
@@ -30,6 +30,7 @@ public class Ant : Enemy
             Speed = ((Ant)e).Speed * 0.9f;
         }
         spawnpoint = transform.position;
+        CheckFlip();
     }
 
 

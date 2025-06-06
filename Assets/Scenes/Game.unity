@@ -7814,6 +7814,9 @@ MonoBehaviour:
   UICooldownsTemplate: {fileID: 1691133815}
   UIActiveCooldownsTemplate: {fileID: 1042857903}
   localBestiary: {fileID: 4023338422407293340}
+  bossGO: {fileID: 708961371}
+  BossHealthSlider: {fileID: 1081872304}
+  BossNameTxt: {fileID: 407900446}
 --- !u!95 &312507741
 Animator:
   serializedVersion: 5
@@ -9652,6 +9655,7 @@ GameObject:
   - component: {fileID: 407900443}
   - component: {fileID: 407900445}
   - component: {fileID: 407900444}
+  - component: {fileID: 407900446}
   m_Layer: 5
   m_Name: BossName
   m_TagString: Untagged
@@ -9775,6 +9779,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407900442}
   m_CullTransparentMesh: 1
+--- !u!114 &407900446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407900442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476351a46d72e3f45aee8f82d976cf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isChat: 0
+  DebugIT: 0
 --- !u!1 &411026324
 GameObject:
   m_ObjectHideFlags: 0
@@ -17283,6 +17301,7 @@ MonoBehaviour:
   ExplosionGhoulPrefab: {fileID: 8853287688916905975, guid: adbdc491307fa1e41888839555d390b5, type: 3}
   GameEnd: 0
   PickedEnemies: []
+  PickedBosses: []
   PresentEnemies: []
   Paused: 0
   HindSightDeepness: 4
@@ -51567,7 +51586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -247.63998, y: -0.0025634766}
+  m_AnchoredPosition: {x: -247.64001, y: -0.0025634766}
   m_SizeDelta: {x: -495.28, y: 0.0049744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987627862
@@ -56882,6 +56901,16 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
     IconSize: {x: 225.56, y: 214.14}
     IconPos: {x: -3.9, y: 61.4}
+  - name: Ant
+    enemy: {fileID: 5158062167366387580, guid: d8fa4cd1249a44d4ea0c3c7ef01381b9, type: 3}
+    Wave: 1
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Colony -</style><br><size=80%>Ants
+        will always spawn behind their leader
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Worm
     enemy: {fileID: 2243928030448316220, guid: f86a3a1578543284aa5973cb5d89297f, type: 3}
     Wave: 1
@@ -57157,6 +57186,21 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
+  - name: Pelican
+    enemy: {fileID: 3161686789459096564, guid: 9b26b4276da9e294d85e78408aac0998, type: 3}
+    Wave: 4
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Carriage -</style><br><size=80%>This
+        animal carries another species, dropping it off near the campfire
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Flying -</style><br><size=80%>Starts
+        the round by <style="Orange">flying</style> from trees, landing somewhere
+        in the middle of the campsite. While flying, it is <style="Blue">untargetable</style>
+        and <style="Blue">immune</style>
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Armadillo
     enemy: {fileID: 4317406584369839249, guid: b5aaec1beb537104aa96f34019d52471, type: 3}
     Wave: 4
@@ -57173,18 +57217,6 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 27b71070d57df0d43b217ee22094dbd0, type: 2}
     IconSize: {x: 193.98, y: 184.16}
     IconPos: {x: -3.9, y: 4.7066e-11}
-  - name: Vulture
-    enemy: {fileID: 8471628064822564788, guid: f295d6f11a2dd3248984fa548c601582, type: 3}
-    Wave: 4
-    abilities:
-    - icon: {fileID: 0}
-      description: <size=100%><style="Yellow">- Necrophagous -</style><br><size=80%>Consume
-        the body of an enemy after it dies. In doing so, gain its <style="LBlue">Speed,
-        <style="Red">Damage, <style="Green">Health, <style="Grey">Armor,</style></style></style></style>
-        and <style="LYellow">Attack Speed</style> stats
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
-    IconSize: {x: 148.45, y: 148.45}
-    IconPos: {x: 0, y: 4.1}
   - name: Skunk
     enemy: {fileID: 534645426103554320, guid: f8709f5ff08527b4da5ab3a0a256202f, type: 3}
     Wave: 4
@@ -57225,6 +57257,21 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: 4bd111b7099bfb445893aa3f9650a3ae, type: 2}
     IconSize: {x: 192.35, y: 182.61}
     IconPos: {x: 2.5, y: 4.7066e-11}
+  - name: Pine Marten
+    enemy: {fileID: 7167517078584043852, guid: f4d89a85a4655134d8ff2c202b0c3ba4, type: 3}
+    Wave: 4
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Explosive Acorn -</style><br><size=80%>This
+        animal sets up <style="Brown">explosive acorns</style> and runs away. If
+        it get out of sight before it dies the <style="Brown">acorn</style> will
+        detonate, dealing <style="Red">+50 dmg.
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Ranged -</style><br><size=80%>Has
+        increased <style="LYellow">range</style> and is able to damage you from afar
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Venomous Scorpion
     enemy: {fileID: 2200746480803589528, guid: 73d0a2411e302a3428faf494f0e4c43f, type: 3}
     Wave: 4
@@ -57324,6 +57371,18 @@ MonoBehaviour:
         animal <style="Orange">surrounds</style> the campfire waiting for an opportunity
         to strike and return to safety
     ShinyMaterial: {fileID: 2100000, guid: a36576a7de55f764195a72e571559358, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
+  - name: Vulture
+    enemy: {fileID: 8471628064822564788, guid: f295d6f11a2dd3248984fa548c601582, type: 3}
+    Wave: 5
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Necrophagous -</style><br><size=80%>Consume
+        the body of an enemy after it dies. In doing so, gain its <style="LBlue">Speed,
+        <style="Red">Damage, <style="Green">Health, <style="Grey">Armor,</style></style></style></style>
+        and <style="LYellow">Attack Speed</style> stats
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
     IconSize: {x: 148.45, y: 148.45}
     IconPos: {x: 0, y: 4.1}
   - name: Snapping Turtle
@@ -57434,6 +57493,13 @@ MonoBehaviour:
   - {fileID: 8349844217330568559}
   - {fileID: 7897323448835946187}
   - {fileID: 223059508}
+  Bosses:
+  - boss: {fileID: 6138253218918678012, guid: d08179e74b0cdc944b82559470b88983, type: 3}
+    wave: 0
+  - boss: {fileID: 6138253218918678012, guid: d08179e74b0cdc944b82559470b88983, type: 3}
+    wave: 1
+  - boss: {fileID: 6138253218918678012, guid: d08179e74b0cdc944b82559470b88983, type: 3}
+    wave: 2
   Stars:
   - {fileID: 140955248, guid: 130f7c2d8b2971a438a5a406e34401b0, type: 3}
   - {fileID: -237967074, guid: 130f7c2d8b2971a438a5a406e34401b0, type: 3}
