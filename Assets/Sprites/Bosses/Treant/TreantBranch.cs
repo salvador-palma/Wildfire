@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TreantBranch : Enemy
@@ -33,5 +34,23 @@ public class TreantBranch : Enemy
             Damage = (int)(Damage * (float)(Math.Pow(x - 20, 2) / 2500f) + 1f);
         }
         MaxHealth = Health;
+        timer = UnityEngine.Random.Range(0f, 5f);
+    }
+    float timer;
+    public override void UpdateEnemy()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+
+            timer = UnityEngine.Random.Range(3f, 7f);
+            
+
+            Enemy[] available = EnemySpawner.Instance.PickedEnemies.Take(6).ToArray();
+            Enemy spawnable = available[UnityEngine.Random.Range(0, available.Length)];
+            Enemy e = Instantiate(spawnable);
+            e.transform.position = HitCenter.transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f));
+            e.CheckFlip();
+        }
     }
 }

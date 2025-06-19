@@ -617,7 +617,7 @@ public class StatikOnHit : OnHitEffects
             return null;
         }
     }
-    int id = 0;
+
     IEnumerator StatikCouroutine(bool Powered, int TTL, float radius, Enemy en){
         List<Enemy> passed = new List<Enemy>(){en};
         LineRenderer lineRenderer = null;

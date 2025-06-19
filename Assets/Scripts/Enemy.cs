@@ -193,9 +193,13 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1-SlowFactor) * Time.deltaTime);
     }
     float spiralRatio = 2f;
-    public virtual void MoveSpiral(float angle = 0, bool reverse = false)
+    public virtual void MoveSpiral(float angle = 0, bool reverse = false, float Speed = -1)
     {
         if (Stunned) { return; }
+        if(Speed < 0)
+        {
+            Speed = this.Speed;
+        }
 
         Vector2 diff = (Vector2)HitCenter.position - AttackTarget.getPosition();
         diff.Normalize();
@@ -291,7 +295,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public void PlayHitAnimation(int dmg, int textID){
-        GetComponent<Animator>().Play("EnemyHit");
+        //GetComponent<Animator>().Play("EnemyHit");
         DamageUI.InstantiateTxtDmg(transform.position, dmg.ToString(), textID);
     }
 
