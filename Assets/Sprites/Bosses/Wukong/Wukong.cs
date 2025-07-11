@@ -12,20 +12,18 @@ public class Wukong : Boss
     protected override void Start()
     {
         base.Start();
-        Phase = 0;
+        Phase = -1;
         NextPhase();
         validThrow = new Predicate<Enemy>(e =>
-        !e.Attacking &&
         !(Vector2.Distance(e.AttackTarget.getPosition(), e.HitCenter.position) <= e.AttackRange) &&
         e.canTarget() &&
-        e != this &&
-        e.Name != "Sloth");
+        e != this);
 
     }
     private Enemy GetThrowTarget()
     {
         return getPredicatedEnemy(
-            (a, b) => UnityEngine.Random.Range(-1,2),
+            (a, b) => UnityEngine.Random.Range(-1, 2),
                 new List<Enemy> { this }, validThrow
                 );
     }
@@ -119,19 +117,65 @@ public class Wukong : Boss
 
     public void NextPhase()
     {
+        Avoiding = false;
+        Trailing = false;
+        JumpingBack = false;
+        Jumping = false;
         Phase++;
         switch (Phase)
         {
             case 0:
-
-                StartCoroutine(Phase0());
+                Debug.Log("Phase 0 starting");
+                StartCoroutine(WaitForPhase(Phase0()));
                 break;
 
             case 1:
-
-                StartCoroutine(Phase1());
+                Debug.Log("Phase 1 starting");
+                StartCoroutine(WaitForPhase(Phase1()));
                 break;
+
+            case 2:
+                Debug.Log("Phase 2 starting");
+                StartCoroutine(WaitForPhase(Phase2()));
+                break;
+
         }
+    }
+    public IEnumerator WaitForPhase(IEnumerator phaseCor)
+    {
+        Exception error = null;
+
+        IEnumerator SafeWrapper()
+        {
+            while (true)
+            {
+                object current;
+                try
+                {
+                    if (!phaseCor.MoveNext())
+                        yield break;
+                    current = phaseCor.Current;
+                }
+                catch (Exception ex)
+                {
+                    error = ex;
+                    Debug.LogError("Error in Wukong phase " + Phase + ": " + ex.Message);
+                    yield break;
+                }
+
+                yield return current;
+            }
+        }
+        try
+        {
+            yield return SafeWrapper();
+        }
+        finally
+        {
+            Debug.Log("Phase " + Phase + (error == null ? " complete" : " ended with error") + ", moving to next phase");
+            NextPhase();
+        }
+
     }
     public bool Jumping;
     public bool JumpingBack;
@@ -163,20 +207,19 @@ public class Wukong : Boss
         GetComponent<Animator>().Play("Jump");
         while (Health > 2 * MaxHealth / 3)
         {
-            Debug.Log("Phase 0");
             yield return new WaitForSeconds(8f);
             if (this == null) { break; }
             if (EnemySpawner.Instance.PresentEnemies.Count <= 1)
             {
                 Roaring = true;
                 GetComponent<Animator>().Play("Roar");
-                yield return new WaitForSeconds(25f);
+                yield return new WaitForSeconds(10f);
                 if (this == null) { break; }
                 Roaring = false;
             }
             JumpingBack = false;
 
-            while (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) > AttackRange)
+            while (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) > AttackRange && Health > 2 * MaxHealth / 3)
             {
                 if (!Avoiding)
                 {
@@ -195,7 +238,6 @@ public class Wukong : Boss
 
         }
         Debug.Log("Phase 0 complete");
-        NextPhase();
 
 
     }
@@ -211,7 +253,7 @@ public class Wukong : Boss
         if (this == null) { yield return null; }
         JumpingBack = false;
 
-        while (Health > 0)
+        while (Health > MaxHealth / 3)
         {
             yield return new WaitForSeconds(2f);
             if (this == null) { yield return null; }
@@ -220,8 +262,12 @@ public class Wukong : Boss
             {
                 if (AvailableEnemies() <= 0)
                 {
+                    Trailing = false;
+                    Avoiding = false;
+                    Jumping = false;
+                    JumpingBack = false;
                     GetComponent<Animator>().Play("Roar");
-                    yield return new WaitForSeconds(10f);
+                    yield return new WaitForSeconds(5f);
                     if (this == null) { yield return null; }
                 }
                 throwTarget = GetThrowTarget();
@@ -235,27 +281,130 @@ public class Wukong : Boss
             {
                 Trailing = true;
                 GetComponent<Animator>().Play("CloudHop");
-                while (throwTarget != null && Vector2.Distance(throwTarget.HitCenter.position, HitCenter.position) > AttackRange)
+                yield return new WaitUntil(() => throwTarget == null || !validThrow(throwTarget) || Vector2.Distance(throwTarget.HitCenter.position, HitCenter.position) < AttackRange || Health <= MaxHealth / 3);
+
+                Trailing = false;
+                Jumping = false;
+                if (!(throwTarget == null || !validThrow(throwTarget) || this == null || Health <= MaxHealth / 3))
                 {
-
-                    yield return new WaitUntil(() => throwTarget == null || Vector2.Distance(throwTarget.HitCenter.position, HitCenter.position) < AttackRange || Health <= 0);
-                    if (this == null || Health <= 0 ) { break; }
-
                     GetComponent<Animator>().Play("CloudHopOff");
-                    Trailing = false;
-                    Jumping = false;
+
                     yield return new WaitForSeconds(1f);
                     if (this == null) { yield return null; }
-                    
+
                     if (throwTarget != null)
                     {
                         GetComponent<Animator>().Play("Throw");
-                    }                    
+                    }
+                }
+
+                
+                
+
+            }
+
+
+        }
+        Debug.Log("Phase 1 complete");
+
+    }
+    public override bool canTarget()
+    {
+        return !unhittable;
+    }
+    bool unhittable = false;
+    void Detarget()
+    {
+        unhittable = true;
+        untarget();
+        if (Flamey.Instance.current_homing == this)
+        {
+            Flamey.Instance.current_homing = null;
+        }
+    }
+    public GameObject WukongClonePrefab;
+    bool InLooping;
+    public IEnumerator Phase2()
+    {
+        Debug.Log("Phase 2");
+        Jumping = false;
+        int amountClones;
+        Avoiding = false;
+        Trailing = false;
+        JumpingBack = false;
+
+
+        while (Health > 0)
+        {
+            GetComponent<Animator>().Play("Disappear");
+
+            Detarget();
+            InLooping = true;
+
+            float angleDelta = UnityEngine.Random.Range(0f, 360f);
+
+            float percentagePhase3 = Health * 100f / (MaxHealth / 3f);
+            float[] barriers = new float[] { 85f, 70f, 55f, 40f, 25f };
+            amountClones = 3;
+            for (int i = 0; i < barriers.Length; i++)
+            {
+                if (percentagePhase3 < barriers[i])
+                {
+                    amountClones++;
                 }
             }
-            
-            
+            float angleStep = 360f / amountClones;
+
+
+            yield return new WaitForSeconds(1f);
+            if (this == null) { break; }
+
+
+            int RealID = UnityEngine.Random.Range(0, amountClones);
+            List<WukongClone> clones = new List<WukongClone>();
+            for (int i = 0; i < amountClones; i++)
+            {
+                float angle = i * angleStep;
+                Vector2 spawnPosition = EnemySpawner.Instance.getPointAngle(angleDelta + angle);
+                if (i == RealID)
+                {
+                    transform.position = spawnPosition;
+                    GetComponent<Animator>().Play("Appear");
+                    unhittable = false;
+                }
+                else
+                {
+                    WukongClone clone = Instantiate(WukongClonePrefab, spawnPosition, Quaternion.identity).GetComponent<WukongClone>();
+                    clones.Add(clone);
+                    clone.AttackTarget = Flamey.Instance;
+                    clone.GetComponent<Animator>().Play("Appear");
+                }
+                yield return new WaitForSeconds(0.25f);
+            }
+            Debug.Log("Waiting for clones to attack");
+            yield return new WaitUntil(() => Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange || Health <= 0 || !InLooping);
+            if (this == null || Health <= 0) { break; }
+
+            if (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange)
+            {
+                Jumping = false;
+                GetComponent<Animator>().Play("AttackDisappear");
+                Detarget();
+                yield return new WaitForSeconds(5f);
+                if (this == null) { break; }
+            }
+            yield return new WaitUntil(() => clones.All(e => e == null));
+            if (this == null) { break; }
+
         }
+
+
+    }
+    public IPoolable ParticlesSmoke;
+    public void SpawnSmoke()
+    {
+        ObjectPooling.Spawn(ParticlesSmoke, new float[] { HitCenter.position.x, HitCenter.position.y });
+
     }
     public void Roar()
     {
@@ -279,6 +428,7 @@ public class Wukong : Boss
             return;
         }
         throwTarget.KnockBack(AttackTarget.getPosition(), power: 4f, retracting: true, time: 1f, stopOnOrigin: true, stopOnOriginMargin: throwTarget.AttackRange);
+        throwTarget = null;
     }
 
 }

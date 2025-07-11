@@ -29,7 +29,7 @@ public class Sloth : Enemy
         validThrow = new Predicate<Enemy>(e =>
         !e.Attacking &&
         !(Vector2.Distance(e.AttackTarget.getPosition(), e.HitCenter.position) <= e.AttackRange) &&
-        !(e.Name == "Sloth") &&
+        !(e.Name == "Sloth") && (e is not Boss) &&
         e.canTarget());
     }
     public float cdtimer;
