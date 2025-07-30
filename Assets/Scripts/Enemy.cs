@@ -496,7 +496,7 @@ public abstract class Boss : Enemy
         }
         base.flame = Flamey.Instance;
 
-        Speed = Distribuitons.RandomTruncatedGaussian(0.02f, Speed, 0.075f);
+        
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
@@ -515,9 +515,17 @@ public abstract class Boss : Enemy
         GameUI.Instance.UpdateBossHP(MaxHealth, Health);
         return n;
     }
+    public override void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5F, bool stopOnOrigin = false, float angleMissStep = 0, float stopOnOriginMargin = 0.05F)
+    {
+        
+    }
     public override void Die(bool onKill = true)
     {
         GameUI.Instance.RemoveBoss();
         base.Die(onKill);
+    }
+    public void Tremor()
+    {
+        CameraShake.Shake(2f, 0.20f);
     }
 }

@@ -79,7 +79,7 @@ public class Wukong : Boss
         if (Stunned) { return; }
         if (Avoiding)
         {
-            MoveSpiral(reverse: fleeDirection, Speed: Speed * 2);
+            MoveSpiral(reverse: fleeDirection, Speed: Speed * 4);
         }
         else if (Jumping)
         {
@@ -408,8 +408,8 @@ public class Wukong : Boss
     }
     public void Roar()
     {
-        Enemy[] available = EnemySpawner.Instance.PickedEnemies.Skip(6).Take(9).ToArray();
-        int amount = 5;
+        Enemy[] available = EnemySpawner.Instance.PickedEnemies.Skip(9).ToArray();
+        int amount = 30;
         for (int i = 0; i < amount; i++)
         {
             Enemy spawn = available[UnityEngine.Random.Range(0, available.Length - 1)];
