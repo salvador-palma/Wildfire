@@ -325,6 +325,7 @@ public class Character : MonoBehaviour
                 if(IceOnLand.Instance == null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 0){
                     DeckBuilder.Instance.getAugmentByName("Snow Pool").Activate();
                 }
+                IceOnLand.Instance.StartSnowballTimer();
                 break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Flower Field":

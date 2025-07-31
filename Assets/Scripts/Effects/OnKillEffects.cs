@@ -474,6 +474,7 @@ public class Smog : OnKillEffects
         }
         OnDrMiasma = false;
     }
+    
     private void RemoveUselessAugments()
     {
         if (prob >= 1f)

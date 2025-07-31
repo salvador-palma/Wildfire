@@ -66,12 +66,17 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
     [SerializeField] private float slowfactor;
     [SerializeField] public int poisonLeft;
-    protected float SlowFactor{
-        get{
+    
+    public SpriteRenderer sr;
+    protected float SlowFactor
+    {
+        get
+        {
             return slowfactor;
         }
-        set{
-            slowfactor = Math.Clamp(value,0f,.99f);
+        set
+        {
+            slowfactor = Math.Clamp(value, 0f, .99f);
         }
     }
     protected void VirtualPreStart()
@@ -80,6 +85,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         {
             EnemySpawner.Instance.PresentEnemies.Add(this);
         }
+        sr = sr==null ? GetComponent<SpriteRenderer>() : sr;
         Health = (int)(Health * Gambling.getGambleMultiplier(4));
         Speed = Speed * Gambling.getGambleMultiplier(5);
         AttackTarget = Flamey.Instance;
@@ -172,7 +178,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void Poison(int tick)
     {
         if(poisonLeft <= 0){
-            GetComponent<SpriteRenderer>().material.SetInt("_Poison", 1);
+            if(sr!=null) sr.material.SetInt("_Poison", 1);
         }
         poisonLeft += tick;
         
@@ -183,7 +189,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
             Hitted((int)(MaxHealth*Flamey.PoisonDrainPerc*perc), 14, ignoreArmor:true, onHit:false, source:"Poison");
             poisonLeft--;
             if(poisonLeft <= 0){
-                GetComponent<SpriteRenderer>().material.SetInt("_Poison", 0);
+                if(sr!=null) sr.material.SetInt("_Poison", 0);
             }
         }
     }
@@ -236,11 +242,11 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     private IEnumerator StunCoroutine(float f,string source = null)
     {
         if(!Stunned){
-            if(source=="Thunder"){GetComponent<SpriteRenderer>().material.SetFloat("_Shock", 1);}
+            if(source=="Thunder"){if(sr!=null) sr.material.SetFloat("_Shock", 1);}
             Stunned = true;
             GetComponent<Animator>().enabled = false;
             yield return new WaitForSeconds(f);
-            if(source=="Thunder"){GetComponent<SpriteRenderer>().material.SetFloat("_Shock", 0);}
+            if(source=="Thunder"){if(sr!=null) sr.material.SetFloat("_Shock", 0);}
             Stunned = false;
             GetComponent<Animator>().enabled = true;
             
@@ -405,15 +411,17 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
 
         float[] prevInfo = getSlowInfo(SlowEffect);
 
-        if(prevInfo == null || prevInfo[0] <= 0){
-            SlowSet += percentage; 
-            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowSet);
+        if (prevInfo == null || prevInfo[0] <= 0)
+        {
+            SlowSet += percentage - prevInfo[1];
+            if (sr != null) sr.material.SetFloat("_Frozen", SlowSet);
+            SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
         }
         if(IceOnLand.Instance!= null && SkillTreeManager.Instance.getLevel("Snow Pool") >= 2 && prevInfo[0] > 0){
             Stun(2f, "IceLand");
         }
 
-        SlowEffectsDuration[SlowEffect] = new float[2]{seconds, percentage};
+        
         
     }  
     public float[] getSlowInfo(string SlowEffect){
@@ -434,10 +442,14 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         }
         if(SlowSet > SlowFactor){
             SlowFactor = SlowSet;
-            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowFactor);
+
+            
+            
+            if(sr!=null) sr.material.SetFloat("_Frozen", SlowFactor);
+            
         }else if(SlowSet < SlowFactor){
             SlowFactor -= Time.deltaTime * SlowDecayRate;
-            GetComponent<SpriteRenderer>().material.SetFloat("_Frozen", SlowFactor);
+            if(sr!=null) sr.material.SetFloat("_Frozen", SlowFactor);
         }
 
     } 
@@ -496,7 +508,7 @@ public abstract class Boss : Enemy
         }
         base.flame = Flamey.Instance;
 
-        
+
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
@@ -517,7 +529,7 @@ public abstract class Boss : Enemy
     }
     public override void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5F, bool stopOnOrigin = false, float angleMissStep = 0, float stopOnOriginMargin = 0.05F)
     {
-        
+
     }
     public override void Die(bool onKill = true)
     {
@@ -528,4 +540,5 @@ public abstract class Boss : Enemy
     {
         CameraShake.Shake(2f, 0.20f);
     }
+    public override void Stun(float f, string source = null){}
 }

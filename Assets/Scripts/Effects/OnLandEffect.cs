@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface OnLandEffect: Effect
 {
@@ -115,16 +117,25 @@ public class IceOnLand : OnLandEffect
     public float timegap;
     public float prob;
     public float lasting;
-    public IceOnLand(float size, float slow, float prob, float lasting){
+    private float CooldownTimer = 4f;
+    private Image cooldownImage;
+    public GameObject prefabSnowBall;
+    public IceOnLand(float size, float slow, float prob, float lasting)
+    {
         this.prob = prob;
         this.size = size;
         this.slow = slow;
         this.lasting = lasting;
-       
-        if(Instance == null){
+
+        if (Instance == null)
+        {
             Instance = this;
             prefab = Resources.Load<GameObject>("Prefab/IceAOE").GetComponent<IPoolable>();
-        }else{
+            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/IcePoolSlow"));
+            prefabSnowBall = Resources.Load<GameObject>("Prefab/Snowball");
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
@@ -164,8 +175,33 @@ public class IceOnLand : OnLandEffect
         }
         
     }
-   
-    public bool addList(){
+    public void StartSnowballTimer()
+    {
+        Flamey.Instance.StartCoroutine(ChargeSnowBall());
+    }
+
+    private IEnumerator ChargeSnowBall()
+    {
+        while (Flamey.Instance.Health > 0)
+        {
+            while (cooldownImage.fillAmount < 1f)
+            {
+                cooldownImage.fillAmount += 0.25f * (1f / CooldownTimer);
+                yield return new WaitForSeconds(0.25f);
+            }
+            ThrowSnowBall();
+        }
+
+    }
+    public void ThrowSnowBall()
+    {
+        Flamey.Instance.SpawnObject(prefabSnowBall);
+        cooldownImage.fillAmount = 0f;
+        
+    }
+    
+    public bool addList()
+    {
         return Instance == this;
     }
 
