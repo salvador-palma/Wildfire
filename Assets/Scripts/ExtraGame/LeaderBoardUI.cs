@@ -8,19 +8,18 @@ using UnityEngine.UI;
 public class LeaderBoardUI : MonoBehaviour
 {
     public GameObject leaderboardPanel;
-    public void Update()
+    public DynamicText loadingText;
+
+    public void OpenLeaderboardPanel()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            if (SteamManager.Initialized)
-            {
-                
-                SteamLeaderboardManager.Instance.DisplayScores(leaderboardPanel);
-            }
-            else
-            {
-                Debug.LogError("Steam is not initialized!");
-            }
-        }
+
+        MetaMenuUI.Instance.ToggleMenu(leaderboardPanel.transform.parent.gameObject);
+        SteamLeaderboardManager.Instance.DisplayScores(leaderboardPanel, loadingText);
+    }
+    public void CloseLeaderboardPanel()
+    {
+        
+        MetaMenuUI.Instance.ToggleMenu(leaderboardPanel.transform.parent.gameObject);
+        
     }
 }

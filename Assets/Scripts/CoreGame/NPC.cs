@@ -72,7 +72,7 @@ public class NPC : MonoBehaviour
     private void Start() {
         if(IdleAnimations.Length > 0){
             int i = UnityEngine.Random.Range(0, IdleAnimations.Length);
-            Debug.Log($"Playing Idle Animation {Name}: {IdleAnimations[i]}");
+            //Debug.Log($"Playing Idle Animation {Name}: {IdleAnimations[i]}");
             GetComponent<Animator>().Play(IdleAnimations[i]);
         }
         SpriteScale = GetComponent<RectTransform>().sizeDelta.x;

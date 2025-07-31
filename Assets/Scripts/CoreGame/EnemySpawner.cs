@@ -193,14 +193,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void SIXAM()
     {
-        if(FlameCircle.Instance != null){
-            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(38,"Betsy",17); //EARTH UNLOCK
+        if (FlameCircle.Instance != null)
+        {
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(38, "Betsy", 17); //EARTH UNLOCK
         }
 
 
-        if(RoundsBelow50PercMaxHP >= 59 && HealthRegen.Instance != null){
+        if (RoundsBelow50PercMaxHP >= 59 && HealthRegen.Instance != null)
+        {
             Debug.Log("UNLOCK PHEONIX");
-            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(30,"Betsy",22); //PHEONIX UNLOCK
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(30, "Betsy", 22); //PHEONIX UNLOCK
+        }
+        
+        if(GameVariables.GetVariable("JunoReady") == -1){
+            GameVariables.SetVariable("JunoReady", 1);
+            NPC.QueueDialogue("Juno", 0);
         }
     }
 

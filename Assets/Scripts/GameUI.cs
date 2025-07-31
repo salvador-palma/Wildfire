@@ -535,12 +535,45 @@ public class GameUI : MonoBehaviour
         BossHealthSlider.value = Health;
     }
 
-    
-   
+
+
+    public static string RoundsToTime(int n)
+    {
+        int roundsPerHour = 10;
+        int hoursPerDay = 24;
+        int daysPerMonth = 30;
+        int monthsPerYear = 12;
+
+        int totalMinutes = n * 6;
+        int years = totalMinutes / (monthsPerYear * daysPerMonth * hoursPerDay * 60);
+        totalMinutes %= (monthsPerYear * daysPerMonth * hoursPerDay * 60);
+
+        int months = totalMinutes / (daysPerMonth * hoursPerDay * 60);
+        totalMinutes %= (daysPerMonth * hoursPerDay * 60);
+
+        int days = totalMinutes / (hoursPerDay * 60);
+        totalMinutes %= (hoursPerDay * 60);
+
+        int hours = totalMinutes / 60;
+        int minutes = totalMinutes % 60;
+
+        string result = "";
+        if (years > 0) result += years + "Y ";
+        if (months > 0 || years > 0) result += months + "M ";
+        if (days > 0 || months > 0 || years > 0) result += days + "D ";
+        result += hours + "H" + minutes.ToString("00");
+        return result.Trim();
+    }
+    public GameObject HighScorePopUp;
+    public void NewHighscorePopUp()
+    {
+        HighScorePopUp.SetActive(true);
+    }
 }
 
-public class SimpleStat{
+public class SimpleStat
+{
     public string Title;
     public int value;
-    public SimpleStat(string t, int v){Title = t; value = v;}
+    public SimpleStat(string t, int v) { Title = t; value = v; }
 }
