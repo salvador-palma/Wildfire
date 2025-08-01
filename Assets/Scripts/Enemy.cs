@@ -474,6 +474,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         selected = selected.Where(e => filter(e)).ToList();
 
         if (selected.Count == 0) { return null; }
+        
         selected.Sort(sortingFactor);
 
         Enemy selectedEnemy = selected.First();

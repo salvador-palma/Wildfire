@@ -33150,7 +33150,9 @@ MonoBehaviour:
   - Name: Mt. Everest
     AnimationBool: Snow
     AbilityName: Snow Pool
-    AbilityDescription: Become an immovable mountain, immune to all sorts of <style="LYellow">Effects</style>
+    AbilityDescription: Throw a <style="LYellow">Rolling Snowball</style> every <style="LYellow">4
+      seconds<style="LYellow"> that leaves a <style="LBlue">Snow trail</style> behind
+      and <style="Orange">Knockbacks</style> enemies hit.
     BodyBack: {fileID: 21300000, guid: 47dcce456380cb047b81bb47798efee8, type: 3}
     BodyFront: {fileID: 0}
     Prop: {fileID: 0}
@@ -33438,6 +33440,113 @@ MonoBehaviour:
     EnvironmentMusic: 5
     Unlocked: 1
     AbilityToSkillTree: Gambling
+    Subtype: 
+    Supratype: 
+  - Name: Tako
+    AnimationBool: Whirlpool
+    AbilityName: Whirlpool
+    AbilityDescription: Once a <style="LYellow">Whirlpool</style> reaches its maximum
+      size, it will be transformed into a <style="LYellow">Water Vortex</style>,
+      killing all enemies inside it <style="Grey">(5 second Cooldown)</style>
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: eba0631b71868c04da4349af4513ec54, type: 3}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 0.25882354, g: 0.7176471, b: 1, a: 1}
+    BodyFrontColor: {r: 0, g: 0.5686275, b: 1, a: 1}
+    Environment: {fileID: 5943299441767252396, guid: 56776a88d7244194ba4b8604cb1541ee, type: 3}
+    EnvironmentMusic: 0
+    Unlocked: 1
+    AbilityToSkillTree: Whirlpool
+    Subtype: 
+    Supratype: 
+  - Name: Dr. Miasma
+    AnimationBool: Poison
+    AbilityName: Smog
+    AbilityDescription: When you get hit, dodge the attack with a <style="LYellow">Smog
+      Cloud</style>, making you untargetable for <style="LYellow">5</style> seconds
+      and <style="Purple">poisoning</style> nearby enemies <style="Grey">(10 second
+      cooldown)</style>
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 9f4b6cc1c8f8f5a49a0464bd710993ca, type: 3}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 0.5686275, g: 0.32156864, b: 0.8862745, a: 1}
+    BodyFrontColor: {r: 0.41568628, g: 0.7921569, b: 0.48235294, a: 1}
+    Environment: {fileID: 6897591518191540117, guid: 19c78518b612d4c4ca7ed0b99a510968, type: 3}
+    EnvironmentMusic: 0
+    Unlocked: 1
+    AbilityToSkillTree: Smog
+    Subtype: 
+    Supratype: 
+  - Name: Mecha
+    AnimationBool: Mecha
+    AbilityName: Laser Beam
+    AbilityDescription: <style="LYellow">Lasers</style> will affect all enemies until
+      they reach their target
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: c5d09960742dbf44987f2e8f9a161f95, type: 3}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 0.37254903, g: 0.8235294, b: 1, a: 1}
+    BodyFrontColor: {r: 0.20392157, g: 0.7529412, b: 0.9137255, a: 1}
+    Environment: {fileID: 5632973442121133982, guid: dcd4db6f30f13b94c8b2c6af5471aa01, type: 3}
+    EnvironmentMusic: 0
+    Unlocked: 1
+    AbilityToSkillTree: Laser Beam
+    Subtype: 
+    Supratype: 
+  - Name: Golem
+    AnimationBool: Golem
+    AbilityName: Earthquake
+    AbilityDescription: Preemptively launch a <style="Yellow">Shock Wave</style>
+      when nearby movement is sensed <style="Grey">(5 second Cooldown)</style>
+    BodyBack: {fileID: 21300000, guid: dd18805c5aa01384ca4ff4cc2ca8b640, type: 3}
+    BodyFront: {fileID: 21300000, guid: 403d5d348b5714343a1c9be3be340d46, type: 3}
+    Prop: {fileID: 21300000, guid: 84460467ce7652044925cf745cd686b8, type: 3}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 0.86274517, g: 0.46274513, b: 0.43529415, a: 1}
+    BodyFrontColor: {r: 0.78431374, g: 0.654902, b: 0.47058824, a: 1}
+    Environment: {fileID: 827525329596228896, guid: 64839746fc86b064cba3ba50d4095eda, type: 3}
+    EnvironmentMusic: 2
+    Unlocked: 1
+    AbilityToSkillTree: Earthquake
+    Subtype: 
+    Supratype: 
+  - Name: Keiki Ahi
+    AnimationBool: Totem
+    AbilityName: Totem
+    AbilityDescription: You now have free will
+    BodyBack: {fileID: 21300000, guid: 61675be723d3dd8488aa7ebb39a73ed1, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 21300000, guid: 6ad6948a8fe3aa54aa7001337c60a480, type: 3}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+    Environment: {fileID: 5259054854031731057, guid: 7caa6d718be5ab14d949ec7dabcd812f, type: 3}
+    EnvironmentMusic: 3
+    Unlocked: 1
+    AbilityToSkillTree: Totem
+    Subtype: 
+    Supratype: 
+  - Name: Black Hole
+    AnimationBool: BlackHole
+    AbilityName: Gravity
+    AbilityDescription: <style="Orange">Singularity Form:</style> Pulls enemies in.
+      Lose <style="LYellow">1% Mass</style> per second or by absorbing damage. Killing
+      nearby enemies restores Mass. At <style="LYellow">0%</style>, shift to <style="Orange">Nucleus
+      Form</style><br><style="Orange">Nucleus Form:</style> Store <style="LYellow">Mass</style>
+      without decay. Return to <style="Orange">Singularity</style> at <style="LYellow">100%</style>
+    BodyBack: {fileID: 21300000, guid: c954dac2ffab72c4cac7dea0dafcaa97, type: 3}
+    BodyFront: {fileID: 0}
+    Prop: {fileID: 0}
+    Face: {fileID: 0}
+    BodyBackColor: {r: 1, g: 1, b: 1, a: 1}
+    BodyFrontColor: {r: 1, g: 1, b: 1, a: 1}
+    Environment: {fileID: 7997866884975536055, guid: c4043f32ecafa524d83e90dbadf3e9ce, type: 3}
+    EnvironmentMusic: 4
+    Unlocked: 1
+    AbilityToSkillTree: Gravity
     Subtype: 
     Supratype: 
   CharacterSelectContainer: {fileID: 1147118009}

@@ -169,8 +169,7 @@ public class Earthquake : OnHittedEffects
             Instance = this;
             EarthquakePrefab = Resources.Load<GameObject>("Prefab/Earthquake").GetComponent<IPoolable>();
             MegaEarthquakePrefab = Resources.Load<GameObject>("Prefab/EarthquakeMalph").GetComponent<IPoolable>();
-            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Gravity"));
-            cooldownImage.fillAmount = 1f;
+            
         }
         else
         {
@@ -218,6 +217,10 @@ public class Earthquake : OnHittedEffects
             {
                 en.Stun(2.5f);
             }
+            if (force >= 5f && GameVariables.hasQuest(53))
+                {
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(53, "Naal", 18);   
+                }
         }
 
         ObjectPooling.Spawn(EarthquakePrefab, new float[] { pos.x, pos.y });
@@ -283,6 +286,9 @@ public class Earthquake : OnHittedEffects
                 {
                     en.Stun(2.5f);
                 }
+
+
+                
             }
 
 
@@ -311,6 +317,11 @@ public class Earthquake : OnHittedEffects
             Flamey.Instance.StartCoroutine(WaitAbilityCD());
         }
 
+    }
+    public void SpawnExtraAssets()
+    {
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/Gravity"));
+        cooldownImage.fillAmount = 1f;
     }
     private IEnumerator WaitAbilityCD()
     {

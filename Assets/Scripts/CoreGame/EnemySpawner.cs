@@ -385,12 +385,14 @@ public class EnemySpawner : MonoBehaviour
         {
             ThornsOnHitted.Instance.ResetInstance();
         }
+        Earthquake.Instance = null;
         //ThornsOnHitted.Instance = null;
 
         Explosion.Instance = null;
         Necromancer.Instance = null;
         Bullets.Instance = null;
         Smog.Instance = null;
+        Gravity.Instance = null;
 
         VampOnHit.Instance = null;
         if (IceOnHit.Instance != null)
@@ -406,6 +408,7 @@ public class EnemySpawner : MonoBehaviour
         IceOnLand.Instance = null;
         DrainOnLand.Instance = null;
         Whirpool.Instance = null;
+        Totem.Instance = null;
 
         SecondShot.Instance = null;
         BurstShot.Instance = null;
@@ -530,13 +533,20 @@ public class EnemySpawner : MonoBehaviour
         if(RoundsWithoutDamage >= 30 && FlameCircle.Instance != null){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42,"Betsy",20); //URANUS UNLOCK
         }
+        
+        if(RoundsWithoutDamage >= 20 && Totem.Instance != null){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(51,"Cloris",20); //TOTEM UNLOCK
+        }
 
-        if(Flamey.Instance.Health <= Flamey.Instance.MaxHealth/4f){
+        if (Flamey.Instance.Health <= Flamey.Instance.MaxHealth / 4f)
+        {
             RoundsBelow25PercMaxHP++;
-            if(RoundsBelow25PercMaxHP >= 10 && FlameCircle.Instance != null){
-                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(39,"Betsy",18); //MARS UNLOCK
+            if (RoundsBelow25PercMaxHP >= 10 && FlameCircle.Instance != null)
+            {
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(39, "Betsy", 18); //MARS UNLOCK
             }
-        }else{RoundsBelow25PercMaxHP=0;}
+        }
+        else { RoundsBelow25PercMaxHP = 0; }
 
         
         

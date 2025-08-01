@@ -100,23 +100,29 @@ public class NPC : MonoBehaviour
     }
 
     //MERGE BOTH FUNCTIONS INTO ONE/HALF
-    public static void QueueDialogue(string NPCName, int ID){
+    public static void QueueDialogue(string NPCName, int ID)
+    {
         CharacterSavedDialogues own_dialogues = savedData.data.FirstOrDefault(e => e.name == NPCName);
-        if(own_dialogues == null){
-            
-            own_dialogues = new CharacterSavedDialogues{name = NPCName,saved_dialogues = new int[1]{ID}};
-            savedData.data.Add(own_dialogues);
-        }else{
+        if (own_dialogues == null)
+        {
 
-            if(!own_dialogues.saved_dialogues.Contains(ID)){
-                savedData.data.Find(i=> i.name == NPCName).Queue(ID);
-                
+            own_dialogues = new CharacterSavedDialogues { name = NPCName, saved_dialogues = new int[1] { ID } };
+            savedData.data.Add(own_dialogues);
+        }
+        else
+        {
+
+            if (!own_dialogues.saved_dialogues.Contains(ID))
+            {
+                savedData.data.Find(i => i.name == NPCName).Queue(ID);
+
             }
-           
-                
+
+
         }
         Debug.Log("Queueing");
         WritingData();
+        
         
     }
     public void QueueDialogue(int ID){

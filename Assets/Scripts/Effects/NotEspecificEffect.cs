@@ -807,6 +807,10 @@ public class Laser : NotEspecificEffect
             amount = 6;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("LaserAmount");
+
+            if(GameVariables.hasQuest(52)){
+                GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(52, "Rowl", 20);
+            }
         }  
         if(increasePerSecond >= 2f){
             increasePerSecond = 2f;

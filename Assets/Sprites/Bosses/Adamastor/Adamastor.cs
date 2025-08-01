@@ -135,6 +135,13 @@ public class Adamastor : Boss
     {
         WaterAnimator.Play("WaterAdamastorExit");
         boats.ForEach(b => {if (b != null) { b.Health = 0; } });
+
+        if (Whirpool.Instance != null && GameVariables.hasQuest(48) )
+        {
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(48, "Juno", 3);
+        }
+
+
         base.Die(onKill);
     }
     private void Storm(bool on)

@@ -12,7 +12,7 @@ public interface Hittable
 {
     public abstract void Hitted(int Dmg, float armPen, Enemy attacker, bool onhitted = true, bool isShake = true, int idHitTxt = 2);
     public abstract Vector2 getPosition();
-    public abstract void Poison(int ticks);
+    public abstract void Poison(int ticks, string tag);
     public bool Unhittable();
     public bool isEqual(GameObject other);
     public bool isOriginal();
@@ -114,7 +114,7 @@ public class TotemToken : IAlliedObject, Hittable
         return HitPoint.position;
     }
 
-    public void Poison(int ticks)
+    public void Poison(int ticks, string tag)
     {
         Health = 0;
         UnPool();

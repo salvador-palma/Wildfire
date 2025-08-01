@@ -55,7 +55,7 @@ public class GilaMonster : Enemy
     public int poisonInject;
     public override void Attack()
     {
-        AttackTarget.Poison(poisonInject);
+        AttackTarget.Poison(poisonInject, Name);
     }
 
     public override void CheckFlip()

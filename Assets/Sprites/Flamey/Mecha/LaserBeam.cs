@@ -38,15 +38,15 @@ public class LaserBeam : MonoBehaviour
         switch (Laser.Instance.currentTargetingOption)
         {
             case 0:
-                return Flamey.Instance.getRandomHomingEnemy();
+                return Flamey.Instance.getRandomHomingEnemy(targetable: true);
             case 1:
-                return Enemy.getPredicatedEnemy((a, b) => Vector2.Distance(a.HitCenter.position, FlameyPos) < Vector2.Distance(b.HitCenter.position, FlameyPos) ? -1 : 1, Current_enemies); 
+                return Enemy.getPredicatedEnemy((a, b) => Vector2.Distance(a.HitCenter.position, FlameyPos) < Vector2.Distance(b.HitCenter.position, FlameyPos) ? -1 : 1, Current_enemies, filter: e => e.canTarget()); 
             case 2:
-                return Enemy.getPredicatedEnemy((e1, e2) => e2.MaxHealth - e1.MaxHealth, Current_enemies);
+                return Enemy.getPredicatedEnemy((e1, e2) => e2.MaxHealth - e1.MaxHealth, Current_enemies, filter: e => e.canTarget());
             case 3:
-                return Enemy.getPredicatedEnemy((a, b) => Vector2.Distance(a.HitCenter.position, FlameyPos) < Vector2.Distance(b.HitCenter.position, FlameyPos) ? 1 : -1, Current_enemies);
+                return Enemy.getPredicatedEnemy((a, b) => Vector2.Distance(a.HitCenter.position, FlameyPos) < Vector2.Distance(b.HitCenter.position, FlameyPos) ? 1 : -1, Current_enemies, filter: e => e.canTarget());
             default:
-                return Flamey.Instance.getRandomHomingEnemy();
+                return Flamey.Instance.getRandomHomingEnemy(targetable: true);
         }
     }
     
@@ -90,6 +90,7 @@ public class LaserBeam : MonoBehaviour
                     target.Hitted((int)(Flamey.Instance.Dmg / Laser.Instance.amount * Math.Pow(dmgIncrease, stacks)), 2, ignoreArmor: false, onHit: false);
                     timerCounter = 0f;
                     stacks++;
+                    if (stacks > 100) stacks = 100;
 
                     if (Character.Instance.isCharacter("Laser Beam"))
                     {
@@ -100,7 +101,7 @@ public class LaserBeam : MonoBehaviour
                             if (enemy != null && enemy != target)
                             {
                                 enemy.Hitted((int)(Flamey.Instance.Dmg / Laser.Instance.amount * Math.Pow(dmgIncrease, stacks)), 2, ignoreArmor: false, onHit: false);
-                                
+
                             }
                         }
                     }

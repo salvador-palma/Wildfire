@@ -132,9 +132,23 @@ public class Betsy : NPC
         SkillTreeManager.Instance.Upgrade("Bee Summoner", Unlock:true);
         SkillTreeManager.Instance.InvokeUIReset();
     }
-    public override void ClickedCharacter(){
+    public SkillTreeButton GravityButton;
+    public void UnlockGravity()
+    {
+        MetaMenuUI.Instance.UnlockableScreen("NEW SKILL DISCOVERED", "GRAVITY", "You can now unlock the <style=\"LYellow\">Gravity</style> ability", 0, () =>
+        {
+            MetaMenuUI.Instance.SkillTreeMenuToggle();
+            GravityButton.Clicked();
+        });
 
-        if(GameVariables.GetVariable("BestiaryReady") <= 0){
+        SkillTreeManager.Instance.Upgrade("Gravity", Unlock: true);
+        SkillTreeManager.Instance.InvokeUIReset();
+    }
+    public override void ClickedCharacter()
+    {
+
+        if (GameVariables.GetVariable("BestiaryReady") <= 0)
+        {
             StartDialogue(0);
             return;
         }

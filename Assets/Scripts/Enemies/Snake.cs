@@ -30,7 +30,7 @@ public class Snake : Enemy
 
     public override void Attack(){
         if(isPoisonous){
-            AttackTarget.Poison(poisonTicks);
+            AttackTarget.Poison(poisonTicks, Name);
             AudioManager.PlayOneShot(AttackSound, transform.position);
             Flamey.Instance.ApplyOnHitted(this, AttackTarget, 0);
         }else{

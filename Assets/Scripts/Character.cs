@@ -417,11 +417,13 @@ public class Character : MonoBehaviour
                 if(Smog.Instance == null && SkillTreeManager.Instance.getLevel("Smog") >= 0){
                     DeckBuilder.Instance.getAugmentByName("Smog").Activate();
                 }
+                Smog.Instance.SpawnExtraAssets();
                 break;
             case "Earthquake":
                 if(Earthquake.Instance == null && SkillTreeManager.Instance.getLevel("Earthquake") >= 0){
                     DeckBuilder.Instance.getAugmentByName("Earthquake").Activate();
                 }
+                Earthquake.Instance.SpawnExtraAssets();
                 break;
             /*--------------------------------------------------------------------------------------------------*/
             case "Magical Shot":
@@ -653,36 +655,49 @@ public class Character : MonoBehaviour
 
         return character_name==null ? characterDatas[active].Unlocked : characterDatas.First(c=>c.Name==character_name).Unlocked;
     }
-    public void Unlock(string character_name){
-        
-        if(!characterDatas.Any(c=>c.Name==character_name)){Debug.LogError("Character " + character_name + " not found"); return;}
-        
-        CharacterUnlockPopUp(characterDatas.First(c=>c.Name==character_name));
-        characterDatas.First(c=>c.Name==character_name).Unlocked = true;
-        
+    public void Unlock(string character_name)
+    {
+
+        if (!characterDatas.Any(c => c.Name == character_name)) { Debug.LogError("Character " + character_name + " not found"); return; }
+
+        CharacterUnlockPopUp(characterDatas.First(c => c.Name == character_name));
+        characterDatas.First(c => c.Name == character_name).Unlocked = true;
+
         WritingData();
 
         //TEMPORARY CLORIS WARDROBE UNLOCK
-        if(GameVariables.GetVariable("ClorisWardrobe")==-1){
+        if (GameVariables.GetVariable("ClorisWardrobe") == -1)
+        {
             QuestBoard.Instance.Cloris.QueueDialogue(9);
-            GameVariables.SetVariable("ClorisWardrobe",1);
+            GameVariables.SetVariable("ClorisWardrobe", 1);
         }
 
         SetupCharacterSelectOptions();
 
+        //CHECK SOLAR SYSTEM UNLOCK
+        if (characterDatas.Where(c => c.Subtype == "Orbital").All(c => c.Unlocked))
+        {
+            if(SkillTreeManager.Instance.getLevel("Gravity") >= -1){
+                betsy.QueueDialogue(27);
+            }
+        }
+        
+
         
     }
+    public Betsy betsy;
 
     private void CharacterUnlockPopUp(CharacterData characterData)
     {
         UnityAction postAction = null;
-        if(characterData.Name == "Saturn"){
+        if (characterData.Name == "Saturn")
+        {
             postAction = () => QuestBoard.PopUpPlanetsQuest();
             Debug.Log("Assigned");
         }
-        
-        
-        
+
+
+
         MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction);
     }
 

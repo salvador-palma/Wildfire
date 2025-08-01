@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -392,8 +393,7 @@ public class Smog : OnKillEffects
             Instance = this;
             Prefab = Resources.Load<GameObject>("Prefab/SmogOnDeath").GetComponent<IPoolable>();
             DrMiasmaSmog = Resources.Load<GameObject>("Prefab/SmogDrMiasma").GetComponent<IPoolable>();
-            cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/PoisonSpread"));
-            cooldownImage.fillAmount = 1f;
+
         }
         else
         {
@@ -461,6 +461,28 @@ public class Smog : OnKillEffects
         }
 
     }
+    static string[] tags = new string[] { "Venomous Scorpion", "Venomous Snake", "Gila Monster" };
+    public static void LogPoison(string tag)
+    {
+        if (Instance != null)
+        {
+            if (GameVariables.hasQuest(49))
+            {
+                if (GameVariables.GetVariable("Poison " + tag) == -1)
+                {
+                    GameVariables.SetVariable("Poison " + tag, 1);
+                }
+
+                if (tags.All(t => GameVariables.GetVariable("Poison " + t) == 1))
+                {
+                    GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(49, "Naal", 16);
+                }
+
+
+            }
+        }
+
+    }
     private IEnumerator DrMiasma()
     {
         Flamey.Instance.Unhittable = true;
@@ -474,7 +496,7 @@ public class Smog : OnKillEffects
         }
         OnDrMiasma = false;
     }
-    
+
     private void RemoveUselessAugments()
     {
         if (prob >= 1f)
@@ -532,6 +554,11 @@ public class Smog : OnKillEffects
     public GameObject getAbilityOptionMenu()
     {
         return null;
+    }
+    public void SpawnExtraAssets()
+    {
+        cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/PoisonSpread"));
+            cooldownImage.fillAmount = 1f;
     }
 }
 
@@ -626,10 +653,14 @@ public class Gravity : OnKillEffects
         }
     }
 
-    public void Stack(Gravity gravity){
+    public void Stack(Gravity gravity)
+    {
         prob += gravity.prob;
         force += gravity.force;
         RemoveUselessAugments();
+        if(GameVariables.hasQuest(50) && prob>=.5f && force >= 3f && Flamey.Instance.MaxHealth >= 5000f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(50, "Betsy", 29);
+        }
     }
     private void RemoveUselessAugments()
     {

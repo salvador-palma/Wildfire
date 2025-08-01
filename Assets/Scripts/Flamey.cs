@@ -630,6 +630,9 @@ public class Flamey : MonoBehaviour, Hittable
         {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(28, "Cloris", 10);
         }
+        if(Gravity.Instance != null && GameVariables.hasQuest(50) &&  Gravity.Instance.prob>=.5f && Gravity.Instance.force >= 3f && MaxHealth >= 5000f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(50, "Betsy", 29);
+        }
 
         Health = (int)Math.Min(Health + MaxHealth * healperc, MaxHealth);
         TotalHealed += (ulong)(MaxHealth * healperc);
@@ -720,8 +723,9 @@ public class Flamey : MonoBehaviour, Hittable
         GetComponent<Animator>().Play("Stunned");
         stunTimeLeft = t;
     }
-    public void Poison(int amount)
+    public void Poison(int amount, string tag)
     {
+        Smog.LogPoison(tag);
         poisonsLeft += amount;
     }
     public void ApplyPoison()
