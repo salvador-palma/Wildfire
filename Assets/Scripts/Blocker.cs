@@ -16,6 +16,5 @@ public class Blocker : MonoBehaviour
         Rect bounds = new Rect(center - halfSize, size);
 
         return bounds.Contains(dest);
-        return area.OverlapPoint(dest);
     }
 }

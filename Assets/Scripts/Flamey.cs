@@ -394,6 +394,7 @@ public class Flamey : MonoBehaviour, Hittable
 
         if (!Unhittable)
         {   
+            Debug.Log("Hitted Flamey");
             // if(Vector2.Distance(getPosition(), attacker.HitCenter.position) > attacker.AttackRange){ return; }
             //CHARACTER SPECIFIC
             if (Character.Instance.isCharacter("Burst") && BurstShot.Instance != null)
@@ -630,7 +631,7 @@ public class Flamey : MonoBehaviour, Hittable
         {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(28, "Cloris", 10);
         }
-        if(Gravity.Instance != null && GameVariables.hasQuest(50) &&  Gravity.Instance.prob>=.5f && Gravity.Instance.force >= 3f && MaxHealth >= 5000f){
+        if(Gravity.Instance != null && GameVariables.hasQuest(50) && MaxHealth >= 5000f){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(50, "Betsy", 29);
         }
 

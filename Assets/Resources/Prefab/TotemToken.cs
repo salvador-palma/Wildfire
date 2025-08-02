@@ -147,6 +147,11 @@ public class TotemToken : IAlliedObject, Hittable
         float multFactor = 1f + Math.Clamp(stacks * 0.05f, 0f, 0.5f);
         radius = size * multFactor * 2f; 
 
+        
+        if(multFactor >= 1.5f && Totem.Instance != null && Totem.Instance.radius >= 1f){
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(51,"Cloris",20); //TOTEM UNLOCK
+        }
+
         Vector2 scale = new Vector2(size*multFactor, size*multFactor);
         transform.localScale = scale;
 

@@ -534,9 +534,6 @@ public class EnemySpawner : MonoBehaviour
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42,"Betsy",20); //URANUS UNLOCK
         }
         
-        if(RoundsWithoutDamage >= 20 && Totem.Instance != null){
-            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(51,"Cloris",20); //TOTEM UNLOCK
-        }
 
         if (Flamey.Instance.Health <= Flamey.Instance.MaxHealth / 4f)
         {

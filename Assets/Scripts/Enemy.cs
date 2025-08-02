@@ -349,6 +349,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     
 
     public virtual void Attack(){
+        if (Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) > AttackRange) { return; }
         AudioManager.PlayOneShot(AttackSound,transform.position);
         AttackTarget.Hitted(Damage, ArmorPen, this);
     }

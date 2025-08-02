@@ -596,12 +596,12 @@ public class Gravity : OnKillEffects
             if (SkillTreeManager.Instance.getLevel("Gravity") >= 1)
             {
 
-                radius = 2f;
+                radius = 3f;
             }
             else
             {
                 // Prefab = Resources.Load<GameObject>("Prefab/ExplosionOnDeath").GetComponent<IPoolable>();
-                radius = 1f;
+                radius = 1.5f;
             }
             currentTargetingOption = Math.Max(0, PlayerPrefs.GetInt("BlackHoleTargetingOption", -1));
             optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("Blackhole").gameObject;
@@ -658,7 +658,7 @@ public class Gravity : OnKillEffects
         prob += gravity.prob;
         force += gravity.force;
         RemoveUselessAugments();
-        if(GameVariables.hasQuest(50) && prob>=.5f && force >= 3f && Flamey.Instance.MaxHealth >= 5000f){
+        if(GameVariables.hasQuest(50) && Flamey.Instance.MaxHealth >= 5000f){
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(50, "Betsy", 29);
         }
     }
