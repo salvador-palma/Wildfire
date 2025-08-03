@@ -136,7 +136,8 @@ public class EnemySpawner : MonoBehaviour
         double y = radius * height * Math.Sin(angle);
         return new Vector2((float)x,(float)y);
     }
-
+    
+    
     private void Update()
     {
 
@@ -166,9 +167,9 @@ public class EnemySpawner : MonoBehaviour
         }
         if (new int[] { 19, 39, 59 }.Contains(current_round))
         {
-            int id = (current_round+1) / 20 - 1;
+            int id = (current_round + 1) / 20 - 1;
             Boss spawnable = PickedBosses[id];
-            Instantiate(spawnable); 
+            Instantiate(spawnable);
 
             isOn = false;
             return;

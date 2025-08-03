@@ -72065,12 +72065,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].name
+      value: Ant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].Wave
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].name
-      value: Caterpillar
+      value: Slug
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].Wave
@@ -72078,7 +72082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].name
-      value: Ant
+      value: Caterpillar
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[3].Wave
@@ -72128,6 +72132,10 @@ PrefabInstance:
       propertyPath: animals.Array.data[9].name
       value: Duck
       objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].enemy
+      value: 
+      objectReference: {fileID: 5158062167366387580, guid: d8fa4cd1249a44d4ea0c3c7ef01381b9, type: 3}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[10].Wave
       value: 2
@@ -72211,7 +72219,7 @@ PrefabInstance:
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].enemy
       value: 
-      objectReference: {fileID: 3905129715520958871, guid: 58c6691817784a94dba3270c12045bee, type: 3}
+      objectReference: {fileID: 908001879365601688, guid: 13de1d630e56f9444b7c4ee287fcbc14, type: 3}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[20].Wave
       value: 3
@@ -72295,7 +72303,7 @@ PrefabInstance:
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].enemy
       value: 
-      objectReference: {fileID: 5158062167366387580, guid: d8fa4cd1249a44d4ea0c3c7ef01381b9, type: 3}
+      objectReference: {fileID: 3905129715520958871, guid: 58c6691817784a94dba3270c12045bee, type: 3}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[30].Wave
       value: 4
@@ -72657,20 +72665,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6824811008063488913, guid: 3afb3ca05a191d54d98e21f2f0c92ebe, type: 3}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: animals.Array.data[1].IconPos.x
-      value: -3.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: animals.Array.data[1].IconPos.y
-      value: 61.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: animals.Array.data[2].IconPos.x
+      propertyPath: animals.Array.data[0].IconPos.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
-      propertyPath: animals.Array.data[2].IconPos.y
+      propertyPath: animals.Array.data[0].IconPos.y
       value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[1].IconPos.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[1].IconPos.y
+      value: 50.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[2].IconPos.x
+      value: -3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[2].IconPos.y
+      value: 61.4
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[3].IconPos.x
@@ -72727,6 +72743,14 @@ PrefabInstance:
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[9].IconPos.y
       value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].IconSize.x
+      value: 148.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].IconSize.y
+      value: 148.45
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[10].IconPos.x
@@ -72810,11 +72834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].IconSize.x
-      value: 225.56
+      value: 192.35
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].IconSize.y
-      value: 214.14
+      value: 182.61
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[20].IconPos.x
@@ -72898,11 +72922,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].IconSize.x
-      value: 148.45
+      value: 225.56
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].IconSize.y
-      value: 148.45
+      value: 214.14
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[30].IconPos.x
@@ -73445,13 +73469,17 @@ PrefabInstance:
       value: 148.45
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].ShinyMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].ShinyMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
+      objectReference: {fileID: 2100000, guid: 9f74cb916ae343b45aa2d863740d7543, type: 2}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].ShinyMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+      objectReference: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[3].ShinyMaterial
       value: 
@@ -73645,12 +73673,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].abilities.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[2].abilities.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[3].abilities.Array.size
@@ -73964,6 +73996,11 @@ PrefabInstance:
       propertyPath: animals.Array.data[48].abilities.Array.data[0].icon
       value: 
       objectReference: {fileID: 21300000, guid: 54ffaeb9e1cfc0a4f992cb45ac6d55b2, type: 3}
+    - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
+      propertyPath: animals.Array.data[0].abilities.Array.data[0].description
+      value: <size=100%><style="Yellow">- Colony -</style><br><size=80%>Ants will
+        always spawn behind their leader
+      objectReference: {fileID: 0}
     - target: {fileID: 4023338423321637361, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: animals.Array.data[1].abilities.Array.data[0].description
       value: <size=100%><style="Yellow">- Protector -</style><br><size=80%>Protects

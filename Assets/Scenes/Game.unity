@@ -33555,6 +33555,12 @@ MonoBehaviour:
   SkillDescription: {fileID: 1158057608}
   currentDisplayedCharacter: 0
   MainFlameVessel: {fileID: 0}
+  LeaderBoardPanel: {fileID: 0}
+  LeaderBoardPanelTemplate: {fileID: 0}
+  LeaderBoardLoadingText: {fileID: 0}
+  LeaderBoardTitleText: {fileID: 0}
+  LeaderBoardButton: {fileID: 0}
+  betsy: {fileID: 0}
 --- !u!224 &1338516673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57132,6 +57138,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   milestones: 64000000f4010000dc05000088130000983a0000
   animals:
+  - name: Ant
+    enemy: {fileID: 5158062167366387580, guid: d8fa4cd1249a44d4ea0c3c7ef01381b9, type: 3}
+    Wave: 1
+    abilities:
+    - icon: {fileID: 0}
+      description: <size=100%><style="Yellow">- Colony -</style><br><size=80%>Ants
+        will always spawn behind their leader
+    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
+    IconSize: {x: 148.45, y: 148.45}
+    IconPos: {x: 0, y: 4.1}
   - name: Slug
     enemy: {fileID: 908001879365601688, guid: 13de1d630e56f9444b7c4ee287fcbc14, type: 3}
     Wave: 1
@@ -57146,16 +57162,6 @@ MonoBehaviour:
     ShinyMaterial: {fileID: 2100000, guid: e76cbe4eead5d8e44beaef37df39d4a6, type: 2}
     IconSize: {x: 225.56, y: 214.14}
     IconPos: {x: -3.9, y: 61.4}
-  - name: Ant
-    enemy: {fileID: 5158062167366387580, guid: d8fa4cd1249a44d4ea0c3c7ef01381b9, type: 3}
-    Wave: 1
-    abilities:
-    - icon: {fileID: 0}
-      description: <size=100%><style="Yellow">- Colony -</style><br><size=80%>Ants
-        will always spawn behind their leader
-    ShinyMaterial: {fileID: 2100000, guid: b00ce0134fd73754c883523e40f812fd, type: 2}
-    IconSize: {x: 148.45, y: 148.45}
-    IconPos: {x: 0, y: 4.1}
   - name: Worm
     enemy: {fileID: 2243928030448316220, guid: f86a3a1578543284aa5973cb5d89297f, type: 3}
     Wave: 1

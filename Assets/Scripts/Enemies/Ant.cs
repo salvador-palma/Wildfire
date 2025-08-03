@@ -2,13 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class Ant : Enemy
 {
-    public Vector2 spawnpoint;
+
+    public static Vector2 spawnpoint;
+    bool untargetable = true;
     private void Start()
     {
+
+
+
         VirtualPreStart();
         flame = Flamey.Instance;
 
@@ -22,15 +30,55 @@ public class Ant : Enemy
         }
         MaxHealth = Health;
 
-
-        Enemy e = EnemySpawner.Instance.PresentEnemies.FirstOrDefault(e => e.Name == "Ant" && e != this);
-        if (e != null)
+        if (nextAnts.Count(a => a != null  && a.untargetable) == 0)
         {
-            transform.position = ((Ant)e).spawnpoint;
-            Speed = ((Ant)e).Speed * 0.9f;
+            nextAnts.Clear();
+            spawnpoint = transform.position;
+            Flamey.Instance.StartCoroutine(DelaySpawn(this));
         }
-        spawnpoint = transform.position;
+        nextAnts.Add(this);
+        transform.position = new Vector2(100, 100);
+  
+        
+        
+    }
+    static float SpawningDelay = 4.5f;
+    public static List<Ant> nextAnts = new List<Ant>();
+    static IEnumerator DelaySpawn(Ant ant)
+    {
+        yield return new WaitForSeconds(SpawningDelay);
+        Spawn(ant);
+    }
+    public static void Spawn(Ant ant)
+    {
+        if (ant == null) return;
+        ant.untargetable = false;
+        ant.transform.position = spawnpoint;
+
+        if (nextAnts.Count(a=>a!=null && a.untargetable) > 0)
+        {
+            
+            Ant nextAnt = nextAnts.First(a=> a != null  && a.untargetable);
+            nextAnts.Remove(nextAnt);
+            Flamey.Instance.StartCoroutine(DelaySpawn(nextAnt));
+        }
+    }
+    
+    public override void Move()
+    {
+        if (untargetable) { return; }
         CheckFlip();
+        base.Move();
+    }
+    public override bool canTarget()
+    {
+        return !untargetable;
+    }
+    public override void CheckFlip(){
+
+           GetComponent<SpriteRenderer>().flipX = transform.position.x < 0;
+
+        
     }
 
 

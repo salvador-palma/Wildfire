@@ -78,6 +78,7 @@ public class Pelican : Enemy
     public override void Move()
     {
         if (Stunned) { return; }
+        CheckFlip();
         if (!flying)
         {
             transform.position = Vector2.MoveTowards(transform.position, AttackTarget.getPosition(), Speed * (1 - SlowFactor) * Time.deltaTime);
@@ -119,13 +120,12 @@ public class Pelican : Enemy
 
     public override void CheckFlip()
     {
-        if(transform.position.x < 0){
-            bool flipped = !GetComponent<SpriteRenderer>().flipX;
-            Vector2 vec = SpawnPoint.transform.position;
-            vec.x *= flipped ? -1 : 1;
-            SpawnPoint.transform.position = vec;
-        }
-        base.CheckFlip();
+        GetComponent<SpriteRenderer>().flipX = transform.position.x < 0;
+        Vector2 vec = SpawnPoint.transform.localPosition;
+        vec.x *= transform.position.x < 0 ? -1 : 1;
+        SpawnPoint.transform.localPosition = vec;
+        
+        
     }
 
 
