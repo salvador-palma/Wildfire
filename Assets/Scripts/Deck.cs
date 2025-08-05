@@ -123,15 +123,23 @@ public class Deck : MonoBehaviour
         refreshedAugments.Clear();
         currentAugments = new Augment[]{null,null,null};
         
-        if(!EnemySpawner.Instance.Paused){
+        Flamey.Instance.notEspecificEffects.ForEach(effect => effect.ApplyEffect());
+
+        if (!EnemySpawner.Instance.Paused)
+        {
             RoundStart?.Invoke(this, new EventArgs());
             EnemySpawner.Instance.newRound();
         }
         
 
     }
+    public static void StartRoundEvent()
+    {
+        RoundStart?.Invoke(Instance, new EventArgs());
+    }
 
-    public void VisualOutroSlots(){
+    public void VisualOutroSlots()
+    {
         SlotsParent.GetComponent<Animator>().Play("OutroSlots");
     }
 

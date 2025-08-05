@@ -21,7 +21,7 @@ public class Treant : Boss
 
     public override bool canTarget()
     {
-        return Phase <= 0;
+        return Phase > 0;
     }
     public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
     {

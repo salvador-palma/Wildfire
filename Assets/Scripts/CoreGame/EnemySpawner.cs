@@ -258,7 +258,7 @@ public class EnemySpawner : MonoBehaviour
         isOnAugments = false;
         GameEnd = false; 
 
-        Flamey.Instance.notEspecificEffects.ForEach(effect => effect.ApplyEffect());
+        
         Flamey.Instance.ApplyTimedRound();
 
         if(Character.Instance.isCharacter("Multicaster")){

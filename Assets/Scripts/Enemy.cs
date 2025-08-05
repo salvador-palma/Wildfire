@@ -472,7 +472,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
     public static Enemy getPredicatedEnemy(Comparison<Enemy> sortingFactor, List<Enemy> except = null, Predicate<Enemy> filter = null){
         List<Enemy> selected = GameObject.FindGameObjectsWithTag("Enemy").Select(I => I.GetComponent<Enemy>()).ToList();
-        selected = selected.Where(e => filter(e)).ToList();
+
+        if (filter != null) { selected = selected.Where(e => filter(e)).ToList(); }
 
         if (selected.Count == 0) { return null; }
         

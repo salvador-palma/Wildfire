@@ -390,12 +390,12 @@ public class Summoner : NotEspecificEffect
             bees = new List<Bee>();
             BeeTypes = new GameObject[]{
                 Resources.Load<GameObject>("Prefab/WorkerBee"),
-                Resources.Load<GameObject>("Prefab/PuncherBee"), //
                 Resources.Load<GameObject>("Prefab/AssassinBee"), //
+                Resources.Load<GameObject>("Prefab/PollinatorBee"), // Resources.Load<GameObject>("Prefab/AssassinBee")
                 Resources.Load<GameObject>("Prefab/AgileBee"), //
-                Resources.Load<GameObject>("Prefab/WarriorBee"), //
-                Resources.Load<GameObject>("Prefab/PollinatorBee"), //
                 Resources.Load<GameObject>("Prefab/ChemicalBee"), //
+                Resources.Load<GameObject>("Prefab/PuncherBee"), //
+                Resources.Load<GameObject>("Prefab/WarriorBee"), //
             };
             for(int i =0; i!=this.amount; i++){
                  Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
@@ -408,43 +408,65 @@ public class Summoner : NotEspecificEffect
             Instance.Stack(this);
         }
     }
-    public void addBee(int amount, int type){
+    public void removeWorkerBee()
+    {
+        Bee worker = bees.Find(e => e.Type == "Worker");
+
+        if (worker == null) { return; }
+        else
+        {
+            Debug.LogWarning("Despawing worker");
+            bees.Remove(worker);
+            worker.Despawn();
+            amount = bees.Count();
+        }
+    }
+    public void addBee(int amount, int type, bool Upgrade2 = true)
+    {
         int max = 14;
-        if(SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2){amount*=2;}
-        if(amount + this.amount > 14){
-            if(Character.Instance.isCharacter("Bee Summoner")){
+        if (SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2 && Upgrade2) { amount *= 2; }
+        if (amount + this.amount > 14)
+        {
+            if (Character.Instance.isCharacter("Bee Summoner"))
+            {
                 this.amount += amount;
                 bees.Add(Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>());
                 RemoveUselessAugments();
                 return;
-            }else{
+            }
+            else
+            {
                 amount = max - this.amount;
             }
-            
+
         }
-        for(int i = 0;i<amount;i++){
+        for (int i = 0; i < amount; i++)
+        {
             Bee b = Flamey.Instance.SpawnObject(BeeTypes[type]).GetComponent<Bee>();
             b.UpdateStats();
             bees.Add(b);
         }
-        this.amount += amount; 
+        this.amount = bees.Count();
 
         //CHECK IF HAS EVERY BEE
         HashSet<string> allTypes = new HashSet<string>();
-        foreach(GameObject go in BeeTypes){
+        foreach (GameObject go in BeeTypes)
+        {
             allTypes.Add(go.GetComponent<Bee>().Type);
         }
         foreach (Bee b in bees)
         {
             string t = b.Type;
-            if(allTypes.Contains(t)){
+            if (allTypes.Contains(t))
+            {
                 allTypes.Remove(t);
             }
         }
         Debug.Log("Left Types: ");
         allTypes.ToList().ForEach(E => Debug.Log(E));
-        if(allTypes.Count == 0){
-           GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(44, "Betsy", 26);
+        if (allTypes.Count == 0)
+        {
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(44, "Betsy", 26);
         }
         RemoveUselessAugments();
     }
@@ -511,9 +533,11 @@ public class Summoner : NotEspecificEffect
           
        
     }
-    
-    public void SpawnExtraAssets(){
+    public GameObject beePanelControl;
+    public void SpawnExtraAssets()
+    {
         cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/SummonAmount"));
+        beePanelControl = GameUI.Instance.SpawnUI(Resources.Load<GameObject>("Prefab/AbilityCharacter/BeeCharacterSelect"));
     }
     public void RoundUpdate(){
         if(cooldownImage !=null){
@@ -521,9 +545,18 @@ public class Summoner : NotEspecificEffect
         
             if(activeRoundsLeft<activeRoundsCooldown){
                 activeRoundsLeft++;
-                if(activeRoundsLeft==activeRoundsCooldown){
-                    activeRoundsLeft=0;
-                    addBee(1,0);
+                if (activeRoundsLeft == activeRoundsCooldown)
+                {
+                    activeRoundsLeft = 0;
+                    
+                    if (bees.Count(e => e.Type == "Worker") == 0)
+                    {
+                        addBee(1, 0);
+                    }
+                    else
+                    {
+                        beePanelControl.GetComponent<BeeSelectMenu>().StartButtons();
+                    }
                 }
                 cooldownImage.fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
             }

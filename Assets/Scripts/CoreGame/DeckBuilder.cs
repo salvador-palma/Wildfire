@@ -458,12 +458,12 @@ public class DeckBuilder : MonoBehaviour
             new Augment("SummonAmount","Worker Bee", "Your Bee Swarm gains an extra Worker Bee", "SummonAmount", Tier.Silver, new UnityAction(() => Summoner.Instance.addBee(1, 0))),
             new Augment("SummonAmount","More Workers", "Your Bee Swarm gains 2 extra Worker Bees", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(2, 0))),
 
-            new Augment("SummonAmountExtra","Puncher Bee", "Your Bee Swarm gains an extra Puncher Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 1)), immoType:IMMOLATE.FIRE),
-            new Augment("SummonAmountExtra","Assassin Bee", "Your Bee Swarm gains an extra Assassin Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 2)), immoType:IMMOLATE.FIRE),
+            new Augment("SummonAmountExtra","Puncher Bee", "Your Bee Swarm gains an extra Puncher Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 5)), immoType:IMMOLATE.FIRE),
+            new Augment("SummonAmountExtra","Assassin Bee", "Your Bee Swarm gains an extra Assassin Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 1)), immoType:IMMOLATE.FIRE),
             new Augment("SummonAmountExtra","Agile Bee", "Your Bee Swarm gains an extra Agile Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 3))),
-            new Augment("SummonAmountExtra","Warrior Bee", "Your Bee Swarm gains an extra Warrior Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 4)), immoType:IMMOLATE.FIRE),
-            new Augment("SummonAmountExtra","Pollinator Bee", "Your Bee Swarm gains an extra Pollinator Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 5)), immoType:IMMOLATE.WATER),
-            new Augment("SummonAmountExtra","Chemical Bee", "Your Bee Swarm gains an extra Chemical Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 6))),
+            new Augment("SummonAmountExtra","Warrior Bee", "Your Bee Swarm gains an extra Warrior Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 6)), immoType:IMMOLATE.FIRE),
+            new Augment("SummonAmountExtra","Pollinator Bee", "Your Bee Swarm gains an extra Pollinator Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 2)), immoType:IMMOLATE.WATER),
+            new Augment("SummonAmountExtra","Chemical Bee", "Your Bee Swarm gains an extra Chemical Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 4))),
 
 
             new Augment("Whirlpool" ,"Whirlpool", "Unlock the ability to create Whirlpools", "WhirlpoolUnlock", Tier.Prismatic, new UnityAction(()=> {
