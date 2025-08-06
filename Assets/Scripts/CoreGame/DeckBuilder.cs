@@ -464,7 +464,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("SummonAmountExtra","Warrior Bee", "Your Bee Swarm gains an extra Warrior Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 6)), immoType:IMMOLATE.FIRE),
             new Augment("SummonAmountExtra","Pollinator Bee", "Your Bee Swarm gains an extra Pollinator Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 2)), immoType:IMMOLATE.WATER),
             new Augment("SummonAmountExtra","Chemical Bee", "Your Bee Swarm gains an extra Chemical Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 4))),
-
+            new Augment("SummonAmountExtra","Bouncy Bee", "Your Bee Swarm gains an extra Bouncy Bee", "SummonAmount", Tier.Gold, new UnityAction(() => Summoner.Instance.addBee(1, 7))),
 
             new Augment("Whirlpool" ,"Whirlpool", "Unlock the ability to create Whirlpools", "WhirlpoolUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Whirlpool");

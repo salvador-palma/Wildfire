@@ -519,12 +519,15 @@ public class Flamey : MonoBehaviour, Hittable
         {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(45, "Gyomyo", 10);
         }
-        
 
-        SteamLeaderboardManager.Instance.UploadScore(EnemySpawner.Instance.current_round, Character.Instance.active, new Action(()=>
+        if (SteamManager.Initialized)
         {
-            GameUI.Instance.NewHighscorePopUp();
-        }));
+            SteamLeaderboardManager.Instance.UploadScore(EnemySpawner.Instance.current_round, Character.Instance.active, new Action(()=>
+            {
+                GameUI.Instance.NewHighscorePopUp();
+            }));
+        }
+        
 
 
         GameUI.Instance.GameOverEffect();

@@ -396,6 +396,7 @@ public class Summoner : NotEspecificEffect
                 Resources.Load<GameObject>("Prefab/ChemicalBee"), //
                 Resources.Load<GameObject>("Prefab/PuncherBee"), //
                 Resources.Load<GameObject>("Prefab/WarriorBee"), //
+                Resources.Load<GameObject>("Prefab/BouncyBee"),
             };
             for(int i =0; i!=this.amount; i++){
                  Bee b = Flamey.Instance.SpawnObject(BeeTypes[0]).GetComponent<Bee>();
