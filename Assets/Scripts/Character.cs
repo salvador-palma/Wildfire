@@ -714,7 +714,8 @@ public class Character : MonoBehaviour
             CharacterName.SetText("???");
             SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>???");
         }
-        LeaderBoardButton.SetActive(data.Unlocked && GameVariables.GetVariable("JunoReady") == 1);
+        if(LeaderBoardButton!=null){LeaderBoardButton.SetActive(data.Unlocked && GameVariables.GetVariable("JunoReady") == 1);}
+        
 
     }
 
@@ -841,7 +842,7 @@ public class Character : MonoBehaviour
 
 
 
-        MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction);
+        MetaMenuUI.Instance.UnlockableScreen("NEW STYLE", characterData.Name, characterData.AbilityDescription, 4, postAction, ability_name: characterData.AbilityName);
     }
 
     public void SyncSkillTreeManagerToCharacterSelect()

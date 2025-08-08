@@ -405,6 +405,12 @@ public class Naal : NPC
     }
     private void CloseDeal(int value){
         SkillTreeManager.Instance.AddEmbers(-1*value);
+        //VARIABLE REGISTER
+        int spent = Math.Max(0,GameVariables.GetVariable("EmbersSpentOnItems"));
+        spent += value;
+        GameVariables.SetVariable("EmbersSpentOnItems", value);
+
+        //
         ItemAtHand.Purchase();
         QuitStore();
     }

@@ -8,24 +8,26 @@ using UnityEngine.SceneManagement;
 
 public class Gyomyo : NPC
 {
-    
 
+    long GetNetWorth()
+    {
+        return Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers + Math.Max(0,GameVariables.GetVariable("EmbersSpentOnItems")));
+    }
     protected override void CharacterLoad()
     {
-        long totalInvested = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers);
-        long NetWorth = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers);
+        long NetWorth = GetNetWorth();
 
         if(NetWorth < 100000 && GameVariables.GetVariable("CasinoReady") == -1){
 
             gameObject.SetActive(false);
 
-        }else if(totalInvested >= 100000 && GameVariables.GetVariable("CasinoReady") == -1){
+        }else if(NetWorth >= 100000 && GameVariables.GetVariable("CasinoReady") == -1){
             
             QueueDialogue(0);
             GameVariables.SetVariable("CasinoReady", 0);
 
         }
-        if(totalInvested >= 250000 && GameVariables.GetVariable("CasinoReady") == 0){
+        if(NetWorth >= 250000 && GameVariables.GetVariable("CasinoReady") == 0){
 
             QueueDialogue(4);
             
@@ -34,13 +36,14 @@ public class Gyomyo : NPC
 
     }
     public override void ClickedCharacter(){
-        
-        long totalInvested = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers);
 
-        if(hasAvailableDialogue()){base.ClickedCharacter(); return;}
+        long NetWorth = GetNetWorth();
+        long holdingValue = Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers);
+
+        if (hasAvailableDialogue()) { base.ClickedCharacter(); return; }
 
     
-        if(GameVariables.GetVariable("CasinoReady") == 0 && totalInvested < 250000){
+        if(GameVariables.GetVariable("CasinoReady") == 0 && NetWorth < 250000){
             float f = UnityEngine.Random.Range(0f,1f);
             if(f<.33f){
                 StartDialogue(1);
@@ -53,18 +56,19 @@ public class Gyomyo : NPC
             return;
         }
 
-        if(GameVariables.GetVariable("CasinoReady") == 1 && totalInvested < 250000){
+        if(GameVariables.GetVariable("CasinoReady") == 1 && holdingValue < 250000){
+            
             if(Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers) < 250000)
             {
                 StartDialogue(5); 
             }else{
                 StartDialogue(6); 
             }
-            
+
             return;
         }
 
-        if(GameVariables.GetVariable("CasinoReady") >= 1 && totalInvested >= 250000){
+        if(GameVariables.GetVariable("CasinoReady") >= 1 && holdingValue >= 250000){
             InviteCasino();
 
             return;

@@ -16,7 +16,7 @@ public class Item : MonoBehaviour
     [SerializeField] public string Name;
     [SerializeField] public Item[] Unlocks;
     [SerializeField] bool initial;
-    
+
     [HideInInspector] public int level;
 
     [SerializeField] UnityEvent AfterUnlock;
@@ -34,74 +34,89 @@ public class Item : MonoBehaviour
     public Transform DisplayPanel;
     public Naal naal;
     public static int itemCount = 0;
-    public void  ItemStart() {
+    public void ItemStart()
+    {
 
-        
 
-        if(Items == null){Items = new Dictionary<string, int>();}
+
+        if (Items == null) { Items = new Dictionary<string, int>(); }
         Transform parent = transform.parent;
-        
+
         level = GameVariables.GetVariable(Name + " Item");
-        if(level == -1){
+        if (level == -1)
+        {
             level = initial ? 0 : level;
-            GameVariables.SetVariable(Name + " Item" , level);
+            GameVariables.SetVariable(Name + " Item", level);
         }
         Items[Name] = level;
-        
-        if(level!= 0 || itemCount >= 6){
+
+        if (level != 0 || itemCount >= 6)
+        {
             gameObject.SetActive(false);
-            if(level==0){
-               //Debug.Log("Limit: " + Name);
+            if (level == 0)
+            {
+                //Debug.Log("Limit: " + Name);
             }
-        }else{
+        }
+        else
+        {
             itemCount++;
-            GetComponent<Button>().onClick.AddListener(()=>Display(true));
+            GetComponent<Button>().onClick.AddListener(() => Display(true));
         }
     }
-    
-    
-    public void Purchase(){
+
+
+    public void Purchase()
+    {
         MetaMenuUI.Instance.UnlockableScreen("NEW ITEM ACQUIRED!", Name, Description, 1);
         gameObject.SetActive(false);
         AfterUnlock?.Invoke();
         Unlock();
     }
-    public void Unlock(){
-        
+    public void Unlock()
+    {
+
         level = 1;
         Items[Name] = level;
-        if(Name == "Essence Gauge"){
+        if (Name == "Essence Gauge")
+        {
             Chat.Instance.MoodSlider.gameObject.SetActive(true);
         }
-        GameVariables.SetVariable(Name + " Item" , level);
+        GameVariables.SetVariable(Name + " Item", level);
         foreach (Item item in Unlocks)
         {
-            GameVariables.SetVariable(item.Name + " Item" , 0);
-        } 
+            GameVariables.SetVariable(item.Name + " Item", 0);
+        }
     }
 
-    static public int getLevel(string name){
+    static public int getLevel(string name)
+    {
         return Items.ContainsKey(name) ? Items[name] : -1;
     }
-    static public bool has(string name){
+    static public bool has(string name)
+    {
         return Items.ContainsKey(name) && Items[name] > 0;
     }
 
-    public void Display(bool on){
+    public void Display(bool on)
+    {
         AudioManager.PlayOneShot(FMODEvents.Instance.PaperSlide, transform.position);
-        if(on){
+        if (on)
+        {
             DisplayPanel.Find("Icon").GetChild(0).GetComponent<Image>().sprite = Icon;
             DisplayPanel.Find("Description").GetComponent<DynamicText>().SetText(Description);
-            DisplayPanel.Find("Title").GetComponent<DynamicText>().SetText("<style=\"Yellow\">"+ Name);
+            DisplayPanel.Find("Title").GetComponent<DynamicText>().SetText("<style=\"Yellow\">" + Name);
 
             Button NoButton = DisplayPanel.Find("Not Interested").GetComponent<Button>();
-            NoButton.onClick.RemoveAllListeners(); NoButton.onClick.AddListener(()=>Display(false));
+            NoButton.onClick.RemoveAllListeners(); NoButton.onClick.AddListener(() => Display(false));
 
             Button YesButton = DisplayPanel.Find("Bargain").GetComponent<Button>();
-            YesButton.onClick.RemoveAllListeners(); YesButton.onClick.AddListener(()=>{naal.BargainItem(this);Display(false);});
-            
+            YesButton.onClick.RemoveAllListeners(); YesButton.onClick.AddListener(() => { naal.BargainItem(this); Display(false); });
+
         }
         DisplayPanel.gameObject.SetActive(!DisplayPanel.gameObject.activeInHierarchy);
     }
+    
+    
 
 }

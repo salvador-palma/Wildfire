@@ -59,6 +59,11 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] private Animator LimitRoundAnimator;
 
+    [Header("Quests")]
+    [SerializeField] Transform QuestContainer;
+    [SerializeField] Transform QuestSlot;
+    [SerializeField] DynamicText QuestTitle;
+
     [Header("Pop Up End Night")]
     [SerializeField] private GameObject ConfirmEndNightPanel;
 
@@ -93,6 +98,7 @@ public class GameUI : MonoBehaviour
 
         if (GameVariables.GetVariable("BestiaryReady") <= 0) { MenuTabs[2].SetActive(false); ButtonTabs[2].gameObject.SetActive(false); }
         if (!Character.Instance.HasAtLeastOneCharacter()) { MenuTabs[3].SetActive(false); ButtonTabs[3].gameObject.SetActive(false); }
+        if (GameVariables.GetVariable("QuestBookReady") <= 0) { MenuTabs[4].SetActive(false); ButtonTabs[4].gameObject.SetActive(false); }
         if (!SkillTreeManager.Instance.HasAtLeastOneSkill()) { MenuTabs[1].SetActive(false); ButtonTabs[1].gameObject.SetActive(false); }
 
         if (Item.has("Hourglass")) { TimeScaleIndex++; }
@@ -151,6 +157,9 @@ public class GameUI : MonoBehaviour
             MenuTabs[current_Tab].SetActive(false);
             ButtonTabs[current_Tab].color = InactiveTab;
             ButtonTabs[index].color = ActiveTab;
+
+            if (index == 4) { QuestBoard.LoadQuests(QuestSlot, QuestContainer); QuestTitle.SetText(QuestBoard.getTitle()); }
+
             MenuTabs[index].SetActive(true);
             current_Tab = index;
             if (current_Tab == 1) { Canvas.ForceUpdateCanvases(); }

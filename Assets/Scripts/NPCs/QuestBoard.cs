@@ -46,40 +46,61 @@ public class QuestBoard : NPC
     }
 
     public void ToggleQuestsPanel(){
-        string title = "";
-        switch (GameVariables.GetVariable("QuestBoard"))
-        {
-            case 0: title = "TO DO LIST"; break;
-            case 1: title = "QUESTS & REQUESTS"; break; //The Grand Compendium of Noble Tasks Bestowed Upon the Worthy
-            case 2: title = "THE GRAND COMPENDIUM OF NOBLE TASKS BESTOWED UPON THE WORTHY"; break;
-            case -1: title = "Quests"; break;
-        }
+        string title = getTitle();
         QuestTitle.SetText(title);
         MetaMenuUI.Instance.ToggleMenu(QuestPanel);
         //QuestPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(QuestPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000 ? 0 : 4000, 0);
     }
-    public void LoadQuests(){
-       int[][] Quests = GameVariables.GetQuests();
-       if(QuestContainer == null){return;}
+    public static string getTitle()
+    {
+        switch (GameVariables.GetVariable("QuestBoard"))
+        {
+            case 0: return "TO DO LIST";
+            case 1: return "QUESTS & REQUESTS";
+            case 2: return "THE GRAND COMPENDIUM OF NOBLE TASKS BESTOWED UPON THE WORTHY";
+            case -1: default: return "Quests"; 
+            
+        }
+    }
+    public void LoadQuests()
+    {
+        int[][] Quests = GameVariables.GetQuests();
+        if (QuestContainer == null) { return; }
         foreach (Transform item in QuestContainer)
+        {
+            if (item.gameObject.activeSelf)
+            {
+                Destroy(item.gameObject);
+            }
+        }
+        Array.ForEach(Quests[0], ID => SpawnSingularQuest(ID, true, QuestSlot, QuestContainer));
+        Array.ForEach(Quests[1], ID => SpawnSingularQuest(ID, false, QuestSlot, QuestContainer));
+    }
+    public static void LoadQuests(Transform QS, Transform QC){
+        
+       int[][] Quests = GameVariables.GetQuests();
+       if(QC == null){return;}
+        foreach (Transform item in QC)
         {
             if(item.gameObject.activeSelf){
                 Destroy(item.gameObject);
             }
         }
-        Array.ForEach(Quests[0], ID => SpawnSingularQuest(ID, true));
-        Array.ForEach(Quests[1], ID => SpawnSingularQuest(ID, false));
+        Debug.Log("Spawning; " + Quests[0].Length);
+        Array.ForEach(Quests[0], ID => Instance.SpawnSingularQuest(ID, true, QS, QC));
+        Array.ForEach(Quests[1], ID => Instance.SpawnSingularQuest(ID, false, QS, QC));
     }
-    public static void ReloadQuests(){
-        
+    public static void ReloadQuests()
+    {
+
         Instance.LoadQuests();
     }
 
 
 
-    private void SpawnSingularQuest(int ID, bool Active){
+    private void SpawnSingularQuest(int ID, bool Active,Transform QS, Transform QC){
         Quest quest = Quests[ID];
-        Transform go = Instantiate(QuestSlot, QuestContainer.transform);
+        Transform go = Instantiate(QS, QC.transform);
 
         Image icon = go.GetChild(0).GetComponent<Image>();
         TextMeshProUGUI title = go.GetChild(1).GetComponent<TextMeshProUGUI>();

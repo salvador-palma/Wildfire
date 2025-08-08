@@ -107,6 +107,7 @@ public class Bee : MonoBehaviour
         else
         {
             sp.flipX = prevX < transform.position.x;
+            propSp.flipX = prevX < transform.position.x;
             prevX = transform.position.x;
         }
     }

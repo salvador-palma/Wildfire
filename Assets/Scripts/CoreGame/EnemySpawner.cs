@@ -276,46 +276,94 @@ public class EnemySpawner : MonoBehaviour
         GameUI.Instance.UpdateProgressBar(current_round); 
         GameUI.Instance.UpdateMenuInfo(current_round); 
     }
-    
+
     /* ===== BINOCULARS ===== */
-    private void CheckForBinoculars(Enemy e){
-        if(latestSpecies==null){latestSpecies=e.Name; return;}
+    [SerializeField] GameObject BinocularPopUp;
+    public void DisplayBinocularProgress(bool on )
+    {
+        if (GameVariables.GetVariable("BinocularLevel") >= 1)
+        {
+            BinocularPopUp.GetComponent<Animator>().Play(on ? "BinocularPopUp" : "BinocularPopDown");
+        }
+        
+    }
+    private void DisplayBinocularWarning(AnimalRunTimeData a, int index)
+    {
+
+        GameObject Slot = BinocularPopUp.transform.GetChild(0).Find("BinocularContainer").GetChild(index).gameObject;
+
+        GameObject newAnimalImage = Slot.transform.GetChild(0).gameObject;
+        RectTransform RT = newAnimalImage.GetComponent<RectTransform>();
+
+        Debug.Log("Searching: " + a.name);
+        int deaths = LocalBestiary.INSTANCE.getMilestoneAmount(a.name);
+        newAnimalImage.GetComponent<Image>().sprite = a.enemy.GetComponent<SpriteRenderer>().sprite;
+        newAnimalImage.GetComponent<Image>().color = deaths > -1 ? Color.white : Color.black;
+        RT.anchoredPosition = a.IconPos;
+        RT.sizeDelta = a.IconSize;
+    }
+    private void CheckForBinoculars(Enemy e)
+    {
+        if (latestSpecies == null) { latestSpecies = e.Name; return; }
 
         int start_from = Array.FindIndex(PickedEnemies, en => e.Name == en.Name);
-        try{
+        try
+        {
             int latest = Array.FindIndex(PickedEnemies, en => latestSpecies == en.Name);
-            if(e==null || PickedEnemies == null){return;}
-            if( e.Name != latestSpecies){
-                if(start_from > latest){
-                    
+            if (e == null || PickedEnemies == null) { return; }
+            if (e.Name != latestSpecies)
+            {
+                if (start_from > latest)
+                {
+
                     latestSpecies = e.Name;
+                    
                     IncrementBinocularHindSight();
                 }
-                
+
+            }
         }
-        } catch(Exception ex){
-            Debug.Log("Found: " + ex.Message);
+        catch (Exception ex)
+        {
+            
+            Debug.Log("Found: " + ex.StackTrace);
         }
 
-        void IncrementBinocularHindSight(){
-            
+        void IncrementBinocularHindSight()
+        {
+
             Debug.Log("Increment Binocular");
             int j = 0;
-            for (int i = start_from; i < start_from+HindSightDeepness; i++)
+            for (int i = start_from; i < start_from + HindSightDeepness; i++)
             {
-                try{
+                try
+                {
                     GameObject child = BinocularSlots[j];
-                    child.GetComponent<Image>().sprite = PickedEnemies[i+1].GetComponent<SpriteRenderer>().sprite;
-                    float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
+                    child.GetComponent<Image>().sprite = PickedEnemies[i + 1].GetComponent<SpriteRenderer>().sprite;
+                    float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i + 1]);
                     ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
+
+                    
+                    AnimalRunTimeData a = LocalBestiary.INSTANCE.getAnimalRunTime(PickedEnemies[i + 1].Name);
+                    if (a == null) { Debug.Log("No Animal: " + PickedEnemies[i + 1].Name); }
+                    else
+                    {
+                         DisplayBinocularWarning(a, j);
+                    }
+                   
+
                     j++;
-                }catch(IndexOutOfRangeException e){
+                }
+                catch (IndexOutOfRangeException e)
+                {
                     Debug.Log("Increment Ignore");
                 }
             }
+            // BinocularPopUp.GetComponent<Animator>().Play("BinocularPopUp");
             LocalBestiary.INSTANCE.UpdateSlots();
         }
-        void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize){
+        void ResizeImage(RectTransform RT, Vector2 IconPos, Vector2 IconSize)
+        {
             RT.anchoredPosition = IconPos;
             RT.sizeDelta = IconSize;
         }

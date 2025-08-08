@@ -78,7 +78,7 @@ public class Bison : Enemy
         if(transform.position.x < 0){
             
             transform.Find("SmokeFront").GetComponent<SpriteRenderer>().flipX = true;
-            transform.Find("SmokeBack").GetComponent<SpriteRenderer>().flipX = true;
+            //transform.Find("SmokeBack").GetComponent<SpriteRenderer>().flipX = true;
         }
         
 

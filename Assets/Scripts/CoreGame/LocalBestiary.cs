@@ -13,6 +13,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class AnimalSaveData {
@@ -489,6 +490,10 @@ public class LocalBestiary : MonoBehaviour
         if(exclude_elliptical){
            notRepeled = notRepeled.Where(e => !elliptical.Contains(getEnemyID(e.enemy))).ToList();
         }
+
+        int MooseOrOx = Random.Range(0f, 1f) < .5f ? 48 : 50;
+        Debug.Log("Removing: " + (MooseOrOx == 48 ? "Moose" : "Ox"));
+        notRepeled = notRepeled.Where(e => getEnemyID(e.enemy) != MooseOrOx).ToList();
         
 
 
@@ -536,30 +541,41 @@ public class LocalBestiary : MonoBehaviour
     public List<Enemy> getEnemyList(){
         return animals.Select(a => a.enemy).ToList();
     }
-    public void UpdateBestiaryValues(){
+    public AnimalRunTimeData getAnimalRunTime(string name){
+        return animals.Find(a => a.name == name);
+    }
+    public void UpdateBestiaryValues()
+    {
 
-        
-        foreach(KeyValuePair<string, int> animal in EnemySpawner.DeathPerEnemy){
-            try{
-                if(animal.Key.Contains("Shiny")){
-                    
-                    string ReplacedString = animal.Key.Replace("Shiny","");
-                    saved_milestones.AddMilestoneShiny(animals.FindIndex(0, animals.Count(), a=>a.name == ReplacedString), animal.Value);
 
-                        
-                }else{
-                    
-                    saved_milestones.AddMilestone(animals.FindIndex(0, animals.Count(), a=>a.name == animal.Key), animal.Value);
+        foreach (KeyValuePair<string, int> animal in EnemySpawner.DeathPerEnemy)
+        {
+            try
+            {
+                if (animal.Key.Contains("Shiny"))
+                {
+
+                    string ReplacedString = animal.Key.Replace("Shiny", "");
+                    saved_milestones.AddMilestoneShiny(animals.FindIndex(0, animals.Count(), a => a.name == ReplacedString), animal.Value);
+
+
                 }
-            }catch{
+                else
+                {
+
+                    saved_milestones.AddMilestone(animals.FindIndex(0, animals.Count(), a => a.name == animal.Key), animal.Value);
+                }
+            }
+            catch
+            {
                 Debug.Log("Error in Bestiary Update: " + animal.Key);
             }
         }
-        
-        
-        
-        
-        
+
+
+
+
+
         WritingData();
     }
 

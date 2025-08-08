@@ -33,9 +33,9 @@ public class Ghoul : IPoolable
             AtkIntervalTimer -= Time.deltaTime;
         }else{
             if(remainingAttacks<=0){GetComponent<Animator>().Play("DespawnGhoul");return;}
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, (isMega? 0.75f: 1f) * speed * Time.deltaTime);
             checkFlip();
-            if(Vector2.Distance(transform.position, target.transform.position) < 1.5f){
+            if(Vector2.Distance(transform.position, target.transform.position) < (isMega? 3.5f : 1.5f)){
                 GetComponent<Animator>().Play(isMega? "MegaGhoulAttack" : "GhoulAttack");
             }
         }
@@ -67,6 +67,7 @@ public class Ghoul : IPoolable
             
             foreach (Enemy enemy in colcol)
             {
+                if (enemy == null) continue;
                 enemy.Hitted((int)dmg, 8, ignoreArmor:false, onHit:false);
             }
             AtkIntervalTimer = AtkInterval;

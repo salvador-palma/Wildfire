@@ -111,6 +111,7 @@ public class Deck : MonoBehaviour
     public void PickedAugment(int i){
         if(currentAugments[i]==null){return;}
         SlotsParent.GetComponent<Animator>().Play("OutroSlots");
+        EnemySpawner.Instance.DisplayBinocularProgress(false);
 
         currPhase++;
         if(currentTier == Tier.Prismatic){GameUI.Instance.PrismaticPicked(); resetPhaseAugmentTier();}
@@ -152,6 +153,7 @@ public class Deck : MonoBehaviour
 
         filteredAugments = FilterAugments(isPrismaticRound, OnlyUnlockables);
         SlotsParent.GetComponent<Animator>().Play("EnterSlots");
+        EnemySpawner.Instance.DisplayBinocularProgress(true);
         AudioManager.PlayOneShot(isPrismaticRound ? FMODEvents.Instance.PrismaticAugment : FMODEvents.Instance.DefaultAugment, transform.position);
         if(isPrismaticRound){GameUI.Instance.FillAll();}
         ChangeSlots();

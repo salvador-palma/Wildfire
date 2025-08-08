@@ -29,6 +29,7 @@ public class MetaMenuUI : MonoBehaviour
     [Header("Unlockable")]
     [SerializeField] DynamicText[] UnlockableTexts;
     [SerializeField] Image UnlockableIcon;
+    [SerializeField] GameObject UnlockableCharacterTemplate;
     [SerializeField] Sprite[] Unlockables;
 
 
@@ -172,18 +173,30 @@ public class MetaMenuUI : MonoBehaviour
         SceneManager.LoadScene("Casino");
     }
     private UnityAction afterUnlock;
-    public void UnlockableScreen(string title, string name, string description, int iconID, UnityAction afterUnlock=null){
+    public void UnlockableScreen(string title, string name, string description, int iconID, UnityAction afterUnlock=null, string ability_name=null){
         
-        UnlockableScreen(title, name, description, Unlockables[iconID], afterUnlock);
+        UnlockableScreen(title, name, description, Unlockables[iconID], afterUnlock,ability_name);
     }
-    public void UnlockableScreen(string title, string name, string description, Sprite icon, UnityAction afterUnlock=null){
+    public void UnlockableScreen(string title, string name, string description, Sprite icon, UnityAction afterUnlock=null, string ability_name=null){
+
+        if (ability_name != null)
+        {
+            Character.Instance.TransformVesselToCharacter(UnlockableCharacterTemplate, ability_name);
+        }
+        else
+        {
+            UnlockableIcon.sprite = icon;
+        }
+        UnlockableCharacterTemplate.SetActive(ability_name != null);
+        UnlockableIcon.gameObject.SetActive(ability_name == null);
+
         this.afterUnlock = afterUnlock;
         AudioManager.Instance.SetAmbienceParameter("OST_Intensity", 0);
         AudioManager.PlayOneShot(FMODEvents.Instance.UnlockedEffect, transform.position);
         UnlockableTexts[0].SetText(title);
         UnlockableTexts[1].SetText(name);
         UnlockableTexts[2].SetText(description);
-        UnlockableIcon.sprite = icon;
+        
         UnlockableIcon.transform.parent.parent.GetComponent<Animator>().Play("UnlockableOn");
 
     }
