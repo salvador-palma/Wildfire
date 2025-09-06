@@ -3,7 +3,6 @@ using Steamworks;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using UnityEditor;
 

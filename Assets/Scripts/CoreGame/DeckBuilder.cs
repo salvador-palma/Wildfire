@@ -48,7 +48,8 @@ public class DeckBuilder : MonoBehaviour
             return -1;
         }
     }
-    public void DefineAugmentClasses(){
+    public void DefineAugmentClasses()
+    {
         AllAugments = new List<Augment>
         {
             new Augment("Dmg","Hard Work", "Gain +10 Base Damage", "Dmg", Tier.Silver, new UnityAction(() => Flamey.Instance.addDmg(10)),baseStat: true, immoType:IMMOLATE.FIRE),
@@ -523,7 +524,7 @@ public class DeckBuilder : MonoBehaviour
             new Augment("TotemHealth","Carved from Koa", "Totems gain +25 HP", "TotemHealth", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,25))), immoType:IMMOLATE.AIR),
             new Augment("TotemHealth","Heart of Lehua", "Totems gain +100 HP", "TotemHealth", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnLandEffect(new Totem(0,0,100))), immoType:IMMOLATE.AIR),
 
-            new Augment("Earthquake" ,"Earthquake", "Summon Totems that taunt nearby enemies", "Gravity", Tier.Prismatic, new UnityAction(()=> {
+            new Augment("Earthquake" ,"Earthquake", "Create Shockwaves to push enemies away from you when attacked", "Gravity", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Earthquake");
                 Flamey.Instance.addOnHittedEffect(new Earthquake(0.1f, 0.5f));
                 Deck.Instance.AddAugmentClass(new List<string>{"EarthquakeForce","EarthquakeProb"});
@@ -535,8 +536,8 @@ public class DeckBuilder : MonoBehaviour
             new Augment("EarthquakeForce","Kicking Dust", "Earthquake gains +25N of force", "GravityForce", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0,0.25f))), immoType:IMMOLATE.AIR),
             new Augment("EarthquakeForce","Monolith", "Earthquake gains +50N of force", "GravityForce", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0,.5f))), immoType:IMMOLATE.AIR),
             new Augment("EarthquakeForce","9.0 Magnitude", "Earthquake gains +100N of force", "GravityForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnHittedEffect(new Earthquake(0, 1))), immoType:IMMOLATE.AIR),
-            
-            new Augment("Gravity" ,"Gravity", "Summon Totems that taunt nearby enemies", "BlackHoleUnlock", Tier.Prismatic, new UnityAction(()=> {
+
+            new Augment("Gravity" ,"Gravity", "Control and create Gravitational Forces", "BlackHoleUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Gravity");
                 Flamey.Instance.addOnKillEffect(new Gravity(0.05f, 0.1f));
                 Deck.Instance.AddAugmentClass(new List<string>{"GravityProb","GravityForce"});
@@ -550,7 +551,8 @@ public class DeckBuilder : MonoBehaviour
             new Augment("GravityForce","9.0 Magnitude", "Gravity gains +25N of Force", "BlackHoleForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.25f))), immoType:IMMOLATE.AIR),
         };
 
-       
+        AllAugments.ForEach(a => { Translator.AddIfNotExists(a.Title);  Translator.AddIfNotExists(a.Description); });
+        
 
     }
 

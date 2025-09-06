@@ -7647,7 +7647,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b2d58a1542b6fc04fba1e9f3259a6aa9, type: 3}
   SoundLayers: 0
   IdealPos: {x: -263, y: 0}
-  SaveStateEnabled: 0
+  SaveStateEnabled: 1
 --- !u!114 &275411190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15664,7 +15664,7 @@ MonoBehaviour:
     npc: {fileID: 1340430405}
     DialogueID: 2
   - Name: Smog
-    Type: On-Kill Effect
+    Type: On-Death Effect
     AbilityDescription1: Killing an enemy can generate <style="LYellow">Smog</style>
       that <style="Purple">poisons</style> nearby enemies, dealing <style="LYellow">4%
       <style="Green">Max HP</style></style> per second until the <style="Purple">poison</style>
@@ -15689,7 +15689,7 @@ MonoBehaviour:
     npc: {fileID: 1206136743}
     DialogueID: 19
   - Name: Gravity
-    Type: On-Kill Effect
+    Type: On-Death Effect
     AbilityDescription1: Killing enemies generates <style="LYellow">Gravitational
       Forces</style> that push enemies away from the location of the killing
     AbilityDescription2: Unlock new <style="LYellow">Directional</style> options
@@ -31640,7 +31640,7 @@ MonoBehaviour:
     Description: Reach maximum <style="LBlue">Slow Percentage
   - Title: High Risk High Reward
     Avatar: {fileID: 21300000, guid: 088cf6060fe1dab48851ce7bc5f7dff3, type: 3}
-    Description: Get <style="LYellow>30 Augments</style> in a single round
+    Description: Get <style="LYellow">30 Augments</style> in a single round
   - Title: The Legend of the Immortal Bird
     Avatar: {fileID: 21300000, guid: 631a8ba3d06fd904ca6105b772f7a07c, type: 3}
     Description: Reach <style="LYellow">6AM</style> without going below <style="LYellow">50%
@@ -71958,7 +71958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.001159668, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00016784668, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6749891280300223470
@@ -75136,7 +75136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0012664795
+      value: 0.0008544922
       objectReference: {fileID: 0}
     - target: {fileID: 9045337272100669272, guid: 1963c409691e84e48bcdc708af814299, type: 3}
       propertyPath: m_AnchoredPosition.y

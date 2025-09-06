@@ -636,6 +636,7 @@ public class Character : MonoBehaviour
 
     public void MoveCharacterSelectOption(int dir)
     {
+        GameState.Delete();
         int newIndex = currentDisplayedCharacter + dir;
         while (newIndex >= -1 && newIndex < characterDatas.Count() + 1)
         {

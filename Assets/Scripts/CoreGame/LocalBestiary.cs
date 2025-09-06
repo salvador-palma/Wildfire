@@ -116,28 +116,32 @@ public class LocalBestiary : MonoBehaviour
 
     private bool InstanceInitialized;
 
-    public void Awake(){
-        if(InstanceInitialized){return;}
-        InstanceInitialized=true;
+    public void Awake()
+    {
+        if (InstanceInitialized) { return; }
+        InstanceInitialized = true;
         INSTANCE = this;
 
-        
+
         RetrieveReferences();
         ReadBestiaryData();
         InitSlots();
 
         RightButton.onClick.RemoveAllListeners();
-        RightButton.onClick.AddListener(()=>ChangeTab(1));
+        RightButton.onClick.AddListener(() => ChangeTab(1));
         LeftButton.onClick.RemoveAllListeners();
-        LeftButton.onClick.AddListener(()=>ChangeTab(-1));
+        LeftButton.onClick.AddListener(() => ChangeTab(-1));
 
-        claimRewardButton.onClick.AddListener(()=>ClaimRewards(lastID));
+        claimRewardButton.onClick.AddListener(() => ClaimRewards(lastID));
 
-        if(SceneManager.GetActiveScene().name == "Game"){
-            BestiaryTabs = new string[2]{"STATS","ABILITIES"};
-            
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            BestiaryTabs = new string[2] { "STATS", "ABILITIES" };
+
         }
         tabTitle.SetText(BestiaryDisplayTab);
+
+        animals.ForEach(a => Array.ForEach(a.abilities, b => Translator.AddIfNotExists(b.description)));
         
     }
     

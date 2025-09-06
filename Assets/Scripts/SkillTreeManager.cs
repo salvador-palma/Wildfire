@@ -81,9 +81,12 @@ public class SkillTreeManager : MonoBehaviour
         anim = GetComponent<Animator>();
         ReadData();
     }
-    private void Start(){
-        
+    private void Start()
+    {
+
         changeEmberAmountUI();
+        Array.ForEach(Abilities, a => { Translator.AddIfNotExists(a.AbilityDescription1); Translator.AddIfNotExists(a.AbilityDescription2); Translator.AddIfNotExists(a.AbilityDescription3); });
+        
     }
     
     public int getLevel(string skill){
@@ -320,7 +323,7 @@ public class SkillTreeManager : MonoBehaviour
     public void resetSkillTree(){
         
         anim.SetBool("DisplayInfo", false);
-        
+        GameState.Delete();
         
         
         List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling","Gravity","Whirlpool"};

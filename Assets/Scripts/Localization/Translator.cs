@@ -16,12 +16,12 @@ public static class Translator
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
 
-    private static bool WriteMissingText = false;
+    private static bool WriteMissingText = true;
     private static bool WarnMissingText = true;
     private static bool SavePreferences = true;
     private static string DefaultLanguageBuild = "简体中文";
     private static bool DebugLineForLineReading = false;
-    private static bool TranslatorsVersion = false;
+    private static bool TranslatorsVersion = true;
 
     public static bool SteamVersion = true;
 
@@ -191,8 +191,8 @@ public static class Translator
         
         if(WriteMissingText == false) return;
 
-        string filePath = Path.Combine(Application.persistentDataPath, "Resources", $"{csvName}.csv");
-
+        string filePath =  Path.Combine(Application.persistentDataPath, $"{csvName}.csv");
+        filePath = filePath.Replace("\\", "/");
         try
         {
             translations["English"].Add(oldWord);
@@ -211,9 +211,10 @@ public static class Translator
             }
             //LoadCSV(csvName);
             Debug.Log("Nova entrada no CSV criada para: " + oldWord);
-        }
-        catch
+       }
+        catch(Exception e)
         {
+            Debug.LogError(e.StackTrace);
             Debug.LogError("Erro a criar nova entrada no CSV Translations");
         }
     }

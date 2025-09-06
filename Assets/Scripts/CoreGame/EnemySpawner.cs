@@ -83,8 +83,10 @@ public class EnemySpawner : MonoBehaviour
     }
     
     public void StartGame(){ 
-        Flamey.Instance.GameEnd = false;    
+        Flamey.Instance.GameEnd = false;  
+           
         if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){ 
+            PlayerPrefs.DeleteKey("PlayerLoad"); 
             Deck.Instance.LoadGame(false);
             PickedEnemies = pickEnemies();
             PickedBosses = pickBosses();
@@ -92,14 +94,14 @@ public class EnemySpawner : MonoBehaviour
             InitDefaultEffects();
             
         }else{
+            PlayerPrefs.DeleteKey("PlayerLoad"); 
             Debug.Log("There will be errors here");
             InitDefaultEffects();
             Deck.Instance.LoadGame(true);
             newRound();
         }
         
-        InitBinoculars();
-        PlayerPrefs.DeleteKey("PlayerLoad");    
+        InitBinoculars();  
     }
     private void InitDefaultEffects(){
         
