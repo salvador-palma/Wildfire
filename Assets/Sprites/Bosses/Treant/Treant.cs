@@ -86,7 +86,7 @@ public class Treant : Boss
 
 
             case 1:
-
+                EnemySpawner.Instance.RoundTotalSpentTime = 0;
                 StartCoroutine(Phase1());
                 break;
         }
@@ -132,7 +132,7 @@ public class Treant : Boss
     public void Roar()
     {
         Enemy[] available = EnemySpawner.Instance.PickedEnemies.Take(6).ToArray();
-        int amount = 15;
+        int amount = Math.Max(5, 15 - (int)(EnemySpawner.Instance.RoundTotalSpentTime/90));
         for (int i = 0; i < amount; i++)
         {
             Enemy spawn = available[Random.Range(0, available.Length - 1)];

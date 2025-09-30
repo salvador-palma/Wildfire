@@ -248,10 +248,12 @@ public class LocalBestiary : MonoBehaviour
         }
         
     }
-    
+
     /* ===== TAB NAVIGATION ===== */
-    private void UpdateCurrentTab(int ID){
-        switch(BestiaryDisplayTab){
+    private void UpdateCurrentTab(int ID)
+    {
+        switch (BestiaryDisplayTab)
+        {
             case "STATS":
                 DisplayStats(ID, statLabels);
                 break;
@@ -260,9 +262,12 @@ public class LocalBestiary : MonoBehaviour
                 break;
             case "MILESTONES":
                 DisplayMilestones(ID, milestoneProgress, DeathAmountSlider);
-                
+
                 break;
         }
+        
+        bool OnNot = BestiaryDisplayTab != "MILESTONES" && saved_milestones.animals[lastID].RetrievedRewards < getMilestoneProgressInt(lastID);
+        tabTitle.transform.parent.Find("MilestonesNot").gameObject.SetActive(OnNot);
     }
     private void ChangeTab(int direction){
         
@@ -277,6 +282,8 @@ public class LocalBestiary : MonoBehaviour
         BestiaryPanels[currentIndex].SetActive(true);
         
         BestiaryDisplayTab = BestiaryTabs[currentIndex];
+
+       
         
         tabTitle.SetText(BestiaryDisplayTab);
         UpdateCurrentTab(lastID);

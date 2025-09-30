@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     float RoundDuration;
     float TimerEnemySpawn;
     float TimerEnemySpawnCounter;
+    public float RoundTotalSpentTime;
 
     [SerializeField] public IPoolable ExplosionPrefab;
     [SerializeField] public GameObject ExplosionGhoulPrefab;
@@ -75,11 +76,7 @@ public class EnemySpawner : MonoBehaviour
             BinocularPanel.SetActive(false);
         }
         SetSpawnLimits();
-        StartRound();
-
-        
-        
-        
+        StartRound();        
     }
     
     public void StartGame(){ 
@@ -145,12 +142,13 @@ public class EnemySpawner : MonoBehaviour
 
         if (GameEnd) { return; }
         UpdateEnemies();
+        RoundTotalSpentTime += Time.deltaTime;
         if (!isOn)
         {
 
             if (GameObject.FindGameObjectWithTag("Enemy") == null && !isOnAugments)
             {
-
+                RoundTotalSpentTime = 0;
                 if (current_round == 59)
                 {//6 AM
                     GameUI.Instance.ShowLimitRoundPanel();
@@ -177,9 +175,12 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
+        
         if (TimerEnemySpawnCounter > 0)
         {
             TimerEnemySpawnCounter -= Time.deltaTime;
+
+
         }
         else
         {
@@ -189,6 +190,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyAmount--;
             if (EnemyAmount <= 0)
             {
+                
                 isOn = false;
             }
         }

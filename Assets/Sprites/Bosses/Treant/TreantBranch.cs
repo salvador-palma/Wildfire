@@ -43,9 +43,8 @@ public class TreantBranch : Enemy
         if (timer <= 0)
         {
 
-            timer = UnityEngine.Random.Range(3f, 7f);
+            timer = UnityEngine.Random.Range(3f, 7f) + (EnemySpawner.Instance.RoundTotalSpentTime/30f);
             
-
             Enemy[] available = EnemySpawner.Instance.PickedEnemies.Take(6).ToArray();
             Enemy spawnable = available[UnityEngine.Random.Range(0, available.Length)];
             Enemy e = Instantiate(spawnable);

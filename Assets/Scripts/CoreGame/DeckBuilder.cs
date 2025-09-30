@@ -503,10 +503,10 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"LaserRatio","LaserAmount"});
             }), baseCard: true, immoType:IMMOLATE.FIRE),
 
-            new Augment("LaserAmount","Viper's Den", "Gain +1 Laser Beam", "LaserAmount", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(1, 0))), immoType:IMMOLATE.FIRE),
-            new Augment("LaserRatio","Persistent Virus", "Laser damage increases by +2.5% per hit", "LaserSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.025f))), immoType:IMMOLATE.FIRE),
-            new Augment("LaserRatio","No Antidote", "Laser damage increases by +5% per hit", "LaserSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.05f))), immoType:IMMOLATE.FIRE),
-            new Augment("LaserRatio","Kiss of Death", "Laser damage increases by +10% per hit", "LaserSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.10f))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserAmount","Auto-Bot", "Gain +1 Laser Beam", "LaserAmount", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(1, 0))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","Tazer", "Laser damage increases by +2.5% per hit", "LaserSpeed", Tier.Silver, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.025f))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","Rail Gun", "Laser damage increases by +5% per hit", "LaserSpeed", Tier.Gold, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.05f))), immoType:IMMOLATE.FIRE),
+            new Augment("LaserRatio","Inferno Tower", "Laser damage increases by +10% per hit", "LaserSpeed", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addNotEspecificEffect(new Laser(0, 0.10f))), immoType:IMMOLATE.FIRE),
 
             new Augment("Totem" ,"Totem", "Summon Totems that taunt nearby enemies", "TotemUnlock", Tier.Prismatic, new UnityAction(()=> {
                 Deck.Instance.removeClassFromDeck("Totem");
@@ -543,12 +543,12 @@ public class DeckBuilder : MonoBehaviour
                 Deck.Instance.AddAugmentClass(new List<string>{"GravityProb","GravityForce"});
             }), baseCard: true, immoType:IMMOLATE.AIR),
 
-            new Augment("GravityProb","Unsteady Ground", "Gain +5% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.05f, 0))), immoType:IMMOLATE.AIR),
-            new Augment("GravityProb","Seismic Pulse", "Gain +10% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.1f, 0))), immoType:IMMOLATE.AIR),
-            new Augment("GravityProb","Tectonic Boom", "Gain +25% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.25f, 0))), immoType:IMMOLATE.AIR),
-            new Augment("GravityForce","Kicking Dust", "Gravity gains +5N of Force", "BlackHoleForce", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.05f))), immoType:IMMOLATE.AIR),
-            new Augment("GravityForce","Monolith", "Gravity gains +10N of Force", "BlackHoleForce", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.1f))), immoType:IMMOLATE.AIR),
-            new Augment("GravityForce","9.0 Magnitude", "Gravity gains +25N of Force", "BlackHoleForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.25f))), immoType:IMMOLATE.AIR),
+            new Augment("GravityProb","Gravitational Pull", "Gain +5% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.05f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityProb","Hawking Radiation", "Gain +10% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.1f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityProb","Event Horizon", "Gain +25% chance of generating Gravitational Forces", "BlackHoleProb", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0.25f, 0))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","Mass Shift", "Gravity gains +5N of Force", "BlackHoleForce", Tier.Silver, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.05f))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","Newton's Apple", "Gravity gains +10N of Force", "BlackHoleForce", Tier.Gold, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.1f))), immoType:IMMOLATE.AIR),
+            new Augment("GravityForce","Singularity", "Gravity gains +25N of Force", "BlackHoleForce", Tier.Prismatic, new UnityAction(() => Flamey.Instance.addOnKillEffect(new Gravity(0, 0.25f))), immoType:IMMOLATE.AIR),
         };
 
         AllAugments.ForEach(a => { Translator.AddIfNotExists(a.Title);  Translator.AddIfNotExists(a.Description); });

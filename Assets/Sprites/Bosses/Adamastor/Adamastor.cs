@@ -118,7 +118,7 @@ public class Adamastor : Boss
             yield return new WaitUntil(() => boats.All(b => b == null) || Health <= 0);
             if (Health <= 0 || this == null) break;
             Storm(false);
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(10f + (EnemySpawner.Instance.RoundTotalSpentTime/30f));
             if (Health <= 0 || this == null) break;
             GetComponent<Animator>().Play("Roar");
             yield return new WaitForSeconds(2f);

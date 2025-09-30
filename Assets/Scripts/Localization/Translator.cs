@@ -11,7 +11,7 @@ public static class Translator
 {
     private static Dictionary<string, List<string>> translations; // Language, List<translations>
     public static event EventHandler dropdownValueChange;
-    private static string csvName = "TranslationsFull+Demo"; // "TranslationsFull+Demo" for demo version
+    private static string csvName = "TranslationsFull+DemoFR"; // "TranslationsFull+Demo" for demo version
     //private static string csvName = "TranslationsFull+Demo"; 
     private static string currentLanguage = "English";
     private static string lastLanguage = "English";
@@ -21,7 +21,7 @@ public static class Translator
     private static bool SavePreferences = true;
     private static string DefaultLanguageBuild = "简体中文";
     private static bool DebugLineForLineReading = false;
-    private static bool TranslatorsVersion = true;
+    private static bool TranslatorsVersion = false;
 
     public static bool SteamVersion = true;
 
@@ -75,16 +75,20 @@ public static class Translator
         Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
         TextAsset csvFile = null;
-        if(TranslatorsVersion){
-            string filePath = Path.Combine(Application.persistentDataPath, csvName+".csv");
-            if(!File.Exists(filePath))
+        if (TranslatorsVersion)
+        {
+            string filePath = Path.Combine(Application.persistentDataPath, csvName + ".csv");
+            if (!File.Exists(filePath))
             {
                 CopyToPersistentDataPath();
             }
             string csvContent = File.ReadAllText(filePath);
             csvFile = new TextAsset(csvContent);
-        }else{
+        }
+        else
+        {
             csvFile = Resources.Load<TextAsset>(filename);
+            Debug.Log($"Translator: {csvFile.name}");
         }
         
         if(csvFile == null)
@@ -103,19 +107,26 @@ public static class Translator
             //Debug.Log($"Adicionado {s} como lingua do dicionario.");
         }
         int maxSize = 0;
+        
         while (reader.Peek() > -1)
         {
-            
             string line = reader.ReadLine();
-            if(DebugLineForLineReading){Debug.Log(line);}
-            if(line[0] == '#') continue;
+            if (DebugLineForLineReading) { Debug.Log(line); }
+            if (line[0] == '#') continue;
             string[] parts = line.Split(';');
             int lang = 0;
             foreach (string str in translations.Keys)
             {
-
-                translations[str].Add(parts[lang++].Trim());
-                maxSize = Mathf.Max(maxSize, parts[lang-1].Length);
+                try
+                {
+                    translations[str].Add(parts[lang++].Trim());
+                    maxSize = Mathf.Max(maxSize, parts[lang - 1].Length);
+                }
+                catch
+                {
+                    Debug.LogError("Error On-Read: " + parts[0]);
+                   
+                }
 
             }
 
