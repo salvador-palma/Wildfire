@@ -315,16 +315,19 @@ public class SkillTreeManager : MonoBehaviour
                 return UnlockedColor;
         }
     }
-    public void changeEmberAmountUI(int amount = 0){
+    public void changeEmberAmountUI(int amount = 0)
+    {
         PlayerData.embers += amount;
         emberText.text = PlayerData.embers.ToString();
     }
 
+    [SerializeField] Gyomyo Gyo;
     public void resetSkillTree(){
         
         anim.SetBool("DisplayInfo", false);
         GameState.Delete();
-        
+
+        Gyo.ReloadAfterTreeReset();
         
         List<string> exceptionsLayer1 = new List<string>(){"Bee Summoner", "Ritual", "Ember Generation", "Assassin", "Critical Strike", "Regeneration", "Orbits", "Multicaster", "Necromancer", "Gambling","Gravity","Whirlpool"};
         List<string> exceptionsLayer2 = new List<string>(){"Vampire", "Burst Shot", "Freeze", "Resonance", "Pirate"};

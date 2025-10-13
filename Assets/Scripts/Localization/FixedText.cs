@@ -37,10 +37,6 @@ public class FixedText : MonoBehaviour
     private void TranslateComponent(object sender, EventArgs e) 
     {
         try{
-            //string text = GetComponent<TextMeshProUGUI>().text;
-
-            //if (string.IsNullOrEmpty(text)) { return; }
-
             string translatedText = Translator.getTranslation(OGText);
             GetComponent<TextMeshProUGUI>().text = translatedText;
 

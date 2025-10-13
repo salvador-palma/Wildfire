@@ -186,7 +186,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     public void ApplyPoison(){
         if(poisonLeft > 0){
             float perc = Smog.Instance != null && SkillTreeManager.Instance.getLevel("Smog") >= 1 ? 2 : 1;
-            Hitted((int)(MaxHealth*Flamey.PoisonDrainPerc*perc), 14, ignoreArmor:true, onHit:false, source:"Poison");
+            Hitted((int)(MaxHealth * Flamey.PoisonDrainPerc * perc), 14, ignoreArmor: true, onHit: false, source: "Poison");
+            AudioManager.PlayOneShot(FMODEvents.Instance.PoisonPop, Vector2.zero);
             poisonLeft--;
             if(poisonLeft <= 0){
                 if(sr!=null) sr.material.SetInt("_Poison", 0);
@@ -309,7 +310,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         if(this==null){return;}
         try
         {
-            Flamey.Instance.addEmbers(calculateEmbers());
+            Flamey.Instance.addEmbers(calculateEmbers() * 2);
             flame.TotalKills++;
             CameraShake.Shake(0.4f, 0.05f);
 

@@ -171,13 +171,11 @@ public class Taiko : MonoBehaviour
                 
                 float FillingPerGood = 1f / NoteAmount;
                 float FillingPerOk = FillingPerGood * 0.5f;
-                float CurrentFilling = (quality[0] - quality[3]) * FillingPerGood + (quality[1]- quality[2]) * FillingPerOk;
-                SoulGauge.value = CurrentFilling;
+                float CurrentFilling = (quality[0] - quality[3] * (Difficulty==0?0.33f: 1)) * FillingPerGood + (quality[1]- quality[2]* (Difficulty==0?0.33f: 1)) * FillingPerOk;
+                SoulGauge.value = CurrentFilling * (Difficulty == 0 ? 3f : 1.5f );
 
                 SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
                 
-                
-                //AccText.text = accuracy.ToString() + "%";
 
                 ShowFeedback(3);
 
@@ -326,7 +324,7 @@ public class Taiko : MonoBehaviour
             float FillingPerGood = 1f / NoteAmount;
             float FillingPerOk = FillingPerGood * 0.5f;
             float CurrentFilling = (quality[0] - quality[3]) * FillingPerGood + (quality[1]- quality[2]) * FillingPerOk;
-            SoulGauge.value = CurrentFilling * 1.5f;
+            SoulGauge.value = CurrentFilling * (Difficulty == 0 ? 3f : 1.5f );
 
             SoulGaugeMaxObj.SetActive(SoulGauge.value >= .92f);
         }

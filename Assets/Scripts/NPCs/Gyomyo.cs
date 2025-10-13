@@ -11,7 +11,15 @@ public class Gyomyo : NPC
 
     long GetNetWorth()
     {
-        return Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers + Math.Max(0,GameVariables.GetVariable("EmbersSpentOnItems")));
+        return Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers + Math.Max(0, GameVariables.GetVariable("EmbersSpentOnItems")));
+    }
+    public void ReloadAfterTreeReset()
+    {
+        
+        long NetWorth = GetNetWorth();
+        if(NetWorth >= 250000 && GameVariables.GetVariable("CasinoReady") == 0){
+            QueueDialogue(4);
+        }
     }
     protected override void CharacterLoad()
     {
@@ -28,10 +36,7 @@ public class Gyomyo : NPC
 
         }
         if(NetWorth >= 250000 && GameVariables.GetVariable("CasinoReady") == 0){
-
             QueueDialogue(4);
-            
-
         }
 
     }

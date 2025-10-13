@@ -25,8 +25,13 @@ public static class Translator
 
     public static bool SteamVersion = true;
 
-    public static int getCurrentLanguageID(){
+    public static int getCurrentLanguageID()
+    {
         return Array.IndexOf(getLanguagesAvailable(), currentLanguage);
+    }
+    public static string getCurrentLanguage(){
+        if(translations == null) LoadCSV(csvName);
+        return currentLanguage;
     }
     public static void AddIfNotExists(string word){
         if(translations == null) LoadCSV(csvName);
@@ -50,7 +55,8 @@ public static class Translator
         {
             //string steamLanguage = SteamApps.GetCurrentGameLanguage();
             string uiLang = SteamUtils.GetSteamUILanguage();
-            switch(uiLang){
+            switch (uiLang)
+            {
                 case "schinese":
                     currentLanguage = "简体中文";
                     break;
@@ -58,7 +64,11 @@ public static class Translator
                     currentLanguage = "繁體中文";
                     break;
                 case "portuguese":
+                case "brazilian":
                     currentLanguage = "Português";
+                    break;
+                case "french":
+                    currentLanguage = "Français";
                     break;
                 case "russian":
                     currentLanguage = "Русский";
@@ -68,11 +78,12 @@ public static class Translator
                     break;
             }
             Debug.Log("Steam Language Formated: " + currentLanguage);
-            
+
         }
+        currentLanguage = PlayerPrefs.GetString("Language", currentLanguage);
+        Debug.Log("Updated Language: " + currentLanguage);
         
         
-        Debug.Log("Changed language to " + currentLanguage + " from " + lastLanguage);
         translations = new Dictionary<string, List<string>>();
         TextAsset csvFile = null;
         if (TranslatorsVersion)

@@ -6958,6 +6958,7 @@ GameObject:
   - component: {fileID: 983958780}
   - component: {fileID: 983958782}
   - component: {fileID: 983958781}
+  - component: {fileID: 983958783}
   m_Layer: 5
   m_Name: WILDFIRE
   m_TagString: Untagged
@@ -7022,6 +7023,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983958779}
   m_CullTransparentMesh: 1
+--- !u!114 &983958783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983958779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7027cd2e7d98be948ac82f1e1598420c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageTranslations:
+  - language: "\u7B80\u4F53\u4E2D\u6587"
+    image: {fileID: 21300000, guid: 3cfb081891c35d643815a542fc4acad9, type: 3}
+  - language: "\u7E41\u9AD4\u4E2D\u6587"
+    image: {fileID: 21300000, guid: 07376558e1e98f441b93bb0eb222278d, type: 3}
 --- !u!1 &1042908431
 GameObject:
   m_ObjectHideFlags: 0
