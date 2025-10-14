@@ -121,11 +121,13 @@ public class SkillTreeManager : MonoBehaviour
             skill.level++;
             skill.max_level_reached = Math.Max(skill.max_level_reached, skill.level);
 
+            Action postCutScene = null;
             if(skill.level==2){
-                CheckForQuestDialogue(getAbility(skill_name));
+                postCutScene = CheckForQuestDialogue(getAbility(skill_name));
             }
 
-            CheckForConstelationUnlock();
+            CheckForConstelationUnlock(postCutScene);
+
             WritingData();
 
             return true;
@@ -133,13 +135,16 @@ public class SkillTreeManager : MonoBehaviour
         return false;
     }
 
-    private void CheckForQuestDialogue(Ability ability){
-        if(ability.QuestID != -1 && !GameVariables.hasQuestAssigned(ability.QuestID)){
+    private Action CheckForQuestDialogue(Ability ability){
+        if (ability.QuestID != -1 && !GameVariables.hasQuestAssigned(ability.QuestID))
+        {
             NPC npc = ability.npc;
-            if(npc != null){
-                npc.StartDialogue(ability.DialogueID);
+            if (npc != null)
+            {
+                return () => npc.StartDialogue(ability.DialogueID);
             }
-        } 
+        }
+        return null;
     }
 
     public void BanSkill(){
@@ -372,21 +377,38 @@ public class SkillTreeManager : MonoBehaviour
 
     }
 
-    public bool HasAtLeastOneSkill(){
+    public bool HasAtLeastOneSkill()
+    {
         return PlayerData.skills.Any(a => a.level >= 0);
     }
 
     //CONSTELATION
+    Action postCutsceneUnlockQuest;
     public void StartSkillTreeCutscene(bool on){
-        
+
         GetComponentInParent<Animator>().SetBool("Constelation", on);
+        if(!on && postCutsceneUnlockQuest != null)
+        {
+            postCutsceneUnlockQuest();
+        }
     }
-    public void CheckForConstelationUnlock(){
-        bool result = PlayerData.skills.All(e => e.level >= 0);
+    public void CheckForConstelationUnlock(Action postCutscene){
+        bool result = PlayerData.skills.All(e => e.level >= 2);
         int save = GameVariables.GetVariable("ConstelationCutScene");
-        if(result && save == -1){
+        if (result && save == -1)
+        {
             GameVariables.SetVariable("ConstelationCutScene", 1);
             StartSkillTreeCutscene(true);
+            postCutsceneUnlockQuest = postCutscene;
+
+        }
+        else
+        {
+            if (postCutscene != null)
+            {
+                postCutscene();
+                
+            }
         }
 
     }
@@ -394,7 +416,7 @@ public class SkillTreeManager : MonoBehaviour
         anim.SetBool("DisplayInfo", false);
         GameObject SkillTree = MetaMenuUI.Instance.SkillTree;
         SkillTree.transform.localScale = new Vector2(0.2642097f,0.2642097f);
-        SkillTree.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,15);
+        SkillTree.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,15,0);
     }
     
 

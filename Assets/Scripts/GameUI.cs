@@ -71,6 +71,7 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] GameObject FinalStatsPanel;
     [SerializeField] Button FinalStatsButton;
+    [SerializeField] Button RestartButton;
     List<SimpleStat> FinalStats;
     [SerializeField] GameObject[] StatTemplates;
 
@@ -306,6 +307,12 @@ public class GameUI : MonoBehaviour
 
     public void GameOverEffect()
     {
+        if(Gyomyo.GetNetWorth() < 5000)
+        {
+
+            Destroy(RestartButton.gameObject);
+        }
+
         AudioManager.Instance.SetAmbienceParameter("OST_Volume", 1);
         int n = EnemySpawner.Instance.current_round;
         RoundsLastedText.GetComponent<DynamicText>().SetText("YOU'VE SURVIVED UNTIL {0}h{1}", new string[] { (n / 10).ToString(), ((n % 10) * 6).ToString("00") });
@@ -314,6 +321,9 @@ public class GameUI : MonoBehaviour
             item.GetComponent<SpriteRenderer>().sortingOrder += 2;
         }
         // Flamey.Instance.GetComponent<SpriteRenderer>().sortingOrder = 4;
+
+
+
         GetComponent<Animator>().Play("GameOver");
         if (EnemySpawner.Instance.isOnAugments) { Deck.Instance.VisualOutroSlots(); }
         setUpFinalStats();

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Gyomyo : NPC
 {
 
-    long GetNetWorth()
+    static public long GetNetWorth()
     {
         return Math.Min(2147483647, SkillTreeManager.Instance.PlayerData.embers + SkillTreeManager.Instance.PlayerData.skillTreeEmbers + Math.Max(0, GameVariables.GetVariable("EmbersSpentOnItems")));
     }
