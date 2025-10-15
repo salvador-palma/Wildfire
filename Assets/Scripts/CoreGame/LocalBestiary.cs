@@ -267,7 +267,7 @@ public class LocalBestiary : MonoBehaviour
         }
         
         bool OnNot = BestiaryDisplayTab != "MILESTONES" && saved_milestones.animals[lastID].RetrievedRewards < getMilestoneProgressInt(lastID);
-        tabTitle.transform.parent.Find("MilestonesNot").gameObject.SetActive(OnNot);
+        tabTitle.transform.parent.Find("MilestonesNot")?.gameObject.SetActive(OnNot);
     }
     private void ChangeTab(int direction){
         

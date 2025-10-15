@@ -12,7 +12,9 @@ public class MenuUI : MonoBehaviour
     public static string device = "PC"; //Mobile, PC, Web
 
     [SerializeField] Button CreditsButton;
-    private void Awake() {
+    private void Awake()
+    {
+
 
         if (PlayerPrefs.GetInt(version, 0) == 0)
         {
@@ -30,19 +32,28 @@ public class MenuUI : MonoBehaviour
                 {
                     Debug.Log("Error Deleting File: " + filePath);
                 }
-
             }
 
+
+        }
+        if (PlayerPrefs.GetInt("V1.6-CharPatchFixing", 0) == 0)
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("V1.6-CharPatchFixing", 1);
+            PlayerPrefs.SetInt(version, 1);
         }
 
-        if(GameVariables.GetVariable("JunoReady") != 1)
+
+
+        if (GameVariables.GetVariable("JunoReady") != 1)
         {
             CreditsButton.gameObject.SetActive(false);
         }
-        
-        
+
+
     }
-    public void LoadGameScene(){
+    public void LoadGameScene()
+    {
 
         SceneManager.LoadScene("MetaGame");
     }
@@ -57,7 +68,7 @@ public class MenuUI : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-    
+
     public void CreditsRoll()
     {
         GetComponent<Animator>().Play("CreditsRoll");
@@ -67,6 +78,6 @@ public class MenuUI : MonoBehaviour
 
 
 
-    
-   
+
+
 }

@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    
-    public static EnemySpawner Instance {get; private set;}
+
+    public static EnemySpawner Instance { get; private set; }
     float height;
     float width;
-    
+
     public bool isOn = true;
     [HideInInspector] public bool isOnAugments = false;
 
-    
+
 
     public int current_round = 0;
 
@@ -27,11 +27,11 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] public IPoolable ExplosionPrefab;
     [SerializeField] public GameObject ExplosionGhoulPrefab;
-    
+
     public bool GameEnd = true;
 
     public static Dictionary<string, int> DeathPerEnemy;
-    
+
     List<List<float>> ProbabiltyList = new List<List<float>>(){
         new List<float>(){1,0,0},
         new List<float>(){0.85f,.15f,0},
@@ -60,83 +60,98 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] BinocularSlots;
 
 
-    private void Awake() {
+    private void Awake()
+    {
         Instance = this;
         PresentEnemies = new List<Enemy>();
         DeathPerEnemy = new Dictionary<string, int>();
         resetInstances();
     }
-    public void Start(){
-        
-        GameEnd =true;
+    public void Start()
+    {
+
+        GameEnd = true;
         Flamey.Instance.GameEnd = true;
-        
-        HindSightDeepness = Math.Max(0,GameVariables.GetVariable("BinocularLevel"));
-        if(HindSightDeepness == 0){
+
+        HindSightDeepness = Math.Max(0, GameVariables.GetVariable("BinocularLevel"));
+        if (HindSightDeepness == 0)
+        {
             BinocularPanel.SetActive(false);
         }
         SetSpawnLimits();
-        StartRound();        
+        StartRound();
     }
-    
-    public void StartGame(){ 
-        Flamey.Instance.GameEnd = false;  
-           
-        if(PlayerPrefs.GetInt("PlayerLoad", 0) == 0){ 
-            PlayerPrefs.DeleteKey("PlayerLoad"); 
+
+    public void StartGame()
+    {
+        Flamey.Instance.GameEnd = false;
+
+        if (PlayerPrefs.GetInt("PlayerLoad", 0) == 0)
+        {
+            PlayerPrefs.DeleteKey("PlayerLoad");
             Deck.Instance.LoadGame(false);
             PickedEnemies = pickEnemies();
             PickedBosses = pickBosses();
             GameEnd = false;
             InitDefaultEffects();
-            
-        }else{
-            PlayerPrefs.DeleteKey("PlayerLoad"); 
+
+        }
+        else
+        {
+            PlayerPrefs.DeleteKey("PlayerLoad");
             Debug.Log("There will be errors here");
             InitDefaultEffects();
             Deck.Instance.LoadGame(true);
             newRound();
         }
-        
-        InitBinoculars();  
+
+        InitBinoculars();
     }
-    private void InitDefaultEffects(){
-        
-        if(SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance==null){
+    private void InitDefaultEffects()
+    {
+
+        if (SkillTreeManager.Instance.getLevel("Ember Generation") >= 0 && MoneyMultipliers.Instance == null)
+        {
             Flamey.Instance.addNotEspecificEffect(new MoneyMultipliers(0, 1));
         }
-        if(SkillTreeManager.Instance.getLevel("Gambling") >= 0 && Gambling.Instance==null){
+        if (SkillTreeManager.Instance.getLevel("Gambling") >= 0 && Gambling.Instance == null)
+        {
             Flamey.Instance.addNotEspecificEffect(new Gambling());
         }
 
         foreach (Skills skill in SkillTreeManager.Instance.PlayerData.skills)
         {
-            if(skill.type=="Ember Generation" || skill.type=="Gambling"){continue;}
-                
+            if (skill.type == "Ember Generation" || skill.type == "Gambling") { continue; }
+
             //DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
-            if(skill.ban){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>Deck.Instance.removeClassFromDeck(a?.AugmentClass));
-            }else if(skill.pick){
-                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string>{skill.type}, inPool:true).ForEach(a=>a.action());
+            if (skill.ban)
+            {
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string> { skill.type }, inPool: true).ForEach(a => Deck.Instance.removeClassFromDeck(a?.AugmentClass));
+            }
+            else if (skill.pick)
+            {
+                DeckBuilder.Instance.GetAugmentsFromClasses(new List<string> { skill.type }, inPool: true).ForEach(a => a.action());
             }
         }
 
         GameUI.Instance.defineEffectList();
     }
-    private Vector2 getPoint(){
-        double angle = Math.PI * (float)Distribuitons.RandomUniform(0,360)/180f;
+    private Vector2 getPoint()
+    {
+        double angle = Math.PI * (float)Distribuitons.RandomUniform(0, 360) / 180f;
         double x = 0.52f * width * Math.Cos(angle);
         double y = 0.52f * height * Math.Sin(angle);
-        return new Vector2((float)x,(float)y);
+        return new Vector2((float)x, (float)y);
     }
-    public Vector2 getPointAngle(double angle, float radius = 0.52f){
-        angle = Math.PI * (float)angle/180f;
+    public Vector2 getPointAngle(double angle, float radius = 0.52f)
+    {
+        angle = Math.PI * (float)angle / 180f;
         double x = radius * width * Math.Cos(angle);
         double y = radius * height * Math.Sin(angle);
-        return new Vector2((float)x,(float)y);
+        return new Vector2((float)x, (float)y);
     }
-    
-    
+
+
     private void Update()
     {
 
@@ -175,22 +190,19 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        
+
         if (TimerEnemySpawnCounter > 0)
         {
             TimerEnemySpawnCounter -= Time.deltaTime;
-
-
         }
         else
         {
-
             TimerEnemySpawnCounter = TimerEnemySpawn * (1 / Gambling.getGambleMultiplier(3));
             SpawnEnemy(PickRandomEnemy(current_round));
             EnemyAmount--;
             if (EnemyAmount <= 0)
             {
-                
+
                 isOn = false;
             }
         }
@@ -209,87 +221,101 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("UNLOCK PHEONIX");
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(30, "Betsy", 22); //PHEONIX UNLOCK
         }
-        
-        if(GameVariables.GetVariable("JunoReady") == -1){
+
+        if (GameVariables.GetVariable("JunoReady") == -1)
+        {
             GameVariables.SetVariable("JunoReady", 1);
             NPC.QueueDialogue("Juno", 0);
         }
     }
 
-    public void UpdateEnemies(){
-        PresentEnemies.ForEach(e => {if(e!=null && !e.Attacking){e.UpdateEnemy(); e.ApplySlowUpdate();}});
-        List<Enemy> deadEnemies = PresentEnemies.Where(e => e==null || e.Health <= 0).ToList();
-        foreach(Enemy enemy in deadEnemies){
+    public void UpdateEnemies()
+    {
+        PresentEnemies.ForEach(e => { if (e != null && !e.Attacking) { e.UpdateEnemy(); e.ApplySlowUpdate(); } });
+        List<Enemy> deadEnemies = PresentEnemies.Where(e => e == null || e.Health <= 0).ToList();
+        foreach (Enemy enemy in deadEnemies)
+        {
             PresentEnemies.Remove(enemy);
             enemy.Die();
         }
     }
-    public void ApplyPoisonEnemies(){
+    public void ApplyPoisonEnemies()
+    {
         PresentEnemies.ForEach(e => e.ApplyPoison());
     }
-    public void addEnemy(Enemy enemy){PresentEnemies.Add(enemy);}
+    public void addEnemy(Enemy enemy) { PresentEnemies.Add(enemy); }
     public float ShinyChance = 0f;
     public float ShinyMultiplier = 10f;
-    public void SpawnEnemy(GameObject enemy){
+    public void SpawnEnemy(GameObject enemy)
+    {
 
         GameObject g = Instantiate(enemy);
         Enemy e = g.GetComponent<Enemy>();
         addEnemy(e);
-        CheckForBinoculars(e);
+        try
+        {
+            CheckForBinoculars(e);
+        }catch{}
+        
         g.transform.position = getPoint();
         e.CheckFlip();
 
-        
-        
-        if(UnityEngine.Random.Range(0f,1f) < ShinyChance){
+
+
+        if (UnityEngine.Random.Range(0f, 1f) < ShinyChance)
+        {
             e.Shiny = true;
             g.GetComponent<Renderer>().material = LocalBestiary.INSTANCE.getShinyMaterial(enemy);
         }
-        
-        
+
+
     }
-    private void SetSpawnLimits(){
+    private void SetSpawnLimits()
+    {
         height = 2f * Camera.main.orthographicSize;
         width = height * Camera.main.aspect;
     }
-    
 
-    public void newRound(){
-        
+
+    public void newRound()
+    {
+
         current_round++;
 
         isOn = true;
         isOnAugments = false;
-        GameEnd = false; 
+        GameEnd = false;
 
-        
+
         Flamey.Instance.ApplyTimedRound();
 
-        if(Character.Instance.isCharacter("Multicaster")){
+        if (Character.Instance.isCharacter("Multicaster"))
+        {
             Flamey.Instance.addAttackSpeed(0.2f);
         }
 
         StartRound();
-        
+
     }
-    private void StartRound(){
+    private void StartRound()
+    {
 
         EnemyAmount = getSpawnAmount(current_round);
         RoundDuration = getRoundTime(current_round);
-        TimerEnemySpawn = RoundDuration/EnemyAmount;
-        GameUI.Instance.UpdateProgressBar(current_round); 
-        GameUI.Instance.UpdateMenuInfo(current_round); 
+        TimerEnemySpawn = RoundDuration / EnemyAmount;
+        GameUI.Instance.UpdateProgressBar(current_round);
+        GameUI.Instance.UpdateMenuInfo(current_round);
     }
 
     /* ===== BINOCULARS ===== */
     [SerializeField] GameObject BinocularPopUp;
-    public void DisplayBinocularProgress(bool on )
+    public void DisplayBinocularProgress(bool on)
     {
         if (GameVariables.GetVariable("BinocularLevel") >= 1)
         {
             BinocularPopUp.GetComponent<Animator>().Play(on ? "BinocularPopUp" : "BinocularPopDown");
         }
-        
+
     }
     private void DisplayBinocularWarning(AnimalRunTimeData a, int index)
     {
@@ -308,30 +334,33 @@ public class EnemySpawner : MonoBehaviour
     }
     private void CheckForBinoculars(Enemy e)
     {
+        if(e == null){ return; }
         if (latestSpecies == null) { latestSpecies = e.Name; return; }
 
         int start_from = Array.FindIndex(PickedEnemies, en => e.Name == en.Name);
-        try
+        if (start_from != -1)
         {
-            int latest = Array.FindIndex(PickedEnemies, en => latestSpecies == en.Name);
-            if (e == null || PickedEnemies == null) { return; }
-            if (e.Name != latestSpecies)
+            try
             {
-                if (start_from > latest)
+                int latest = Array.FindIndex(PickedEnemies, en => latestSpecies == en.Name);
+                if (e == null || PickedEnemies == null) { return; }
+                if (e.Name != latestSpecies)
                 {
+                    if (start_from > latest)
+                    {
+                        latestSpecies = e.Name;
+                        IncrementBinocularHindSight();
+                    }
 
-                    latestSpecies = e.Name;
-                    
-                    IncrementBinocularHindSight();
                 }
-
+            }
+            catch (Exception ex)
+            {
+                
+                Debug.Log("Found: " + ex.StackTrace + "; " + start_from );
             }
         }
-        catch (Exception ex)
-        {
-            
-            Debug.Log("Found: " + ex.StackTrace);
-        }
+
 
         void IncrementBinocularHindSight()
         {
@@ -347,14 +376,14 @@ public class EnemySpawner : MonoBehaviour
                     float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i + 1]);
                     ResizeImage(child.GetComponent<RectTransform>(), new Vector2(dimensions[0], dimensions[1]), new Vector2(dimensions[2], dimensions[3]));
 
-                    
+
                     AnimalRunTimeData a = LocalBestiary.INSTANCE.getAnimalRunTime(PickedEnemies[i + 1].Name);
                     if (a == null) { Debug.Log("No Animal: " + PickedEnemies[i + 1].Name); }
                     else
                     {
-                         DisplayBinocularWarning(a, j);
+                        DisplayBinocularWarning(a, j);
                     }
-                   
+
 
                     j++;
                 }
@@ -372,39 +401,48 @@ public class EnemySpawner : MonoBehaviour
             RT.sizeDelta = IconSize;
         }
     }
-    private void InitBinoculars(){
+    private void InitBinoculars()
+    {
 
         for (int i = 0; i < HindSightDeepness; i++)
         {
             GameObject child = BinocularSlots[i];
-            child.GetComponent<Image>().sprite = PickedEnemies[i+1].gameObject.GetComponent<SpriteRenderer>().sprite;
-            if(!LocalBestiary.INSTANCE.hasBeenUnlocked(PickedEnemies[i+1])){
+            child.GetComponent<Image>().sprite = PickedEnemies[i + 1].gameObject.GetComponent<SpriteRenderer>().sprite;
+            if (!LocalBestiary.INSTANCE.hasBeenUnlocked(PickedEnemies[i + 1]))
+            {
                 child.GetComponent<Image>().color = Color.black;
             }
-            float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i+1]);
+            float[] dimensions = LocalBestiary.INSTANCE.getMeasurements(PickedEnemies[i + 1]);
             child.GetComponent<RectTransform>().anchoredPosition = new Vector2(dimensions[0], dimensions[1]);
             child.GetComponent<RectTransform>().sizeDelta = new Vector2(dimensions[2], dimensions[3]);
 
         }
     }
     /* ===== ENEMY PICK ===== */
-    private GameObject PickRandomEnemy(int round){
-        if(PickedEnemies==null){
+    private GameObject PickRandomEnemy(int round)
+    {
+        if (PickedEnemies == null)
+        {
             Debug.Log("error found");
         }
         if (round >= 60)
             return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
-        int picked = pickEnemyIndex(ProbabiltyList[round % 10]) + (3*(round/10));
-       
+        int picked = pickEnemyIndex(ProbabiltyList[round % 10]) + (3 * (round / 10));
+
         return PickedEnemies[picked].gameObject;
-        
+
     }
-    private int pickEnemyIndex(List<float> prob){
-        float val = UnityEngine.Random.Range(0f,1f);
-        for(int i = 0 ; i< prob.Count; i++){
-            if(prob[i] > val){
+    private int pickEnemyIndex(List<float> prob)
+    {
+        float val = UnityEngine.Random.Range(0f, 1f);
+        for (int i = 0; i < prob.Count; i++)
+        {
+            if (prob[i] > val)
+            {
                 return i;
-            }else{
+            }
+            else
+            {
                 val -= prob[i];
             }
         }
@@ -412,8 +450,8 @@ public class EnemySpawner : MonoBehaviour
     }
 
     /* ===== ROUND SETTINGS ===== */
-    private float getRoundTime(int round){return Math.Min(5 + 1.2f * round, 40);}
-    private float getSpawnAmount(int round){return 5*(round%10)+25*(round/10)+5;}
+    private float getRoundTime(int round) { return Math.Min(5 + 1.2f * round, 40); }
+    private float getSpawnAmount(int round) { return 5 * (round % 10) + 25 * (round / 10) + 5; }
 
     private void resetInstances()
     {
@@ -484,27 +522,29 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    private Enemy[] pickEnemies(){
+    private Enemy[] pickEnemies()
+    {
         List<Enemy> result = new List<Enemy>();
         for (int i = 0; i < 6; i++)
         {
-            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i+1, 3, exclude_banned:true, exclude_elliptical:false));//Character.Instance.isCharacter("Totem")
+            result.AddRange(LocalBestiary.INSTANCE.getRandomEnemyCombination(i + 1, 3, exclude_banned: true, exclude_elliptical: false));//Character.Instance.isCharacter("Totem")
         }
 
         Deck.Instance.gameState.EnemyIDs = LocalBestiary.INSTANCE.getEnemiesID(result.ToArray());
         return result.ToArray();
     }
-    
-    private Boss[] pickBosses(){
+
+    private Boss[] pickBosses()
+    {
         List<Boss> result = new List<Boss>();
-        
+
         List<BossRunTimeData> possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.BEGGINER).ToList();
         result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
         possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.ADVANCED).ToList();
         result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
         possible = LocalBestiary.INSTANCE.Bosses.Where(e => e.wave == BossPhase.MASTER).ToList();
         result.Add(possible[UnityEngine.Random.Range(0, possible.Count())].boss);
-        
+
         return result.ToArray();
     }
 
@@ -578,15 +618,17 @@ public class EnemySpawner : MonoBehaviour
     public int RoundsWithoutDamage = 0;
     public int RoundsBelow25PercMaxHP = 0;
     public int RoundsBelow50PercMaxHP = 0;
-    private void LogNewRound(){
+    private void LogNewRound()
+    {
         //MARS
         RoundsWithoutDamage++;
         RoundsBelow50PercMaxHP++;
 
-        if(RoundsWithoutDamage >= 30 && FlameCircle.Instance != null){
-            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42,"Betsy",20); //URANUS UNLOCK
+        if (RoundsWithoutDamage >= 30 && FlameCircle.Instance != null)
+        {
+            GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(42, "Betsy", 20); //URANUS UNLOCK
         }
-        
+
 
         if (Flamey.Instance.Health <= Flamey.Instance.MaxHealth / 4f)
         {
@@ -598,10 +640,10 @@ public class EnemySpawner : MonoBehaviour
         }
         else { RoundsBelow25PercMaxHP = 0; }
 
-        
-        
-        
+
+
+
     }
 
-    
+
 }

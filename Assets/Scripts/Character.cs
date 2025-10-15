@@ -780,6 +780,21 @@ public class Character : MonoBehaviour
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/characters.json");
             JsonUtility.FromJson<SerialList<CharacterUnlockedData>>(json).list.ForEach(c1 => characterDatas.First(c2 => c2.Name == c1.Name || (c2.Name == "Phoenix" && c1.Name == "Pheonix")).Unlocked = c1.Unlocked);
+
+            if(PlayerPrefs.GetInt("PatchingCharacterUnlock") == 0)
+            {
+                PlayerPrefs.SetInt("PatchingCharacterUnlock", 1);
+                string[] exclude = new string[] { "Tako", "Dr. Miasma", "Golem", "Mecha", "Black Hole", "Keiki Ahi" };
+                foreach(CharacterData d in characterDatas)
+                {
+                    if (exclude.Contains(d.Name))
+                    {
+                        d.Unlocked = false;
+                    }
+                }
+            }
+            
+            
             WritingData();
         }
         else
@@ -790,7 +805,7 @@ public class Character : MonoBehaviour
     }
     private void CreateFile()
     {
-        string str = "{\"active\":0,\"list\":[{\"Name\":\"Flame\",\"Unlocked\":true},{\"Name\":\"Double Faced\",\"Unlocked\":false},{\"Name\":\"Rose Warrior\",\"Unlocked\":false},{\"Name\":\"Sir Flareington\",\"Unlocked\":false},{\"Name\":\"Fire Bee\",\"Unlocked\":false},{\"Name\":\"Von Van Pyre\",\"Unlocked\":false},{\"Name\":\"Ice Cube\",\"Unlocked\":false},{\"Name\":\"Echo\",\"Unlocked\":false},{\"Name\":\"Ash Pyre\",\"Unlocked\":false},{\"Name\":\"Tesla Coil\",\"Unlocked\":false},{\"Name\":\"Bomber\",\"Unlocked\":false},{\"Name\":\"King Ghoul\",\"Unlocked\":false},{\"Name\":\"Captain Ember Teach\",\"Unlocked\":false},{\"Name\":\"Mt. Vesuvius\",\"Unlocked\":false},{\"Name\":\"Mt. Everest\",\"Unlocked\":false},{\"Name\":\"Flora\",\"Unlocked\":false},{\"Name\":\"Blaze Brigade\",\"Unlocked\":false},{\"Name\":\"Powered Up\",\"Unlocked\":false},{\"Name\":\"Ankh-Ra\",\"Unlocked\":false},{\"Name\":\"Phoenix\",\"Unlocked\":false},{\"Name\":\"Monk\",\"Unlocked\":false},{\"Name\":\"Fire Monk\",\"Unlocked\":false},{\"Name\":\"Water Monk\",\"Unlocked\":false},{\"Name\":\"Air Monk\",\"Unlocked\":false},{\"Name\":\"Earth Monk\",\"Unlocked\":false},{\"Name\":\"Azureoth\",\"Unlocked\":false},{\"Name\":\"Orbital\",\"Unlocked\":false},{\"Name\":\"Mercury\",\"Unlocked\":false},{\"Name\":\"Venus\",\"Unlocked\":false},{\"Name\":\"Earth\",\"Unlocked\":false},{\"Name\":\"Mars\",\"Unlocked\":false},{\"Name\":\"Jupiter\",\"Unlocked\":false},{\"Name\":\"Saturn\",\"Unlocked\":false},{\"Name\":\"Uranus\",\"Unlocked\":false},{\"Name\":\"Neptune\",\"Unlocked\":false},{\"Name\":\"Zeus\",\"Unlocked\":false},{\"Name\":\"Clown\",\"Unlocked\":false}]}";
+        string str = "{\"active\":0,\"list\":[{\"Name\":\"Flame\",\"Unlocked\":true},{\"Name\":\"Double Faced\",\"Unlocked\":false},{\"Name\":\"Rose Warrior\",\"Unlocked\":false},{\"Name\":\"Sir Flareington\",\"Unlocked\":false},{\"Name\":\"Fire Bee\",\"Unlocked\":false},{\"Name\":\"Von Van Pyre\",\"Unlocked\":false},{\"Name\":\"Ice Cube\",\"Unlocked\":false},{\"Name\":\"Echo\",\"Unlocked\":false},{\"Name\":\"Ash Pyre\",\"Unlocked\":false},{\"Name\":\"Tesla Coil\",\"Unlocked\":false},{\"Name\":\"Bomber\",\"Unlocked\":false},{\"Name\":\"King Ghoul\",\"Unlocked\":false},{\"Name\":\"Captain Ember Teach\",\"Unlocked\":false},{\"Name\":\"Mt. Vesuvius\",\"Unlocked\":false},{\"Name\":\"Mt. Everest\",\"Unlocked\":false},{\"Name\":\"Flora\",\"Unlocked\":false},{\"Name\":\"Blaze Brigade\",\"Unlocked\":false},{\"Name\":\"Powered Up\",\"Unlocked\":false},{\"Name\":\"Ankh-Ra\",\"Unlocked\":false},{\"Name\":\"Phoenix\",\"Unlocked\":false},{\"Name\":\"Monk\",\"Unlocked\":false},{\"Name\":\"Fire Monk\",\"Unlocked\":false},{\"Name\":\"Water Monk\",\"Unlocked\":false},{\"Name\":\"Air Monk\",\"Unlocked\":false},{\"Name\":\"Earth Monk\",\"Unlocked\":false},{\"Name\":\"Azureoth\",\"Unlocked\":false},{\"Name\":\"Orbital\",\"Unlocked\":false},{\"Name\":\"Mercury\",\"Unlocked\":false},{\"Name\":\"Venus\",\"Unlocked\":false},{\"Name\":\"Earth\",\"Unlocked\":false},{\"Name\":\"Mars\",\"Unlocked\":false},{\"Name\":\"Jupiter\",\"Unlocked\":false},{\"Name\":\"Saturn\",\"Unlocked\":false},{\"Name\":\"Uranus\",\"Unlocked\":false},{\"Name\":\"Neptune\",\"Unlocked\":false},{\"Name\":\"Zeus\",\"Unlocked\":false},{\"Name\":\"Clown\",\"Unlocked\":false},{\"Name\":\"Tako\",\"Unlocked\":false},{\"Name\":\"Golem\",\"Unlocked\":false},{\"Name\":\"Black Hole\",\"Unlocked\":false},{\"Name\":\"Keiki Ahi\",\"Unlocked\":false},{\"Name\":\"Mecha\",\"Unlocked\":false},{\"Name\":\"Dr. Miasma\",\"Unlocked\":false}]}";
         File.WriteAllText(Application.persistentDataPath + "/characters.json", str);
     }
 

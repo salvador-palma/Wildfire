@@ -49,7 +49,7 @@ public class Owl : Enemy
 
     private Enemy pickCarriage()
     {
-        string[] exceptions = new string[] { "Mole", "Worm", "Ant"};
+        string[] exceptions = new string[] { "Mole", "Worm", "Ant", "Caterpillar"};
         Enemy[] available = EnemySpawner.Instance.PickedEnemies.Take(6).Where(e => !exceptions.Contains(e.Name)).ToArray();
 
         return available[UnityEngine.Random.Range(0, available.Length - 1)];
