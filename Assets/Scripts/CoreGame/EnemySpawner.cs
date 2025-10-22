@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FMOD;
+using Steamworks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -102,6 +105,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("There will be errors here");
             InitDefaultEffects();
             Deck.Instance.LoadGame(true);
+            PickedBosses = pickBosses();
             newRound();
         }
 
@@ -180,9 +184,11 @@ public class EnemySpawner : MonoBehaviour
             }
             return;
         }
-        if (new int[] { 19, 39, 59 }.Contains(current_round))
+        if (current_round%20 == 19)
         {
-            int id = (current_round + 1) / 20 - 1;
+            int id = ((current_round + 1) / 20 - 1) % 3;
+            Debug.Log("Picked Boss: " + id);
+            Debug.Log("Picked Boss Name: " + PickedBosses[id]);
             Boss spawnable = PickedBosses[id];
             Instantiate(spawnable);
 
@@ -231,7 +237,25 @@ public class EnemySpawner : MonoBehaviour
 
     public void UpdateEnemies()
     {
-        PresentEnemies.ForEach(e => { if (e != null && !e.Attacking) { e.UpdateEnemy(); e.ApplySlowUpdate(); } });
+        PresentEnemies.ForEach(e =>
+        {
+            try
+            {
+                if (e != null && !e.Attacking)
+                {
+                    e.UpdateEnemy(); e.ApplySlowUpdate();
+                }
+
+            }
+            catch (Exception exc)
+            {
+                Debug.Log("Error on Enemy: " + e.Name);
+                Debug.Log(exc.StackTrace);
+                e.Health = 0;
+
+            }
+        }
+        );
         List<Enemy> deadEnemies = PresentEnemies.Where(e => e == null || e.Health <= 0).ToList();
         foreach (Enemy enemy in deadEnemies)
         {
@@ -255,8 +279,9 @@ public class EnemySpawner : MonoBehaviour
         try
         {
             CheckForBinoculars(e);
-        }catch{}
-        
+        }
+        catch { }
+
         g.transform.position = getPoint();
         e.CheckFlip();
 
@@ -325,7 +350,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject newAnimalImage = Slot.transform.GetChild(0).gameObject;
         RectTransform RT = newAnimalImage.GetComponent<RectTransform>();
 
-        Debug.Log("Searching: " + a.name);
+        
         int deaths = LocalBestiary.INSTANCE.getMilestoneAmount(a.name);
         newAnimalImage.GetComponent<Image>().sprite = a.enemy.GetComponent<SpriteRenderer>().sprite;
         newAnimalImage.GetComponent<Image>().color = deaths > -1 ? Color.white : Color.black;
@@ -334,7 +359,7 @@ public class EnemySpawner : MonoBehaviour
     }
     private void CheckForBinoculars(Enemy e)
     {
-        if(e == null){ return; }
+        if (e == null) { return; }
         if (latestSpecies == null) { latestSpecies = e.Name; return; }
 
         int start_from = Array.FindIndex(PickedEnemies, en => e.Name == en.Name);
@@ -356,8 +381,8 @@ public class EnemySpawner : MonoBehaviour
             }
             catch (Exception ex)
             {
-                
-                Debug.Log("Found: " + ex.StackTrace + "; " + start_from );
+
+                Debug.Log("Found: " + ex.StackTrace + "; " + start_from);
             }
         }
 
@@ -426,7 +451,11 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("error found");
         }
         if (round >= 60)
-            return PickedEnemies[UnityEngine.Random.Range(0, PickedEnemies.Length)].gameObject;
+        {
+            Enemy[] possiblePicks = PickedEnemies.Where(e => e.Name != "Ant").ToArray();
+            return possiblePicks[UnityEngine.Random.Range(0, possiblePicks.Length)].gameObject;
+        }
+
         int picked = pickEnemyIndex(ProbabiltyList[round % 10]) + (3 * (round / 10));
 
         return PickedEnemies[picked].gameObject;
@@ -552,6 +581,11 @@ public class EnemySpawner : MonoBehaviour
     //==== DEATH COUNTER ==== //
     public static void AddDeath(string enemy_name, bool shiny = false)
     {
+        if (LocalBestiary.INSTANCE.animals.First(a => a.name == enemy_name) == null)
+        {
+            return;
+        }
+
         if (DeathPerEnemy.ContainsKey(enemy_name))
         {
             DeathPerEnemy[enemy_name]++;

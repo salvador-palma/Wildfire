@@ -24,14 +24,14 @@ public class Squirrel : Enemy
             Health = (int)(Health * (float) (Math.Pow(x-30, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
             Speed *= (float) (Math.Pow(x-30, 2)/4000f) + 1f;
-            Damage = (int)(Damage * (float) (Math.Pow(x-30, 2)/2500f) + 1f);
+            Damage = (int)(Damage * (float) (Math.Pow(x-30, 2)/250f) + 1f);
         }
         MaxHealth = Health;
     }
     public override void UpdateEnemy()  {
         Move();
         if(Vector2.Distance(AttackTarget.getPosition(), HitCenter.position) < AttackRange && !placedBomb){
-            Attacking = true;
+           Attacking = true;
            GetComponent<Animator>().SetTrigger("InRange");
         }
         if((Math.Abs(transform.position.x) > 10f || Math.Abs(transform.position.y) > 6f) && placedBomb){

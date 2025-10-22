@@ -445,6 +445,7 @@ public class ExecuteOnHit : OnHitEffects
                 return 1;
             }
         }catch(Exception e){
+            Debug.Log(e.StackTrace);
             Debug.LogError(e.Message + "; " + en);
         }
         return 0;
@@ -677,7 +678,7 @@ public class StatikOnHit : OnHitEffects
         if(lineRenderer!=null){lineRenderer.GetComponent<IPoolable>().UnPool();}
         
         
-        if(amountOfOnHit >= 20){
+        if(amountOfOnHit >= 18){
             if(GameVariables.hasQuest(12)){
                 GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(12, "Rowl", 13);
             }

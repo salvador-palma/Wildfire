@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 public class Beaver : Enemy
 {
 
@@ -23,7 +23,7 @@ public class Beaver : Enemy
             Health = (int)(Health * (float) (Math.Pow(x-30, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
             Speed *= (float) (Math.Pow(x-30, 2)/4000f) + 1f;
-            Damage = (int)(Damage * (float) (Math.Pow(x-30, 2)/2500f) + 1f);
+            Damage = (int)(Damage * (float) (Math.Pow(x-30, 2)/250f) + 1f);
         }
         MaxHealth = Health;
     }

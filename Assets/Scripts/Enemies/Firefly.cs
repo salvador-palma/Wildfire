@@ -31,7 +31,7 @@ public class Firefly : Enemy{
             Health = (int)(Health * (float) (Math.Pow(x-10, 2)/350) + 1f);
             Armor = (int)(Armor * (x-45f)/15f); 
             Speed *= (float) (Math.Pow(x-10, 2)/4000f) + 1f;
-            Damage = (int)(Damage * (float) (Math.Pow(x-10, 2)/2500f) + 1f);
+            Damage = (int)(Damage * (float) (Math.Pow(x-10, 2)/250f) + 1f);
         }
         MaxSpeed = Speed;
         MaxHealth = Health;

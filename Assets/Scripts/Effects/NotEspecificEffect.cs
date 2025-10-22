@@ -424,9 +424,9 @@ public class Summoner : NotEspecificEffect
     }
     public void addBee(int amount, int type, bool Upgrade2 = true)
     {
-        int max = 14;
+        int max = 16;
         if (SkillTreeManager.Instance.getLevel("Bee Summoner") >= 2 && Upgrade2) { amount *= 2; }
-        if (amount + this.amount > 14)
+        if (amount + this.amount > max)
         {
             if (Character.Instance.isCharacter("Bee Summoner"))
             {
@@ -490,7 +490,7 @@ public class Summoner : NotEspecificEffect
     }
     public string[] getCaps()
     {
-        return new string[]{"Bee Amount: {0} (Max. 14)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount.ToString(), dmg.ToString(), (Mathf.Round(atkSpeed *  100)/100).ToString(), (Mathf.Round(speed*  100)/100).ToString()};
+        return new string[]{"Bee Amount: {0} (Max. 16)<br>Bee Damage: +{1} <br>Bee Attack Speed: {2}/s (Max. 4/s) <br>Bee Speed: {3} (Max. 4)", amount.ToString(), dmg.ToString(), (Mathf.Round(atkSpeed *  100)/100).ToString(), (Mathf.Round(speed*  100)/100).ToString()};
     }
 
     public string getIcon()

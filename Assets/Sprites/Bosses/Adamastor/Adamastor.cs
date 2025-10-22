@@ -133,6 +133,9 @@ public class Adamastor : Boss
     }
     public override void Die(bool onKill = true)
     {
+
+        SteamLeaderboardManager.UnlockAchievment("ADAMASTOR_BEATEN");
+
         WaterAnimator.Play("WaterAdamastorExit");
         boats.ForEach(b => {if (b != null) { b.Health = 0; } });
 

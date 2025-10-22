@@ -96,6 +96,7 @@ public class Gyomyo : NPC
     }
     public void GoCasino(){
         MetaMenuUI.Instance.GetComponent<Animator>().Play("CurtainsOn");
+        SteamLeaderboardManager.UnlockAchievment("GYOMYO_CASINO");
         
     }
 
@@ -105,7 +106,8 @@ public class Gyomyo : NPC
     
     public void UnlockCasino(){
         UnityAction post = () => UnlockQuest(45);
-        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6, afterUnlock:post);
+        MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "GYOMYO'S CASINO", "You can now <style=\"LYellow\">gamble</style> your embers", 6, afterUnlock: post);
+        SteamLeaderboardManager.UnlockAchievment("GYOMYO_CASINO");
         if(GameVariables.hasQuest(46)){
             QuestBoard.Instance.Cloris.QueueDialogue(17); 
         }

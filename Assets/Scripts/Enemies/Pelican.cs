@@ -48,7 +48,7 @@ public class Pelican : Enemy
 
     private Enemy pickCarriage()
     {
-        string[] exceptions = new string[] { "Mole", "Worm", "Owl", "Vulture", "Pelican" };
+        string[] exceptions = new string[] { "Mole", "Worm", "Owl", "Vulture", "Pelican", "Pine Marten" };
         Enemy[] available = EnemySpawner.Instance.PickedEnemies.Skip(6).Take(6).Where(e => !exceptions.Contains(e.Name)).ToArray();
 
         return available[UnityEngine.Random.Range(0, available.Length - 1)];

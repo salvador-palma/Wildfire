@@ -28,8 +28,8 @@ public class TreantBranch : Enemy
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
-            Health = (int)(Health * (float)(Math.Pow(x - 20, 2) / 350) + 1f);
-            Armor = (int)(Armor * (x - 45f) / 15f);
+            Health = (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f) < 0 ? int.MaxValue : (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f);
+            Armor = (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f)) < 0 ? int.MaxValue : (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f));
             Speed *= (float)(Math.Pow(x - 20, 2) / 4000f) + 1f;
             Damage = (int)(Damage * (float)(Math.Pow(x - 20, 2) / 2500f) + 1f);
         }

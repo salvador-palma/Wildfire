@@ -149,7 +149,6 @@ public class MetaMenuUI : MonoBehaviour
 
     public bool SaveStateEnabled = true;
     public void ClickedPlay(){
-        Debug.Log(Application.persistentDataPath);
         if(File.Exists(Application.persistentDataPath +"/gameState.json") && SaveStateEnabled){
             
             Chat.Instance.StartChat();

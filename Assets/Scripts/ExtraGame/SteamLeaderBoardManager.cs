@@ -120,9 +120,6 @@ public class SteamLeaderboardManager : MonoBehaviour
             leaderboardToUse = currentLeaderboard;
         }
 
-
-
-
         SteamAPICall_t apiCall = SteamUserStats.DownloadLeaderboardEntries(leaderboardToUse, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobal, 0, 10);
         downloadResult = CallResult<LeaderboardScoresDownloaded_t>.Create();
         downloadResult.Set(apiCall, (LeaderboardScoresDownloaded_t result, bool failure) =>
@@ -130,9 +127,8 @@ public class SteamLeaderboardManager : MonoBehaviour
             if (!failure && result.m_cEntryCount > 0)
             {
                 List<LeaderboardEntryData> entries = new List<LeaderboardEntryData>();
-                for (int i = 0; i < result.m_cEntryCount; i++)
+                for (int i = 0; i < Math.Min(result.m_cEntryCount, 5); i++)
                 {
-
                     LeaderboardEntryData entryData = GetLeaderboardEntryData(result.m_hSteamLeaderboardEntries, i);
                     entries.Add(entryData);
                 }
@@ -266,7 +262,7 @@ public class SteamLeaderboardManager : MonoBehaviour
         }
 
         Debug.Log("Uploading score: " + score + " for character ID: " + characterID);
-        
+
         if (!leaderboardReady)
         {
             FindLeaderboard("HighscoreBase", false, () => { UploadScore(score, characterID, onHighScore); });
@@ -276,7 +272,7 @@ public class SteamLeaderboardManager : MonoBehaviour
         {
             UploadScoreToLeaderboard(currentLeaderboard, score, new int[] { characterID }, onHighScore);
         }
-        
+
 
         Character.CharacterData data = Character.Instance.characterDatas[characterID];
         if (characterLeaderboards.ContainsKey(data.Name))
@@ -297,7 +293,20 @@ public class SteamLeaderboardManager : MonoBehaviour
 
 
 
-        
+
+    }
+    
+    public static void UnlockAchievment(string title)
+    {
+        if (SteamManager.Initialized)
+        {
+            SteamUserStats.GetAchievement(title, out bool Beaten);
+            if (!Beaten)
+            {
+                SteamUserStats.SetAchievement(title);
+                SteamUserStats.StoreStats();
+            }
+        }
     }
 }
 

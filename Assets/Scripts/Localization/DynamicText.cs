@@ -18,13 +18,29 @@ public class DynamicText : MonoBehaviour
     //[HideInInspector] public string[] oldArgs;
     public bool isChat;
     private string Scene;
-    private bool hasAssignedEvent; 
-    void Awake(){
-         if(!hasAssignedEvent){
+    private bool hasAssignedEvent;
+    public bool hasFixedStart;
+    void Awake()
+    {
+        if (!hasAssignedEvent)
+        {
             hasAssignedEvent = true;
-            Translator.dropdownValueChange += TranslateComponent;  
-         }
-        Scene = SceneManager.GetActiveScene().name;    
+            Translator.dropdownValueChange += TranslateComponent;
+        }
+        Scene = SceneManager.GetActiveScene().name;
+
+    }
+    void Start()
+    {
+        if (hasFixedStart)
+        {
+            OGText = GetComponent<TextMeshProUGUI>().text;
+
+            if (string.IsNullOrEmpty(OGText)) { return; }
+
+            string translatedText = Translator.getTranslation(OGText);
+            GetComponent<TextMeshProUGUI>().text = translatedText;
+        }
         
     }
     public bool DebugIT;

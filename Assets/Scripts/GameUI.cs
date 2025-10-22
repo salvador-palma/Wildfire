@@ -170,6 +170,12 @@ public class GameUI : MonoBehaviour
     public void AddAugment(Augment a)
     {
         if (!ownsAugment) { ownsAugment = true; NoAugmentsText.SetActive(false); }
+        
+        if(AugmentContainer.transform.childCount > 100)
+        {
+            Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
+            Destroy(AugmentContainer.transform.GetChild(1).gameObject);
+        }
 
         Deck.Instance.inBuildAugments.Add(a);
         GameObject go = Instantiate(AugmentTemplate, AugmentContainer.transform);
@@ -187,11 +193,19 @@ public class GameUI : MonoBehaviour
 
         Augment a = DeckBuilder.Instance.getAugmentByName(serA.title);
 
+        
+
         go.transform.GetChild(0).GetComponent<Image>().sprite = Deck.Instance.getTierSprite(a.tier);
         go.transform.GetChild(1).GetComponent<DynamicText>().SetText(a.Title);
         go.transform.GetChild(2).GetComponent<DynamicText>().SetText(a.getDescription());
         go.transform.GetChild(3).GetComponent<Image>().sprite = a.icon;
         go.SetActive(true);
+
+        if(AugmentContainer.transform.childCount > 100)
+        {
+            Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
+            Destroy(AugmentContainer.transform.GetChild(1).gameObject);
+        }
     }
 
     public void defineStats()

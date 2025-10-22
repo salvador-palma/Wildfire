@@ -409,7 +409,6 @@ public class Smog : OnKillEffects
 
     public void ApplyEffect(Vector2 pos)
     {
-
         if (Random.Range(0f, 1f) < prob)
         {
 
@@ -420,7 +419,7 @@ public class Smog : OnKillEffects
 
             foreach (Collider2D col in targets)
             {
-                col.GetComponent<Enemy>().Poison(ticks);
+                col.GetComponent<Enemy>()?.Poison(ticks);
             }
 
         }
@@ -621,6 +620,7 @@ public class Gravity : OnKillEffects
     {
         void applyKB(Enemy en)
         {
+            if(en==null){ return; }
             switch (currentTargetingOption)
             {
                 case 0:

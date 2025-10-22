@@ -89,6 +89,8 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         Health = (int)(Health * Gambling.getGambleMultiplier(4));
         Speed = Speed * Gambling.getGambleMultiplier(5);
         AttackTarget = Flamey.Instance;
+
+        
        
     }
     public virtual void UpdateEnemy()  {
@@ -184,6 +186,7 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
         
     }
     public void ApplyPoison(){
+        if(this==null){ return; }
         if(poisonLeft > 0){
             float perc = Smog.Instance != null && SkillTreeManager.Instance.getLevel("Smog") >= 1 ? 2 : 1;
             Hitted((int)(MaxHealth * Flamey.PoisonDrainPerc * perc), 14, ignoreArmor: true, onHit: false, source: "Poison");
@@ -397,10 +400,22 @@ public abstract class Enemy : MonoBehaviour,IComparable<Enemy>
     }
 
     public virtual void CheckFlip(){
+
+        // bool flipped = attack_target.getPosition().x < transform.position.x;
+        // GetComponent<SpriteRenderer>().flipX = flipped;
+        // if (transform.Find("Effect") != null)
+        // {
+        //     transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
+        // }
+            
         if(transform.position.x < 0){
             bool flipped = !GetComponent<SpriteRenderer>().flipX;
             GetComponent<SpriteRenderer>().flipX = flipped;
-            transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
+            if(transform.Find("Effect") != null)
+            {
+                transform.Find("Effect").GetComponent<SpriteRenderer>().flipX = flipped;
+            }
+            
         }
     }
 
@@ -516,10 +531,10 @@ public abstract class Boss : Enemy
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
-            Health = (int)(Health * (float)(Math.Pow(x - 30, 2) / 350) + 1f);
-            Armor = (int)(Armor * (x - 45f) / 15f);
-            Speed *= (float)(Math.Pow(x - 30, 2) / 4000f) + 1f;
-            Damage = (int)(Damage * (float)(Math.Pow(x - 30, 2) / 2500f) + 1f);
+            Health = (int)(Health * (float)(Math.Pow(x - 50, 2) / 350) + 1f) < 0 ? int.MaxValue : (int)(Health * (float)(Math.Pow(x - 50, 2) / 350) + 1f);
+            Armor = (int)(Armor * (x-45f)/4f);
+            //Speed *= (float)(Math.Pow(x, 2) / 4000f) + 1f;
+            Damage = Math.Max(Damage, (int)(Damage * (float)(Math.Pow(x-50, 2) / 50f) + 1f) < 0 ? int.MaxValue : (int)(Damage * (float)(Math.Pow(x-50, 2) / 50f) + 1f));
         }
         MaxHealth = Health;
 

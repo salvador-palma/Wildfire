@@ -14,93 +14,122 @@ public interface OnShootEffects : Effect
 
 }
 
-public class SecondShot : OnShootEffects{
+public class SecondShot : OnShootEffects
+{
 
 
     public static SecondShot Instance;
-    
+
     public float perc;
 
     public int currentTargetingOption;
 
     public GameObject optionMenu;
     Enemy secondaryTarget;
-    public SecondShot(float p){
+    public SecondShot(float p)
+    {
         perc = p;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             currentTargetingOption = PlayerPrefs.GetInt("MulticasterTargetingOption", 0);
             optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("Multicaster").gameObject;
-            
-        }else{
+
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
 
     public int ApplyEffect()
     {
-        if(UnityEngine.Random.Range(0f,1f) < perc){
-            
+        if (UnityEngine.Random.Range(0f, 1f) < perc)
+        {
+
             ShootWithDelay();
         }
         return 0;
     }
-    private async void ShootWithDelay(){
+    private async void ShootWithDelay()
+    {
         await Task.Delay(100);
-        
-        Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Multicaster"});
-        try{
-            switch(currentTargetingOption)
+
+        Flare f = Flamey.Instance.InstantiateShot(new List<string>() { "Multicaster" });
+        try
+        {
+            switch (currentTargetingOption)
             {
                 default:
                 case 0://Same
-                    f.setTarget(Flamey.Instance.current_homing.HitCenter.position);
+                    if (Flamey.Instance.current_homing == null) { f.setTarget(Vector2.zero); }
+                    else { f.setTarget(Flamey.Instance.current_homing.HitCenter.position); }
                     break;
                 case 1://Random
                     f.setTarget(Flamey.Instance.getRandomHomingPosition());
                     break;
                 case 2://Second Closest
-                    if(secondaryTarget==null){getHoming();}
-                    if(secondaryTarget==null){f.setTarget(Flamey.Instance.current_homing.HitCenter.position);}
-                    else{f.setTarget(secondaryTarget.HitCenter.position);}
+                    if (secondaryTarget == null) { getHoming(); }
+                    if (secondaryTarget == null)
+                    {
+                        if (Flamey.Instance.current_homing == null)
+                        {
+                            f.setTarget(Vector2.zero);
+                        }
+                        else
+                        {
+                            f.setTarget(Flamey.Instance.current_homing.HitCenter.position);
+                        }
+                    }
+                    else { f.setTarget(secondaryTarget.HitCenter.position); }
                     break;
                 case 3://Mouse
                     Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     f.setTarget(worldPosition);
                     break;
             }
-        }catch(Exception e){
+        }
+        catch (Exception e)
+        {
             Debug.LogWarning("Prevented error: Multicaster: " + e.StackTrace);
         }
     }
 
-    public void Stack(SecondShot secondShot){
+    public void Stack(SecondShot secondShot)
+    {
         perc += secondShot.perc;
+        perc = (float)Math.Round(perc, 2);
         RemoveUselessAugments();
     }
 
-    private void getHoming(){
+    private void getHoming()
+    {
         secondaryTarget = Flamey.Instance.getRandomHomingEnemy();
     }
-    private void RemoveUselessAugments(){
-        if(perc >= 1f){
+    private void RemoveUselessAugments()
+    {
+        if (perc >= 1f)
+        {
             perc = 1;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("MulticasterProb");
         }
 
-        if(GameVariables.hasQuest(16) && perc>=1f && BurstShot.Instance != null && BurstShot.Instance.interval <=10){
+        if (GameVariables.hasQuest(16) && perc >= 1f && BurstShot.Instance != null && BurstShot.Instance.interval <= 10)
+        {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
 
-        
-        if(GameVariables.hasQuest(25) && perc>=1 && Flamey.Instance.atkSpeed>=12f){
+
+        if (GameVariables.hasQuest(25) && perc >= 1 && Flamey.Instance.atkSpeed >= 12f)
+        {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(25, "Rowl", 15);
         }
-        
+
     }
-   
-    public bool addList(){
+
+    public bool addList()
+    {
         return Instance == this;
     }
 
@@ -120,19 +149,21 @@ public class SecondShot : OnShootEffects{
     }
     public string[] getCaps()
     {
-        return new string[]{"Chance: {0}% (Max. 100%)<br>", Mathf.Round(perc*100).ToString()};
+        return new string[] { "Chance: {0}% (Max. 100%)<br>", Mathf.Round(perc * 100).ToString() };
     }
     public string getIcon()
     {
         return "MulticasterUnlock";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
         return SkillTreeManager.Instance.getLevel("Multicaster") >= 1 ? optionMenu : null;
     }
-   
+
 }
 
-public class BurstShot : OnShootEffects{
+public class BurstShot : OnShootEffects
+{
     public static BurstShot Instance;
     public int interval;
     public int amount;
@@ -141,21 +172,25 @@ public class BurstShot : OnShootEffects{
     private Button activeCooldownImage;
     private int activeRoundsLeft;
     private int activeRoundsCooldown = 3;
-    
+
     public int currentTargetingOption;
 
     private int ExtraBurstShots = 0;
     public GameObject optionMenu;
-    public BurstShot(int interval, int amount){
+    public BurstShot(int interval, int amount)
+    {
         this.interval = interval;
         this.amount = amount;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             cooldownImage = GameUI.Instance.SpawnUIMetric(Resources.Load<Sprite>("Icons/BurstUnlock"));
-            currentTargetingOption = Math.Max(0,PlayerPrefs.GetInt("BurstShotTargetingOption", -1));
+            currentTargetingOption = Math.Max(0, PlayerPrefs.GetInt("BurstShotTargetingOption", -1));
             optionMenu = GameUI.Instance.AbilityOptionContainer.transform.Find("BurstShot").gameObject;
 
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
         Deck.RoundOver += ResetExtraShots;
@@ -169,67 +204,77 @@ public class BurstShot : OnShootEffects{
     public int ApplyEffect()
     {
         leftToShoot--;
-        
-        cooldownImage.fillAmount = 1 - ((float)leftToShoot)/interval;
-        if(leftToShoot <= 0){
+
+        cooldownImage.fillAmount = 1 - ((float)leftToShoot) / interval;
+        if (leftToShoot <= 0)
+        {
             leftToShoot = interval;
             Burst();
         }
         return 0;
     }
-    public void Burst(int a = -1){
-        int acutal_amount = a == - 1 ? amount + ExtraBurstShots : 250;
-        Debug.Log("Burst: " + acutal_amount);
-        for(int i =0; i < acutal_amount; i++){
-                Flare f = Flamey.Instance.InstantiateShot(new List<string>(){"Burst Shot", "Multicaster"});
+    public void Burst(int a = -1)
+    {
+        int acutal_amount = a == -1 ? amount + ExtraBurstShots : 250;
+        //Debug.Log("Burst: " + acutal_amount);
+        for (int i = 0; i < acutal_amount; i++)
+        {
+            Flare f = Flamey.Instance.InstantiateShot(new List<string>() { "Burst Shot", "Multicaster" });
 
-                switch(currentTargetingOption)
-                {
-                    case 1:
-                        f.setTarget(Flamey.Instance.current_homing.HitCenter.position);
-                        break;
-                    case 2:
-                        f.setTarget(Enemy.getPredicatedEnemyPosition((e1,e2)=> e2.MaxHealth - e1.MaxHealth));
-                        break;
-                    case 0:
-                    default:
-                        f.setTarget(Flamey.Instance.getRandomHomingPosition());
-                        break;
-                }
-                
+            switch (currentTargetingOption)
+            {
+                case 1:
+                    f.setTarget(Flamey.Instance.current_homing.HitCenter.position);
+                    break;
+                case 2:
+                    f.setTarget(Enemy.getPredicatedEnemyPosition((e1, e2) => e2.MaxHealth - e1.MaxHealth));
+                    break;
+                case 0:
+                default:
+                    f.setTarget(Flamey.Instance.getRandomHomingPosition());
+                    break;
+            }
+
         }
 
-        if(SkillTreeManager.Instance.getLevel("Burst Shot") >= 2){
-            
-            ExtraBurstShots = Math.Min(ExtraBurstShots+1, amount);
+        if (SkillTreeManager.Instance.getLevel("Burst Shot") >= 2)
+        {
+
+            ExtraBurstShots = Math.Min(ExtraBurstShots + 1, amount);
         }
     }
-   
 
-    public void Stack(BurstShot secondShot){
+
+    public void Stack(BurstShot secondShot)
+    {
         amount = Mathf.Min(20, amount + secondShot.amount);
         interval = Mathf.Max(10, interval - secondShot.interval);
-        RemoveUselessAugments();    
+        RemoveUselessAugments();
     }
 
-    private void RemoveUselessAugments(){
-        if(amount >= 20){
+    private void RemoveUselessAugments()
+    {
+        if (amount >= 20)
+        {
             amount = 20;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstAmount");
         }
-        if(interval <= 10){
+        if (interval <= 10)
+        {
             interval = 10;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BurstInterval");
         }
-        if(GameVariables.hasQuest(16) && interval<=10 && SecondShot.Instance != null && SecondShot.Instance.perc >= 1f){
+        if (GameVariables.hasQuest(16) && interval <= 10 && SecondShot.Instance != null && SecondShot.Instance.perc >= 1f)
+        {
             GameUI.Instance.CompleteQuestIfHasAndQueueDialogue(16, "Rowl", 16);
         }
-       
+
     }
-   
-    public void SpawnExtraAssets(){
+
+    public void SpawnExtraAssets()
+    {
         // activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BurstAmount"));
         // activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         // Deck.RoundOver += UpdateActive;
@@ -241,22 +286,26 @@ public class BurstShot : OnShootEffects{
 
         // });
     }
-    
-    private void UpdateActive(object sender, EventArgs e){
-        if(activeRoundsLeft<activeRoundsCooldown){
+
+    private void UpdateActive(object sender, EventArgs e)
+    {
+        if (activeRoundsLeft < activeRoundsCooldown)
+        {
             activeRoundsLeft++;
-            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft) / activeRoundsCooldown;
         }
-        if(activeRoundsLeft>=activeRoundsCooldown){
-             activeCooldownImage.interactable = true;
+        if (activeRoundsLeft >= activeRoundsCooldown)
+        {
+            activeCooldownImage.interactable = true;
         }
     }
 
-    public bool addList(){
+    public bool addList()
+    {
         return Instance == this;
     }
 
-     
+
     public string getText()
     {
         return "Burst Shot";
@@ -273,19 +322,21 @@ public class BurstShot : OnShootEffects{
     }
     public string[] getCaps()
     {
-        return new string[]{"Burst Shots: {0} Flames (Max. 20)<br>Burst Interval: {1} Flames (Min. 10)", amount.ToString(), interval.ToString()};
+        return new string[] { "Burst Shots: {0} Flames (Max. 20)<br>Burst Interval: {1} Flames (Min. 10)", amount.ToString(), interval.ToString() };
     }
     public string getIcon()
     {
         return "BurstUnlock";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
 
         return SkillTreeManager.Instance.getLevel("Burst Shot") >= 1 ? optionMenu : null;
     }
 }
 
-public class KrakenSlayer : OnShootEffects{
+public class KrakenSlayer : OnShootEffects
+{
 
 
     public static KrakenSlayer Instance;
@@ -300,84 +351,104 @@ public class KrakenSlayer : OnShootEffects{
     private int activeRoundsCooldown = 1;
     public bool purpleON;
 
-    public KrakenSlayer(int interval, int extraDmg){
+    public KrakenSlayer(int interval, int extraDmg)
+    {
         this.interval = interval;
         this.extraDmg = extraDmg;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
 
     public int ApplyEffect()
     {
-        if(purpleON){return 6;}
-        
+        if (purpleON) { return 6; }
 
-        if(curr <= 0){
+
+        if (curr <= 0)
+        {
             curr = interval;
-            if(SkillTreeManager.Instance.getLevel("Magical Shot") >= 2){
+            if (SkillTreeManager.Instance.getLevel("Magical Shot") >= 2)
+            {
                 FlamesUntilPurple--;
-                if(FlamesUntilPurple <= 0){
+                if (FlamesUntilPurple <= 0)
+                {
                     FlamesUntilPurple = FlamesPurpleCooldown;
                     return 6;
                 }
             }
             return 3;
-        }else{
+        }
+        else
+        {
             curr--;
         }
         return 0;
     }
-  
 
-    public void Stack(KrakenSlayer krakenSlayer){
+
+    public void Stack(KrakenSlayer krakenSlayer)
+    {
         interval = Mathf.Max(0, interval - krakenSlayer.interval);
         extraDmg += krakenSlayer.extraDmg;
         RemoveUselessAugments();
     }
-    private void RemoveUselessAugments(){
-        if(interval == 0){
+    private void RemoveUselessAugments()
+    {
+        if (interval == 0)
+        {
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("BlueFlameInterval");
-            
+
         }
-        
+
     }
-    
-    public void SpawnExtraAssets(){
+
+    public void SpawnExtraAssets()
+    {
         activeCooldownImage = GameUI.Instance.SpawnUIActiveMetric(Resources.Load<Sprite>("Icons/BlueFlameInterval"));
         activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
         Deck.RoundOver += UpdateActive;
-        activeCooldownImage.onClick.AddListener(() => {
+        activeCooldownImage.onClick.AddListener(() =>
+        {
             purpleON = true;
-            Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",true);
+            Flamey.Instance.GetComponent<Animator>().SetBool("BluePink", true);
             AudioManager.PlayOneShot(FMODEvents.Instance.EvilLaugh, Vector2.zero);
-            Flamey.Instance.callFunctionAfter(() =>{ purpleON = false; Flamey.Instance.GetComponent<Animator>().SetBool("BluePink",false);}, 5f);
+            Flamey.Instance.callFunctionAfter(() => { purpleON = false; Flamey.Instance.GetComponent<Animator>().SetBool("BluePink", false); }, 5f);
             activeCooldownImage.interactable = false;
             activeRoundsLeft = 0;
             activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
 
         });
     }
-    public void TurnPurple(){
+    public void TurnPurple()
+    {
         purpleON = false;
     }
-    public void ResetInstance(){
+    public void ResetInstance()
+    {
         Instance = null;
         Deck.RoundOver -= UpdateActive;
     }
-    private void UpdateActive(object sender, EventArgs e){
-        if(activeRoundsLeft<activeRoundsCooldown){
+    private void UpdateActive(object sender, EventArgs e)
+    {
+        if (activeRoundsLeft < activeRoundsCooldown)
+        {
             activeRoundsLeft++;
-            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft)/activeRoundsCooldown;
+            activeCooldownImage.transform.GetChild(0).GetComponent<Image>().fillAmount = ((float)activeRoundsLeft) / activeRoundsCooldown;
         }
-        if(activeRoundsLeft>=activeRoundsCooldown){
-             activeCooldownImage.interactable = true;
+        if (activeRoundsLeft >= activeRoundsCooldown)
+        {
+            activeCooldownImage.interactable = true;
         }
     }
-    public bool addList(){
+    public bool addList()
+    {
         return Instance == this;
     }
 
@@ -391,71 +462,84 @@ public class KrakenSlayer : OnShootEffects{
         return "On-Shoot Effect";
     }
 
-    public string getDescription() 
+    public string getDescription()
     {
         return "Shoot a powerful <color=#53D1FF>Blue Flame</color> that deals <color=#FF5858>Extra Damage</color> everytime you shoot a certain amount of flames.";
     }
     public string[] getCaps()
     {
-        return new string[]{"Extra Damage: +{0} Damage <br>Blue Flame Interval: {1} Flames (Min. 0)", extraDmg.ToString(), interval.ToString()};
+        return new string[] { "Extra Damage: +{0} Damage <br>Blue Flame Interval: {1} Flames (Min. 0)", extraDmg.ToString(), interval.ToString() };
     }
     public string getIcon()
     {
         return "BlueFlameUnlock";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
         return null;
     }
 }
 
-public class CritUnlock : OnShootEffects{
+public class CritUnlock : OnShootEffects
+{
 
 
     public static CritUnlock Instance;
     public float perc;
     public float mult;
-    public CritUnlock(float perc, float mult){
+    public CritUnlock(float perc, float mult)
+    {
         this.perc = perc;
         this.mult = mult;
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
-        }else{
+        }
+        else
+        {
             Instance.Stack(this);
         }
     }
 
     public int ApplyEffect()
     {
-        if(Distribuitons.RandomUniform(0f,1f) <= perc){
-            if(SkillTreeManager.Instance.getLevel("Critical Strike") >= 2 && UnityEngine.Random.Range(0f,1f) < 0.1f){
+        if (Distribuitons.RandomUniform(0f, 1f) <= perc)
+        {
+            if (SkillTreeManager.Instance.getLevel("Critical Strike") >= 2 && UnityEngine.Random.Range(0f, 1f) < 0.1f)
+            {
                 return 2;
             }
             return 1;
         }
         return 0;
     }
-    
 
-    public void Stack(CritUnlock critUnlock){
+
+    public void Stack(CritUnlock critUnlock)
+    {
         perc += critUnlock.perc;
         mult += critUnlock.mult;
         RemoveUselessAugments();
     }
-    private void RemoveUselessAugments(){
-        if(perc >= 0.8f){
+    private void RemoveUselessAugments()
+    {
+        if (perc >= 0.8f)
+        {
             perc = 0.8f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritChance");
         }
-        if(mult >= 5f && SkillTreeManager.Instance.getLevel("Critical Strike") < 2){
+        if (mult >= 5f && SkillTreeManager.Instance.getLevel("Critical Strike") < 2)
+        {
             mult = 5f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("CritMult");
         }
-        
+
     }
-  
-    public bool addList(){
+
+    public bool addList()
+    {
         return Instance == this;
     }
 
@@ -465,11 +549,12 @@ public class CritUnlock : OnShootEffects{
     }
     public string[] getCaps()
     {
-        
-        if(SkillTreeManager.Instance.getLevel("Critical Strike") < 1){
-            return new string[]{"Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc*100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString()};
+
+        if (SkillTreeManager.Instance.getLevel("Critical Strike") < 1)
+        {
+            return new string[] { "Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. x5)", Mathf.Round(perc * 100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString() };
         }
-        return new string[]{"Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. Infinite)", Mathf.Round(perc*100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString()};
+        return new string[] { "Critic Chance: +{0}% (Max. 80%)<br>Damage Multiplier: x{1} (Max. Infinite)", Mathf.Round(perc * 100f).ToString(), (Mathf.Round(mult * 100f) * 0.01f).ToString() };
     }
 
     public string getIcon()
@@ -486,7 +571,8 @@ public class CritUnlock : OnShootEffects{
     {
         return "On-Shoot Effect";
     }
-    public GameObject getAbilityOptionMenu(){
+    public GameObject getAbilityOptionMenu()
+    {
         return null;
     }
 }

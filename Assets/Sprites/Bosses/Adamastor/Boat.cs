@@ -19,12 +19,12 @@ public class Boat : Enemy
             Health = (int)(Health * (float)(Math.Pow(x, 2) / 350) + 1f);
             Armor = (int)(Armor * (x - 45f) / 15f);
             Speed *= (float)(Math.Pow(x, 2) / 4000f) + 1f;
-            Damage = (int)(Damage * (float)(Math.Pow(x, 2) / 2500f) + 1f);
+            Damage = Math.Max(Damage, (int)(Damage * (float)(Math.Pow(x-50, 2) / 50f) + 1f) < 0 ? int.MaxValue : (int)(Damage * (float)(Math.Pow(x-50, 2) / 50f) + 1f));
         }
         MaxHealth = Health;
 
         enemiesToSpawn = new GameObject[spawnCount];
-        string[] exceptions = new string[] { "Mole", "Worm", "Owl", "Vulture", "Pelican" };
+        string[] exceptions = new string[] { "Ant", "Mole", "Worm", "Owl", "Vulture", "Pelican" };
         GameObject[] available = EnemySpawner.Instance.PickedEnemies.Take(12).Where(e => !exceptions.Contains(e.Name)).Select(e => e.gameObject).ToArray();
 
         for (int i = 0; i < spawnCount; i++)
@@ -55,11 +55,19 @@ public class Boat : Enemy
         {
             for (int i = 0; i < spawnCount; i++)
             {
-                GameObject g = Instantiate(enemiesToSpawn[i]);
-                Enemy e = g.GetComponent<Enemy>();
-                g.transform.position = HitCenter.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
-                e.CheckFlip();
-                e.KnockBack(HitCenter.position, retracting: false, 0.5f, 1f);
+                try
+                {
+                    GameObject g = Instantiate(enemiesToSpawn[i]);
+                    Enemy e = g.GetComponent<Enemy>();
+                    g.transform.position = HitCenter.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0);
+                    e.CheckFlip();
+                    e.KnockBack(HitCenter.position, retracting: false, 0.5f, 1f);
+                }
+                catch
+                {
+                    Debug.Log("Error on Boat");
+                }
+                
 
             }
         }

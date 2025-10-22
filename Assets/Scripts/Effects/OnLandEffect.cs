@@ -471,6 +471,7 @@ public class Totem : OnLandEffect
     public void Stack(Totem totem){
         radius += totem.radius;
         prob += totem.prob;
+        prob = (float)Math.Round(prob, 2);
         Health += totem.Health;
         RemoveUselessAugments();
     }
@@ -482,8 +483,10 @@ public class Totem : OnLandEffect
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("TotemRadius");
         }
+         
         if (prob >= .1f)
         {
+         
             prob = .1f;
             Deck deck = Deck.Instance;
             deck.removeClassFromDeck("TotemProb");

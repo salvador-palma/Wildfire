@@ -12,6 +12,14 @@ public class Wukong : Boss
     protected override void Start()
     {
         base.Start();
+        if (EnemySpawner.Instance.current_round >= 60)
+        {
+            int x = EnemySpawner.Instance.current_round;
+            float prevSpeed = Speed;
+            Speed *= (float)(Math.Pow(x - 30, 2) / 4000f) + 1f;
+            trailTime = 0.5f * prevSpeed / Speed;
+        }
+
         Phase = -1;
         NextPhase();
         validThrow = new Predicate<Enemy>(e =>
@@ -79,7 +87,7 @@ public class Wukong : Boss
         if (Stunned) { return; }
         if (Avoiding)
         {
-            MoveSpiral(reverse: fleeDirection, Speed: Speed * 4);
+            MoveSpiral(reverse: fleeDirection, Speed: Speed * 4, angle: -2);
         }
         else if (Jumping)
         {
@@ -429,6 +437,13 @@ public class Wukong : Boss
         }
         throwTarget.KnockBack(AttackTarget.getPosition(), power: 4f, retracting: true, time: 1f, stopOnOrigin: true, stopOnOriginMargin: throwTarget.AttackRange);
         throwTarget = null;
+    }
+
+    public override void Die(bool onKill = true)
+    {
+        SteamLeaderboardManager.UnlockAchievment("WUKONG_BEATEN");
+        base.Die();
+        
     }
 
 }

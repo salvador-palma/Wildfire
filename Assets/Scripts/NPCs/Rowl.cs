@@ -23,17 +23,19 @@ public class Rowl : NPC
     }
     public override void ClickedCharacter(){
 
-        if(GameVariables.GetVariable("SkillTreeReady") <= 0 && !hasAvailableDialogue()){
+        if (GameVariables.GetVariable("SkillTreeReady") <= 0 && !hasAvailableDialogue())
+        {
             StartDialogue(0);
             return;
         }
-        
+
+        SteamLeaderboardManager.UnlockAchievment("ROWL_SKILLTREE");
         base.ClickedCharacter();
     }
 
     public void UnlockSkillTree(){
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "ROWL'S SKILL TREE", "You can now <style=\"LYellow\">unlock</style> and <style=\"LYellow\">upgrade</style> new abilities for your <style=\"LYellow\">campfire</style>", 3);
-       
+        SteamLeaderboardManager.UnlockAchievment("ROWL_SKILLTREE");
     }
     [SerializeField] SkillTreeButton[] Unlockables;
     public void ShowUnlockedUpgrade(int unlockableID){

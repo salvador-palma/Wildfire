@@ -329,7 +329,9 @@ public class GameVariables{
     }
     
     public static void SetVariable(string name, int value){
-        Debug.Log("Setting Variable: " + name + " to:" + value);
+
+        if (!name.Contains("Item")) { Debug.Log("Setting Variable: " + name + " to:" + value); }
+        
         GameVariables gv = getInstance();
 
         if(gv.variableList.variables.Any(i => i.name == name)){

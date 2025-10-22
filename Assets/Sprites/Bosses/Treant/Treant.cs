@@ -15,6 +15,12 @@ public class Treant : Boss
     protected override void Start()
     {
         base.Start();
+        if (EnemySpawner.Instance.current_round >= 60)
+        {
+            int x = EnemySpawner.Instance.current_round;
+
+            Speed *= (float)(Math.Pow(x - 30, 2) / 4000f) + 1f;
+        }
         NextPhase();
 
     }
@@ -132,7 +138,7 @@ public class Treant : Boss
     public void Roar()
     {
         Enemy[] available = EnemySpawner.Instance.PickedEnemies.Take(6).ToArray();
-        int amount = Math.Max(5, 15 - (int)(EnemySpawner.Instance.RoundTotalSpentTime/90));
+        int amount = Math.Max(5, 15 - (int)(EnemySpawner.Instance.RoundTotalSpentTime / 90));
         for (int i = 0; i < amount; i++)
         {
             Enemy spawn = available[Random.Range(0, available.Length - 1)];
@@ -141,5 +147,11 @@ public class Treant : Boss
             en.transform.position = EnemySpawner.Instance.getPointAngle(360f / amount * i);
             en.CheckFlip();
         }
+    }
+
+    public override void Die(bool onKill = true)
+    {
+        SteamLeaderboardManager.UnlockAchievment("TREANT_BEATEN");
+        base.Die();
     }
 }

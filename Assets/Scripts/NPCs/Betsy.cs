@@ -116,6 +116,7 @@ public class Betsy : NPC
     }
     public void unlockBestiary(){
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "BETSY'S BESTIARY", "You can now check the stats and abilities of <style=\"LYellow\">animals</style> you've defeated and gather <style=\"LYellow\">milestones</style>", 2);
+        SteamLeaderboardManager.UnlockAchievment("BETSY_BESTIARY");
     }
     public void unlockShiny(){
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "SHINY TRACKER", "You can now keep track of <sprite name=\"Shiny\"> Shiny animals that you've encountered", 5);
@@ -152,6 +153,7 @@ public class Betsy : NPC
             StartDialogue(0);
             return;
         }
+        SteamLeaderboardManager.UnlockAchievment("BETSY_BESTIARY");
         base.ClickedCharacter();
     }
 

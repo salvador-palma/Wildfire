@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using FMOD;
 using FMOD.Studio;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -332,26 +334,27 @@ public class Flamey : MonoBehaviour, Hittable
 
         }
     }
-    public UnityEngine.Vector2 getRandomHomingPosition()
+    public Vector2 getRandomHomingPosition()
     {
         GameObject[] go = GameObject.FindGameObjectsWithTag("Enemy");
         try
         {
-
+            if(go.Length == 0){return Vector2.zero;}
             GameObject g = go[UnityEngine.Random.Range(0, go.Length)];
+
             int n = 0;
             while (!g.GetComponent<Enemy>().canTarget() && n < 100)
             {
                 g = go[UnityEngine.Random.Range(0, go.Length)];
                 n++;
             }
-            return n >= 100 ? UnityEngine.Vector2.zero : g.GetComponent<Enemy>().HitCenter.position;
+            return n >= 100 ? Vector2.zero : g.GetComponent<Enemy>().HitCenter.position;
         }
         catch
         {
             Debug.Log("Covered Error! Flamey.getRandomHomingPosition()");
         }
-        return UnityEngine.Vector2.zero;
+        return Vector2.zero;
     }
     public Enemy getRandomHomingEnemy(bool targetable = false, Predicate<Enemy> predicate = null)
     {
@@ -394,7 +397,7 @@ public class Flamey : MonoBehaviour, Hittable
 
         if (!Unhittable)
         {   
-            Debug.Log("Hitted Flamey");
+           
             // if(Vector2.Distance(getPosition(), attacker.HitCenter.position) > attacker.AttackRange){ return; }
             //CHARACTER SPECIFIC
             if (Character.Instance.isCharacter("Burst") && BurstShot.Instance != null)

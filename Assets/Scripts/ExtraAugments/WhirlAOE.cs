@@ -19,7 +19,7 @@ public class WhirlAOE : IPoolable
     public int merges = 0;
 
     //CHARACTER
-    float MegaWhirlPoolTime = 3f;
+
 
 
 

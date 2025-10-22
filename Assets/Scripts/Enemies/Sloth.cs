@@ -80,7 +80,7 @@ public class Sloth : Enemy
     {
         if (throwTarget != null)
         {
-            Debug.Log("Throwing: " + throwTarget.Name);
+           
             throwTarget.KnockBack(AttackTarget.getPosition(), power: 4f, retracting: true, time: 1f, stopOnOrigin: true, stopOnOriginMargin: throwTarget.AttackRange);
             yield return new WaitForSeconds(3f);
             throwTarget = null;

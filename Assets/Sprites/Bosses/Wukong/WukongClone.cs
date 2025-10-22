@@ -21,10 +21,11 @@ public class WukongClone : Enemy
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
-            Health = (int)(Health * (float)(Math.Pow(x - 30, 2) / 350) + 1f);
-            Armor = (int)(Armor * (x - 45f) / 15f);
             Speed *= (float)(Math.Pow(x - 30, 2) / 4000f) + 1f;
-            Damage = (int)(Damage * (float)(Math.Pow(x - 30, 2) / 2500f) + 1f);
+            Health = (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f) < 0 ? int.MaxValue : (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f);
+            Armor = (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f)) < 0 ? int.MaxValue : (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f));
+            //Speed *= (float)(Math.Pow(x, 2) / 4000f) + 1f;
+            Damage = Math.Max(Damage, (int)(Damage * (float)(Math.Pow(x-500, 2) / 2500f) + 1f) < 0 ? int.MaxValue : (int)(Damage * (float)(Math.Pow(x-500, 2) / 2500f) + 1f));
         }
         MaxHealth = Health;
 

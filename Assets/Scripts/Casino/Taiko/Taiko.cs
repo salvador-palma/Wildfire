@@ -108,7 +108,6 @@ public class Taiko : MonoBehaviour
     public void StartTrack(){
         trackInstance.start();
     }
-    int i = 0;
     int[] fr = new int[3]{10,30,60};
 
 

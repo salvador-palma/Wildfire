@@ -24,7 +24,7 @@ public class Cloris : NPC
             }
         }
 
-
+        SteamLeaderboardManager.UnlockAchievment("CLORIS_WARDROBE");
         base.ClickedCharacter();
     }
 
@@ -36,6 +36,7 @@ public class Cloris : NPC
     public void UnlockCharacterSelect(){
         GameVariables.SetVariable("ClorisPresentation", 1);
         MetaMenuUI.Instance.UnlockableScreen("UNLOCKED", "CLORIS' WARDROBE", "You can now <style=\"LYellow\">style</style> your <style=\"LYellow\">campfire</style> affecting its <style=\"LYellow\">behaviour</style> and <style=\"LYellow\">environment</style>", 4);
+        SteamLeaderboardManager.UnlockAchievment("CLORIS_WARDROBE");
     }
 
     public void ShredDialogueCheckForCasino(){
