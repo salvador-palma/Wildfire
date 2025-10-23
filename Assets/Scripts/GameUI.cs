@@ -173,7 +173,7 @@ public class GameUI : MonoBehaviour
         
         if(AugmentContainer.transform.childCount > 100)
         {
-            Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
+            // Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
             Destroy(AugmentContainer.transform.GetChild(1).gameObject);
         }
 
@@ -203,7 +203,7 @@ public class GameUI : MonoBehaviour
 
         if(AugmentContainer.transform.childCount > 100)
         {
-            Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
+            // Debug.Log("" + a.Title + " : " + AugmentContainer.transform.childCount);
             Destroy(AugmentContainer.transform.GetChild(1).gameObject);
         }
     }

@@ -9,7 +9,11 @@ public class TreantBranch : Enemy
     public Treant Tree;
     public override void Die(bool onKill = true)
     {
+        try
+        {
+            
         Tree.DeleteBranch(this);
+        }catch{}
         base.Die(onKill);
     }
     public override void KnockBack(Vector2 origin, bool retracting, float power, float time = 0.5F, bool stopOnOrigin = false, float angleMissStep = 0, float stopOnOriginMargin = 0.05F)
@@ -28,7 +32,7 @@ public class TreantBranch : Enemy
         if (EnemySpawner.Instance.current_round >= 60)
         {
             int x = EnemySpawner.Instance.current_round;
-            Health = (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f) < 0 ? int.MaxValue : (int)(Health * (float)(Math.Pow(x-500, 2) / 350) + 1f);
+            Health = (int)(Health * (float)(Math.Pow(x - 50, 2) / 350) + 1f) < 0 ? int.MaxValue : (int)(Health * (float)(Math.Pow(x - 50, 2) / 350) + 1f);
             Armor = (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f)) < 0 ? int.MaxValue : (int)(Armor * (float)(Math.Pow(x-500, 2) / 15f));
             Speed *= (float)(Math.Pow(x - 20, 2) / 4000f) + 1f;
             Damage = (int)(Damage * (float)(Math.Pow(x - 20, 2) / 2500f) + 1f);

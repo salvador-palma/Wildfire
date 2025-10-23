@@ -146,8 +146,12 @@ public class WhirlAOE : IPoolable
         spriteRenderer.color = new Color(1, 1, 1, 1);
         
 
-        yield return new WaitForSeconds(10f);
-        colliding.ForEach(x => x.Health = 0);
+        colliding.ForEach(x => { if (x.canTarget()) { x.Health = 0; } });
+        yield return new WaitForSeconds(5f);
+        colliding.ForEach(x => { if (x.canTarget()) { x.Health = 0; } });
+        yield return new WaitForSeconds(5f);
+        colliding.ForEach(x => { if (x.canTarget()) { x.Health = 0; } });
+        
         while (time < 5f)
         {
             float a = (5f - time) * .4f;

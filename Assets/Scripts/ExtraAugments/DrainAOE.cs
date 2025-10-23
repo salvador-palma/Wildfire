@@ -28,7 +28,8 @@ public class DrainAOE : IAlliedObject
                 if(isCarnivore){
                     foreach (Enemy item in colliding)
                     {
-                        if(item == null || !item.canTarget()){continue;}
+                        if (item == null || !item.canTarget()) { continue; }
+                        
                         item.Hitted((int)(item.MaxHealth * perc), 21, false, false);
                         Flamey.Instance.addHealth(item.MaxHealth * perc);
 

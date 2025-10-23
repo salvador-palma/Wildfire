@@ -14,6 +14,7 @@ public class MenuUI : MonoBehaviour
     [SerializeField] Button CreditsButton;
     private void Awake()
     {
+        Debug.LogError("Player Log Create");
 
 
         if (PlayerPrefs.GetInt(version, 0) == 0)

@@ -22,7 +22,7 @@ public static class Translator
     private static bool DebugLineForLineReading = false;
     private static bool TranslatorsVersion = false;
 
-    public static bool SteamVersion = true;
+    public static bool SteamVersion = false;
 
     public static int getCurrentLanguageID()
     {
