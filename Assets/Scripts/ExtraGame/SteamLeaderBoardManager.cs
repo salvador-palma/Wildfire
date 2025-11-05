@@ -59,7 +59,7 @@ public class SteamLeaderboardManager : MonoBehaviour
                 {
                     currentLeaderboard = result.m_hSteamLeaderboard;
                     leaderboardReady = true;
-
+                    
                     Debug.Log("Main Leaderboard found and assigned.");
                 }
             }
@@ -92,52 +92,6 @@ public class SteamLeaderboardManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    public int GetUserScore(string leaderboardName)
-    {
-        if (!SteamManager.Initialized){return 0;}
-
-        int userScore = 0;
-        bool scoreReceived = false;
-
-        SteamUserStats.FindLeaderboard(leaderboardName);
-
-        Callback<LeaderboardFindResult_t>.Create((result) =>
-        {
-            if (result.m_bLeaderboardFound != 0)
-            {
-                SteamUserStats.DownloadLeaderboardEntriesForUsers(result.m_hSteamLeaderboard, new CSteamID[] { SteamUser.GetSteamID() }, 1);
-            }
-            else
-            {
-                scoreReceived = true;
-            }
-        });
-
-        Callback<LeaderboardScoresDownloaded_t>.Create((result) =>
-        {
-            if (result.m_cEntryCount > 0)
-            {
-                LeaderboardEntry_t entry;
-                if (SteamUserStats.GetDownloadedLeaderboardEntry(result.m_hSteamLeaderboardEntries, 0, out entry, null, 0))
-                {
-                    userScore = entry.m_nScore;
-                }
-            }
-            else
-            {
-                userScore = 0;
-            }
-            scoreReceived = true;
-        });
-
-        DateTime startTime = DateTime.Now;
-        while (!scoreReceived && (DateTime.Now - startTime).TotalSeconds < 5)
-        {
-            System.Threading.Thread.Sleep(100);
-        }
-
-        return userScore;
-    }
     public void DisplayScores(GameObject leaderboardPanel, DynamicText loadingText, string leaderboardName = "HighscoreBase")
     {
         IEnumerator loadingCor = Loading(loadingText);
@@ -158,7 +112,7 @@ public class SteamLeaderboardManager : MonoBehaviour
             else
             {
                 leaderboardToUse = characterLeaderboards[leaderboardName];
-
+                
             }
         }
         else
@@ -341,7 +295,7 @@ public class SteamLeaderboardManager : MonoBehaviour
 
 
     }
-
+    
     public static void UnlockAchievment(string title)
     {
         if (SteamManager.Initialized)

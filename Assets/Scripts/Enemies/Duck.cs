@@ -36,7 +36,18 @@ public class Duck : Enemy
         }
     }
 
-    
+    public override int Hitted(int Dmg, int TextID, bool ignoreArmor, bool onHit, string except = null, string source = null, float[] extraInfo = null)
+    {
+        
+        int n = base.Hitted(Dmg, TextID, ignoreArmor, onHit, except, source, extraInfo);
+        return n;
+        
+    }
+
+    public override void UpdateEnemy()
+    {
+        base.UpdateEnemy();
+    }
 
     public override void Die(bool onKill = true)
     {
