@@ -394,8 +394,8 @@ public class SkillTreeManager : MonoBehaviour
     }
     public void CheckForConstelationUnlock(Action postCutscene){
         bool result = PlayerData.skills.All(e => e.level >= 2);
-        int save = GameVariables.GetVariable("ConstelationCutScene");
-        if (result && save == -1)
+        // int save = GameVariables.GetVariable("ConstelationCutScene");
+        if (result)
         {
             GameVariables.SetVariable("ConstelationCutScene", 1);
             StartSkillTreeCutscene(true);

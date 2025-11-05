@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
         public GameObject Environment;
         [SerializeField] public OSTType EnvironmentMusic;
         public bool Unlocked;
+        public bool Mastery;
         public string AbilityToSkillTree;
         [Header("Hierarchy")]
         public string Subtype;
@@ -534,6 +535,7 @@ public class Character : MonoBehaviour
     public GameObject CharacterSubTypeContainer;
     public DynamicText CharacterName;
     public DynamicText SkillDescription;
+    public GameObject MasteryFixedIcon;
     [SerializeField] private int currentDisplayedCharacter = 0;
     [SerializeField] private GameObject MainFlameVessel;
     [SerializeField] private GameObject LeaderBoardPanel;
@@ -702,11 +704,20 @@ public class Character : MonoBehaviour
         }
 
     }
+
+    public bool HasMastery(CharacterData data)
+    {
+        return SteamLeaderboardManager.Instance.GetUserScore(data.Name) > 60;
+    }
     private void UpdateCharacterInfo(CharacterData data)
     {
+        MasteryFixedIcon.SetActive(data.Mastery && data.Unlocked);
 
         if (data.Unlocked)
         {
+
+
+
             CharacterName.SetText(data.Name);
             SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>{0}", new string[] { data.AbilityDescription });
         }
@@ -715,16 +726,28 @@ public class Character : MonoBehaviour
             CharacterName.SetText("???");
             SkillDescription.SetText("<size=100%><style=\"Yellow\">- Ability -</style><size=80%><br>???");
         }
-        if(LeaderBoardButton!=null){LeaderBoardButton.SetActive(data.Unlocked && GameVariables.GetVariable("JunoReady") == 1);}
-        
+        if (LeaderBoardButton != null) { LeaderBoardButton.SetActive(data.Unlocked && GameVariables.GetVariable("JunoReady") == 1); }
+
 
     }
-
+    private void DisplayMasteries()
+    {
+        int i = 0;
+        foreach (CharacterData character in characterDatas)
+        {
+            CharacterSelectContainer.transform.GetChild(i + 1).Find("Mastery").gameObject.SetActive(character.Mastery);
+            i++;
+        }
+    }
     public void toggleCharacterPanel(GameObject CharacterSelectPanel)
     {
+        
         if (CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition.x > 2000)
         {
             SyncSkillTreeManagerToCharacterSelect();
+            
+
+
             foreach (Transform child in CharacterSubTypeContainer.transform)
             {
                 if (child.gameObject.activeInHierarchy) { Destroy(child.gameObject); }
@@ -752,6 +775,7 @@ public class Character : MonoBehaviour
             TransformVesselToCharacter(CharacterSelectContainer.transform.GetChild(offset + 1).gameObject, characterDatas[currentDisplayedCharacter].AbilityName);
             CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition = new Vector2(344.5f + (-155.10608f) * offset, CharacterSelectContainer.GetComponent<RectTransform>().anchoredPosition.y);
             UpdateCharacterInfo(characterDatas[currentDisplayedCharacter]);
+            DisplayMasteries();
             //CharacterSelectPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
 
 
@@ -768,7 +792,7 @@ public class Character : MonoBehaviour
         SerialList<CharacterUnlockedData> unlockList = new SerialList<CharacterUnlockedData>() { list = new List<CharacterUnlockedData>() };
         foreach (CharacterData character in characterDatas)
         {
-            unlockList.list.Add(new CharacterUnlockedData(character.Name, character.Unlocked));
+            unlockList.list.Add(new CharacterUnlockedData(character.Name, character.Unlocked, character.Mastery));
         }
         string json = JsonUtility.ToJson(unlockList);
         File.WriteAllText(Application.persistentDataPath + "/characters.json", json);
@@ -779,13 +803,13 @@ public class Character : MonoBehaviour
         if (File.Exists(Application.persistentDataPath + "/characters.json"))
         {
             string json = File.ReadAllText(Application.persistentDataPath + "/characters.json");
-            JsonUtility.FromJson<SerialList<CharacterUnlockedData>>(json).list.ForEach(c1 => characterDatas.First(c2 => c2.Name == c1.Name || (c2.Name == "Phoenix" && c1.Name == "Pheonix")).Unlocked = c1.Unlocked);
+            JsonUtility.FromJson<SerialList<CharacterUnlockedData>>(json).list.ForEach(c1 => characterDatas.First(c2 => c2.Name == c1.Name).Unlocked = c1.Unlocked);
 
-            if(PlayerPrefs.GetInt("PatchingCharacterUnlock") == 0)
+            if (PlayerPrefs.GetInt("PatchingCharacterUnlock") == 0)
             {
                 PlayerPrefs.SetInt("PatchingCharacterUnlock", 1);
                 string[] exclude = new string[] { "Tako", "Dr. Miasma", "Golem", "Mecha", "Black Hole", "Keiki Ahi" };
-                foreach(CharacterData d in characterDatas)
+                foreach (CharacterData d in characterDatas)
                 {
                     if (exclude.Contains(d.Name))
                     {
@@ -793,8 +817,14 @@ public class Character : MonoBehaviour
                     }
                 }
             }
-            
-            
+
+
+            Array.ForEach(characterDatas, c1 =>
+            {
+                c1.Mastery = c1.Mastery || HasMastery(c1);
+            });
+
+
             WritingData();
         }
         else
@@ -872,6 +902,7 @@ public class Character : MonoBehaviour
             {
                 CharacterSelectContainer.transform.GetChild(i + 1).Find("Warning").gameObject.SetActive(true);
                 CharacterSelectContainer.transform.GetChild(i + 1).Find("Warning").Find("Text").GetComponentInChildren<DynamicText>().SetText("Requires {0}", new string[] { character.AbilityToSkillTree });
+
             }
             else
             {
@@ -918,22 +949,25 @@ public class Character : MonoBehaviour
         LeaderBoardTitleText.SetText("{0} LEADERBOARD", new string[] { data.Name });
         SteamLeaderboardManager.Instance.DisplayScores(LeaderBoardPanelTemplate, LeaderBoardLoadingText, data.Name);
         LeaderBoardPanel.SetActive(true);
-        
+
     }
     public void CloseLeaderBoardPanel()
     {
         LeaderBoardPanel.SetActive(false);
     }
-    
+
 }
 [Serializable]
-public class SerialList<T>{
+public class SerialList<T>
+{
     public int active;
     public List<T> list;
 }
 [Serializable]
-public class CharacterUnlockedData{
+public class CharacterUnlockedData
+{
     public string Name;
     public bool Unlocked;
-    public CharacterUnlockedData(string n, bool u){Name=n; Unlocked=u;}
+    public bool Mastery;
+    public CharacterUnlockedData(string n, bool u, bool m) { Name = n; Unlocked = u; Mastery = m; }
 }
